@@ -1,7 +1,6 @@
 <template>
   <div id="home">
-    <img src="./assets/logo.png">
-    <h1></h1>
+    <header-desktop></header-desktop>
     <h2>Essential Links</h2>
     <h1>{{ msg }}</h1>
     <ul>
@@ -21,8 +20,12 @@
 </template>
 
 <script>
+  import HeaderDesktop from './components/HeaderDesktop.vue';
 export default {
   name: 'app',
+    components: {
+        HeaderDesktop
+    },
   data () {
     return {
         msg: 'Welcome to Your Vue.js App',
