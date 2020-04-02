@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "home.vue"
+        name: "Button.vue"
     }
 </script>
 
