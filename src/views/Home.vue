@@ -1,37 +1,44 @@
 <template>
   <div class="home">
-    <!--<img alt="Vue logo" src="../assets/logo.png" />-->
-    <!--<HelloWorld msg="Welcome to Your Vue.js App" />-->
-    <div class="home_search">
-      <search/>
-    </div> <!-- /.home_search -->
 
-    <div class="new_to_site">
-      <h2>
-        New to jobalert ?
-      </h2>
-      <div class="home_main_btn">
-          <a href="#" class="job_btn">Register with us</a>
-          <a href="#" class="job_btn">Upload resume</a>
-      </div>
-    </div> <!-- /.new_to_site -->
+    <Header></Header>
 
-    <div class="search_tags">
+    <main class="site-content">
 
-        <h3>Most Searches</h3>
+        <div class="home_search">
+            <search/>
+        </div> <!-- /.home_search -->
 
-        <div class="search_tags_row">
-            <a href="#" class="search_tag">Higher Education <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">Freelance <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">Engineering <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">Pharmacy <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">House Sitting <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">Writing <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">Creative Designer <i class="fa fa-search"></i></a>
-            <a href="#" class="search_tag">Army <i class="fa fa-search"></i></a>
-        </div>
+        <div class="new_to_site">
+            <h2>
+                New to jobalert ?
+            </h2>
+            <div class="home_main_btn">
+                <a href="#" class="job_btn">Register with us</a>
+                <a href="#" class="job_btn">Upload resume</a>
+            </div>
+        </div> <!-- /.new_to_site -->
 
-    </div> <!-- /.search_tags -->
+        <div class="search_tags">
+
+            <h3>Most Searches</h3>
+
+            <div class="search_tags_row">
+                <a href="#" class="search_tag">Higher Education <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">Freelance <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">Engineering <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">Pharmacy <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">House Sitting <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">Writing <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">Creative Designer <i class="fa fa-search"></i></a>
+                <a href="#" class="search_tag">Army <i class="fa fa-search"></i></a>
+            </div>
+
+        </div> <!-- /.search_tags -->
+
+    </main>
+
+    <Footer></Footer>
 
   </div>
 </template>
@@ -41,9 +48,13 @@
 // import HelloWorld from "@/components/HelloWorld.vue";
 
 import Search from "../components/Search";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 export default {
   name: "Home",
   components: {
+      Footer,
+      Header,
       Search
     // HelloWorld
   }
@@ -51,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .home{
+    .home .site-content{
         /*min-height: calc(100vh - 335px);*/
         padding: 150px 0;
         margin-top: -90px;
