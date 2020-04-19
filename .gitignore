@@ -20,4 +20,8 @@ yarn-error.log*
 *.sln
 *.sw?
 
-.idea/**/workspace.xml
+
+.idea/workspace.xml
+
+.idea/workspace.xml
+
