@@ -13,7 +13,7 @@
           <router-link to="/about">Recruiters</router-link>
           <router-link to="/login">Log in</router-link>
           <router-link to="/about">Employer / Post job</router-link>
-          <router-link class="nav_btn job_btn" to="/about"
+          <router-link class="nav_btn job_btn" to="/getalert"
             >Get Alert</router-link
           >
         </nav>
