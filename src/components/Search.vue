@@ -1,6 +1,7 @@
 <template>
     <div class="job_search">
-        <input type="text" placeholder="Search Jobs ...">
+        <input type="text" placeholder="job title, keywords or company">
+        <input type="text" placeholder="city, state or zip code">
         <button>Search</button>
     </div>
 </template>
@@ -14,8 +15,9 @@
 <style scoped lang="scss">
 .job_search{
     display: flex;
+    justify-content: space-between;
     input{
-        width: calc(100% - 100px);
+        width: calc(50% - 60px);
         font-size: 16px;
         height: 46px;
         padding: 0 20px;
