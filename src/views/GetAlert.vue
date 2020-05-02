@@ -1,276 +1,222 @@
 <template>
   <div class="getalert">
-
     <!-- Header Component -->
     <Header></Header>
     <!-- Header Component -->
 
     <main class="site-content">
       <div class="container">
-
         <div class="header_title">
           <h4>Create a Free Job Alert</h4>
         </div>
 
         <div class="row">
-          <div class="col-md-8">
-
+          <div class="col-md-7">
             <!-- Vee validate validation observer component which wraps bootstrap vue form -->
-            <validation-observer
-                ref="observer"
-                v-slot="{ handleSubmit }"
-            >
-
-              <!-- Get Alert form uses Bootstarp vue form -->
+            <validation-observer ref="observer" v-slot="{ handleSubmit }">
+              <!-- Get Alert form uses Bootstrap vue form -->
               <b-form
-                  class="create_alert_form"
-                  @submit="onSubmit"
-                  @reset="onReset"
-                  v-if="show"
-                  @submit.stop.prevent="handleSubmit(onSubmit)"
+                class="create_alert_form"
+                @submit="onSubmit"
+                @reset="onReset"
+                v-if="show"
+                @submit.stop.prevent="handleSubmit(onSubmit)"
               >
+                <AlertTextField
+                  type="text"
+                  id="input-0"
+                  v-model="form.keywords"
+                  :rules="{ required: true }"
+                  label="Keywords"
+                  name="Keywords"
+                  aria_describedby="input-0-live-feedback"
+                  placeholder="Skills, Designation, Roles, Companies"
+                />
+
+                <AlertTextField
+                  type="text"
+                  id="input-1"
+                  v-model="form.name"
+                  :rules="{ required: true, min: 3 }"
+                  label="Full Name"
+                  name="Name"
+                  aria_describedby="input-1-live-feedback"
+                  placeholder="Enter Your Full Name"
+                />
+
+                <AlertTextField
+                  vid="email"
+                  type="email"
+                  id="input-2"
+                  v-model="form.email"
+                  :rules="{ required: true, email: true }"
+                  label="Email ID"
+                  name="Email"
+                  aria_describedby="input-2-live-feedback"
+                  placeholder="Enter your Email ID where you recognize this Job Alert"
+                />
+
+                <AlertTextField
+                  type="text"
+                  id="input-3"
+                  v-model="form.alertName"
+                  :rules="{ required: true, min: 3 }"
+                  label="Name Your Job Alert"
+                  name="Alert Name"
+                  aria_describedby="input-3-live-feedback"
+                  placeholder="Your Job Alert Enter a name that will help you recognize this job Alert"
+                />
+
+                <AlertTextField
+                  type="text"
+                  id="input-4"
+                  v-model="form.location"
+                  label="Location"
+                  name="Location"
+                  aria_describedby="input-4-live-feedback"
+                  placeholder="Enter the cities you want to work in"
+                />
 
                 <validation-provider
-                    name="Name"
-                    :rules="{ required: true, min: 3 }"
-                    v-slot="validationContext"
+                  name="Experience"
+                  :rules="{ required: true }"
+                  v-slot="validationContext"
                 >
                   <b-form-group
-                      label-cols="4"
-                      label-cols-lg="3"
-                      label-size="sm"
-                      label-align-sm="right"
-                      label="Keywords"
-                      label-for="input-1"
-                      id="input-group-1"
-                      description=""
+                    label-cols="4"
+                    label-size="sm"
+                    label-align-sm="right"
+                    label="Work Experience"
+                    label-for="input-5"
                   >
+                    <b-form-select
+                      id="input-5"
+                      name="work experience"
+                      v-model="form.years.value"
+                      :options="form.years.options"
+                      :state="getValidationState(validationContext)"
+                      aria-describedby="input-5-live-feedback"
+                    ></b-form-select>
 
-                    <b-form-input
-                        id="input-1"
-                        v-model="form.keywords"
-                        :state="getValidationState(validationContext)"
-                        aria-describedby="input-2-live-feedback"
-                        type="text"
-                        required
-                        placeholder="Skills, Designation, Roles, Companies"
-                    ></b-form-input>
-
-                    <b-form-invalid-feedback id="input-2-live-feedback">
-                      Key skills should not blank
+                    <b-form-invalid-feedback id="input-5-live-feedback">
+                      {{ validationContext.errors[0] }}
                     </b-form-invalid-feedback>
-
                   </b-form-group>
                 </validation-provider>
 
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-2"
-                    label="Full Name"
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Enter Your Full Name"
-                  ></b-form-input>
-                </b-form-group>
+                <AlertTextField
+                  type="text"
+                  id="input-6"
+                  v-model="form.salary"
+                  :rules="{ required: true }"
+                  label="Expected Salary"
+                  name="Salary"
+                  aria_describedby="input-6-live-feedback"
+                  placeholder="Min"
+                />
 
-                <b-form-group
+                <validation-provider
+                  name="Job Level"
+                  :rules="{ required: true }"
+                  v-slot="validationContext"
+                >
+                  <b-form-group
                     label-cols="4"
-                    label-cols-lg="3"
                     label-size="sm"
                     label-align-sm="right"
-                    id="input-group-3"
-                    label="Email ID "
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Enter your Email ID where you recognize this Job Alert"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-4"
-                    label="Name Your Job Alert"
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Your Job Alert Enter a name that will help you recognize this job Alert"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-5"
-                    label="Location"
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Enter the cities you want to work in"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-6"
-                    label="Work Exprience"
-                    label-for="input-3"
-                >
-                  <div class="input-group" style="width: 69.5%">
+                    label="Job level"
+                    label-for="input-7"
+                  >
                     <b-form-select
-                        id="input-3"
-                        v-model="form.years"
-                        :options="years"
-                        required
+                      id="input-7"
+                      name="job level"
+                      v-model="form.jobLevel.value"
+                      :options="form.jobLevel.options"
+                      :state="getValidationState(validationContext)"
+                      aria-describedby="input-7-live-feedback"
                     ></b-form-select>
-                    <label style="margin: 8px 10px; color:#355899">Years</label>
-                    <label style="margin: 8px 10px; color: #355899"
-                    >Expected Salary</label
-                    >
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.salary"
-                        required
-                        placeholder="MIN"
-                        style="border-radius: 0px"
-                    />
-                  </div>
-                </b-form-group>
 
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-7"
-                    label="Level"
-                    label-for="input-3"
+                    <b-form-invalid-feedback id="input-7-live-feedback">
+                      {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                  </b-form-group>
+                </validation-provider>
+
+                <AlertTextField
+                  type="text"
+                  id="input-8"
+                  v-model="form.industry"
+                  label="Industry"
+                  name="Industry"
+                  aria_describedby="input-8-live-feedback"
+                  placeholder="Enter your Industry type"
+                />
+
+                <AlertTextField
+                  type="text"
+                  id="input-9"
+                  v-model="form.jobCategory"
+                  label="Job Category"
+                  name="Job Category"
+                  aria_describedby="input-9-live-feedback"
+                  placeholder="Type or Select the desired Category where you want to work"
+                />
+
+                <AlertTextField
+                  type="text"
+                  id="input-10"
+                  v-model="form.jobRole"
+                  label="Job Role"
+                  name="Job Role"
+                  aria_describedby="input-10-live-feedback"
+                  placeholder="Type or Select the desired role where you want to work"
+                />
+
+                <validation-provider
+                  name="terms"
+                  :rules="{ required: { allowFalse: false } }"
+                  v-slot="validationContext"
                 >
-                  <div class="input-group" style="width: 69.5%">
-                    <b-form-select
-                        id="input-3"
-                        v-model="form.level"
-                        :options="level"
-                        required
-                    ></b-form-select>
-                  </div>
-                </b-form-group>
-
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-8"
-                    label="Industry"
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Enter the Cities you want to work in "
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-9"
-                    label="Job Category"
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Type or Select the desired Category where you want to work"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                    label-cols="4"
-                    label-cols-lg="3"
-                    label-size="sm"
-                    label-align-sm="right"
-                    id="input-group-10"
-                    label="Role"
-                    label-for="input-2"
-                >
-                  <b-form-input
-                      id="input-2"
-                      v-model="form.location"
-                      required
-                      placeholder="Type or Select the desired role where you want to work"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group id="input-group-11">
-                  <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
+                  <b-form-group id="input-group-11">
                     <b-form-checkbox
-                        value="that"
-                        style="color:#355899; font-size: 16px"
+                      class="col-md-8 offset-md-4"
+                      id="checkbox-1"
+                      v-model="form.termsConditions"
+                      :state="getValidationState(validationContext)"
+                      name="checkbox-1"
                     >
                       Also send me jobs closely related my search terms
                     </b-form-checkbox>
-                  </b-form-checkbox-group>
-                </b-form-group>
+
+                    <b-form-invalid-feedback id="input-7-live-feedback">
+                      {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                  </b-form-group>
+                </validation-provider>
 
                 <div class="row">
-                  <div class="col text-center">
-                    <b-button type="submit" style="background: #213D7C"
-                    >CREATE A JOB ALERT</b-button
-                    >
+                  <div class="col text-right">
+                    <b-button type="submit">CREATE A JOB ALERT</b-button>
                   </div>
                 </div>
               </b-form>
-              <!-- End of get Alert Bootstarp vue form -->
-
+              <!-- End of get Alert Bootstrap vue form -->
             </validation-observer>
             <!-- end of  Vee validate validation observer component -->
-
           </div>
 
-          <div class="col-md-4 note_group">
-            <h5 style="color: black; font-weight: bold">
+          <div class="col-md-4 offset-md-1 note_group">
+            <h3>
               Why should you create a free job alert?
-            </h5>
+            </h3>
 
             <div class="note">
-              <p class="ab">Get relevant jobs directly in your inbox</p>
-              <p class="a">Stay updated with latest opportunities</p>
-              <p class="a">Be the First one to apply</p>
-              <p class="a">Create up to 5 personalized job alerts</p>
+              <p>*Get relevant jobs directly in your inbox</p>
+              <p>*Stay updated with latest opportunities</p>
+              <p>*Be the First one to apply</p>
+              <p>*Create up to 5 personalized job alerts</p>
             </div>
           </div>
-
         </div>
       </div>
     </main>
@@ -278,44 +224,55 @@
     <!-- Footer component -->
     <Footer></Footer>
     <!-- Footer Component -->
-
   </div>
 </template>
 
 <script>
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import AlertTextField from "../components/AlertTextField";
+import axios from "axios";
+
 export default {
   name: "getAlert",
-  components: { Footer, Header },
+  components: { AlertTextField, Footer, Header },
   data() {
     return {
       form: {
         keywords: "",
-        email: "",
         name: "",
-        years: null,
-        checked: []
+        email: "",
+        alertName: "",
+        location: "",
+        years: {
+          value: null,
+          options: [
+            { value: null, text: "Select in year" },
+            { value: 1, text: "1 year" },
+            { value: 2, text: "2 year" },
+            { value: 3, text: "3 year" }
+          ]
+        },
+        salary: "",
+        jobLevel: {
+          value: null,
+          options: [
+            { value: null, text: "Select Your Job Level" },
+            { value: "entry", text: "Entry Level" },
+            { value: "mid", text: "Mid Level" },
+            { value: "high", text: "High Level" }
+          ]
+        },
+        industry: "",
+        jobCategory: "",
+        jobRole: "",
+        termsConditions: ""
       },
-      years: [
-        { text: "Select One", value: null },
-        "One",
-        "Two",
-        "Three",
-        "Four"
-      ],
-      level: [
-        { text: "Select One", value: null },
-        "Entry Level",
-        "Mid Level",
-        "High Level"
-      ],
       show: true,
-        info: '',
+      info: ""
     };
   },
   methods: {
-
     getValidationState({ dirty, validated, valid = null }) {
       return dirty || validated ? valid : null;
     },
@@ -323,7 +280,6 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
-
     },
 
     onReset(evt) {
@@ -339,12 +295,22 @@ export default {
         this.$refs.observer.reset();
         this.show = true;
       });
-    },
+    }
   },
+  mounted () {
+    axios
+        .get('https://jsonplaceholder.typicode.com/users')
+        .then(response => (this.info = response.data))
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => this.loading = false);
+  }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .note_group,
 .create_alert_form {
   padding: 50px 0;
@@ -360,61 +326,20 @@ export default {
   padding-top: 9px;
   font-size: 18px;
 }
-.sub_button {
-  position: center;
-}
-.note p {
-  position: relative;
-  margin-right: 15px;
-}
-.note p:before {
-  position: unset;
-  content: "*";
-  color: red;
-  right: -10px;
-  top: 0;
-}
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #eeeeee;
-  opacity: 1; /* Firefox */
-  font-size: 12px;
-}
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #eeeeee;
+button {
+  background: #213d7c;
+  transition: all 0.4s ease;
+  &:hover {
+    background: #213d7c;
+    opacity: 0.8;
+  }
 }
 
-#input-1,
-#input-2,
-#input-4,
-#input-5,
-#input-6,
-#input-7,
-#input-8 {
-  background: #eeeeee1a;
-  border: 1.5px solid #bfbfbf61;
-  border-radius: 0px;
-  width: 400px;
-}
-
-#input-3 {
-  width: 150px;
-  border-radius: 0px;
-}
-#input-group-1__BV_label_,
-#input-group-2__BV_label_,
-#input-group-3__BV_label_,
-#input-group-4__BV_label_,
-#input-group-5__BV_label_,
-#input-group-6__BV_label_,
-#input-group-7__BV_label_,
-#input-group-8__BV_label_ {
-  font-size: 16px;
-  font-weight: 500;
-  color: #355899;
-}
-.custom-control-inline {
-  margin-right: -0.3rem;
+.note_group {
+  h3 {
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0 0 30px;
+  }
 }
 </style>

@@ -20,14 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AlertTextField.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TextInput.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Getalert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GetAlert.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/GetAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GetAlert.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +40,6 @@
         <option value="Vue Single File Component" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>keywords</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,12 +68,13 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.CSS" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="SvnConfiguration">
@@ -115,7 +111,10 @@
       <workItem from="1588260987493" duration="1805000" />
       <workItem from="1588324892569" duration="1183000" />
       <workItem from="1588327124878" duration="1679000" />
-      <workItem from="1588331276398" duration="1688000" />
+      <workItem from="1588331276398" duration="16724000" />
+      <workItem from="1588402129171" duration="4910000" />
+      <workItem from="1588412614489" duration="1591000" />
+      <workItem from="1588415006707" duration="1041000" />
     </task>
     <servers />
   </component>
@@ -144,13 +143,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588331323044">
+    <state x="100" y="55" width="1128" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588415046585">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="100" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1588331323044" />
-    <state x="29" y="0" width="1125" height="800" key="SettingsEditor" timestamp="1588331918664">
+    <state x="100" y="55" width="1128" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1588415046585" />
+    <state x="312" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588406514014">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="29" y="0" width="1125" height="800" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1588331918664" />
+    <state x="312" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1588406514014" />
+    <state x="29" y="0" width="1125" height="800" key="SettingsEditor" timestamp="1588415549612">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="29" y="0" width="1125" height="800" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1588415549612" />
+    <state x="221" y="0" width="838" height="1032" key="search.everywhere.popup" timestamp="1588367423050">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="221" y="0" width="838" height="1032" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1588367423050" />
   </component>
 </project>

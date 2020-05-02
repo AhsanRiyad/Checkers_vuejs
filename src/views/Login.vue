@@ -14,36 +14,54 @@
 
         <div class="col-md-6 offset-md-3">
           <div class="login-box">
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email ID / Username</label>
-                <input
-                  placeholder="Enter your email ID / Username"
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-                <small id="emailHelp" class="form-text text-muted"
+            <ValidationObserver ref="loginform" v-slot="{ handleSubmit }">
+              <form @submit.prevent="handleSubmit(onSubmit)">
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email ID / Username</label>
+                  <ValidationProvider vid="email" name="E-mail" v-slot="{ errors }">
+                    <input
+                        v-model="loginForm.email"
+                        placeholder="Enter your email ID / Username"
+                        type="email"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        aria-describedby="emailHelp"
+                    />
+                    <span>{{ errors[0] }}</span>
+                  </ValidationProvider>
+                  <small id="emailHelp" class="form-text text-muted"
                   >We'll never share your email with anyone else.</small
-                >
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input
-                  placeholder="Enter your password"
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                />
-                <small id="passlHelp" class="form-text text-muted forgot-pass"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+
+                  <ValidationProvider vid="password" name="Password" v-slot="{ errors }">
+                    <input
+                        placeholder="Enter your password"
+                        type="password"
+                        class="form-control"
+                        id="exampleInputPassword1"
+                        v-model="loginForm.password"
+                    />
+
+                    <span>{{ errors[0] }}</span>
+                  </ValidationProvider>
+
+                  <small id="passlHelp" class="form-text text-muted forgot-pass"
                   ><a href="#">Forgot Password?</a></small
-                >
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">
-                Login
-              </button>
-            </form>
+                  >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                  Login
+                </button>
+
+              </form>
+            </ValidationObserver>
+
 
             <div class="or-divider">or</div>
 
@@ -69,7 +87,37 @@
 
 <script>
 export default {
-  name: "Login"
+  name: "Login",
+  data: () => ({
+    loginForm: {
+      email: "",
+      password: "",
+    }
+  }),
+  methods: {
+    onSubmit() {
+          fetch(`https://1idoi.sse.codesandbox.io/login`, {
+            method: "post",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify({
+              email: this.loginForm.email,
+              password: this.loginForm.password
+            })
+          })
+          .then(res => res.json())
+          .then(json => {
+            if (json.errors) {
+              console.log(json.errors);
+              this.$refs.loginform.setErrors(json.errors);
+              return;
+            }
+
+            alert(json.message);
+          });
+    }
+  }
 };
 </script>
 
