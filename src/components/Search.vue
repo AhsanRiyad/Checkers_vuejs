@@ -1,14 +1,45 @@
 <template>
   <div class="job_search">
-    <input type="text" placeholder="job title, keywords or company" />
-    <input type="text" placeholder="city, state or zip code" />
-    <button>Search</button>
+
+    <b-form-input
+        v-model="search.keyword"
+        list="input-list"
+        id="input-with-list"
+        type="text"
+        placeholder="job title, keywords or company"
+    ></b-form-input>
+    <b-form-datalist id="input-list" :options="options"></b-form-datalist>
+
+    <b-form-input
+        v-model="search.city"
+        list="city-list"
+        id="input-with-city-list"
+        type="text"
+        placeholder="city, state or zip code"
+    ></b-form-input>
+    <b-form-datalist id="city-list" :options="options"></b-form-datalist>
+
+    <button @click.prevent="onSubmit">Search</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Search"
+    name: "Search",
+    data() {
+      return{
+          options: ['Apple', 'Banana', 'Grape', 'Kiwi', 'Orange', 'Apple', 'Banana', 'Grape', 'Kiwi', 'Orange', 'Apple', 'Banana', 'Grape', 'Kiwi', 'Orange'],
+          search: {
+              keyword: '',
+              city: ''
+          }
+      }
+    },
+    methods: {
+        onSubmit() {
+            alert(JSON.stringify(this.search));
+        },
+    }
 };
 </script>
 

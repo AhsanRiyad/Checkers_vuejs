@@ -311,35 +311,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.note_group,
-.create_alert_form {
-  padding: 50px 0;
-}
+  .note_group,
+  .create_alert_form {
+    padding: 50px 0;
+  }
 
-.header_title {
-  background: #365898;
-  height: 40px;
-}
-.header_title h4 {
-  color: #fff;
-  text-align: center;
-  padding-top: 9px;
-  font-size: 18px;
-}
-button {
-  background: #213d7c;
-  transition: all 0.4s ease;
-  &:hover {
+  .header_title {
+    background: #365898;
+    height: 40px;
+  }
+  .header_title h4 {
+    color: #fff;
+    text-align: center;
+    padding-top: 9px;
+    font-size: 18px;
+  }
+  button {
     background: #213d7c;
-    opacity: 0.8;
+    transition: all 0.4s ease;
+    &:hover {
+      background: #213d7c;
+      opacity: 0.8;
+    }
   }
-}
 
-.note_group {
-  h3 {
-    font-weight: 700;
-    font-size: 26px;
-    margin: 0 0 30px;
+  .note_group {
+    h3 {
+      font-weight: 700;
+      font-size: 26px;
+      margin: 0 0 30px;
+    }
   }
-}
 </style>

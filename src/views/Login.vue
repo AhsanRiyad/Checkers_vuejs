@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+      <div class="loading"></div>
     <div class="container">
       <div class="row">
         <div class="col-md-12 login-logo">
@@ -19,7 +20,12 @@
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email ID / Username</label>
-                  <ValidationProvider vid="email" name="E-mail" v-slot="{ errors }">
+                  <ValidationProvider
+                          vid="email"
+                          name="E-mail"
+                          :rules="{ required: true, email: true }"
+                          v-slot="{ errors }"
+                  >
                     <input
                         v-model="loginForm.email"
                         placeholder="Enter your email ID / Username"
@@ -28,7 +34,7 @@
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
                     />
-                    <span>{{ errors[0] }}</span>
+                    <span class="error-text">{{ errors[0] }}</span>
                   </ValidationProvider>
                   <small id="emailHelp" class="form-text text-muted"
                   >We'll never share your email with anyone else.</small
@@ -38,7 +44,12 @@
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
 
-                  <ValidationProvider vid="password" name="Password" v-slot="{ errors }">
+                  <ValidationProvider
+                          vid="password"
+                          name="Password"
+                          :rules="{ required: true, min: 6 }"
+                          v-slot="{ errors }"
+                  >
                     <input
                         placeholder="Enter your password"
                         type="password"
@@ -47,7 +58,7 @@
                         v-model="loginForm.password"
                     />
 
-                    <span>{{ errors[0] }}</span>
+                    <span class="error-text">{{ errors[0] }}</span>
                   </ValidationProvider>
 
                   <small id="passlHelp" class="form-text text-muted forgot-pass"
@@ -86,128 +97,185 @@
 </template>
 
 <script>
+    import axios from "axios";
 export default {
   name: "Login",
   data: () => ({
     loginForm: {
-      email: "",
-      password: "",
+        fullName:"Mr. Postman",
+        address:"149, Brik lane, USA",
+        city:"New York",
+        zipPostCode:"1000",
+        countryId:"232",
+        nationality:"Americans",
+        dateOfBirth:"01/01/1980",
+        gender:"Male",
+        identityNumber:"45874125AS",
+        countryCodeMain:"+97",
+        mobileNumber:"845213695",
+        countryCodeAnother:"+97",
+        anotherMobileNumber:"5687452",
+        objectives:". Expert with a proven ability to “upsell” alcohol, dessert, and appetizers to customers. Looking to leverage my knowledge and experience into a management role at your restaurant.",
+        photo:"http://api.test/resume_photos/4beadc8e-015b-4ff5-8e3b-40973bc4f641.jpg",
+        careerDescription:"Longhorn Grill, Los Angeles, CA  /  September 2016 - Present Memorize restaurant’s wine stock and appropriate entrée pairings, leading to daily wine sales averaging $180, fully 15% higher than company average",
+        "coverLetter":"Waitress with 5+ years of experience in providing excellent service to diners at quality establishments. Possesses familiarity with POS terminals and common restaurant machinery. Expert with a proven ability to “upsell” alcohol, dessert, and appetizers to customers. Looking to leverage my knowledge and experience into a management role at your restaurant",
+        noticePeriod:"1 Month"
     }
   }),
   methods: {
     onSubmit() {
-          fetch(`https://1idoi.sse.codesandbox.io/login`, {
-            method: "post",
-            headers: {
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({
-              email: this.loginForm.email,
-              password: this.loginForm.password
-            })
-          })
-          .then(res => res.json())
-          .then(json => {
-            if (json.errors) {
-              console.log(json.errors);
-              this.$refs.loginform.setErrors(json.errors);
-              return;
-            }
+          // fetch(`https://1idoi.sse.codesandbox.io/login`, {
+          //   method: "post",
+          //   headers: {
+          //     "content-type": "application/json"
+          //   },
+          //   body: JSON.stringify({
+          //     email: this.loginForm.email,
+          //     password: this.loginForm.password
+          //   })
+          // })
+          // .then(res => res.json())
+          // .then(json => {
+          //   if (json.errors) {
+          //     console.log(json.errors);
+          //     this.$refs.loginform.setErrors(json.errors);
+          //     return;
+          //   }
+          //
+          //   alert(json.message);
+          // });
 
-            alert(json.message);
-          });
+        const headers = {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer 9d35b6c32cab49fcbd7daf55373e3686|662b582257cc4fdfa8355587e6892e5a'
+        };
+
+        axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
+            headers: headers
+        })
+            .then(function (response) {
+                console.log(response.status);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
     }
-  }
+  },
+    created() {
+      console.log('loaded');
+        const headers = {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer 9d35b6c32cab49fcbd7daf55373e3686|662b582257cc4fdfa8355587e6892e5a'
+        };
+
+        axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
+            headers: headers
+        })
+            .then(function (response) {
+                console.log(response.status);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 };
 </script>
 
 <style scoped lang="scss">
-.btn-primary {
-  background: #00204e;
-  border-color: #00204e;
-}
+    .btn-primary {
+      background: #00204e;
+      border-color: #00204e;
+    }
 
-.login {
-  min-height: 100vh;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .login {
+      min-height: 100vh;
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.login-logo {
-  text-align: center;
-  img {
-    margin-bottom: 15px;
-    max-height: 35px;
-  }
-}
+    .login-logo {
+      text-align: center;
+      img {
+        margin-bottom: 15px;
+        max-height: 35px;
+      }
+    }
 
-.login-box {
-  padding: 30px 50px;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.45);
-}
+    .login-box {
+      padding: 30px 50px;
+      box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.45);
+    }
 
-.or-divider {
-  text-align: center;
-  font-size: 18px;
-  position: relative;
-  color: #00204e;
-  font-weight: 700;
-  margin: 10px 0;
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 45%;
-    position: absolute;
-    top: 13px;
-    background: #ddd;
-  }
-  &:before {
-    left: 0;
-  }
-  &:after {
-    right: 0;
-  }
-}
+    .or-divider {
+      text-align: center;
+      font-size: 18px;
+      position: relative;
+      color: #00204e;
+      font-weight: 700;
+      margin: 10px 0;
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 45%;
+        position: absolute;
+        top: 13px;
+        background: #ddd;
+      }
+      &:before {
+        left: 0;
+      }
+      &:after {
+        right: 0;
+      }
+    }
 
-.social_login {
-  text-align: center;
-  a {
-    display: inline-block;
-    border: 1px solid;
-    height: 30px;
-    width: 30px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 18px;
-    margin: 0 10px;
-    border-radius: 5px;
-  }
-}
+    .social_login {
+      text-align: center;
+      a {
+        display: inline-block;
+        border: 1px solid;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        margin: 0 10px;
+        border-radius: 5px;
+      }
+    }
 
-.privacy_text {
-  font-size: 12px;
-  color: #ddd;
-  margin: 10px 0;
-}
-.bottom_text {
-  font-size: 16px;
-  font-weight: 700;
-  a,
-  a:-webkit-any-link {
-    color: #0000ff;
-  }
-}
+    .privacy_text {
+      font-size: 12px;
+      color: #ddd;
+      margin: 10px 0;
+    }
+    .bottom_text {
+      font-size: 16px;
+      font-weight: 700;
+      a,
+      a:-webkit-any-link {
+        color: #0000ff;
+      }
+    }
 
-a:-webkit-any-link,
-.forgot-pass {
-  color: #002b68;
-}
-.forgot-pass {
-  text-align: right;
-  text-decoration: none;
-}
+    a:-webkit-any-link,
+    .forgot-pass {
+      color: #002b68;
+    }
+    .forgot-pass {
+      text-align: right;
+      text-decoration: none;
+    }
+
+    .error-text{
+        color: red;
+        font-size: 12px;
+    }
+
 </style>

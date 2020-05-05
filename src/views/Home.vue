@@ -55,6 +55,8 @@
 </template>
 
 <script>
+    // import axios from "axios";
+
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 
@@ -68,6 +70,23 @@ export default {
     Header,
     Search
     // HelloWorld
+  },
+  created() {
+
+      // Make a request for a user with a given ID
+      // axios.get('http://13.58.205.236:8080')
+      //     .then(function (response) {
+      //         // handle success
+      //         console.log(response.data);
+      //     })
+      //     .catch(function (error) {
+      //         // handle error
+      //         console.log(error);
+      //     })
+      //     .then(function () {
+      //         // always executed
+      //     });
+
   }
 };
 </script>

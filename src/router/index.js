@@ -17,7 +17,6 @@ const routes = [
     name: "Login",
     component: Login
   },
-
   {
     path: "/getalert",
     name: "GetAlert",
