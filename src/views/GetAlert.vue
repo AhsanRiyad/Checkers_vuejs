@@ -17,11 +17,10 @@
               <!-- Get Alert form uses Bootstrap vue form -->
               <b-form
                 class="create_alert_form"
-                @submit="onSubmit"
-                @reset="onReset"
                 v-if="show"
                 @submit.stop.prevent="handleSubmit(onSubmit)"
               >
+
                 <AlertTextField
                   type="text"
                   id="input-0"
@@ -92,8 +91,8 @@
                     <b-form-select
                       id="input-5"
                       name="work experience"
-                      v-model="form.years.value"
-                      :options="form.years.options"
+                      v-model="form.years"
+                      :options='[{ value: null, text: "Select in year" }, { value: 1, text: "1 year" }, { value: 2, text: "2 year" }, { value: 3, text: "3 year" }]'
                       :state="getValidationState(validationContext)"
                       aria-describedby="input-5-live-feedback"
                     ></b-form-select>
@@ -130,8 +129,8 @@
                     <b-form-select
                       id="input-7"
                       name="job level"
-                      v-model="form.jobLevel.value"
-                      :options="form.jobLevel.options"
+                      v-model="form.jobLevel"
+                      :options='[{ value: null, text: "Select Your Job Level" }, { value: "Entry", text: "Entry Level" }, { value: "Mid", text: "Mid Level" }, { value: "High", text: "High Level" }]'
                       :state="getValidationState(validationContext)"
                       aria-describedby="input-7-live-feedback"
                     ></b-form-select>
@@ -152,15 +151,32 @@
                   placeholder="Enter your Industry type"
                 />
 
-                <AlertTextField
-                  type="text"
-                  id="input-9"
-                  v-model="form.jobCategory"
-                  label="Job Category"
-                  name="Job Category"
-                  aria_describedby="input-9-live-feedback"
-                  placeholder="Type or Select the desired Category where you want to work"
-                />
+                  <validation-provider
+                          name="Job Level"
+                          :rules="{ required: true }"
+                          v-slot="validationContext"
+                  >
+                      <b-form-group
+                              label-cols="4"
+                              label-size="sm"
+                              label-align-sm="right"
+                              label="Job Category"
+                              label-for="input-9"
+                      >
+                          <b-form-select
+                                  id="input-9"
+                                  name="Job Category"
+                                  v-model="form.jobCategory"
+                                  :options="[{value: null, text: 'Select Job Category'}, {value: 'Civil', text: 'Civil'}, {value: 'Teaching', text: 'Teaching'}, {value: 'IT_Computer', text: 'IT Computer'}]"
+                                  :state="getValidationState(validationContext)"
+                                  aria-describedby="input-9-live-feedback"
+                          ></b-form-select>
+
+                          <b-form-invalid-feedback id="input-9-live-feedback">
+                              {{ validationContext.errors[0] }}
+                          </b-form-invalid-feedback>
+                      </b-form-group>
+                  </validation-provider>
 
                 <AlertTextField
                   type="text"
@@ -199,8 +215,22 @@
                     <b-button type="submit">CREATE A JOB ALERT</b-button>
                   </div>
                 </div>
+
               </b-form>
               <!-- End of get Alert Bootstrap vue form -->
+
+                <div v-else class="form-alert-success">
+                    <!--<span @click="show = !show" class="alert-message-close">×</span>-->
+                    <div class="form-alert-success-text">
+                        Your Job Alert has been created successfully!
+                    </div>
+                    <b-button
+                            @click="show = !show"
+                            variant="success"
+                    >
+                        Create another Job Alert
+                    </b-button>
+                </div>
             </validation-observer>
             <!-- end of  Vee validate validation observer component -->
           </div>
@@ -217,6 +247,7 @@
               <p>*Create up to 5 personalized job alerts</p>
             </div>
           </div>
+
         </div>
       </div>
     </main>
@@ -238,38 +269,24 @@ export default {
   components: { AlertTextField, Footer, Header },
   data() {
     return {
-      form: {
-        keywords: "",
-        name: "",
-        email: "",
-        alertName: "",
-        location: "",
-        years: {
-          value: null,
-          options: [
-            { value: null, text: "Select in year" },
-            { value: 1, text: "1 year" },
-            { value: 2, text: "2 year" },
-            { value: 3, text: "3 year" }
-          ]
+        form: {
+            keywords: "",
+            name: "",
+            email: "",
+            alertName: "",
+            location: "",
+            years: null,
+            salary: "",
+            jobLevel: null,
+            industry: "",
+            jobCategory: null,
+            jobRole: "",
+            termsConditions: []
         },
-        salary: "",
-        jobLevel: {
-          value: null,
-          options: [
-            { value: null, text: "Select Your Job Level" },
-            { value: "entry", text: "Entry Level" },
-            { value: "mid", text: "Mid Level" },
-            { value: "high", text: "High Level" }
-          ]
-        },
-        industry: "",
-        jobCategory: "",
-        jobRole: "",
-        termsConditions: ""
-      },
-      show: true,
-      info: ""
+        show: true,
+        info: "",
+        errored: false,
+        loading: true,
     };
   },
   methods: {
@@ -277,40 +294,100 @@ export default {
       return dirty || validated ? valid : null;
     },
 
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+    onSubmit() {
+        let formData = {
+                keywords: this.form.keywords,
+                name: this.form.name,
+                email: this.form.email,
+                alertName: this.form.alertName,
+                location: this.form.location,
+                years: this.form.years,
+                salary: this.form.salary,
+                jobLevel: {
+                    id: 1,
+                    name: this.form.jobLevel
+                },
+                industry: this.form.industry,
+                jobCategory: {
+                    id: 1,
+                    name: this.form.jobCategory
+                },
+                jobRole: {
+                    id: 1,
+                    name: this.form.jobRole
+                },
+                termsConditions: this.form.termsConditions[0],
+            };
+        console.log(JSON.stringify(formData));
+
+        axios({
+            method: 'post',
+            url: 'http://13.58.205.236:8080/jobs/alert/new',
+            data: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+        })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        this.onReset();
     },
 
-    onReset(evt) {
-      evt.preventDefault();
+    onReset() {
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+        this.form = {
+            keywords: "",
+            name: "",
+            email: "",
+            alertName: "",
+            location: "",
+            years: null,
+            salary: "",
+            jobLevel: null,
+            industry: "",
+            jobCategory: null,
+            jobRole: "",
+            termsConditions: []
+        };
+
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
         this.$refs.observer.reset();
-        this.show = true;
       });
     }
-  },
-  mounted () {
-    axios
-        .get('https://jsonplaceholder.typicode.com/users')
-        .then(response => (this.info = response.data))
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-        })
-        .finally(() => this.loading = false);
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
+    .form-alert-success {
+        padding: 100px 20px;
+        position: relative;
+        text-align: center;
+        .alert-message-close{
+            color: red;
+            font-size: 50px;
+            cursor: pointer;
+            display: inline-block;
+            position: absolute;
+            top: 30px;
+            right: 20px;
+        }
+        .form-alert-success-text{
+            color: green;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+    }
   .note_group,
   .create_alert_form {
     padding: 50px 0;

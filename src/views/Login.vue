@@ -102,52 +102,36 @@ export default {
   name: "Login",
   data: () => ({
     loginForm: {
-        fullName:"Mr. Postman",
-        address:"149, Brik lane, USA",
-        city:"New York",
-        zipPostCode:"1000",
-        countryId:"232",
-        nationality:"Americans",
-        dateOfBirth:"01/01/1980",
-        gender:"Male",
-        identityNumber:"45874125AS",
-        countryCodeMain:"+97",
-        mobileNumber:"845213695",
-        countryCodeAnother:"+97",
-        anotherMobileNumber:"5687452",
-        objectives:". Expert with a proven ability to “upsell” alcohol, dessert, and appetizers to customers. Looking to leverage my knowledge and experience into a management role at your restaurant.",
-        photo:"http://api.test/resume_photos/4beadc8e-015b-4ff5-8e3b-40973bc4f641.jpg",
-        careerDescription:"Longhorn Grill, Los Angeles, CA  /  September 2016 - Present Memorize restaurant’s wine stock and appropriate entrée pairings, leading to daily wine sales averaging $180, fully 15% higher than company average",
-        "coverLetter":"Waitress with 5+ years of experience in providing excellent service to diners at quality establishments. Possesses familiarity with POS terminals and common restaurant machinery. Expert with a proven ability to “upsell” alcohol, dessert, and appetizers to customers. Looking to leverage my knowledge and experience into a management role at your restaurant",
-        noticePeriod:"1 Month"
-    }
+        email: 'jahurul1@gmail.com',
+        password: '123456'
+    },
   }),
   methods: {
     onSubmit() {
-          // fetch(`https://1idoi.sse.codesandbox.io/login`, {
-          //   method: "post",
-          //   headers: {
-          //     "content-type": "application/json"
-          //   },
-          //   body: JSON.stringify({
-          //     email: this.loginForm.email,
-          //     password: this.loginForm.password
-          //   })
-          // })
-          // .then(res => res.json())
-          // .then(json => {
-          //   if (json.errors) {
-          //     console.log(json.errors);
-          //     this.$refs.loginform.setErrors(json.errors);
-          //     return;
-          //   }
-          //
-          //   alert(json.message);
-          // });
+          fetch(`https://1idoi.sse.codesandbox.io/login`, {
+            method: "post",
+            headers: {
+              "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+              email: this.loginForm.email,
+              password: this.loginForm.password
+            })
+          })
+          .then(res => res.json())
+          .then(json => {
+            if (json.errors) {
+              console.log(json.errors);
+              this.$refs.loginform.setErrors(json.errors);
+              return;
+            }
+
+            alert(json.message);
+          });
 
         const headers = {
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer 9d35b6c32cab49fcbd7daf55373e3686|662b582257cc4fdfa8355587e6892e5a'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer 87bc9364a7434415babdf8733eb914ba|8e9030afad044621a276b3c82cd5a3cb'
         };
 
         axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
@@ -166,15 +150,29 @@ export default {
     created() {
       console.log('loaded');
         const headers = {
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer 9d35b6c32cab49fcbd7daf55373e3686|662b582257cc4fdfa8355587e6892e5a'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
         };
 
-        axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
-            headers: headers
-        })
+        // axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
+        //     headers: headers
+        // })
+        //     .then(function (response) {
+        //         console.log(response.status);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+
+        axios({
+                method: 'post',
+                url: 'http://13.58.205.236:8080/users/login',
+                data: JSON.stringify(this.loginForm),
+                headers: headers,
+
+            })
             .then(function (response) {
-                console.log(response.status);
+                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
