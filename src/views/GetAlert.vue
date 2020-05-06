@@ -318,7 +318,7 @@ export default {
                 },
                 termsConditions: this.form.termsConditions[0],
             };
-        console.log(JSON.stringify(formData));
+        // console.log(JSON.stringify(formData));
 
         axios({
             method: 'post',
@@ -330,7 +330,8 @@ export default {
 
         })
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
+                this.info = response.data;
             })
             .catch(function (error) {
                 console.log(error);
