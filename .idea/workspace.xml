@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/GetAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GetAlert.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,10 +32,110 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-691773276">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="1" />
+          <entry key="JavaScript" value="1" />
+          <entry key="Vue.js" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="10" />
+          <entry key="JavaScript" value="19" />
+          <entry key="Vue.js" value="1462" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="169" column="53" lean-forward="true" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="53" />
+              <folding>
+                <element signature="n#style#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/Home.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-66">
+              <caret line="60" column="56" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+              <folding>
+                <element signature="n#div#2;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="e#1673#1715#0" expanded="true" />
+                <element signature="n#style#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Search.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="760">
+              <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+              <folding>
+                <element signature="n#style#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/views/GetAlert.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="387" column="28" selection-start-line="387" selection-start-column="28" selection-end-line="387" selection-end-column="28" />
+              <folding>
+                <element signature="n#AlertTextField#0;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#1;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#2;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#3;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#4;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#validation-provider#0;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#5;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#validation-provider#1;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#6;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#validation-provider#2;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#AlertTextField#7;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#validation-provider#3;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#div#0;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#script#0;n#!!top" />
+                <element signature="e#9568#9610#0" expanded="true" />
+                <element signature="e#9869#10193#0" />
+                <element signature="e#10439#11313#0" />
+                <element signature="e#9748#10122#0" />
+                <element signature="e#10490#10516#0" />
+                <element signature="e#10534#10582#0" />
+                <element signature="e#10602#10691#0" />
+                <element signature="e#10845#10936#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -29,11 +147,90 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/router/index.js" />
+        <option value="$PROJECT_DIR$/src/components/Search.vue" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/views/Home.vue" />
+        <option value="$PROJECT_DIR$/src/views/Login.vue" />
+        <option value="$PROJECT_DIR$/src/views/GetAlert.vue" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
+  </component>
   <component name="ProjectId" id="1akgtWwltXFpT2AIB2khghF0Uzs" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="jobalertfrontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jobalertfrontend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jobalertfrontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jobalertfrontend" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jobalertfrontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jobalertfrontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jobalertfrontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jobalertfrontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -41,10 +238,14 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -80,8 +281,71 @@
       <workItem from="1587242318955" duration="4535000" />
       <workItem from="1587285255867" duration="1558000" />
       <workItem from="1587299886243" duration="4507000" />
+      <workItem from="1587311527188" duration="112000" />
+      <workItem from="1587391371436" duration="17000" />
+      <workItem from="1587495693700" duration="1321000" />
+      <workItem from="1587556533849" duration="703000" />
+      <workItem from="1587565783350" duration="18000" />
+      <workItem from="1587799094474" duration="2368000" />
+      <workItem from="1587902207193" duration="4435000" />
+      <workItem from="1587998048689" duration="404000" />
+      <workItem from="1588172219257" duration="2853000" />
+      <workItem from="1588260987493" duration="1805000" />
+      <workItem from="1588324892569" duration="1183000" />
+      <workItem from="1588327124878" duration="1679000" />
+      <workItem from="1588331276398" duration="16724000" />
+      <workItem from="1588402129171" duration="4910000" />
+      <workItem from="1588412614489" duration="1591000" />
+      <workItem from="1588415006707" duration="1221000" />
+      <workItem from="1588438523272" duration="109000" />
+      <workItem from="1588486119804" duration="422000" />
+      <workItem from="1588606174648" duration="7749000" />
+      <workItem from="1588673208314" duration="66000" />
+      <workItem from="1588673312196" duration="1128000" />
+      <workItem from="1588690239377" duration="201000" />
+      <workItem from="1588704321689" duration="1699000" />
+      <workItem from="1588754188537" duration="706000" />
+      <workItem from="1588776221044" duration="11756000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="23305000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32911393" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -92,28 +356,117 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="COLUMN_ORDER" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
             </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/views/Home.vue</url>
-          <line>5</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/views/Getalert.vue</url>
-          <line>8</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="100" y="55" width="1128" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588415046585">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="100" y="55" width="1128" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1588415046585" />
+    <state x="312" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588406514014">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="312" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1588406514014" />
+    <state x="29" y="0" width="1125" height="800" key="SettingsEditor" timestamp="1588415549612">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="29" y="0" width="1125" height="800" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1588415549612" />
+    <state x="221" y="0" width="838" height="1032" key="search.everywhere.popup" timestamp="1588367423050">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="221" y="0" width="838" height="1032" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1588367423050" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Search.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="113" selection-start-line="8" selection-start-column="113" selection-end-line="8" selection-end-column="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="60" column="56" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+          <folding>
+            <element signature="n#div#2;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="e#1673#1715#0" expanded="true" />
+            <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="169" column="53" lean-forward="true" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="53" />
+          <folding>
+            <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/GetAlert.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="387" column="28" selection-start-line="387" selection-start-column="28" selection-end-line="387" selection-end-column="28" />
+          <folding>
+            <element signature="n#AlertTextField#0;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#1;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#2;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#3;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#4;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#validation-provider#0;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#5;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#validation-provider#1;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#6;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#validation-provider#2;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#AlertTextField#7;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#validation-provider#3;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#div#0;n#b-form#0;n#validation-observer#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#script#0;n#!!top" />
+            <element signature="e#9568#9610#0" expanded="true" />
+            <element signature="e#9869#10193#0" />
+            <element signature="e#10439#11313#0" />
+            <element signature="e#9748#10122#0" />
+            <element signature="e#10490#10516#0" />
+            <element signature="e#10534#10582#0" />
+            <element signature="e#10602#10691#0" />
+            <element signature="e#10845#10936#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
