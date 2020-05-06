@@ -107,8 +107,8 @@
                   type="text"
                   id="input-6"
                   v-model="form.salary"
-                  :rules="{ required: true }"
-                  label="Expected Salary"
+                  :rules="{ required: true, numeric: true }"
+                  label="Expected Salary( In $ )"
                   name="Salary"
                   aria_describedby="input-6-live-feedback"
                   placeholder="Min"
@@ -302,7 +302,7 @@ export default {
                 alertName: this.form.alertName,
                 location: this.form.location,
                 years: this.form.years,
-                salary: this.form.salary,
+                salary: Number(this.form.salary),
                 jobLevel: {
                     id: 1,
                     name: this.form.jobLevel
@@ -318,7 +318,7 @@ export default {
                 },
                 termsConditions: this.form.termsConditions[0],
             };
-        console.log(JSON.stringify(formData));
+        // console.log(JSON.stringify(formData));
 
         axios({
             method: 'post',
@@ -330,7 +330,8 @@ export default {
 
         })
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
+                this.info = response.data;
             })
             .catch(function (error) {
                 console.log(error);
@@ -392,7 +393,15 @@ export default {
   .create_alert_form {
     padding: 50px 0;
   }
-
+    #input-6{
+        position: relative;
+        &:before{
+            content: "$";
+            position: absolute;
+            top: 5px;
+            left: 0;
+        }
+    }
   .header_title {
     background: #365898;
     height: 40px;
