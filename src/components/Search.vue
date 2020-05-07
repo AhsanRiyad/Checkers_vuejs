@@ -8,7 +8,7 @@
         type="text"
         placeholder="job title, keywords or company"
     ></b-form-input>
-    <b-form-datalist id="input-list" :options="options"></b-form-datalist>
+    <b-form-datalist id="input-list" :options="title"></b-form-datalist>
 
     <b-form-input
         v-model="search.city"
@@ -17,7 +17,7 @@
         type="text"
         placeholder="city, state or zip code"
     ></b-form-input>
-    <b-form-datalist id="city-list" :options="options"></b-form-datalist>
+    <b-form-datalist id="city-list" :options="location"></b-form-datalist>
 
     <button @click.prevent="onSubmit">Search</button>
   </div>
@@ -28,7 +28,8 @@ export default {
     name: "Search",
     data() {
       return{
-          options: ['Apple', 'Banana', 'Grape', 'Kiwi', 'Orange', 'Apple', 'Banana', 'Grape', 'Kiwi', 'Orange', 'Apple', 'Banana', 'Grape', 'Kiwi', 'Orange'],
+          title: ['Symphony', 'Larval', 'React', 'Vue JS', 'Django'],
+          location: ['Dhaka', 'Khulna', 'Rajshahi', 'Chittagong', 'Sylhet'],
           search: {
               keyword: '',
               city: ''
@@ -37,7 +38,8 @@ export default {
     },
     methods: {
         onSubmit() {
-            alert(JSON.stringify(this.search));
+            // alert(JSON.stringify(this.search));
+            console.log(JSON.stringify(this.search));
         },
     }
 };

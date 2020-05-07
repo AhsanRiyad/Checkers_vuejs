@@ -13,8 +13,8 @@
           New to jobalert ?
         </h2>
         <div class="home_main_btn">
-          <a href="#" class="job_btn">Register with us</a>
-          <a href="#" class="job_btn">Upload resume</a>
+          <router-link v-if="!isLoggedIn" :to="{ name: 'Registration'}" class="job_btn">Register With Us</router-link>
+          <a href="#" class="job_btn">Manage Resume</a>
         </div>
       </div>
       <!-- /.new_to_site -->
@@ -71,7 +71,16 @@ export default {
     Search
     // HelloWorld
   },
+  data() {
+    return {
+      isLoggedIn: false,
+    }
+  },
   created() {
+    if(this.getCookie('auth_token') !== ''){
+      console.log(this.getCookie('auth_token'));
+      this.isLoggedIn = true;
+    }
 
       // Make a request for a user with a given ID
       // axios.get('http://13.58.205.236:8080')
@@ -87,6 +96,24 @@ export default {
       //         // always executed
       //     });
 
+  },
+
+  methods: {
+    getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
   }
 };
 </script>
@@ -114,7 +141,7 @@ export default {
   }
   .home_main_btn {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     .job_btn {
       width: 48%;
       padding: 15px 0;
@@ -152,6 +179,7 @@ export default {
       &:hover {
         background: #365899;
         box-shadow: 0 3px 10px 0 #365899;
+        text-decoration: none;
       }
       i {
         margin-left: 10px;

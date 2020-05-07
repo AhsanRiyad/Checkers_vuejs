@@ -15,6 +15,7 @@
 
         <div class="col-md-6 offset-md-3">
           <div class="login-box">
+
             <ValidationObserver ref="loginform" v-slot="{ handleSubmit }">
               <form @submit.prevent="handleSubmit(onSubmit)">
 
@@ -76,10 +77,16 @@
 
             <div class="or-divider">or</div>
 
-            <div class="social_login">
+            <div class="text-center">
+              <router-link :to="{ name: 'Registration' }">Create a New Account</router-link>
+            </div>
+
+
+            <div v-if="false" class="social_login">
               <a href="#"><i class="fa fa-facebook"></i></a>
               <a href="#"><i class="fa fa-google"></i></a>
             </div>
+
             <div class="privacy_text text-muted">
               All your activity will remain private
             </div>
@@ -102,82 +109,73 @@ export default {
   name: "Login",
   data: () => ({
     loginForm: {
-        email: 'jahurul1@gmail.com',
+        email: 'jahurul@gmail.com',
         password: '123456'
     },
   }),
   methods: {
     onSubmit() {
-          fetch(`https://1idoi.sse.codesandbox.io/login`, {
-            method: "post",
-            headers: {
-              "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-              email: this.loginForm.email,
-              password: this.loginForm.password
-            })
-          })
-          .then(res => res.json())
-          .then(json => {
-            if (json.errors) {
-              console.log(json.errors);
-              this.$refs.loginform.setErrors(json.errors);
-              return;
+
+      console.log('loaded');
+      const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      };
+
+      axios({
+        method: 'post',
+        url: 'http://13.58.205.236:8080/users/login',
+        data: JSON.stringify(this.loginForm),
+        headers: headers,
+
+      })
+          .then(res => {
+            console.log(res.data);
+
+            if(res.status  === 200) {
+              console.log('200');
+              this.setCookie('auth_token', res.data.access_token, 0.00347222);
+              this.$router.push('/');
             }
 
-            alert(json.message);
-          });
+          })
+          .catch(err => {
+            console.log(err);
+            this.eraseCookie('auth_token');
+          })
+      .finally(() => {
+        console.log(this.getCookie('auth_token'));
+      });
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 87bc9364a7434415babdf8733eb914ba|8e9030afad044621a276b3c82cd5a3cb'
-        };
+    },
 
-        axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
-            headers: headers
-        })
-            .then(function (response) {
-                console.log(response.status);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    setCookie(cname, cvalue, exdays) {
+      let d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    },
+    getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    eraseCookie(name) {
+      document.cookie = name+'=; Max-Age=-99999999;';
+    },
 
 
-    }
   },
-    created() {
-      console.log('loaded');
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        };
-
-        // axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
-        //     headers: headers
-        // })
-        //     .then(function (response) {
-        //         console.log(response.status);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-
-        axios({
-                method: 'post',
-                url: 'http://13.58.205.236:8080/users/login',
-                data: JSON.stringify(this.loginForm),
-                headers: headers,
-
-            })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
 };
 </script>
 

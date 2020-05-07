@@ -31,6 +31,8 @@ a {
   padding: 10px 20px;
   &:hover {
     background: #6f9ae8;
+    color: #fff;
+    text-decoration: none;
   }
 }
 #app {

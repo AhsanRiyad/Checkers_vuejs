@@ -1,5 +1,5 @@
 <template>
-    <div class="registration">
+    <div class="login">
         <div class="loading"></div>
         <div class="container">
             <div class="row">
@@ -15,8 +15,8 @@
 
                 <div class="col-md-6 offset-md-3">
                     <div class="login-box">
-                        <ValidationObserver ref="loginform" v-slot="{ handleSubmit }">
-                            <form @submit.prevent="handleSubmit(onSubmit)">
+                        <ValidationObserver ref="signupform" v-slot="{ handleSubmit }">
+                            <form @submit.stop.prevent="handleSubmit(onSubmit)">
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email ID / Username</label>
@@ -27,7 +27,7 @@
                                             v-slot="{ errors }"
                                     >
                                         <input
-                                                v-model="loginForm.email"
+                                                v-model="signUpForm.email"
                                                 placeholder="Enter your email ID / Username"
                                                 type="email"
                                                 class="form-control"
@@ -35,6 +35,7 @@
                                                 aria-describedby="emailHelp"
                                         />
                                         <span class="error-text">{{ errors[0] }}</span>
+                                        <span v-if="info" class="error-text">{{info}}</span>
                                     </ValidationProvider>
                                     <small id="emailHelp" class="form-text text-muted"
                                     >We'll never share your email with anyone else.</small
@@ -55,37 +56,26 @@
                                                 type="password"
                                                 class="form-control"
                                                 id="exampleInputPassword1"
-                                                v-model="loginForm.password"
+                                                v-model="signUpForm.password"
                                         />
 
                                         <span class="error-text">{{ errors[0] }}</span>
                                     </ValidationProvider>
-
-                                    <small id="passlHelp" class="form-text text-muted forgot-pass"
-                                    ><a href="#">Forgot Password?</a></small
-                                    >
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    Login
+                                    Sign Up
                                 </button>
 
                             </form>
                         </ValidationObserver>
 
-
-                        <div class="or-divider">or</div>
-
-                        <div class="social_login">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-google"></i></a>
-                        </div>
                         <div class="privacy_text text-muted">
                             All your activity will remain private
                         </div>
 
                         <div class="bottom_text">
-                            By signing in to your account, you agree to JOB ALERT’s
+                            By registering a new account, you agree to JOB ALERT’s
                             <a href="#">Terms of Service</a> and consent to our
                             <a href="#">Cookie Policy</a> and <a href="#">Privacy Policy</a>.
                         </div>
@@ -100,83 +90,49 @@
     import axios from "axios";
     export default {
         name: "Registration",
-        data: () => ({
-            loginForm: {
-                email: 'jahurul1@gmail.com',
-                password: '123456'
-            },
-        }),
-        methods: {
-            onSubmit() {
-                fetch(`https://1idoi.sse.codesandbox.io/login`, {
-                    method: "post",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: this.loginForm.email,
-                        password: this.loginForm.password
-                    })
-                })
-                    .then(res => res.json())
-                    .then(json => {
-                        if (json.errors) {
-                            console.log(json.errors);
-                            this.$refs.loginform.setErrors(json.errors);
-                            return;
-                        }
-
-                        alert(json.message);
-                    });
-
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 87bc9364a7434415babdf8733eb914ba|8e9030afad044621a276b3c82cd5a3cb'
-                };
-
-                axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
-                    headers: headers
-                })
-                    .then(function (response) {
-                        console.log(response.status);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-
+        data() {
+            return{
+                signUpForm: {
+                    email: '',
+                    password: '',
+                },
+                successMessage: '',
+                info: ''
             }
         },
-        created() {
-            console.log('loaded');
-            const headers = {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            };
+        methods: {
 
-            // axios.post('http://13.58.205.236:8080/resume/biodata', JSON.stringify(this.loginForm), {
-            //     headers: headers
-            // })
-            //     .then(function (response) {
-            //         console.log(response.status);
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
+            onSubmit() {
 
-            axios({
-                method: 'post',
-                url: 'http://13.58.205.236:8080/users/login',
-                data: JSON.stringify(this.loginForm),
-                headers: headers,
+                axios({
+                    method: 'post',
+                    url: 'http://13.58.205.236:8080/users',
+                    data: JSON.stringify(this.signUpForm),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
 
-            })
-                .then(function (response) {
-                    console.log(response);
                 })
-                .catch(function (error) {
-                    console.log(error);
+                    .then(res => {
+                        this.info = '';
+                        this.successMessage = res.data;
+                        this.$router.push('/login');
+                    })
+                    .catch(err => (this.info = err.response.data.message));
+
+                // console.log(JSON.stringify(this.signUpForm));
+
+            },
+
+            onReset() {
+                console.log('reset');
+                this.signUpForm.email = '';
+                this.signUpForm.password = '';
+                this.$nextTick(() => {
+                    this.$refs.signupform.reset();
                 });
+            }
         }
     }
 </script>

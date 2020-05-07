@@ -7,21 +7,66 @@ import GetAlert from "../views/GetAlert";
 
 Vue.use(VueRouter);
 
+const ifAuthenticated = (to, from, next) => {
+  if (getCookie('auth_token')) {
+    console.log(getCookie('auth_token'));
+    next()
+    return
+  }
+  next('/login')
+}
+
+const getCookie = (cname) => {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+};
+
+
+
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home
   },
-    {
-        path: "/registration",
-        name: "Registration",
-        component: Registration
-    },
+  {
+    path: "/jobs",
+    name: "Jobs",
+    component: () => import(/* webpackChunkName: "about" */ "../views/Jobs.vue"),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+      path: "/registration",
+      name: "Registration",
+      component: Registration
+  },
   {
     path: "/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/recruiters",
+    name: "Recruiters",
+    component: () => import(/* webpackChunkName: "about" */ "../views/Recruiters.vue"),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/employer",
+    name: "Employer",
+    component: () => import(/* webpackChunkName: "about" */ "../views/Employer.vue"),
+    beforeEnter: ifAuthenticated,
   },
   {
     path: "/getalert",
