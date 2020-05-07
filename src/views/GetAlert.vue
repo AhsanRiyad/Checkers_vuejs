@@ -104,7 +104,7 @@
                 </validation-provider>
 
                 <AlertTextField
-                  type="text"
+                  type="number"
                   id="input-6"
                   v-model="form.salary"
                   :rules="{ required: true, numeric: true }"
@@ -185,7 +185,7 @@
                   label="Job Role"
                   name="Job Role"
                   aria_describedby="input-10-live-feedback"
-                  placeholder="Type or Select the desired role where you want to work"
+                  placeholder="Type the desired role where you want to work"
                 />
 
                 <validation-provider
