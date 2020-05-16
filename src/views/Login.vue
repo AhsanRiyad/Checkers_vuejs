@@ -122,15 +122,14 @@ export default {
         'Access-Control-Allow-Origin': '*',
       };
 
-      axios({
-        method: 'post',
-        url: 'http://13.58.205.236:8080/users/login',
-        data: JSON.stringify(this.loginForm),
-        headers: headers,
+        axios({
+          method: 'post',
+          url: 'http://13.58.205.236:8080/users/login',
+          data: JSON.stringify(this.loginForm),
+          headers: headers,
 
-      })
+        })
           .then(res => {
-            console.log(res.data);
 
             if(res.status  === 200) {
               console.log('200');

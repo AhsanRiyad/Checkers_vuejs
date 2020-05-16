@@ -76,32 +76,15 @@
                   placeholder="Enter the cities you want to work in"
                 />
 
-                <validation-provider
-                  name="Experience"
-                  :rules="{ required: true }"
-                  v-slot="validationContext"
-                >
-                  <b-form-group
-                    label-cols="4"
-                    label-size="sm"
-                    label-align-sm="right"
-                    label="Work Experience"
-                    label-for="input-5"
-                  >
-                    <b-form-select
-                      id="input-5"
-                      name="work experience"
-                      v-model="form.years"
-                      :options='[{ value: null, text: "Select in year" }, { value: 1, text: "1 year" }, { value: 2, text: "2 year" }, { value: 3, text: "3 year" }]'
-                      :state="getValidationState(validationContext)"
-                      aria-describedby="input-5-live-feedback"
-                    ></b-form-select>
-
-                    <b-form-invalid-feedback id="input-5-live-feedback">
-                      {{ validationContext.errors[0] }}
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                </validation-provider>
+                <AlertTextField
+                    type="number"
+                    id="input-5"
+                    v-model="form.years"
+                    label="Work Experience(In Years)"
+                    name="Experience"
+                    aria_describedby="input-5-live-feedback"
+                    placeholder="Type Work Experience"
+                />
 
                 <AlertTextField
                   type="number"
@@ -130,7 +113,7 @@
                       id="input-7"
                       name="job level"
                       v-model="form.jobLevel"
-                      :options='[{ value: null, text: "Select Your Job Level" }, { value: "Entry", text: "Entry Level" }, { value: "Mid", text: "Mid Level" }, { value: "High", text: "High Level" }]'
+                      :options="allActiveRole"
                       :state="getValidationState(validationContext)"
                       aria-describedby="input-7-live-feedback"
                     ></b-form-select>
@@ -151,42 +134,59 @@
                   placeholder="Enter your Industry type"
                 />
 
-                  <validation-provider
-                          name="Job Level"
-                          :rules="{ required: true }"
-                          v-slot="validationContext"
+                <validation-provider
+                        name="Job Level"
+                        :rules="{ required: true }"
+                        v-slot="validationContext"
+                >
+                    <b-form-group
+                            label-cols="4"
+                            label-size="sm"
+                            label-align-sm="right"
+                            label="Job Category"
+                            label-for="input-9"
+                    >
+                        <b-form-select
+                                id="input-9"
+                                name="Job Category"
+                                v-model="form.jobCategory"
+                                :options="allCategory"
+                                :state="getValidationState(validationContext)"
+                                aria-describedby="input-9-live-feedback"
+                        ></b-form-select>
+
+                        <b-form-invalid-feedback id="input-9-live-feedback">
+                            {{ validationContext.errors[0] }}
+                        </b-form-invalid-feedback>
+                    </b-form-group>
+                </validation-provider>
+
+                <validation-provider
+                    name="JobRole"
+                    :rules="{ required: true }"
+                    v-slot="validationContext"
+                >
+                  <b-form-group
+                      label-cols="4"
+                      label-size="sm"
+                      label-align-sm="right"
+                      label="Job Role"
+                      label-for="input-10"
                   >
-                      <b-form-group
-                              label-cols="4"
-                              label-size="sm"
-                              label-align-sm="right"
-                              label="Job Category"
-                              label-for="input-9"
-                      >
-                          <b-form-select
-                                  id="input-9"
-                                  name="Job Category"
-                                  v-model="form.jobCategory"
-                                  :options="[{value: null, text: 'Select Job Category'}, {value: 'Civil', text: 'Civil'}, {value: 'Teaching', text: 'Teaching'}, {value: 'IT_Computer', text: 'IT Computer'}]"
-                                  :state="getValidationState(validationContext)"
-                                  aria-describedby="input-9-live-feedback"
-                          ></b-form-select>
+                    <b-form-select
+                        id="input-5"
+                        name="Job Role"
+                        v-model="form.jobRole"
+                        :options="allActiveRole"
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="input-10-live-feedback"
+                    ></b-form-select>
 
-                          <b-form-invalid-feedback id="input-9-live-feedback">
-                              {{ validationContext.errors[0] }}
-                          </b-form-invalid-feedback>
-                      </b-form-group>
-                  </validation-provider>
-
-                <AlertTextField
-                  type="text"
-                  id="input-10"
-                  v-model="form.jobRole"
-                  label="Job Role"
-                  name="Job Role"
-                  aria_describedby="input-10-live-feedback"
-                  placeholder="Type the desired role where you want to work"
-                />
+                    <b-form-invalid-feedback id="input-10-live-feedback">
+                      {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                  </b-form-group>
+                </validation-provider>
 
                 <validation-provider
                   name="terms"
@@ -219,18 +219,19 @@
               </b-form>
               <!-- End of get Alert Bootstrap vue form -->
 
-                <div v-else class="form-alert-success">
-                    <!--<span @click="show = !show" class="alert-message-close">×</span>-->
-                    <div class="form-alert-success-text">
-                        Your Job Alert has been created successfully!
-                    </div>
-                    <b-button
-                            @click="show = !show"
-                            variant="success"
-                    >
-                        Create another Job Alert
-                    </b-button>
-                </div>
+              <div v-else class="form-alert-success">
+                  <!--<span @click="show = !show" class="alert-message-close">×</span>-->
+                  <div class="form-alert-success-text">
+                      Your Job Alert has been created successfully!
+                  </div>
+                  <b-button
+                          @click="show = !show"
+                          variant="success"
+                  >
+                      Create another Job Alert
+                  </b-button>
+              </div>
+
             </validation-observer>
             <!-- end of  Vee validate validation observer component -->
           </div>
@@ -284,10 +285,77 @@ export default {
             termsConditions: []
         },
         show: true,
-        info: "",
+        info: null,
+        allActiveRole: [
+          {
+            value: null,
+            text: 'Select Job Role'
+          }
+        ],
+        allActiveLabel: [
+          {
+            value: null,
+            text: 'Select Job Level'
+          }
+        ],
+        allCategory: [
+          {
+            value: null,
+            text: 'Select Job Category'
+          }
+        ],
         errored: false,
         loading: true,
     };
+  },
+  created() {
+
+        axios({
+          method: 'get',
+          url: 'http://13.58.205.236:8080/jobs/alert/new',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+        })
+        .then( res => {
+          // handle success
+          console.log(res.data.data);
+          this.info = res.data.data;
+
+          res.data.data.allActiveRole.forEach( v => {
+            console.log(v.id, v.name);
+            this.allActiveRole = this.allActiveRole.concat({
+              value: v.id,
+              text: v.name,
+            });
+          });
+
+          res.data.data.allActiveLabel.forEach( v => {
+            console.log(v.id, v.name);
+            this.allActiveLabel = this.allActiveLabel.concat({
+              value: v.id,
+              text: v.name,
+            });
+          });
+
+          res.data.data.allCategory.forEach( v => {
+            console.log(v.id, v.name);
+            this.allCategory = this.allCategory.concat({
+              value: v.id,
+              text: v.name,
+            });
+          });
+
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+
   },
   methods: {
     getValidationState({ dirty, validated, valid = null }) {
@@ -303,22 +371,13 @@ export default {
                 location: this.form.location,
                 years: this.form.years,
                 salary: Number(this.form.salary),
-                jobLevel: {
-                    id: 1,
-                    name: this.form.jobLevel
-                },
+                jobLevel: this.form.jobLevel,
                 industry: this.form.industry,
-                jobCategory: {
-                    id: 1,
-                    name: this.form.jobCategory
-                },
-                jobRole: {
-                    id: 1,
-                    name: this.form.jobRole
-                },
+                jobCategory: this.form.jobCategory,
+                jobRole: this.form.jobRole,
                 termsConditions: this.form.termsConditions[0],
             };
-        // console.log(JSON.stringify(formData));
+        console.log(JSON.stringify(formData));
 
         axios({
             method: 'post',
@@ -329,7 +388,7 @@ export default {
             },
 
         })
-            .then(function (response) {
+            .then((response) => {
                 // console.log(response.data);
                 this.info = response.data;
             })
