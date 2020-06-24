@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     submit() {
-      console.log("submit clicked");
+      // console.log("submit clicked");
       this.$router.push("/search?q="+this.search);
     }
   }

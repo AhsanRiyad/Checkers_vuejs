@@ -63,8 +63,8 @@ export default {
     };
   },
   methods: {
-    onScroll(e) {
-      console.log(e);
+    onScroll() {
+      // console.log(e);
       /* console.log(window);
       let MainCard = document.getElementById("MainCard");
       console.log('in the main card');
@@ -73,7 +73,7 @@ export default {
       console.log("scorlling"); */
 
       if (window.scrollY >= 2400) {
-        console.log("call second api");
+        // console.log("call second api");
         // this.pageNo = 2;
 
         // this.getData();
@@ -97,7 +97,7 @@ export default {
         )
         .then(
           function(response) {
-            console.log(response.data.jobs.result);
+            // console.log(response.data.jobs.result);
             this.Jobs = [...this.Jobs, ...response.data.jobs.result];
           }.bind(this)
         )
