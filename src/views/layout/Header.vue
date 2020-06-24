@@ -37,14 +37,23 @@
       style="background: #365899"
     >
       <v-list>
-        <v-list-item  v-for="([icon, text], i) in items" :key="i" link>
+        <v-list-item  v-for="([icon, text, url], i) in items" :key="i" link>
+          
           <v-list-item-icon>
+            <router-link :to="url">
             <v-icon class="white--text" >{{ icon }}</v-icon>
+            </router-link>
           </v-list-item-icon>
 
+
           <v-list-item-content>
+            <router-link :to="url">
             <v-list-item-title class="white--text" >{{ text }}</v-list-item-title>
+            </router-link>
           </v-list-item-content>
+
+      
+
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -59,9 +68,9 @@ export default {
     return {
       drawer: false,
       items: [
-        ["mdi-email", "Jobs"],
-        ["mdi-account-supervisor-circle", "Recruite"],
-        ["mdi-clock-start", "Login"],
+        ["mdi-email", "Jobs", "/"],
+        ["mdi-account-supervisor-circle", "Recruite" , "/"],
+        ["mdi-clock-start", "Login" , "/"],
         // ["mdi-clock-start", "Employeers/Job Post"],
         // ["mdi-clock-start", "Get Alerts"],
       ]
