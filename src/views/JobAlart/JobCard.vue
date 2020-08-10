@@ -5,22 +5,14 @@
         <h1 class="ml-6">Search Results</h1>
       </v-row>
 
-    
-
-     <v-alert
-      prominent
-      type="error"
-      v-if="ShowAlertMsg"
-    >
-      <v-row align="center">
-        <v-col class="grow">No Jobs Available with this keyword</v-col>
-        <v-col class="shrink">
-          <v-btn router to="/" >Search Again</v-btn>
-        </v-col>
-      </v-row>
-    </v-alert>
-
-
+      <v-alert prominent type="error" v-if="ShowAlertMsg">
+        <v-row align="center">
+          <v-col class="grow">No Jobs Available with this keyword</v-col>
+          <v-col class="shrink">
+            <v-btn router to="/">Search Again</v-btn>
+          </v-col>
+        </v-row>
+      </v-alert>
 
       <v-row v-for="n in Jobs" :key="n.id">
         <v-col>
@@ -72,51 +64,55 @@ export default {
       console.log(MainCard);
       console.log("scorlling"); */
 
-      if (window.scrollY >= 2400) {
-        // console.log("call second api");
-        // this.pageNo = 2;
+      let pageNo = window.scrollY/2400;
+      let isInt =  Number.isInteger( (window.scrollY/2400) );
+      console.log('is int check,' , isInt);
+      console.log( 'scroll result ' ,  (window.scrollY/2400) ) ;
 
-        // this.getData();
+      if ( isInt && this.pageNo < pageNo+1 ) {
+        console.log("call second api");
+        this.pageNo = pageNo+1;
+        this.getData();
       }
     },
     getData() {
       this.loading = true;
-      let headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "application/json"
-      };
 
-      this.$axios
-        .get(
-          "http://13.58.205.236:8080/search?q=" +
-            this.$route.query.q +
-            "&page=" +
-            this.pageNo,
-          {},
-          headers
-        )
-        .then(
-          function(response) {
-            // console.log(response.data.jobs.result);
-            this.Jobs = [...this.Jobs, ...response.data.jobs.result];
-          }.bind(this)
-        )
-        .catch(function() {}.bind(this))
-        .finally(
-          function() {
-            this.loading = false;
-            if(this.Jobs.length === 0) this.ShowAlertMsg = true;
-          }.bind(this)
-        );
-    }
+this.$store
+        .dispatch("callApi", {
+          url: 'search',
+          method: 'get',
+          params:{
+            q: this.$route.query.q,
+            page: this.pageNo
+          }
+        })
+        .then((response) => {
+          console.log(response);
+          this.Jobs = [...this.Jobs, ...response.jobs.result];
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+
+          //  this.tableLoading = false;
+        });
+    },
   },
   mounted() {
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
     this.getData();
   },
-  destroyed: function() {
+  destroyed: function () {
     window.removeEventListener("scroll", this.onScroll);
-  }
+  },
 };
 </script>

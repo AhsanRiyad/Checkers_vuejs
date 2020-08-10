@@ -27,9 +27,9 @@ const routes = [
 },
 ]
 
-  const router = new VueRouter({
-    routes,
-    mode: 'history' /*mode: 'hash'*/
-  })
+const router = new VueRouter({
+  routes,
+  mode: 'history' /*mode: 'hash'*/
+})
 
-  export default router
+export default router
