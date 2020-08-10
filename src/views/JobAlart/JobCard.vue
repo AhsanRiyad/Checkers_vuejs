@@ -66,11 +66,11 @@ export default {
 
       let pageNo = window.scrollY/2400;
       let isInt =  Number.isInteger( (window.scrollY/2400) );
-      console.log('is int check,' , isInt);
-      console.log( 'scroll result ' ,  (window.scrollY/2400) ) ;
+      // console.log('is int check,' , isInt);
+      // console.log( 'scroll result ' ,  (window.scrollY/2400) ) ;
 
       if ( isInt && this.pageNo < pageNo+1 ) {
-        console.log("call second api");
+        // console.log("call second api");
         this.pageNo = pageNo+1;
         this.getData();
       }
@@ -88,7 +88,7 @@ this.$store
           }
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.Jobs = [...this.Jobs, ...response.jobs.result];
           // this.$refs.form.reset();
           //saves the items from the database in the table

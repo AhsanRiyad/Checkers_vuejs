@@ -17,7 +17,7 @@
         <v-btn text color="white">Recruiters</v-btn>
         <v-btn text color="white">Login</v-btn>
         <v-btn text color="white">Employeer/Job Post</v-btn>
-        <v-btn tile color="white">Get Alert</v-btn>
+        <v-btn router to="/create-alert" tile color="white">Get Alert</v-btn>
       </span>
 
       <span>
