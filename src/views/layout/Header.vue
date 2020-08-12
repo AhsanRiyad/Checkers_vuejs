@@ -2,7 +2,7 @@
   <div>
     <!-- header starts -->
     <v-app-bar class="white--text" style="background: #365899 ">
-      <v-toolbar-title  >
+      <v-toolbar-title>
         <!-- <img :src="require('../../../public/JobAlartLogo.png')" alt=""> -->
         
         <router-link to="/" style="color: white; text-decoration: none">
@@ -15,9 +15,9 @@
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
         <v-btn text color="white">Recruiters</v-btn>
-        <v-btn text color="white">Login</v-btn>
+        <v-btn router to="/signin" text color="white">Login</v-btn>
         <v-btn text color="white">Employeer/Job Post</v-btn>
-        <v-btn router to="/create-alert" tile color="white">Get Alert</v-btn>
+        <v-btn router to="/create-alert"  color="white">Get Alert</v-btn>
       </span>
 
       <span>

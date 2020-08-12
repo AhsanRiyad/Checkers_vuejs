@@ -44,6 +44,7 @@
                 block
                 class="white--text"
                 style="background: #365899; height: 50px"
+                @click.stop="()=>$router.history.push({ name: 'resume' })"
               >Manage Resume</v-btn>
             </v-col>
           </v-row>

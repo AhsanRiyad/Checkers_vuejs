@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import JobCard from '../views/JobAlart/JobCard'
 import SearchJob from '../views/JobAlart/SearchJob'
 import CreateAlert from '../views/JobAlart/CreateAlert'
+import Signin from '../views/JobAlart/Signin.vue'
+import Resume from '../views/JobAlart/Resume1.vue'
 
 
 Vue.use(VueRouter)
@@ -32,6 +34,22 @@ const routes = [
   component: CreateAlert,
   meta: {
     title: 'Create Alert'
+  }
+},
+{
+  path: '/signin' ,
+  name: 'Signin',
+  component: Signin,
+  meta: {
+    title: 'Signin'
+  }
+},
+{
+  path: '/resume' ,
+  name: 'resume',
+  component: Resume,
+  meta: {
+    title: 'Resume'
   }
 },
 ]
