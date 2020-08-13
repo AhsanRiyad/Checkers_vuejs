@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/GetAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GetAlert.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +58,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -68,7 +67,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.jest.jest_package" value="" />
-    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -76,6 +75,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -132,6 +132,7 @@
       <workItem from="1589406086405" duration="115000" />
       <workItem from="1589472949633" duration="6079000" />
       <workItem from="1589608305174" duration="410000" />
+      <workItem from="1597309886673" duration="2245000" />
     </task>
     <servers />
   </component>
@@ -145,7 +146,7 @@
     </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -160,21 +161,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="55" width="1128" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588415046585">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1897" height="338" key="GridCell.Tab.0.bottom" timestamp="1597310618431">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="100" y="55" width="1128" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1588415046585" />
-    <state x="312" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588406514014">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1897" height="338" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597310618431" />
+    <state width="1897" height="338" key="GridCell.Tab.0.center" timestamp="1597310618430">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="312" y="95" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1588406514014" />
-    <state x="29" y="0" width="1125" height="800" key="SettingsEditor" timestamp="1588415549612">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1897" height="338" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597310618430" />
+    <state width="1897" height="338" key="GridCell.Tab.0.left" timestamp="1597310618430">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="29" y="0" width="1125" height="800" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1588415549612" />
-    <state x="221" y="0" width="838" height="1032" key="search.everywhere.popup" timestamp="1588367423050">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1897" height="338" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597310618430" />
+    <state width="1897" height="338" key="GridCell.Tab.0.right" timestamp="1597310618430">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="221" y="0" width="838" height="1032" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1588367423050" />
+    <state width="1897" height="338" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597310618430" />
   </component>
 </project>
