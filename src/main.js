@@ -9,14 +9,17 @@ import VueCookies from 'vue-cookies'
 import './registerServiceWorker'
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 
+import "./sass/job-alart/_defaults.scss"
 
 
+import CKEditor from '@ckeditor/ckeditor5-vue';
+Vue.use( CKEditor );
 
+import VueTelInput from 'vue-tel-input';
+Vue.use(VueTelInput);
 
 Vue.use(VueCookies);
 // Vue.use(print);
-
-
 
 // set default config
 VueCookies.config('7d');
