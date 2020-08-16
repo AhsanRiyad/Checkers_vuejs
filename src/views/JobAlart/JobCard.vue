@@ -47,8 +47,8 @@
 
     <div class="clearFix"></div>
 
-    <div :style="jobDetails">
-      <v-card class="mx-auto" outlined>
+    <div :style="jobDetails" v-if="!loading">
+      <v-card outlined :style="heightControll">
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
@@ -63,12 +63,19 @@
           <v-btn color="primary">Apply Now</v-btn>
         </v-card-actions>
 
-        <div class="JobDescription">
+        <v-divider class="divider"></v-divider>
+
+        <div :style="JobDescriptionStyle">
           <h4>Location</h4>
           <p>{{ JobDescription.jobLocation }}</p>
 
           <h4>Responsibilities</h4>
           <p>{{ JobDescription.jobResponsibilities }}</p>
+
+          <p>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+          </p>
         </div>
       </v-card>
     </div>
@@ -105,8 +112,22 @@ export default {
         right: "21%",
         top: "185px",
         position: "fixed",
+        height: "100%",
         transition: "top 0.5s",
       },
+
+      JobDescriptionStyle: {
+        paddingLeft: "10px",
+        marginTop: "20px",
+        // height: "100%",
+        overflowY: "auto",
+        // overflowY: "visible",
+      },
+
+      heightControll:{
+        height: "calc( 100% - 190px )",
+        overflowY: "auto",
+      }
     };
   },
   methods: {
@@ -123,13 +144,28 @@ export default {
       console.log(MainCard);
       console.log("scorlling"); */
 
-      this.jobDetails.top = "20px";
+      console.log(window);
+
+      console.log('window inner height' , window.innerHeight );
+      console.log('scrol top' , document.body.scrollTop );
+      console.log('offset height' , document.body.offsetHeight );
+      console.log('addition ' , window.innerHeight + window.scrollY );
+
+
+
+
+
 
       if (window.scrollY > 217) {
         this.jobDetails.top = "20px";
+        this.heightControll.height = "calc(100% - 50px)";
       } else {
-        
         this.jobDetails.top = "185px";
+        this.heightControll.height = " calc( 100% - 190px ) ";
+      }
+
+      if( ( document.body.offsetHeight - (window.innerHeight + window.scrollY ) ) < 150 ){
+        this.heightControll.height = " calc( 100% - 350px ) ";
       }
 
       let pageNo = window.scrollY / 2400;
@@ -158,6 +194,7 @@ export default {
         .then((response) => {
           console.log("job list....", response);
           this.Jobs = [...this.Jobs, ...response.jobs.result];
+          this.JobDescription = this.Jobs[0];
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
