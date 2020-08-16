@@ -5,8 +5,7 @@ import JobCard from '../views/JobAlart/JobCard'
 import SearchJob from '../views/JobAlart/SearchJob'
 import CreateAlert from '../views/JobAlart/CreateAlert'
 import Signin from '../views/JobAlart/Signin.vue'
-import Resume from '../views/JobAlart/Resume1.vue'
-
+import Resume from '../views/JobAlart/Resume/Resume.vue'
 
 Vue.use(VueRouter)
 
