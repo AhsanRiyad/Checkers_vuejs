@@ -1,104 +1,82 @@
 <template>
-  <v-card :loading="loading" class="mt-3" id="MainCard">
-    <v-container>
-      <v-row justify="center">
-        <v-col cols="12" md="8">
-          <v-row>
-            <h1 class="ml-6">Search Results</h1>
-          </v-row>
+  <div>
+    <div class="searchText">
+      <h1>Search Result</h1>
+    </div>
 
-          <v-alert prominent type="error" v-if="ShowAlertMsg">
-            <v-row align="center">
-              <v-col class="grow">No Jobs Available with this keyword</v-col>
-              <v-col class="shrink">
-                <v-btn router to="/">Search Again</v-btn>
-              </v-col>
-            </v-row>
-          </v-alert>
+    <div class="filter">
+      <div class="filter-item-1">
+        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+      </div>
+      <div class="filter-item-2">
+        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+      </div>
+      <div class="filter-item-3">
+        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+      </div>
+      <div class="filter-item-4">
+        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+      </div>
+    </div>
 
-          <v-row>
-            <v-col class="d-flex" cols="12" md="3">
-              <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-            </v-col>
-            <v-col class="d-flex" cols="12" md="3">
-              <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-            </v-col>
-            <v-col class="d-flex" cols="12" md="3">
-              <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-            </v-col>
-            <v-col class="d-flex" cols="12" md="3">
-              <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-            </v-col>
-          </v-row>
+    <div class="clearFix"></div>
 
-          <v-row>
-            <v-col cols="6">
-              <v-row v-for="n in Jobs" :key="n.id">
-                <v-col cols="12">
-                  <v-card class="mx-auto">
-                    <v-card-text>
-                      <h2 style="color: green" class="mb-2" v-text="n.jobTitle"></h2>
-                      <h4 v-text="n.companyName"></h4>
-                      <p class="text--primary">
-                        <v-icon>location_on</v-icon>
-                        {{ n.jobLocation }}
-                      </p>
-                      <p class="text--primary">
-                        <v-icon>school</v-icon>
-                        {{ n.education }}
-                      </p>
-                      <p class="text--primary">
-                        <v-icon>payment</v-icon>
-                        {{ n.minSalaryRange }} to {{ n.maxSalaryRange }}
-                      </p>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-btn text color="deep-purple accent-4" @click.stop="()=>saveDetails(n)">Details</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-col>
+    <div class="searchResults">
+      <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
+        <v-card-text>
+          <h2 style="color: green" class="mb-2" v-text="n.jobTitle"></h2>
+          <h4 v-text="n.companyName"></h4>
+          <p class="text--primary">
+            <v-icon>location_on</v-icon>
+            {{ n.jobLocation }}
+          </p>
+          <p class="text--primary">
+            <v-icon>school</v-icon>
+            {{ n.education }}
+          </p>
+          <p class="text--primary">
+            <v-icon>payment</v-icon>
+            {{ n.minSalaryRange }} to {{ n.maxSalaryRange }}
+          </p>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn text color="deep-purple accent-4" @click.stop="()=>saveDetails(n)">Details</v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
 
-            <v-col cols="6">
-              <v-card class="mx-auto" outlined>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
-                    <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
-                    <p> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }}</p>
-                  </v-list-item-content>
+    <div class="clearFix"></div>
 
-                  <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-                </v-list-item>
+    <div :style="jobDetails">
+      <v-card class="mx-auto" outlined>
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
+            <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
+            <p>{{ JobDescription.companyName }} || {{ JobDescription.typeInText }}</p>
+          </v-list-item-content>
 
-                <v-card-actions>
-                  <v-btn color="primary">Apply Now</v-btn>
-                </v-card-actions>
+          <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+        </v-list-item>
 
-                <div class="JobDescription">
+        <v-card-actions>
+          <v-btn color="primary">Apply Now</v-btn>
+        </v-card-actions>
 
-                  <h4>Location </h4>
-                  <p>
-                     {{ JobDescription.jobLocation }}
-                  </p>
+        <div class="JobDescription">
+          <h4>Location</h4>
+          <p>{{ JobDescription.jobLocation }}</p>
 
-                  <h4>Responsibilities </h4>
-                  <p>
-                     {{ JobDescription.jobResponsibilities }}
-                  </p>
-                </div>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
+          <h4>Responsibilities</h4>
+          <p>{{ JobDescription.jobResponsibilities }}</p>
+        </div>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
-import "../../sass/job-alart/_JobCard.scss"
+import "../../sass/job-alart/_JobCard.scss";
 
 export default {
   name: "JobCard",
@@ -109,8 +87,7 @@ export default {
       pageNo: 1,
       ShowAlertMsg: false,
 
-
-      JobDescription:{
+      JobDescription: {
         jobTitle: "PHP developer",
         companyName: "PHP",
         country: "Bangladesh",
@@ -120,12 +97,21 @@ export default {
         skillQualificationRequirement: "CSE, EEE, IT",
         typeInText: "Remote",
         maxSalaryRange: "20000",
-      }
+      },
 
+      //style for search
+      jobDetails: {
+        width: "27%",
+        right: "21%",
+        top: "185px",
+        position: "fixed",
+        transition: "top 0.5s",
+      },
     };
   },
   methods: {
-    saveDetails(n){
+    saveDetails(n) {
+      console.log("dd", n);
       this.JobDescription = n;
     },
     onScroll() {
@@ -136,6 +122,15 @@ export default {
       console.log(window.scrollY);
       console.log(MainCard);
       console.log("scorlling"); */
+
+      this.jobDetails.top = "20px";
+
+      if (window.scrollY > 217) {
+        this.jobDetails.top = "20px";
+      } else {
+        
+        this.jobDetails.top = "185px";
+      }
 
       let pageNo = window.scrollY / 2400;
       let isInt = Number.isInteger(window.scrollY / 2400);
@@ -161,7 +156,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log('job list....', response);
+          console.log("job list....", response);
           this.Jobs = [...this.Jobs, ...response.jobs.result];
           // this.$refs.form.reset();
           //saves the items from the database in the table

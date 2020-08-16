@@ -1,10 +1,62 @@
-.JobDescription{
-    max-height: 500px;
-    overflow-y: auto;
-    padding-left: 10px;
-    padding-top: 20px;
+
+.clearFix{
+    clear: both;
 }
 
-.JobDescriptionMain{
-    position: fixed;
+.searchText{
+    width: 60%;
+    margin-left: 20%;
+    text-align: left;
 }
+
+.filter{
+    width: 60%;
+    margin-left: 20%;
+    
+    .filter-item-1, .filter-item-2, .filter-item-3, .filter-item-4 {
+        width: 20%;
+        float: left;
+        margin-right: 2%;
+    }
+
+}
+
+
+.searchResults{
+    width: 30%;
+    margin-left: 20%;
+    float: left;
+    .searchResults-text{
+        margin-bottom: 10px;
+    }
+
+}
+
+
+.jobDetails{
+    width: 23%;
+    right: 25%;
+    top: 185px;
+    position: fixed;
+
+    
+}
+
+.JobDescription{
+    padding-left: 7px;
+}
+
+.jobDetails-after-scroll{
+    width: 23%;
+    right: 25%;
+    top: 20px;
+    position: fixed;
+
+    .JobDescription{
+        padding-left: 7px;
+    }
+    
+}
+
+
+
