@@ -48,7 +48,7 @@
     <div class="clearFix"></div>
 
     <div :style="jobDetails" v-if="!loading">
-      <v-card outlined :style="heightControll">
+      <div outlined :style="firstContainer">
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
@@ -77,7 +77,7 @@
             The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
           </p>
         </div>
-      </v-card>
+      </div>
     </div>
   </div>
 </template>
@@ -112,21 +112,22 @@ export default {
         right: "21%",
         top: "185px",
         position: "fixed",
-        height: "100%",
-        transition: "top 0.5s",
+        // height: "100%",
+        transition: "top 0.1s",
       },
 
       JobDescriptionStyle: {
         paddingLeft: "10px",
         marginTop: "20px",
-        // height: "100%",
-        overflowY: "auto",
+        height: "calc( 100vh - 400px )",
+        overflowY: "auto"
         // overflowY: "visible",
       },
 
-      heightControll:{
-        height: "calc( 100% - 190px )",
-        overflowY: "auto",
+      firstContainer:{
+        background: "white",
+        // height: "calc( 100% - 190px )",
+        // overflowY: "auto",
       }
     };
   },
@@ -151,21 +152,21 @@ export default {
       console.log('offset height' , document.body.offsetHeight );
       console.log('addition ' , window.innerHeight + window.scrollY );
 
-
-
-
+        // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
+        // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
+        // this.JobDescriptionStyle.height = "200px";
 
 
       if (window.scrollY > 217) {
         this.jobDetails.top = "20px";
-        this.heightControll.height = "calc(100% - 50px)";
+        this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
       } else {
         this.jobDetails.top = "185px";
-        this.heightControll.height = " calc( 100% - 190px ) ";
+        // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
 
-      if( ( document.body.offsetHeight - (window.innerHeight + window.scrollY ) ) < 150 ){
-        this.heightControll.height = " calc( 100% - 350px ) ";
+      if( ( document.body.offsetHeight - (window.innerHeight + window.scrollY ) ) < 200 ){
+        this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
       }
 
       let pageNo = window.scrollY / 2400;
