@@ -6,6 +6,7 @@ import SearchJob from '../views/JobAlart/SearchJob'
 import CreateAlert from '../views/JobAlart/CreateAlert'
 import Signin from '../views/JobAlart/Signin.vue'
 import Resume from '../views/JobAlart/Resume/Resume.vue'
+import accountSettings from "@/views/JobAlart/accountSettings";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,14 @@ const routes = [
     title: 'Resume'
   }
 },
+  {
+    path: '/account-settings' ,
+    name: 'accountSettings',
+    component: accountSettings,
+    meta: {
+      title: 'Account Settings'
+    }
+  },
 ]
 
 const router = new VueRouter({

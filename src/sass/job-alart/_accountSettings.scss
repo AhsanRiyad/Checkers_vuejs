@@ -1,0 +1,32 @@
+@import "../baseVariables";
+.account-settings{
+.ja__card{
+  padding: pxToVw(30) pxToVw(30);
+  border-radius: 0 !important;
+  .ja__account__list{
+    li{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: pxToVw(15) 0;
+      border-bottom: 2px solid #ececec;
+      &:last-child{
+        border-bottom: 0;
+      }
+      .left__side{
+        .top__text{
+          font-size: pxToVw(18);
+          font-weight: 700;
+        }
+      }
+      .right__side{
+        a{
+          display: block;
+          text-align: right;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
+}

@@ -20,7 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sass/job-alart/_accountSettings.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sass/job-alart/_header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/addNumber.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changePassword.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/accountSettings.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/_baseVariables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_baseVariables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Header.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Single File Component" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -57,6 +67,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -131,6 +142,7 @@
       <workItem from="1597309886673" duration="2245000" />
       <workItem from="1597319173103" duration="861000" />
       <workItem from="1597555528419" duration="350000" />
+      <workItem from="1597646457902" duration="12001000" />
     </task>
     <servers />
   </component>
