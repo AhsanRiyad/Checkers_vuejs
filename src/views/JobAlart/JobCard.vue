@@ -110,7 +110,7 @@ export default {
       jobDetails: {
         width: "35%",
         right: "21%",
-        top: "185px",
+        top: "225px",
         position: "fixed",
         // height: "100%",
         transition: "top 0.1s",
@@ -162,7 +162,7 @@ export default {
         this.jobDetails.top = "20px";
         this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
       } else {
-        this.jobDetails.top = "185px";
+        this.jobDetails.top = "225px";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
 
