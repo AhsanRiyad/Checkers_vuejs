@@ -44,10 +44,6 @@
     <other-services-enabled>false</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
-  </component>
   <component name="ProjectId" id="1akgtWwltXFpT2AIB2khghF0Uzs" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -133,6 +129,8 @@
       <workItem from="1589472949633" duration="6079000" />
       <workItem from="1589608305174" duration="410000" />
       <workItem from="1597309886673" duration="2245000" />
+      <workItem from="1597319173103" duration="861000" />
+      <workItem from="1597555528419" duration="350000" />
     </task>
     <servers />
   </component>
