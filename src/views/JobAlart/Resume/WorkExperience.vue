@@ -20,195 +20,105 @@
     </div>
 
     <div class="row-2">
-      <p>Last Name</p>
-      <v-text-field
+      <p>Job Category</p>
+      <v-select
         background-color="white"
         class="mb-0"
         :rules="[v=>!!v||'required']"
         placeholder="Enter your last name"
         outlined
+        :items="['hi', 'hellow']"
         dense
-      ></v-text-field>
+      ></v-select>
     </div>
 
-    <div class="row-3">
-      <p>Company Notice Period</p>
-      <div>
-        <v-text-field
+    <div class="row-100">
+      <div class="row-100-title">
+        <p>Time Period</p>
+      </div>
+
+      <div class="row-100-1">
+        <v-select
           background-color="white"
           class="mb-0"
           :rules="[v=>!!v||'required']"
-          placeholder="In days"
+          placeholder="Year"
           outlined
+          :items="['hi', 'hellow']"
           dense
-        ></v-text-field>
-        <p>Days</p>
+        ></v-select>
+      </div>
+
+      <div class="row-100-2">
+        <v-select
+          background-color="white"
+          class="mb-0"
+          :rules="[v=>!!v||'required']"
+          placeholder="Month"
+          outlined
+          :items="['hi', 'hellow']"
+          dense
+        ></v-select>
+      </div>
+
+      <div class="row-100-3">To</div>
+
+      <div class="row-100-4">
+        <v-select
+          background-color="white"
+          class="mb-0"
+          :rules="[v=>!!v||'required']"
+          placeholder="Year"
+          outlined
+          :items="['hi', 'hellow']"
+          dense
+        ></v-select>
+      </div>
+
+      <div class="row-100-5">
+        <v-select
+          background-color="white"
+          class="mb-0"
+          :rules="[v=>!!v||'required']"
+          placeholder="Month"
+          outlined
+          :items="['hi', 'hellow']"
+          dense
+        ></v-select>
+      </div>
+
+      <div class="row-100-6">
+        <v-checkbox label="I am currently working here" value="A"></v-checkbox>
       </div>
     </div>
 
-    <div class="row-4">
-      <p>Objectives</p>
+    <div class="row-we-6">
+      <p>Job Description/Job Responsibilites</p>
       <div>
         <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
       </div>
     </div>
 
-    <div class="row-5">
-      <p>Career Desciriptions</p>
-      <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
-      </div>
+    <div class="applicationInfo">Application Information</div>
+
+    <div class="row-we-7">
+      <p>Job Category</p>
+      <v-select
+        background-color="white"
+        class="mb-0"
+        :rules="[v=>!!v||'required']"
+        placeholder="Enter your last name"
+        outlined
+        :items="['hi', 'hellow']"
+        dense
+      ></v-select>
     </div>
 
-    <div class="row-6">
-      <p>Cover Letter</p>
-      <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
-      </div>
-    </div>
-
-    <div class="row-7">
-      <p>Personal Details</p>
-    </div>
-
-    <div class="row-8">
-      <p>Address</p>
-      <div>
-        <v-text-field
-          background-color="white"
-          class="mb-0"
-          :rules="[v=>!!v||'required']"
-          placeholder="Enter your address"
-          outlined
-          dense
-        ></v-text-field>
-      </div>
-    </div>
-
-    <div class="row-9">
-      <div class="item-1">
-        <p>City</p>
-        <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your city"
-            outlined
-            dense
-          ></v-text-field>
-        </div>
-      </div>
-
-      <div class="item-2">
-        <p>Zip/Post Code</p>
-        <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your post code"
-            outlined
-            dense
-          ></v-text-field>
-        </div>
-      </div>
-    </div>
-
-    <div class="row-10">
-      <div class="item-1">
-        <p>Country</p>
-        <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your country"
-            outlined
-            dense
-          ></v-text-field>
-        </div>
-      </div>
-
-      <div class="item-2">
-        <p>Nationality</p>
-        <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your nationality"
-            outlined
-            dense
-          ></v-text-field>
-        </div>
-      </div>
-    </div>
-
-    <div class="row-11">
-      <div class="item-1">
-        <p>Date Of Birth</p>
-        <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your date of birth"
-            outlined
-            dense
-          ></v-text-field>
-        </div>
-      </div>
-
-      <div class="item-2">
-        <p>Gender</p>
-        <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your gender"
-            outlined
-            dense
-          ></v-text-field>
-        </div>
-      </div>
-    </div>
-
-    <div class="row-12">
-      <p>National Identity Number/ Passport Number</p>
-      <div>
-        <v-text-field
-          background-color="white"
-          class="mb-0"
-          :rules="[v=>!!v||'required']"
-          placeholder="Enter your nid/passport no."
-          outlined
-          dense
-        ></v-text-field>
-      </div>
-    </div>
-
-    <div class="row-13">
-      <div class="item-1">
-        <p>Mobile Number</p>
-        <div>
-          <vue-tel-input inputClasses="vTelInput"></vue-tel-input>
-        </div>
-      </div>
-
-      <div class="item-2">
-        <p>Optional Number</p>
-        <div>
-          <vue-tel-input inputClasses="vTelInput"></vue-tel-input>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../../../sass/job-alart/_WorkExperience.scss"
 
 export default {
   name: "Biodata",
@@ -228,5 +138,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+@import "../../../sass/job-alart/_WorkExperience.scss";
 </style>

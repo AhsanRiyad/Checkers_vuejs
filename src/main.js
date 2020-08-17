@@ -11,7 +11,6 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure
 
 import "./sass/job-alart/_defaults.scss"
 
-
 import CKEditor from '@ckeditor/ckeditor5-vue';
 Vue.use( CKEditor );
 
@@ -29,9 +28,6 @@ VueCookies.config('7d');
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
-
-
-
 /*Vue.mixin({
   data: () => ({
 
@@ -41,8 +37,6 @@ Vue.config.productionTip = false;
   },
   created: function () {}
 })*/
-
-
 
 new Vue({
   router,

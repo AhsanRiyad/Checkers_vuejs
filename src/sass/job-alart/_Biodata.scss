@@ -1,14 +1,16 @@
 @import "../_baseVariables.scss";
 
-.mainTemplate {
-    background: green;
+  .mainTemplate {
+    background: transparent;
   }
+
   .mainContainer {
     background: #efefef;
     justify-content: center;
     width: 50%;
-    margin: 20px auto;
+    margin: 0px auto;
   }
+
   .h1Text {
     text-align: center;
     margin: 0 20px;
@@ -45,7 +47,7 @@
     width: 50%;
     margin: 0px 20px 10px 20px;
     div {
-      width: 50%;
+      width: 70%;
       p {
         margin-top: -15px;
       }
