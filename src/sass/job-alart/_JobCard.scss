@@ -1,0 +1,71 @@
+
+.clearFix{
+    clear: both;
+}
+
+.searchText{
+    width: 60%;
+    margin-left: 20%;
+    text-align: left;
+}
+
+.filter{
+    width: 60%;
+    margin-left: 20%;
+    
+    .filter-item-1, .filter-item-2, .filter-item-3, .filter-item-4 {
+        width: 20%;
+        float: left;
+        margin-right: 2%;
+    }
+
+}
+
+
+.searchResults{
+    width: 30%;
+    margin-left: 20%;
+    float: left;
+    .searchResults-text{
+        margin-bottom: 10px;
+    }
+
+}
+
+
+.jobDetails{
+    width: 23%;
+    right: 25%;
+    top: 185px;
+    position: fixed;
+
+    
+}
+
+.JobDescription{
+    padding-left: 10px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* .jobDetails-after-scroll{
+    width: 23%;
+    right: 25%;
+    top: 20px;
+    position: fixed;
+
+    .JobDescription{
+        padding-left: 7px;
+        margin-top: 20px;
+    }
+    
+}
+ */
+
+
+.divider{
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 10px;
+}
