@@ -23,7 +23,3 @@ export default {
 name: "appliedJobs"
 }
 </script>
-
-<style scoped>
-
-</style>
