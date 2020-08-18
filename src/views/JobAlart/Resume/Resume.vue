@@ -9,14 +9,14 @@
 
       <div class="row-14">
         <div class="item-1">
-          <v-btn @click.stop="nameOfComponent='Biodata'">Cancel</v-btn>
+          <v-btn @click.stop="nameOfComponent='Award'">Cancel</v-btn>
         </div>
 
         <div class="item-2">
           <v-btn
             color="#365899"
             class="white--text"
-            @click.stop="nameOfComponent='Education'"
+            @click.stop="nameOfComponent='Award'"
           >Next</v-btn>
         </div>
       </div>
@@ -28,11 +28,12 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import WorkExperience from "./WorkExperience.vue";
 import Biodata from "./Biodata.vue";
 import Education from "./Education.vue";
+import Award from "./Award.vue";
 import "../../../sass/job-alart/_Resume.scss"
 
 export default {
   name: "Resume",
-  components: { Biodata, WorkExperience, Education },
+  components: { Biodata, WorkExperience, Education, Award },
   data: () => {
     return {
       nameOfComponent: 'Biodata',
