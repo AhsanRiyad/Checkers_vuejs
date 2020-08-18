@@ -8,7 +8,9 @@
       <v-col cols="12" md="8">
         <v-card class="ja__card">
           <v-card flat class="ja__selected_card">
-            sdfsdgsdgssgsdgsgd
+            <v-col cols="12" md="3">
+              <v-text-field></v-text-field>
+            </v-col>
           </v-card>
         </v-card>
       </v-col>
