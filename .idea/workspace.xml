@@ -20,7 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/verifyPhoneNumber.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/_baseVariables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_baseVariables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_accountSettings.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_accountSettings.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/addNumber.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/addNumber.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changePassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changePassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Signin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Signin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/accountSettings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/accountSettings.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Header.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +147,10 @@
       <workItem from="1597319173103" duration="861000" />
       <workItem from="1597555528419" duration="350000" />
       <workItem from="1597646457902" duration="13324000" />
+      <workItem from="1597725926382" duration="7945000" />
+      <workItem from="1597734649119" duration="224000" />
+      <workItem from="1597735224281" duration="4704000" />
+      <workItem from="1597741755522" duration="2782000" />
     </task>
     <servers />
   </component>

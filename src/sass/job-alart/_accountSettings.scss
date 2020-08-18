@@ -1,8 +1,5 @@
 @import "../baseVariables";
 .account-settings{
-.ja__card{
-  padding: pxToVw(30) pxToVw(30);
-  border-radius: 0 !important;
   .ja__account__list{
     li{
       display: flex;
@@ -15,8 +12,11 @@
       }
       .left__side{
         .top__text{
-          font-size: pxToVw(18);
+          font-size: pxToVw(20);
           font-weight: 700;
+        }
+        .bottom__text{
+          font-size: pxToVw(16);
         }
       }
       .right__side{
@@ -24,9 +24,19 @@
           display: block;
           text-align: right;
           text-transform: capitalize;
+          font-size: pxToVw(18);
         }
       }
     }
   }
 }
+.ja__card{
+  padding: pxToVw(30) pxToVw(30);
+  border-radius: 0 !important;
 }
+
+//change email css start
+.ja__button{
+  display: flex;
+}
+//change email css end

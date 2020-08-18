@@ -2,8 +2,10 @@
   <div class="account-settings">
     <v-container>
       <v-row justify="center">
+        <v-col cols="12">
+          <h1 class="text-center ja__headline">Account Settings</h1>
+        </v-col>
         <v-col cols="12" md="8">
-          <h1 class="text-center mb-5">Account Settings</h1>
           <v-card class="ja__card">
             <ul class="ja__account__list">
               <li>
@@ -12,7 +14,7 @@
                   <div class="bottom__text">farzanakabirrinky@yahoo.com</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-password">Change email address</router-link>
+                  <router-link to="/change-email">Change email address</router-link>
                 </div>
               </li>
               <li>
@@ -30,7 +32,7 @@
                   <div class="bottom__text">01753212480</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-password">add a number</router-link>
+                  <router-link to="/add-number">add a number</router-link>
                 </div>
               </li>
               <li>
@@ -44,8 +46,8 @@
                   <div class="top__text">farzanakabirrinky@yahoo.com</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-password">signout</router-link>
-                  <router-link to="/change-password">return to your resume</router-link>
+                  <router-link to="/signin">signout</router-link>
+                  <router-link to="/">Return to job search</router-link>
                 </div>
               </li>
             </ul>

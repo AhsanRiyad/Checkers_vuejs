@@ -4,7 +4,7 @@
       <v-form ref="form">
         <v-row justify="center">
           <v-col cols="12" md="4">
-            <h1 class="text-center">Job Alert</h1>
+            <h1 class="text-center ja__headline">Job Alert</h1>
             <v-card>
               <v-row justify="center">
                 <v-col cols="10" md="10" class="col-1 mb-n4 pb-0">

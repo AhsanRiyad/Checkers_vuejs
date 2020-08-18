@@ -28,6 +28,7 @@
             icon
             v-bind="attrs"
             v-on="on"
+            class="mr-3"
         >
           <v-icon>mdi-account-circle-outline</v-icon>
         </v-btn>
@@ -54,21 +55,17 @@
       </v-list>
      <v-divider></v-divider>
      <v-card-actions>
-          <v-btn color="primary" text @click="menu = false">Signout</v-btn>
+          <v-btn block color="primary" text @click="menu = false">Signout</v-btn>
         </v-card-actions>
    </v-card>
     </v-menu>
-
         <v-btn router to="/create-alert" color="white">Get Alert</v-btn>
       </span>
 
       <span>
       <v-app-bar-nav-icon color="white" class="d-sm-none d-inline" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </span>
-
     </v-app-bar>
-
-
     <!-- header ends -->
 
     <!-- drawer starts -->
@@ -86,14 +83,11 @@
               <v-icon class="white--text">{{ icon }}</v-icon>
             </router-link>
           </v-list-item-icon>
-
-
           <v-list-item-content>
             <router-link :to="url">
               <v-list-item-title class="white--text">{{ text }}</v-list-item-title>
             </router-link>
           </v-list-item-content>
-
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -117,7 +111,7 @@ export default {
       ],
       menus: [
         ["mdi-account-settings-outline", "Account", "/account-settings"],
-        ["mdi-account-supervisor-circle", "My Jobs", "/"],
+        ["mdi-account-supervisor-circle", "My Jobs", "/applied-jobs"],
         ["mdi-clock-start", "Profile", "/"],
       ]
     };
