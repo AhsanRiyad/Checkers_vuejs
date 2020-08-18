@@ -19,17 +19,34 @@
 }
 
 
+.Fixed-Job-Details{
+    display: inline;
+    @include tab(){
+        display: none;
+    }
+}
+
+
 
 .filter{
     width: 60%;
     margin-left: 20%;
-    
+    @include tab(){
+        width: 70%;
+        
+    }
+
     .filter-item-1, .filter-item-2, .filter-item-3, .filter-item-4 {
         width: 20%;
         float: left;
         margin-right: 2%;
+        @include tab(){
+            width: 48%;
+            
+        }
     }
 }
+
 
 .searchResults{
     width: 23%;
@@ -37,6 +54,9 @@
     float: left;
     .searchResults-text{
         margin-bottom: 10px;
+    }
+    @include tab(){
+        width: 70%;
     }
 }
 

@@ -9,6 +9,10 @@
     justify-content: center;
     width: 50%;
     margin: 0px auto;
+    @include tab(){
+      width: 95%;
+      
+    }
   }
 
   .h1Text {
