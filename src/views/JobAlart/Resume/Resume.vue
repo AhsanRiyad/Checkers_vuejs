@@ -16,7 +16,7 @@
           <v-btn
             color="#365899"
             class="white--text"
-            @click.stop="nameOfComponent='WorkExperience'"
+            @click.stop="nameOfComponent='Education'"
           >Next</v-btn>
         </div>
       </div>
@@ -27,11 +27,12 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import WorkExperience from "./WorkExperience.vue";
 import Biodata from "./Biodata.vue";
+import Education from "./Education.vue";
 import "../../../sass/job-alart/_Resume.scss"
 
 export default {
   name: "Resume",
-  components: { Biodata, WorkExperience },
+  components: { Biodata, WorkExperience, Education },
   data: () => {
     return {
       nameOfComponent: 'Biodata',

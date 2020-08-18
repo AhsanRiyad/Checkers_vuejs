@@ -43,7 +43,7 @@ new Vue({
   vuetify,
   store: store,
   icons: {
-    iconfont: 'md',
+    iconfont: 'mdi',
   },
   render: function (h) { return h(App) },
   methods:{},
