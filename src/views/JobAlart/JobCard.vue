@@ -4,6 +4,13 @@
       <h1>Search Result</h1>
     </div>
 
+    <div v-if="loading">
+      <v-skeleton-loader v-for="n in 3" :key="n" class="loader" type="card"></v-skeleton-loader>
+    </div>
+
+    <div v-else>
+
+
     <div class="filter">
       <div class="filter-item-1">
         <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
@@ -47,7 +54,7 @@
 
     <div class="clearFix"></div>
 
-    <div class="Fixed-Job-Details" >
+    <div class="Fixed-Job-Details">
       <div :style="jobDetails" v-if="!loading">
         <div outlined :style="firstContainer">
           <v-list-item three-line>
@@ -80,6 +87,8 @@
           </div>
         </div>
       </div>
+    </div>
+
     </div>
   </div>
 </template>

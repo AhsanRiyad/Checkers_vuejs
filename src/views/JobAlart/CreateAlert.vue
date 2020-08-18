@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div style="backgroundColor: white; ">
+    <v-container >
       <v-row class="text-md-center text-center white--text banner">
         <v-col md="12">Create a Free Job Alert</v-col>
       </v-row>
@@ -11,10 +11,10 @@
 
           <v-col offset-md="2" md="4" cols="12" order="2" order-md="1">
             <v-row>
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Keywords</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.keywords"
                   :rules="validationRule('name')"
@@ -26,10 +26,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Full Name</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.fullName"
                   :rules="validationRule('name')"
@@ -42,10 +42,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Email</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.email"
                   :rules="validationRule('name')"
@@ -58,10 +58,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Name Your Job Alert</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.NameOfAlertedJob"
                   :rules="validationRule('name')"
@@ -74,10 +74,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Location</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.location"
                   :rules="validationRule('name')"
@@ -90,10 +90,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Work Experience</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.workExperience"
                   :rules="validationRule('name')"
@@ -107,10 +107,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Expected Salary (In $)</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.expectedSlary"
                   :rules="validationRule('name')"
@@ -124,10 +124,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Job Level</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-select
                   v-model="formData.jobLabelId"
                   :rules="validationRule('name')"
@@ -142,10 +142,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Industry</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.industry"
                   :rules="validationRule('name')"
@@ -158,10 +158,10 @@
             </v-row>
 
             <v-row class="formRow">
-              <v-col md="4" cols="3">
+              <v-col md="4" cols="4">
                 <v-subheader class="black--text">Job Category</v-subheader>
               </v-col>
-              <v-col md="8" cols="9">
+              <v-col md="8" cols="8">
                 <v-select
                   v-model="formData.jobCategory"
                   :rules="validationRule('name')"

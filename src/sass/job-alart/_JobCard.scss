@@ -10,6 +10,17 @@
     clear: both;
 }
 
+.loader{
+    width: 23%;
+    margin-left: 20%;
+    text-align: left;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    @include tab(){
+        width: 70%;
+    }
+}
+
 .searchText{
     width: 60%;
     margin-left: 20%;
