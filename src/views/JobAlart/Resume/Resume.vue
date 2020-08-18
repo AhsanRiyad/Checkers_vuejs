@@ -9,16 +9,17 @@
 
       <div class="row-14">
         <div class="item-1">
-          <v-btn @click.stop="nameOfComponent='Award'">Cancel</v-btn>
+          <v-btn @click.stop="prevBtn">Cancel</v-btn>
         </div>
 
         <div class="item-2">
           <v-btn
             color="#365899"
             class="white--text"
-            @click.stop="nameOfComponent='Award'"
+            @click.stop="nextBtn"
           >Next</v-btn>
         </div>
+        
       </div>
     </div>
   </div>
@@ -45,8 +46,23 @@ export default {
         // The configuration of the editor.
         height: 500,
       },
+
+      pageList: ['Biodata' , 'WorkExperience' , 'Education' , 'Award'],
+      index: 0,
+
     };
   },
-  methods: {},
+  methods: {
+    nextBtn(){
+      if(this.index >= 3) return;
+      this.nameOfComponent = this.pageList[++this.index]
+    },
+    prevBtn(){
+      if(this.index >= 0) return;
+      this.nameOfComponent = this.pageList[--this.index]
+
+    }
+
+  },
 };
 </script>
