@@ -25,17 +25,16 @@
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import Biodata from "./Biodata.vue";
 import WorkExperience from "./WorkExperience.vue";
+import Biodata from "./Biodata.vue";
+import "../../../sass/job-alart/_Resume.scss"
 
 export default {
-  name: "Resume1",
+  name: "Resume",
   components: { Biodata, WorkExperience },
   data: () => {
     return {
-
       nameOfComponent: 'Biodata',
-      
 
       search: "",
       editor: ClassicEditor,
@@ -49,128 +48,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style scoped lang="scss">
-.mainTemplate {
-  background: green;
-}
-.mainContainer {
-  background: #efefef;
-  justify-content: center;
-  width: 50%;
-  margin: 20px auto;
-}
-.h1Text {
-  text-align: center;
-  margin: 0 20px;
-  font-size: 25px;
-  color: #2166b6;
-}
-
-.pHeader {
-  margin: 10px 20px;
-  font-size: 15px;
-  span {
-    color: red;
-    font-size: 12px;
-  }
-}
-
-.row-1 {
-  width: 50%;
-  margin: 20px 20px 0px 20px;
-  p {
-    margin: 2px 0;
-  }
-}
-
-.row-2 {
-  width: 50%;
-  margin: 0px 20px 0px 20px;
-  p {
-    margin: 2px 0;
-  }
-}
-
-.row-3 {
-  width: 50%;
-  margin: 0px 20px 10px 20px;
-  div {
-    width: 50%;
-    p {
-      margin-top: -15px;
-    }
-  }
-  p {
-    margin-bottom: 0px;
-  }
-}
-
-.row-4 {
-  margin: 15px 20px;
-  p {
-    margin-bottom: 5px;
-  }
-}
-
-.row-5 {
-  margin: 15px 20px;
-  p {
-    margin-bottom: 5px;
-  }
-}
-
-.row-6 {
-  margin: 15px 20px;
-  p {
-    margin-bottom: 5px;
-  }
-}
-
-.row-7 {
-  margin: 15px 20px;
-  p {
-    margin-bottom: 5px;
-  }
-}
-
-.row-8 {
-  margin: 15px 20px;
-  p {
-    margin-bottom: 5px;
-  }
-}
-
-.row-9,
-.row-10,
-.row-11,
-.row-13 {
-  width: 100%;
-  display: flex;
-  .item-1 {
-    flex-grow: 1;
-    margin: 0 20px;
-  }
-  .item-2 {
-    flex-grow: 1;
-    margin: 0 20px;
-  }
-}
-
-.row-12 {
-  margin: 0 20px;
-}
-
-.row-14 {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 20px;
-  .item-1 {
-    flex-grow: 1;
-  }
-  .item-2 {
-    flex-grow: 1;
-    text-align: right;
-  }
-}
-</style>

@@ -163,7 +163,7 @@
               </v-col>
               <v-col md="8" cols="9">
                 <v-select
-                  v-model="formData.jobCategoryId"
+                  v-model="formData.jobCategory"
                   :rules="validationRule('name')"
                   item-value="id"
                   item-text="name"

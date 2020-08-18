@@ -60,7 +60,7 @@
         </v-list-item>
 
         <v-card-actions>
-          <v-btn color="primary">Apply Now</v-btn>
+          <v-btn class="applyNow" color="primary" >Apply Now</v-btn>
         </v-card-actions>
 
         <v-divider class="divider"></v-divider>
@@ -108,9 +108,9 @@ export default {
 
       //style for search
       jobDetails: {
-        width: "27%",
+        width: "35%",
         right: "21%",
-        top: "185px",
+        top: "225px",
         position: "fixed",
         // height: "100%",
         transition: "top 0.1s",
@@ -118,6 +118,7 @@ export default {
 
       JobDescriptionStyle: {
         paddingLeft: "10px",
+        paddingRight: "20px",
         marginTop: "20px",
         height: "calc( 100vh - 400px )",
         overflowY: "auto"
@@ -161,11 +162,11 @@ export default {
         this.jobDetails.top = "20px";
         this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
       } else {
-        this.jobDetails.top = "185px";
+        this.jobDetails.top = "225px";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
 
-      if( ( document.body.offsetHeight - (window.innerHeight + window.scrollY ) ) < 200 ){
+      if( ( document.body.offsetHeight - (window.innerHeight + window.scrollY ) ) < 210 ){
         this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
       }
 

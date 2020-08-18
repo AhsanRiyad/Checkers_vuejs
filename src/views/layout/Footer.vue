@@ -7,7 +7,7 @@
         md="12"
         justify="center"
         class="white--text"
-        style="background: #365899; margin-top: 100px"
+        style="background: #365899;"
       >
         <v-container>
           <v-row>

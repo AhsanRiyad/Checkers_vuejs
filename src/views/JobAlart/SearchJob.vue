@@ -2,7 +2,7 @@
   <div >
     <v-container
       fluid
-      :style="{'margin-top': '50px' , 'background': 'transparent' }"
+      class="container-1"
     >
       <v-row cols="12" justify="center">
         <v-col cols="10" md="5">
@@ -54,6 +54,7 @@
   </div>
 </template>
 <script>
+import "../../sass/job-alart/_SearchJob.scss"
 export default {
   name: "SearchJob",
   data:()=>{
