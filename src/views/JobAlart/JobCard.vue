@@ -4,7 +4,7 @@
       <h1>Search Result</h1>
     </div>
 
-    <div v-if="loading">
+    <div v-if="skeleton">
       <v-skeleton-loader v-for="n in 3" :key="n" class="loader" type="card"></v-skeleton-loader>
     </div>
 
@@ -105,6 +105,8 @@ export default {
       pageNo: 1,
       ShowAlertMsg: false,
 
+      skeleton: true,
+
       JobDescription: {
         jobTitle: "PHP developer",
         companyName: "PHP",
@@ -198,6 +200,7 @@ export default {
     getData() {
       this.loading = true;
 
+
       this.$store
         .dispatch("callApi", {
           url: "search",
@@ -215,6 +218,7 @@ export default {
           //saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
+          this.skeleton = false;
         })
         .catch(() => {
           this.$awn.alert("Failed");

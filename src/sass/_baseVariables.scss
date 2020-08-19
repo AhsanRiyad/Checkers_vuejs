@@ -8,12 +8,12 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Theme front end colors
-$primaryColor: #6E0E10;
-$secondaryColor: #2bb152;
+$primaryColor: #365899;
+$secondaryColor: #2166b6;
 $tarsiaryColor: #D6EFDC;
 
 //==============media query variable ============
-/* $desktop: '(min-width: 1400px)';
+$desktop: '(min-width: 1400px)';
 $desktopTab: '(min-width: 768px)';
 $desktopLgToMobile: '(max-width: 1399px)';
 $laptop: '(max-width: 1199px)';
@@ -22,7 +22,7 @@ $mobile: 'only screen and (max-width: 767px)';
 $mobile-sm: 'only screen and (max-width: 424px)';
 $mobile-375: 'only screen and (max-width: 375px)';
 $mobileLandScape: 'only screen and (orientation: landscape) and (max-width: 767px)';
- */
+
 
 
 @mixin desktop() {
