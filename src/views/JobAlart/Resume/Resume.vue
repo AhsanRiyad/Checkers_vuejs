@@ -58,7 +58,7 @@ export default {
       this.nameOfComponent = this.pageList[++this.index]
     },
     prevBtn(){
-      if(this.index >= 0) return;
+      if(this.index <= 0) return;
       this.nameOfComponent = this.pageList[--this.index]
 
     }
