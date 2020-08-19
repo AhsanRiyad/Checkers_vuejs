@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +139,7 @@
       <workItem from="1597735224281" duration="4704000" />
       <workItem from="1597741755522" duration="4125000" />
       <workItem from="1597746980544" duration="1183000" />
-      <workItem from="1597750535863" duration="594000" />
+      <workItem from="1597750535863" duration="1126000" />
     </task>
     <servers />
   </component>
