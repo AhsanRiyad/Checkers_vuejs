@@ -9,7 +9,7 @@
 
       <div class="row-14">
         <div class="item-1">
-          <v-btn @click.stop="prevBtn">Cancel</v-btn>
+          <v-btn @click.stop="prevBtn">Previous</v-btn>
         </div>
 
         <div class="item-2">
