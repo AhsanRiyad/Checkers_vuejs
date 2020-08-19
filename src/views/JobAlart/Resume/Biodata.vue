@@ -150,14 +150,29 @@
       <div class="item-1">
         <p>Date Of Birth</p>
         <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your date of birth"
-            outlined
-            dense
-          ></v-text-field>
+          <v-menu
+            v-model="menu"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            transition="scale-transition"
+            offset-y
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="date"
+                prepend-inner-icon="event"
+                readonly
+                placeholder="Enter Date of Birth"
+                backgroundColor="white"
+                outlined
+                dense
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+          </v-menu>
         </div>
       </div>
 
@@ -225,6 +240,9 @@ export default {
   name: "Biodata",
   data: () => {
     return {
+      date: "",
+      menu: "",
+
       search: "",
       editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
@@ -239,9 +257,7 @@ export default {
       console.log("validating...");
     },
   },
-  mounted() {
-
-  },
+  mounted() {},
 };
 </script>
 
