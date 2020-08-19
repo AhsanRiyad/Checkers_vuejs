@@ -11,6 +11,21 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure
 
 import "./sass/job-alart/_defaults.scss"
 
+
+import './plugins/vue-toast';
+
+//importing style
+
+import * as R from 'ramda'
+Vue.prototype.R = R;
+
+import moment from 'moment'
+Vue.prototype.moment = moment;
+
+import _ from 'lodash'
+Vue.prototype._ = _;
+
+
 import CKEditor from '@ckeditor/ckeditor5-vue';
 Vue.use( CKEditor );
 

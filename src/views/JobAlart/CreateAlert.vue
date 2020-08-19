@@ -17,7 +17,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.keywords"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   outlined
                   placeholder="Skill, Designation, Roles, Companies"
@@ -32,7 +32,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.fullName"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'name' , 'name')"
                   dense
                   class="textField"
                   outlined
@@ -48,7 +48,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.email"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'email' , 'email')"
                   dense
                   class="textField"
                   outlined
@@ -64,7 +64,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.NameOfAlertedJob"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
                   outlined
@@ -80,7 +80,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.location"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
                   outlined
@@ -96,7 +96,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.workExperience"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
                   outlined
@@ -113,7 +113,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.expectedSlary"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
                   outlined
@@ -130,7 +130,7 @@
               <v-col md="8" cols="8">
                 <v-select
                   v-model="formData.jobLabelId"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   item-value="id"
                   item-text="name"
                   outlined
@@ -148,7 +148,7 @@
               <v-col md="8" cols="8">
                 <v-text-field
                   v-model="formData.industry"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
                   outlined
@@ -164,7 +164,7 @@
               <v-col md="8" cols="8">
                 <v-select
                   v-model="formData.jobCategory"
-                  :rules="validationRule('name')"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
                   item-value="id"
                   item-text="name"
                   outlined
@@ -217,8 +217,10 @@
 </template>
 
 <script>
+import validation from "../../mixins/validation"
 export default {
   name: "LandingPage",
+  mixins: [validation],
   components: {},
   data() {
     return {

@@ -40,6 +40,7 @@
           :rules="[v=>!!v||'required']"
           placeholder="In days"
           outlined
+          type="number"
           dense
         ></v-text-field>
         <p>Days</p>
@@ -49,7 +50,7 @@
     <div class="row-4">
       <p>Objectives</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor :isValid="true" :editor="editor" :config="editorConfig"></ckeditor>
       </div>
     </div>
 
@@ -193,14 +194,24 @@
       <div class="item-1">
         <p>Mobile Number</p>
         <div>
-          <vue-tel-input inputClasses="vTelInput"></vue-tel-input>
+          <vue-tel-input
+            @validate="validate"
+            :required="true"
+            :validCharactersOnly="true"
+            inputClasses="vTelInput"
+          ></vue-tel-input>
         </div>
       </div>
 
       <div class="item-2">
         <p>Optional Number</p>
         <div>
-          <vue-tel-input inputClasses="vTelInput"></vue-tel-input>
+          <vue-tel-input
+            @validate="validate"
+            :required="true"
+            :validCharactersOnly="true"
+            inputClasses="vTelInput"
+          ></vue-tel-input>
         </div>
       </div>
     </div>
@@ -208,7 +219,7 @@
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../../../sass/job-alart/_Biodata.scss"
+import "../../../sass/job-alart/_Biodata.scss";
 
 export default {
   name: "Biodata",
@@ -223,7 +234,14 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+    validate() {
+      console.log("validating...");
+    },
+  },
+  mounted() {
+
+  },
 };
 </script>
 

@@ -1,6 +1,9 @@
 {
-  "name": "intern_project_final_babe",
+  "name": "job-alart",
   "version": "0.1.0",
+  "author": "Riyad Ahsan",
+  "email": "riyad298@gmail.com",
+  "mobile": "+8801919448787",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -20,6 +23,7 @@
     "ramda": "^0.27.1",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
+    "vue-awesome-notifications": "^3.1.1",
     "vue-cookies": "^1.5.13",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.1.3",
