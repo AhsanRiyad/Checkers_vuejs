@@ -124,8 +124,24 @@ $mobileLandScape: 'only screen and (orientation: landscape) and (max-width: 767p
   margin: 0;
   padding: 0;
 }
-
+ body{
+   margin: 0;
+   padding: 0;
+ }
 
 a{
   text-decoration: none;
+}
+ul{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+ul li{
+  list-style: none;
+}
+.ja__headline{
+  font-size: pxToVw(35);
+  @include mobile{
+    font-size: pxToMobVw(30);
+  }
 }
