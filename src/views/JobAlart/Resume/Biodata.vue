@@ -40,6 +40,7 @@
           :rules="[v=>!!v||'required']"
           placeholder="In days"
           outlined
+          type="number"
           dense
         ></v-text-field>
         <p>Days</p>
@@ -49,7 +50,7 @@
     <div class="row-4">
       <p>Objectives</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor :isValid="true" :editor="editor" :config="editorConfig"></ckeditor>
       </div>
     </div>
 
@@ -149,14 +150,29 @@
       <div class="item-1">
         <p>Date Of Birth</p>
         <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your date of birth"
-            outlined
-            dense
-          ></v-text-field>
+          <v-menu
+            v-model="menu"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            transition="scale-transition"
+            offset-y
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="date"
+                prepend-inner-icon="event"
+                readonly
+                placeholder="Enter Date of Birth"
+                backgroundColor="white"
+                outlined
+                dense
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+          </v-menu>
         </div>
       </div>
 
@@ -193,14 +209,24 @@
       <div class="item-1">
         <p>Mobile Number</p>
         <div>
-          <vue-tel-input inputClasses="vTelInput"></vue-tel-input>
+          <vue-tel-input
+            @validate="validate"
+            :required="true"
+            :validCharactersOnly="true"
+            inputClasses="vTelInput"
+          ></vue-tel-input>
         </div>
       </div>
 
       <div class="item-2">
         <p>Optional Number</p>
         <div>
-          <vue-tel-input inputClasses="vTelInput"></vue-tel-input>
+          <vue-tel-input
+            @validate="validate"
+            :required="true"
+            :validCharactersOnly="true"
+            inputClasses="vTelInput"
+          ></vue-tel-input>
         </div>
       </div>
     </div>
@@ -208,12 +234,15 @@
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../../../sass/job-alart/_Biodata.scss"
+import "../../../sass/job-alart/_Biodata.scss";
 
 export default {
   name: "Biodata",
   data: () => {
     return {
+      date: "",
+      menu: "",
+
       search: "",
       editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
@@ -223,7 +252,12 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+    validate() {
+      console.log("validating...");
+    },
+  },
+  mounted() {},
 };
 </script>
 

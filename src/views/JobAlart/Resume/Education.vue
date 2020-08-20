@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="pHeader">
-      Work Experience (
+      Education (
       <span>*Required Field of Education</span> )
     </p>
     <v-divider></v-divider>

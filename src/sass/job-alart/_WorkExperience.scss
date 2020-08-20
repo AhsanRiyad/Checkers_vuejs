@@ -1,3 +1,5 @@
+@import "../_baseVariables.scss";
+
 .mainTemplate {
   background: green;
 }
@@ -13,7 +15,7 @@
   text-align: center;
   margin: 0 20px;
   font-size: 25px;
-  color: #2166b6;
+  color: $secondaryColor;
 }
 
 .pHeader {
@@ -26,11 +28,16 @@
 }
 
 .row-1,
-.row-2, .row-we-7, .row-we-af {
+.row-2,
+.row-we-7,
+.row-we-af {
   width: 95%;
   margin: 20px 20px 0px 20px;
   p {
     margin: 2px 0;
+  }
+  @include tab() {
+    width: 85%;
   }
 }
 
@@ -47,19 +54,31 @@
   .row-100-1 {
     flex-basis: 15%;
     margin-right: 10px;
+    @include tab() {
+      flex-basis: 40%;
+    }
   }
 
   .row-100-2 {
     flex-basis: 15%;
+    @include tab() {
+      flex-basis: 40%;
+    }
   }
 
   .row-100-4 {
     flex-basis: 15%;
     margin-right: 10px;
+    @include tab() {
+      flex-basis: 40%;
+    }
   }
 
   .row-100-5 {
     flex-basis: 15%;
+    @include tab() {
+      flex-basis: 40%;
+    }
   }
 
   .row-100-6 {
@@ -72,6 +91,12 @@
     flex-basis: 3%;
     margin-left: 20px;
     margin-right: 20px;
+    @include tab() {
+      margin-left: 0px;
+      margin-right: 0px;
+      flex-basis: 85%;
+      text-align: center;
+    }
   }
 }
 
@@ -82,22 +107,21 @@
   }
 }
 
-.applicationInfo{
+.applicationInfo {
   margin: 20px 20px 0px 20px;
   font-size: 20px;
   font-weight: bold;
 }
 
-
-.row-we-skills{
+.row-we-skills {
   display: flex;
   flex-wrap: wrap;
   margin: 20px 20px 0px 20px;
-  .we-skills-title{
+  .we-skills-title {
     flex-basis: 100%;
   }
 
-  .we-skills-box{
+  .we-skills-box {
     height: 40px;
     // width: 50px;
     border-radius: 5px;
@@ -109,7 +133,7 @@
     margin-bottom: 10px;
   }
 
-  .skill-add-text-field{
+  .skill-add-text-field {
     flex-basis: 100%;
     margin-top: 10px;
   }

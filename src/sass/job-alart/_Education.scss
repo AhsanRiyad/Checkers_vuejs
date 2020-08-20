@@ -1,3 +1,4 @@
+@import "../_baseVariables.scss";
 .ed-row-1, .level-of-education{
    
     margin: 20px 20px 0px 20px;
@@ -21,19 +22,32 @@
     .row-100-1 {
       flex-basis: 15%;
       margin-right: 10px;
+      flex-wrap: wrap;
+      @include tab(){
+        flex-basis: 40%;
+      }
     }
   
     .row-100-2 {
       flex-basis: 15%;
+      @include tab(){
+        flex-basis: 40%;
+      }
     }
   
     .row-100-4 {
       flex-basis: 15%;
       margin-right: 10px;
+      @include tab(){
+        flex-basis: 40%;
+      }
     }
   
     .row-100-5 {
       flex-basis: 15%;
+      @include tab(){
+        flex-basis: 40%;
+      }
     }
   
     .row-100-6 {
@@ -46,5 +60,10 @@
       flex-basis: 3%;
       margin-left: 20px;
       margin-right: 20px;
+      @include tab(){
+        margin: 0px 0px;
+        flex-basis: 85%;
+        text-align: center;
+      }
     }
   }

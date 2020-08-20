@@ -10,7 +10,7 @@
                 <v-col cols="10" md="10" class="col-1 mb-n4 pb-0">
                   <p class="mb-1">Email Id / Username</p>
                   <v-text-field
-                    :rules="[v=>!!v||'required']"
+                    :rules="fieldRulesProp(true, 'email' , 'email')"
                     class="mb-0 pb-0 mb-0"
                     placeholder="Email"
                     outlined
@@ -23,7 +23,7 @@
                   <p class="mb-1">Password</p>
                   <v-text-field
                     class="mb-0"
-                    :rules="[v=>!!v||'required']"
+                    :rules="fieldRulesProp(true, 'password' , 'password')"
                     placeholder="Password"
                     outlined
                     dense
@@ -32,7 +32,7 @@
                 </v-col>
 
                 <v-col cols="10" md="10" class="col-3">
-                  <v-btn block color="#00204e" class="white--text" @click.stop="submit">Login</v-btn>
+                  <v-btn block color="primary" class="white--text" @click.stop="submit">Login</v-btn>
                 </v-col>
 
                 <v-col cols="10" md="10">
@@ -66,16 +66,18 @@
   </div>
 </template>
 <script>
+import validation from "../../mixins/validation";
 export default {
   name: "Signin",
+  mixins: [validation],
   data() {
     return {};
   },
-  methods:{
-    submit(){
+  methods: {
+    submit() {
       this.$refs.form.validate();
-    }
-  }
+    },
+  },
 };
 </script>
 
