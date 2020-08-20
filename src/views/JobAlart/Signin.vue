@@ -32,7 +32,7 @@
                 </v-col>
 
                 <v-col cols="10" md="10" class="col-3">
-                  <v-btn block color="#00204e" class="white--text" @click.stop="submit">Login</v-btn>
+                  <v-btn block color="primary" class="white--text" @click.stop="submit">Login</v-btn>
                 </v-col>
 
                 <v-col cols="10" md="10">
