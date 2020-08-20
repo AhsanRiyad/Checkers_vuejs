@@ -8,7 +8,7 @@
     <v-divider></v-divider>
 
     <div class="row-1">
-      <p>First Name</p>
+      <p>Name</p>
       <v-text-field
         background-color="white"
         class="mb-0"
@@ -16,10 +16,11 @@
         placeholder="Enter your first name"
         outlined
         dense
+        v-model="biodata.fullName"
       ></v-text-field>
     </div>
 
-    <div class="row-2">
+    <!--     <div class="row-2">
       <p>Last Name</p>
       <v-text-field
         background-color="white"
@@ -29,7 +30,7 @@
         outlined
         dense
       ></v-text-field>
-    </div>
+    </div>-->
 
     <div class="row-3">
       <p>Company Notice Period</p>
@@ -38,10 +39,11 @@
           background-color="white"
           class="mb-0"
           :rules="[v=>!!v||'required']"
-          placeholder="In days"
+          placeholder="In month"
           outlined
           type="number"
           dense
+          v-model="biodata.noticePeriod"
         ></v-text-field>
         <p>Days</p>
       </div>
@@ -50,21 +52,26 @@
     <div class="row-4">
       <p>Objectives</p>
       <div>
-        <ckeditor :isValid="true" :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor
+          v-model="biodata.objectives"
+          :isValid="true"
+          :editor="editor"
+          :config="editorConfig"
+        ></ckeditor>
       </div>
     </div>
 
     <div class="row-5">
       <p>Career Desciriptions</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor v-model="biodata.careerDescription" :editor="editor" :config="editorConfig"></ckeditor>
       </div>
     </div>
 
     <div class="row-6">
       <p>Cover Letter</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor v-model="biodata.coverLetter" :editor="editor" :config="editorConfig"></ckeditor>
       </div>
     </div>
 
@@ -82,6 +89,7 @@
           placeholder="Enter your address"
           outlined
           dense
+          v-model="biodata.address"
         ></v-text-field>
       </div>
     </div>
@@ -97,6 +105,7 @@
             placeholder="Enter your city"
             outlined
             dense
+            v-model="biodata.city"
           ></v-text-field>
         </div>
       </div>
@@ -111,6 +120,7 @@
             placeholder="Enter your post code"
             outlined
             dense
+            v-model="biodata.zipPostCode"
           ></v-text-field>
         </div>
       </div>
@@ -127,6 +137,7 @@
             placeholder="Enter your country"
             outlined
             dense
+            v-model="biodata.countryId"
           ></v-text-field>
         </div>
       </div>
@@ -141,6 +152,7 @@
             placeholder="Enter your nationality"
             outlined
             dense
+            v-model="biodata.nationality"
           ></v-text-field>
         </div>
       </div>
@@ -160,7 +172,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date"
+                v-model="biodata.dateOfBirth"
                 prepend-inner-icon="event"
                 readonly
                 placeholder="Enter Date of Birth"
@@ -180,6 +192,7 @@
         <p>Gender</p>
         <div>
           <v-text-field
+            v-model="biodata.gender "
             background-color="white"
             class="mb-0"
             :rules="[v=>!!v||'required']"
@@ -196,6 +209,7 @@
       <div>
         <v-text-field
           background-color="white"
+          v-model="biodata.identityNumber"
           class="mb-0"
           :rules="[v=>!!v||'required']"
           placeholder="Enter your nid/passport no."
@@ -211,6 +225,7 @@
         <div>
           <vue-tel-input
             @validate="validate"
+            v-model="biodata.mobileNumber"
             :required="true"
             :validCharactersOnly="true"
             inputClasses="vTelInput"
@@ -222,6 +237,7 @@
         <p>Optional Number</p>
         <div>
           <vue-tel-input
+            v-model="biodata.anotherMobileNumber"
             @validate="validate"
             :required="true"
             :validCharactersOnly="true"
@@ -243,6 +259,8 @@ export default {
       date: "",
       menu: "",
 
+      biodata: {},
+
       search: "",
       editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
@@ -255,6 +273,9 @@ export default {
   methods: {
     validate() {
       console.log("validating...");
+    },
+    submit() {
+      console.log("biodate ", this.biodata);
     },
   },
   mounted() {},

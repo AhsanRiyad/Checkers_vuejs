@@ -1,18 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap");
 @import "../_baseVariables.scss";
 
-*{
-    font-family: 'Baloo Tamma 2', cursive;
+* {
+    font-family: "Baloo Tamma 2", cursive;
 }
 
-.container-1{
+.login-main-container {
     // margin-top: 200px ;
-    padding-top: 100px ;
-    height: calc( 100vh - (64px + 296px) );
+    // padding-top: 100px ;
+    height: calc(100vh - (64px + 296px));
     background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-
-.buttonContainer-search{
+.buttonContainer-search {
     margin-bottom: 100px;
+}
+
+.login-row-1,
+.login-msg,
+.login-btn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .login-row-item-1,
+    .login-msg-row-1 {
+        flex-basis: 40%;
+
+        @include tab() {
+            flex-basis: 80%;
+        }
+    }
+
+    .login-btn-row-1 {
+        flex-basis: 20%;
+
+        @include tab() {
+            flex-basis: 80%;
+        }
+    }
 }

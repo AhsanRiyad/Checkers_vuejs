@@ -32,6 +32,8 @@ Vue.use( CKEditor );
 import VueTelInput from 'vue-tel-input';
 Vue.use(VueTelInput);
 
+//for docs
+// https://github.com/cmp-cc/vue-cookies#readme
 Vue.use(VueCookies);
 // Vue.use(print);
 

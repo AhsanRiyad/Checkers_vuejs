@@ -19,13 +19,15 @@ export const store = new Vuex.Store({
 			// withCredentials: true, 
 			// crossDomain: true
 		}),
+		isLoggedIn: false,
 	},
 	mutations: {
-
-
+		isLoggedIn(state, payload) {
+			state.isLoggedIn = payload;
+		}
 	},
 	getters: {
-
+		isLoggedIn: state => state.isLoggedIn,
 	},
 	actions: {
 		callApi: (context, info) => {
