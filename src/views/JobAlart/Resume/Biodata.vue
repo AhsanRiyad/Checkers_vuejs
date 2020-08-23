@@ -7,6 +7,30 @@
 
     <v-divider></v-divider>
 
+
+    <div class="biodata-image">
+
+        <div class="biodata-first">
+
+          <div class="biodata-name">
+
+          </div>
+
+          <div class="biodata-notice-period">
+
+          </div>
+
+        </div>
+
+        <div class="biodata-second">
+
+        </div>
+
+    </div>
+
+
+
+
     <div class="row-1">
       <p>Name</p>
       <v-text-field
