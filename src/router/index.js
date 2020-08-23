@@ -13,6 +13,8 @@ import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
 import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
 import appliedJobs from "@/views/JobAlart/appliedJobs";
 
+
+
 Vue.use(VueRouter)
 
 const routes = [

@@ -5,21 +5,23 @@
 
       <!-- <Biodata /> -->
 
-      <component :is="nameOfComponent" />
+      <keep-alive>
+        <component :is="nameOfComponent" />
+      </keep-alive>
 
       <div class="row-14">
         <div class="item-1">
-          <v-btn @click.stop="prevBtn">Previous</v-btn>
+          <v-btn :disabled="prevBtnStatus" @click.stop="prevBtn">Previous</v-btn>
         </div>
 
         <div class="item-2">
           <v-btn
+            :disabled="nextBtnStatus"
             color="#365899"
             class="white--text"
             @click.stop="nextBtn"
           >Next</v-btn>
         </div>
-        
       </div>
     </div>
   </div>
@@ -30,14 +32,14 @@ import WorkExperience from "./WorkExperience.vue";
 import Biodata from "./Biodata.vue";
 import Education from "./Education.vue";
 import Award from "./Award.vue";
-import "../../../sass/job-alart/_Resume.scss"
+import "../../../sass/job-alart/_Resume.scss";
 
 export default {
   name: "Resume",
   components: { Biodata, WorkExperience, Education, Award },
   data: () => {
     return {
-      nameOfComponent: 'Biodata',
+      nameOfComponent: "Biodata",
 
       search: "",
       editor: ClassicEditor,
@@ -47,22 +49,29 @@ export default {
         height: 500,
       },
 
-      pageList: ['Biodata' , 'WorkExperience' , 'Education' , 'Award'],
+      pageList: ["Biodata", "WorkExperience", "Education", "Award"],
       index: 0,
-
     };
   },
-  methods: {
-    nextBtn(){
-      if(this.index >= 3) return;
-      this.nameOfComponent = this.pageList[++this.index]
+  computed: {
+    nextBtnStatus() {
+      if (this.$store.getters.resumeNextbtn) return true;
+      else return false;
     },
-    prevBtn(){
-      if(this.index <= 0) return;
-      this.nameOfComponent = this.pageList[--this.index]
-
-    }
-
+    prevBtnStatus() {
+      if (this.$store.getters.resumePrevbtn) return true;
+      else return false;
+    },
+  },
+  methods: {
+    nextBtn() {
+      if (this.index >= 3) return;
+      this.nameOfComponent = this.pageList[++this.index];
+    },
+    prevBtn() {
+      if (this.index <= 0) return;
+      this.nameOfComponent = this.pageList[--this.index];
+    },
   },
 };
 </script>

@@ -11,7 +11,7 @@ import Header from '../layout/Header'
 import Footer from '../layout/Footer';
 export default {
   name: "LandingPage",
-  components:{
+components:{
     Header,
     Footer
   },

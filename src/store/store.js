@@ -20,14 +20,29 @@ export const store = new Vuex.Store({
 			// crossDomain: true
 		}),
 		isLoggedIn: false,
+
+		resume:{},
+		biodata:{},
+
+		resumeNextbtn: true,
+		resumePrevbtn: true,
 	},
 	mutations: {
 		isLoggedIn(state, payload) {
 			state.isLoggedIn = payload;
-		}
+		},
+		biodata(state, payload) {
+			state.biodata = payload;
+		},
+		resume(state, payload) { state.resume = {...state.resume , payload} },
+		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
+		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
+		biodata: state => state.biodata,
+		resumePrevbtn: state => state.resumePrevbtn,
+		resumeNextbtn: state => state.resumeNextbtn,
 	},
 	actions: {
 		callApi: (context, info) => {
