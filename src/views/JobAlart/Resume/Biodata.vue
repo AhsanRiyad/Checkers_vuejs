@@ -7,43 +7,64 @@
 
     <v-divider></v-divider>
 
-
     <div class="biodata-image">
-
-        <div class="biodata-first">
-
-          <div class="biodata-name">
-
-          </div>
-
-          <div class="biodata-notice-period">
-
-          </div>
-
+      <div class="biodata-first">
+        <div class="biodata-name">
+          <p>Name</p>
+          <v-text-field
+            background-color="white"
+            class="mb-0"
+            :rules="[v=>!!v||'required']"
+            placeholder="Enter your first name"
+            outlined
+            dense
+            v-model="biodata.fullName"
+            @change="saveData"
+          ></v-text-field>
         </div>
 
-        <div class="biodata-second">
+        <div class="biodata-notice-period">
+          <p>Company Notice Period</p>
+          <div>
+            <v-text-field
+              background-color="white"
+              class="mb-0"
+              :rules="[v=>!!v||'required']"
+              placeholder="In month"
+              outlined
+              type="number"
+              dense
+              @change="saveData"
+              v-model="biodata.noticePeriod"
+            ></v-text-field>
+            <p>Days</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="biodata-second">
+        <div class="biodata-image-display">
+          <v-avatar class="profile" color="grey" size="164" tile>
+            <v-img :src="imageUrl"></v-img>
+          </v-avatar>
         </div>
 
+        <div class="biodata-image-input">
+          <v-file-input
+            :rules="rules"
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Choose a photo"
+            prepend-icon="perm_media"
+            label="Avatar"
+            :loading="imageUploadLoading"
+            @change="uploadPhoto"
+            v-model="photo"
+          ></v-file-input>
+        </div>
+      </div>
     </div>
 
-
-
-
-    <div class="row-1">
-      <p>Name</p>
-      <v-text-field
-        background-color="white"
-        class="mb-0"
-        :rules="[v=>!!v||'required']"
-        placeholder="Enter your first name"
-        outlined
-        dense
-        v-model="biodata.fullName"
-        @change="saveData"
-      ></v-text-field>
-    </div>
+    <!-- <div class="row-1"></div> -->
 
     <!--     <div class="row-2">
       <p>Last Name</p>
@@ -57,23 +78,7 @@
       ></v-text-field>
     </div>-->
 
-    <div class="row-3">
-      <p>Company Notice Period</p>
-      <div>
-        <v-text-field
-          background-color="white"
-          class="mb-0"
-          :rules="[v=>!!v||'required']"
-          placeholder="In month"
-          outlined
-          type="number"
-          dense
-          @change="saveData"
-          v-model="biodata.noticePeriod"
-        ></v-text-field>
-        <p>Days</p>
-      </div>
-    </div>
+    <!-- <div class="row-3"></div> -->
 
     <div class="row-4">
       <p>Objectives</p>
@@ -307,7 +312,20 @@ export default {
       date: "",
       menu: "",
 
+      photo: null,
+
+      imageUrl: "",
+
       biodata: {},
+
+      imageUploadLoading: false,
+
+      rules: [
+        (value) =>
+          !value ||
+          value.size < 2000000 ||
+          "Avatar size should be less than 2 MB!",
+      ],
 
       vTelInput: "vTelInput",
 
@@ -335,6 +353,42 @@ export default {
       // this.$store.commit('resumeNextbtn' , false);
       this.$store.commit("biodata", this.biodata);
       console.log("biodada... ", this.$store.getters.biodata);
+    },
+    uploadPhoto() {
+      console.log(this.photo);
+
+      // if(this.photo.size > 2048) return;
+      this.imageUploadLoading = true;
+
+      let data = new FormData();
+      data.append("image", this.photo);
+      data.append("path", "/images/profile-photo/1");
+
+      this.$store
+        .dispatch("upload", {
+          url: "profile-photo",
+          method: "post",
+          data,
+        })
+        .then((response) => {
+          console.log("file upload response...", response);
+
+          // this.imageUrl = "https://cdn.vuetifyjs.com/images/cards/server-room.jpg";
+          this.imageUrl = this.$store.getters.imageUrl + response;
+
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+          this.imageUploadLoading = false;
+        });
     },
   },
   mounted() {},
