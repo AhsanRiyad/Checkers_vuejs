@@ -31,6 +31,9 @@ export const store = new Vuex.Store({
 		resume:{},
 		biodata:{},
 
+		componentName: "",
+
+
 		resumeNextbtn: true,
 		resumePrevbtn: true,
 	},
@@ -44,6 +47,7 @@ export const store = new Vuex.Store({
 		resume(state, payload) { state.resume = {...state.resume , payload} },
 		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
+		componentName(state, payload) { state.componentName = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -51,6 +55,7 @@ export const store = new Vuex.Store({
 		resumePrevbtn: state => state.resumePrevbtn,
 		resumeNextbtn: state => state.resumeNextbtn,
 		imageUrl: state => state.imageUrl,
+		componentName: state => state.componentName,
 	},
 	actions: {
 		callApi: (context, info) => {

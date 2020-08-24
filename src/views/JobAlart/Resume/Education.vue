@@ -142,6 +142,11 @@ export default {
       },
     };
   },
+  mounted(){
+    this.$store.commit("resumePrevbtn", false);
+    this.$store.commit("componentName", 'Education');
+
+  }
 
 };
 </script>

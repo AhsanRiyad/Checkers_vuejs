@@ -44,6 +44,7 @@ var store = new _vuex["default"].Store({
     isLoggedIn: false,
     resume: {},
     biodata: {},
+    componentName: "",
     resumeNextbtn: true,
     resumePrevbtn: true
   },
@@ -64,6 +65,9 @@ var store = new _vuex["default"].Store({
     },
     resumePrevbtn: function resumePrevbtn(state, payload) {
       state.resumePrevbtn = payload;
+    },
+    componentName: function componentName(state, payload) {
+      state.componentName = payload;
     }
   },
   getters: {
@@ -81,6 +85,9 @@ var store = new _vuex["default"].Store({
     },
     imageUrl: function imageUrl(state) {
       return state.imageUrl;
+    },
+    componentName: function componentName(state) {
+      return state.componentName;
     }
   },
   actions: {

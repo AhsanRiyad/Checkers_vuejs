@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+
 import vuetify from './plugins/vuetify'
 // import VueResouce from 'vue-resource'
 import axios from 'axios'
@@ -30,6 +31,14 @@ Vue.use( CKEditor );
 import VueTelInput from 'vue-tel-input';
 Vue.use(VueTelInput);
 
+
+//vuetify tel input
+// for docs https://github.com/yogakurniawan/vue-tel-input-vuetify
+import VueTelInputVuetify from "vue-tel-input-vuetify";
+Vue.use(VueTelInputVuetify);
+
+
+
 //for docs
 // https://github.com/cmp-cc/vue-cookies#readme
 Vue.use(VueCookies);
@@ -42,6 +51,8 @@ VueCookies.config('7d');
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+
+
 
 /*Vue.mixin({
   data: () => ({
