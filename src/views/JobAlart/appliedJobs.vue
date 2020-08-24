@@ -146,24 +146,24 @@
             <div class="pagination">
               <ul class="d-flex pg-list">
                 <li>
-                  <v-btn text>
+                  <v-btn class="pg-btn" small text>
                     <v-icon>mdi-chevron-double-left</v-icon>
                   </v-btn>
                 </li>
                 <li>
-                  <v-btn text>1</v-btn>
+                  <v-btn class="pg-btn" small text>1</v-btn>
                 </li>
                 <li>
-                  <v-btn text>2</v-btn>
+                  <v-btn class="pg-btn" small text>2</v-btn>
                 </li>
                 <li>
-                  <v-btn text>3</v-btn>
+                  <v-btn class="pg-btn" small text>3</v-btn>
                 </li>
                 <li>
-                  <v-btn text>..12</v-btn>
+                  <v-btn class="pg-btn" small text>..12</v-btn>
                 </li>
                 <li>
-                  <v-btn text>
+                  <v-btn class="pg-btn" small text>
                     <v-icon>mdi-chevron-double-right</v-icon>
                   </v-btn>
                 </li>
