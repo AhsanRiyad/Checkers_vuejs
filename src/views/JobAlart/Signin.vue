@@ -15,6 +15,7 @@
                     placeholder="Email"
                     outlined
                     dense
+                    v-model="email"
                   ></v-text-field>
                   <p class="smallText mt-n3">We will never share your email with anyone</p>
                 </v-col>
@@ -26,7 +27,9 @@
                     :rules="fieldRulesProp(true, 'password' , 'password')"
                     placeholder="Password"
                     outlined
+                    v-model="password"
                     dense
+                    type="password"
                   ></v-text-field>
                   <p class="text-right mt-n6">Forgot Password?</p>
                 </v-col>
@@ -71,12 +74,59 @@ export default {
   name: "Signin",
   mixins: [validation],
   data() {
-    return {};
+    return {
+      email: "",
+      password: "",
+    };
   },
   methods: {
     submit() {
-      this.$refs.form.validate();
+      if (!this.$refs.form.validate()) return;
+
+      this.$store
+        .dispatch("callApi", {
+          url: "users/login",
+          method: "post",
+          data: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+        .then((response) => {
+          console.log("login image", response);
+          this.$awn.success("Successful");
+          localStorage.setItem("accessToken", response.access_token);
+          this.$cookies.set("accessToken", response.access_token);
+
+          setTimeout(() => {
+            this.$router.history.push({ name: 'SearchJob' })
+          }, 1000);
+
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
     },
+  },
+  mounted() {
+    // this.$cookies.set("accessToken", null);
+    this.$cookies.remove("accessToken");
+    this.$store.commit("isLoggedIn", false);
+
+    // console.log("cookies", this.$cookies.get("accessToken"));
+    /* 
+    console.log(
+      " is logged in ",
+      this.R.isEmpty(this.$cookies.get("accessToken"))
+    ); */
   },
 };
 </script>

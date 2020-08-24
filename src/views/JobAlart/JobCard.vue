@@ -8,87 +8,88 @@
       <v-skeleton-loader v-for="n in 3" :key="n" class="loader" type="card"></v-skeleton-loader>
     </div>
 
+    <div class="alertMsg" v-else-if="ShowAlertMsg">
+      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>
+    </div>
+
     <div v-else>
-
-
-    <div class="filter">
-      <div class="filter-item-1">
-        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+      <div class="filter">
+        <div class="filter-item-1">
+          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+        </div>
+        <div class="filter-item-2">
+          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+        </div>
+        <div class="filter-item-3">
+          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+        </div>
+        <div class="filter-item-4">
+          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+        </div>
       </div>
-      <div class="filter-item-2">
-        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-      </div>
-      <div class="filter-item-3">
-        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-      </div>
-      <div class="filter-item-4">
-        <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-      </div>
-    </div>
 
-    <div class="clearFix"></div>
+      <div class="clearFix"></div>
 
-    <div class="searchResults">
-      <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
-        <v-card-text>
-          <h2 style="color: green" class="mb-2" v-text="n.jobTitle"></h2>
-          <h4 v-text="n.companyName"></h4>
-          <p class="text--primary">
-            <v-icon>location_on</v-icon>
-            {{ n.jobLocation }}
-          </p>
-          <p class="text--primary">
-            <v-icon>school</v-icon>
-            {{ n.education }}
-          </p>
-          <p class="text--primary">
-            <v-icon>payment</v-icon>
-            {{ n.minSalaryRange }} to {{ n.maxSalaryRange }}
-          </p>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn text color="deep-purple accent-4" @click.stop="()=>saveDetails(n)">Details</v-btn>
-        </v-card-actions>
-      </v-card>
-    </div>
-
-    <div class="clearFix"></div>
-
-    <div class="Fixed-Job-Details">
-      <div :style="jobDetails" v-if="!loading">
-        <div outlined :style="firstContainer">
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
-              <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
-              <p>{{ JobDescription.companyName }} || {{ JobDescription.typeInText }}</p>
-            </v-list-item-content>
-
-            <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-          </v-list-item>
-
-          <v-card-actions>
-            <v-btn class="applyNow" color="primary">Apply Now</v-btn>
-          </v-card-actions>
-
-          <v-divider class="divider"></v-divider>
-
-          <div :style="JobDescriptionStyle">
-            <h4>Location</h4>
-            <p>{{ JobDescription.jobLocation }}</p>
-
-            <h4>Responsibilities</h4>
-            <p>{{ JobDescription.jobResponsibilities }}</p>
-
-            <p>
-              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-              The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+      <div class="searchResults">
+        <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
+          <v-card-text>
+            <h2 style="color: green" class="mb-2" v-text="n.jobTitle"></h2>
+            <h4 v-text="n.companyName"></h4>
+            <p class="text--primary">
+              <v-icon>location_on</v-icon>
+              {{ n.jobLocation }}
             </p>
+            <p class="text--primary">
+              <v-icon>school</v-icon>
+              {{ n.education }}
+            </p>
+            <p class="text--primary">
+              <v-icon>payment</v-icon>
+              {{ n.minSalaryRange }} to {{ n.maxSalaryRange }}
+            </p>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn text color="deep-purple accent-4" @click.stop="()=>saveDetails(n)">Details</v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
+
+      <div class="clearFix"></div>
+
+      <div class="Fixed-Job-Details">
+        <div :style="jobDetails" v-if="!loading">
+          <div outlined :style="firstContainer">
+            <v-list-item three-line>
+              <v-list-item-content>
+                <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
+                <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
+                <p>{{ JobDescription.companyName }} || {{ JobDescription.typeInText }}</p>
+              </v-list-item-content>
+
+              <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+            </v-list-item>
+
+            <v-card-actions>
+              <v-btn class="applyNow" color="primary">Apply Now</v-btn>
+            </v-card-actions>
+
+            <v-divider class="divider"></v-divider>
+
+            <div :style="JobDescriptionStyle">
+              <h4>Location</h4>
+              <p>{{ JobDescription.jobLocation }}</p>
+
+              <h4>Responsibilities</h4>
+              <p>{{ JobDescription.jobResponsibilities }}</p>
+
+              <p>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
     </div>
   </div>
 </template>
@@ -200,7 +201,6 @@ export default {
     getData() {
       this.loading = true;
 
-
       this.$store
         .dispatch("callApi", {
           url: "search",
@@ -225,6 +225,7 @@ export default {
         })
         .finally(() => {
           this.loading = false;
+          this.skeleton = false;
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
 
           //  this.tableLoading = false;

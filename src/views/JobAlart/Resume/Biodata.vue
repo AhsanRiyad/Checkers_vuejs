@@ -7,19 +7,66 @@
 
     <v-divider></v-divider>
 
-    <div class="row-1">
-      <p>First Name</p>
-      <v-text-field
-        background-color="white"
-        class="mb-0"
-        :rules="[v=>!!v||'required']"
-        placeholder="Enter your first name"
-        outlined
-        dense
-      ></v-text-field>
+    <div class="biodata-image">
+      <div class="biodata-first">
+        <div class="biodata-name">
+          <p>Name</p>
+          <v-text-field
+            background-color="white"
+            class="mb-0"
+            :rules="[v=>!!v||'required']"
+            placeholder="Enter your first name"
+            outlined
+            dense
+            v-model="biodata.fullName"
+            @change="saveData"
+          ></v-text-field>
+        </div>
+
+        <div class="biodata-notice-period">
+          <p>Company Notice Period</p>
+          <div>
+            <v-text-field
+              background-color="white"
+              class="mb-0"
+              :rules="[v=>!!v||'required']"
+              placeholder="In month"
+              outlined
+              type="number"
+              dense
+              @change="saveData"
+              v-model="biodata.noticePeriod"
+            ></v-text-field>
+            <p>Days</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="biodata-second">
+        <div class="biodata-image-display">
+          <v-avatar class="profile" color="grey" size="164" tile>
+            <v-img :src="imageUrl"></v-img>
+          </v-avatar>
+        </div>
+
+        <div class="biodata-image-input">
+          <v-file-input
+            :rules="rules"
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Choose a photo"
+            prepend-icon="perm_media"
+            label="Avatar"
+            :loading="imageUploadLoading"
+            @change="uploadPhoto"
+            v-model="photo"
+          ></v-file-input>
+        </div>
+      </div>
     </div>
 
-    <div class="row-2">
+    <!-- <div class="row-1"></div> -->
+
+    <!--     <div class="row-2">
       <p>Last Name</p>
       <v-text-field
         background-color="white"
@@ -29,42 +76,44 @@
         outlined
         dense
       ></v-text-field>
-    </div>
+    </div>-->
 
-    <div class="row-3">
-      <p>Company Notice Period</p>
-      <div>
-        <v-text-field
-          background-color="white"
-          class="mb-0"
-          :rules="[v=>!!v||'required']"
-          placeholder="In days"
-          outlined
-          type="number"
-          dense
-        ></v-text-field>
-        <p>Days</p>
-      </div>
-    </div>
+    <!-- <div class="row-3"></div> -->
 
     <div class="row-4">
       <p>Objectives</p>
       <div>
-        <ckeditor :isValid="true" :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor
+          v-model="biodata.objectives"
+          :isValid="true"
+          :editor="editor"
+          :config="editorConfig"
+          @input="saveData"
+        ></ckeditor>
       </div>
     </div>
 
     <div class="row-5">
       <p>Career Desciriptions</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor
+          @input="saveData"
+          v-model="biodata.careerDescription"
+          :editor="editor"
+          :config="editorConfig"
+        ></ckeditor>
       </div>
     </div>
 
     <div class="row-6">
       <p>Cover Letter</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor
+          @input="saveData"
+          v-model="biodata.coverLetter"
+          :editor="editor"
+          :config="editorConfig"
+        ></ckeditor>
       </div>
     </div>
 
@@ -82,6 +131,8 @@
           placeholder="Enter your address"
           outlined
           dense
+          @change="saveData"
+          v-model="biodata.address"
         ></v-text-field>
       </div>
     </div>
@@ -97,6 +148,8 @@
             placeholder="Enter your city"
             outlined
             dense
+            @change="saveData"
+            v-model="biodata.city"
           ></v-text-field>
         </div>
       </div>
@@ -111,6 +164,8 @@
             placeholder="Enter your post code"
             outlined
             dense
+            @change="saveData"
+            v-model="biodata.zipPostCode"
           ></v-text-field>
         </div>
       </div>
@@ -127,6 +182,8 @@
             placeholder="Enter your country"
             outlined
             dense
+            @change="saveData"
+            v-model="biodata.countryId"
           ></v-text-field>
         </div>
       </div>
@@ -141,6 +198,8 @@
             placeholder="Enter your nationality"
             outlined
             dense
+            @change="saveData"
+            v-model="biodata.nationality"
           ></v-text-field>
         </div>
       </div>
@@ -160,18 +219,19 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date"
+                v-model="biodata.dateOfBirth"
                 prepend-inner-icon="event"
                 readonly
                 placeholder="Enter Date of Birth"
                 backgroundColor="white"
                 outlined
                 dense
+                @change="saveData"
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+            <v-date-picker v-model="biodata.dateOfBirth" @input="menu = false"></v-date-picker>
           </v-menu>
         </div>
       </div>
@@ -179,14 +239,17 @@
       <div class="item-2">
         <p>Gender</p>
         <div>
-          <v-text-field
+          <v-select
+            v-model="biodata.gender "
             background-color="white"
             class="mb-0"
             :rules="[v=>!!v||'required']"
             placeholder="Enter your gender"
             outlined
+            :items="['Male', 'Female', 'Common' ,'Not Decided']"
             dense
-          ></v-text-field>
+            @change="saveData"
+          ></v-select>
         </div>
       </div>
     </div>
@@ -196,11 +259,13 @@
       <div>
         <v-text-field
           background-color="white"
+          v-model="biodata.identityNumber"
           class="mb-0"
           :rules="[v=>!!v||'required']"
           placeholder="Enter your nid/passport no."
           outlined
           dense
+          @change="saveData"
         ></v-text-field>
       </div>
     </div>
@@ -211,6 +276,8 @@
         <div>
           <vue-tel-input
             @validate="validate"
+            @input="saveData"
+            v-model="biodata.mobileNumber"
             :required="true"
             :validCharactersOnly="true"
             inputClasses="vTelInput"
@@ -222,10 +289,12 @@
         <p>Optional Number</p>
         <div>
           <vue-tel-input
+            v-model="biodata.anotherMobileNumber"
             @validate="validate"
+            @input="saveData"
             :required="true"
             :validCharactersOnly="true"
-            inputClasses="vTelInput"
+            :inputClasses="vTelInput"
           ></vue-tel-input>
         </div>
       </div>
@@ -243,6 +312,23 @@ export default {
       date: "",
       menu: "",
 
+      photo: null,
+
+      imageUrl: "",
+
+      biodata: {},
+
+      imageUploadLoading: false,
+
+      rules: [
+        (value) =>
+          !value ||
+          value.size < 2000000 ||
+          "Avatar size should be less than 2 MB!",
+      ],
+
+      vTelInput: "vTelInput",
+
       search: "",
       editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
@@ -253,8 +339,56 @@ export default {
     };
   },
   methods: {
-    validate() {
+    validate({ number, isValid, country }) {
+      console.log(number);
+      console.log(isValid);
+      console.log(country);
       console.log("validating...");
+      return true;
+    },
+    submit() {
+      console.log("biodate ", this.biodata);
+    },
+    saveData() {
+      // this.$store.commit('resumeNextbtn' , false);
+      this.$store.commit("biodata", this.biodata);
+      console.log("biodada... ", this.$store.getters.biodata);
+    },
+    uploadPhoto() {
+      console.log(this.photo);
+
+      // if(this.photo.size > 2048) return;
+      this.imageUploadLoading = true;
+
+      let data = new FormData();
+      data.append("image", this.photo);
+      data.append("path", "/images/profile-photo/1");
+
+      this.$store
+        .dispatch("upload", {
+          url: "profile-photo",
+          method: "post",
+          data,
+        })
+        .then((response) => {
+          console.log("file upload response...", response);
+
+          // this.imageUrl = "https://cdn.vuetifyjs.com/images/cards/server-room.jpg";
+          this.imageUrl = this.$store.getters.imageUrl + response;
+
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+          this.imageUploadLoading = false;
+        });
     },
   },
   mounted() {},

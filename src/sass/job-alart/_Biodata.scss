@@ -2,6 +2,7 @@
 
 .vTelInput {
   background: white;
+  // border: 1px solid red !important;
 }
 
 .mainTemplate {
@@ -31,6 +32,59 @@
   span {
     color: red;
     font-size: 12px;
+  }
+}
+
+.biodata-image {
+  display: flex;
+  flex-wrap: wrap;
+  .biodata-first {
+    flex-basis: 20%;
+    flex-grow: 1;
+    // height: 100px;
+    // background: red;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    .biodata-name {
+      flex-basis: 90%;
+      margin-left: 5%;
+      // flex-grow: 1;
+      // height: 20px;
+      // background: black;
+    }
+    .biodata-notice-period {
+      flex-basis: 90%;
+      margin-left: 5%;
+      // flex-grow: 1;
+      // height: 20px;
+      // background: yellow;
+    }
+  }
+  .biodata-second {
+    flex-basis: 20%;
+    flex-grow: 1;
+    // height: 100px;
+    // background: green;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    /*  &:nth-child(1) {
+      flex-basis: 30%;
+      margin-top: 30px;
+    } */
+
+    .biodata-image-display {
+      // margin-top: 30px;
+      // height: 50%;
+      // justify-content: center;
+      
+    }
+    .biodata-image-input {
+      // min-height: 80%;
+      // height: 50%;
+      // justify-content: center;
+    }
   }
 }
 
