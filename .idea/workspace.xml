@@ -20,11 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sass/_table.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/Company/AddCompany.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/Company/CompanyList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/ArchivedJobs.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/DraftedJobs.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/JobsTab.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Subscribe.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/layout/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/noInternetSnackBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/noInternetSnackBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/test.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +86,11 @@
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\job alert\jobalertfrontend\src\views\Employers" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -150,6 +165,7 @@
       <workItem from="1598175311435" duration="602000" />
       <workItem from="1598178070814" duration="56000" />
       <workItem from="1598178151335" duration="1299000" />
+      <workItem from="1598245507218" duration="12626000" />
     </task>
     <servers />
   </component>
