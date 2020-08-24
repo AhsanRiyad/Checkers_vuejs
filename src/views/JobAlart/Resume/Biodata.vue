@@ -45,7 +45,15 @@
       <div class="biodata-second">
         <div class="biodata-image-display">
           <v-avatar class="profile" color="grey" size="164" tile>
-            <v-img :src="imageUrl"></v-img>
+            <v-img
+              :src="imageUrl"
+              lazy-src="../../../assets/balgownie-avatar.jpg"
+              aspect-ratio="1"
+              class="grey lighten-2"
+              max-width="500"
+              max-height="300"
+            >
+            </v-img>
           </v-avatar>
         </div>
 
@@ -320,12 +328,14 @@ export default {
 
       imageUploadLoading: false,
 
-      rules: [
-        (value) =>
-          !value ||
-          value.size < 2000000 ||
-          "Avatar size should be less than 2 MB!",
-      ],
+      // rules: [
+      //   (value) =>
+      //     !value ||
+      //     value.size < 2000000 ||
+      //     "Avatar size should be less than 2 MB!",
+      // ],
+
+      rules:[()=>true],
 
       vTelInput: "vTelInput",
 
@@ -361,8 +371,8 @@ export default {
       this.imageUploadLoading = true;
 
       let data = new FormData();
-      data.append("image", this.photo);
-      data.append("path", "/images/profile-photo/1");
+      data.append("image", this.photo); 
+      data.append("id", "1");
 
       this.$store
         .dispatch("upload", {

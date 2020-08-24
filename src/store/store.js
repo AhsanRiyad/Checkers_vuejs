@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
 
 	state: {
 		apiBase: "http://13.58.205.236:8080/",
-		imageUrl: "http://localhost/jobAlartFileServer/public/",
+		imageUrl: "http://f1.redspice.ae/public/",
 		ax: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
 			baseURL: "http://13.58.205.236:8080/",
@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
 		}),
 		upload: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
-			baseURL: "http://localhost/jobAlartFileServer/public/api/",
+			baseURL: "http://f1.redspice.ae/public/api/",
 			// withCredentials: true, 
 			// crossDomain: true
 		}),
