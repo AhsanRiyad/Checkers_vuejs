@@ -12,6 +12,8 @@ import changePassword from "@/views/JobAlart/AccountSettings/changePassword";
 import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
 import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
 import appliedJobs from "@/views/JobAlart/appliedJobs";
+import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
+
 
 
 
@@ -33,6 +35,14 @@ const routes = [
   component: JobCard,
   meta: {
     title: 'search'
+  }
+},
+{
+  path: '/defaultResume' ,
+  name: 'defaultResume',
+  component: defaultResume,
+  meta: {
+    title: 'defaultResume'
   }
 },
 {

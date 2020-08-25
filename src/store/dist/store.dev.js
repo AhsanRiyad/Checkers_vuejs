@@ -13,8 +13,6 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _vueCookies = _interopRequireDefault(require("vue-cookies"));
 
-var _ramda = require("ramda");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -23,6 +21,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// import { type } from 'ramda'
 _vue["default"].use(_vuex["default"]);
 
 var store = new _vuex["default"].Store({
@@ -100,7 +99,8 @@ var store = new _vuex["default"].Store({
 
         var headers = {
           'Authorization': 'Bearer ' + _vueCookies["default"].get('accessToken'),
-          'Content-Type': (0, _ramda.type)(data) == "FormData" ? "multipart/form-data" : "application/json;charset=UTF-8"
+          'Content-Type': "application/json",
+          'Accept': "application/json"
         };
         context.state.ax.withCredentials = true;
         context.state.ax.request({

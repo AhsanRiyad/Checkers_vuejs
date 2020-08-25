@@ -1,0 +1,151 @@
+$titleColor: #002157;
+
+
+.rd-main-card {
+    background: transparent;
+}
+
+
+
+.dr-title-all {
+    color: $titleColor;
+    font-size: 20px;
+    text-decoration: underline;
+    // border-bottom: 4px solid $titleColor;
+    padding-bottom: 5px;
+    font-weight: bold;
+    line-height: 4px;
+    margin-top: 20px;
+}
+
+.default-resume-main-card {
+    background: white;
+    width: 45%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    -webkit-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+}
+
+
+.years-of-experience {
+    color: $titleColor;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table-title-dr {
+    color: $titleColor;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+.defaultResume-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    flex-direction: row;
+    // justify-content: center;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    .dr-title-photo {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 70px;
+    }
+}
+
+.defaultResume-title-text {
+    font-size: 30px;
+    color: $titleColor;
+    font-weight: bold;
+
+}
+
+.dr-main-text-div {
+    line-height: 10px;
+    margin-top: 100px;
+}
+
+
+.dr-career-objective {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+}
+
+.dr-academic-qualification {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+    .dr-academic-q-heading {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+
+}
+
+.dr-academic-certificate {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+    .dr-academic-c-heading {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+}
+
+.dr-skills {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+}
+
+
+.appInfo-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: row;
+
+}
+
+.dr-application-info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: row;
+
+    .dr-application-info-1 {
+        flex-basis: 30%;
+    }
+}
+
+.last-section-dr {
+    margin-bottom: 40px;
+}

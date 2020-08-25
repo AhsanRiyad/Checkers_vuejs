@@ -61,6 +61,33 @@ export default {
       else return false;
     },
   },
+  mounted() {
+    console.log("resume mounting");
+
+    this.$store
+      .dispatch("callApi", {
+        url: "resume/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        // console.log("resume.. data", response);
+        this.$store.commit("biodata", response.data.biodata);
+        console.log("resume.. data", this.$store.getters.biodata);
+
+        //  this.$refs.form.reset();
+        //  saves the items from the database in the table
+        //  console.log(response);
+        //  this.items = response.data;
+      })
+      .catch(() => {
+        this.$awn.alert("Failed!");
+        //   this.$awn.alert("Failed");
+      })
+      .finally(() => {
+        //  this.tableLoading = false;
+      });
+  },
   methods: {
     nextBtn() {
       let data = {},
@@ -86,7 +113,7 @@ export default {
           data,
         })
         .then((response) => {
-          console.log("resume ... ", response);
+          console.log("resume ... ff ", response);
 
           if (this.index >= 3) return;
           this.nameOfComponent = this.pageList[++this.index];

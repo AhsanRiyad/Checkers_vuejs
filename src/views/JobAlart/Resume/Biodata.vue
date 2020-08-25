@@ -67,7 +67,7 @@
             prepend-icon="perm_media"
             label="Avatar"
             :loading="imageUploadLoading"
-            @keyups="uploadPhoto"
+            @change="uploadPhoto"
             v-model="photo"
           ></v-file-input>
         </div>
@@ -465,7 +465,7 @@ export default {
   },
   mounted() {
     this.$store.commit("resumePrevbtn", true);
-    this.$store.commit("resumeNextbtnbtn", true);
+    this.$store.commit("resumeNextbtn", true);
     this.$store.commit("componentName", "Biodata");
   },
 };

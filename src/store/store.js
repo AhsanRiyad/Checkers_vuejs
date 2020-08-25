@@ -6,7 +6,7 @@ import axios from 'axios'
 // Vue.prototype.$axios = axios;
 
 import VueCookies from 'vue-cookies'
-import { type } from 'ramda'
+// import { type } from 'ramda'
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -38,12 +38,8 @@ export const store = new Vuex.Store({
 		resumePrevbtn: true,
 	},
 	mutations: {
-		isLoggedIn(state, payload) {
-			state.isLoggedIn = payload;
-		},
-		biodata(state, payload) {
-			state.biodata = payload;
-		},
+		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
+		biodata(state, payload) { state.biodata = payload; },
 		resume(state, payload) { state.resume = {...state.resume , payload} },
 		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
@@ -64,7 +60,8 @@ export const store = new Vuex.Store({
 				// const withCredentials = true;
 				let headers = {
 					'Authorization': 'Bearer ' + VueCookies.get('accessToken'),
-					'Content-Type': type(data) == "FormData" ? "multipart/form-data" : "application/json;charset=UTF-8",
+					'Content-Type':  "application/json",
+					'Accept': "application/json",
 				}
 				context.state.ax.withCredentials = true;
 				context.state.ax.request({ method, url, data, headers, params }).then((response) => {
