@@ -42,28 +42,41 @@
       <!-- section-4 ends -->
 
       <!-- section-5 starts -->
-      <div class="dr-academic-qualification">
+      <div class="dr-academic-qualification ">
         <p class="dr-title-all">Academic Qualification:</p>
 
         <div class="dr-academic-q-heading">
-          <div>
+          <div class="dr-academic-q-heading-item" >
             <p class="table-title-dr">Title</p>
+          </div>
+          <div class="dr-academic-q-heading-item">
+            <p class="table-title-dr">Institution name</p>
+          </div>
+          <div class="dr-academic-q-heading-item">
+            <p class="table-title-dr">Field of study</p>
+          </div>
+          <div class="dr-academic-q-heading-item">
+            <p class="table-title-dr">Duration</p>
+          </div>
+          <div class="dr-academic-q-heading-item">
+            <p class="table-title-dr">Result</p>
+          </div>
+        </div>
+
+        <div class="dr-academic-q-info">
+          <div class="dr-academic-q-heading-item" >
             <p>BSc In CSE</p>
           </div>
-          <div>
-            <p class="table-title-dr">Institution name</p>
+          <div class="dr-academic-q-heading-item">
             <p>American International University-Bangladesh</p>
           </div>
-          <div>
-            <p class="table-title-dr">Field of study</p>
+          <div class="dr-academic-q-heading-item">
             <p>Computer Programming</p>
           </div>
-          <div>
-            <p class="table-title-dr">Duration</p>
+          <div class="dr-academic-q-heading-item">
             <p>4 Years</p>
           </div>
-          <div>
-            <p class="table-title-dr">Result</p>
+          <div class="dr-academic-q-heading-item">
             <p>CGPA-3.92</p>
           </div>
         </div>
@@ -74,22 +87,33 @@
       <div class="dr-academic-certificate">
         <p class="dr-title-all">Academic Certificate:</p>
 
-        <div class="dr-academic-c-heading">
-          <div>
+        <div class="dr-academic-c-heading ">
+          <div class="dr-academic-c-heading-item">
             <p class="table-title-dr">Certificate Name</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Certificate number</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Validity</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Issuing Institution</p>
+          </div>
+        </div>
+
+        <div class="dr-academic-c-info">
+          <div class="dr-academic-c-heading-item">
             <p>BSc In CSE</p>
           </div>
-          <div>
-            <p class="table-title-dr">Certificate number</p>
+          <div class="dr-academic-c-heading-item">
             <p>Aiub-1515</p>
           </div>
-          <div>
-            <p class="table-title-dr">Issuing Institution</p>
-            <p>American International University-Bangladesh</p>
-          </div>
-          <div>
-            <p class="table-title-dr">Validity</p>
+          <div class="dr-academic-c-heading-item">
             <p>2022</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p>American International University-Bangladesh</p>
           </div>
         </div>
       </div>

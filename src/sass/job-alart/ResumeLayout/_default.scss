@@ -2,12 +2,9 @@
 
 $titleColor: #002157;
 
-
 .rd-main-card {
     background: transparent;
 }
-
-
 
 .dr-title-all {
     color: $titleColor;
@@ -31,8 +28,11 @@ $titleColor: #002157;
     -moz-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
 
-
     @include tab() {
+        width: 90%;
+    }
+
+    @include laptop() {
         width: 90%;
     }
 }
@@ -48,6 +48,7 @@ $titleColor: #002157;
     color: $titleColor;
     font-size: 15px;
     font-weight: bold;
+    // margin-bottom: -50px;
 
 }
 
@@ -111,15 +112,30 @@ $titleColor: #002157;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        justify-content: space-between;
-
+        // justify-content: space-between;
+        margin-bottom: -70px;
         @include tab() {
+            margin-bottom: 0px;
             flex-direction: column;
             border: 1px solid $titleColor;
             padding: 10px 20px;
             line-height: 5px;
         }
 
+    }
+
+    .dr-academic-q-info{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        // justify-content: space-between;
+        // margin-bottom: -70px;
+        @include tab() {
+            flex-direction: column;
+            border: 1px solid $titleColor;
+            padding: 10px 20px;
+            line-height: 5px;
+        }
     }
 
 
@@ -136,9 +152,10 @@ $titleColor: #002157;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        justify-content: space-between;
-
+        // justify-content: space-between;
+        margin-bottom: -30px;
         @include tab() {
+            margin-bottom: 0px;
             flex-direction: column;
             border: 1px solid $titleColor;
             padding: 10px 20px;
@@ -146,6 +163,28 @@ $titleColor: #002157;
         }
     }
 
+    .dr-academic-c-info {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        // justify-content: space-between;
+        // margin-bottom: -30px;
+        @include tab() {
+            flex-direction: column;
+            border: 1px solid $titleColor;
+            padding: 10px 20px;
+            line-height: 5px;
+        }
+    }
+}
+
+.dr-academic-c-heading-item{
+    flex-basis: 25%;
+    // flex-grow: 1;
+}
+
+.dr-academic-q-heading-item{
+    flex-basis: 20%;
 }
 
 .dr-skills {

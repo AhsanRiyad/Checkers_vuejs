@@ -61,6 +61,11 @@ ul li {
     width: 90%;
   }
 }
+@media screen and (max-width: 1199px) {
+  .default-resume-main-card {
+    width: 90%;
+  }
+}
 
 .years-of-experience {
   color: #002157;
@@ -129,10 +134,24 @@ ul li {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  margin-bottom: -70px;
 }
 @media only screen and (max-width: 991px) {
   .dr-academic-qualification .dr-academic-q-heading {
+    margin-bottom: 0px;
+    flex-direction: column;
+    border: 1px solid #002157;
+    padding: 10px 20px;
+    line-height: 5px;
+  }
+}
+.dr-academic-qualification .dr-academic-q-info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+@media only screen and (max-width: 991px) {
+  .dr-academic-qualification .dr-academic-q-info {
     flex-direction: column;
     border: 1px solid #002157;
     padding: 10px 20px;
@@ -151,15 +170,37 @@ ul li {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  margin-bottom: -30px;
 }
 @media only screen and (max-width: 991px) {
   .dr-academic-certificate .dr-academic-c-heading {
+    margin-bottom: 0px;
     flex-direction: column;
     border: 1px solid #002157;
     padding: 10px 20px;
     line-height: 5px;
   }
+}
+.dr-academic-certificate .dr-academic-c-info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+@media only screen and (max-width: 991px) {
+  .dr-academic-certificate .dr-academic-c-info {
+    flex-direction: column;
+    border: 1px solid #002157;
+    padding: 10px 20px;
+    line-height: 5px;
+  }
+}
+
+.dr-academic-c-heading-item {
+  flex-basis: 25%;
+}
+
+.dr-academic-q-heading-item {
+  flex-basis: 20%;
 }
 
 .dr-skills {
