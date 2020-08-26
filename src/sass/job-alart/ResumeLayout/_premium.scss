@@ -1,0 +1,165 @@
+@import "../../_baseVariables.scss";
+
+@mixin desgin-for-title {
+    // height: 50px;
+    // background: yellow;
+    color: $titleColor;
+    font-size: 20px;
+    border-bottom: 1px solid $titleColor;
+    // text-decoration: underline;
+    // border-bottom: 4px solid $titleColor;
+    line-height: 20px;
+    margin-top: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.pr {
+    background: white;
+    // height: 100px;
+
+    -webkit-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+
+    width: 40%;
+    padding-top: 50px;
+
+    margin: auto {
+        top: 50px;
+        bottom: 50px;
+    }
+
+    ;
+
+
+
+    @include laptop() {
+        width: 70%;
+    }
+
+
+    @include tab() {
+        width: 90%;
+    }
+
+
+
+    &__pp {
+        @include flex-common-feature;
+
+        /* :nth-child(1){
+            height: 100px;
+            width: 100px;
+            background: red;
+        } */
+        div:nth-of-type(1) {
+            // height: 100px;
+            flex-basis: 45%;
+            @include flex-common-feature;
+            align-content: center;
+
+            @include tab() {
+                flex-basis: 90%;
+                order: 2;
+            }
+
+            >p {
+                @include defaultResume-title-text;
+            }
+
+        }
+
+        div:nth-of-type(2) {
+            // height: 100px;
+            flex-basis: 45%;
+            @include flex-common-feature;
+
+            @include tab() {
+                flex-basis: 90%;
+                order: 1;
+            }
+        }
+    }
+
+    &__body {
+        @include flex-common-feature;
+
+        &__left {
+            flex-basis: 53%;
+            // background: red;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            border-right: 1px solid $titleColor;
+            padding-right: 1%;
+
+            &__1>div:nth-child(1),
+            &__4>div:nth-child(1),
+            &__2>div:nth-child(1) {
+                @include desgin-for-title;
+            }
+
+            &__3>div:nth-child(1) {
+                @include desgin-for-title;
+            }
+
+        }
+
+        &__right {
+            // background: green;
+            margin-left: 1%;
+            flex-basis: 35%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            &__1>div:nth-child(1),
+            &__2>div:nth-child(1),
+            &__3>div:nth-child(1) {
+                @include desgin-for-title;
+            }
+        }
+    }
+
+}
+
+
+.pr__body__left__3_eh {
+    margin-bottom: 20px;
+
+    :nth-child(1) {
+        color: $titleColor;
+        line-height: 15px;
+    }
+
+    :nth-child(2) {
+        line-height: 15px;
+    }
+}
+
+.pr__body__left__3__ex {
+    color: $titleColor;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.pr__body__left__4_dt {
+    display: flex;
+    flex-wrap: wrap;
+
+    :first-child {
+        flex-basis: 30%;
+    }
+
+    :last-child {
+        flex-basis: 60%;
+    }
+}
+
+.pr__body__right__3__inst {
+    font-size: 15px;
+    font-weight: bold;
+    color: $titleColor;
+}

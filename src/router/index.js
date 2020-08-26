@@ -15,6 +15,9 @@ import appliedJobs from "@/views/JobAlart/appliedJobs";
 import AddCompany from "@/views/Employers/Company/AddCompany";
 import JobsTab from "@/views/Employers/JobsTab";
 import AddJobs from "@/views/Employers/Jobs/AddJobs";
+import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
+import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
+
 
 
 
@@ -36,6 +39,22 @@ const routes = [
   component: JobCard,
   meta: {
     title: 'search'
+  }
+},
+{
+  path: '/defaultResume' ,
+  name: 'defaultResume',
+  component: defaultResume,
+  meta: {
+    title: 'defaultResume'
+  }
+},
+{
+  path: '/premiumResume' ,
+  name: 'premiumResume',
+  component: premiumResume,
+  meta: {
+    title: 'premiumResume'
   }
 },
 {

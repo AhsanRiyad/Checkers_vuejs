@@ -5,10 +5,15 @@
   class="elevation-1"
   >
   <template v-slot:item.calories="{ item }">
-    <v-chip :color="getColor(item.calories)" dark>{{ item.calories }}</v-chip>
+    <v-chip :color="getColor(item.calories)" dark>{{ item.calories }}</v-chip> 
+
     <!-- <v-btn :color="getColor(item.Calcium)" dark>{{ item.Calcium }}</v-btn> -->
   </template>
+
+
   <template v-slot:item.Calcium="{ item }" >
+
+
     <v-btn @click="CalciumClick()" :color="getColor(item.Calcium)" dark>{{ item.Calcium }}</v-btn>
   </template>
 </v-data-table>
@@ -18,6 +23,8 @@
 <script>
 
   import _ from 'lodash'
+
+
   export default {
     data () {
       return {

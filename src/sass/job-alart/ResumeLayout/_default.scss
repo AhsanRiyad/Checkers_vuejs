@@ -1,0 +1,221 @@
+@import "../../_baseVariables.scss";
+
+
+
+.rd-main-card {
+    background: transparent;
+}
+
+.dr-title-all {
+    color: $titleColor;
+    font-size: 20px;
+    text-decoration: underline;
+    // border-bottom: 4px solid $titleColor;
+    padding-bottom: 5px;
+    font-weight: bold;
+    line-height: 4px;
+    margin-top: 20px;
+}
+
+.default-resume-main-card {
+    background: white;
+    width: 45%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    -webkit-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.75);
+
+    @include tab() {
+        width: 90%;
+    }
+
+    @include laptop() {
+        width: 90%;
+    }
+}
+
+
+.years-of-experience {
+    color: $titleColor;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table-title-dr {
+    color: $titleColor;
+    font-size: 15px;
+    font-weight: bold;
+    // margin-bottom: -50px;
+
+}
+
+.defaultResume-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    flex-direction: row;
+    // justify-content: center;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    .dr-title-photo {
+        // display: flex;
+        // flex-wrap: wrap;
+        margin-top: 70px;
+
+        @include tab() {
+            order: 1;
+            margin: 0 auto;
+            margin-top: 70px;
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.defaultResume-title-text {
+   @include defaultResume-title-text;
+
+}
+
+.dr-main-text-div {
+    line-height: 10px;
+    margin-top: 100px;
+
+    @include tab() {
+        order: 2;
+    }
+}
+
+
+.dr-career-objective {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+}
+
+.dr-academic-qualification {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+    .dr-academic-q-heading {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        // justify-content: space-between;
+        margin-bottom: -70px;
+        @include tab() {
+            margin-bottom: 0px;
+            flex-direction: column;
+            border: 1px solid $titleColor;
+            padding: 10px 20px;
+            line-height: 5px;
+        }
+
+    }
+
+    .dr-academic-q-info{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        // justify-content: space-between;
+        // margin-bottom: -70px;
+        @include tab() {
+            flex-direction: column;
+            border: 1px solid $titleColor;
+            padding: 10px 20px;
+            line-height: 5px;
+        }
+    }
+
+
+}
+
+.dr-academic-certificate {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+    .dr-academic-c-heading {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        // justify-content: space-between;
+        margin-bottom: -30px;
+        @include tab() {
+            margin-bottom: 0px;
+            flex-direction: column;
+            border: 1px solid $titleColor;
+            padding: 10px 20px;
+            line-height: 5px;
+        }
+    }
+
+    .dr-academic-c-info {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        // justify-content: space-between;
+        // margin-bottom: -30px;
+        @include tab() {
+            flex-direction: column;
+            border: 1px solid $titleColor;
+            padding: 10px 20px;
+            line-height: 5px;
+        }
+    }
+}
+
+.dr-academic-c-heading-item{
+    flex-basis: 25%;
+    // flex-grow: 1;
+}
+
+.dr-academic-q-heading-item{
+    flex-basis: 20%;
+}
+
+.dr-skills {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+
+}
+
+
+.appInfo-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: row;
+
+}
+
+.dr-application-info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: row;
+
+    .dr-application-info-1 {
+        flex-basis: 30%;
+    }
+}
+
+.last-section-dr {
+    margin-bottom: 40px;
+}

@@ -6,14 +6,14 @@ import axios from 'axios'
 // Vue.prototype.$axios = axios;
 
 import VueCookies from 'vue-cookies'
-import { type } from 'ramda'
+// import { type } from 'ramda'
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 
 	state: {
 		apiBase: "http://13.58.205.236:8080/",
-		imageUrl: "http://localhost/jobAlartFileServer/public/",
+		imageUrl: "http://f1.redspice.ae/public/",
 		ax: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
 			baseURL: "http://13.58.205.236:8080/",
@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
 		}),
 		upload: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
-			baseURL: "http://localhost/jobAlartFileServer/public/api/",
+			baseURL: "http://f1.redspice.ae/public/api/",
 			// withCredentials: true, 
 			// crossDomain: true
 		}),
@@ -31,19 +31,19 @@ export const store = new Vuex.Store({
 		resume:{},
 		biodata:{},
 
+		componentName: "",
+
+
 		resumeNextbtn: true,
 		resumePrevbtn: true,
 	},
 	mutations: {
-		isLoggedIn(state, payload) {
-			state.isLoggedIn = payload;
-		},
-		biodata(state, payload) {
-			state.biodata = payload;
-		},
+		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
+		biodata(state, payload) { state.biodata = payload; },
 		resume(state, payload) { state.resume = {...state.resume , payload} },
 		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
+		componentName(state, payload) { state.componentName = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -51,6 +51,7 @@ export const store = new Vuex.Store({
 		resumePrevbtn: state => state.resumePrevbtn,
 		resumeNextbtn: state => state.resumeNextbtn,
 		imageUrl: state => state.imageUrl,
+		componentName: state => state.componentName,
 	},
 	actions: {
 		callApi: (context, info) => {
@@ -59,7 +60,8 @@ export const store = new Vuex.Store({
 				// const withCredentials = true;
 				let headers = {
 					'Authorization': 'Bearer ' + VueCookies.get('accessToken'),
-					'Content-Type': type(data) == "FormData" ? "multipart/form-data" : "application/json;charset=UTF-8",
+					'Content-Type':  "application/json",
+					'Accept': "application/json",
 				}
 				context.state.ax.withCredentials = true;
 				context.state.ax.request({ method, url, data, headers, params }).then((response) => {

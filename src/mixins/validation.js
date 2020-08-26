@@ -17,7 +17,7 @@ export default{
                 if (args[0] == true) {
                     return ([
                         v => !!v || args[2] + ' is required',
-                        v => /[a-zA-Z0-9._]{2,15}@[a-zA-Z0-9]{2,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g.test(v) || 'Invalid'
+                        v => /[a-zA-Z0-9._]{2,15}@[a-zA-Z0-9-]{2,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g.test(v) || 'Invalid'
                     ]);
                 } else {
                     return ([

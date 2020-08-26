@@ -5,9 +5,7 @@
 
       <!-- <Biodata /> -->
 
-      <keep-alive>
-        <component :is="nameOfComponent" />
-      </keep-alive>
+      <component :is="nameOfComponent" />
 
       <div class="row-14">
         <div class="item-1">
@@ -63,10 +61,75 @@ export default {
       else return false;
     },
   },
+  mounted() {
+    console.log("resume mounting");
+
+    this.$store
+      .dispatch("callApi", {
+        url: "resume/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        // console.log("resume.. data", response);
+        this.$store.commit("biodata", response.data.biodata);
+        console.log("resume.. data", this.$store.getters.biodata);
+
+        //  this.$refs.form.reset();
+        //  saves the items from the database in the table
+        //  console.log(response);
+        //  this.items = response.data;
+      })
+      .catch(() => {
+        this.$awn.alert("Failed!");
+        //   this.$awn.alert("Failed");
+      })
+      .finally(() => {
+        //  this.tableLoading = false;
+      });
+  },
   methods: {
     nextBtn() {
-      if (this.index >= 3) return;
-      this.nameOfComponent = this.pageList[++this.index];
+      let data = {},
+        url = "/";
+      if (this.$store.getters.componentName == "Biodata") {
+        data = this.$store.getters.biodata;
+        url = "resume/biodata";
+      } else if (this.$store.getters.componentName == "WorkExperience") {
+        data = this.$store.getters.workExperience;
+        url = "resume/experiences";
+      } else if (this.$store.getters.componentName == "Education") {
+        data = this.$store.getters.qualification;
+        url = "resume/qualification";
+      } else if (this.$store.getters.componentName == "Education") {
+        data = this.$store.getters.award;
+        url = "resume/award";
+      }
+
+      this.$store
+        .dispatch("callApi", {
+          url,
+          method: "post",
+          data,
+        })
+        .then((response) => {
+          console.log("resume ... ff ", response);
+
+          if (this.index >= 3) return;
+          this.nameOfComponent = this.pageList[++this.index];
+
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
     },
     prevBtn() {
       if (this.index <= 0) return;

@@ -1,5 +1,5 @@
 <template>
-<span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover'}" >
+<span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover'}" > 
 <Header></Header>
 <router-view></router-view>
 <Footer></Footer>

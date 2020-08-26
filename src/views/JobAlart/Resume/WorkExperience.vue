@@ -194,6 +194,11 @@ export default {
       this.skillArray.push(this.skill);
     },
   },
+  mounted(){
+    this.$store.commit("resumePrevbtn", false);
+    this.$store.commit("componentName", 'WorkExperience');
+
+  }
 };
 </script>
 

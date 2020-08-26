@@ -1,5 +1,4 @@
 @import "../baseVariables";
-@import "../table";
 .applied-job{
   p{
     margin: 0 !important;
@@ -52,6 +51,60 @@
         padding-top: 7px;
         margin-right: 10px;
         display: block;
+      }
+    }
+  }
+  table{
+    width: 100%;
+    border: none;
+    margin-top: 0;
+    border-spacing: 0;
+    text-align: left;
+    tr th{
+      border: none;
+      vertical-align: middle;
+      padding: 0 pxToVw(10);
+    }
+    td{
+      border-top: 1px solid #efefef;
+      padding: pxToVw(15) pxToVw(10);
+    }
+    .panel-heading{
+      vertical-align: middle;
+      background-color: #d9d9d9;
+      color: #333;
+      width: 90%;
+      margin: 0 auto;
+      font-size: 13px;
+      font-weight: 700;
+      padding-top: 12px;
+      height: pxToVw(50);
+    }
+    .interactn{
+      .v-icon{
+        font-size: pxToVw(16) !important;
+      }
+    }
+    .c-grey{
+      color: #9da2a6 !important;
+      border: 1px solid #9da2a6;
+    }
+    .c-green{
+      color: #59913d !important;
+      border: 1px solid #59913d;
+      margin: 0 pxToVw(5);
+    }
+    .c-blue{
+      border: 1px solid #0091ea;
+      color: #0091ea !important;
+    }
+  }
+  .pagination{
+    margin: pxToVw(40) 0;
+    .pg-list{
+      .v-btn{
+        border-radius: 0 !important;
+        border: 1px solid #efefef;
       }
     }
   }

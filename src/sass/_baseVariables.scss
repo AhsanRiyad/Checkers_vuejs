@@ -12,6 +12,11 @@ $primaryColor: #365899;
 $secondaryColor: #2166b6;
 $tarsiaryColor: #D6EFDC;
 
+
+//resume
+$titleColor: #002157;
+
+
 //==============media query variable ============
 $desktop: '(min-width: 1400px)';
 $desktopTab: '(min-width: 768px)';
@@ -23,14 +28,23 @@ $mobile-sm: 'only screen and (max-width: 424px)';
 $mobile-375: 'only screen and (max-width: 375px)';
 $mobileLandScape: 'only screen and (orientation: landscape) and (max-width: 767px)';
 
+@mixin flex-common-feature {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
+@mixin defaultResume-title-text {
+  font-size: 30px;
+  color: $titleColor;
+  font-weight: bold;
+}
 
 @mixin desktop() {
   @media screen and (max-width: 1400px ) {
     @content
   }
 };
-
 
 @mixin desktopTab() {
   @media screen and (max-width: 768px ) {
