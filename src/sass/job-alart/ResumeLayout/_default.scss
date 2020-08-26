@@ -1,6 +1,6 @@
 @import "../../_baseVariables.scss";
 
-$titleColor: #002157;
+
 
 .rd-main-card {
     background: transparent;
@@ -76,9 +76,7 @@ $titleColor: #002157;
 }
 
 .defaultResume-title-text {
-    font-size: 30px;
-    color: $titleColor;
-    font-weight: bold;
+   @include defaultResume-title-text;
 
 }
 

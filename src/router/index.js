@@ -13,6 +13,7 @@ import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
 import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
 import appliedJobs from "@/views/JobAlart/appliedJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
+import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
 
 
 
@@ -43,6 +44,14 @@ const routes = [
   component: defaultResume,
   meta: {
     title: 'defaultResume'
+  }
+},
+{
+  path: '/premiumResume' ,
+  name: 'premiumResume',
+  component: premiumResume,
+  meta: {
+    title: 'premiumResume'
   }
 },
 {

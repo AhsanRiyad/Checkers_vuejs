@@ -33,6 +33,8 @@ var _appliedJobs = _interopRequireDefault(require("@/views/JobAlart/appliedJobs"
 
 var _default2 = _interopRequireDefault(require("../views/JobAlart/ResumeLayout/default.vue"));
 
+var _premium = _interopRequireDefault(require("../views/JobAlart/ResumeLayout/premium.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // import login from '@/views/login_registration/Login.vue'
@@ -59,6 +61,13 @@ var routes = [{
   component: _default2["default"],
   meta: {
     title: 'defaultResume'
+  }
+}, {
+  path: '/premiumResume',
+  name: 'premiumResume',
+  component: _premium["default"],
+  meta: {
+    title: 'premiumResume'
   }
 }, {
   path: '/create-alert',

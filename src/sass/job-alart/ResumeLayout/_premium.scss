@@ -1,0 +1,108 @@
+@import "../../_baseVariables.scss";
+
+@mixin desgin-for-title {
+    // height: 50px;
+    // background: yellow;
+    color: $titleColor;
+    font-size: 20px;
+    border-bottom: 1px solid $titleColor;
+    // text-decoration: underline;
+    // border-bottom: 4px solid $titleColor;
+    line-height: 10px;
+    margin-top: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.pr {
+    background: white;
+    // height: 100px;
+    width: 40%;
+    margin: auto;
+
+    &__pp {
+        @include flex-common-feature;
+
+        /* :nth-child(1){
+            height: 100px;
+            width: 100px;
+            background: red;
+        } */
+        div:nth-of-type(1) {
+            // height: 100px;
+            flex-basis: 45%;
+            @include flex-common-feature;
+            align-content: center;
+
+            >p {
+                @include defaultResume-title-text;
+            }
+
+        }
+
+        div:nth-of-type(2) {
+            // height: 100px;
+            flex-basis: 45%;
+            @include flex-common-feature;
+        }
+    }
+
+    &__body {
+        @include flex-common-feature;
+
+        &__left {
+            flex-basis: 53%;
+            // background: red;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            border-right: 1px solid $titleColor;
+            padding-right: 1%;
+
+            &__1>div:nth-child(1),
+            &__2>div:nth-child(1) {
+                @include desgin-for-title;
+            }
+
+            &__3>div:nth-child(1) {
+                @include desgin-for-title;
+
+                +p {
+                    font-size: 20px;
+                    color: $titleColor;
+                    font-weight: bold;
+                }
+
+                +p+p {
+                    color: $titleColor;
+                    line-height: 15px;
+                }
+
+                +p+p+div {
+                    line-height: 15px;
+                }
+
+            }
+        }
+
+        &__right {
+            // background: green;
+            margin-left: 1%;
+            flex-basis: 35%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            &__1>div:nth-child(1),
+            &__2>div:nth-child(1) {
+                @include desgin-for-title;
+            }
+        }
+    }
+
+
+
+
+
+}
