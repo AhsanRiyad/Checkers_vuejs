@@ -1,79 +1,9 @@
 <template>
-  <div class="applied-job">
+  <div class="posted__list">
     <v-container>
       <v-row justify="center">
-        <v-col cols="12">
-          <h1 class="text-center ja__headline">Applied Jobs</h1>
-        </v-col>
-        <v-col cols="12" md="8">
-          <v-card class="ja__card">
-            <!--********** Top card start **************-->
-            <v-card flat class="ja__selected_card">
-              <v-row>
-                <v-col cols="12" lg="3">
-                  <v-menu
-                      ref="menu1"
-                      v-model="menu1"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      max-width="290px"
-                      min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                          v-model="computedDateFormatted"
-                          label="Date"
-                          prepend-icon="event"
-                          v-bind="attrs"
-                          @blur="date = parseDate(dateFormatted)"
-                          v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                  </v-menu>
-                </v-col>
-
-                <v-col cols="12" lg="3">
-                  <v-menu
-                      v-model="menu2"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      max-width="290px"
-                      min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                          v-model="computedDateFormatted"
-                          label="Date (read only text field)"
-                          persistent-hint
-                          prepend-icon="event"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-col cols="12" lg="3" md="3">
-                  <v-text-field
-                      label="Company Name"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" lg="3">
-                  <v-select
-                      :items="items"
-                      label="Status"
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <div class="search__btn text-center">
-                <v-btn color="success" dark>search</v-btn>
-              </div>
-            </v-card>
-            <!--********** Top card END **************-->
+        <v-col cols="12" md="12">
+          <v-card flat class="ja__card">
             <!--********** Job activities start **************-->
             <div class="jobActivity">
               <v-row>
@@ -111,7 +41,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(job, i) in appliedJobs" :key="i">
+              <tr v-for="(job, i) in postedJobs" :key="i">
                 <td><p>{{ job.id }}</p></td>
                 <td>
                   <a>{{ job.role }}</a>
@@ -178,17 +108,15 @@
 </template>
 
 <script>
-import '../../sass/job-alart/_appliedJobs.scss'
-
 export default {
-  name: "appliedJobs",
+name: "PostedJobList",
   data: vm => ({
     date: new Date().toISOString().substr(0, 10),
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     menu2: false,
     items: ['viewed', 'Not viewed'],
-    appliedJobs: [
+    postedJobs: [
       {
         id: 1,
         role: 'Software Developer - Front End Engineer',

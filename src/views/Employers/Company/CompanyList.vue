@@ -1,5 +1,5 @@
 <template>
-  <div class="applied-job">
+  <div class="company__list">
     <v-container>
       <v-row justify="center">
         <v-col cols="12">
@@ -178,10 +178,8 @@
 </template>
 
 <script>
-import '../../sass/job-alart/_appliedJobs.scss'
-
 export default {
-  name: "appliedJobs",
+name: "CompanyList",
   data: vm => ({
     date: new Date().toISOString().substr(0, 10),
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),

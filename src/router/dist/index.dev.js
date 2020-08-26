@@ -35,6 +35,10 @@ var _default2 = _interopRequireDefault(require("../views/JobAlart/ResumeLayout/d
 
 var _premium = _interopRequireDefault(require("../views/JobAlart/ResumeLayout/premium.vue"));
 
+var _AddCompany = _interopRequireDefault(require("@/views/Employers/Company/AddCompany"));
+
+var _JobsTab = _interopRequireDefault(require("@/views/Employers/JobsTab"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // import login from '@/views/login_registration/Login.vue'
@@ -133,7 +137,23 @@ var routes = [{
   meta: {
     title: 'Verify Phone Number'
   }
-} // account settings component routing end
+}, // account settings component routing end
+//    companies components routing start
+{
+  path: '/add-company',
+  name: 'AddCompany',
+  component: _AddCompany["default"],
+  meta: {
+    title: 'Add Company'
+  }
+}, {
+  path: '/jobs',
+  name: 'JobsTab',
+  component: _JobsTab["default"],
+  meta: {
+    title: 'Jobs'
+  }
+} //    companies components routing end
 ];
 var router = new _vueRouter["default"]({
   routes: routes,
