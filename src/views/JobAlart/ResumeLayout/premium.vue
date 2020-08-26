@@ -34,29 +34,69 @@
           <!-- nth-of-type(3) starts -->
           <div class="pr__body__left__3">
             <div>Employement History</div>
+            <p class="pr__body__left__3__ex">Total Year Of Experience: 10 Years</p>
 
-            <p>Total Year Of Experience: 10 Years</p>
+            <div class="pr__body__left__3_eh">
+              <p>Junior Software Engineer (Apr 1, 2020) Portland Advertising Agency</p>
 
-            <p>Junior Software Engineer (Apr 1, 2020) Portland Advertising Agency</p>
-
-            <div>
-              Email: riyad298@gmail.com <br>
-              Mobile: 01919448787 <br>
-              Address: Kazi bari jame moshjid, Kuratoli , Kuril , dhaka <br>
+              <div>
+                Email: riyad298@gmail.com
+                <br />Mobile: 01919448787
+                <br />Address: Kazi bari jame moshjid, Kuratoli , Kuril , dhaka
+                <br />
+              </div>
             </div>
 
-            <p>Total Year Of Experience: 10 Years</p>
+            <div class="pr__body__left__3_eh">
+              <p>Junior Software Engineer (Apr 1, 2020) Portland Advertising Agency</p>
 
-            <p>Junior Software Engineer (Apr 1, 2020) Portland Advertising Agency</p>
-
-            <div>
-              Email: riyad298@gmail.com <br>
-              Mobile: 01919448787 <br>
-              Address: Kazi bari jame moshjid, Kuratoli , Kuril , dhaka <br>
+              <div>
+                Email: riyad298@gmail.com
+                <br />Mobile: 01919448787
+                <br />Address: Kazi bari jame moshjid, Kuratoli , Kuril , dhaka
+                <br />
+              </div>
             </div>
           </div>
           <!-- nth-of-type(3) ends -->
+
+          <!-- nth-of-type(4) starts -->
+          <div class="pr__body__left__4">
+            <div>Career Description</div>
+            <div class="pr__body__left__4_dt">
+              <div>Looking For</div>
+              <div>: Web development job</div>
+            </div>
+            <div class="pr__body__left__4_dt">
+              <div>Available For</div>
+              <div>: Web development job</div>
+            </div>
+            <div class="pr__body__left__4_dt">
+              <div>Expected Salary</div>
+              <div>: 30000</div>
+            </div>
+          </div>
+          <!-- nth-of-type(4) ends -->
+
+          <!-- nth-of-type(4) starts -->
+          <div class="pr__body__left__4">
+            <div>Personal Details</div>
+            <div class="pr__body__left__4_dt">
+              <div>Looking For</div>
+              <div>: Web development job</div>
+            </div>
+            <div class="pr__body__left__4_dt">
+              <div>Available For</div>
+              <div>: Web development job</div>
+            </div>
+            <div class="pr__body__left__4_dt">
+              <div>Expected Salary</div>
+              <div>: 30000</div>
+            </div>
+          </div>
+          <!-- nth-of-type(4) ends -->
         </div>
+
         <!-- first child ends -->
         <!-- second child starts -->
         <div class="pr__body__right">
@@ -74,6 +114,57 @@
             <div>Facebook: facebook.com/riyadahsan6</div>
             <div>Twitter: tweeter.com/riyadahsan</div>
             <div>Instagram: intagram.com/riyadahsan</div>
+          </div>
+          <!-- nth-of-type(2) ends -->
+          <!-- nth-of-type(2`) starts -->
+          <div class="pr__body__right__2">
+            <div>Skills</div>
+            <div>Web Design, React, Vue, Angular, Laravel, Spring Boot</div>
+          </div>
+          <!-- nth-of-type(2) ends -->
+          <!-- nth-of-type(2`) starts -->
+          <div class="pr__body__right__3">
+            <div>Education</div>
+            <div >
+              <div class="pr__body__right__3__inst">CSE DU</div>
+              <div>Dilkusha, Dhaka</div>
+            </div>
+          </div>
+          <!-- nth-of-type(2) ends -->
+          <!-- nth-of-type(2`) starts -->
+          <div class="pr__body__right__3">
+            <div>Certificate</div>
+            <div >
+              <div class="pr__body__right__3__inst">AIUB</div>
+              <div>Dilkusha, Dhaka</div>
+            </div>
+          </div>
+          <!-- nth-of-type(2) ends -->
+          <!-- nth-of-type(2`) starts -->
+          <div class="pr__body__right__3">
+            <div>Training</div>
+            <div >
+              <div class="pr__body__right__3__inst">AIUB</div>
+              <div>Dilkusha, Dhaka</div>
+            </div>
+          </div>
+          <!-- nth-of-type(2) ends -->
+          <!-- nth-of-type(2`) starts -->
+          <div class="pr__body__right__3">
+            <div>Award</div>
+            <div >
+              <div class="pr__body__right__3__inst">AIUB</div>
+              <div>Dilkusha, Dhaka</div>
+            </div>
+          </div>
+          <!-- nth-of-type(2) ends -->
+          <!-- nth-of-type(2`) starts -->
+          <div class="pr__body__right__3">
+            <div>Military Service</div>
+            <div >
+              <div class="pr__body__right__3__inst">AIUB</div>
+              <div>Dilkusha, Dhaka</div>
+            </div>
           </div>
           <!-- nth-of-type(2) ends -->
         </div>
