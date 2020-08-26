@@ -8,23 +8,7 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job Found : <span>23</span></p>
-                </v-col>
-                <v-col cols="12" lg="8">
-                  <ul class="d-flex ja__info justify-end">
-                    <li class="ja_tinfo d-flex align-center">
-                      <v-icon class="light__grey">mdi-account-tie-voice-off</v-icon>
-                      <p>not connected: <span>1</span></p>
-                    </li>
-                    <li class="ja_tinfo d-flex align-center">
-                      <v-icon class="green">mdi-account-voice</v-icon>
-                      <p>connected: <span>1</span></p>
-                    </li>
-                    <li class="ja_tinfo d-flex align-center">
-                      <v-icon class="blue">mdi-handshake-outline</v-icon>
-                      <p>hired: <span>1</span></p>
-                    </li>
-                  </ul>
+                  <p class="jaif">Total Job: <span>23</span></p>
                 </v-col>
               </v-row>
             </div>
@@ -34,10 +18,25 @@
               <thead>
               <tr class="panel-heading">
                 <th>Sl</th>
-                <th style=" width:42%;">Job Title</th>
-                <th>Expected Salary</th>
-                <th class="text-center">Viewed (by Employer)</th>
-                <th class="text-center">Employer's interaction</th>
+                <th style=" width:35%;">Job Title</th>
+                <th><v-icon>mdi-bell-ring</v-icon>Job Status</th>
+                <th>
+                  <v-icon>mdi-file-multiple-outline</v-icon>
+                  Application
+                </th>
+                <th class="text-center">
+                  <v-icon>mdi-account-group</v-icon>
+                  Matched
+                </th>
+                <th class="text-center">
+                  <v-icon>mdi-format-list-bulleted</v-icon>
+                  Short-listed
+                </th>
+                <th class="text-center">
+                  <v-icon>mdi-eye</v-icon>
+                  View Status
+                </th>
+                <th class="text-center">Actions</th>
               </tr>
               </thead>
               <tbody>
@@ -45,27 +44,28 @@
                 <td><p>{{ job.id }}</p></td>
                 <td>
                   <a>{{ job.role }}</a>
-                  <p>{{ job.companyName }}</p>
-                  <small>Applied On:
-                    <v-icon>mdi-calendar-month</v-icon>
-                    <span>{{ job.appliedOn }}</span></small>
+                  <p>Published On:<span>{{ job.publishedOn }}</span></p>
+                  <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>
                 </td>
-                <td><p>{{ job.expectedSalary }}</p></td>
-                <td class="text-center" v-if="job.viewed">
-                  <v-icon color="green">mdi-check</v-icon>
-                </td>
-                <td class="text-center" v-else>
-                  <v-icon color="red">mdi-close</v-icon>
-                </td>
-                <td class="text-center">
+                <td><v-switch
+                    v-model="job.jobStatus"
+                    color="success"
+                    value="success"
+                    hide-details
+                ></v-switch></td>
+                <td >{{ job.applications }}</td>
+                <td class="text-center">{{job.matched}}</td>
+                <td class="text-center">{{job.shortlisted}}</td>
+                <td class="text-center">{{job.views}} | {{job.applications}}</td>
+                <td class="action text-center">
                   <v-btn class="interactn c-grey" icon>
-                    <v-icon>mdi-account-voice</v-icon>
+                    <v-icon>mdi-square-edit-outline</v-icon>
                   </v-btn>
-                  <v-btn class="interactn c-green" icon>
-                    <v-icon>mdi-account-tie-voice-off</v-icon>
+                  <v-btn class="interactn  mr-2 ml-2 c-green" icon>
+                    <v-icon>mdi-backup-restore</v-icon>
                   </v-btn>
                   <v-btn class="interactn c-blue" icon>
-                    <v-icon>mdi-handshake-outline</v-icon>
+                    <v-icon>mdi-chart-line-stacked</v-icon>
                   </v-btn>
                 </td>
               </tr>
@@ -109,7 +109,7 @@
 
 <script>
 export default {
-name: "PostedJobList",
+  name: "PostedJobList",
   data: vm => ({
     date: new Date().toISOString().substr(0, 10),
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
@@ -121,41 +121,67 @@ name: "PostedJobList",
         id: 1,
         role: 'Software Developer - Front End Engineer',
         companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
+        publishedOn: '4 Aug 2019',
+        deadline: '4 Aug 2019',
         expectedSalary: '30000',
-        viewed: true
+        jobStatus: true
+        ,
+        applications: 300,
+        matched: 50,
+        shortlisted: 3,
+        views: 73
       },
       {
         id: 2,
         role: 'Software Developer - Front End Engineer',
         companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
+        publishedOn: '4 Aug 2019',
+        deadline: '4 Aug 2019',
         expectedSalary: '30000',
-        viewed: false
+        jobStatus: true,
+        applications: 300,
+        matched: 50,
+        shortlisted: 3,
+        views: 73
       },
       {
         id: 3,
         role: 'Software Developer - Front End Engineer',
         companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
+        publishedOn: '4 Aug 2019',
+        deadline: '4 Aug 2019',
         expectedSalary: '30000',
-        viewed: true
+        jobStatus: true,
+        applications: 300,
+        matched: 50,
+        shortlisted: 3,
+        views: 73
       },
       {
         id: 4,
         role: 'Software Developer - Front End Engineer',
         companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
+        publishedOn: '4 Aug 2019',
+        deadline: '4 Aug 2019',
         expectedSalary: '30000',
-        viewed: false
+        jobStatus: false,
+        applications: 300,
+        matched: 50,
+        shortlisted: 3,
+        views: 73
       },
       {
         id: 5,
         role: 'Software Developer - Front End Engineer',
         companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
+        publishedOn: '4 Aug 2019',
+        deadline: '4 Aug 2019',
         expectedSalary: '30000',
-        viewed: false
+        jobStatus: false,
+        applications: 300,
+        matched: 50,
+        shortlisted: 3,
+        views: 73
       }
     ]
   }),

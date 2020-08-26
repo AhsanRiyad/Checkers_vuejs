@@ -14,6 +14,7 @@ import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumbe
 import appliedJobs from "@/views/JobAlart/appliedJobs";
 import AddCompany from "@/views/Employers/Company/AddCompany";
 import JobsTab from "@/views/Employers/JobsTab";
+import AddJobs from "@/views/Employers/Jobs/AddJobs";
 
 
 
@@ -129,6 +130,16 @@ const routes = [
     }
   },
 //    companies components routing end
+  //   jobs components routing start
+  {
+    path: '/add-job' ,
+    name: 'AddJobs',
+    component: AddJobs,
+    meta: {
+      title: 'Add Jobs'
+    }
+  }
+//   jobs components routing end
 ]
 
 const router = new VueRouter({

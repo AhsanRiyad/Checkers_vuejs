@@ -1,7 +1,20 @@
 @import "../baseVariables";
 @import "../table";
-.jobsTab{
-  .posted__list{
 
+.jobsTab {
+  .ja__selected_card{
+    background-color: #ececec;
+    padding: pxToVw(25) pxToVw(30);
+    .search__btn{
+      .v-btn{
+        max-width: 45%;
+      }
+    }
+  }
+  .posted__list {
+    .action {
+      //display: table-caption;
+      //text-align: right;
+    }
   }
 }
