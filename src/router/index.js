@@ -15,8 +15,6 @@ import appliedJobs from "@/views/JobAlart/appliedJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
 import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
 
-import AddCompany from "@/views/Employers/Company/AddCompany";
-import JobsTab from "@/views/Employers/JobsTab";
 
 
 
@@ -130,24 +128,6 @@ const routes = [
     }
   },
 // account settings component routing end
-//    companies components routing start
-  {
-    path: '/add-company' ,
-    name: 'AddCompany',
-    component: AddCompany,
-    meta: {
-      title: 'Add Company'
-    }
-  },
-  {
-    path: '/jobs' ,
-    name: 'JobsTab',
-    component: JobsTab,
-    meta: {
-      title: 'Jobs'
-    }
-  },
-//    companies components routing end
 ]
 
 const router = new VueRouter({
