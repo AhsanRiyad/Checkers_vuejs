@@ -12,7 +12,7 @@ import changePassword from "@/views/JobAlart/AccountSettings/changePassword";
 import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
 import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
 import appliedJobs from "@/views/JobAlart/appliedJobs";
-import AddCompany from "@/views/Employers/Company/AddCompany";
+// import AddCompany from "@/views/Employers/Company/AddCompany";
 import JobsTab from "@/views/Employers/JobsTab";
 import AddJobs from "@/views/Employers/Jobs/AddJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
@@ -132,14 +132,14 @@ const routes = [
   },
 // account settings component routing end
 //    companies components routing start
-  {
-    path: '/add-company' ,
-    name: 'AddCompany',
-    component: AddCompany,
-    meta: {
-      title: 'Add Company'
-    }
-  },
+//   {
+//     path: '/add-company' ,
+//     name: 'AddCompany',
+//     component: AddCompany,
+//     meta: {
+//       title: 'Add Company'
+//     }
+//   },
   {
     path: '/jobs' ,
     name: 'JobsTab',
