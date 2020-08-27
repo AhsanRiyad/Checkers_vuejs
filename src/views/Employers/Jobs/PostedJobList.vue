@@ -3,7 +3,7 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" md="12">
-          <v-card flat class="ja__card">
+          <v-card flat class="ja__card pt-0">
             <!--********** Job activities start **************-->
             <div class="jobActivity">
               <v-row>

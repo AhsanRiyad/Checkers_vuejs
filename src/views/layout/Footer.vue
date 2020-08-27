@@ -1,6 +1,6 @@
 <template>
     <!-- footer starts -->
-    <v-container fluid style>
+    <v-container class="pb-0" fluid style>
       <v-row
         cols="12"
         offset-md="0"

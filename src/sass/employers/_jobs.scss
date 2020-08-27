@@ -2,6 +2,21 @@
 @import "../table";
 
 .jobsTab {
+  .v-text-field__details{
+    display: none;
+  }
+  .v-input__slot{
+    margin-bottom: 0 !important;
+  }
+  .v-tab{
+    text-transform: capitalize;
+    font-size: pxToVw(16);
+    font-weight: 700;
+  }
+  .v-tab.v-tab--active{
+    background-color: $primaryColor;
+    color: #ffffff;
+  }
   .ja__selected_card{
     background-color: #ececec;
     padding: pxToVw(25) pxToVw(30);
@@ -10,6 +25,9 @@
         max-width: 45%;
       }
     }
+  }
+  .tab_contain{
+    padding: pxToVw(30) pxToVw(40) 0 pxToVw(40);
   }
   .posted__list {
     .action {

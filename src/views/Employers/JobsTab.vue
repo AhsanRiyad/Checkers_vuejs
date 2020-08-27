@@ -17,30 +17,31 @@
             </div>
           </v-card>
           <!--********** Top card END **************-->
-          <v-toolbar flat prominent>
-             <template v-slot:extension>
-              <v-tabs v-model="tabs" align-with-title>
-                <v-tab>Posted jobs (12)</v-tab>
-                <v-tab>Drafted jobs (12)</v-tab>
-                <v-tab>Archived jobs (12)</v-tab>
-              </v-tabs>
-              <v-row>
-                <v-col>
-                  <v-text-field
-                      class="mx-4"
-                      flat
-                      hide-details
-                      label="Search job by title"
-                      append-icon="search"
-                      solo-inverted
-                  ></v-text-field>
-                </v-col>
-                <v-col>
-                  <v-text-field v-model="dateRangeText" label="Date range" prepend-icon="event" readonly></v-text-field>
-                </v-col>
-              </v-row>
-            </template>
-          </v-toolbar>
+         <v-container class="tab_contain">
+           <v-row align="center">
+             <v-col cols="12" md="8">
+               <v-tabs v-model="tabs">
+                 <v-tab>Posted jobs (12)</v-tab>
+                 <v-tab>Drafted jobs (12)</v-tab>
+                 <v-tab>Archived jobs (12)</v-tab>
+               </v-tabs>
+             </v-col>
+             <v-col cols="12" md="4">
+               <div class="tab-right_side d-flex">
+                 <v-text-field
+                     dense
+                     class="mx-4"
+                     flat
+                     hide-details
+                     label="Search job by title"
+                     append-icon="search"
+                     solo-inverted
+                 ></v-text-field>
+                 <v-text-field outlined dense v-model="dateRangeText" placeholder="Date range" prepend-inner-icon="event" single-line></v-text-field>
+               </div>
+             </v-col>
+           </v-row>
+         </v-container>
 
           <v-tabs-items v-model="tabs">
             <v-tab-item>

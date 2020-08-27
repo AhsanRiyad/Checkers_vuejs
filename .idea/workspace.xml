@@ -21,8 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/JobsTab.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/JobsTab.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/layout/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Footer.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +84,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b163b6e9-188c-4390-8114-3d4877eafc6f" name="Default Changelist" comment="" />
+      <changelist id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="" />
       <created>1585806587389</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -151,6 +154,7 @@
       <workItem from="1598245507218" duration="12708000" />
       <workItem from="1598328501242" duration="6925000" />
       <workItem from="1598418176515" duration="16200000" />
+      <workItem from="1598505438046" duration="6741000" />
     </task>
     <servers />
   </component>
