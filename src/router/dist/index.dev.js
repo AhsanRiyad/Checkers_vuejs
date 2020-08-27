@@ -15,7 +15,9 @@ var _SearchJob = _interopRequireDefault(require("../views/JobAlart/SearchJob"));
 
 var _CreateAlert = _interopRequireDefault(require("../views/JobAlart/CreateAlert"));
 
-var _Signin = _interopRequireDefault(require("../views/JobAlart/Signin.vue"));
+var _Signin = _interopRequireDefault(require("../views/JobAlart/Auth/Signin"));
+
+var _Signup = _interopRequireDefault(require("../views/JobAlart/Auth/Signup"));
 
 var _Resume = _interopRequireDefault(require("../views/JobAlart/Resume/Resume.vue"));
 
@@ -82,6 +84,13 @@ var routes = [{
   component: _Signin["default"],
   meta: {
     title: 'Signin'
+  }
+}, {
+  path: '/signup',
+  name: 'Signup',
+  component: _Signup["default"],
+  meta: {
+    title: 'Signup'
   }
 }, {
   path: '/resume',
