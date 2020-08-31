@@ -1,63 +1,230 @@
 <template>
-  <v-container >
-    <v-row class="text-md-center text-center white--text banner">
-      <v-col md="12">Create a Free Job Alert</v-col>
-    </v-row>
+  <div class="mainTemplate">
+    <div class="mainContainer">
+      <p class="h1Text">Create a Job Alert Resume</p>
 
-    <v-form ref="form">
-      <v-row class="text-md-center white--text">
-        <!-- form part -->
+      <p class="pHeader">
+        Work Experiences (
+        <span>*Required Field of Education</span> )
+      </p>
 
-        <v-col offset-md="2" md="4" cols="12" order="2" order-md="1">
-          <v-row>
-            <v-col md="4" cols="4">
-              <v-subheader class="black--text">Keywords</v-subheader>
-            </v-col>
-            <v-col md="8" cols="8">
-              <v-text-field
-                  :rules="fieldRulesProp(true, 'others' , 'others')"
-                  dense
-                  outlined
-                  placeholder="Skill, Designation, Roles, Companies"
-              ></v-text-field>
-            </v-col>
-          </v-row>
+      <v-divider></v-divider>
 
-          <v-row class="formRow">
-            <v-col md="4" cols="4">
-              <v-subheader class="black--text">Full Name</v-subheader>
-            </v-col>
-            <v-col md="8" cols="8">
-              <v-text-field
-                  :rules="fieldRulesProp(true, 'name' , 'name')"
-                  dense
-                  class="textField"
-                  outlined
-                  placeholder="Enter Your Full Name"
-              ></v-text-field>
-            </v-col>
-          </v-row>
+      <div class="row-1">
+        <p>First Name</p>
+        <v-text-field
+            background-color="white"
+            class="mb-0"
+            :rules="[v=>!!v||'required']"
+            placeholder="Enter your first name"
+            outlined
+            dense
+        ></v-text-field>
+      </div>
 
-          <v-row class="formRow">
-            <v-col md="4" cols="4">
-              <v-subheader class="black--text">Email</v-subheader>
-            </v-col>
-            <v-col md="8" cols="8">
-              <v-text-field
-                  :rules="fieldRulesProp(true, 'email' , 'email')"
-                  dense
-                  class="textField"
-                  outlined
-                  placeholder="Enter Your Email Id"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </v-col>
+      <div class="row-2">
+        <p>Last Name</p>
+        <v-text-field
+            background-color="white"
+            class="mb-0"
+            :rules="[v=>!!v||'required']"
+            placeholder="Enter your last name"
+            outlined
+            dense
+        ></v-text-field>
+      </div>
 
-        <!-- form ends -->
-      </v-row>
-    </v-form>
-  </v-container>
+      <div class="row-3">
+        <p>Company Notice Period</p>
+        <div>
+          <v-text-field
+              background-color="white"
+              class="mb-0"
+              :rules="[v=>!!v||'required']"
+              placeholder="In days"
+              outlined
+              dense
+          ></v-text-field>
+          <p>Days</p>
+        </div>
+      </div>
+
+      <div class="row-4">
+        <p>Objectives</p>
+        <div>
+          <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        </div>
+      </div>
+
+      <div class="row-5">
+        <p>Career Desciriptions</p>
+        <div>
+          <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        </div>
+      </div>
+
+      <div class="row-6">
+        <p>Cover Letter</p>
+        <div>
+          <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        </div>
+      </div>
+
+      <div class="row-7">
+        <p>Personal Details</p>
+      </div>
+
+      <div class="row-8">
+        <p>Address</p>
+        <div>
+          <v-text-field
+              background-color="white"
+              class="mb-0"
+              :rules="[v=>!!v||'required']"
+              placeholder="Enter your address"
+              outlined
+              dense
+          ></v-text-field>
+        </div>
+      </div>
+
+      <div class="row-9">
+        <div class="item-1">
+          <p>City</p>
+          <div>
+            <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your city"
+                outlined
+                dense
+            ></v-text-field>
+          </div>
+        </div>
+
+        <div class="item-2">
+          <p>Zip/Post Code</p>
+          <div>
+            <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your post code"
+                outlined
+                dense
+            ></v-text-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-10">
+        <div class="item-1">
+          <p>Country</p>
+          <div>
+            <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your country"
+                outlined
+                dense
+            ></v-text-field>
+          </div>
+        </div>
+
+        <div class="item-2">
+          <p>Nationality</p>
+          <div>
+            <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your nationality"
+                outlined
+                dense
+            ></v-text-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-11">
+        <div class="item-1">
+          <p>Date Of Birth</p>
+          <div>
+            <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your date of birth"
+                outlined
+                dense
+            ></v-text-field>
+          </div>
+        </div>
+
+        <div class="item-2">
+          <p>Gender</p>
+          <div>
+            <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your gender"
+                outlined
+                dense
+            ></v-text-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-12">
+        <p>National Identity Number/ Passport Number</p>
+        <div>
+          <v-text-field
+              background-color="white"
+              class="mb-0"
+              :rules="[v=>!!v||'required']"
+              placeholder="Enter your nid/passport no."
+              outlined
+              dense
+          ></v-text-field>
+        </div>
+      </div>
+
+      <div class="row-13">
+        <div class="item-1">
+          <p>Mobile Number</p>
+          <div>
+            <vue-tel-input
+                inputClasses="vTelInput"
+            ></vue-tel-input>
+          </div>
+        </div>
+
+        <div class="item-2">
+          <p>Optional Number</p>
+          <div>
+            <vue-tel-input
+                inputClasses="vTelInput"
+            >
+
+            </vue-tel-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-14">
+        <div class="item-1">
+          <v-btn>Cancel</v-btn>
+        </div>
+
+        <div class="item-2">
+          <v-btn color="#365899" class="white--text">Next</v-btn>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

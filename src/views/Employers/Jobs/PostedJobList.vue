@@ -43,7 +43,7 @@
               <tr v-for="(job, i) in postedJobs" :key="i">
                 <td><p>{{ job.id }}</p></td>
                 <td>
-                  <a>{{ job.role }}</a>
+                  <a @click="goToJobDetails(job.id)">{{ job.role }}</a>
                   <p>Published On:<span>{{ job.publishedOn }}</span></p>
                   <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>
                 </td>
@@ -133,11 +133,11 @@ export default {
       },
       {
         id: 2,
-        role: 'Software Developer - Front End Engineer',
+        role: 'Software Developer - Back End Engineer',
         companyName: 'One One and Co. Limited',
         publishedOn: '4 Aug 2019',
         deadline: '4 Aug 2019',
-        expectedSalary: '30000',
+        expectedSalary: '60000',
         jobStatus: true,
         applications: 300,
         matched: 50,
@@ -193,6 +193,9 @@ export default {
   },
 
   methods: {
+    goToJobDetails(jobId){
+      this.$router.push({name:'JobDetails', params:{id:jobId}})
+    },
     formatDate(date) {
       if (!date) return null
 

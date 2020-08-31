@@ -70,7 +70,32 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn class="applyNow" color="primary">Apply Now</v-btn>
+              <v-btn
+                  @click="showModal = true"
+                  dark
+                  v-on="on"
+                  class="applyNow"
+                  color="primary">
+                Apply Now
+              </v-btn>
+              <job-alert-modal persistent v-if="showModal">
+                <div class="d-flex align-center" slot="header">
+                  <h1 class="warning-text">Warning Message</h1>
+                  <v-spacer></v-spacer>
+                  <v-btn @click="showModal = false" icon><v-icon>mdi-close</v-icon></v-btn>
+                </div>
+                <div slot="body">
+                  <p>JobAlert.com only works as a mean of communication between employers and job-seekers.
+                    JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
+                    the company after applying through the jobalert.com website.
+                  </p>
+                  <div class="d-flex align-center">
+                    <v-checkbox label="I have read the above warning message." required></v-checkbox>
+                    <v-spacer></v-spacer>
+                    <v-btn class="text--white" color="green" depressed link to="/jobonlineapply">Apply</v-btn>
+                  </div>
+                </div>
+              </job-alert-modal>
             </v-card-actions>
 
             <v-divider class="divider"></v-divider>
@@ -83,8 +108,17 @@
               <p>{{ JobDescription.jobResponsibilities }}</p>
 
               <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
+                Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
+                undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
+                Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
+                theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
+                sit amet..", comes from a line in section 1.10.32.
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
+                Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
+                exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
               </p>
             </div>
           </div>
@@ -99,11 +133,15 @@ import "../../sass/job-alart/_JobCard.scss";
 
 export default {
   name: "JobCard",
+  components: {
+    JobAlertModal: () => import('../../components/Modal')
+  },
   data: () => {
     return {
       Jobs: [],
       loading: false,
       pageNo: 1,
+      showModal: false,
       ShowAlertMsg: false,
 
       skeleton: true,
@@ -181,8 +219,8 @@ export default {
       }
 
       if (
-        document.body.offsetHeight - (window.innerHeight + window.scrollY) <
-        210
+          document.body.offsetHeight - (window.innerHeight + window.scrollY) <
+          210
       ) {
         this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
       }
@@ -202,34 +240,34 @@ export default {
       this.loading = true;
 
       this.$store
-        .dispatch("callApi", {
-          url: "search",
-          method: "get",
-          params: {
-            q: this.$route.query.q,
-            page: this.pageNo,
-          },
-        })
-        .then((response) => {
-          console.log("job list....", response);
-          this.Jobs = [...this.Jobs, ...response.jobs.result];
-          this.JobDescription = this.Jobs[0];
-          // this.$refs.form.reset();
-          //saves the items from the database in the table
-          //  console.log(response);
-          //  this.items = response.data;
-          this.skeleton = false;
-        })
-        .catch(() => {
-          this.$awn.alert("Failed");
-        })
-        .finally(() => {
-          this.loading = false;
-          this.skeleton = false;
-          if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+          .dispatch("callApi", {
+            url: "search",
+            method: "get",
+            params: {
+              q: this.$route.query.q,
+              page: this.pageNo,
+            },
+          })
+          .then((response) => {
+            console.log("job list....", response);
+            this.Jobs = [...this.Jobs, ...response.jobs.result];
+            this.JobDescription = this.Jobs[0];
+            // this.$refs.form.reset();
+            //saves the items from the database in the table
+            //  console.log(response);
+            //  this.items = response.data;
+            this.skeleton = false;
+          })
+          .catch(() => {
+            this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            this.loading = false;
+            this.skeleton = false;
+            if (this.Jobs.length === 0) this.ShowAlertMsg = true;
 
-          //  this.tableLoading = false;
-        });
+            //  this.tableLoading = false;
+          });
     },
   },
   mounted() {

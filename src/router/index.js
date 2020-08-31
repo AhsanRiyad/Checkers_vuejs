@@ -14,10 +14,12 @@ import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
 import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
 import appliedJobs from "@/views/JobAlart/appliedJobs";
 // import AddCompany from "@/views/Employers/Company/AddCompany";
-import JobsTab from "@/views/Employers/JobsTab";
 import AddJobs from "@/views/Employers/Jobs/AddJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
 import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
+import EmployersPanel from "@/views/Employers/EmployersPanel";
+import JobDetails from "@/views/Employers/Jobs/JobDetails";
+import JobOnlineApply from "@/views/JobAlart/JobApply/JobOnlineApply";
 
 Vue.use(VueRouter)
 
@@ -147,11 +149,11 @@ const routes = [
 //     }
 //   },
   {
-    path: '/jobs' ,
-    name: 'JobsTab',
-    component: JobsTab,
+    path: '/employers' ,
+    name: 'EmployersPanel',
+    component: EmployersPanel,
     meta: {
-      title: 'Jobs'
+      title: 'Employers Panel'
     }
   },
 //    companies components routing end
@@ -162,6 +164,22 @@ const routes = [
     component: AddJobs,
     meta: {
       title: 'Add Jobs'
+    }
+  },
+  {
+    path: '/details/:id' ,
+    name: 'JobDetails',
+    component: JobDetails,
+    meta: {
+      title: 'Job Details'
+    }
+  },
+  {
+    path: '/jobonlineapply' ,
+    name: 'JobOnlineApply',
+    component: JobOnlineApply,
+    meta: {
+      title: 'Job Online Apply'
     }
   }
 //   jobs components routing end
