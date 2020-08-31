@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import JobCard from '../views/JobAlart/JobCard'
 import SearchJob from '../views/JobAlart/SearchJob'
 import CreateAlert from '../views/JobAlart/CreateAlert'
-import Signin from '../views/JobAlart/Signin.vue'
+import Signin from '../views/JobAlart/Auth/Signin'
+import Signup from '../views/JobAlart/Auth/Signup'
 import Resume from '../views/JobAlart/Resume/Resume.vue'
 import accountSettings from "@/views/JobAlart/accountSettings";
 import changeEmail from "@/views/JobAlart/AccountSettings/changeEmail";
@@ -17,9 +18,6 @@ import JobsTab from "@/views/Employers/JobsTab";
 import AddJobs from "@/views/Employers/Jobs/AddJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
 import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
-
-
-
 
 Vue.use(VueRouter)
 
@@ -71,6 +69,14 @@ const routes = [
   component: Signin,
   meta: {
     title: 'Signin'
+  }
+},
+{
+  path: '/signup' ,
+  name: 'Signup',
+  component: Signup,
+  meta: {
+    title: 'Signup'
   }
 },
 {
