@@ -107,13 +107,13 @@ export default {
           }, 1000);
 
           // this.$refs.form.reset();
-          //saves the items from the database in the table
+          // saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
         })
         .catch(() => {
           this.$awn.alert("Failed! Email/Password doesn't match");
-          //   this.$awn.alert("Failed");
+          // this.$awn.alert("Failed");
         })
         .finally(() => {
           //  this.tableLoading = false;

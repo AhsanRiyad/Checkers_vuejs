@@ -249,15 +249,16 @@ export default {
 
       this.$store
         .dispatch("callApi", {
-          url: "jobs/alert/new",
+          url: "job-alerts/new",
           method: "post",
           data: this.formData,
         })
         .then((response) => {
           console.log("alert post", response);
+          this.$awn.success("Successful");
         })
         .catch(() => {
-          //   this.$awn.alert("Failed");
+            this.$awn.alert("Failed");
         })
         .finally(() => {
           //  this.tableLoading = false;
@@ -267,11 +268,13 @@ export default {
   mounted() {
     this.$store
       .dispatch("callApi", {
-        url: "jobs/alert/new",
+        url:"job-alerts/new",
         method: "get",
       })
       .then((response) => {
         console.log(response);
+        
+
 
         this.itemsJobLevel = response.data.allActiveLabel;
         this.itemsJobCategory = response.data.allCategory;

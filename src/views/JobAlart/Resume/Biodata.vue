@@ -21,7 +21,7 @@
             placeholder="Enter your first name"
             outlined
             dense
-            v-model="biodata.fullName"
+            v-model="biodata.full_name"
             @keyups="saveData"
           ></v-text-field>
         </div>
@@ -108,7 +108,7 @@
       <div>
         <ckeditor
           @input="saveData"
-          v-model="biodata.careerDescription"
+          v-model="biodata.career_description"
           :editor="editor"
           :config="editorConfig"
         ></ckeditor>
@@ -120,7 +120,7 @@
       <div>
         <ckeditor
           @input="saveData"
-          v-model="biodata.coverLetter"
+          v-model="biodata.cover_letter"
           :editor="editor"
           :config="editorConfig"
         ></ckeditor>
@@ -161,7 +161,7 @@
           outlined
           dense
           @keyup="saveData"
-          v-model="biodata.contactEmail"
+          v-model="biodata.contact_email"
         ></v-text-field>
       </div>
     </div>
@@ -194,7 +194,7 @@
             outlined
             dense
             @keyups="saveData"
-            v-model="biodata.zipPostCode"
+            v-model="biodata.zip_post_code"
           ></v-text-field>
         </div>
       </div>
@@ -204,18 +204,19 @@
       <div class="item-1">
         <p>Country</p>
         <div>
-          <v-text-field
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||true]"
-            placeholder="Enter your country"
+          <v-autocomplete
+            item-text="country_name"
+            item-value="id"
+            v-model="biodata.country_id"
+            :items="countries"
             outlined
             dense
-            @keyups="saveData"
-            v-model="biodata.countryId"
-          ></v-text-field>
+            background-color="white"
+            placeholder="Select Country"
+          ></v-autocomplete>
         </div>
       </div>
+
 
       <div class="item-2">
         <p>Nationality</p>
@@ -248,7 +249,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="biodata.dateOfBirth"
+                v-model="biodata.date_of_birth"
                 prepend-inner-icon="event"
                 readonly
                 placeholder="Enter Date of Birth"
@@ -260,7 +261,7 @@
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="biodata.dateOfBirth" @input="menu = false"></v-date-picker>
+            <v-date-picker v-model="biodata.date_of_birth" @input="menu = false"></v-date-picker>
           </v-menu>
         </div>
       </div>
@@ -288,7 +289,7 @@
       <div>
         <v-text-field
           background-color="white"
-          v-model="biodata.identityNumber"
+          v-model="biodata.identity_number"
           class="mb-0"
           :rules="[v=>!!v||true]"
           placeholder="Enter your nid/passport no."
@@ -310,12 +311,12 @@
             @validate="validate"
             @input="saveData"
             @focus="focus"
-            v-model="biodata.mobileNumber"
+            v-model="biodata.mobile_number"
             :required="true"
             :validCharactersOnly="true"
             :inputClasses="vTelInput"
           ></vue-tel-input>
-          <small v-if="biodata.mobileNumber == ''" class="required">mobile number is required</small>
+          <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small>
         </div>
       </div>
 
@@ -323,7 +324,7 @@
         <p>Optional Number</p>
         <div>
           <vue-tel-input
-            v-model="biodata.anotherMobileNumber"
+            v-model="biodata.anothermobile_number"
             @validate="validate"
             @input="saveData"
             :required="true"
@@ -338,7 +339,8 @@
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../../../sass/job-alart/_Biodata.scss";
-
+// import { eventBus } from '@/main';
+// import axios from 'axios';
 export default {
   name: "Biodata",
   data: () => {
@@ -348,28 +350,28 @@ export default {
 
       photo: null,
 
+      countries:[],
+
       imageUrl: "",
 
       biodata: {
-        fullName: "",
-        contactEmail: "",
+        full_name: "",
+        contact_email: "",
         address: "",
         city: "",
-        zipPostCode: "",
-        countryId: "",
+        zip_post_code: "",
+        country_id: "",
         nationality: "",
-        dateOfBirth: "",
+        date_of_birth: "",
         gender: "",
-        identityNumber: "",
-        countryCodeMain: "",
-        mobileNumber: "",
-        countryCodeAnother: "",
-        anotherMobileNumber: "",
+        identity_number: "",
+        mobile_number: "",
+        another_mobile_number: "",
         objectives: "",
         photo: "",
-        careerDescription: "",
-        coverLetter: "",
-        noticePeriod: "",
+        career_description: "",
+        cover_letter: "",
+        notice_period: "",
       },
 
       imageUploadLoading: false,
@@ -404,23 +406,27 @@ export default {
     },
     focus() {
       console.log("clicked focus.....");
-      if (this.biodata.mobileNumber == "") this.vTelInput = "vTelInput_error";
+      if (this.biodata.mobile_number == "") this.vTelInput = "vTelInput_error";
       else this.vTelInput = "vTelInput";
     },
+
     submit() {
       console.log("biodate ", this.biodata);
     },
     saveData() {
       if (
-        !this.R.isEmpty(this.biodata.mobileNumber) &&
-        !this.R.isEmpty(this.biodata.fullName) &&
-        !this.R.isEmpty(this.biodata.contactEmail)
+        !this.R.isEmpty(this.biodata.mobile_number) &&
+        !this.R.isEmpty(this.biodata.full_name) &&
+        !this.R.isEmpty(this.biodata.contact_email)
       )
         this.$store.commit("resumeNextbtn", false);
       else this.$store.commit("resumeNextbtn", true);
 
-      if (this.biodata.mobileNumber == "") this.vTelInput = "vTelInput_error";
+      if (this.biodata.mobile_number == "") this.vTelInput = "vTelInput_error";
       else this.vTelInput = "vTelInput";
+
+ /*      let biodata =  this.R.pick(['full_name', 'contact_email', 'address', 'city', 'zip_post_code', 'country_id', 'nationality', 'date_of_birth', 'gender', 'identity_number', 'mobile_number', 'another_mobile_number', 'objectives', 'photo', 'career_description', 'cover_letter', 'notice_period'], this.biodata);
+ */
 
       this.$store.commit("biodata", this.biodata);
       console.log("biodada... ", this.$store.getters.biodata);
@@ -463,10 +469,40 @@ export default {
         });
     },
   },
+  created(){},
   mounted() {
     this.$store.commit("resumePrevbtn", true);
     this.$store.commit("resumeNextbtn", true);
     this.$store.commit("componentName", "Biodata");
+
+    this.$store
+      .dispatch("callApi", {
+        url: "resume/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        console.log( "resume.. data", response );
+        // eventBus.$emit( "fillData" , response.data );
+        this.countries = response.data.countryList
+        this.biodata = { ...this.biodata, ...response.data.biodata }
+        console.log('this is biodata info... ',this.biodata);
+        this.$store.commit("biodata", this.biodata);
+        console.log('this is  ', this.$store.getters.biodata);
+        
+        //  this.$refs.form.reset();
+        //  saves the items from the database in the table
+        //  console.log(response);
+        //  this.items = response.data;
+      })
+      .catch(() => {
+        this.$awn.alert("Failed!");
+        //   this.$awn.alert("Failed");
+      })
+      .finally(() => {
+        //  this.tableLoading = false;
+      });
+
   },
 };
 </script>

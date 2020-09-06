@@ -7,6 +7,7 @@
 
     <v-divider></v-divider>
 
+  <div v-for="n in 1" :key="n">
     <div class="row-1">
       <p>Job Title</p>
       <v-text-field
@@ -99,6 +100,10 @@
       </div>
     </div>
 
+  </div>
+   <v-btn class="add_more_btn ml-3" color="primary"> Add More+ </v-btn>
+
+
     <div class="applicationInfo">Application Information</div>
 
     <div class="row-we-7">
@@ -187,6 +192,19 @@ export default {
       },
       skillArray: ["java script", "nodejs", "php", "laravel"],
       skill: "",
+
+      experiences: [
+        {
+          "jobTitle":"PHP Developer",
+          "jobCategory":"as4521468sjndggh",
+          "fromDate":"2020-04-25 12:00:51",
+          "toDate":"2020-04-25 12:00:51",
+          "companyName":"AB Group",
+          "companyLocation":"Chennai",
+          "jobDescription":"As Avarage of Exp"
+        }
+      ],
+
     };
   },
   methods: {
