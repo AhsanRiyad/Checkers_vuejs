@@ -16,6 +16,10 @@ import appliedJobs from "@/views/JobAlart/appliedJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
 import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
 
+import biodata from "../views/JobAlart/Resume/Biodata"
+import workExperience from "../views/JobAlart/Resume/WorkExperience"
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -82,6 +86,22 @@ const routes = [
   component: Resume,
   meta: {
     title: 'Resume'
+  }
+},
+{
+  path: '/biodata' ,
+  name: 'biodata',
+  component: biodata,
+  meta: {
+    title: 'Biodata'
+  }
+},
+{
+  path: '/work-experience' ,
+  name: 'workExperience',
+  component: workExperience,
+  meta: {
+    title: 'Work Experience'
   }
 },
   {

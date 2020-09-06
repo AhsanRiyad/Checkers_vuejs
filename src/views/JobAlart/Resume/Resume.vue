@@ -94,10 +94,10 @@ export default {
     nextBtn() {
       let data = {},
         url = "/";
-      if (this.$store.getters.componentName == "Biodata") {
-        data  =  this.R.pick(['full_name', 'contact_email', 'address', 'city', 'zip_post_code', 'country_id', 'nationality', 'date_of_birth', 'gender', 'identity_number', 'mobile_number', 'another_mobile_number', 'objectives', 'photo', 'career_description', 'cover_letter', 'notice_period', 'another_mobile_number'], this.$store.getters.biodata);
+      if ( this.$store.getters.componentName == "Biodata" ) {
+        data  =  this.R.pick([ 'full_name', 'contact_email', 'address', 'city', 'zip_post_code', 'country_id', 'nationality', 'date_of_birth', 'gender', 'identity_number', 'mobile_number', 'another_mobile_number', 'objectives', 'photo', 'career_description', 'cover_letter', 'notice_period', 'another_mobile_number'], this.$store.getters.biodata);
         data = { ...data, ...{ country_id: data.country_id.id }  }
-        console.log('data in the submit.... ',data);
+        console.log( 'data in the submit.... ', data );
         url = "resume/biodata";
       } else if (this.$store.getters.componentName == "WorkExperience") {
         data = this.$store.getters.workExperience;
