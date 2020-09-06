@@ -11,7 +11,9 @@
 
         <v-divider></v-divider>
 
-        <div v-for="n in experiences" :key="n">
+        <div v-for="(n, i) in experiences" :key="n.title">
+          <v-divider></v-divider>
+
           <div class="row-1">
             <p>Job Title</p>
             <v-text-field
@@ -45,53 +47,59 @@
             </div>
 
             <div class="row-100-1">
-              <v-select
-                background-color="white"
-                class="mb-0"
-                :rules="[v=>!!v||'required']"
-                placeholder="Year"
-                outlined
-                :items="['hi', 'hellow']"
-                dense
-              ></v-select>
-            </div>
-
-            <div class="row-100-2">
-              <v-select
-                background-color="white"
-                class="mb-0"
-                :rules="[v=>!!v||'required']"
-                placeholder="Month"
-                outlined
-                :items="['hi', 'hellow']"
-                dense
-              ></v-select>
+              <v-menu
+                v-model="menu"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="n.from_date"
+                    prepend-inner-icon="event"
+                    readonly
+                    placeholder="From"
+                    backgroundColor="white"
+                    outlined
+                    dense
+                    @keyups="saveData"
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="n.from_date" @input="menu = false"></v-date-picker>
+              </v-menu>
             </div>
 
             <div class="row-100-3">To</div>
 
             <div class="row-100-4">
-              <v-select
-                background-color="white"
-                class="mb-0"
-                :rules="[v=>!!v||'required']"
-                placeholder="Year"
-                outlined
-                :items="['hi', 'hellow']"
-                dense
-              ></v-select>
-            </div>
-
-            <div class="row-100-5">
-              <v-select
-                background-color="white"
-                class="mb-0"
-                :rules="[v=>!!v||'required']"
-                placeholder="Month"
-                outlined
-                :items="['hi', 'hellow']"
-                dense
-              ></v-select>
+              <v-menu
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="n.to_date"
+                    prepend-inner-icon="event"
+                    readonly
+                    placeholder="To"
+                    backgroundColor="white"
+                    outlined
+                    dense
+                    @keyups="saveData"
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="n.to_date" @input="menu2 = false"></v-date-picker>
+              </v-menu>
             </div>
 
             <div class="row-100-6">
@@ -105,8 +113,13 @@
               <ckeditor v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
             </div>
           </div>
+          <v-btn color="error" class="ml-5 mb-3" @click.stop="()=>remove(i)">Remove</v-btn>
         </div>
-        <v-btn class="add_more_btn ml-3" color="primary">Add More+</v-btn>
+        <v-btn
+          class="add_more_btn ml-5"
+          color="primary"
+          @click.stop="addAnotherExperience"
+        >Add More+</v-btn>
 
         <div class="applicationInfo">Application Information</div>
 
@@ -114,6 +127,7 @@
           <p>Job Level</p>
           <v-select
             background-color="white"
+            v-model="applicationInfo.job_level"
             class="mb-0"
             :rules="[v=>!!v||'required']"
             placeholder="Enter your last name"
@@ -126,6 +140,7 @@
         <div class="row-we-af">
           <p>Available For</p>
           <v-text-field
+            v-model="applicationInfo.available_for"
             background-color="white"
             class="mb-0"
             :rules="[v=>!!v||'required']"
@@ -209,6 +224,18 @@ export default {
       skillArray: ["java script", "nodejs", "php", "laravel"],
       skill: "",
 
+      applicationInfo: {
+        job_level: "",
+        job_categoryId: "",
+        available_for: "",
+        salary: "",
+      },
+
+      date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      modal: false,
+      menu2: false,
+
       experiences: [
         {
           job_title: "",
@@ -223,9 +250,27 @@ export default {
     };
   },
   methods: {
+    remove(index) {
+      this.experiences.splice(index, 1);
+    },
+    nextBtn() {
+      console.log("experiences....", this.experiences);
+    },
+    addAnotherExperience() {
+      this.experiences.push({
+        job_title: "",
+        job_category: "",
+        from_date: "",
+        to_date: "",
+        company_name: "",
+        company_location: "",
+        job_description: "",
+      });
+    },
     addSkill() {
       this.skillArray.push(this.skill);
     },
+    saveData() {},
   },
   mounted() {
     this.$store.commit("resumePrevbtn", false);

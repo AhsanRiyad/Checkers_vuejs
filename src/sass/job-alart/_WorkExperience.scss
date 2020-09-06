@@ -56,7 +56,7 @@
   }
 
   .row-100-1 {
-    flex-basis: 15%;
+    flex-basis: 30%;
     margin-right: 10px;
     @include tab() {
       flex-basis: 40%;
@@ -71,7 +71,7 @@
   }
 
   .row-100-4 {
-    flex-basis: 15%;
+    flex-basis: 30%;
     margin-right: 10px;
     @include tab() {
       flex-basis: 40%;
