@@ -131,7 +131,7 @@
                   <v-btn class="interactn c-grey" icon>
                     <v-icon>mdi-account-voice</v-icon>
                   </v-btn>
-                  <v-btn class="interactn c-green" icon>
+                  <v-btn class="interactn mr-2 ml-2 c-green" icon>
                     <v-icon>mdi-account-tie-voice-off</v-icon>
                   </v-btn>
                   <v-btn class="interactn c-blue" icon>

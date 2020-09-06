@@ -67,7 +67,32 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn class="applyNow" color="primary">Apply Now</v-btn>
+              <v-btn
+                  @click="showModal = true"
+                  dark
+                  v-on="on"
+                  class="applyNow"
+                  color="primary">
+                Apply Now
+              </v-btn>
+              <job-alert-modal persistent v-if="showModal">
+                <div class="d-flex align-center" slot="header">
+                  <h1 class="warning-text">Warning Message</h1>
+                  <v-spacer></v-spacer>
+                  <v-btn @click="showModal = false" icon><v-icon>mdi-close</v-icon></v-btn>
+                </div>
+                <div slot="body">
+                  <p>JobAlert.com only works as a mean of communication between employers and job-seekers.
+                    JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
+                    the company after applying through the jobalert.com website.
+                  </p>
+                  <div class="d-flex align-center">
+                    <v-checkbox label="I have read the above warning message." required></v-checkbox>
+                    <v-spacer></v-spacer>
+                    <v-btn class="text--white" color="green" depressed link to="/jobonlineapply">Apply</v-btn>
+                  </div>
+                </div>
+              </job-alert-modal>
             </v-card-actions>
 
             <v-divider class="divider"></v-divider>
@@ -92,11 +117,15 @@ import "../../sass/job-alart/_JobCard.scss";
 
 export default {
   name: "JobCard",
+  components: {
+    JobAlertModal: () => import('../../components/Modal')
+  },
   data: () => {
     return {
       Jobs: [],
       loading: false,
       pageNo: 1,
+      showModal: false,
       ShowAlertMsg: false,
 
       skeleton: true,
@@ -198,8 +227,8 @@ export default {
       }
 
       if (
-        document.body.offsetHeight - (window.innerHeight + window.scrollY) <
-        210
+          document.body.offsetHeight - (window.innerHeight + window.scrollY) <
+          210
       ) {
         this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
       }
