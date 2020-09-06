@@ -4,8 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/JobAlartLogo.png"
   },
   {
-    "revision": "f00090f2d0bd9d13895e",
-    "url": "/css/app.26c70178.css"
+    "revision": "bb57b3c7877c35c7b9c5",
+    "url": "/css/app.e3e3b2c5.css"
   },
   {
     "revision": "b6b602c30556ae0605d2",
@@ -44,12 +44,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/background.0f9dd741.png"
   },
   {
-    "revision": "4dad9adcc552f77a6d1bb086fb3403e5",
+    "revision": "cfcd5abc25d28fbc0dd83881b87dff00",
     "url": "/index.html"
   },
   {
-    "revision": "f00090f2d0bd9d13895e",
-    "url": "/js/app.1e5433e8.js"
+    "revision": "bb57b3c7877c35c7b9c5",
+    "url": "/js/app.19d8a807.js"
   },
   {
     "revision": "b6b602c30556ae0605d2",

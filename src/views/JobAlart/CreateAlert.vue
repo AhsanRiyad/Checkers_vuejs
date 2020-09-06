@@ -10,6 +10,7 @@
           <!-- form part -->
 
           <v-col offset-md="2" md="4" cols="12" order="2" order-md="1">
+
             <v-row>
               <v-col md="4" cols="4">
                 <v-subheader class="black--text">Keywords</v-subheader>
@@ -24,6 +25,26 @@
                 ></v-text-field>
               </v-col>
             </v-row>
+
+            
+            <v-row class="formRow">
+              <v-col md="4" cols="4">
+                <v-subheader class="black--text">Job Category</v-subheader>
+              </v-col>
+              <v-col md="8" cols="8">
+                <v-select
+                  v-model="formData.jobCategory"
+                  :rules="fieldRulesProp(true, 'others' , 'others')"
+                  item-value="id"
+                  item-text="name"
+                  outlined
+                  :items="itemsJobCategory"
+                  label="Select Job Category"
+                  dense
+                ></v-select>
+              </v-col>
+            </v-row>
+
 
             <v-row class="formRow">
               <v-col md="4" cols="4">
@@ -141,39 +162,6 @@
               </v-col>
             </v-row>
 
-            <v-row class="formRow">
-              <v-col md="4" cols="4">
-                <v-subheader class="black--text">Industry</v-subheader>
-              </v-col>
-              <v-col md="8" cols="8">
-                <v-text-field
-                  v-model="formData.industry"
-                  :rules="fieldRulesProp(true, 'others' , 'others')"
-                  dense
-                  class="textField"
-                  outlined
-                  placeholder="Enter Your Industry Type"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-
-            <v-row class="formRow">
-              <v-col md="4" cols="4">
-                <v-subheader class="black--text">Job Category</v-subheader>
-              </v-col>
-              <v-col md="8" cols="8">
-                <v-select
-                  v-model="formData.jobCategory"
-                  :rules="fieldRulesProp(true, 'others' , 'others')"
-                  item-value="id"
-                  item-text="name"
-                  outlined
-                  :items="itemsJobCategory"
-                  label="Select Job Category"
-                  dense
-                ></v-select>
-              </v-col>
-            </v-row>
 
             <v-row class="formRow" justify-md="end">
               <v-col md="2" class="d-none d-sm-none">
