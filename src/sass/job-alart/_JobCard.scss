@@ -1,91 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
 @import "../_baseVariables.scss";
 
-*{
-    font-family: 'Baloo Tamma 2', cursive;
+* {
+  font-family: 'Baloo Tamma 2', cursive;
 }
 
 
-.clearFix{
-    clear: both;
+.clearFix {
+  clear: both;
 }
 
-.loader{
-    width: 23%;
-    margin-left: 20%;
-    text-align: left;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    @include tab(){
-        width: 70%;
-    }
+.loader {
+  width: 23%;
+  margin-left: 20%;
+  text-align: left;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  @include tab() {
+    width: 70%;
+  }
 }
 
-.searchText{
-    width: 60%;
-    margin-left: 20%;
-    text-align: left;
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
-
-
-.Fixed-Job-Details{
-    display: inline;
-    @include tab(){
-        display: none;
-    }
-}
-
-.alertMsg{
-    width: 60%;
-    margin-left: 20%;
-}
-
-.filter{
-    width: 60%;
-    margin-left: 20%;
-    @include tab(){
-        width: 70%;
-        
-    }
-
-    .filter-item-1, .filter-item-2, .filter-item-3, .filter-item-4 {
-        width: 20%;
-        float: left;
-        margin-right: 2%;
-        @include tab(){
-            width: 48%;
-            
-        }
-    }
+.searchText {
+  width: 60%;
+  margin-left: 20%;
+  text-align: left;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 
-.searchResults{
-    width: 23%;
-    margin-left: 20%;
+.Fixed-Job-Details {
+  display: inline;
+  @include tab() {
+    display: none;
+  }
+}
+
+.alertMsg {
+  width: 60%;
+  margin-left: 20%;
+}
+
+.filter {
+  width: 60%;
+  margin-left: 20%;
+  @include tab() {
+    width: 70%;
+
+  }
+
+  .filter-item-1, .filter-item-2, .filter-item-3, .filter-item-4 {
+    width: 20%;
     float: left;
-    .searchResults-text{
-        margin-bottom: 10px;
+    margin-right: 2%;
+    @include tab() {
+      width: 48%;
+
     }
-    @include tab(){
-        width: 70%;
-    }
+  }
 }
 
-.jobDetails{
-    width: 23%;
-    right: 25%;
-    top: 185px;
-    position: fixed;
+
+.searchResults {
+  width: 23%;
+  margin-left: 20%;
+  float: left;
+
+  .searchResults-text {
+    margin-bottom: 10px;
+  }
+
+  @include tab() {
+    width: 70%;
+  }
 }
 
-.JobDescription{
-    padding-left: 10px;
-    margin-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
+.jobDetails {
+  width: 23%;
+  right: 25%;
+  top: 185px;
+  position: fixed;
+}
+
+.JobDescription {
+  padding-left: 10px;
+  margin-top: 20px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 /* .jobDetails-after-scroll{
@@ -103,14 +105,52 @@
  */
 
 
-.divider{
-    width: 96%;
-    margin-left: 2%;
-    margin-top: 10px;
+.divider {
+  width: 96%;
+  margin-left: 2%;
+  margin-top: 10px;
 }
 
 
-.applyNow{
-    width: 300px;
-    margin-top: -30px;
+.applyNow {
+  width: 300px;
+  margin-top: -30px;
 }
+
+// job online applied css start
+.jobApplied_online {
+  .v-card {
+    padding: pxToVw(30);
+  }
+
+  .applied_card {
+    background-color: #ececec;
+    padding: pxToVw(30);
+    border: 1px solid #c6c4c5;
+h1{
+  margin-bottom: pxToVw(15);
+}
+    .online_info_list {
+      background-color: #f5f5f5;
+      padding: pxToVw(20) !important;
+      li {
+        margin: pxToVw(15) 0;
+        display: flex;
+        align-items: baseline;
+        font-size: pxToVw(20);
+      }
+      .v-input{
+        max-width: 50%;
+        margin-right: pxToVw(10);
+      }
+    }
+
+    .side_title {
+      margin-right: pxToVw(15);
+      width: 30%;
+      font-weight: 700;
+    }
+  }
+}
+
+// job online applied css end
