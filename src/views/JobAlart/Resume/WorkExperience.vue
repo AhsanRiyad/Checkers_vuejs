@@ -7,12 +7,13 @@
 
     <v-divider></v-divider>
 
-  <div v-for="n in 1" :key="n">
+  <div v-for="n in experiences" :key="n">
     <div class="row-1">
       <p>Job Title</p>
       <v-text-field
         background-color="white"
         class="mb-0"
+        v-model="n.job_title"
         :rules="[v=>!!v||'required']"
         placeholder="Enter your first name"
         outlined
@@ -23,6 +24,7 @@
     <div class="row-2">
       <p>Job Category</p>
       <v-select
+        v-model="n.job_category"
         background-color="white"
         class="mb-0"
         :rules="[v=>!!v||'required']"
@@ -94,9 +96,9 @@
     </div>
 
     <div class="row-we-6">
-      <p>Job Description/Job Responsibilites</p>
+      <p>Job Description/Job Respsonsibilites</p>
       <div>
-        <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+        <ckeditor  v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
       </div>
     </div>
 
@@ -195,13 +197,13 @@ export default {
 
       experiences: [
         {
-          "jobTitle":"PHP Developer",
-          "jobCategory":"as4521468sjndggh",
-          "fromDate":"2020-04-25 12:00:51",
-          "toDate":"2020-04-25 12:00:51",
-          "companyName":"AB Group",
-          "companyLocation":"Chennai",
-          "jobDescription":"As Avarage of Exp"
+          job_title:"",
+          job_category:"",
+          from_date:"",
+          to_date:"",
+          company_name:"",
+          company_location:"",
+          job_description:""
         }
       ],
 
