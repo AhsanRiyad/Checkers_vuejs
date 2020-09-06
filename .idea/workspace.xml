@@ -21,12 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/_baseVariables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_baseVariables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_JobCard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_JobCard.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/JobAlart/JobApply/JobOnlineApply.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/JobApply/JobOnlineApply.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Header.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +168,7 @@
       <workItem from="1598850380743" duration="88000" />
       <workItem from="1598850571703" duration="20768000" />
       <workItem from="1599378868652" duration="1329000" />
-      <workItem from="1599380246369" duration="7308000" />
+      <workItem from="1599380246369" duration="9512000" />
     </task>
     <servers />
   </component>

@@ -13,7 +13,7 @@
         <v-btn router to="/" text color="white">Jobs</v-btn>
         <v-btn text color="white">Recruiters</v-btn>
         <v-btn router to="/signin" text color="white">{{ $store.getters.isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
-        <v-btn text color="white">Employeer/Job Post</v-btn>
+        <v-btn router to="/employers" text color="white">Employeer/Job Post</v-btn>
         <v-menu bottom origin="center center" transition="scale-transition">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="white" icon v-bind="attrs" v-on="on" class="mr-3">
