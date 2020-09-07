@@ -54,6 +54,10 @@ Vue.config.productionTip = false;
 
 
 
+//event bus
+export const eventBus = new Vue();
+
+
 /*Vue.mixin({
   data: () => ({
 

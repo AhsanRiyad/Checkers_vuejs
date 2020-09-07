@@ -5,9 +5,8 @@
   font-family: 'Baloo Tamma 2', cursive;
 }
 
-
-.clearFix {
-  clear: both;
+.clearFix{
+    clear: both;
 }
 
 .loader {
@@ -62,18 +61,27 @@
 }
 
 
-.searchResults {
-  width: 23%;
-  margin-left: 20%;
-  float: left;
 
-  .searchResults-text {
-    margin-bottom: 10px;
-  }
+.job-card-job-search {
+    
+    &:hover {
+        cursor: pointer;
+-webkit-box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
+box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
+    }
+}
 
-  @include tab() {
-    width: 70%;
-  }
+.searchResults{
+    width: 23%;
+    margin-left: 20%;
+    float: left;
+    .searchResults-text{
+        margin-bottom: 10px;
+    }
+    @include tab(){
+        width: 70%;
+    }
 }
 
 .jobDetails {

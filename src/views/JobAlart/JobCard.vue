@@ -32,12 +32,12 @@
 
       <div class="searchResults">
         <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
-          <v-card-text>
-            <h2 style="color: green" class="mb-2" v-text="n.jobTitle"></h2>
-            <h4 v-text="n.companyName"></h4>
+          <v-card-text @click.stop="()=>saveDetails(n)" class="job-card-job-search">
+            <h2 style="color: green" class="mb-2" v-text="n.job_title"></h2>
+            <h4 v-text="n.company_name"></h4>
             <p class="text--primary">
               <v-icon>location_on</v-icon>
-              {{ n.jobLocation }}
+              {{ n.job_location }}
             </p>
             <p class="text--primary">
               <v-icon>school</v-icon>
@@ -45,12 +45,9 @@
             </p>
             <p class="text--primary">
               <v-icon>payment</v-icon>
-              {{ n.minSalaryRange }} to {{ n.maxSalaryRange }}
+              {{ n.min_salary_range }} to {{ n.max_salary_range }}
             </p>
           </v-card-text>
-          <v-card-actions>
-            <v-btn text color="deep-purple accent-4" @click.stop="()=>saveDetails(n)">Details</v-btn>
-          </v-card-actions>
         </v-card>
       </div>
 
@@ -61,9 +58,9 @@
           <div outlined :style="firstContainer">
             <v-list-item three-line>
               <v-list-item-content>
-                <v-list-item-title class="headline mb-1">{{ JobDescription.jobTitle }}</v-list-item-title>
+                <v-list-item-title class="headline mb-1">{{ JobDescription.job_title }}</v-list-item-title>
                 <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
-                <p>{{ JobDescription.companyName }} || {{ JobDescription.typeInText }}</p>
+                <p>{{ JobDescription.company_name }} || {{ JobDescription.type_in_text }}</p>
               </v-list-item-content>
 
               <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
@@ -102,24 +99,11 @@
 
             <div :style="JobDescriptionStyle">
               <h4>Location</h4>
-              <p>{{ JobDescription.jobLocation }}</p>
+              <p>{{ JobDescription.city }}</p>
 
-              <h4>Responsibilities</h4>
-              <p>{{ JobDescription.jobResponsibilities }}</p>
+              <h4>Descriptions</h4>
+              <p>{{ JobDescription.job_description }}</p>
 
-              <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
-                Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
-                Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
-                undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
-                Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
-                theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
-                sit amet..", comes from a line in section 1.10.32.
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
-                Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-                exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-              </p>
             </div>
           </div>
         </div>
@@ -147,15 +131,15 @@ export default {
       skeleton: true,
 
       JobDescription: {
-        jobTitle: "PHP developer",
-        companyName: "PHP",
+        job_title: "PHP developer",
+        company_name: "PHP",
         country: "Bangladesh",
         education: "CSE",
-        jobLocation: "Bangladesh, India",
-        jobResponsibilities: "Web site development",
-        skillQualificationRequirement: "CSE, EEE, IT",
-        typeInText: "Remote",
-        maxSalaryRange: "20000",
+        job_location: "Bangladesh, India",
+        job_responsibilities: "Web site development",
+        skill_qualification_requirement: "CSE, EEE, IT",
+        type_in_text: "Remote",
+        max_salary_range: "20000",
       },
 
       //style for search
@@ -171,9 +155,9 @@ export default {
 
       JobDescriptionStyle: {
         paddingLeft: "10px",
-        paddingRight: "20px",
+        paddingRight: "10px",
         marginTop: "20px",
-        height: "calc( 100vh - 400px )",
+        // height: "calc( 100vh - 400px )",
         overflowY: "auto",
         // overflowY: "visible",
       },
@@ -188,7 +172,31 @@ export default {
   methods: {
     saveDetails(n) {
       console.log("dd", n);
-      this.JobDescription = n;
+
+
+      this.$store
+        .dispatch("callApi", {
+          url: "jobs/"+n.id,
+          method: "get",
+          data:{},
+        })
+        .then((response) => {
+          console.log("details list in the", response.data.jobs);
+      this.JobDescription = response.data.jobs;
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          this.skeleton = false;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
+
+
     },
     onScroll() {
       // console.log(e);
@@ -240,34 +248,34 @@ export default {
       this.loading = true;
 
       this.$store
-          .dispatch("callApi", {
-            url: "search",
-            method: "get",
-            params: {
-              q: this.$route.query.q,
-              page: this.pageNo,
-            },
-          })
-          .then((response) => {
-            console.log("job list....", response);
-            this.Jobs = [...this.Jobs, ...response.jobs.result];
-            this.JobDescription = this.Jobs[0];
-            // this.$refs.form.reset();
-            //saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-            this.skeleton = false;
-          })
-          .catch(() => {
-            this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            this.loading = false;
-            this.skeleton = false;
-            if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+        .dispatch("callApi", {
+          url: "search",
+          method: "get",
+          params: {
+            q: this.$route.query.q,
+            page: this.pageNo,
+          },
+        })
+        .then((response) => {
+          console.log("job list....", response);
+          this.Jobs = [...this.Jobs, ...response.jobs.items];
+          this.JobDescription = this.Jobs[0];
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          this.skeleton = false;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          this.skeleton = false;
+          if (this.Jobs.length === 0) this.ShowAlertMsg = true;
 
-            //  this.tableLoading = false;
-          });
+          //  this.tableLoading = false;
+        });
     },
   },
   mounted() {

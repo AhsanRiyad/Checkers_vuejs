@@ -21,6 +21,10 @@ import EmployersPanel from "@/views/Employers/EmployersPanel";
 import JobDetails from "@/views/Employers/Jobs/JobDetails";
 import JobOnlineApply from "@/views/JobAlart/JobApply/JobOnlineApply";
 
+import biodata from "../views/JobAlart/Resume/Biodata"
+import workExperience from "../views/JobAlart/Resume/WorkExperience"
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -87,6 +91,22 @@ const routes = [
   component: Resume,
   meta: {
     title: 'Resume'
+  }
+},
+{
+  path: '/biodata' ,
+  name: 'biodata',
+  component: biodata,
+  meta: {
+    title: 'Biodata'
+  }
+},
+{
+  path: '/work-experience' ,
+  name: 'workExperience',
+  component: workExperience,
+  meta: {
+    title: 'Work Experience'
   }
 },
   {

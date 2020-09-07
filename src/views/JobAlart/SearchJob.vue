@@ -35,7 +35,7 @@
           block
           class="white--text"
           style="background: #365899; height: 50px"
-          @click.stop="()=>$router.history.push({ name: 'resume' })"
+          @click.stop="()=>$router.history.push({ name: 'biodata' })"
         >Manage Resume</v-btn>
       </div>
       <div class="login-btn-row-1" v-else>

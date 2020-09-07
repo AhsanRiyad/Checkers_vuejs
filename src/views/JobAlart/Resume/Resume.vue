@@ -4,17 +4,15 @@
       <p class="h1Text">Create a Job Alert Resume</p>
 
       <!-- <Biodata /> -->
-
       <component :is="nameOfComponent" />
 
       <div class="row-14">
         <div class="item-1">
-          <v-btn :disabled="prevBtnStatus" @click.stop="prevBtn">Previous</v-btn>
+          <v-btn  @click.stop="prevBtn">Previous</v-btn>
         </div>
 
         <div class="item-2">
           <v-btn
-            :disabled="nextBtnStatus"
             color="#365899"
             class="white--text"
             @click.stop="nextBtn"
@@ -31,6 +29,8 @@ import Biodata from "./Biodata.vue";
 import Education from "./Education.vue";
 import Award from "./Award.vue";
 import "../../../sass/job-alart/_Resume.scss";
+// import { eventBus } from '@/main';
+
 
 export default {
   name: "Resume",
@@ -71,9 +71,11 @@ export default {
         data: {},
       })
       .then((response) => {
-        // console.log("resume.. data", response);
-        this.$store.commit("biodata", response.data.biodata);
-        console.log("resume.. data", this.$store.getters.biodata);
+        console.log( "resume.. data", response.data.countryList );
+        this.$store.commit( "biodata", response.data.biodata );
+        console.log( "resume.. data", this.$store.getters.biodata );
+
+        // eventBus.$emit( "fillData" , response.data );
 
         //  this.$refs.form.reset();
         //  saves the items from the database in the table
@@ -92,8 +94,10 @@ export default {
     nextBtn() {
       let data = {},
         url = "/";
-      if (this.$store.getters.componentName == "Biodata") {
-        data = this.$store.getters.biodata;
+      if ( this.$store.getters.componentName == "Biodata" ) {
+        data  =  this.R.pick([ 'full_name', 'contact_email', 'address', 'city', 'zip_post_code', 'country_id', 'nationality', 'date_of_birth', 'gender', 'identity_number', 'mobile_number', 'another_mobile_number', 'objectives', 'photo', 'career_description', 'cover_letter', 'notice_period', 'another_mobile_number'], this.$store.getters.biodata);
+        data = { ...data, ...{ country_id: data.country_id.id }  }
+        console.log( 'data in the submit.... ', data );
         url = "resume/biodata";
       } else if (this.$store.getters.componentName == "WorkExperience") {
         data = this.$store.getters.workExperience;
