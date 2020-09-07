@@ -1,5 +1,8 @@
 <template >
   <div class="mainTemplate">
+
+    <optionTab />
+
     <div class="mainContainer">
       <p class="h1Text">Create a Job Alert Resume</p>
 
@@ -212,6 +215,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   name: "Biodata",
+  components: {
+    optionTab: () => import("./tab/optionTab"),
+  },
   data: () => {
     return {
       search: "",
