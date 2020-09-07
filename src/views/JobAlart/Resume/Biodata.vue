@@ -1,5 +1,13 @@
 <template >
   <div class="mainTemplate">
+    <div class="resume-option-tab-container">
+      <div class="resume-option-tab">
+        <div class="resume-option-tab__biodata">Biodata</div>
+        <div class="resume-option-tab__work-experience" @click.stop="()=>{ $router.history.push('/work-experience') }" >Work Experience</div>
+        <div class="resume-option-tab__education">Education</div>
+      </div>
+    </div>
+
     <div class="mainContainer">
       <p class="h1Text">Create a Job Alert Resume</p>
 
