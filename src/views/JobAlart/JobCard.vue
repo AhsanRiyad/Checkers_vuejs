@@ -54,56 +54,69 @@
       <div class="clearFix"></div>
 
       <div class="Fixed-Job-Details">
-        <div :style="jobDetails" v-if="!loading">
-          <div outlined :style="firstContainer">
-            <v-list-item three-line>
-              <v-list-item-content>
-                <v-list-item-title class="headline mb-1">{{ JobDescription.job_title }}</v-list-item-title>
-                <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
-                <p>{{ JobDescription.company_name }} || {{ JobDescription.type_in_text }}</p>
-              </v-list-item-content>
+        <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
+          <v-skeleton-loader width="400" class="loader" type="card"></v-skeleton-loader>
+        </div>
 
-              <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-            </v-list-item>
+        <div v-else>
+          <div :style="jobDetails" v-if="!loading">
+            <div outlined :style="firstContainer">
+              <v-list-item three-line>
+                <v-list-item-content>
+                  <v-list-item-title class="headline mb-1">{{ JobDescription.job_title }}</v-list-item-title>
+                  <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
+                  <p>{{ JobDescription.company_name }} || {{ JobDescription.type_in_text }}</p>
+                </v-list-item-content>
 
-            <v-card-actions>
-              <v-btn
+                <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+              </v-list-item>
+
+              <v-card-actions>
+                <v-btn
                   @click="showModal = true"
                   dark
                   v-on="on"
                   class="applyNow"
-                  color="primary">
-                Apply Now
-              </v-btn>
-              <job-alert-modal persistent v-if="showModal">
-                <div class="d-flex align-center" slot="header">
-                  <h1 class="warning-text">Warning Message</h1>
-                  <v-spacer></v-spacer>
-                  <v-btn @click="showModal = false" icon><v-icon>mdi-close</v-icon></v-btn>
-                </div>
-                <div slot="body">
-                  <p>JobAlert.com only works as a mean of communication between employers and job-seekers.
-                    JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
-                    the company after applying through the jobalert.com website.
-                  </p>
-                  <div class="d-flex align-center">
-                    <v-checkbox label="I have read the above warning message." required></v-checkbox>
+                  color="primary"
+                >Apply Now</v-btn>
+                <job-alert-modal persistent v-if="showModal">
+                  <div class="d-flex align-center" slot="header">
+                    <h1 class="warning-text">Warning Message</h1>
                     <v-spacer></v-spacer>
-                    <v-btn class="text--white" color="green" depressed link to="/jobonlineapply">Apply</v-btn>
+                    <v-btn @click="showModal = false" icon>
+                      <v-icon>mdi-close</v-icon>
+                    </v-btn>
                   </div>
-                </div>
-              </job-alert-modal>
-            </v-card-actions>
+                  <div slot="body">
+                    <p>
+                      JobAlert.com only works as a mean of communication between employers and job-seekers.
+                      JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
+                      the company after applying through the jobalert.com website.
+                    </p>
+                    <div class="d-flex align-center">
+                      <v-checkbox label="I have read the above warning message." required></v-checkbox>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        class="text--white"
+                        color="green"
+                        depressed
+                        link
+                        to="/jobonlineapply"
+                      >Apply</v-btn>
+                    </div>
+                  </div>
+                </job-alert-modal>
+              </v-card-actions>
 
-            <v-divider class="divider"></v-divider>
+              <v-divider class="divider"></v-divider>
 
-            <div :style="JobDescriptionStyle">
-              <h4>Location</h4>
-              <p>{{ JobDescription.city }}</p>
+              <div :style="JobDescriptionStyle">
+                <h4>Location</h4>
+                <p>{{ JobDescription.city }}</p>
 
-              <h4>Descriptions</h4>
-              <p>{{ JobDescription.job_description }}</p>
-
+                <h4>Descriptions</h4>
+                <p>{{ JobDescription.job_description }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -118,7 +131,7 @@ import "../../sass/job-alart/_JobCard.scss";
 export default {
   name: "JobCard",
   components: {
-    JobAlertModal: () => import('../../components/Modal')
+    JobAlertModal: () => import("../../components/Modal"),
   },
   data: () => {
     return {
@@ -129,6 +142,7 @@ export default {
       ShowAlertMsg: false,
 
       skeleton: true,
+      skeletonJobDetails: true,
 
       JobDescription: {
         job_title: "PHP developer",
@@ -147,6 +161,17 @@ export default {
         // display: "none",
         width: "35%",
         right: "21%",
+        top: "225px",
+        position: "fixed",
+        // height: "100%",
+        transition: "top 0.1s",
+      },
+
+      //style for search
+      jobDetailsLoader: {
+        // display: "none",
+        width: "35%",
+        right: "27%",
         top: "225px",
         position: "fixed",
         // height: "100%",
@@ -172,17 +197,17 @@ export default {
   methods: {
     saveDetails(n) {
       console.log("dd", n);
-
+      this.skeletonJobDetails = true;
 
       this.$store
         .dispatch("callApi", {
-          url: "jobs/"+n.id,
+          url: "jobs/" + n.id,
           method: "get",
-          data:{},
+          data: {},
         })
         .then((response) => {
           console.log("details list in the", response.data.jobs);
-      this.JobDescription = response.data.jobs;
+          this.JobDescription = response.data.jobs;
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
@@ -194,9 +219,8 @@ export default {
         })
         .finally(() => {
           //  this.tableLoading = false;
+          this.skeletonJobDetails = false;
         });
-
-
     },
     onScroll() {
       // console.log(e);
@@ -227,8 +251,8 @@ export default {
       }
 
       if (
-          document.body.offsetHeight - (window.innerHeight + window.scrollY) <
-          210
+        document.body.offsetHeight - (window.innerHeight + window.scrollY) <
+        210
       ) {
         this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
       }

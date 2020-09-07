@@ -320,7 +320,7 @@
                   :validCharactersOnly="true"
                   :inputClasses="vTelInput"
                 ></vue-tel-input>
-                <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small>
+                <!-- <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small> -->
               </div>
             </div>
 
