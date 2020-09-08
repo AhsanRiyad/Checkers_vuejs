@@ -12,7 +12,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: #efefef;
     padding-bottom: 10px;
     margin-bottom: -30px;
     -webkit-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
@@ -36,7 +35,6 @@
 
 .resume-option-tab__item:hover .v__icon_1 {
     cursor: pointer;
-    background: white;
     color: #365899 !important;
 }
 
@@ -59,9 +57,6 @@
 }
 
 .resume-option-tab__active .v__icon_1 {
-    background: white;
     color: #365899 !important;
-    
-
 }
 // resume option tab ends

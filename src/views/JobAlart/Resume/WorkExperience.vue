@@ -1,6 +1,5 @@
 <template >
   <div class="mainTemplate">
-
     <optionTab />
 
     <div class="mainContainer">
@@ -116,7 +115,14 @@
               <ckeditor v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
             </div>
           </div>
-          <v-btn color="error" class="ml-5 mb-3" @click.stop="()=>remove(i)">Remove</v-btn>
+
+          <div class="row-we-remove">
+            <v-btn
+              color="error"
+              class="ml-5 mb-3 row-we-remove__btn"
+              @click.stop="()=>remove(i)"
+            >Remove</v-btn>
+          </div>
         </div>
         <v-btn
           class="add_more_btn ml-5"
@@ -128,16 +134,16 @@
 
         <div class="row-we-7">
           <p>Job Level</p>
-          <v-select
-            background-color="white"
+          <v-autocomplete
+            item-text="country_name"
+            item-value="id"
             v-model="applicationInfo.job_level"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your last name"
+            :items="job_level"
             outlined
-            :items="['hi', 'hellow']"
             dense
-          ></v-select>
+            background-color="white"
+            placeholder="Select Country"
+          ></v-autocomplete>
         </div>
 
         <div class="row-we-af">
@@ -155,15 +161,16 @@
 
         <div class="row-we-7">
           <p>Job Category</p>
-          <v-select
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your last name"
+          <v-autocomplete
+            item-text="country_name"
+            item-value="id"
+            v-model="applicationInfo.job_categroy"
+            :items="job_category"
             outlined
-            :items="['hi', 'hellow']"
             dense
-          ></v-select>
+            background-color="white"
+            placeholder="Select Categroy"
+          ></v-autocomplete>
         </div>
 
         <div class="row-we-skills">
@@ -230,6 +237,8 @@ export default {
       skillArray: ["java script", "nodejs", "php", "laravel"],
       skill: "",
 
+      job_level:[],
+      job_categroy:[],
       applicationInfo: {
         job_level: "",
         job_categoryId: "",

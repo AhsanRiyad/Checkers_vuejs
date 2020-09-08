@@ -3,14 +3,14 @@
       <!-- style="padding-right: 3px; color: white" -->
     <div class="resume-option-tab-container">
       <div class="resume-option-tab">
-        <div @click.stop="()=>{ $router.history.push('/biodata') }" :class="`${ $store.getters.componentName == 'Biodata' ?  active_class: className}`"> <span > <v-icon class="v__icon_1 resume-option-tab__active"> person
+        <div @click.stop="()=>{ $router.history.push('/biodata') }" :class="`${ $store.getters.componentName == 'Biodata' ?  active_class: className}`"> <span > <v-icon class="v__icon_1"> person
         </v-icon> </span> Biodata</div>
         <div
           :class="`${ $store.getters.componentName == 'WorkExperience' ?  active_class: className}`"
           @click.stop="()=>{ $router.history.push('/work-experience') }"
         > <span > <v-icon class="v__icon_1"> sports_volleyball
         </v-icon> </span> Experience  </div>
-        <div :class="`${ $store.getters.componentName == 'Education' ?  active_class: className}`"> <span> <v-icon class="v__icon_1"> school
+        <div @click.stop="()=>{ $router.history.push('/education') }" :class="`${ $store.getters.componentName == 'Education' ?  active_class: className}`"> <span> <v-icon class="v__icon_1"> school
         </v-icon> </span> Education</div>
       </div>
     </div>

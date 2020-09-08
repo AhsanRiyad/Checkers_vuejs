@@ -1,69 +1,93 @@
 @import "../_baseVariables.scss";
-.ed-row-1, .level-of-education{
-   
-    margin: 20px 20px 0px 20px;
-    p {
-      margin: 2px 0;
-    }
+
+.ed-row-1,
+.level-of-education,
+.ed-certificate {
+
+  margin: 20px 20px 0px 20px;
+
+  p {
+    margin: 2px 0;
+  }
 }
 
 
+.header-text{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 20px 0px 20px;
+}
+
+.row-we-remove {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  &__btn {
+    margin-right: 20px;
+  }
+}
 
 .row-100 {
-    width: 95%;
-    margin: 20px 20px 0px 20px;
-    display: flex;
+  width: 95%;
+  margin: 20px 20px 0px 20px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .row-100-title {
+    flex-basis: 100%;
+  }
+
+  .row-100-1 {
+    flex-basis: 15%;
+    margin-right: 10px;
     flex-wrap: wrap;
-  
-    .row-100-title {
-      flex-basis: 100%;
-    }
-  
-    .row-100-1 {
-      flex-basis: 15%;
-      margin-right: 10px;
-      flex-wrap: wrap;
-      @include tab(){
-        flex-basis: 40%;
-      }
-    }
-  
-    .row-100-2 {
-      flex-basis: 15%;
-      @include tab(){
-        flex-basis: 40%;
-      }
-    }
-  
-    .row-100-4 {
-      flex-basis: 15%;
-      margin-right: 10px;
-      @include tab(){
-        flex-basis: 40%;
-      }
-    }
-  
-    .row-100-5 {
-      flex-basis: 15%;
-      @include tab(){
-        flex-basis: 40%;
-      }
-    }
-  
-    .row-100-6 {
-      // flex-basis: 15%;
-      margin-left: 10px;
-      margin-top: -10px;
-    }
-  
-    .row-100-3 {
-      flex-basis: 3%;
-      margin-left: 20px;
-      margin-right: 20px;
-      @include tab(){
-        margin: 0px 0px;
-        flex-basis: 85%;
-        text-align: center;
-      }
+
+    @include tab() {
+      flex-basis: 40%;
     }
   }
+
+  .row-100-2 {
+    flex-basis: 15%;
+
+    @include tab() {
+      flex-basis: 40%;
+    }
+  }
+
+  .row-100-4 {
+    flex-basis: 15%;
+    margin-right: 10px;
+
+    @include tab() {
+      flex-basis: 40%;
+    }
+  }
+
+  .row-100-5 {
+    flex-basis: 15%;
+
+    @include tab() {
+      flex-basis: 40%;
+    }
+  }
+
+  .row-100-6 {
+    // flex-basis: 15%;
+    margin-left: 10px;
+    margin-top: -10px;
+  }
+
+  .row-100-3 {
+    flex-basis: 3%;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    @include tab() {
+      margin: 0px 0px;
+      flex-basis: 85%;
+      text-align: center;
+    }
+  }
+}
