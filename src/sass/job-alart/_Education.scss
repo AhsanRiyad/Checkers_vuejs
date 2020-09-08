@@ -11,6 +11,24 @@
   }
 }
 
+.row-ed-training-place{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 20px 0px 20px;
+  &__place {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-right: 10px;
+    
+  }
+  &__duration {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: 10px;
+  }
+
+}
+
 
 .header-text{
   font-size: 20px;

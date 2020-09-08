@@ -218,7 +218,92 @@
                 <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
               </div>
             </div>
+
+            <div class="row-we-remove">
+              <v-btn
+                color="error"
+                class="ml-5 mb-3 row-we-remove__btn"
+                @click.stop="()=>remove(i)"
+              >Remove</v-btn>
+            </div>
           </div>
+
+          <v-btn class="ml-5" color="primary" @click.stop="()=>addMore()">Add More+</v-btn>
+
+          <p class="header-text">Training</p>
+
+          <div v-for="(n, i) in trainings" :key="i">
+            <div class="row-4">
+              <p>Issuing Institution</p>
+              <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Result"
+                outlined
+                dense
+              ></v-text-field>
+            </div>
+
+            <div class="row-4">
+              <p>Name of Training Provider</p>
+              <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Result"
+                outlined
+                dense
+              ></v-text-field>
+            </div>
+
+            <div class="row-ed-training-place">
+              <div class="row-ed-training-place__place">
+                <p>Place</p>
+                <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  :rules="[v=>!!v||'required']"
+                  placeholder="Result"
+                  outlined
+                  dense
+                ></v-text-field>
+              </div>
+              <div class="row-ed-training-place__duration">
+                <p>Duration</p>
+                <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  :rules="[v=>!!v||'required']"
+                  placeholder="Result"
+                  outlined
+                  dense
+                ></v-text-field>
+              </div>
+            </div>
+
+            <div class="row-4">
+              <p>Training Details</p>
+              <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Result"
+                outlined
+                dense
+              ></v-text-field>
+            </div>
+
+            <div class="row-we-remove">
+              <v-btn
+                color="error"
+                class="ml-5 mb-3 row-we-remove__btn"
+                @click.stop="()=>remove(i)"
+              >Remove</v-btn>
+            </div>
+          </div>
+
+          <v-btn class="ml-5" color="primary" @click.stop="()=>addMore()">Add More+</v-btn>
         </div>
       </div>
     </div>
@@ -262,6 +347,8 @@ export default {
           details: "",
         },
       ],
+
+      trainings: [{}],
 
       certificate_validity: "",
 
