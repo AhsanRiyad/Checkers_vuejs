@@ -5,8 +5,8 @@
   font-family: 'Baloo Tamma 2', cursive;
 }
 
-.clearFix{
-    clear: both;
+.clearFix {
+  clear: both;
 }
 
 .loader {
@@ -15,6 +15,7 @@
   text-align: left;
   margin-top: 25px;
   margin-bottom: 10px;
+
   @include tab() {
     width: 70%;
   }
@@ -28,60 +29,86 @@
   margin-bottom: 10px;
 }
 
-
 .Fixed-Job-Details {
   display: inline;
+
   @include tab() {
     display: none;
   }
 }
 
 .alertMsg {
-  width: 60%;
+  width: 100%;
   margin-left: 20%;
+}
+
+.login-row-item-1 {
+
+  width: 80%;
+  margin-left: 5%;
 }
 
 .filter {
-  width: 60%;
-  margin-left: 20%;
+  width: 95%;
+  margin-left: 15px;
+
   @include tab() {
     width: 70%;
-
   }
 
-  .filter-item-1, .filter-item-2, .filter-item-3, .filter-item-4 {
+  .filter-item-1,
+  .filter-item-2,
+  .filter-item-3,
+  .filter-item-4 {
     width: 20%;
     float: left;
     margin-right: 2%;
+
     @include tab() {
       width: 48%;
-
     }
   }
 }
 
-
-
-.job-card-job-search {
-    
-    &:hover {
-        cursor: pointer;
--webkit-box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
--moz-box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
-box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
-    }
+.job-search-job-card {
+  width: 95%;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
-.searchResults{
-    width: 23%;
-    margin-left: 20%;
-    float: left;
-    .searchResults-text{
-        margin-bottom: 10px;
-    }
-    @include tab(){
-        width: 70%;
-    }
+.filter-fixed-position {
+  position: fixed;
+  width: 60%;
+  // z-index: 3;
+  margin: 0 auto;
+  background: skyblue;
+  padding-top: 10px;
+  top: 100px;
+  right: 20%;
+}
+
+.job-card-job-search {
+
+  &:hover {
+    cursor: pointer;
+    -webkit-box-shadow: -1px 0px 12px 2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 0px 12px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 0px 12px 2px rgba(0, 0, 0, 0.75);
+  }
+}
+
+.searchResults {
+  width: 23%;
+  margin-left: 20%;
+  float: left;
+
+  .searchResults-text {
+    margin-bottom: 10px;
+  }
+
+  @include tab() {
+    width: 70%;
+  }
 }
 
 .jobDetails {
@@ -129,10 +156,12 @@ box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
 .jobApplied_online {
   .v-card {
     padding: pxToVw(60) pxToVw(50);
-    h1{
+
+    h1 {
       margin-bottom: pxToVw(30);
       color: green
     }
+
     .online_info_list {
       li {
         margin: pxToVw(15) 0;
@@ -140,7 +169,8 @@ box-shadow: -1px 0px 12px 2px rgba(0,0,0,0.75);
         align-items: baseline;
         font-size: pxToVw(16);
       }
-      .v-input{
+
+      .v-input {
         max-width: 50%;
         margin-right: pxToVw(10);
       }

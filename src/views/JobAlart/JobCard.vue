@@ -13,22 +13,67 @@
     </div>
 
     <div v-else>
-      <div class="filter">
-        <div class="filter-item-1">
-          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
+      <div :style="filterFixedPosition">
+        <div class="job-search-job-card">
+          <v-text-field dense solo label="Search" prepend-inner-icon="search">
+            <template v-slot:append-outer>
+              <v-btn
+                tile
+                class="white--text"
+                style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+              >Search</v-btn>
+            </template>
+          </v-text-field>
         </div>
-        <div class="filter-item-2">
-          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-        </div>
-        <div class="filter-item-3">
-          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-        </div>
-        <div class="filter-item-4">
-          <v-select dense :items="['hi' , 'hellow']" filled label="Filled style"></v-select>
-        </div>
-      </div>
 
-      <div class="clearFix"></div>
+        <div class="filter">
+          <div class="filter-item-1">
+            <v-autocomplete
+              item-text="country_name"
+              item-value="id"
+              :items="['hi', 'hellow']"
+              outlined
+              dense
+              background-color="white"
+              placeholder="Select Country"
+            ></v-autocomplete>
+          </div>
+          <div class="filter-item-2">
+            <v-autocomplete
+              item-text="country_name"
+              item-value="id"
+              :items="['hi', 'hellow']"
+              outlined
+              dense
+              background-color="white"
+              placeholder="Select Country"
+            ></v-autocomplete>
+          </div>
+          <div class="filter-item-3">
+            <v-autocomplete
+              item-text="country_name"
+              item-value="id"
+              :items="['hi', 'hellow']"
+              outlined
+              dense
+              background-color="white"
+              placeholder="Select Country"
+            ></v-autocomplete>
+          </div>
+          <div class="filter-item-4">
+            <v-autocomplete
+              item-text="country_name"
+              item-value="id"
+              :items="['hi', 'hellow']"
+              outlined
+              dense
+              background-color="white"
+              placeholder="Select Country"
+            ></v-autocomplete>
+          </div>
+        </div>
+        <div class="clearFix"></div>
+      </div>
 
       <div class="searchResults">
         <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
@@ -156,12 +201,23 @@ export default {
         max_salary_range: "20000",
       },
 
+      filterFixedPosition: {
+        position: "static",
+        width: "60%",
+        zIndex: 0,
+        margin: "0 auto",
+        backgroundColor: "#e1e1e1",
+        paddingTop: "10px",
+        top: "100px",
+        right: "20%",
+      },
+
       //style for search
       jobDetails: {
         // display: "none",
         width: "35%",
         right: "21%",
-        top: "225px",
+        top: "325px",
         position: "fixed",
         // height: "100%",
         transition: "top 0.1s",
@@ -172,7 +228,7 @@ export default {
         // display: "none",
         width: "35%",
         right: "27%",
-        top: "225px",
+        top: "325px",
         position: "fixed",
         // height: "100%",
         transition: "top 0.1s",
@@ -242,11 +298,16 @@ export default {
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      if (window.scrollY > 217) {
-        this.jobDetails.top = "20px";
-        this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
+      if (window.scrollY > 317) {
+        this.jobDetails.top = "200px";
+        // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
+        this.filterFixedPosition.position = "fixed";
+        this.filterFixedPosition.top = "0px";
+        this.filterFixedPosition.zIndex = 3;
       } else {
-        this.jobDetails.top = "225px";
+        this.jobDetails.top = "325px";
+        this.filterFixedPosition.top = "100px";
+        this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
 
@@ -254,7 +315,7 @@ export default {
         document.body.offsetHeight - (window.innerHeight + window.scrollY) <
         210
       ) {
-        this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
+        // this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
       }
 
       let pageNo = window.scrollY / 2400;
