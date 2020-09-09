@@ -165,7 +165,7 @@
           <v-autocomplete
             item-text="name"
             item-value="id"
-            v-model="applicationInfo.job_categroy"
+            v-model="applicationInfo.job_categroy_id"
             :items="job_category"
             outlined
             dense
@@ -250,8 +250,9 @@ export default {
       job_level: [],
       job_categroy: [],
       applicationInfo: {
+        id:"",
         job_level: "",
-        job_categoryId: "",
+        job_category_id: "",
         available_for: "",
         salary: "",
       },
@@ -291,16 +292,42 @@ export default {
       this.skillArray.forEach((n) => (skill = skill + n.id + ","));
       console.log(skill);
 
-      let finalData = {
+      let data = {
         experiences: this.experiences,
         applicationInfo: this.applicationInfo,
         skills: skill,
       };
 
-      console.log(finalData);
+      console.log(data);
+
+      this.$store
+        .dispatch("callApi", {
+          url: "resume/experiences",
+          method: "post",
+          data,
+        })
+        .then((response) => {
+          console.log("resume.. data", response);
+          // eventBus.$emit( "fillData" , response.data );
+
+          this.$awn.success("Failed!");
+
+          //  this.$refs.form.reset();
+          //  saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
     },
     addAnotherExperience() {
       this.experiences.push({
+        id:"",
         job_title: "",
         job_category: "",
         from_date: "",
