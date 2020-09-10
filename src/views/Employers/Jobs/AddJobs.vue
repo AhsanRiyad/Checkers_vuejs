@@ -3,14 +3,6 @@
     <v-row class="mainContainer">
       <v-col cols="12" md="10" lg="10">
         <p class="h1Text">Create a Job</p>
-
-        <!--      <p class="pHeader">-->
-        <!--        Work Experiences (-->
-        <!--        <span>*Required Field of Education</span> )-->
-        <!--      </p>-->
-
-        <!--      <v-divider></v-divider>-->
-
         <div>
           <p>Job Title</p>
           <v-text-field

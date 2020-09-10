@@ -111,9 +111,11 @@
   p {
     margin-bottom: 0 !important;
   }
-.tab_contain{
-  padding:pxToVw(20) pxToVw(45) pxToVw(0) pxToVw(45) !important;
-}
+
+  .tab_contain {
+    padding: pxToVw(20) pxToVw(45) pxToVw(0) pxToVw(45) !important;
+  }
+
   .top_section_card {
     background-color: #d9d9d9;
     padding: pxToVw(40) pxToVw(40);
@@ -123,7 +125,7 @@
     width: 100%;
 
     .ja_left_card {
-      .job_title{
+      .job_title {
         text-transform: capitalize;
       }
     }
@@ -134,12 +136,14 @@
       }
     }
   }
-  .jd_section_card{
+
+  .jd_section_card {
     padding: pxToVw(20) pxToVw(40);
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
     .jd_border {
       border: 2px solid #E0E0E0;
       padding: pxToVw(20) !important;
@@ -151,9 +155,11 @@
       .jd_list {
         margin: 0 pxToVw(15);
         text-align: center;
-        .jd_status{
+
+        .jd_status {
           font-size: pxToVw(18);
         }
+
         .jd_title {
           text-transform: capitalize;
           font-size: pxToVw(22);
@@ -166,13 +172,16 @@
       .jd_list {
         text-align: center;
         margin: 0 pxToVw(15);
-        .jd_status{
+
+        .jd_status {
           font-weight: 700;
         }
+
         .jd_status, .jd_title {
           text-transform: uppercase;
           font-size: pxToVw(20) !important;
         }
+
         .v-icon {
           font-size: pxToVw(35) !important;
 
@@ -193,3 +202,40 @@
 }
 
 //job details css end
+//Applicant list css start
+.applicant__list {
+  table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+  }
+
+  tbody {
+    tr {
+      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+//Applicant list css end
+//job preview css start
+.jp{
+  .ja__card{
+    padding-top:  0 !important;
+    box-shadow:none !important;
+  }
+  .chart_top{
+    padding: 0 pxToVw(10);
+  }
+  .jp_summary_cards{
+
+    padding: pxToVw(25) 0;
+    .v-card{
+      width: 35%;
+      margin: 0 pxToVw(10);
+    }
+    .card_bottom{
+      padding: pxToVw(25) pxToVw(20) pxToVw(10) pxToVw(20);
+    }
+  }
+}
+//job preview css end
