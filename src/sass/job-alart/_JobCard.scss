@@ -9,6 +9,11 @@
   clear: both;
 }
 
+.jobcard-first-container {
+  // height: 100vh;
+  min-height: 400px;
+}
+
 .loader {
   width: 23%;
   margin-left: 20%;
@@ -24,9 +29,15 @@
 .searchText {
   width: 60%;
   margin-left: 20%;
-  text-align: left;
+  // text-align: left;
   margin-top: 25px;
   margin-bottom: 10px;
+}
+
+.searchText-pagination-jobcard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .Fixed-Job-Details {
@@ -38,8 +49,9 @@
 }
 
 .alertMsg {
-  width: 100%;
+  width: 60%;
   margin-left: 20%;
+  margin-right: 15%;
 }
 
 .login-row-item-1 {
@@ -53,7 +65,8 @@
   margin-left: 15px;
 
   @include tab() {
-    width: 70%;
+    // width: 70%;
+    display: none;
   }
 
   .filter-item-1,
@@ -67,6 +80,18 @@
     @include tab() {
       width: 48%;
     }
+  }
+}
+
+.filterFixedPosition {
+
+  width: 60% !important;
+  right: "20%";
+  top: "100px";
+
+  @include tab() {
+    right: "0";
+    width: 100% !important;
   }
 }
 
@@ -135,7 +160,6 @@
         padding-left: 7px;
         margin-top: 20px;
     }
-    
 }
  */
 
@@ -190,5 +214,26 @@
 
   }
 }
-
 // job online applied css end
+
+
+//expected salary starts
+.expectedSalary-job-search {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__title {
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+}
+
+
+.expectedSalary-job-search__applybutton{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+}
+
+//expected salry ends

@@ -31,13 +31,10 @@ Vue.use( CKEditor );
 import VueTelInput from 'vue-tel-input';
 Vue.use(VueTelInput);
 
-
 //vuetify tel input
 // for docs https://github.com/yogakurniawan/vue-tel-input-vuetify
 import VueTelInputVuetify from "vue-tel-input-vuetify";
 Vue.use(VueTelInputVuetify);
-
-
 
 //for docs
 // https://github.com/cmp-cc/vue-cookies#readme
@@ -52,11 +49,8 @@ VueCookies.config('7d');
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
-
-
 //event bus
 export const eventBus = new Vue();
-
 
 /*Vue.mixin({
   data: () => ({

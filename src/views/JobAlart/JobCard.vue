@@ -1,7 +1,15 @@
 <template>
-  <div>
+  <div class="jobcard-first-container">
     <div class="searchText">
-      <h1>Search Result</h1>
+      <div class="searchText-pagination-jobcard">
+        <div>
+          <h1>Search Result</h1>
+        </div>
+
+        <div>
+          <v-pagination v-model="page" :length="6"></v-pagination>
+        </div>
+      </div>
     </div>
 
     <div v-if="skeleton">
@@ -9,18 +17,43 @@
     </div>
 
     <div class="alertMsg" v-else-if="ShowAlertMsg">
+      <v-text-field
+        @keyup.enter="getData"
+        dense
+        solo
+        label="Search"
+        prepend-inner-icon="search"
+        v-model="search"
+      >
+        <template v-slot:append-outer>
+          <v-btn
+            tile
+            class="white--text"
+            style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+            @click.stop="getData"
+          >Search</v-btn>
+        </template>
+      </v-text-field>
       <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>
     </div>
 
     <div v-else>
-      <div :style="filterFixedPosition">
+      <div :style="filterFixedPosition" class="filterFixedPosition">
         <div class="job-search-job-card">
-          <v-text-field dense solo label="Search" prepend-inner-icon="search">
+          <v-text-field
+            @keyup.enter="getData"
+            dense
+            solo
+            label="Search"
+            prepend-inner-icon="search"
+            v-model="search"
+          >
             <template v-slot:append-outer>
               <v-btn
                 tile
                 class="white--text"
                 style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+                @click.stop="getData"
               >Search</v-btn>
             </template>
           </v-text-field>
@@ -119,38 +152,10 @@
               <v-card-actions>
                 <v-btn
                   @click="showModal = true"
-                  dark
-                  v-on="on"
-                  class="applyNow"
+                  class="applyNow white--text"
                   color="primary"
+                  v-bind:disabled="isApplied"
                 >Apply Now</v-btn>
-                <job-alert-modal persistent v-if="showModal">
-                  <div class="d-flex align-center" slot="header">
-                    <h1 class="warning-text">Warning Message</h1>
-                    <v-spacer></v-spacer>
-                    <v-btn @click="showModal = false" icon>
-                      <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                  </div>
-                  <div slot="body">
-                    <p>
-                      JobAlert.com only works as a mean of communication between employers and job-seekers.
-                      JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
-                      the company after applying through the jobalert.com website.
-                    </p>
-                    <div class="d-flex align-center">
-                      <v-checkbox label="I have read the above warning message." required></v-checkbox>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        class="text--white"
-                        color="green"
-                        depressed
-                        link
-                        to="/jobonlineapply"
-                      >Apply</v-btn>
-                    </div>
-                  </div>
-                </job-alert-modal>
               </v-card-actions>
 
               <v-divider class="divider"></v-divider>
@@ -167,11 +172,77 @@
         </div>
       </div>
     </div>
+
+    <!-- job apply modal starts-->
+    <job-alert-modal persistent v-if="showModal">
+      <div class="d-flex align-center" slot="header">
+        <h1 class="warning-text">Warning Message</h1>
+        <v-spacer></v-spacer>
+        <v-btn @click="showModal = false" icon>
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </div>
+      <div slot="body">
+        <p>
+          JobAlert.com only works as a mean of communication between employers and job-seekers.
+          JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
+          the company after applying through the jobalert.com website.
+        </p>
+        <div class="d-flex align-center">
+          <v-checkbox
+            v-model="termsAndConditions"
+            label="I have read the above warning message."
+            required
+          ></v-checkbox>
+          <v-spacer></v-spacer>
+        </div>
+
+        <div v-if="termsAndConditions">
+          <div class="expectedSalary-job-search">
+            <div class="expectedSalary-job-search__title">Expected Salary</div>
+            <div class="expectedSalary-job-search__textinput">
+              <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
+                <v-text-field
+                  type="number"
+                  :rules="[ v=>!!v||'required' ]"
+                  v-model="expectedSalary"
+                  outlined
+                  dense
+                  solo
+                  placeholder="Salary"
+                  @keyup.enter.stop="applyJob"
+                ></v-text-field>
+              </v-form>
+            </div>
+          </div>
+
+          <div class="expectedSalary-job-search__applybutton">
+            <div>
+              <v-btn
+                class="white--text"
+                color="green"
+                depressed
+                link
+                :disabled="!termsAndConditions"
+                @click.stop="applyJob"
+                :loading="loadingAppliedJob"
+              >Apply</v-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </job-alert-modal>
+    <!-- job apply modal ends-->
+
+    <!-- apply online Expected salary starts -->
+
+    <!-- apply online Expected salary ends -->
   </div>
 </template>
 
 <script>
 import "../../sass/job-alart/_JobCard.scss";
+import axios from "axios";
 
 export default {
   name: "JobCard",
@@ -185,6 +256,18 @@ export default {
       pageNo: 1,
       showModal: false,
       ShowAlertMsg: false,
+      termsAndConditions: false,
+      search: "",
+
+      loadingAppliedJob: false,
+
+      page: 1,
+
+      jobId: "",
+
+      expectedSalary: "",
+
+      showModalSalary: false,
 
       skeleton: true,
       skeletonJobDetails: true,
@@ -203,18 +286,17 @@ export default {
 
       filterFixedPosition: {
         position: "static",
-        width: "60%",
         zIndex: 0,
         margin: "0 auto",
         backgroundColor: "#e1e1e1",
         paddingTop: "10px",
-        top: "100px",
-        right: "20%",
       },
 
       //style for search
       jobDetails: {
         // display: "none",
+        // overflowY: "scroll",
+        // maxHeight: "300px",
         width: "35%",
         right: "21%",
         top: "325px",
@@ -239,7 +321,8 @@ export default {
         paddingRight: "10px",
         marginTop: "20px",
         // height: "calc( 100vh - 400px )",
-        overflowY: "auto",
+        height: "300px",
+        overflowY: "scroll",
         // overflowY: "visible",
       },
 
@@ -250,10 +333,77 @@ export default {
       },
     };
   },
+  computed: {
+    isApplied() {
+      return this.jobId.applied == 1 ? true : false;
+    },
+  },
   methods: {
+    applyJob(event) {
+      if (event) {
+        event.preventDefault();
+      }
+      if (!this.$refs.expectedSalary.validate()) return;
+
+      if (this.$cookies.get("accessToken") == null) {
+        this.$router.history.push("/signin");
+        return;
+      }
+
+      this.loadingAppliedJob = true;
+
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        method: "post",
+        baseURL: this.$store.state.apiBase,
+        url: `jobs/${this.jobId.id}/apply`,
+        data: {
+          expected_salary: this.expectedSalary,
+        },
+        headers,
+      })
+        .then((response) => {
+          console.log(response);
+
+          if (response.status == 206) {
+            this.$router.history.push("/resume/biodata");
+            this.$awn.alert("Your resume is not completed");
+            return;
+          }
+          this.showModal = false;
+          this.$awn.success("You have successfully applied!");
+          this.getData();
+        })
+        .catch((error) => {
+          console.log(error);
+
+          if (error.response.status == 401) {
+            this.$awn.alert("You are not logged in");
+            this.$router.history.push("/signin");
+          } else if (error.response.status == 404) {
+            this.$awn.alert("Your resume is not completed");
+            this.$router.history.push("/resume/biodata");
+            return;
+          }
+        })
+        .finally(() => {
+          this.loadingAppliedJob = false;
+        });
+    },
+    showModalExpectedSalary() {
+      this.showModal = false;
+      this.showModalSalary = true;
+    },
     saveDetails(n) {
       console.log("dd", n);
       this.skeletonJobDetails = true;
+
+      this.jobId = n;
 
       this.$store
         .dispatch("callApi", {
@@ -270,8 +420,9 @@ export default {
           //  this.items = response.data;
           this.skeleton = false;
         })
-        .catch(() => {
+        .catch((error) => {
           this.$awn.alert("Failed");
+          console.log("eror..", error.response);
         })
         .finally(() => {
           //  this.tableLoading = false;
@@ -298,14 +449,20 @@ export default {
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      if (window.scrollY > 317) {
-        this.jobDetails.top = "200px";
+      if (window.scrollY > 150) {
+        this.jobDetails.top = "150px";
         // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
         this.filterFixedPosition.zIndex = 3;
+
+        console.log("inner width.... ", window.innerWidth);
+
+        if (window.innerWidth > 960) {
+          this.filterFixedPosition.right = "20%";
+        }
       } else {
-        this.jobDetails.top = "325px";
+        this.jobDetails.top = "300px";
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
@@ -326,32 +483,42 @@ export default {
       if (isInt && this.pageNo < pageNo + 1) {
         // console.log("call second api");
         this.pageNo = pageNo + 1;
-        this.getData();
+        // this.getData();
       }
     },
     getData() {
       this.loading = true;
 
+      this.skeleton = true;
+
+      let url = "search";
+
+      if (this.$store.getters.isLoggedIn) url = "job-search";
+
       this.$store
         .dispatch("callApi", {
-          url: "search",
+          url,
           method: "get",
           params: {
-            q: this.$route.query.q,
+            q: this.search,
             page: this.pageNo,
           },
         })
         .then((response) => {
           console.log("job list....", response);
-          this.Jobs = [...this.Jobs, ...response.jobs.items];
-          this.JobDescription = this.Jobs[0];
+          // this.Jobs = [...this.Jobs, ...response.jobs.items];
+          this.Jobs = response.jobs.items;
+          this.jobId = this.JobDescription = this.Jobs[0];
+          this.skeletonJobDetails = false;
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
           this.skeleton = false;
+          this.ShowAlertMsg = false;
         })
         .catch(() => {
+          this.Jobs = [];
           this.$awn.alert("Failed");
         })
         .finally(() => {
@@ -366,6 +533,9 @@ export default {
   mounted() {
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
+
+    this.search = this.$route.query.q;
+
     this.getData();
   },
   destroyed: function () {
