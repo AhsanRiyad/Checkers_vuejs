@@ -5,6 +5,9 @@
         <v-row justify="center">
           <v-col cols="12" md="4">
             <h1 class="text-center ja__headline">Job Alert</h1>
+
+            <optionTab />
+
             <v-card>
               <v-row justify="center">
                 <p class="text-center mb-n12 mt-4 header-text">Create a new account</p>
@@ -77,6 +80,9 @@ import validation from "../../../mixins/validation";
 export default {
   name: "Signin",
   mixins: [validation],
+  components: {
+    optionTab: () => import("./tab/optionTab"),
+  },
   data() {
     return {
       email: "",
@@ -87,14 +93,24 @@ export default {
     submit() {
       if (!this.$refs.form.validate()) return;
 
+      let data = {};
+
+      this.$store.getters.registerAs == "APPLICANTS"
+        ? (data = {
+            email: this.email,
+            password: this.password,
+          })
+        : (data = {
+            email: this.email,
+            password: this.password,
+            role: "COMPANY",
+          });
+
       this.$store
         .dispatch("callApi", {
           url: "users",
           method: "post",
-          data: {
-            email: this.email,
-            password: this.password,
-          },
+          data,
         })
         .then((response) => {
           console.log("login image", response);

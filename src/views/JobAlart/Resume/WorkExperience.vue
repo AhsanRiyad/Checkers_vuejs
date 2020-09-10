@@ -1,5 +1,7 @@
 <template >
   <div class="mainTemplate">
+    <optionTab />
+
     <div class="mainContainer">
       <p class="h1Text">Create a Job Alert Resume</p>
 
@@ -29,16 +31,16 @@
 
           <div class="row-2">
             <p>Job Category</p>
-            <v-select
-              v-model="n.job_category"
-              background-color="white"
-              class="mb-0"
-              :rules="[v=>!!v||'required']"
-              placeholder="Enter your last name"
+            <v-autocomplete
+              item-text="name"
+              item-value="id"
+              v-model="n.job_categroy"
+              :items="job_category"
               outlined
-              :items="['hi', 'hellow']"
               dense
-            ></v-select>
+              background-color="white"
+              placeholder="Select Categroy"
+            ></v-autocomplete>
           </div>
 
           <div class="row-100">
@@ -113,7 +115,14 @@
               <ckeditor v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
             </div>
           </div>
-          <v-btn color="error" class="ml-5 mb-3" @click.stop="()=>remove(i)">Remove</v-btn>
+
+          <div class="row-we-remove">
+            <v-btn
+              color="error"
+              class="ml-5 mb-3 row-we-remove__btn"
+              @click.stop="()=>remove(i)"
+            >Remove</v-btn>
+          </div>
         </div>
         <v-btn
           class="add_more_btn ml-5"
@@ -125,52 +134,53 @@
 
         <div class="row-we-7">
           <p>Job Level</p>
-          <v-select
-            background-color="white"
+          <v-autocomplete
+            item-text="value"
+            item-value="key"
             v-model="applicationInfo.job_level"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your last name"
+            :items="job_level"
             outlined
-            :items="['hi', 'hellow']"
             dense
-          ></v-select>
+            background-color="white"
+            placeholder="Select Country"
+          ></v-autocomplete>
         </div>
 
         <div class="row-we-af">
           <p>Available For</p>
-          <v-text-field
+
+          <v-autocomplete
             v-model="applicationInfo.available_for"
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your first name"
+            class="mb-0 skill-add-text-field"
+            :items="['Part Time', 'Full Time']"
             outlined
             dense
-          ></v-text-field>
+            background-color="white"
+            placeholder="Select Country"
+          ></v-autocomplete>
         </div>
 
         <div class="row-we-7">
           <p>Job Category</p>
-          <v-select
-            background-color="white"
-            class="mb-0"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your last name"
+          <v-autocomplete
+            item-text="name"
+            item-value="id"
+            v-model="applicationInfo.job_categroy_id"
+            :items="job_category"
             outlined
-            :items="['hi', 'hellow']"
             dense
-          ></v-select>
+            background-color="white"
+            placeholder="Select Categroy"
+          ></v-autocomplete>
         </div>
 
         <div class="row-we-skills">
           <p class="we-skills-title">Skills</p>
 
-          <v-badge
+          <!--  <v-badge
             bordered
             color="error"
-            icon="mdi-lock"
-            overlap
+            content="6"
             v-for="(v , i) in skillArray"
             :key="i"
           >
@@ -178,18 +188,25 @@
               {{ v }}
               <span>remove</span>
             </div>
-          </v-badge>
+          </v-badge>-->
 
-          <v-text-field
-            v-model="skill"
-            background-color="white"
+          <div class="skill_badge we-skills-box" v-for="(v , i) in skillArray" :key="i">
+            {{ v.title }}
+            <div class="skill_badge_close" @click.stop="()=>removeSkill(i)">x</div>
+          </div>
+
+          <v-autocomplete
+            item-text="title"
+            item-value="id"
             class="mb-0 skill-add-text-field"
-            :rules="[v=>!!v||'required']"
-            placeholder="Enter your skill"
+            v-model="skill_id"
+            :items="skill_list"
             outlined
             dense
-            @keyup.enter="addSkill"
-          ></v-text-field>
+            return-object
+            background-color="white"
+            placeholder="Select Skill"
+          ></v-autocomplete>
 
           <v-btn color="#00adef" class="white--text" @click.stop="addSkill">Add Skill</v-btn>
         </div>
@@ -212,6 +229,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   name: "Biodata",
+  components: {
+    optionTab: () => import("./tab/optionTab"),
+  },
   data: () => {
     return {
       search: "",
@@ -221,15 +241,23 @@ export default {
         // The configuration of the editor.
         height: 500,
       },
-      skillArray: ["java script", "nodejs", "php", "laravel"],
+      skillArray: [],
       skill: "",
+      skill_list: [],
 
+      job_category: [],
+
+      job_level: [],
+      job_categroy: [],
       applicationInfo: {
+        id:"",
         job_level: "",
-        job_categoryId: "",
+        job_category_id: "",
         available_for: "",
         salary: "",
       },
+
+      skill_id: "",
 
       date: new Date().toISOString().substr(0, 10),
       menu: false,
@@ -250,14 +278,56 @@ export default {
     };
   },
   methods: {
+    removeSkill(index) {
+      this.skillArray.splice(index, 1);
+    },
     remove(index) {
       this.experiences.splice(index, 1);
     },
     nextBtn() {
       console.log("experiences....", this.experiences);
+      console.log("applicationInfo....", this.applicationInfo);
+      console.log("skillArray....", this.skillArray);
+      let skill = "";
+      this.skillArray.forEach((n) => (skill = skill + n.id + ","));
+      console.log(skill);
+
+      let data = {
+        experiences: this.experiences,
+        applicationInfo: this.applicationInfo,
+        skills: skill,
+      };
+
+      console.log(data);
+
+      this.$store
+        .dispatch("callApi", {
+          url: "resume/experiences",
+          method: "post",
+          data,
+        })
+        .then((response) => {
+          console.log("resume.. data", response);
+          // eventBus.$emit( "fillData" , response.data );
+
+          this.$awn.success("Failed!");
+
+          //  this.$refs.form.reset();
+          //  saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
     },
     addAnotherExperience() {
       this.experiences.push({
+        id:"",
         job_title: "",
         job_category: "",
         from_date: "",
@@ -268,13 +338,87 @@ export default {
       });
     },
     addSkill() {
-      this.skillArray.push(this.skill);
+      if (this.skillArray.some((n) => n.id == this.skill_id.id)) return;
+
+      this.skillArray.push(this.skill_id);
     },
     saveData() {},
   },
   mounted() {
     this.$store.commit("resumePrevbtn", false);
     this.$store.commit("componentName", "WorkExperience");
+
+    this.$store
+      .dispatch("callApi", {
+        url: "resume/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        console.log("resume.. data", response);
+        // eventBus.$emit( "fillData" , response.data );
+        this.skill_list = response.data.skillList;
+
+        //  this.$refs.form.reset();
+        //  saves the items from the database in the table
+        //  console.log(response);
+        //  this.items = response.data;
+      })
+      .catch(() => {
+        this.$awn.alert("Failed!");
+        //   this.$awn.alert("Failed");
+      })
+      .finally(() => {
+        //  this.tableLoading = false;
+      });
+
+    this.$store
+      .dispatch("callApi", {
+        url: "jobs-category/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        console.log("job category..... ", response);
+        // eventBus.$emit( "fillData" , response.data );
+        this.job_category = response.data;
+
+        //  this.$refs.form.reset();
+        //  saves the items from the database in the table
+        //  console.log(response);
+        //  this.items = response.data;
+      })
+      .catch(() => {
+        this.$awn.alert("Failed!");
+        //   this.$awn.alert("Failed");
+      })
+      .finally(() => {
+        //  this.tableLoading = false;
+      });
+
+    this.$store
+      .dispatch("callApi", {
+        url: "/jobs/expertize-label/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        console.log("job label ", response);
+        // eventBus.$emit( "fillData" , response.data );
+        this.job_level = response.data;
+
+        //  this.$refs.form.reset();
+        //  saves the items from the database in the table
+        //  console.log(response);
+        //  this.items = response.data;
+      })
+      .catch(() => {
+        this.$awn.alert("Failed!");
+        //   this.$awn.alert("Failed");
+      })
+      .finally(() => {
+        //  this.tableLoading = false;
+      });
   },
 };
 </script>

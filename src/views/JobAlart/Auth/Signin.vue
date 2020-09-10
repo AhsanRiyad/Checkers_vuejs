@@ -5,6 +5,9 @@
         <v-row justify="center">
           <v-col cols="12" md="4">
             <h1 class="text-center ja__headline">Job Alert</h1>
+
+        
+
             <v-card>
               <v-row justify="center">
                 <p class="text-center mb-n12 mt-4 header-text">Welcome back! Please Login</p>
@@ -74,9 +77,11 @@
 </template>
 <script>
 import validation from "../../../mixins/validation";
+
 export default {
   name: "Signin",
   mixins: [validation],
+ 
   data() {
     return {
       email: "",

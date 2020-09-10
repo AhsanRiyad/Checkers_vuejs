@@ -1,5 +1,6 @@
 @import "../_baseVariables.scss";
 
+
 .vTelInput {
   background: white;
   // border: 1px solid red !important;
@@ -19,6 +20,7 @@
   justify-content: center;
   width: 50%;
   margin: 0px auto;
+
   @include tab() {
     width: 95%;
   }
@@ -34,6 +36,7 @@
 .pHeader {
   margin: 10px 20px;
   font-size: 15px;
+
   span {
     color: red;
     font-size: 12px;
@@ -43,6 +46,7 @@
 .biodata-image {
   display: flex;
   flex-wrap: wrap;
+
   .biodata-first {
     flex-basis: 20%;
     flex-grow: 1;
@@ -51,6 +55,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+
     .biodata-name {
       flex-basis: 90%;
       margin-left: 5%;
@@ -58,6 +63,7 @@
       // height: 20px;
       // background: black;
     }
+
     .biodata-notice-period {
       flex-basis: 90%;
       margin-left: 5%;
@@ -66,6 +72,7 @@
       // background: yellow;
     }
   }
+
   .biodata-second {
     flex-basis: 20%;
     flex-grow: 1;
@@ -83,8 +90,9 @@
       // margin-top: 30px;
       // height: 50%;
       // justify-content: center;
-      
+
     }
+
     .biodata-image-input {
       // min-height: 80%;
       // height: 50%;
@@ -96,9 +104,11 @@
 .row-1 {
   width: 50%;
   margin: 20px 20px 0px 20px;
+
   p {
     margin: 2px 0;
   }
+
   @include tab() {
     width: 85%;
   }
@@ -107,9 +117,11 @@
 .row-2 {
   width: 50%;
   margin: 0px 20px 0px 20px;
+
   p {
     margin: 2px 0;
   }
+
   @include tab() {
     width: 85%;
   }
@@ -118,18 +130,23 @@
 .row-3 {
   width: 50%;
   margin: 0px 20px 10px 20px;
+
   @include tab() {
     width: 85%;
   }
+
   div {
     @include tab() {
       width: 100%;
     }
+
     width: 70%;
+
     p {
       margin-top: -15px;
     }
   }
+
   p {
     margin-bottom: 0px;
   }
@@ -137,6 +154,7 @@
 
 .row-4 {
   margin: 15px 20px;
+
   p {
     margin-bottom: 5px;
   }
@@ -144,6 +162,7 @@
 
 .row-5 {
   margin: 15px 20px;
+
   p {
     margin-bottom: 5px;
   }
@@ -151,6 +170,7 @@
 
 .row-6 {
   margin: 15px 20px;
+
   p {
     margin-bottom: 5px;
   }
@@ -158,6 +178,7 @@
 
 .row-7 {
   margin: 15px 20px;
+
   p {
     margin-bottom: 5px;
   }
@@ -165,6 +186,7 @@
 
 .row-8 {
   margin: 15px 20px;
+
   p {
     margin-bottom: 5px;
   }
@@ -177,18 +199,22 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+
   .item-1 {
     flex-grow: 1;
     margin: 0 20px;
     flex-basis: 40%;
+
     @include tab() {
       flex-basis: 80%;
     }
   }
+
   .item-2 {
     flex-grow: 1;
     margin: 0 20px;
     flex-basis: 40%;
+
     @include tab() {
       flex-basis: 80%;
     }
@@ -203,9 +229,11 @@
   display: flex;
   justify-content: space-between;
   margin: 20px 20px;
+
   .item-1 {
     flex-grow: 1;
   }
+
   .item-2 {
     flex-grow: 1;
     text-align: right;

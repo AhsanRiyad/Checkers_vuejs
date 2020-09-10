@@ -33,6 +33,7 @@ export const store = new Vuex.Store({
 
 		componentName: "",
 
+		registerAs: "APPLICANTS",
 
 		resumeNextbtn: true,
 		resumePrevbtn: true,
@@ -44,6 +45,7 @@ export const store = new Vuex.Store({
 		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
 		componentName(state, payload) { state.componentName = payload },
+		registerAs(state, payload) { state.registerAs = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -52,6 +54,7 @@ export const store = new Vuex.Store({
 		resumeNextbtn: state => state.resumeNextbtn,
 		imageUrl: state => state.imageUrl,
 		componentName: state => state.componentName,
+		registerAs: state => state.registerAs,
 	},
 	actions: {
 		callApi: (context, info) => {

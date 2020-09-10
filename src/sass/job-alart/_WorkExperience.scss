@@ -4,6 +4,30 @@
   // background: green;
 }
 
+.skill_badge {
+  padding: 10px;
+  background: #00adef;
+  color: white;
+  border-radius: 5px;
+  position: relative;
+
+  &:hover{
+   cursor: pointer; 
+  }
+
+  .skill_badge_close {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: red;
+    text-align: center;
+  }
+}
+
+
 .mainContainer {
   background: #efefef;
   justify-content: center;
@@ -21,13 +45,14 @@
 .pHeader {
   margin: 10px 20px;
   font-size: 15px;
+
   span {
     color: red;
     font-size: 12px;
   }
 }
 
-.add_more_btn{
+.add_more_btn {
   margin-right: 10px;
 }
 
@@ -37,9 +62,11 @@
 .row-we-af {
   width: 95%;
   margin: 20px 20px 0px 20px;
+
   p {
     margin: 2px 0;
   }
+
   @include tab() {
     width: 85%;
   }
@@ -58,6 +85,7 @@
   .row-100-1 {
     flex-basis: 30%;
     margin-right: 10px;
+
     @include tab() {
       flex-basis: 40%;
     }
@@ -65,6 +93,7 @@
 
   .row-100-2 {
     flex-basis: 15%;
+
     @include tab() {
       flex-basis: 40%;
     }
@@ -73,6 +102,7 @@
   .row-100-4 {
     flex-basis: 30%;
     margin-right: 10px;
+
     @include tab() {
       flex-basis: 40%;
     }
@@ -80,6 +110,7 @@
 
   .row-100-5 {
     flex-basis: 15%;
+
     @include tab() {
       flex-basis: 40%;
     }
@@ -95,6 +126,7 @@
     flex-basis: 3%;
     margin-left: 20px;
     margin-right: 20px;
+
     @include tab() {
       margin-left: 0px;
       margin-right: 0px;
@@ -106,8 +138,19 @@
 
 .row-we-6 {
   margin: 15px 20px;
+
   p {
     margin-bottom: 5px;
+  }
+}
+
+.row-we-remove {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  &__btn {
+    margin-right: 20px;
   }
 }
 
@@ -121,6 +164,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 20px 20px 0px 20px;
+
   .we-skills-title {
     flex-basis: 100%;
   }

@@ -23,6 +23,7 @@ import JobOnlineApply from "@/views/JobAlart/JobApply/JobOnlineApply";
 
 import biodata from "../views/JobAlart/Resume/Biodata"
 import workExperience from "../views/JobAlart/Resume/WorkExperience"
+import education from "../views/JobAlart/Resume/Education"
 
 
 Vue.use(VueRouter)
@@ -107,6 +108,14 @@ const routes = [
   component: workExperience,
   meta: {
     title: 'Work Experience'
+  }
+},
+{
+  path: '/education' ,
+  name: 'education',
+  component: education,
+  meta: {
+    title: 'Education'
   }
 },
   {

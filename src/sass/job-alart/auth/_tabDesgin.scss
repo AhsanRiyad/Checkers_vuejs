@@ -1,0 +1,63 @@
+// resume option tab starts
+
+
+
+.resume-option-tab-containe_signup {
+    margin: 0px auto;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.resume-option-tab {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 10px;
+    margin-bottom: -30px;
+  /*   -webkit-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75); */
+    align-items: center;
+    color: white;
+    flex-direction: row !important;
+
+    &__item {
+        flex-grow: 1;
+        flex-shrink: 1;
+        background: #365899;
+        text-align: center;
+        border: 1px solid white;
+        padding: auto {
+            top: 10px;
+            bottom: 10px;
+        }
+    }
+}
+
+.resume-option-tab__item:hover .v__icon_1 {
+    cursor: pointer;
+    color: #365899 !important;
+}
+
+.resume-option-tab__item:hover  {
+    cursor: pointer;
+    background: white;
+    color: #365899 !important;
+}
+
+.v__icon_1 {
+    color: white !important;
+}
+
+
+.resume-option-tab__active{
+    background: white;
+    color: #365899 !important;
+    
+
+}
+
+.resume-option-tab__active .v__icon_1 {
+    color: #365899 !important;
+}
+// resume option tab ends

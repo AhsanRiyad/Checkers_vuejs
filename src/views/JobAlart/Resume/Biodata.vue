@@ -1,87 +1,92 @@
 <template >
   <div class="mainTemplate">
+    <optionTab />
+
     <div class="mainContainer">
-      <p class="h1Text">Create a Job Alert Resume</p>
+      <div class="biodata__flex-container">
+        
+        <div>
+          <p class="h1Text">Create a Job Alert Resume</p>
 
-      <div>
-        <p class="pHeader">
-          Biodata (
-          <span>*Required Field of Education</span> )
-        </p>
+          <div>
+            <p class="pHeader">
+              Biodata (
+              <span>*Required Field of Education</span> )
+            </p>
 
-        <v-divider></v-divider>
+            <v-divider></v-divider>
 
-        <v-form ref="form">
-          <div class="biodata-image">
-            <div class="biodata-first">
-              <div class="biodata-name">
-                <p>
-                  Name
-                  <span class="required">*</span>
-                </p>
-                <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  :rules="[v=>!!v||'required']"
-                  placeholder="Enter your first name"
-                  outlined
-                  dense
-                  v-model="biodata.full_name"
-                  @keyups="saveData"
-                ></v-text-field>
-              </div>
+            <v-form ref="form">
+              <div class="biodata-image">
+                <div class="biodata-first">
+                  <div class="biodata-name">
+                    <p>
+                      Name
+                      <span class="required">*</span>
+                    </p>
+                    <v-text-field
+                      background-color="white"
+                      class="mb-0"
+                      :rules="[v=>!!v||'required']"
+                      placeholder="Enter your first name"
+                      outlined
+                      dense
+                      v-model="biodata.full_name"
+                      @keyups="saveData"
+                    ></v-text-field>
+                  </div>
 
-              <div class="biodata-notice-period">
-                <p>Company Notice Period</p>
-                <div>
-                  <v-text-field
-                    background-color="white"
-                    class="mb-0"
-                    :rules="[v=>!!v||true]"
-                    placeholder="In month"
-                    outlined
-                    type="number"
-                    dense
-                    @keyups="saveData"
-                    v-model="biodata.noticePeriod"
-                  ></v-text-field>
-                  <p>Days</p>
+                  <div class="biodata-notice-period">
+                    <p>Company Notice Period</p>
+                    <div>
+                      <v-text-field
+                        background-color="white"
+                        class="mb-0"
+                        :rules="[v=>!!v||true]"
+                        placeholder="In month"
+                        outlined
+                        type="number"
+                        dense
+                        @keyups="saveData"
+                        v-model="biodata.noticePeriod"
+                      ></v-text-field>
+                      <p>Days</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="biodata-second">
+                  <div class="biodata-image-display">
+                    <v-avatar class="profile" color="grey" size="164" tile>
+                      <v-img
+                        :src=" $store.getters.imageUrl + imageUrl"
+                        lazy-src="../../../assets/balgownie-avatar.jpg"
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                        max-width="500"
+                        max-height="300"
+                      ></v-img>
+                    </v-avatar>
+                  </div>
+
+                  <div class="biodata-image-input">
+                    <v-file-input
+                      :rules="rules"
+                      accept="image/png, image/jpeg, image/bmp"
+                      placeholder="Choose a photo"
+                      prepend-icon="perm_media"
+                      label="Avatar"
+                      :loading="imageUploadLoading"
+                      @change="uploadPhoto"
+                      v-model="photo"
+                    ></v-file-input>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="biodata-second">
-              <div class="biodata-image-display">
-                <v-avatar class="profile" color="grey" size="164" tile>
-                  <v-img
-                    :src=" $store.getters.imageUrl + imageUrl"
-                    lazy-src="../../../assets/balgownie-avatar.jpg"
-                    aspect-ratio="1"
-                    class="grey lighten-2"
-                    max-width="500"
-                    max-height="300"
-                  ></v-img>
-                </v-avatar>
-              </div>
+              <!-- <div class="row-1"></div> -->
 
-              <div class="biodata-image-input">
-                <v-file-input
-                  :rules="rules"
-                  accept="image/png, image/jpeg, image/bmp"
-                  placeholder="Choose a photo"
-                  prepend-icon="perm_media"
-                  label="Avatar"
-                  :loading="imageUploadLoading"
-                  @change="uploadPhoto"
-                  v-model="photo"
-                ></v-file-input>
-              </div>
-            </div>
-          </div>
-
-          <!-- <div class="row-1"></div> -->
-
-          <!--     <div class="row-2">
+              <!--     <div class="row-2">
       <p>Last Name</p>
       <v-text-field
         background-color="white"
@@ -91,263 +96,265 @@
         outlined
         dense
       ></v-text-field>
-          </div>-->
+              </div>-->
 
-          <!-- <div class="row-3"></div> -->
+              <!-- <div class="row-3"></div> -->
 
-          <div class="row-4">
-            <p>Objectives</p>
-            <div>
-              <ckeditor
-                v-model="biodata.objectives"
-                :isValid="true"
-                :editor="editor"
-                :config="editorConfig"
-                @input="saveData"
-              ></ckeditor>
-            </div>
-          </div>
-
-          <div class="row-5">
-            <p>Career Desciriptions</p>
-            <div>
-              <ckeditor
-                @input="saveData"
-                v-model="biodata.career_description"
-                :editor="editor"
-                :config="editorConfig"
-              ></ckeditor>
-            </div>
-          </div>
-
-          <div class="row-6">
-            <p>Cover Letter</p>
-            <div>
-              <ckeditor
-                @input="saveData"
-                v-model="biodata.cover_letter"
-                :editor="editor"
-                :config="editorConfig"
-              ></ckeditor>
-            </div>
-          </div>
-
-          <div class="row-7">
-            <p>Personal Details</p>
-          </div>
-
-          <div class="row-8">
-            <p>Address</p>
-            <div>
-              <v-text-field
-                background-color="white"
-                class="mb-0"
-                :rules="[v=>!!v||true]"
-                placeholder="Enter your address"
-                outlined
-                dense
-                @keyup="saveData"
-                v-model="biodata.address"
-              ></v-text-field>
-            </div>
-          </div>
-
-          <div class="row-8">
-            <p>
-              Email
-              <span class="required">*</span>
-            </p>
-            <div>
-              <v-text-field
-                background-color="white"
-                class="mb-0"
-                :rules="[v=>!!v||'email is required']"
-                placeholder="Enter your address"
-                outlined
-                dense
-                @keyup="saveData"
-                v-model="biodata.contact_email"
-              ></v-text-field>
-            </div>
-          </div>
-
-          <div class="row-9">
-            <div class="item-1">
-              <p>City</p>
-              <div>
-                <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  :rules="[v=>!!v||true]"
-                  placeholder="Enter your city"
-                  outlined
-                  dense
-                  @keyups="saveData"
-                  v-model="biodata.city"
-                ></v-text-field>
+              <div class="row-4">
+                <p>Objectives</p>
+                <div>
+                  <ckeditor
+                    v-model="biodata.objectives"
+                    :isValid="true"
+                    :editor="editor"
+                    :config="editorConfig"
+                    @input="saveData"
+                  ></ckeditor>
+                </div>
               </div>
-            </div>
 
-            <div class="item-2">
-              <p>Zip/Post Code</p>
-              <div>
-                <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  :rules="[v=>!!v||true]"
-                  placeholder="Enter your post code"
-                  outlined
-                  dense
-                  @keyups="saveData"
-                  v-model="biodata.zip_post_code"
-                ></v-text-field>
+              <div class="row-5">
+                <p>Career Desciriptions</p>
+                <div>
+                  <ckeditor
+                    @input="saveData"
+                    v-model="biodata.career_description"
+                    :editor="editor"
+                    :config="editorConfig"
+                  ></ckeditor>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div class="row-10">
-            <div class="item-1">
-              <p>Country</p>
-              <div>
-                <v-autocomplete
-                  item-text="country_name"
-                  item-value="id"
-                  v-model="biodata.country_id"
-                  :items="countries"
-                  outlined
-                  dense
-                  background-color="white"
-                  placeholder="Select Country"
-                ></v-autocomplete>
+              <div class="row-6">
+                <p>Cover Letter</p>
+                <div>
+                  <ckeditor
+                    @input="saveData"
+                    v-model="biodata.cover_letter"
+                    :editor="editor"
+                    :config="editorConfig"
+                  ></ckeditor>
+                </div>
               </div>
-            </div>
 
-            <div class="item-2">
-              <p>Nationality</p>
-              <div>
-                <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  :rules="[v=>!!v||true]"
-                  placeholder="Enter your nationality"
-                  outlined
-                  dense
-                  @keyups="saveData"
-                  v-model="biodata.nationality"
-                ></v-text-field>
+              <div class="row-7">
+                <p>Personal Details</p>
               </div>
-            </div>
-          </div>
 
-          <div class="row-11">
-            <div class="item-1">
-              <p>Date Of Birth</p>
-              <div>
-                <v-menu
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :nudge-right="40"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="290px"
-                >
-                  <template v-slot:activator="{ on, attrs }">
+              <div class="row-8">
+                <p>Address</p>
+                <div>
+                  <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    :rules="[v=>!!v||true]"
+                    placeholder="Enter your address"
+                    outlined
+                    dense
+                    @keyup="saveData"
+                    v-model="biodata.address"
+                  ></v-text-field>
+                </div>
+              </div>
+
+              <div class="row-8">
+                <p>
+                  Email
+                  <span class="required">*</span>
+                </p>
+                <div>
+                  <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    :rules="[v=>!!v||'email is required']"
+                    placeholder="Enter your address"
+                    outlined
+                    dense
+                    @keyup="saveData"
+                    v-model="biodata.contact_email"
+                  ></v-text-field>
+                </div>
+              </div>
+
+              <div class="row-9">
+                <div class="item-1">
+                  <p>City</p>
+                  <div>
                     <v-text-field
-                      v-model="biodata.date_of_birth"
-                      prepend-inner-icon="event"
-                      readonly
-                      placeholder="Enter Date of Birth"
-                      backgroundColor="white"
+                      background-color="white"
+                      class="mb-0"
+                      :rules="[v=>!!v||true]"
+                      placeholder="Enter your city"
                       outlined
                       dense
                       @keyups="saveData"
-                      v-bind="attrs"
-                      v-on="on"
+                      v-model="biodata.city"
                     ></v-text-field>
-                  </template>
-                  <v-date-picker v-model="biodata.date_of_birth" @input="menu = false"></v-date-picker>
-                </v-menu>
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            <div class="item-2">
-              <p>Gender</p>
-              <div>
-                <v-select
-                  v-model="biodata.gender "
-                  background-color="white"
-                  class="mb-0"
-                  :rules="[v=>!!v||true]"
-                  placeholder="Enter your gender"
-                  outlined
-                  :items="['Male', 'Female', 'Common' ,'Not Decided']"
-                  dense
-                  @keyups="saveData"
-                ></v-select>
+                <div class="item-2">
+                  <p>Zip/Post Code</p>
+                  <div>
+                    <v-text-field
+                      background-color="white"
+                      class="mb-0"
+                      :rules="[v=>!!v||true]"
+                      placeholder="Enter your post code"
+                      outlined
+                      dense
+                      @keyups="saveData"
+                      v-model="biodata.zip_post_code"
+                    ></v-text-field>
+                  </div>
+                </div>
               </div>
-            </div>
+
+              <div class="row-10">
+                <div class="item-1">
+                  <p>Country</p>
+                  <div>
+                    <v-autocomplete
+                      item-text="country_name"
+                      item-value="id"
+                      v-model="biodata.country_id"
+                      :items="countries"
+                      outlined
+                      dense
+                      background-color="white"
+                      placeholder="Select Country"
+                    ></v-autocomplete>
+                  </div>
+                </div>
+
+                <div class="item-2">
+                  <p>Nationality</p>
+                  <div>
+                    <v-text-field
+                      background-color="white"
+                      class="mb-0"
+                      :rules="[v=>!!v||true]"
+                      placeholder="Enter your nationality"
+                      outlined
+                      dense
+                      @keyups="saveData"
+                      v-model="biodata.nationality"
+                    ></v-text-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row-11">
+                <div class="item-1">
+                  <p>Date Of Birth</p>
+                  <div>
+                    <v-menu
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="biodata.date_of_birth"
+                          prepend-inner-icon="event"
+                          readonly
+                          placeholder="Enter Date of Birth"
+                          backgroundColor="white"
+                          outlined
+                          dense
+                          @keyups="saveData"
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="biodata.date_of_birth" @input="menu = false"></v-date-picker>
+                    </v-menu>
+                  </div>
+                </div>
+
+                <div class="item-2">
+                  <p>Gender</p>
+                  <div>
+                    <v-select
+                      v-model="biodata.gender "
+                      background-color="white"
+                      class="mb-0"
+                      :rules="[v=>!!v||true]"
+                      placeholder="Enter your gender"
+                      outlined
+                      :items="['Male', 'Female', 'Common' ,'Not Decided']"
+                      dense
+                      @keyups="saveData"
+                    ></v-select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row-12">
+                <p>National Identity Number/ Passport Number</p>
+                <div>
+                  <v-text-field
+                    background-color="white"
+                    v-model="biodata.identity_number"
+                    class="mb-0"
+                    :rules="[v=>!!v||true]"
+                    placeholder="Enter your nid/passport no."
+                    outlined
+                    dense
+                    @keyups="saveData"
+                  ></v-text-field>
+                </div>
+              </div>
+
+              <div class="row-13">
+                <div class="item-1">
+                  <p>
+                    Mobile Number
+                    <span class="required">*</span>
+                  </p>
+                  <div>
+                    <vue-tel-input
+                      @validate="validate"
+                      @input="saveData"
+                      @focus="focus"
+                      v-model="biodata.mobile_number"
+                      :required="true"
+                      :validCharactersOnly="true"
+                      :inputClasses="vTelInput"
+                    ></vue-tel-input>
+                    <!-- <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small> -->
+                  </div>
+                </div>
+
+                <div class="item-2">
+                  <p>Optional Number</p>
+                  <div>
+                    <vue-tel-input
+                      v-model="biodata.anothermobile_number"
+                      @validate="validate"
+                      @input="saveData"
+                      :required="true"
+                      :validCharactersOnly="true"
+                      inputClasses="vTelInput"
+                    ></vue-tel-input>
+                  </div>
+                </div>
+              </div>
+            </v-form>
           </div>
 
-          <div class="row-12">
-            <p>National Identity Number/ Passport Number</p>
-            <div>
-              <v-text-field
-                background-color="white"
-                v-model="biodata.identity_number"
-                class="mb-0"
-                :rules="[v=>!!v||true]"
-                placeholder="Enter your nid/passport no."
-                outlined
-                dense
-                @keyups="saveData"
-              ></v-text-field>
-            </div>
-          </div>
-
-          <div class="row-13">
+          <div class="row-14">
             <div class="item-1">
-              <p>
-                Mobile Number
-                <span class="required">*</span>
-              </p>
-              <div>
-                <vue-tel-input
-                  @validate="validate"
-                  @input="saveData"
-                  @focus="focus"
-                  v-model="biodata.mobile_number"
-                  :required="true"
-                  :validCharactersOnly="true"
-                  :inputClasses="vTelInput"
-                ></vue-tel-input>
-                <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small>
-              </div>
+              <v-btn @click.stop="prevBtn">Previous</v-btn>
             </div>
 
             <div class="item-2">
-              <p>Optional Number</p>
-              <div>
-                <vue-tel-input
-                  v-model="biodata.anothermobile_number"
-                  @validate="validate"
-                  @input="saveData"
-                  :required="true"
-                  :validCharactersOnly="true"
-                  inputClasses="vTelInput"
-                ></vue-tel-input>
-              </div>
+              <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Next</v-btn>
             </div>
           </div>
-        </v-form>
-      </div>
-
-      <div class="row-14">
-        <div class="item-1">
-          <v-btn @click.stop="prevBtn">Previous</v-btn>
-        </div>
-
-        <div class="item-2">
-          <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Next</v-btn>
         </div>
       </div>
     </div>
@@ -361,6 +368,9 @@ import "../../../sass/job-alart/_Resume.scss";
 // import axios from 'axios';
 export default {
   name: "Biodata",
+  components: {
+    optionTab: () => import("./tab/optionTab"),
+  },
   data: () => {
     return {
       date: "",
