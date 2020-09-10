@@ -214,5 +214,26 @@
 
   }
 }
-
 // job online applied css end
+
+
+//expected salary starts
+.expectedSalary-job-search {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__title {
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+}
+
+
+.expectedSalary-job-search__applybutton{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+}
+
+//expected salry ends

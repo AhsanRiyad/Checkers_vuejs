@@ -28,8 +28,8 @@ export const store = new Vuex.Store({
 		}),
 		isLoggedIn: false,
 
-		resume:{},
-		biodata:{},
+		resume: {},
+		biodata: {},
 
 		componentName: "",
 
@@ -41,7 +41,7 @@ export const store = new Vuex.Store({
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
 		biodata(state, payload) { state.biodata = payload; },
-		resume(state, payload) { state.resume = {...state.resume , payload} },
+		resume(state, payload) { state.resume = { ...state.resume, payload } },
 		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
 		componentName(state, payload) { state.componentName = payload },
@@ -63,7 +63,7 @@ export const store = new Vuex.Store({
 				// const withCredentials = true;
 				let headers = {
 					'Authorization': 'Bearer ' + VueCookies.get('accessToken'),
-					'Content-Type':  "application/json",
+					'Content-Type': "application/json",
 					'Accept': "application/json",
 				}
 				context.state.ax.withCredentials = true;
@@ -75,6 +75,13 @@ export const store = new Vuex.Store({
 					console.log('in the error');
 					// console.log(error.response.status);
 					// if(error.response.status == 401 && router.name != 'signIn') return router.push({ name: "signIn" });
+					console.log('error in the store .....', error.response);
+					/* if (error.response.status == 401) {
+						console.log('in the unauthenticated.... store');
+						VueCookies.remove('accessToken');
+						context.state.isLoggedIn = false;
+
+					} */
 					reject(error);
 				})
 			})
@@ -85,7 +92,7 @@ export const store = new Vuex.Store({
 				// const withCredentials = true;
 				let headers = {
 					'Authorization': 'Bearer ' + VueCookies.get('accessToken'),
-					'Content-Type':  "multipart/form-data" ,
+					'Content-Type': "multipart/form-data",
 				}
 				context.state.upload.withCredentials = true;
 				context.state.upload.request({ method, url, data, headers, params }).then((response) => {
@@ -96,10 +103,11 @@ export const store = new Vuex.Store({
 					console.log('in the error');
 					// console.log(error.response.status);
 					// if(error.response.status == 401 && router.name != 'signIn') return router.push({ name: "signIn" });
+					console.log('error in the store .....', error.response);
 					reject(error);
 				})
 			})
 		}
 	}
-	
+
 });

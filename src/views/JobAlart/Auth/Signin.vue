@@ -6,8 +6,6 @@
           <v-col cols="12" md="4">
             <h1 class="text-center ja__headline">Job Alert</h1>
 
-        
-
             <v-card>
               <v-row justify="center">
                 <p class="text-center mb-n12 mt-4 header-text">Welcome back! Please Login</p>
@@ -42,7 +40,13 @@
                 </v-col>
 
                 <v-col cols="10" md="10" class="col-3">
-                  <v-btn :loading="loading" block color="primary" class="white--text" @click.stop="submit">Login</v-btn>
+                  <v-btn
+                    :loading="loading"
+                    block
+                    color="primary"
+                    class="white--text"
+                    @click.stop="submit"
+                  >Login</v-btn>
                 </v-col>
 
                 <v-col cols="10" md="10">
@@ -83,7 +87,7 @@ import validation from "../../../mixins/validation";
 export default {
   name: "Signin",
   mixins: [validation],
- 
+
   data() {
     return {
       email: "",
@@ -111,7 +115,7 @@ export default {
           this.$awn.success("Successful");
           localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("accessToken", response.access_token);
-
+          this.$store.commit("isLoggedIn", true);
           setTimeout(() => {
             this.$router.history.push({ name: "SearchJob" });
           }, 1000);

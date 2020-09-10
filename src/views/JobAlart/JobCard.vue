@@ -152,38 +152,10 @@
               <v-card-actions>
                 <v-btn
                   @click="showModal = true"
-                  dark
-                  v-on="on"
-                  class="applyNow"
+                  class="applyNow white--text"
                   color="primary"
+                  v-bind:disabled="isApplied"
                 >Apply Now</v-btn>
-                <job-alert-modal persistent v-if="showModal">
-                  <div class="d-flex align-center" slot="header">
-                    <h1 class="warning-text">Warning Message</h1>
-                    <v-spacer></v-spacer>
-                    <v-btn @click="showModal = false" icon>
-                      <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                  </div>
-                  <div slot="body">
-                    <p>
-                      JobAlert.com only works as a mean of communication between employers and job-seekers.
-                      JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
-                      the company after applying through the jobalert.com website.
-                    </p>
-                    <div class="d-flex align-center">
-                      <v-checkbox label="I have read the above warning message." required></v-checkbox>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        class="text--white"
-                        color="green"
-                        depressed
-                        link
-                        to="/jobonlineapply"
-                      >Apply</v-btn>
-                    </div>
-                  </div>
-                </job-alert-modal>
               </v-card-actions>
 
               <v-divider class="divider"></v-divider>
@@ -200,11 +172,76 @@
         </div>
       </div>
     </div>
+
+    <!-- job apply modal starts-->
+    <job-alert-modal persistent v-if="showModal">
+      <div class="d-flex align-center" slot="header">
+        <h1 class="warning-text">Warning Message</h1>
+        <v-spacer></v-spacer>
+        <v-btn @click="showModal = false" icon>
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </div>
+      <div slot="body">
+        <p>
+          JobAlert.com only works as a mean of communication between employers and job-seekers.
+          JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
+          the company after applying through the jobalert.com website.
+        </p>
+        <div class="d-flex align-center">
+          <v-checkbox
+            v-model="termsAndConditions"
+            label="I have read the above warning message."
+            required
+          ></v-checkbox>
+          <v-spacer></v-spacer>
+        </div>
+
+        <div v-if="termsAndConditions">
+          <div class="expectedSalary-job-search">
+            <div class="expectedSalary-job-search__title">Expected Salary</div>
+            <div class="expectedSalary-job-search__textinput">
+              <v-form ref="expectedSalary">
+                <v-text-field
+                  type="number"
+                  :rules="[ v=>!!v||'required' ]"
+                  v-model="expectedSalary"
+                  outlined
+                  dense
+                  solo
+                  placeholder="Salary"
+                  @keyup.enter="applyJob"
+                ></v-text-field>
+              </v-form>
+            </div>
+          </div>
+
+          <div class="expectedSalary-job-search__applybutton">
+            <div>
+              <v-btn
+                class="white--text"
+                color="green"
+                depressed
+                link
+                :disabled="!termsAndConditions"
+                @click="applyJob"
+              >Apply</v-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </job-alert-modal>
+    <!-- job apply modal ends-->
+
+    <!-- apply online Expected salary starts -->
+
+    <!-- apply online Expected salary ends -->
   </div>
 </template>
 
 <script>
 import "../../sass/job-alart/_JobCard.scss";
+import axios from "axios";
 
 export default {
   name: "JobCard",
@@ -218,10 +255,16 @@ export default {
       pageNo: 1,
       showModal: false,
       ShowAlertMsg: false,
-
+      termsAndConditions: false,
       search: "",
 
       page: 1,
+
+      jobId: "",
+
+      expectedSalary: "",
+
+      showModalSalary: false,
 
       skeleton: true,
       skeletonJobDetails: true,
@@ -287,10 +330,65 @@ export default {
       },
     };
   },
+  computed: {
+    isApplied() {
+      return this.jobId.applied == 1 ? true : false;
+    },
+  },
   methods: {
+    applyJob() {
+      if (!this.$refs.expectedSalary.validate()) return;
+
+      if (this.$cookies.get("accessToken") == null) {
+        this.$router.history.push("/signin");
+        return;
+      }
+
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        method: "post",
+        baseURL: this.$store.state.apiBase,
+        url: `jobs/${this.jobId.id}/apply`,
+        data: {
+          email: this.email,
+          password: this.password,
+        },
+        headers,
+      })
+        .then((response) => {
+          console.log(response);
+
+          if (response.status == 206) {
+            this.$router.history.push("/resume/biodata");
+            return;
+          }
+        })
+        .catch((error) => {
+          this.$awn.alert("Invalid id/password");
+          console.log(error);
+
+          if (error.response.status == 404) {
+            this.$router.history.push("/resume/biodata");
+            return;
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    showModalExpectedSalary() {
+      this.showModal = false;
+      this.showModalSalary = true;
+    },
     saveDetails(n) {
       console.log("dd", n);
       this.skeletonJobDetails = true;
+
+      this.jobId = n;
 
       this.$store
         .dispatch("callApi", {
@@ -307,8 +405,9 @@ export default {
           //  this.items = response.data;
           this.skeleton = false;
         })
-        .catch(() => {
+        .catch((error) => {
           this.$awn.alert("Failed");
+          console.log("eror..", error.response);
         })
         .finally(() => {
           //  this.tableLoading = false;
@@ -377,11 +476,13 @@ export default {
 
       this.skeleton = true;
 
-      
+      let url = "search";
+
+      if (this.$store.getters.isLoggedIn) url = "job-search";
 
       this.$store
         .dispatch("callApi", {
-          url: "search",
+          url,
           method: "get",
           params: {
             q: this.search,
