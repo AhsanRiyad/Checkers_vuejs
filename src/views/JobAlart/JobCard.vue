@@ -201,7 +201,7 @@
           <div class="expectedSalary-job-search">
             <div class="expectedSalary-job-search__title">Expected Salary</div>
             <div class="expectedSalary-job-search__textinput">
-              <v-form ref="expectedSalary">
+              <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
                 <v-text-field
                   type="number"
                   :rules="[ v=>!!v||'required' ]"
@@ -210,7 +210,7 @@
                   dense
                   solo
                   placeholder="Salary"
-                  @keyup.enter="applyJob"
+                  @keyup.enter.stop="applyJob"
                 ></v-text-field>
               </v-form>
             </div>
@@ -224,7 +224,8 @@
                 depressed
                 link
                 :disabled="!termsAndConditions"
-                @click="applyJob"
+                @click.stop="applyJob"
+                :loading="loadingAppliedJob"
               >Apply</v-btn>
             </div>
           </div>
@@ -257,6 +258,8 @@ export default {
       ShowAlertMsg: false,
       termsAndConditions: false,
       search: "",
+
+      loadingAppliedJob: false,
 
       page: 1,
 
@@ -336,7 +339,10 @@ export default {
     },
   },
   methods: {
-    applyJob() {
+    applyJob(event) {
+      if (event) {
+        event.preventDefault();
+      }
       if (!this.$refs.expectedSalary.validate()) return;
 
       if (this.$cookies.get("accessToken") == null) {
@@ -344,7 +350,10 @@ export default {
         return;
       }
 
+      this.loadingAppliedJob = true;
+
       const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
         Accept: "application/json",
       };
@@ -354,8 +363,7 @@ export default {
         baseURL: this.$store.state.apiBase,
         url: `jobs/${this.jobId.id}/apply`,
         data: {
-          email: this.email,
-          password: this.password,
+          expected_salary: this.expectedSalary,
         },
         headers,
       })
@@ -364,20 +372,27 @@ export default {
 
           if (response.status == 206) {
             this.$router.history.push("/resume/biodata");
+            this.$awn.alert("Your resume is not completed");
             return;
           }
+          this.showModal = false;
+          this.$awn.success("You have successfully applied!");
+          this.getData();
         })
         .catch((error) => {
-          this.$awn.alert("Invalid id/password");
           console.log(error);
 
-          if (error.response.status == 404) {
+          if (error.response.status == 401) {
+            this.$awn.alert("You are not logged in");
+            this.$router.history.push("/signin");
+          } else if (error.response.status == 404) {
+            this.$awn.alert("Your resume is not completed");
             this.$router.history.push("/resume/biodata");
             return;
           }
         })
         .finally(() => {
-          this.loading = false;
+          this.loadingAppliedJob = false;
         });
     },
     showModalExpectedSalary() {
@@ -493,7 +508,7 @@ export default {
           console.log("job list....", response);
           // this.Jobs = [...this.Jobs, ...response.jobs.items];
           this.Jobs = response.jobs.items;
-          this.JobDescription = this.Jobs[0];
+          this.jobId = this.JobDescription = this.Jobs[0];
           this.skeletonJobDetails = false;
           // this.$refs.form.reset();
           //saves the items from the database in the table
