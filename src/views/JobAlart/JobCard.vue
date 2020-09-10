@@ -1,7 +1,15 @@
 <template>
-  <div>
+  <div class="jobcard-first-container">
     <div class="searchText">
-      <h1>Search Result</h1>
+      <div class="searchText-pagination-jobcard">
+        <div>
+          <h1>Search Result</h1>
+        </div>
+
+        <div>
+          <v-pagination v-model="page" :length="6"></v-pagination>
+        </div>
+      </div>
     </div>
 
     <div v-if="skeleton">
@@ -9,18 +17,43 @@
     </div>
 
     <div class="alertMsg" v-else-if="ShowAlertMsg">
+      <v-text-field
+        @keyup.enter="getData"
+        dense
+        solo
+        label="Search"
+        prepend-inner-icon="search"
+        v-model="search"
+      >
+        <template v-slot:append-outer>
+          <v-btn
+            tile
+            class="white--text"
+            style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+            @click.stop="getData"
+          >Search</v-btn>
+        </template>
+      </v-text-field>
       <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>
     </div>
 
     <div v-else>
-      <div :style="filterFixedPosition">
+      <div :style="filterFixedPosition" class="filterFixedPosition">
         <div class="job-search-job-card">
-          <v-text-field dense solo label="Search" prepend-inner-icon="search">
+          <v-text-field
+            @keyup.enter="getData"
+            dense
+            solo
+            label="Search"
+            prepend-inner-icon="search"
+            v-model="search"
+          >
             <template v-slot:append-outer>
               <v-btn
                 tile
                 class="white--text"
                 style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+                @click.stop="getData"
               >Search</v-btn>
             </template>
           </v-text-field>
@@ -186,6 +219,10 @@ export default {
       showModal: false,
       ShowAlertMsg: false,
 
+      search: "",
+
+      page: 1,
+
       skeleton: true,
       skeletonJobDetails: true,
 
@@ -203,18 +240,17 @@ export default {
 
       filterFixedPosition: {
         position: "static",
-        width: "60%",
         zIndex: 0,
         margin: "0 auto",
         backgroundColor: "#e1e1e1",
         paddingTop: "10px",
-        top: "100px",
-        right: "20%",
       },
 
       //style for search
       jobDetails: {
         // display: "none",
+        // overflowY: "scroll",
+        // maxHeight: "300px",
         width: "35%",
         right: "21%",
         top: "325px",
@@ -239,7 +275,8 @@ export default {
         paddingRight: "10px",
         marginTop: "20px",
         // height: "calc( 100vh - 400px )",
-        overflowY: "auto",
+        height: "300px",
+        overflowY: "scroll",
         // overflowY: "visible",
       },
 
@@ -298,14 +335,20 @@ export default {
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      if (window.scrollY > 317) {
-        this.jobDetails.top = "200px";
+      if (window.scrollY > 150) {
+        this.jobDetails.top = "150px";
         // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
         this.filterFixedPosition.zIndex = 3;
+
+        console.log("inner width.... ", window.innerWidth);
+
+        if (window.innerWidth > 960) {
+          this.filterFixedPosition.right = "20%";
+        }
       } else {
-        this.jobDetails.top = "325px";
+        this.jobDetails.top = "300px";
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
@@ -326,32 +369,40 @@ export default {
       if (isInt && this.pageNo < pageNo + 1) {
         // console.log("call second api");
         this.pageNo = pageNo + 1;
-        this.getData();
+        // this.getData();
       }
     },
     getData() {
       this.loading = true;
+
+      this.skeleton = true;
+
+      
 
       this.$store
         .dispatch("callApi", {
           url: "search",
           method: "get",
           params: {
-            q: this.$route.query.q,
+            q: this.search,
             page: this.pageNo,
           },
         })
         .then((response) => {
           console.log("job list....", response);
-          this.Jobs = [...this.Jobs, ...response.jobs.items];
+          // this.Jobs = [...this.Jobs, ...response.jobs.items];
+          this.Jobs = response.jobs.items;
           this.JobDescription = this.Jobs[0];
+          this.skeletonJobDetails = false;
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
           this.skeleton = false;
+          this.ShowAlertMsg = false;
         })
         .catch(() => {
+          this.Jobs = [];
           this.$awn.alert("Failed");
         })
         .finally(() => {
@@ -366,6 +417,9 @@ export default {
   mounted() {
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
+
+    this.search = this.$route.query.q;
+
     this.getData();
   },
   destroyed: function () {
