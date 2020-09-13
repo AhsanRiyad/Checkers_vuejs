@@ -12,8 +12,21 @@
               <v-row justify="center">
                 <p class="text-center mb-n12 mt-4 header-text">Create a new account</p>
 
-                <v-col cols="10" md="10" class="col-1 mb-n4 pb-0">
-                  <p class="mb-1">Email Id / Username</p>
+                <v-col cols="10" md="10" class="col-1 pb-0">
+                  <p class="mb-1">Username</p>
+                  <v-text-field
+                    :rules="fieldRulesProp(true, 'name' , 'name')"
+                    class="mb-0 pb-0 mb-0"
+                    placeholder="Username"
+                    outlined
+                    dense
+                    v-model="username"
+                    @keyup.enter="submit"
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="10" md="10" class="col-2 mb-n4 pb-0">
+                  <p class="mb-1">Email</p>
                   <v-text-field
                     :rules="fieldRulesProp(true, 'email' , 'email')"
                     class="mb-0 pb-0 mb-0"
@@ -95,6 +108,7 @@ export default {
     return {
       email: "",
       password: "",
+      username: "",
 
       loading: false,
     };
@@ -111,9 +125,11 @@ export default {
         ? (data = {
             email: this.email,
             password: this.password,
+            username: this.username,
           })
         : (data = {
             email: this.email,
+            username: this.username,
             password: this.password,
             role: "COMPANY",
           });

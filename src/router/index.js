@@ -25,101 +25,112 @@ import biodata from "../views/JobAlart/Resume/Biodata"
 import workExperience from "../views/JobAlart/Resume/WorkExperience"
 import education from "../views/JobAlart/Resume/Education"
 
+import forgotPassword from "../views/JobAlart/AccountSettings/forgotPassword"
+
+
 
 Vue.use(VueRouter)
 
 const routes = [
-{
-  path: '/' ,
-  alias: '/',
-  name: 'SearchJob',
-  component: SearchJob,
-  meta: {
-    title: 'JobAlart'
-  }
-},
-{
-  path: '/search' ,
-  name: 'search',
-  component: JobCard,
-  meta: {
-    title: 'search'
-  }
-},
-{
-  path: '/defaultResume' ,
-  name: 'defaultResume',
-  component: defaultResume,
-  meta: {
-    title: 'defaultResume'
-  }
-},
-{
-  path: '/premiumResume' ,
-  name: 'premiumResume',
-  component: premiumResume,
-  meta: {
-    title: 'premiumResume'
-  }
-},
-{
-  path: '/create-alert' ,
-  name: 'CreateAlert',
-  component: CreateAlert,
-  meta: {
-    title: 'Create Alert'
-  }
-},
-{
-  path: '/signin' ,
-  name: 'Signin',
-  component: Signin,
-  meta: {
-    title: 'Signin'
-  }
-},
-{
-  path: '/signup' ,
-  name: 'Signup',
-  component: Signup,
-  meta: {
-    title: 'Signup'
-  }
-},
-{
-  path: '/resume' ,
-  name: 'resume',
-  component: Resume,
-  meta: {
-    title: 'Resume'
-  }
-},
-{
-  path: '/biodata' ,
-  name: 'biodata',
-  component: biodata,
-  meta: {
-    title: 'Biodata'
-  }
-},
-{
-  path: '/work-experience' ,
-  name: 'workExperience',
-  component: workExperience,
-  meta: {
-    title: 'Work Experience'
-  }
-},
-{
-  path: '/education' ,
-  name: 'education',
-  component: education,
-  meta: {
-    title: 'Education'
-  }
-},
   {
-    path: '/account-settings' ,
+    path: '/',
+    alias: '/',
+    name: 'SearchJob',
+    component: SearchJob,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: JobCard,
+    meta: {
+      title: 'search'
+    }
+  },
+  {
+    path: '/defaultResume',
+    name: 'defaultResume',
+    component: defaultResume,
+    meta: {
+      title: 'defaultResume'
+    }
+  },
+  {
+    path: '/premiumResume',
+    name: 'premiumResume',
+    component: premiumResume,
+    meta: {
+      title: 'premiumResume'
+    }
+  },
+  {
+    path: '/create-alert',
+    name: 'CreateAlert',
+    component: CreateAlert,
+    meta: {
+      title: 'Create Alert'
+    }
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: Signin,
+    meta: {
+      title: 'Signin'
+    }
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup,
+    meta: {
+      title: 'Signup'
+    }
+  },
+  {
+    path: '/resume',
+    name: 'resume',
+    component: Resume,
+    meta: {
+      title: 'Resume'
+    }
+  },
+  {
+    path: '/forgot-password',
+    name: 'Forgot Password',
+    component: forgotPassword,
+    meta: {
+      title: 'Forgot Password'
+    }
+  },
+  {
+    path: '/biodata',
+    name: 'biodata',
+    component: biodata,
+    meta: {
+      title: 'Biodata'
+    }
+  },
+  {
+    path: '/work-experience',
+    name: 'workExperience',
+    component: workExperience,
+    meta: {
+      title: 'Work Experience'
+    }
+  },
+  {
+    path: '/education',
+    name: 'education',
+    component: education,
+    meta: {
+      title: 'Education'
+    }
+  },
+  {
+    path: '/account-settings',
     name: 'accountSettings',
     component: accountSettings,
     meta: {
@@ -127,16 +138,16 @@ const routes = [
     }
   },
   {
-    path: '/applied-jobs' ,
+    path: '/applied-jobs',
     name: 'appliedJobs',
     component: appliedJobs,
     meta: {
       title: 'Applied Jobs'
     }
   },
-// account settings component routing start
+  // account settings component routing start
   {
-    path: '/change-email' ,
+    path: '/change-email',
     name: 'changeEmail',
     component: changeEmail,
     meta: {
@@ -144,7 +155,7 @@ const routes = [
     }
   },
   {
-    path: '/change-password' ,
+    path: '/change-password',
     name: 'changePassword',
     component: changePassword,
     meta: {
@@ -152,7 +163,7 @@ const routes = [
     }
   },
   {
-    path: '/add-number' ,
+    path: '/add-number',
     name: 'addNumber',
     component: addNumber,
     meta: {
@@ -160,35 +171,35 @@ const routes = [
     }
   },
   {
-    path: '/verifyphone' ,
+    path: '/verifyphone',
     name: 'verifyPhoneNumber',
     component: verifyPhoneNumber,
     meta: {
       title: 'Verify Phone Number'
     }
   },
-// account settings component routing end
-//    companies components routing start
-//   {
-//     path: '/add-company' ,
-//     name: 'AddCompany',
-//     component: AddCompany,
-//     meta: {
-//       title: 'Add Company'
-//     }
-//   },
+  // account settings component routing end
+  //    companies components routing start
+  //   {
+  //     path: '/add-company' ,
+  //     name: 'AddCompany',
+  //     component: AddCompany,
+  //     meta: {
+  //       title: 'Add Company'
+  //     }
+  //   },
   {
-    path: '/employers' ,
+    path: '/employers',
     name: 'EmployersPanel',
     component: EmployersPanel,
     meta: {
       title: 'Employers Panel'
     }
   },
-//    companies components routing end
+  //    companies components routing end
   //   jobs components routing start
   {
-    path: '/add-job' ,
+    path: '/add-job',
     name: 'AddJobs',
     component: AddJobs,
     meta: {
@@ -196,7 +207,7 @@ const routes = [
     }
   },
   {
-    path: '/details/:id' ,
+    path: '/details/:id',
     name: 'JobDetails',
     component: JobDetails,
     meta: {
@@ -204,14 +215,14 @@ const routes = [
     }
   },
   {
-    path: '/jobonlineapply' ,
+    path: '/jobonlineapply',
     name: 'JobOnlineApply',
     component: JobOnlineApply,
     meta: {
       title: 'Job Online Apply'
     }
   }
-//   jobs components routing end
+  //   jobs components routing end
 ]
 
 const router = new VueRouter({

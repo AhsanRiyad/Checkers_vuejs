@@ -12,9 +12,19 @@
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
         <v-btn text color="white">Recruiters</v-btn>
-        <v-btn router to="/signin" text color="white">{{ $store.getters.isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
+        <v-btn
+          router
+          to="/signin"
+          text
+          color="white"
+        >{{ $store.getters.isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
         <v-btn router to="/employers" text color="white">Employeer/Job Post</v-btn>
-        <v-menu bottom origin="center center" transition="scale-transition">
+        <v-menu
+          bottom
+          origin="center center"
+          transition="scale-transition"
+          v-if="$store.getters.isLoggedIn"
+        >
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="white" icon v-bind="attrs" v-on="on" class="mr-3">
               <v-icon>mdi-account-circle-outline</v-icon>
@@ -104,8 +114,11 @@ export default {
       }
     },
   },
-  mounted(){
-    console.log( 'logged in check in the header...' , this.$cookies.get("accessToken") )
-  }
+  mounted() {
+    console.log(
+      "logged in check in the header...",
+      this.$cookies.get("accessToken")
+    );
+  },
 };
 </script>
