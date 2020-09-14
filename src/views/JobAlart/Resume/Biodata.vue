@@ -1,10 +1,9 @@
 <template >
-  <div class="mainTemplate">
+  <div class="mainTemplate_biodata">
     <optionTab />
 
-    <div class="mainContainer">
+    <div class="mainContainer_biodata">
       <div class="biodata__flex-container">
-        
         <div>
           <p class="h1Text">Create a Job Alert Resume</p>
 
@@ -362,8 +361,7 @@
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../../../sass/job-alart/_Biodata.scss";
-import "../../../sass/job-alart/_Resume.scss";
+
 // import { eventBus } from '@/main';
 // import axios from 'axios';
 export default {
@@ -597,4 +595,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../../sass/job-alart/_Biodata.scss";
+@import "../../../sass/job-alart/_Resume.scss";
 </style>

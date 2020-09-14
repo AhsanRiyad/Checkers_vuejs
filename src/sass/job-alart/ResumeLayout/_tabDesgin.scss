@@ -1,11 +1,17 @@
+@import "../../_baseVariables.scss";
+
 // resume option tab starts
-
-
 
 .resume-option-tab-container {
     width: 60%;
     margin: 0px auto;
     margin-top: 20px;
+    margin-bottom: 20px;
+
+    @include tab() {
+        width: 95%;
+    }
+
 }
 
 .resume-option-tab {
@@ -26,6 +32,7 @@
         background: #365899;
         text-align: center;
         border: 1px solid white;
+
         padding: auto {
             top: 10px;
             bottom: 10px;
@@ -38,7 +45,7 @@
     color: #365899 !important;
 }
 
-.resume-option-tab__item:hover  {
+.resume-option-tab__item:hover {
     cursor: pointer;
     background: white;
     color: #365899 !important;
@@ -49,14 +56,15 @@
 }
 
 
-.resume-option-tab__active{
+.resume-option-tab__active {
     background: white;
     color: #365899 !important;
-    
+
 
 }
 
 .resume-option-tab__active .v__icon_1 {
     color: #365899 !important;
 }
+
 // resume option tab ends
