@@ -92,6 +92,8 @@ export default {
       })
         .then((response) => {
           console.log(response);
+          this.$router.histroy.push('/signin');
+
           this.$awn.success("Successful");
         })
         .catch(() => {

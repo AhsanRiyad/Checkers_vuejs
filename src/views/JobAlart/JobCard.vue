@@ -7,7 +7,7 @@
         </div>
 
         <div>
-          <v-pagination v-model="page" :length="6"></v-pagination>
+          <v-pagination v-model="pageNo" :length="length"></v-pagination>
         </div>
       </div>
     </div>
@@ -268,6 +268,8 @@ export default {
 
       jobId: "",
 
+      length: 0,
+
       expectedSalary: "",
 
       showModalSalary: false,
@@ -374,7 +376,7 @@ export default {
           console.log(response);
 
           if (response.status == 206) {
-            this.$router.history.push("/resume/biodata");
+            this.$router.history.push("/biodata");
             this.$awn.alert("Your resume is not completed");
             return;
           }
@@ -469,7 +471,7 @@ export default {
           this.filterFixedPosition.right = "20%";
         }
       } else {
-      this.jobDetails.top = 287 - window.scrollY + "px";
+        this.jobDetails.top = 287 - window.scrollY + "px";
         // this.jobDetails.top = "287px";
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
@@ -536,6 +538,11 @@ export default {
           this.Jobs = response.data.jobs.items;
           this.jobId = this.JobDescription = this.Jobs[0];
           this.skeletonJobDetails = false;
+
+          this.length = Math.round(
+            response.data.jobs.total_count /
+              response.data.jobs.num_items_per_page
+          );
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
@@ -565,6 +572,11 @@ export default {
   },
   destroyed: function () {
     window.removeEventListener("scroll", this.onScroll);
+  },
+  watch: {
+    pageNo() {
+      this.getData();
+    },
   },
 };
 </script>

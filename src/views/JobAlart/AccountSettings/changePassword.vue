@@ -19,7 +19,7 @@
                   placeholder="Password"
                   outlined
                   dense
-                  v-model="data.new_password"
+                  v-model="data.password"
                 ></v-text-field>
               </v-col>
 
@@ -31,7 +31,7 @@
                   placeholder="Password"
                   outlined
                   dense
-                  v-model="data.password"
+                  v-model="data.new_password"
                 ></v-text-field>
               </v-col>
               <div class="ja__button">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "changePassword",
   data: () => {
@@ -60,11 +61,37 @@ export default {
         password: "",
         new_password: "",
       },
+      loading: false,
     };
   },
   methods: {
     submit() {
-      this.$refs.form.validate();
+      if (!this.$refs.form.validate()) return;
+
+      this.loading = true;
+
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        baseURL: this.$store.state.apiBase,
+        url: "users/new-password",
+        method: "put",
+        data: this.data,
+        headers,
+      })
+        .then((response) => {
+          console.log(response);
+          this.$awn.success("Successful");
+        })
+        .catch(() => {
+          this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };
