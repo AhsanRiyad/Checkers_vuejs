@@ -1,6 +1,7 @@
 module.exports = {
   "transpileDependencies": [
-    "vuetify"
+    "vuetify",
+    "vue-tel-input-vuetify"
   ],
   publicPath: process.env.NODE_ENV === 'production'
     ? '/'    /*'/new/'*/
