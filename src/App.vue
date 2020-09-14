@@ -9,10 +9,11 @@
 import cookie_mixins from "@/mixins/cookie_mixins";
 import commonInfoMixins from "@/mixins/commonInfoMixins";
 import LandingPage from "./views/JobAlart/LandingPage";
-
+import ipMixins from "./mixins/ipMixins";
+import refreshToken from "./mixins/tokenMixins";
 export default {
   name: "App",
-  mixins: [cookie_mixins, commonInfoMixins],
+  mixins: [cookie_mixins, commonInfoMixins, ipMixins, refreshToken],
   components: {
     LandingPage: LandingPage,
   },
@@ -26,6 +27,17 @@ export default {
     },
   },
   beforeCreate() {},
+  mounted() {
+    this.getIp(
+      () => {},
+      () => {}
+    );
+
+    this.refreshToken(
+      () => {},
+      () => {}
+    );
+  },
   created() {
     if (
       this.R.isNil(this.$cookies.get("accessToken")) ||

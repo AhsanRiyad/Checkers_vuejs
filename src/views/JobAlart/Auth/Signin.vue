@@ -11,7 +11,7 @@
                 <p class="text-center mb-n12 mt-4 header-text">Welcome back! Please Login</p>
 
                 <v-col cols="10" md="10" class="col-1 mb-n4 pb-0">
-                  <p class="mb-1">Email Id / Username</p>
+                  <p class="mb-1">Email</p>
                   <v-text-field
                     :rules="fieldRulesProp(true, 'email' , 'email')"
                     class="mb-0 pb-0 mb-0"
@@ -36,7 +36,10 @@
                     type="password"
                     @keyup.enter="submit"
                   ></v-text-field>
-                  <p class="text-right mt-n6">Forgot Password?</p>
+
+                  <div style="display: flex; justify-content: flex-end">
+                    <router-link to="/forgot-password">Forgot password?</router-link>
+                  </div>
                 </v-col>
 
                 <v-col cols="10" md="10" class="col-3">
@@ -108,6 +111,9 @@ export default {
           data: {
             email: this.email,
             password: this.password,
+          },
+          params: {
+            ip: this.$store.getters.userIp,
           },
         })
         .then((response) => {

@@ -243,12 +243,15 @@
 <script>
 import "../../sass/job-alart/_JobCard.scss";
 import axios from "axios";
+import ipMixins from "../../mixins/ipMixins";
+import tokenMixins from "../../mixins/tokenMixins";
 
 export default {
   name: "JobCard",
   components: {
     JobAlertModal: () => import("../../components/Modal"),
   },
+  mixins: [ipMixins, tokenMixins],
   data: () => {
     return {
       Jobs: [],
@@ -299,10 +302,10 @@ export default {
         // maxHeight: "300px",
         width: "35%",
         right: "21%",
-        top: "325px",
+        top: "287px",
         position: "fixed",
         // height: "100%",
-        transition: "top 0.1s",
+        // transition: "top 0.1s",
       },
 
       //style for search
@@ -440,17 +443,21 @@ export default {
 
       console.log("window ... ", window);
 
-      console.log("window inner height", window.innerHeight);
+      /* console.log("window inner height", window.innerHeight);
       console.log("scrol top", document.body.scrollTop);
       console.log("offset height", document.body.offsetHeight);
-      console.log("addition ", window.innerHeight + window.scrollY);
+      console.log("addition ", window.innerHeight + window.scrollY); */
+      console.log("scroll y... ", window.scrollY);
+      console.log("subtraction... ", 142 - window.scrollY);
 
       // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      if (window.scrollY > 150) {
-        this.jobDetails.top = "150px";
+      // this.jobDetails.top = 142 - window.scrollY + "px";
+
+      if (window.scrollY > 132) {
+        this.jobDetails.top = "142px";
         // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
@@ -462,7 +469,8 @@ export default {
           this.filterFixedPosition.right = "20%";
         }
       } else {
-        this.jobDetails.top = "300px";
+      this.jobDetails.top = 287 - window.scrollY + "px";
+        // this.jobDetails.top = "287px";
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
@@ -487,6 +495,17 @@ export default {
       }
     },
     getData() {
+      if (this.$store.getters.userIp == "") {
+        new Promise((resolve, reject) => {
+          this.getIp(resolve, reject);
+        }).then(() => {
+          this.getSearchData();
+        });
+      } else {
+        this.getSearchData();
+      }
+    },
+    getSearchData() {
       this.loading = true;
 
       this.skeleton = true;
@@ -495,19 +514,26 @@ export default {
 
       if (this.$store.getters.isLoggedIn) url = "job-search";
 
-      this.$store
-        .dispatch("callApi", {
-          url,
-          method: "get",
-          params: {
-            q: this.search,
-            page: this.pageNo,
-          },
-        })
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        baseURL: this.$store.state.apiBase,
+        url,
+        method: "get",
+        params: {
+          q: this.search,
+          page: this.pageNo,
+          ip: this.$store.getters.userIp,
+        },
+        headers,
+      })
         .then((response) => {
           console.log("job list....", response);
           // this.Jobs = [...this.Jobs, ...response.jobs.items];
-          this.Jobs = response.jobs.items;
+          this.Jobs = response.data.jobs.items;
           this.jobId = this.JobDescription = this.Jobs[0];
           this.skeletonJobDetails = false;
           // this.$refs.form.reset();
@@ -525,7 +551,6 @@ export default {
           this.loading = false;
           this.skeleton = false;
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
-
           //  this.tableLoading = false;
         });
     },

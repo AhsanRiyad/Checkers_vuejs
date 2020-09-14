@@ -37,6 +37,9 @@ export const store = new Vuex.Store({
 
 		resumeNextbtn: true,
 		resumePrevbtn: true,
+
+		userIp: "",
+
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
@@ -46,6 +49,7 @@ export const store = new Vuex.Store({
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
 		componentName(state, payload) { state.componentName = payload },
 		registerAs(state, payload) { state.registerAs = payload },
+		userIp(state, payload) { state.userIp = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -55,6 +59,7 @@ export const store = new Vuex.Store({
 		imageUrl: state => state.imageUrl,
 		componentName: state => state.componentName,
 		registerAs: state => state.registerAs,
+		userIp: state => state.userIp,
 	},
 	actions: {
 		callApi: (context, info) => {
