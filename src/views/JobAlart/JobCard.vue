@@ -305,7 +305,7 @@ export default {
         top: "287px",
         position: "fixed",
         // height: "100%",
-        transition: "top 0.1s",
+        // transition: "top 0.1s",
       },
 
       //style for search
@@ -447,8 +447,8 @@ export default {
       console.log("scrol top", document.body.scrollTop);
       console.log("offset height", document.body.offsetHeight);
       console.log("addition ", window.innerHeight + window.scrollY); */
-      console.log("scroll y... ",  window.scrollY );
-      console.log("subtraction... ", 142 - window.scrollY );
+      console.log("scroll y... ", window.scrollY);
+      console.log("subtraction... ", 142 - window.scrollY);
 
       // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
@@ -469,7 +469,8 @@ export default {
           this.filterFixedPosition.right = "20%";
         }
       } else {
-        this.jobDetails.top = "287px";
+      this.jobDetails.top = 287 - window.scrollY + "px";
+        // this.jobDetails.top = "287px";
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
