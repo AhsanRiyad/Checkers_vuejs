@@ -1,5 +1,5 @@
 <template>
-  <div class="jobcard-first-container">
+  <div class="jobcard-first-container" id="mainDocs">
     <div class="searchText">
       <div class="searchText-pagination-jobcard">
         <div>
@@ -449,15 +449,48 @@ export default {
       console.log("scrol top", document.body.scrollTop);
       console.log("offset height", document.body.offsetHeight);
       console.log("addition ", window.innerHeight + window.scrollY); */
+
+      console.log("inner height ", window.innerHeight);
       console.log("scroll y... ", window.scrollY);
       console.log("subtraction... ", 142 - window.scrollY);
+      console.log("document height", document.body.scrollHeight);
+      console.log(
+        "document body height",
+        document.querySelector("#mainDocs").scrollHeight
+      );
 
       // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      // this.jobDetails.top = 142 - window.scrollY + "px";
+      this.jobDetails.top = screen.availHeight + "px";
 
+      // this.JobDescriptionStyle.height = screen.availHeight - 140 + "px";
+
+      if (window.scrollY > screen.availHeight - 296 - 140 - 140) {
+        this.JobDescriptionStyle.height =
+          screen.availHeight -
+          140 -
+          140 -
+          140 -
+          140 -
+          40 -
+          (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
+          "px";
+        // this.JobDescriptionStyle.height = "464px";
+        // console.log("scrolled.......", screen.availHeight - 296 - 140 - 140);
+        console.log(
+          "scrolled.......",
+          screen.availHeight -
+            140 -
+            140 -
+            140 -
+            (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
+            "px"
+        );
+      }
+
+      // if (window.innerHeight)
       if (window.scrollY > 132) {
         this.jobDetails.top = "142px";
         // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";

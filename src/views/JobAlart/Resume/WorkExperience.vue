@@ -1,8 +1,8 @@
 <template >
-  <div class="mainTemplate">
+  <div class="mainTemplate_we">
     <optionTab />
 
-    <div class="mainContainer">
+    <div class="mainContainer_we">
       <p class="h1Text">Create a Job Alert Resume</p>
 
       <div>
