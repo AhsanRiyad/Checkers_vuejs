@@ -304,7 +304,9 @@ export default {
       console.log("id keeper ", category_id_keeper);
 
       this.skillArray.forEach((n) => (skill_id = skill_id + n.id + ","));
-      this.skillArray.forEach((n) => (skill_title = skill_title + n.title + ","));
+      this.skillArray.forEach(
+        (n) => (skill_title = skill_title + n.title + ",")
+      );
       category_id_keeper.forEach(
         (n) => (job_category_id = job_category_id + n.id + ",")
       );
@@ -312,15 +314,12 @@ export default {
         (n) => (job_category_title = job_category_title + n.name + ",")
       );
 
-      this.applicationInfo = this._.omitBy(
-        this.applicationInfo,
-        this._.isArray
-      );
+      let applI = this._.omitBy(this.applicationInfo, this._.isArray);
 
       let data = {
         experiences: this.experiences,
         applicationInfo: {
-          ...this.applicationInfo,
+          ...applI,
           ...{
             job_category_id: job_category_id,
             job_category_title: job_category_title,
@@ -333,7 +332,7 @@ export default {
       };
       console.log(data);
 
-       this.$store
+      this.$store
         .dispatch("callApi", {
           url: "resume/experiences",
           method: "post",
@@ -355,11 +354,6 @@ export default {
         .finally(() => {
           //  this.tableLoading = false;
         });
-
-
-
-
-
     },
     addAnotherExperience() {
       this.experiences.push({
@@ -395,6 +389,31 @@ export default {
         console.log("resume.. data", response);
         // eventBus.$emit( "fillData" , response.data );
         this.skill_list = response.data.skillList;
+
+        this.applicationInfo = response.data.applicationInfo;
+        this.experiences = response.data.experiences;
+
+        this.applicationInfo.job_category_id = this.R.split(
+          ",",
+          this.applicationInfo.job_category_id
+        );
+        this.applicationInfo.job_category_id = this._.compact(
+          this.applicationInfo.job_category_id
+        );
+
+        this.applicationInfo.job_category_id = this.applicationInfo.job_category_id.map(
+          (n) => {
+            return {
+              id: n,
+            };
+          }
+        );
+
+        // console.log("job category....", abc);
+
+        this.applicationInfo = { ...this.applicationInfo };
+
+        console.log("application in mounted...", this.applicationInfo);
 
         //  this.$refs.form.reset();
         //  saves the items from the database in the table
