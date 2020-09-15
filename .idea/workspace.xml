@@ -21,14 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +172,7 @@
       <workItem from="1599738199639" duration="738000" />
       <workItem from="1599970721953" duration="1583000" />
       <workItem from="1599988033512" duration="8039000" />
+      <workItem from="1600067974803" duration="1531000" />
     </task>
     <servers />
   </component>
