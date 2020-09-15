@@ -31,10 +31,11 @@ Vue.use( CKEditor );
 import VueTelInput from 'vue-tel-input';
 Vue.use(VueTelInput);
 
-//vuetify tel input
-// for docs https://github.com/yogakurniawan/vue-tel-input-vuetify
-import VueTelInputVuetify from "vue-tel-input-vuetify";
-Vue.use(VueTelInputVuetify);
+import VueTelInputVuetify from 'vue-tel-input-vuetify/lib';
+
+Vue.use(VueTelInputVuetify, {
+  vuetify,
+});
 
 //for docs
 // https://github.com/cmp-cc/vue-cookies#readme

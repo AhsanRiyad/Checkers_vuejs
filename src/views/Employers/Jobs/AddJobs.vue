@@ -144,11 +144,9 @@
           <div class="item-2">
             <p>Optional Number</p>
             <div>
-              <vue-tel-input
-                  inputClasses="vTelInput"
-              >
-
-              </vue-tel-input>
+              <vue-tel-input-vuetify label="Outlined"
+                                     single-line
+                                     outlined dense  v-model="phone"></vue-tel-input-vuetify>
             </div>
           </div>
         </div>
@@ -176,7 +174,7 @@ export default {
   mixins: [validation],
   data() {
     return {
-
+      phone: null
     };
   },
   methods: {

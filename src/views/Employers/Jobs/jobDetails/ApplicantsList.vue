@@ -14,48 +14,50 @@
             </div>
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
-            <table>
-              <tbody>
-              <tr v-for="(applicant, i) in applicants" :key="i">
-                <td class="text-center"><p class="font-weight-bold">{{ applicant.id }}</p></td>
-                <td style="width: 10%">
-                  <v-avatar size="85">
-                  <img src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    alt="John">
-                </v-avatar>
-                </td>
-                <td>
-                  <p><a href="">{{ applicant.name }} </a><span class="age_outline">{{applicant.age}}</span></p>
-                  <p>{{ applicant.address }}</p>
-                  <p>{{ applicant.institution_name }}</p>
-                  <p><span>{{applicant.degree}}</span> in <span>{{applicant.subject}}</span></p>
-                  <p><span><v-icon small>mdi-phone</v-icon></span><span>{{applicant.contactNumber}}</span></p>
-                  <v-btn small style="color: #fff !important;" color="blue" depressed><v-icon small>mdi-plus</v-icon> comment</v-btn>
-                </td>
-                <td>
-                  <div v-for="(ex, i) in applicant.exp" :key="i">
-                    <p class="font-weight-bold">{{ex.companyName}}</p>
-                    <p>{{ex.designation}} (<span>{{ex.experience}}</span> + years)</p>
-                  </div>
-                </td>
-                <td></td>
-                <td>
-                  <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ applicant.totalExp }} + years</span></p>
-                  <p> <span class="mr-2">&#2547;</span>{{ applicant.expectedSalary }}</p>
-                  <p> <span class="mr-2"><v-icon small>mdi-restore-alert</v-icon></span><span>{{ applicant.views }} times applied</span></p>
-                  <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ applicant.appliedOn }}</span></p>
-                </td>
-                <td class="action text-center">
-                  <v-btn class="interactn c-grey" color="success" icon>
-                    <i class="material-icons">check</i>
-                  </v-btn>
-                  <v-btn class="interactn  mr-2 ml-2 c-green" color="error" icon>
-                    <i class="material-icons">close</i>
-                  </v-btn>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+           <div >
+             <table  style="overflow-x: auto !important;">
+               <tbody>
+               <tr v-for="(applicant, i) in applicants" :key="i">
+                 <td class="text-center"><p class="font-weight-bold">{{ applicant.id }}</p></td>
+                 <td style="width: 10%">
+                   <v-avatar size="85">
+                     <img src="https://cdn.vuetifyjs.com/images/john.jpg"
+                          alt="John">
+                   </v-avatar>
+                 </td>
+                 <td>
+                   <p><a href="">{{ applicant.name }} </a><span class="age_outline">{{applicant.age}}</span></p>
+                   <p>{{ applicant.address }}</p>
+                   <p>{{ applicant.institution_name }}</p>
+                   <p><span>{{applicant.degree}}</span> in <span>{{applicant.subject}}</span></p>
+                   <p><span><v-icon small>mdi-phone</v-icon></span><span>{{applicant.contactNumber}}</span></p>
+                   <v-btn small style="color: #fff !important;" color="blue" depressed><v-icon small>mdi-plus</v-icon> comment</v-btn>
+                 </td>
+                 <td>
+                   <div v-for="(ex, i) in applicant.exp" :key="i">
+                     <p class="font-weight-bold">{{ex.companyName}}</p>
+                     <p>{{ex.designation}} (<span>{{ex.experience}}</span> + years)</p>
+                   </div>
+                 </td>
+                 <td></td>
+                 <td>
+                   <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ applicant.totalExp }} + years</span></p>
+                   <p> <span class="mr-2">&#2547;</span>{{ applicant.expectedSalary }}</p>
+                   <p> <span class="mr-2"><v-icon small>mdi-restore-alert</v-icon></span><span>{{ applicant.views }} times applied</span></p>
+                   <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ applicant.appliedOn }}</span></p>
+                 </td>
+                 <td class="action text-center">
+                   <v-btn class="interactn c-grey" color="success" icon>
+                     <i class="material-icons">check</i>
+                   </v-btn>
+                   <v-btn class="interactn  mr-2 ml-2 c-green" color="error" icon>
+                     <i class="material-icons">close</i>
+                   </v-btn>
+                 </td>
+               </tr>
+               </tbody>
+             </table>
+           </div>
             <!--********** Job applied table end **************-->
             <!--********** pagination start **************-->
             <div class="pagination">

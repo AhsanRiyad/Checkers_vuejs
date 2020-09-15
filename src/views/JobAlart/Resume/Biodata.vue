@@ -302,15 +302,17 @@
                     <span class="required">*</span>
                   </p>
                   <div>
-                    <vue-tel-input
+                    <vue-tel-input-vuetify
+                        outlined dense
+                        single-line
                       @validate="validate"
                       @input="saveData"
                       @focus="focus"
                       v-model="biodata.mobile_number"
-                      :required="true"
+                        :rules="[v=>!!v||true]"
                       :validCharactersOnly="true"
                       :inputClasses="vTelInput"
-                    ></vue-tel-input>
+                    ></vue-tel-input-vuetify>
                     <!-- <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small> -->
                   </div>
                 </div>
@@ -318,14 +320,16 @@
                 <div class="item-2">
                   <p>Optional Number</p>
                   <div>
-                    <vue-tel-input
+                    <vue-tel-input-vuetify
+                        outlined dense
+                        single-line
                       v-model="biodata.anothermobile_number"
                       @validate="validate"
                       @input="saveData"
                       :required="true"
                       :validCharactersOnly="true"
                       inputClasses="vTelInput"
-                    ></vue-tel-input>
+                    ></vue-tel-input-vuetify>
                   </div>
                 </div>
               </div>

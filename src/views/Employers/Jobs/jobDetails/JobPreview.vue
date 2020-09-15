@@ -75,8 +75,8 @@
 
 <script>
 
-import PieChart from "@/sass/job-alart/chart/PieChart";
-import BarChart from "@/sass/job-alart/chart/BarChart";
+import PieChart from "@/components/chart/PieChart";
+import BarChart from "@/components/chart/BarChart";
 export default {
   name: "JobPreview",
   components: {BarChart, PieChart},
