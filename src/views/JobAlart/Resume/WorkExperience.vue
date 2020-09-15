@@ -5,182 +5,169 @@
     <div class="mainContainer_we">
       <p class="h1Text">Create a Job Alert Resume</p>
 
-      <div>
-        <p class="pHeader">
-          Work Experience (
-          <span>*Required Field of Experience</span> )
-        </p>
+      <v-form ref="form">
+        <div>
+          <p class="pHeader">
+            Work Experience (
+            <span>*Required Field of Experience</span> )
+          </p>
 
-        <v-divider></v-divider>
-
-        <div v-for="(n, i) in experiences" :key="n.title">
           <v-divider></v-divider>
 
-          <div class="row-1">
-            <p>Job Title</p>
-            <v-text-field
-              background-color="white"
-              class="mb-0"
-              v-model="n.job_title"
-              :rules="[v=>!!v||'required']"
-              placeholder="Enter your first name"
+          <div v-for="(n, i) in experiences" :key="n.title">
+            <v-divider></v-divider>
+
+            <div class="row-1">
+              <p>Job Title</p>
+              <v-text-field
+                background-color="white"
+                class="mb-0"
+                v-model="n.job_title"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your first name"
+                outlined
+                dense
+              ></v-text-field>
+            </div>
+
+            <div class="row-100">
+              <div class="row-100-title">
+                <p>Time Period</p>
+              </div>
+
+              <div class="row-100-1">
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="n.from_date"
+                      prepend-inner-icon="event"
+                      readonly
+                      placeholder="From"
+                      backgroundColor="white"
+                      outlined
+                      dense
+                      @keyups="saveData"
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker v-model="n.from_date" @input="menu = false"></v-date-picker>
+                </v-menu>
+              </div>
+
+              <div class="row-100-3">To</div>
+
+              <div class="row-100-4">
+                <v-menu
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="n.to_date"
+                      prepend-inner-icon="event"
+                      readonly
+                      placeholder="To"
+                      backgroundColor="white"
+                      outlined
+                      dense
+                      @keyups="saveData"
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker v-model="n.to_date" @input="menu2 = false"></v-date-picker>
+                </v-menu>
+              </div>
+
+              <div class="row-100-6">
+                <v-checkbox label="I am currently working here" value="A"></v-checkbox>
+              </div>
+            </div>
+
+            <div class="row-we-6">
+              <p>Job Description/Job Respsonsibilites</p>
+              <div>
+                <ckeditor v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
+              </div>
+            </div>
+
+            <div class="row-we-remove" v-if="experiences.length > 1">
+              <v-btn
+                color="error"
+                class="ml-5 mb-3 row-we-remove__btn"
+                @click.stop="()=>remove(i)"
+              >Remove</v-btn>
+            </div>
+          </div>
+          <v-btn
+            :disabled="R.isEmpty(experiences[experiences.length-1].job_title) "
+            class="add_more_btn ml-5"
+            color="primary"
+            @click.stop="addAnotherExperience"
+          >Add More+</v-btn>
+
+          <div class="applicationInfo">Application Information</div>
+
+          <div class="row-we-7">
+            <p>Job Level</p>
+            <v-autocomplete
+              item-text="value"
+              item-value="key"
+              v-model="applicationInfo.job_level"
+              :items="job_level"
               outlined
               dense
-            ></v-text-field>
+              background-color="white"
+              placeholder="Select Country"
+            ></v-autocomplete>
           </div>
 
-          <div class="row-2">
-            <p>Choose your preferable area</p>
+          <div class="row-we-af">
+            <p>Available For</p>
+
+            <v-autocomplete
+              v-model="applicationInfo.available_for"
+              class="mb-0 skill-add-text-field"
+              :items="['Part Time', 'Full Time']"
+              outlined
+              dense
+              background-color="white"
+              placeholder="Select Country"
+            ></v-autocomplete>
+          </div>
+
+          <div class="row-we-7">
+            <p>Preferable Area</p>
             <v-autocomplete
               item-text="name"
               item-value="id"
-              v-model="n.job_categroy"
+              v-model="applicationInfo.job_categroy_id"
               :items="job_category"
               outlined
               dense
               multiple
+              return-object
               background-color="white"
               placeholder="Select Categroy"
             ></v-autocomplete>
           </div>
 
-          <div class="row-100">
-            <div class="row-100-title">
-              <p>Time Period</p>
-            </div>
+          <div class="row-we-skills">
+            <p class="we-skills-title">Skills</p>
 
-            <div class="row-100-1">
-              <v-menu
-                v-model="menu"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="n.from_date"
-                    prepend-inner-icon="event"
-                    readonly
-                    placeholder="From"
-                    backgroundColor="white"
-                    outlined
-                    dense
-                    @keyups="saveData"
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="n.from_date" @input="menu = false"></v-date-picker>
-              </v-menu>
-            </div>
-
-            <div class="row-100-3">To</div>
-
-            <div class="row-100-4">
-              <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="n.to_date"
-                    prepend-inner-icon="event"
-                    readonly
-                    placeholder="To"
-                    backgroundColor="white"
-                    outlined
-                    dense
-                    @keyups="saveData"
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="n.to_date" @input="menu2 = false"></v-date-picker>
-              </v-menu>
-            </div>
-
-            <div class="row-100-6">
-              <v-checkbox label="I am currently working here" value="A"></v-checkbox>
-            </div>
-          </div>
-
-          <div class="row-we-6">
-            <p>Job Description/Job Respsonsibilites</p>
-            <div>
-              <ckeditor v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
-            </div>
-          </div>
-
-          <div class="row-we-remove" v-if="experiences.length > 1">
-            <v-btn
-              color="error"
-              class="ml-5 mb-3 row-we-remove__btn"
-              @click.stop="()=>remove(i)"
-            >Remove</v-btn>
-          </div>
-        </div>
-        <v-btn
-          :disabled="R.isEmpty(experiences[experiences.length-1].job_title) "
-          class="add_more_btn ml-5"
-          color="primary"
-          @click.stop="addAnotherExperience"
-        >Add More+</v-btn>
-
-        <div class="applicationInfo">Application Information</div>
-
-        <div class="row-we-7">
-          <p>Job Level</p>
-          <v-autocomplete
-            item-text="value"
-            item-value="key"
-            v-model="applicationInfo.job_level"
-            :items="job_level"
-            outlined
-            dense
-            background-color="white"
-            placeholder="Select Country"
-          ></v-autocomplete>
-        </div>
-
-        <div class="row-we-af">
-          <p>Available For</p>
-
-          <v-autocomplete
-            v-model="applicationInfo.available_for"
-            class="mb-0 skill-add-text-field"
-            :items="['Part Time', 'Full Time']"
-            outlined
-            dense
-            background-color="white"
-            placeholder="Select Country"
-          ></v-autocomplete>
-        </div>
-
-        <div class="row-we-7">
-          <p>Job Category</p>
-          <v-autocomplete
-            item-text="name"
-            item-value="id"
-            v-model="applicationInfo.job_categroy_id"
-            :items="job_category"
-            outlined
-            dense
-            multiple
-            background-color="white"
-            placeholder="Select Categroy"
-          ></v-autocomplete>
-        </div>
-
-        <div class="row-we-skills">
-          <p class="we-skills-title">Skills</p>
-
-          <!--  <v-badge
+            <!--  <v-badge
             bordered
             color="error"
             content="6"
@@ -191,39 +178,40 @@
               {{ v }}
               <span>remove</span>
             </div>
-          </v-badge>-->
+            </v-badge>-->
 
-          <div class="skill_badge we-skills-box" v-for="(v , i) in skillArray" :key="i">
-            {{ v.title }}
-            <div class="skill_badge_close" @click.stop="()=>removeSkill(i)">x</div>
+            <div class="skill_badge we-skills-box" v-for="(v , i) in skillArray" :key="i">
+              {{ v.title }}
+              <div class="skill_badge_close" @click.stop="()=>removeSkill(i)">x</div>
+            </div>
+
+            <v-autocomplete
+              item-text="title"
+              item-value="id"
+              class="mb-0 skill-add-text-field"
+              v-model="skill_id"
+              :items="skill_list"
+              outlined
+              dense
+              return-object
+              background-color="white"
+              placeholder="Select Skill"
+            ></v-autocomplete>
+
+            <v-btn color="#00adef" class="white--text" @click.stop="addSkill">Add Skill</v-btn>
+          </div>
+        </div>
+
+        <div class="row-14">
+          <div class="item-1">
+            <v-btn @click.stop="()=>{ $router.history.push('/biodata') }">Back</v-btn>
           </div>
 
-          <v-autocomplete
-            item-text="title"
-            item-value="id"
-            class="mb-0 skill-add-text-field"
-            v-model="skill_id"
-            :items="skill_list"
-            outlined
-            dense
-            return-object
-            background-color="white"
-            placeholder="Select Skill"
-          ></v-autocomplete>
-
-          <v-btn color="#00adef" class="white--text" @click.stop="addSkill">Add Skill</v-btn>
+          <div class="item-2">
+            <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
+          </div>
         </div>
-      </div>
-
-      <div class="row-14">
-        <div class="item-1">
-          <v-btn @click.stop="()=>{ $router.history.push('/biodata') }">Back</v-btn>
-        </div>
-
-        <div class="item-2">
-          <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
-        </div>
-      </div>
+      </v-form>
     </div>
   </div>
 </template>
@@ -269,6 +257,7 @@ export default {
 
       experiences: [
         {
+          id: "",
           job_title: "",
           job_category: "",
           from_date: "",
@@ -291,36 +280,71 @@ export default {
       console.log("experiences....", this.experiences);
       console.log("applicationInfo....", this.applicationInfo);
       console.log("skillArray....", this.skillArray);
-      let skill = "";
 
+      let skill_id = "";
+      let skill_title = "";
+      let job_category_id = "";
+      let job_category_title = "";
 
-      
+      let n_ex = {};
 
-      this.skillArray.forEach((n) => (skill = skill + n.id + ","));
-      console.log(skill);
+      console.log("n_exx.....", n_ex);
+
+      let category_id_keeper = [];
+
+      this.R.forEachObjIndexed((v, k) => {
+        if (k === "job_categroy_id" && this.R.type(v) === "Array") {
+          console.log("inside......");
+          category_id_keeper = v;
+        }
+        console.log("k", k);
+        console.log("v", v);
+      }, this.applicationInfo);
+
+      console.log("id keeper ", category_id_keeper);
+
+      this.skillArray.forEach((n) => (skill_id = skill_id + n.id + ","));
+      this.skillArray.forEach((n) => (skill_title = skill_title + n.title + ","));
+      category_id_keeper.forEach(
+        (n) => (job_category_id = job_category_id + n.id + ",")
+      );
+      category_id_keeper.forEach(
+        (n) => (job_category_title = job_category_title + n.name + ",")
+      );
+
+      this.applicationInfo = this._.omitBy(
+        this.applicationInfo,
+        this._.isArray
+      );
 
       let data = {
         experiences: this.experiences,
-        applicationInfo: this.applicationInfo,
-        skills: skill,
+        applicationInfo: {
+          ...this.applicationInfo,
+          ...{
+            job_category_id: job_category_id,
+            job_category_title: job_category_title,
+          },
+        },
+        skills: {
+          skill_id,
+          skill_title,
+        },
       };
-
       console.log(data);
 
-      this.$store
+       this.$store
         .dispatch("callApi", {
           url: "resume/experiences",
           method: "post",
           data,
         })
         .then((response) => {
-          console.log("resume.. data", response);
-          // eventBus.$emit( "fillData" , response.data );
-
+          console.log("resume ... ff ", response);
           this.$awn.success("Failed!");
 
-          //  this.$refs.form.reset();
-          //  saves the items from the database in the table
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
         })
@@ -331,12 +355,16 @@ export default {
         .finally(() => {
           //  this.tableLoading = false;
         });
+
+
+
+
+
     },
     addAnotherExperience() {
       this.experiences.push({
         id: "",
         job_title: "",
-        job_category: "",
         from_date: "",
         to_date: "",
         company_name: "",

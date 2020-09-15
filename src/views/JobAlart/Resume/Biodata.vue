@@ -575,6 +575,7 @@ export default {
         // eventBus.$emit( "fillData" , response.data );
         this.countries = response.data.countryList;
         this.biodata = { ...this.biodata, ...response.data.biodata };
+        this.imageUrl = this.biodata.photo;
         console.log("this is biodata info... ", this.biodata);
         this.$store.commit("biodata", this.biodata);
         console.log("this is  ", this.$store.getters.biodata);
