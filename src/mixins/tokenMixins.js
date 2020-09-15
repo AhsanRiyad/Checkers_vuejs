@@ -12,7 +12,8 @@ export default {
                 baseURL: this.$store.state.apiBase,
                 url: `users/new-access-token`,
                 params: {
-                    access_token: this.$cookies.get("accessToken")
+                    access_token: this.$cookies.get("accessToken"),
+                    ip: this.$store.getters.userIp
                 },
                 headers,
             })
