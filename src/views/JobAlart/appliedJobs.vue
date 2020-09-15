@@ -115,18 +115,40 @@
                 <tr v-for="(job, i) in appliedJobs" :key="i">
                   <td><p>{{ i+1 }}</p></td>
                   <td class="col-w">
-                    <a>{{ job.job_title }}</a>
+                    <a  @click="showJobDetails(job.id)">{{ job.job_title }}</a>
                     <p>{{ job.company_name }}</p>
                     <small>Applied On:
                       <v-icon small>mdi-calendar-month</v-icon>
                       <span>{{getHumanDate(job.applied_at)}}</span></small>
                   </td>
-                  <td class="exp-c"><p>{{ job.expected_salary }}</p></td>
+                  <td class="exp-c"><p> <span class="font-weight-bold">{{job.currency_code}}</span> {{ job.expected_salary }}</p></td>
                   <td class="text-center" v-if="job.summary_view">
-                    <v-icon color="green">mdi-check</v-icon>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn c-green" icon
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        > <v-icon color="green">mdi-eye</v-icon></v-btn>
+                      </template>
+                      <span>Summary Viewed</span>
+                    </v-tooltip>
                   </td>
                   <td class="text-center" v-else>
-                    <v-icon color="red">mdi-close</v-icon>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn c-red" icon
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        > <v-icon color="red">mdi-eye-off</v-icon></v-btn>
+                      </template>
+                      <span>Summary Not Viewed</span>
+                    </v-tooltip>
                   </td>
                   <td class="text-center">
                     <v-btn class="interactn c-grey" icon>
@@ -135,9 +157,18 @@
                     <v-btn class="interactn mr-2 ml-2 c-green" icon>
                       <v-icon>mdi-account-tie-voice-off</v-icon>
                     </v-btn>
-                    <v-btn class="interactn c-blue" icon>
-                      <v-icon>mdi-handshake-outline</v-icon>
-                    </v-btn>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn c-blue" icon
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        > <v-icon>mdi-handshake-outline</v-icon></v-btn>
+                      </template>
+                      <span>Short listed</span>
+                    </v-tooltip>
                   </td>
                 </tr>
                 </tbody>
@@ -172,6 +203,24 @@
               </ul>
             </div>
             <!--********** pagination end **************-->
+            <!-- job apply modal starts-->
+            <job-alert-modal persistent v-if="showModal">
+              <div class="d-flex" slot="header">
+               <div class="top_job_det">
+                 <h1 class="warning-text">{{jobDetails.job_title}}</h1>
+                 <p>{{jobDetails.company_name}}</p>
+                 <p><span>{{jobDetails.currency_code}} {{jobDetails.min_salary_range}}</span> - <span>{{jobDetails.currency_code}} {{jobDetails.max_salary_range}}</span></p>
+               </div>
+                <v-spacer></v-spacer>
+                <v-btn small @click="showModal = false" icon>
+                  <v-icon small>mdi-close</v-icon>
+                </v-btn>
+              </div>
+              <div slot="body">
+                <p v-if="jobDetails.job_description">{{jobDetails.job_description}}</p>
+              </div>
+            </job-alert-modal>
+            <!-- job apply modal ends-->
           </v-card>
         </v-col>
       </v-row>
@@ -184,6 +233,9 @@ import '../../sass/job-alart/_appliedJobs.scss'
 import moment from 'moment';
 export default {
   name: "appliedJobs",
+  components: {
+    JobAlertModal: () => import("../../components/Modal"),
+  },
   data: vm => ({
     date: new Date().toISOString().substr(0, 10),
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
@@ -191,6 +243,8 @@ export default {
     menu2: false,
     items: ['viewed', 'Not viewed'],
     appliedJobs: [],
+    jobDetails: {},
+    showModal: false
   }),
 
   computed: {
@@ -219,6 +273,12 @@ export default {
         });
   },
   methods: {
+    showJobDetails (id) {
+      this.showModal = true
+      this.jobId = id
+      this.jobDetails = this.appliedJobs.find(({ id }) => id === this.jobId)
+      console.log("job details", this.jobDetails)
+    },
     getHumanDate : function (date) {
       return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
