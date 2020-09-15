@@ -162,43 +162,12 @@
                 </div>
               </div>
 
-              <div class="row-9">
-                <div class="item-1">
-                  <p>City</p>
-                  <div>
-                    <v-text-field
-                      background-color="white"
-                      class="mb-0"
-                      :rules="[v=>!!v||true]"
-                      placeholder="Enter your city"
-                      outlined
-                      dense
-                      @keyups="saveData"
-                      v-model="biodata.city"
-                    ></v-text-field>
-                  </div>
-                </div>
-
-                <div class="item-2">
-                  <p>Zip/Post Code</p>
-                  <div>
-                    <v-text-field
-                      background-color="white"
-                      class="mb-0"
-                      :rules="[v=>!!v||true]"
-                      placeholder="Enter your post code"
-                      outlined
-                      dense
-                      @keyups="saveData"
-                      v-model="biodata.zip_post_code"
-                    ></v-text-field>
-                  </div>
-                </div>
-              </div>
-
               <div class="row-10">
                 <div class="item-1">
-                  <p>Country</p>
+                  <p>
+                    Country
+                    <span class="required">*</span>
+                  </p>
                   <div>
                     <v-autocomplete
                       item-text="country_name"
@@ -210,6 +179,43 @@
                       background-color="white"
                       placeholder="Select Country"
                     ></v-autocomplete>
+                  </div>
+                </div>
+
+                <div class="row-9">
+                  <div class="item-1">
+                    <p>
+                      City
+                      <span class="required">*</span>
+                    </p>
+                    <div>
+                      <v-text-field
+                        background-color="white"
+                        class="mb-0"
+                        :rules="[v=>!!v||true]"
+                        placeholder="Enter your city"
+                        outlined
+                        dense
+                        @keyups="saveData"
+                        v-model="biodata.city"
+                      ></v-text-field>
+                    </div>
+                  </div>
+
+                  <div class="item-2">
+                    <p>Zip/Post Code</p>
+                    <div>
+                      <v-text-field
+                        background-color="white"
+                        class="mb-0"
+                        :rules="[v=>!!v||true]"
+                        placeholder="Enter your post code"
+                        outlined
+                        dense
+                        @keyups="saveData"
+                        v-model="biodata.zip_post_code"
+                      ></v-text-field>
+                    </div>
                   </div>
                 </div>
 
@@ -303,15 +309,17 @@
                   </p>
                   <div>
                     <vue-tel-input-vuetify
-                        outlined dense
-                        single-line
+                      outlined
+                      dense
+                      single-line
                       @validate="validate"
                       @input="saveData"
                       @focus="focus"
                       v-model="biodata.mobile_number"
-                        :rules="[v=>!!v||true]"
+                      :rules="[v=>!!v||'required']"
                       :validCharactersOnly="true"
                       :inputClasses="vTelInput"
+                      background-color="white"
                     ></vue-tel-input-vuetify>
                     <!-- <small v-if="biodata.mobile_number == ''" class="required">mobile number is required</small> -->
                   </div>
@@ -321,12 +329,14 @@
                   <p>Optional Number</p>
                   <div>
                     <vue-tel-input-vuetify
-                        outlined dense
-                        single-line
+                      outlined
+                      dense
+                      single-line
                       v-model="biodata.anothermobile_number"
                       @validate="validate"
                       @input="saveData"
                       :required="true"
+                      background-color="white"
                       :validCharactersOnly="true"
                       inputClasses="vTelInput"
                     ></vue-tel-input-vuetify>
@@ -338,11 +348,11 @@
 
           <div class="row-14">
             <div class="item-1">
-              <v-btn @click.stop="prevBtn">Previous</v-btn>
+              <v-btn @click.stop="()=>{ $router.history.push('/') }">Back</v-btn>
             </div>
 
             <div class="item-2">
-              <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Next</v-btn>
+              <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
             </div>
           </div>
         </div>

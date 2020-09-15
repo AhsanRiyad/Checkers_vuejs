@@ -117,7 +117,7 @@
             </div>
           </div>
 
-          <div class="row-we-remove">
+          <div class="row-we-remove" v-if="experiences.length > 1">
             <v-btn
               color="error"
               class="ml-5 mb-3 row-we-remove__btn"
@@ -126,6 +126,7 @@
           </div>
         </div>
         <v-btn
+          :disabled="R.isEmpty(experiences[experiences.length-1].job_title) "
           class="add_more_btn ml-5"
           color="primary"
           @click.stop="addAnotherExperience"
@@ -170,6 +171,7 @@
             :items="job_category"
             outlined
             dense
+            multiple
             background-color="white"
             placeholder="Select Categroy"
           ></v-autocomplete>
@@ -215,11 +217,11 @@
 
       <div class="row-14">
         <div class="item-1">
-          <v-btn @click.stop="prevBtn">Previous</v-btn>
+          <v-btn @click.stop="()=>{ $router.history.push('/biodata') }">Back</v-btn>
         </div>
 
         <div class="item-2">
-          <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Next</v-btn>
+          <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
         </div>
       </div>
     </div>
@@ -290,6 +292,10 @@ export default {
       console.log("applicationInfo....", this.applicationInfo);
       console.log("skillArray....", this.skillArray);
       let skill = "";
+
+
+      
+
       this.skillArray.forEach((n) => (skill = skill + n.id + ","));
       console.log(skill);
 
@@ -339,6 +345,8 @@ export default {
       });
     },
     addSkill() {
+      if (this.R.isEmpty(this.skill_id)) return;
+
       if (this.skillArray.some((n) => n.id == this.skill_id.id)) return;
 
       this.skillArray.push(this.skill_id);
