@@ -25,7 +25,7 @@
 
   .ja__selected_card {
     background-color: #ececec;
-    padding: pxToVw(25) pxToVw(30);
+    padding: pxToVw(25) pxToVw(10);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -72,15 +72,6 @@
 
   .posted__list {
     justify-content: center;
-
-    .ja__card {
-
-    }
-
-    .action {
-      //display: table-caption;
-      //text-align: right;
-    }
   }
 }
 
@@ -127,12 +118,17 @@
     .ja_left_card {
       .job_title {
         text-transform: capitalize;
+        font-size: pxToVw(30);
       }
     }
 
     .ja_right_card {
-      .v-btn {
+      .v-icon{
+        line-height: 0 !important;
+      }
+      .v-btn, .v-icon {
         color: #ffffff !important;
+        font-size: pxToVw(14);
       }
     }
   }

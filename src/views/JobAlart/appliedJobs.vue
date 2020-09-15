@@ -78,9 +78,9 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job Found : <span>23</span></p>
+                  <p class="jaif">Total Job Found : <span>{{totalJobs}}</span></p>
                 </v-col>
-                <v-col cols="12" lg="8">
+                <v-col cols="12" lg="8" v-if="false">
                   <ul class="d-flex ja__info justify-end">
                     <li class="ja_tinfo d-flex align-center">
                       <v-icon class="light__grey">mdi-account-tie-voice-off</v-icon>
@@ -100,76 +100,127 @@
             </div>
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
-            <table>
-              <thead>
-              <tr class="panel-heading">
-                <th>Sl</th>
-                <th style=" width:42%;">Job Title</th>
-                <th>Expected Salary</th>
-                <th class="text-center">Viewed (by Employer)</th>
-                <th class="text-center">Employer's interaction</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr v-for="(job, i) in appliedJobs" :key="i">
-                <td><p>{{ job.id }}</p></td>
-                <td>
-                  <a>{{ job.role }}</a>
-                  <p>{{ job.companyName }}</p>
-                  <small>Applied On:
-                    <v-icon>mdi-calendar-month</v-icon>
-                    <span>{{ job.appliedOn }}</span></small>
-                </td>
-                <td><p>{{ job.expectedSalary }}</p></td>
-                <td class="text-center" v-if="job.viewed">
-                  <v-icon color="green">mdi-check</v-icon>
-                </td>
-                <td class="text-center" v-else>
-                  <v-icon color="red">mdi-close</v-icon>
-                </td>
-                <td class="text-center">
-                  <v-btn class="interactn c-grey" icon>
-                    <v-icon>mdi-account-voice</v-icon>
-                  </v-btn>
-                  <v-btn class="interactn mr-2 ml-2 c-green" icon>
-                    <v-icon>mdi-account-tie-voice-off</v-icon>
-                  </v-btn>
-                  <v-btn class="interactn c-blue" icon>
-                    <v-icon>mdi-handshake-outline</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+            <div style="overflow-x: auto">
+              <table>
+                <thead>
+                <tr class="panel-heading">
+                  <th>Sl</th>
+                  <th style=" width:42%;">Job Title</th>
+                  <th>Expected Salary</th>
+                  <th class="text-center">Viewed (by Employer)</th>
+                  <th class="text-center">Employer's interaction</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(job, i) in appliedJobs" :key="i">
+                  <td><p>{{ i+1 }}</p></td>
+                  <td class="col-w">
+                    <a  @click="showJobDetails(job.id)">{{ job.job_title }}</a>
+                    <p>{{ job.company_name }}</p>
+                    <small>Applied On:
+                      <v-icon small>mdi-calendar-month</v-icon>
+                      <span>{{getHumanDate(job.applied_at)}}</span></small>
+                  </td>
+                  <td class="exp-c"><p> <span class="font-weight-bold">{{job.currency_code}}</span> {{ job.expected_salary }}</p></td>
+                  <td class="text-center" v-if="job.summary_view">
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn c-green" icon
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        > <v-icon color="green">mdi-eye</v-icon></v-btn>
+                      </template>
+                      <span>Summary Viewed</span>
+                    </v-tooltip>
+                  </td>
+                  <td class="text-center" v-else>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn c-red" icon
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        > <v-icon color="red">mdi-eye-off</v-icon></v-btn>
+                      </template>
+                      <span>Summary Not Viewed</span>
+                    </v-tooltip>
+                  </td>
+                  <td class="text-center">
+                    <v-btn class="interactn c-grey" icon>
+                      <v-icon>mdi-account-voice</v-icon>
+                    </v-btn>
+                    <v-btn class="interactn mr-2 ml-2 c-green" icon>
+                      <v-icon>mdi-account-tie-voice-off</v-icon>
+                    </v-btn>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn c-blue" icon
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        > <v-icon>mdi-handshake-outline</v-icon></v-btn>
+                      </template>
+                      <span>Short listed</span>
+                    </v-tooltip>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
             <!--********** Job applied table end **************-->
             <!--********** pagination start **************-->
             <div class="pagination">
               <ul class="d-flex pg-list">
                 <li>
-                  <v-btn text>
+                  <v-btn text small>
                     <v-icon>mdi-chevron-double-left</v-icon>
                   </v-btn>
                 </li>
                 <li>
-                  <v-btn text>1</v-btn>
+                  <v-btn text small>1</v-btn>
                 </li>
                 <li>
-                  <v-btn text>2</v-btn>
+                  <v-btn text small>2</v-btn>
                 </li>
                 <li>
-                  <v-btn text>3</v-btn>
+                  <v-btn text small>3</v-btn>
                 </li>
                 <li>
-                  <v-btn text>..12</v-btn>
+                  <v-btn text small>..12</v-btn>
                 </li>
                 <li>
-                  <v-btn text>
+                  <v-btn text small>
                     <v-icon>mdi-chevron-double-right</v-icon>
                   </v-btn>
                 </li>
               </ul>
             </div>
             <!--********** pagination end **************-->
+            <!-- job apply modal starts-->
+            <job-alert-modal persistent v-if="showModal">
+              <div class="d-flex" slot="header">
+               <div class="top_job_det">
+                 <h1 class="warning-text">{{jobDetails.job_title}}</h1>
+                 <p>{{jobDetails.company_name}}</p>
+                 <p><span>{{jobDetails.currency_code}} {{jobDetails.min_salary_range}}</span> - <span>{{jobDetails.currency_code}} {{jobDetails.max_salary_range}}</span></p>
+               </div>
+                <v-spacer></v-spacer>
+                <v-btn small @click="showModal = false" icon>
+                  <v-icon small>mdi-close</v-icon>
+                </v-btn>
+              </div>
+              <div slot="body">
+                <p v-if="jobDetails.job_description">{{jobDetails.job_description}}</p>
+              </div>
+            </job-alert-modal>
+            <!-- job apply modal ends-->
           </v-card>
         </v-col>
       </v-row>
@@ -179,66 +230,58 @@
 
 <script>
 import '../../sass/job-alart/_appliedJobs.scss'
-
+import moment from 'moment';
 export default {
   name: "appliedJobs",
+  components: {
+    JobAlertModal: () => import("../../components/Modal"),
+  },
   data: vm => ({
     date: new Date().toISOString().substr(0, 10),
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     menu2: false,
     items: ['viewed', 'Not viewed'],
-    appliedJobs: [
-      {
-        id: 1,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
-        expectedSalary: '30000',
-        viewed: true
-      },
-      {
-        id: 2,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
-        expectedSalary: '30000',
-        viewed: false
-      },
-      {
-        id: 3,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
-        expectedSalary: '30000',
-        viewed: true
-      },
-      {
-        id: 4,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
-        expectedSalary: '30000',
-        viewed: false
-      },
-      {
-        id: 5,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        appliedOn: '4 Aug 2019',
-        expectedSalary: '30000',
-        viewed: false
-      }
-    ]
+    appliedJobs: [],
+    jobDetails: {},
+    showModal: false
   }),
 
   computed: {
+    totalJobs () {
+      return this.appliedJobs && this.appliedJobs.length
+    },
     computedDateFormatted() {
       return this.formatDate(this.date)
     },
   },
-
+  mounted() {
+    this.$store
+        .dispatch("callApi", {
+          url: "jobs/applied",
+          method: "get",
+          data: {}
+        })
+        .then((response) => {
+          console.log("job.. data", response.jobs);
+          this.appliedJobs = response.jobs
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+        })
+        .finally(() => {
+        });
+  },
   methods: {
+    showJobDetails (id) {
+      this.showModal = true
+      this.jobId = id
+      this.jobDetails = this.appliedJobs.find(({ id }) => id === this.jobId)
+      console.log("job details", this.jobDetails)
+    },
+    getHumanDate : function (date) {
+      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
+    },
     formatDate(date) {
       if (!date) return null
 

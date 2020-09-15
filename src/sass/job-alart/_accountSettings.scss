@@ -1,5 +1,9 @@
 @import "../baseVariables";
 .account-settings{
+  .ja__card{
+    padding: pxToVw(30) pxToVw(30);
+    border-radius: 0 !important;
+  }
   .ja__account__list{
     li{
       display: flex;
@@ -30,10 +34,7 @@
     }
   }
 }
-.ja__card{
-  padding: pxToVw(30) pxToVw(30);
-  border-radius: 0 !important;
-}
+
 
 //change email css start
 .ja__button{
