@@ -4,7 +4,6 @@
       <v-row>
         <v-col cols="12" md="12">
           <v-tabs v-model="tabs"
-              fixed-tabs
               background-color="indigo"
               dark
           >

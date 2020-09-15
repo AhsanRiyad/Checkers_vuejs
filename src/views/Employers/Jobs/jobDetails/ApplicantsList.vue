@@ -14,8 +14,8 @@
             </div>
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
-           <div >
-             <table  style="overflow-x: auto !important;">
+           <div  style="overflow-x: auto !important;">
+             <table>
                <tbody>
                <tr v-for="(applicant, i) in applicants" :key="i">
                  <td class="text-center"><p class="font-weight-bold">{{ applicant.id }}</p></td>

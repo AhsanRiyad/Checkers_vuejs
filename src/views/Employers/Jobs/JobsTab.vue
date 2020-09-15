@@ -6,7 +6,7 @@
           <!--********** Top card start **************-->
           <v-card flat class="ja__selected_card">
             <div class="top_portion text-right">
-              <v-btn color="primary">
+              <v-btn class="mr-2" color="primary">
                 <v-icon>mdi-magnify</v-icon>
                 search cv bank
               </v-btn>
