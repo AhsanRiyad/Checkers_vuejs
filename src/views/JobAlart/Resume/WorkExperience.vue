@@ -8,7 +8,7 @@
       <div>
         <p class="pHeader">
           Work Experience (
-          <span>*Required Field of Education</span> )
+          <span>*Required Field of Experience</span> )
         </p>
 
         <v-divider></v-divider>
@@ -30,7 +30,7 @@
           </div>
 
           <div class="row-2">
-            <p>Job Category</p>
+            <p>Choose your preferable area</p>
             <v-autocomplete
               item-text="name"
               item-value="id"
@@ -38,6 +38,7 @@
               :items="job_category"
               outlined
               dense
+              multiple
               background-color="white"
               placeholder="Select Categroy"
             ></v-autocomplete>
@@ -250,7 +251,7 @@ export default {
       job_level: [],
       job_categroy: [],
       applicationInfo: {
-        id:"",
+        id: "",
         job_level: "",
         job_category_id: "",
         available_for: "",
@@ -327,7 +328,7 @@ export default {
     },
     addAnotherExperience() {
       this.experiences.push({
-        id:"",
+        id: "",
         job_title: "",
         job_category: "",
         from_date: "",

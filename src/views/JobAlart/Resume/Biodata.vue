@@ -10,7 +10,7 @@
           <div>
             <p class="pHeader">
               Biodata (
-              <span>*Required Field of Education</span> )
+              <span>*Required Field of Biodata</span> )
             </p>
 
             <v-divider></v-divider>
@@ -41,7 +41,7 @@
                       <v-text-field
                         background-color="white"
                         class="mb-0"
-                        :rules="[v=>!!v||true]"
+                        :rules="[v=>!!v||'required', v => v > 0 || 'cant not be negative']"
                         placeholder="In month"
                         outlined
                         type="number"
@@ -49,7 +49,6 @@
                         @keyups="saveData"
                         v-model="biodata.noticePeriod"
                       ></v-text-field>
-                      <p>Days</p>
                     </div>
                   </div>
                 </div>
@@ -124,36 +123,8 @@
                 </div>
               </div>
 
-              <div class="row-6">
-                <p>Cover Letter</p>
-                <div>
-                  <ckeditor
-                    @input="saveData"
-                    v-model="biodata.cover_letter"
-                    :editor="editor"
-                    :config="editorConfig"
-                  ></ckeditor>
-                </div>
-              </div>
-
               <div class="row-7">
                 <p>Personal Details</p>
-              </div>
-
-              <div class="row-8">
-                <p>Address</p>
-                <div>
-                  <v-text-field
-                    background-color="white"
-                    class="mb-0"
-                    :rules="[v=>!!v||true]"
-                    placeholder="Enter your address"
-                    outlined
-                    dense
-                    @keyup="saveData"
-                    v-model="biodata.address"
-                  ></v-text-field>
-                </div>
               </div>
 
               <div class="row-8">
@@ -171,6 +142,22 @@
                     dense
                     @keyup="saveData"
                     v-model="biodata.contact_email"
+                  ></v-text-field>
+                </div>
+              </div>
+
+              <div class="row-8">
+                <p>Address</p>
+                <div>
+                  <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    :rules="[v=>!!v||true]"
+                    placeholder="Enter your address"
+                    outlined
+                    dense
+                    @keyup="saveData"
+                    v-model="biodata.address"
                   ></v-text-field>
                 </div>
               </div>

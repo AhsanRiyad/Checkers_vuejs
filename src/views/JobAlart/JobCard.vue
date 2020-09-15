@@ -262,6 +262,8 @@ export default {
       termsAndConditions: false,
       search: "",
 
+      screenHeight: "",
+
       loadingAppliedJob: false,
 
       page: 1,
@@ -386,6 +388,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$awn.alert("Failed!");
 
           if (error.response.status == 401) {
             this.$awn.alert("You are not logged in");
@@ -445,6 +448,9 @@ export default {
 
       console.log("window ... ", window);
 
+      this.JobDescriptionStyle.height =
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
+
       /* console.log("window inner height", window.innerHeight);
       console.log("scrol top", document.body.scrollTop);
       console.log("offset height", document.body.offsetHeight);
@@ -463,7 +469,7 @@ export default {
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      this.jobDetails.top = screen.availHeight + "px";
+      // this.jobDetails.top = screen.availHeight + "px";
 
       // this.JobDescriptionStyle.height = screen.availHeight - 140 + "px";
 
@@ -571,7 +577,6 @@ export default {
           this.Jobs = response.data.jobs.items;
           this.jobId = this.JobDescription = this.Jobs[0];
           this.skeletonJobDetails = false;
-
           this.length = Math.round(
             response.data.jobs.total_count /
               response.data.jobs.num_items_per_page
@@ -592,12 +597,24 @@ export default {
           this.skeleton = false;
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
           //  this.tableLoading = false;
+          // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
+          this.JobDescriptionStyle.height =
+            screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
+          console.log(
+            "window availheight.....",
+            document.querySelector("#mainDocs").scrollHeight
+          );
         });
     },
   },
   mounted() {
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
+    this.screenHeight = screen.availHeight;
+
+    // this.jobDetails.height =  "1000px";
+
+    console.log("screen height... ", this.screenHeight);
 
     this.search = this.$route.query.q;
 
@@ -605,6 +622,9 @@ export default {
   },
   destroyed: function () {
     window.removeEventListener("scroll", this.onScroll);
+  },
+  updated() {
+    // this.jobDetails.top = screen.availHeight + "px";
   },
   watch: {
     pageNo() {
