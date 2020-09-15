@@ -3,6 +3,12 @@
   p{
     margin: 0 !important;
   }
+  .ja__card{
+    padding: 30px 50px;
+    @media (max-width: 959px){
+      padding: 15px 0;
+    }
+  }
   .ja__selected_card{
     background-color: #ececec;
     padding: pxToVw(25) pxToVw(20);
@@ -18,15 +24,25 @@
       padding: pxToVw(5) 0 pxToVw(5) 0;
       color: #69aa44;
       font-size: pxToVw(16);
+      @media (max-width: 959px){
+        text-align: center;
+        font-size: pxToMobVw(25);
+        margin: pxToMobVw(30) 0 !important;
+      }
       span{
         font-size: pxToVw(16);
-        min-width: pxToVw(35);
         height: pxToVw(22);
         padding: pxToVw(0) pxToVw(10) pxToVw(0) pxToVw(10);
         color: #fff;
         background-color: #68aa47;
         border-radius: 4px;
         margin-left: pxToVw(5);
+        @media (max-width: 959px){
+          font-size: pxToMobVw(25);
+          height: pxToMobVw(22);
+          padding: 0 pxToMobVw(10);
+          margin-left: pxToMobVw(5);
+        }
       }
     }
     .ja_tinfo{
@@ -60,14 +76,34 @@
     margin-top: 0;
     border-spacing: 0;
     text-align: left;
+    .col-w{
+      @media (max-width: 959px){
+        width: 180px;
+        overflow: hidden;
+        display: inline-block;
+        white-space: nowrap;
+      }
+    }
+    .exp-c{
+      @media (max-width: 959px){
+        width: 100px !important;
+      }
+
+    }
     tr th{
       border: none;
       vertical-align: middle;
       padding: 0 pxToVw(10);
+      @media (max-width: 959px) {
+        padding: pxToMobVw(10) pxToMobVw(40);
+      }
     }
     td{
       border-top: 1px solid #efefef;
       padding: pxToVw(15) pxToVw(10);
+      @media (max-width: 959px) {
+        padding: pxToMobVw(20) pxToMobVw(40);
+      }
     }
     .panel-heading{
       vertical-align: middle;
@@ -83,6 +119,9 @@
     .interactn{
       .v-icon{
         font-size: pxToVw(16) !important;
+        @media (max-width: 959px){
+          font-size: pxToMobVw(25) !important;
+        }
       }
     }
     .c-grey{
