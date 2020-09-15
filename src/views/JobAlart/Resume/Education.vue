@@ -1,8 +1,8 @@
 <template>
-  <div class="mainTemplate">
+  <div class="mainTemplate_education">
     <optionTab />
 
-    <div class="mainContainer">
+    <div class="mainContainer_education">
       <p class="h1Text">Create a Job Alert Resume</p>
       <div>
         <p class="pHeader">
@@ -19,8 +19,7 @@
             <v-select
               background-color="white"
               :rules="[v=>!!v||'required']"
-              placeholder="Level Of Education"
-              outlined
+              placeholder="Level Of Education" outlined
               :items="['hi', 'hellow']"
               dense
             ></v-select>

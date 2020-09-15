@@ -11,15 +11,19 @@
   border: 1px solid red !important;
 }
 
-.mainTemplate {
+.mainTemplate_biodata {
   background: transparent;
 }
 
-.mainContainer {
+.mainContainer_biodata {
   background: #efefef;
   justify-content: center;
-  width: 50%;
+  width: 60%;
   margin: 0px auto;
+  -webkit-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
+  padding-bottom: 10px;
 
   @include tab() {
     width: 95%;

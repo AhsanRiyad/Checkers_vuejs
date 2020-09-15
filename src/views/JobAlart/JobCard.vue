@@ -1,5 +1,5 @@
 <template>
-  <div class="jobcard-first-container">
+  <div class="jobcard-first-container" id="mainDocs">
     <div class="searchText">
       <div class="searchText-pagination-jobcard">
         <div>
@@ -7,7 +7,7 @@
         </div>
 
         <div>
-          <v-pagination v-model="page" :length="6"></v-pagination>
+          <v-pagination v-model="pageNo" :length="length"></v-pagination>
         </div>
       </div>
     </div>
@@ -262,11 +262,15 @@ export default {
       termsAndConditions: false,
       search: "",
 
+      screenHeight: "",
+
       loadingAppliedJob: false,
 
       page: 1,
 
       jobId: "",
+
+      length: 0,
 
       expectedSalary: "",
 
@@ -374,7 +378,7 @@ export default {
           console.log(response);
 
           if (response.status == 206) {
-            this.$router.history.push("/resume/biodata");
+            this.$router.history.push("/biodata");
             this.$awn.alert("Your resume is not completed");
             return;
           }
@@ -384,6 +388,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$awn.alert("Failed!");
 
           if (error.response.status == 401) {
             this.$awn.alert("You are not logged in");
@@ -443,19 +448,55 @@ export default {
 
       console.log("window ... ", window);
 
+      this.JobDescriptionStyle.height =
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
+
       /* console.log("window inner height", window.innerHeight);
       console.log("scrol top", document.body.scrollTop);
       console.log("offset height", document.body.offsetHeight);
       console.log("addition ", window.innerHeight + window.scrollY); */
+
+      console.log("inner height ", window.innerHeight);
       console.log("scroll y... ", window.scrollY);
       console.log("subtraction... ", 142 - window.scrollY);
+      console.log("document height", document.body.scrollHeight);
+      console.log(
+        "document body height",
+        document.querySelector("#mainDocs").scrollHeight
+      );
 
       // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
       // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
       // this.JobDescriptionStyle.height = "200px";
 
-      // this.jobDetails.top = 142 - window.scrollY + "px";
+      // this.jobDetails.top = screen.availHeight + "px";
 
+      // this.JobDescriptionStyle.height = screen.availHeight - 140 + "px";
+
+      if (window.scrollY > screen.availHeight - 296 - 140 - 140) {
+        this.JobDescriptionStyle.height =
+          screen.availHeight -
+          140 -
+          140 -
+          140 -
+          140 -
+          40 -
+          (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
+          "px";
+        // this.JobDescriptionStyle.height = "464px";
+        // console.log("scrolled.......", screen.availHeight - 296 - 140 - 140);
+        console.log(
+          "scrolled.......",
+          screen.availHeight -
+            140 -
+            140 -
+            140 -
+            (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
+            "px"
+        );
+      }
+
+      // if (window.innerHeight)
       if (window.scrollY > 132) {
         this.jobDetails.top = "142px";
         // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
@@ -469,7 +510,7 @@ export default {
           this.filterFixedPosition.right = "20%";
         }
       } else {
-      this.jobDetails.top = 287 - window.scrollY + "px";
+        this.jobDetails.top = 287 - window.scrollY + "px";
         // this.jobDetails.top = "287px";
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
@@ -536,6 +577,10 @@ export default {
           this.Jobs = response.data.jobs.items;
           this.jobId = this.JobDescription = this.Jobs[0];
           this.skeletonJobDetails = false;
+          this.length = Math.round(
+            response.data.jobs.total_count /
+              response.data.jobs.num_items_per_page
+          );
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
@@ -552,12 +597,24 @@ export default {
           this.skeleton = false;
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
           //  this.tableLoading = false;
+          // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
+          this.JobDescriptionStyle.height =
+            screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
+          console.log(
+            "window availheight.....",
+            document.querySelector("#mainDocs").scrollHeight
+          );
         });
     },
   },
   mounted() {
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
+    this.screenHeight = screen.availHeight;
+
+    // this.jobDetails.height =  "1000px";
+
+    console.log("screen height... ", this.screenHeight);
 
     this.search = this.$route.query.q;
 
@@ -565,6 +622,14 @@ export default {
   },
   destroyed: function () {
     window.removeEventListener("scroll", this.onScroll);
+  },
+  updated() {
+    // this.jobDetails.top = screen.availHeight + "px";
+  },
+  watch: {
+    pageNo() {
+      this.getData();
+    },
   },
 };
 </script>

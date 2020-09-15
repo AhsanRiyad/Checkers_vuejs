@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import "../../../../sass/job-alart/auth/_tabDesgin.scss";
 
 export default {
   props: ["active"],
@@ -34,4 +33,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../../sass/job-alart/auth/_tabDesgin.scss";
 </style>
