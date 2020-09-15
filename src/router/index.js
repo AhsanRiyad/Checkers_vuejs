@@ -24,6 +24,7 @@ import JobOnlineApply from "@/views/JobAlart/JobApply/JobOnlineApply";
 import biodata from "../views/JobAlart/Resume/Biodata"
 import workExperience from "../views/JobAlart/Resume/WorkExperience"
 import education from "../views/JobAlart/Resume/Education"
+import pricingTable from "@/views/JobAlart/pricingTable";
 
 import forgotPassword from "../views/JobAlart/AccountSettings/forgotPassword"
 
@@ -220,6 +221,14 @@ const routes = [
     component: JobOnlineApply,
     meta: {
       title: 'Job Online Apply'
+    }
+  },
+  {
+    path: '/pricing-table' ,
+    name: 'pricingTable',
+    component: pricingTable,
+    meta: {
+      title: 'Pricing Table'
     }
   }
   //   jobs components routing end

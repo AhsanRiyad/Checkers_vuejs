@@ -31,11 +31,15 @@
               </li>
               <li class="jd_list">
                 <p class="jd_title">job type</p>
-                <div class="jd_status"><v-icon>description</v-icon><span>Stand Out</span></div>
+                <div class="jd_status">
+                  <v-icon size="20">description</v-icon>
+                  <span>Stand Out</span></div>
               </li>
               <li class="jd_list">
                 <p class="jd_title">published on</p>
-                <div class="jd_status"><v-icon>calendar_today</v-icon><span>05 September 2020</span></div>
+                <div class="jd_status">
+                  <v-icon size="20">calendar_today</v-icon>
+                  <span>05 September 2020</span></div>
               </li>
             </ul>
             <ul class="d-flex jd_border jd_right_card">
@@ -77,7 +81,8 @@
                       append-icon="search"
                       solo-inverted
                   ></v-text-field>
-                  <v-text-field outlined dense v-model="dateRangeText" placeholder="Date range" prepend-inner-icon="event" single-line></v-text-field>
+                  <v-text-field outlined dense v-model="dateRangeText" placeholder="Date range"
+                                prepend-inner-icon="event" single-line></v-text-field>
                 </div>
               </v-col>
             </v-row>
@@ -88,45 +93,10 @@
               <applicant-list/>
             </v-tab-item>
             <v-tab-item>
-              <v-card flat>
-                <v-card-title class="headline">An awesome title</v-card-title>
-                <v-card-text>
-                  <p>
-                    Duis lobortis massa imperdiet quam. Donec vitae orci sed dolor rutrum auctor. Vestibulum facilisis,
-                    purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Praesent
-                    congue erat at massa.
-                  </p>
-
-                  <p>
-                    Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
-                    sagittis lacus. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue,
-                    ac auctor orci leo non est. Etiam sit amet orci eget eros faucibus tincidunt. Donec sodales sagittis
-                    magna.
-                  </p>
-
-                  <p class="mb-0">
-                    Ut leo. Suspendisse potenti. Duis vel nibh at velit scelerisque suscipit. Fusce pharetra convallis
-                    urna.
-                  </p>
-                </v-card-text>
-              </v-card>
+              <job-preview/>
             </v-tab-item>
             <v-tab-item>
-              <v-card flat>
-                <v-card-title class="headline">An even better title</v-card-title>
-                <v-card-text>
-                  <p>
-                    Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc
-                    et lorem. Sed hendrerit. Maecenas malesuada. Vestibulum ullamcorper mauris at ligula. Proin faucibus
-                    arcu quis ante.
-                  </p>
-
-                  <p class="mb-0">
-                    Etiam vitae tortor. Curabitur ullamcorper ultricies nisi. Sed magna purus, fermentum eu, tincidunt
-                    eu, varius ut, felis. Aliquam lobortis. Suspendisse potenti.
-                  </p>
-                </v-card-text>
-              </v-card>
+              <job-summary/>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
@@ -137,10 +107,12 @@
 
 <script>
 export default {
-name: "JobDetails",
- components: {
-   ApplicantList: () => import('../Jobs/jobDetails/ApplicantsList'),
- },
+  name: "JobDetails",
+  components: {
+    ApplicantList: () => import('../Jobs/jobDetails/ApplicantsList'),
+    JobPreview: () => import('../Jobs/jobDetails/JobPreview'),
+    JobSummary: () => import('../Jobs/jobDetails/JobSummary'),
+  },
   data: () => {
     return {
       tabs: null,

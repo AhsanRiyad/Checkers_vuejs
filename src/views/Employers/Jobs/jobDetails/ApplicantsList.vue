@@ -15,54 +15,36 @@
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
             <table>
-              <thead>
-              <tr class="panel-heading">
-                <th>Sl</th>
-                <th>Sl</th>
-                <th style=" width:35%;">Job Title</th>
-                <th>
-                  <v-icon>mdi-bell-ring</v-icon>
-                  Job Status
-                </th>
-                <th>
-                  <v-icon>mdi-file-multiple-outline</v-icon>
-                  Application
-                </th>
-                <th class="text-center">
-                  <v-icon>mdi-account-group</v-icon>
-                  Matched
-                </th>
-                <th class="text-center">
-                  <v-icon>mdi-format-list-bulleted</v-icon>
-                  Short-listed
-                </th>
-                <th class="text-center">
-                  <v-icon>mdi-eye</v-icon>
-                  View Status
-                </th>
-                <th class="text-center">Actions</th>
-              </tr>
-              </thead>
               <tbody>
-              <tr v-for="(job, i) in applicants" :key="i">
-                <td><p>{{ job.id }}</p></td>
-                <td>
-                  <a >{{ job.role }}</a>
-                  <p>Published On:<span>{{ job.publishedOn }}</span></p>
-                  <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>
+              <tr v-for="(applicant, i) in applicants" :key="i">
+                <td class="text-center"><p class="font-weight-bold">{{ applicant.id }}</p></td>
+                <td style="width: 10%">
+                  <v-avatar size="85">
+                  <img src="https://cdn.vuetifyjs.com/images/john.jpg"
+                    alt="John">
+                </v-avatar>
                 </td>
                 <td>
-                  <v-switch
-                      v-model="job.jobStatus"
-                      color="success"
-                      value="success"
-                      hide-details
-                  ></v-switch>
+                  <p><a href="">{{ applicant.name }} </a><span class="age_outline">{{applicant.age}}</span></p>
+                  <p>{{ applicant.address }}</p>
+                  <p>{{ applicant.institution_name }}</p>
+                  <p><span>{{applicant.degree}}</span> in <span>{{applicant.subject}}</span></p>
+                  <p><span><v-icon small>mdi-phone</v-icon></span><span>{{applicant.contactNumber}}</span></p>
+                  <v-btn small style="color: #fff !important;" color="blue" depressed><v-icon small>mdi-plus</v-icon> comment</v-btn>
                 </td>
-                <td>{{ job.applications }}</td>
-                <td class="text-center">{{ job.matched }}</td>
-                <td class="text-center">{{ job.shortlisted }}</td>
-                <td class="text-center">{{ job.views }} | {{ job.applications }}</td>
+                <td>
+                  <div v-for="(ex, i) in applicant.exp" :key="i">
+                    <p class="font-weight-bold">{{ex.companyName}}</p>
+                    <p>{{ex.designation}} (<span>{{ex.experience}}</span> + years)</p>
+                  </div>
+                </td>
+                <td></td>
+                <td>
+                  <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ applicant.totalExp }} + years</span></p>
+                  <p> <span class="mr-2">&#2547;</span>{{ applicant.expectedSalary }}</p>
+                  <p> <span class="mr-2"><v-icon small>mdi-restore-alert</v-icon></span><span>{{ applicant.views }} times applied</span></p>
+                  <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ applicant.appliedOn }}</span></p>
+                </td>
                 <td class="action text-center">
                   <v-btn class="interactn c-grey" color="success" icon>
                     <i class="material-icons">check</i>
@@ -124,7 +106,7 @@ export default {
           age: 25,
           address: 'Dhaka, Bangladesh',
           institution_name: 'IUB',
-          eduBackground: 'B.Sc Engineering',
+          degree: 'B.Sc Engineering',
           graduation: '30000',
           subject: 'CSE',
           contactNumber: '01712794616',
@@ -136,7 +118,7 @@ export default {
           ],
           shortlisted: true,
           rejected: true,
-          expectedSalary: '600689',
+          expectedSalary: '60,689',
           views: 73,
           totalExp: '5',
           appliedOn: '20 August 2020'
@@ -148,7 +130,7 @@ export default {
           age: 25,
           address: 'Dhaka, Bangladesh',
           institution_name: 'IUB',
-          eduBackground: 'B.Sc Engineering',
+          degree: 'B.Sc Engineering',
           graduation: '30000',
           subject: 'CSE',
           contactNumber: '01712794616',
@@ -160,7 +142,7 @@ export default {
           ],
           shortlisted: true,
           rejected: true,
-          expectedSalary: '600689',
+          expectedSalary: '60,689',
           views: 73,
           totalExp: '5',
           appliedOn: '20 August 2020'
@@ -172,7 +154,7 @@ export default {
           age: 25,
           address: 'Dhaka, Bangladesh',
           institution_name: 'IUB',
-          eduBackground: 'B.Sc Engineering',
+          degree: 'B.Sc Engineering',
           graduation: '30000',
           subject: 'CSE',
           contactNumber: '01712794616',
@@ -184,7 +166,7 @@ export default {
           ],
           shortlisted: true,
           rejected: true,
-          expectedSalary: '600689',
+          expectedSalary: '60,689',
           views: 73,
           totalExp: '5',
           appliedOn: '20 August 2020'
@@ -196,7 +178,7 @@ export default {
           age: 25,
           address: 'Dhaka, Bangladesh',
           institution_name: 'IUB',
-          eduBackground: 'B.Sc Engineering',
+          degree: 'B.Sc Engineering',
           graduation: '30000',
           subject: 'CSE',
           contactNumber: '01712794616',
@@ -208,7 +190,7 @@ export default {
           ],
           shortlisted: true,
           rejected: true,
-          expectedSalary: '600689',
+          expectedSalary: '60,689',
           views: 73,
           totalExp: '5',
           appliedOn: '20 August 2020'
@@ -220,7 +202,7 @@ export default {
           age: 25,
           address: 'Dhaka, Bangladesh',
           institution_name: 'IUB',
-          eduBackground: 'B.Sc Engineering',
+          degree: 'B.Sc Engineering',
           graduation: '30000',
           subject: 'CSE',
           contactNumber: '01712794616',
@@ -232,7 +214,7 @@ export default {
           ],
           shortlisted: true,
           rejected: true,
-          expectedSalary: '600689',
+          expectedSalary: '60,689',
           views: 73,
           totalExp: '5',
           appliedOn: '20 August 2020'
