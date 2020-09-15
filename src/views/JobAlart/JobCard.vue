@@ -395,7 +395,7 @@ export default {
             this.$router.history.push("/signin");
           } else if (error.response.status == 404) {
             this.$awn.alert("Your resume is not completed");
-            this.$router.history.push("/resume/biodata");
+            this.$router.history.push("/biodata");
             return;
           }
         })

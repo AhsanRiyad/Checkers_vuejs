@@ -19,7 +19,8 @@
             <v-select
               background-color="white"
               :rules="[v=>!!v||'required']"
-              placeholder="Level Of Education" outlined
+              placeholder="Level Of Education"
+              outlined
               :items="['hi', 'hellow']"
               dense
             ></v-select>
@@ -116,7 +117,7 @@
             ></v-text-field>
           </div>
 
-          <div class="row-we-remove">
+          <div class="row-we-remove" v-if="qualification.length > 1">
             <v-btn
               color="error"
               class="ml-5 mb-3 row-we-remove__btn"
@@ -126,7 +127,12 @@
         </div>
 
         <v-divider></v-divider>
-        <v-btn class="ml-5" color="primary" @click.stop="()=>addMore()">Add More+</v-btn>
+        <v-btn
+          
+          class="ml-5"
+          color="primary"
+          @click.stop="()=>addMore()"
+        >Add More+</v-btn>
       </div>
     </div>
   </div>
