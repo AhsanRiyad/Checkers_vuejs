@@ -17,19 +17,24 @@
           <div v-for="(n, i) in experiences" :key="n.title">
             <v-divider></v-divider>
 
-            <div class="row-1">
-              <p>Job Title</p>
-              <v-text-field
-                background-color="white"
-                class="mb-0"
-                v-model="n.job_title"
-                :rules="[v=>!!v||'required']"
-                placeholder="Enter your first name"
-                outlined
-                dense
-              ></v-text-field>
+            <div class="first-div-close-button">
+              <div v-if="experiences.length > 1" class="closeButton" @click.stop="()=>remove(i)">
+                x
+                <span class="closeButton__tooltip_text">remove</span>
+              </div>
+              <div class="row-1">
+                <p>Job Title</p>
+                <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  v-model="n.job_title"
+                  :rules="[v=>!!v||'required']"
+                  placeholder="Enter your first name"
+                  outlined
+                  dense
+                ></v-text-field>
+              </div>
             </div>
-
             <div class="row-100">
               <div class="row-100-title">
                 <p>Time Period</p>
@@ -108,13 +113,13 @@
               </div>
             </div>
 
-            <div class="row-we-remove" v-if="experiences.length > 1">
+            <!-- <div class="row-we-remove" v-if="experiences.length > 1">
               <v-btn
                 color="error"
                 class="ml-5 mb-3 row-we-remove__btn"
                 @click.stop="()=>remove(i)"
               >Remove</v-btn>
-            </div>
+            </div>-->
           </div>
           <v-btn
             :disabled="R.isEmpty(experiences[experiences.length-1].job_title) "
@@ -440,7 +445,9 @@ export default {
             this.skill_list = response.data.skillList;
 
             this.applicationInfo = response.data.applicationInfo;
-            this.experiences = response.data.experiences;
+            this.experiences = this.R.isEmpty(response.data.experiences)
+              ? this.experiences
+              : response.data.experiences;
 
             this.job_categroy_id = this.R.split(
               ",",

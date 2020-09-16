@@ -14,18 +14,24 @@
         <p class="header-text">Education</p>
 
         <div v-for="(n, i) in educations" :key="i">
-          <div class="ed-row-1">
-            <p>Level of Education</p>
-            <v-autocomplete
-              item-text="title"
-              item-value="id"
-              v-model="n.exam_id"
-              :items="examList"
-              outlined
-              dense
-              background-color="white"
-              placeholder="Select Exam"
-            ></v-autocomplete>
+          <div  class="first-div-close-button">
+            <div v-if="educations.length > 1"  class="closeButton" @click.stop="()=>remove(i)">
+              x
+              <span class="closeButton__tooltip_text">remove</span>
+            </div>
+            <div class="ed-row-1">
+              <p>Level of Education</p>
+              <v-autocomplete
+                item-text="title"
+                item-value="id"
+                v-model="n.exam_id"
+                :items="examList"
+                outlined
+                dense
+                background-color="white"
+                placeholder="Select Exam"
+              ></v-autocomplete>
+            </div>
           </div>
 
           <div class="level-of-education">
@@ -126,13 +132,13 @@
             ></v-text-field>
           </div>
 
-          <div class="row-we-remove" v-if="educations.length > 1">
+         <!--  <div class="row-we-remove" v-if="educations.length > 1">
             <v-btn
               color="error"
               class="ml-5 mb-3 row-we-remove__btn"
               @click.stop="()=>remove(i)"
             >Remove</v-btn>
-          </div>
+          </div> -->
         </div>
 
         <v-divider></v-divider>

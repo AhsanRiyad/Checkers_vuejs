@@ -166,3 +166,49 @@
     text-align: right;
   }
 }
+
+
+
+//close button and tooltip starts
+.first-div-close-button {
+  position: relative;
+}
+
+
+.closeButton {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  background: red;
+  padding-right: 8px;
+  padding-left: 8px;
+  color: white;
+  border-radius: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+
+.closeButton__tooltip_text {
+  visibility: hidden;
+  z-index: 2;
+  position: absolute;
+  top: 25px;
+  right: -10px;
+  color: white;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 10px;
+  ;
+  background: black;
+}
+
+
+.closeButton:hover .closeButton__tooltip_text {
+  visibility: visible;
+}
+
+//close button and tooltip ends
