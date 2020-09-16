@@ -78,7 +78,7 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job Found : <span>{{totalJobs}}</span></p>
+                  <p class="jaif">Total Job Found : <span>{{ totalJobs }}</span></p>
                 </v-col>
                 <v-col cols="12" lg="8" v-if="false">
                   <ul class="d-flex ja__info justify-end">
@@ -113,62 +113,109 @@
                 </thead>
                 <tbody>
                 <tr v-for="(job, i) in appliedJobs" :key="i">
-                  <td><p>{{ i+1 }}</p></td>
+                  <td><p>{{ i + 1 }}</p></td>
                   <td class="col-w">
-                    <a  @click="showJobDetails(job.id)">{{ job.job_title }}</a>
+                    <a @click="showJobDetails(job.id)">{{ job.job_title }}</a>
                     <p>{{ job.company_name }}</p>
-                    <small>Applied On:
+                    <small class="font-weight-bold">Applied On:
                       <v-icon small>mdi-calendar-month</v-icon>
-                      <span>{{getHumanDate(job.applied_at)}}</span></small>
+                      <span>{{ getHumanDate(job.applied_at) }}</span></small>
                   </td>
-                  <td class="exp-c"><p> <span class="font-weight-bold">{{job.currency_code}}</span> {{ job.expected_salary }}</p></td>
-                  <td class="text-center" v-if="job.summary_view">
-                    <v-tooltip top>
+                  <td class="exp-c"><p><span class="font-weight-bold">{{ job.currency_code }}</span>
+                    {{ job.expected_salary }}</p></td>
+                  <td class="text-center">
+                    <!-- Summary View icon start -->
+                    <v-tooltip top v-if="job.summary_view">
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            class="interactn c-green" icon
-                            color="primary"
-                            dark
-                            v-bind="attrs"
-                            v-on="on"
-                        > <v-icon color="green">mdi-eye</v-icon></v-btn>
+                        <v-icon class="interactn c-green" icon
+                                dark
+                                v-bind="attrs"
+                                v-on="on" color="green">mdi-eye
+                        </v-icon>
                       </template>
                       <span>Summary Viewed</span>
                     </v-tooltip>
-                  </td>
-                  <td class="text-center" v-else>
-                    <v-tooltip top>
+                    <v-tooltip top v-else>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            class="interactn c-red" icon
-                            color="primary"
-                            dark
-                            v-bind="attrs"
-                            v-on="on"
-                        > <v-icon color="red">mdi-eye-off</v-icon></v-btn>
+                        <v-icon class="interactn c-red" rounded
+                                dark
+                                v-bind="attrs"
+                                v-on="on" color="red">mdi-eye-off
+                        </v-icon>
                       </template>
                       <span>Summary Not Viewed</span>
                     </v-tooltip>
+                    <!-- Summary View icon end -->
+                    <!-- Details View icon start -->
+                    <v-tooltip top v-if="job.details_view">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon class="interactn c-green" icon
+                                dark
+                                v-bind="attrs"
+                                v-on="on" color="green">mdi-text-box-check
+                        </v-icon>
+                      </template>
+                      <span>Details Viewed</span>
+                    </v-tooltip>
+                    <v-tooltip top v-else>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon class="interactn c-red" icon
+                                dark
+                                v-bind="attrs"
+                                v-on="on" color="red">mdi-text-box-remove
+                        </v-icon>
+                      </template>
+                      <span>Details Not Viewed</span>
+                    </v-tooltip>
+                    <!-- Details View icon end -->
                   </td>
                   <td class="text-center">
-                    <v-btn class="interactn c-grey" icon>
-                      <v-icon>mdi-account-voice</v-icon>
-                    </v-btn>
-                    <v-btn class="interactn mr-2 ml-2 c-green" icon>
-                      <v-icon>mdi-account-tie-voice-off</v-icon>
-                    </v-btn>
-                    <v-tooltip top>
+                    <!-- Interview call icon start-->
+                    <v-tooltip top v-if="jobDetails.inter_view_call">
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            class="interactn c-blue" icon
-                            color="primary"
-                            dark
-                            v-bind="attrs"
-                            v-on="on"
-                        > <v-icon>mdi-handshake-outline</v-icon></v-btn>
+                        <v-icon class="interactn c-green" rounded
+                                dark
+                                v-bind="attrs"
+                                v-on="on" color="green">mdi-account-voice
+                        </v-icon>
+                      </template>
+                      <span>Interview call</span>
+                    </v-tooltip>
+                    <v-tooltip top v-else>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon class="interactn c-red" rounded
+                                dark
+                                v-bind="attrs"
+                                v-on="on" color="red">mdi-account-tie-voice-off
+                        </v-icon>
+                      </template>
+                      <span>Interview not call</span>
+                    </v-tooltip>
+                    <!-- Interview call icon end-->
+                    <!-- shortlisted icon start-->
+                    <v-tooltip top v-if="jobDetails.short_listed">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon class="interactn c-green" icon
+                                color="primary"
+                                dark
+                                v-bind="attrs"
+                                v-on="on">mdi-check
+                        </v-icon>
                       </template>
                       <span>Short listed</span>
                     </v-tooltip>
+                    <v-tooltip top v-else>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon class="interactn c-red" icon
+                                color="red"
+                                dark
+                                v-bind="attrs"
+                                v-on="on">mdi-close
+                        </v-icon>
+                      </template>
+                      <span>Not Short listed</span>
+                    </v-tooltip>
+                    <!-- shortlisted icon end-->
                   </td>
                 </tr>
                 </tbody>
@@ -176,48 +223,49 @@
             </div>
             <!--********** Job applied table end **************-->
             <!--********** pagination start **************-->
-            <div class="pagination">
-              <ul class="d-flex pg-list">
-                <li>
-                  <v-btn text small>
-                    <v-icon>mdi-chevron-double-left</v-icon>
-                  </v-btn>
-                </li>
-                <li>
-                  <v-btn text small>1</v-btn>
-                </li>
-                <li>
-                  <v-btn text small>2</v-btn>
-                </li>
-                <li>
-                  <v-btn text small>3</v-btn>
-                </li>
-                <li>
-                  <v-btn text small>..12</v-btn>
-                </li>
-                <li>
-                  <v-btn text small>
-                    <v-icon>mdi-chevron-double-right</v-icon>
-                  </v-btn>
-                </li>
-              </ul>
+            <div>
+              <v-pagination v-model="pageNo" :length="length"></v-pagination>
             </div>
             <!--********** pagination end **************-->
             <!-- job apply modal starts-->
             <job-alert-modal persistent v-if="showModal">
+              <div :style="modalStyle" v-if="!modalSkeleton">
+                <v-skeleton-loader
+                    class="mx-auto"
+                    max-width="300"
+                    type="card"
+                ></v-skeleton-loader>
+              </div>
               <div class="d-flex" slot="header">
-               <div class="top_job_det">
-                 <h1 class="warning-text">{{jobDetails.job_title}}</h1>
-                 <p>{{jobDetails.company_name}}</p>
-                 <p><span>{{jobDetails.currency_code}} {{jobDetails.min_salary_range}}</span> - <span>{{jobDetails.currency_code}} {{jobDetails.max_salary_range}}</span></p>
-               </div>
+                <div class="top_job_det">
+                  <h1 class="warning-text">{{ jobDetails.job_title }}</h1>
+                  <p class="company-name">{{ jobDetails.company_name }} || {{jobDetails.type_in_text}}</p>
+                  <p> <span class="font-weight-bold">{{ jobDetails.currency_code }}</span><span> {{ jobDetails.min_salary_range }}</span> -
+                    <span> {{ jobDetails.max_salary_range }}</span></p>
+                </div>
                 <v-spacer></v-spacer>
                 <v-btn small @click="showModal = false" icon>
-                  <v-icon small>mdi-close</v-icon>
+                  <v-icon color="black" small>mdi-close</v-icon>
                 </v-btn>
               </div>
               <div slot="body">
-                <p v-if="jobDetails.job_description">{{jobDetails.job_description}}</p>
+                <h4 class="mb-3">Job Location</h4>
+               <div class="d-flex mb-4">
+                 <div class="job_location d-flex">
+                   <p>{{jobDetails.job_location}}</p>, <p>{{jobDetails.city}}</p>, <p>{{jobDetails.country}}</p>
+                 </div>
+<!--                 <div class="job_city" v-else-if="jobDetails.city">-->
+<!--                   <p>{{jobDetails.city}}</p>-->
+<!--                 </div>-->
+<!--                 <div class="job_city" v-else-if="jobDetails.country">-->
+<!--                   <p>{{jobDetails.country}}</p>-->
+<!--                 </div>-->
+<!--                 <div v-else>-->
+<!--                   <p>{{jobDetails.country}}</p>-->
+<!--                 </div>-->
+               </div>
+                <h4 class="mb-3">Job Description</h4>
+                <p v-if="jobDetails.job_description">{{ jobDetails.job_description }}</p>
               </div>
             </job-alert-modal>
             <!-- job apply modal ends-->
@@ -231,6 +279,8 @@
 <script>
 import '../../sass/job-alart/_appliedJobs.scss'
 import moment from 'moment';
+import axios from "axios";
+
 export default {
   name: "appliedJobs",
   components: {
@@ -244,11 +294,19 @@ export default {
     items: ['viewed', 'Not viewed'],
     appliedJobs: [],
     jobDetails: {},
-    showModal: false
+    showModal: false,
+    page: 1,
+    pageNo: 1,
+    jobId: "",
+    length: 0,
+    modalSkeleton: false,
+    modalStyle: {
+      width: "50%"
+    }
   }),
 
   computed: {
-    totalJobs () {
+    totalJobs() {
       return this.appliedJobs && this.appliedJobs.length
     },
     computedDateFormatted() {
@@ -256,33 +314,100 @@ export default {
     },
   },
   mounted() {
-    this.$store
-        .dispatch("callApi", {
-          url: "jobs/applied",
-          method: "get",
-          data: {}
-        })
-        .then((response) => {
-          console.log("job.. data", response.jobs);
-          this.appliedJobs = response.jobs
-        })
-        .catch(() => {
-          this.$awn.alert("Failed!");
-        })
-        .finally(() => {
-        });
+    this.getJobAppliedData()
   },
   methods: {
-    showJobDetails (id) {
+    // getData() {
+    //   if (this.$store.getters.userIp == "") {
+    //     new Promise((resolve, reject) => {
+    //       this.getIp(resolve, reject);
+    //     }).then(() => {
+    //       this.getJobAppliedData();
+    //     });
+    //   } else {
+    //     this.getJobAppliedData();
+    //   }
+    // },
+    getJobAppliedData(){
+      this.loading = true;
+      this.skeleton = true;
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        baseURL: this.$store.state.apiBase,
+        url: "jobs/applied",
+        method: "get",
+        params: {
+          // q: this.search,
+          page: this.pageNo,
+          ip: this.$store.getters.userIp,
+        },
+        headers,
+      })
+          .then((response) => {
+            console.log("job applied list....", response);
+            this.appliedJobs = response.data.jobs.items;
+            // this.jobId = this.jobDetails = this.appliedJobs[0];
+            this.skeletonJobDetails = false;
+            this.length = Math.round(
+                response.data.jobs.total_count /
+                response.data.jobs.num_items_per_page
+            );
+            this.skeleton = false;
+            this.ShowAlertMsg = false;
+          })
+          .catch(() => {
+            this.Jobs = [];
+            this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            this.loading = false;
+            this.skeleton = false;
+            // if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+            //  this.tableLoading = false;
+            // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
+          });    },
+    showJobDetails(id) {
+      console.log("job id", id)
       this.showModal = true
-      this.jobId = id
-      this.jobDetails = this.appliedJobs.find(({ id }) => id === this.jobId)
-      console.log("job details", this.jobDetails)
+      this.modalSkeleton = true
+
+      // this.jobId = id
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      this.$store
+          .dispatch("callApi", {
+            url: "jobs/" + id,
+            method: "get",
+            headers,
+            data: {},
+          })
+          .then((response) => {
+            console.log("Job Details list in the", response.data.jobs);
+            this.jobDetails = response.data.jobs;
+          })
+          .catch((error) => {
+            this.$awn.alert("Failed");
+            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+          })
+          .finally(() => {
+            //  this.tableLoading = false;
+            // this.skeletonJobDetails = false;
+          });
+      // this.jobDetails = this.appliedJobs.find(({id}) => id === this.jobId)
+      // console.log("job details", this.jobDetails)
     },
-    getHumanDate : function (date) {
+    getHumanDate: function (date) {
       return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
-    formatDate(date) {
+    formatDate(date) {.0
+
       if (!date) return null
 
       const [year, month, day] = date.split('-')
@@ -295,5 +420,10 @@ export default {
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
   },
+  // watch: {
+  //   pageNo() {
+  //     this.getData();
+  //   },
+  // },
 }
 </script>

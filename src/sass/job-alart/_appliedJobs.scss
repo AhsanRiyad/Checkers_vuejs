@@ -127,24 +127,87 @@
     .c-grey{
       color: #9da2a6 !important;
       border: 1px solid #9da2a6;
+      border-radius: 100%;
+      padding: pxToVw(6);
+      font-size: pxToVw(15);
+      @media (max-width: 959px){
+        font-size: pxToMobVw(17);
+        padding: pxToMobVw(8);
+      }
     }
     .c-green{
       color: #59913d !important;
       border: 1px solid #59913d;
-      margin: 0 pxToVw(5);
+      border-radius: 100%;
+      padding: pxToVw(6);
+      font-size: pxToVw(15);
+      margin: 0 pxToVw(3);
+      @media (max-width: 959px){
+        font-size: pxToMobVw(17);
+        padding: pxToMobVw(8);
+        margin: 0 pxToMobVw(2);
+      }
     }
     .c-blue{
       border: 1px solid #0091ea;
-      color: #0091ea !important;
+      border-radius: 100%;
+      padding: pxToVw(6);
+      font-size: pxToVw(15);
+      @media (max-width: 959px){
+        font-size: pxToMobVw(17);
+        padding: pxToMobVw(8);
+      }
     }
     .c-red{
       border: 1px solid red;
-      color: #0091ea !important;
+      border-radius: 100%;
+      padding: pxToVw(6);
+      font-size: pxToVw(15);
+      margin: 0 pxToVw(3);
+      @media (max-width: 959px){
+        font-size: pxToMobVw(17);
+        padding: pxToMobVw(8);
+        margin: 0 pxToMobVw(2);
+      }
+    }
+  }
+  .modal-container{
+    padding: 0 !important;
+    max-width: 700px;
+    @media (max-width: 959px) {
+      width: 95%;
+    }
+   .modal-header{
+     border-bottom: 2px solid #eeeeee;
+     box-shadow: 0 2px 4px rgba(0,0,0,.08);
+     padding: 20px 30px;
+     @media (max-width: 959px){
+       h1{
+         font-size: 22px;
+       }
+     }
+     .company-name{
+       color: $primaryColor;
+       font-weight: 700;
+       padding: pxToVw(5) 0 !important;
+     }
+   }
+    .modal-body{
+      overflow-y: auto;
+      padding: 10px 30px 30px 30px;
+      max-height: 350px;
+      @media (max-width: 959px){
+        max-height: 420px;
+      }
     }
   }
   .pagination{
+
     margin: pxToVw(40) 0;
     .pg-list{
+      @media (max-width: 959px){
+        justify-content: center;
+      }
       .v-btn{
         border-radius: 0 !important;
         border: 1px solid #efefef;

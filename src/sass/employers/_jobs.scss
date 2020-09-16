@@ -77,20 +77,27 @@
 
 //add jobs css start
 .mainTemplate {
+  background-color: transparent !important;
   .mainContainer {
     padding-bottom: 10px;
     -webkit-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
     box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
     justify-content: center;
-    width: 60%;
+   width: 60%;
     margin: pxToVw(20) auto;
-
+    background-color: #ffffff;
+    @media (max-width: 959px){
+      width: 95%;
+    }
     .h1Text {
       text-align: center;
-      margin: 0 20px;
+      margin: 20px 0;
       font-size: pxToVw(25);
       color: $secondaryColor;
+      @media (max-width: 959px) {
+        font-size: pxToMobVw(40);
+      }
     }
   }
 }

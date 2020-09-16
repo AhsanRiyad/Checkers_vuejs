@@ -20,7 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/c.sh" beforeDir="false" afterPath="$PROJECT_DIR$/c.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +82,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -87,7 +94,7 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\Farzana Kabir\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -176,6 +183,7 @@
       <workItem from="1600067974803" duration="1531000" />
       <workItem from="1600153391533" duration="17042000" />
       <workItem from="1600231441327" duration="820000" />
+      <workItem from="1600232337081" duration="23204000" />
     </task>
     <servers />
   </component>
@@ -208,6 +216,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="736" y="319" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1599731085193" />
+    <state x="739" y="260" key="FileChooserDialogImpl" timestamp="1600247394545">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="260" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600247394545" />
     <state width="1897" height="338" key="GridCell.Tab.0.bottom" timestamp="1599381385330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -224,6 +236,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1897" height="338" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599381385329" />
+    <state x="460" y="164" key="SettingsEditor" timestamp="1600247542803">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="460" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600247542803" />
     <state x="913" y="0" width="896" height="812" key="dock-window-1" timestamp="1599718407128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

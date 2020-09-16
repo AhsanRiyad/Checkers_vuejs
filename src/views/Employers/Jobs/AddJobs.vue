@@ -151,13 +151,9 @@
           </div>
         </div>
 
-        <div>
-          <div class="item-1">
-            <v-btn>Cancel</v-btn>
-          </div>
-
+        <div class="text-right">
           <div class="item-2">
-            <v-btn color="#365899" class="white--text">Next</v-btn>
+            <v-btn color="#365899" class="white--text">Save</v-btn>
           </div>
         </div>
       </v-col>
@@ -174,7 +170,8 @@ export default {
   mixins: [validation],
   data() {
     return {
-      phone: null
+      phone: null,
+      categories: []
     };
   },
   methods: {
