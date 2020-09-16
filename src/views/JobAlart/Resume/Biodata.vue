@@ -7,6 +7,12 @@
         <div>
           <p class="h1Text">Create a Job Alert Resume</p>
 
+          <div class="previewButton">
+            <v-btn color="success" class="previewButton__button">
+              <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+            </v-btn>
+          </div>
+
           <div>
             <p class="pHeader">
               Biodata (
