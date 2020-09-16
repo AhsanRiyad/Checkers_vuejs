@@ -136,7 +136,6 @@
 
           <div class="row-we-af">
             <p>Available For</p>
-
             <v-autocomplete
               v-model="applicationInfo.available_for"
               class="mb-0 skill-add-text-field"
@@ -243,7 +242,7 @@ export default {
       applicationInfo: {
         id: "",
         job_level: "",
-        job_category_id: "",
+        job_category_id: [],
         available_for: "",
         salary: "",
       },
@@ -340,7 +339,7 @@ export default {
         })
         .then((response) => {
           console.log("resume ... ff ", response);
-          this.$awn.success("Failed!");
+          this.$awn.success("Updated!");
 
           // this.$refs.form.reset();
           //saves the items from the database in the table
@@ -381,55 +380,6 @@ export default {
 
     this.$store
       .dispatch("callApi", {
-        url: "resume/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log("resume.. data", response);
-        // eventBus.$emit( "fillData" , response.data );
-        this.skill_list = response.data.skillList;
-
-        this.applicationInfo = response.data.applicationInfo;
-        this.experiences = response.data.experiences;
-
-        this.applicationInfo.job_category_id = this.R.split(
-          ",",
-          this.applicationInfo.job_category_id
-        );
-        this.applicationInfo.job_category_id = this._.compact(
-          this.applicationInfo.job_category_id
-        );
-
-        this.applicationInfo.job_category_id = this.applicationInfo.job_category_id.map(
-          (n) => {
-            return {
-              id: n,
-            };
-          }
-        );
-
-        // console.log("job category....", abc);
-
-        this.applicationInfo = { ...this.applicationInfo };
-
-        console.log("application in mounted...", this.applicationInfo);
-
-        //  this.$refs.form.reset();
-        //  saves the items from the database in the table
-        //  console.log(response);
-        //  this.items = response.data;
-      })
-      .catch(() => {
-        this.$awn.alert("Failed!");
-        //   this.$awn.alert("Failed");
-      })
-      .finally(() => {
-        //  this.tableLoading = false;
-      });
-
-    this.$store
-      .dispatch("callApi", {
         url: "jobs-category/",
         method: "get",
         data: {},
@@ -443,30 +393,121 @@ export default {
         //  saves the items from the database in the table
         //  console.log(response);
         //  this.items = response.data;
-      })
-      .catch(() => {
-        this.$awn.alert("Failed!");
-        //   this.$awn.alert("Failed");
-      })
-      .finally(() => {
-        //  this.tableLoading = false;
-      });
 
-    this.$store
-      .dispatch("callApi", {
-        url: "/jobs/expertize-label/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log("job label ", response);
-        // eventBus.$emit( "fillData" , response.data );
-        this.job_level = response.data;
+        this.$store
+          .dispatch("callApi", {
+            url: "/jobs/expertize-label/",
+            method: "get",
+            data: {},
+          })
+          .then((response) => {
+            console.log("job label ", response);
+            // eventBus.$emit( "fillData" , response.data );
+            this.job_level = response.data;
 
-        //  this.$refs.form.reset();
-        //  saves the items from the database in the table
-        //  console.log(response);
-        //  this.items = response.data;
+            //  this.$refs.form.reset();
+            //  saves the items from the database in the table
+            //  console.log(response);
+            //  this.items = response.data;
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            //  this.tableLoading = false;
+          });
+
+        this.$store
+          .dispatch("callApi", {
+            url: "resume/",
+            method: "get",
+            data: {},
+          })
+          .then((response) => {
+            console.log("resume.. data", response);
+            // eventBus.$emit( "fillData" , response.data );
+            this.skill_list = response.data.skillList;
+
+            this.applicationInfo = response.data.applicationInfo;
+            this.experiences = response.data.experiences;
+
+            this.applicationInfo.job_category_id = this.R.split(
+              ",",
+              this.applicationInfo.job_category_id
+            );
+            this.applicationInfo.job_category_id = this._.compact(
+              this.applicationInfo.job_category_id
+            );
+
+            this.applicationInfo.job_category_id = this.applicationInfo.job_category_id.map(
+              (n) => {
+                return {
+                  id: n,
+                };
+              }
+            );
+
+            this.applicationInfo.job_category_title = this.R.split(
+              ",",
+              this.applicationInfo.job_category_title
+            );
+            this.applicationInfo.job_category_title = this._.compact(
+              this.applicationInfo.job_category_title
+            );
+
+            this.applicationInfo.job_category_title = this.applicationInfo.job_category_title.map(
+              (n) => {
+                return {
+                  name: n,
+                };
+              }
+            );
+
+            this.applicationInfo.job_category_id = this.job_category.filter(
+              (n) => {
+                return this.applicationInfo.job_category_id.some(
+                  (m) => m.id == n.id
+                );
+              }
+            );
+
+            console.log(
+              "filtering the result",
+              this.applicationInfo.job_category_id
+            );
+
+            /*     console.log(
+          " mergin values.... ",
+          this.R.mergeAll(this.applicationInfo.job_category_id)
+        );
+
+        console.log(
+          "concate ",
+          this.R.concat(
+            this.applicationInfo.job_category_id,
+            this.applicationInfo.job_category_title
+          )
+        ); */
+
+            // console.log("job category....", abc);
+
+            this.applicationInfo = { ...this.applicationInfo };
+
+            console.log("application in mounted...", this.applicationInfo);
+
+            //  this.$refs.form.reset();
+            //  saves the items from the database in the table
+            //  console.log(response);
+            //  this.items = response.data;
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            //  this.tableLoading = false;
+          });
       })
       .catch(() => {
         this.$awn.alert("Failed!");
