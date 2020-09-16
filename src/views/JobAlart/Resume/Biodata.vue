@@ -47,7 +47,7 @@
                         type="number"
                         dense
                         @keyups="saveData"
-                        v-model="biodata.noticePeriod"
+                        v-model="biodata.notice_period"
                       ></v-text-field>
                     </div>
                   </div>
