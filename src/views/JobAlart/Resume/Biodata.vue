@@ -471,7 +471,7 @@ export default {
         })
         .then((response) => {
           console.log("resume ... ff ", response);
-          this.$awn.success("Failed!");
+          this.$awn.success("Updated!");
 
           // this.$refs.form.reset();
           //saves the items from the database in the table

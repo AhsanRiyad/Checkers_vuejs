@@ -152,7 +152,7 @@
             <v-autocomplete
               item-text="name"
               item-value="id"
-              v-model="applicationInfo.job_categroy_id"
+              v-model="job_categroy_id"
               :items="job_category"
               outlined
               dense
@@ -235,6 +235,7 @@ export default {
       skill: "",
       skill_list: [],
 
+
       job_category: [],
 
       job_level: [],
@@ -248,7 +249,7 @@ export default {
       },
 
       skill_id: "",
-
+      job_categroy_id: "",
       date: new Date().toISOString().substr(0, 10),
       menu: false,
       modal: false,
@@ -289,16 +290,16 @@ export default {
 
       console.log("n_exx.....", n_ex);
 
-      let category_id_keeper = [];
+      let category_id_keeper = this.job_categroy_id;
 
-      this.R.forEachObjIndexed((v, k) => {
+     /*  this.R.forEachObjIndexed((v, k) => {
         if (k === "job_categroy_id" && this.R.type(v) === "Array") {
           console.log("inside......");
           category_id_keeper = v;
         }
         console.log("k", k);
         console.log("v", v);
-      }, this.applicationInfo);
+      }, this.applicationInfo); */
 
       console.log("id keeper ", category_id_keeper);
 
@@ -432,15 +433,15 @@ export default {
             this.applicationInfo = response.data.applicationInfo;
             this.experiences = response.data.experiences;
 
-            this.applicationInfo.job_category_id = this.R.split(
+            this.job_categroy_id = this.R.split(
               ",",
               this.applicationInfo.job_category_id
             );
-            this.applicationInfo.job_category_id = this._.compact(
-              this.applicationInfo.job_category_id
+            this.job_categroy_id = this._.compact(
+              this.job_categroy_id
             );
 
-            this.applicationInfo.job_category_id = this.applicationInfo.job_category_id.map(
+            this.job_categroy_id = this.job_categroy_id.map(
               (n) => {
                 return {
                   id: n,
@@ -448,9 +449,9 @@ export default {
               }
             );
 
-            this.applicationInfo.job_category_id = this.job_category.filter(
+            this.job_categroy_id = this.job_category.filter(
               (n) => {
-                return this.applicationInfo.job_category_id.some(
+                return this.job_categroy_id.some(
                   (m) => m.id == n.id
                 );
               }
@@ -458,7 +459,7 @@ export default {
 
             console.log(
               "filtering the result",
-              this.applicationInfo.job_category_id
+              this.job_categroy_id
             );
 
             /*     console.log(
