@@ -217,11 +217,11 @@
           </div>
 
           <div class="item-2">
-            <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
+            <v-btn color="#365899" class="white--text" :loading="loading" @click.stop="nextBtn">Save</v-btn>
           </div>
         </div>
       </v-form>
-    </div>
+    </div>this.loading = true;
   </div>
 </template>
 <script>
@@ -234,6 +234,7 @@ export default {
   },
   data: () => {
     return {
+      loading: false,
       search: "",
       editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
@@ -292,8 +293,11 @@ export default {
     },
     nextBtn() {
       console.log("experiences....", this.experiences);
+      this.loading = false;
       console.log("applicationInfo....", this.applicationInfo);
       console.log("skillArray....", this.skillArray);
+
+      this.loading = true;
 
       let skill_id = "";
       let skill_title = "";
@@ -366,6 +370,7 @@ export default {
           //   this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.loading = false;
           //  this.tableLoading = false;
         });
     },

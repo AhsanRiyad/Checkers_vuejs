@@ -358,7 +358,12 @@
             </div>
 
             <div class="item-2">
-              <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
+              <v-btn
+                :loading="loading"
+                color="#365899"
+                class="white--text"
+                @click.stop="nextBtn"
+              >Save</v-btn>
             </div>
           </div>
         </div>
@@ -380,6 +385,8 @@ export default {
     return {
       date: "",
       menu: "",
+
+      loading: false,
 
       photo: null,
 
@@ -433,6 +440,9 @@ export default {
     nextBtn() {
       console.log("next btn clicked");
       //  if(!this.$refs.form.validate()) return;
+
+      this.loading = true;
+
       let data = {};
       data = this.R.pick(
         [
@@ -489,6 +499,7 @@ export default {
           //   this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.loading = false;
           //  this.tableLoading = false;
         });
     },
