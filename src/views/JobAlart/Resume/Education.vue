@@ -96,6 +96,7 @@
                     @keyups="saveData"
                     v-bind="attrs"
                     v-on="on"
+                    :disabled="n.currentlyWorking"
                   ></v-text-field>
                 </template>
                 <v-date-picker v-model="n.end_year" @input="menu2 = false"></v-date-picker>
@@ -103,7 +104,12 @@
             </div>
 
             <div class="row-100-6">
-              <v-checkbox label="I am currently working here" value="A"></v-checkbox>
+              <v-checkbox
+                label="I am currently studying here"
+                value="A"
+                v-model="n.currentlyWorking"
+                @change="()=>currentlyWorking(n)"
+              ></v-checkbox>
             </div>
           </div>
 
@@ -197,6 +203,11 @@ export default {
     };
   },
   methods: {
+    currentlyWorking(n) {
+      console.log("working here", n);
+      n.end_year = null;
+    },
+
     nextBtn() {
       console.log(this.educations);
 

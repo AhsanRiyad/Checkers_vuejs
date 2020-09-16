@@ -82,6 +82,7 @@
                       backgroundColor="white"
                       outlined
                       dense
+                      :disabled="n.currentlyWorking"
                       @keyups="saveData"
                       v-bind="attrs"
                       v-on="on"
@@ -92,7 +93,11 @@
               </div>
 
               <div class="row-100-6">
-                <v-checkbox label="I am currently working here" value="A"></v-checkbox>
+                <v-checkbox
+                  v-model="n.currentlyWorking"
+                  label="I am currently working here"
+                  @click="()=>currentlyWorking(n)"
+                ></v-checkbox>
               </div>
             </div>
 
@@ -235,7 +240,6 @@ export default {
       skill: "",
       skill_list: [],
 
-
       job_category: [],
 
       job_level: [],
@@ -270,6 +274,11 @@ export default {
     };
   },
   methods: {
+    currentlyWorking(n) {
+      console.log("currently working...", n);
+      n.to_date = null;
+    },
+
     removeSkill(index) {
       this.skillArray.splice(index, 1);
     },
@@ -292,7 +301,7 @@ export default {
 
       let category_id_keeper = this.job_categroy_id;
 
-     /*  this.R.forEachObjIndexed((v, k) => {
+      /*  this.R.forEachObjIndexed((v, k) => {
         if (k === "job_categroy_id" && this.R.type(v) === "Array") {
           console.log("inside......");
           category_id_keeper = v;
@@ -437,30 +446,19 @@ export default {
               ",",
               this.applicationInfo.job_category_id
             );
-            this.job_categroy_id = this._.compact(
-              this.job_categroy_id
-            );
+            this.job_categroy_id = this._.compact(this.job_categroy_id);
 
-            this.job_categroy_id = this.job_categroy_id.map(
-              (n) => {
-                return {
-                  id: n,
-                };
-              }
-            );
+            this.job_categroy_id = this.job_categroy_id.map((n) => {
+              return {
+                id: n,
+              };
+            });
 
-            this.job_categroy_id = this.job_category.filter(
-              (n) => {
-                return this.job_categroy_id.some(
-                  (m) => m.id == n.id
-                );
-              }
-            );
+            this.job_categroy_id = this.job_category.filter((n) => {
+              return this.job_categroy_id.some((m) => m.id == n.id);
+            });
 
-            console.log(
-              "filtering the result",
-              this.job_categroy_id
-            );
+            console.log("filtering the result", this.job_categroy_id);
 
             /*     console.log(
           " mergin values.... ",
