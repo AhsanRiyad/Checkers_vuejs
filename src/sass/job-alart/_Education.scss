@@ -50,16 +50,18 @@
   }
 }
 
-.row-ed-training-place{
+.row-ed-training-place {
   display: flex;
   flex-wrap: wrap;
   margin: 20px 20px 0px 20px;
+
   &__place {
     flex-grow: 1;
     flex-shrink: 1;
     margin-right: 10px;
-    
+
   }
+
   &__duration {
     flex-grow: 1;
     flex-shrink: 1;
@@ -69,7 +71,7 @@
 }
 
 
-.header-text{
+.header-text {
   font-size: 20px;
   font-weight: bold;
   margin: 20px 20px 0px 20px;
@@ -148,3 +150,65 @@
     }
   }
 }
+
+
+.row-14 {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px;
+
+  .item-1 {
+    flex-grow: 1;
+  }
+
+  .item-2 {
+    flex-grow: 1;
+    text-align: right;
+  }
+}
+
+
+
+//close button and tooltip starts
+.first-div-close-button {
+  position: relative;
+}
+
+
+.closeButton {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  background: red;
+  padding-right: 8px;
+  padding-left: 8px;
+  color: white;
+  border-radius: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+
+.closeButton__tooltip_text {
+  visibility: hidden;
+  z-index: 2;
+  position: absolute;
+  top: 25px;
+  right: -10px;
+  color: white;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 10px;
+  ;
+  background: black;
+}
+
+
+.closeButton:hover .closeButton__tooltip_text {
+  visibility: visible;
+}
+
+//close button and tooltip ends

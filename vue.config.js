@@ -7,28 +7,20 @@ module.exports = {
     ? '/'    /*'/new/'*/
     : '/',
 
-    pwa: {
+  pwa: {
     name: 'JobAlart',
     start_url: './',
-    themeColor: '#6200ea',
-    backgroundColor: '#6200ea',
-    msTileColor: '#6200ea',
+    themeColor: '#365899',
+    backgroundColor: '#365899',
+    msTileColor: '#365899',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: '#6200ea',
+    appleMobileWebAppStatusBarStyle: '#365899',
     // configure the workbox plugin
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
       swSrc: 'src/registerServiceWorker.js',
       // ...other Workbox options...
-
-
     },
-    
-
-
-
-
-}
-    
+  }
 }

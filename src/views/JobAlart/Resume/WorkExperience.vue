@@ -17,19 +17,24 @@
           <div v-for="(n, i) in experiences" :key="n.title">
             <v-divider></v-divider>
 
-            <div class="row-1">
-              <p>Job Title</p>
-              <v-text-field
-                background-color="white"
-                class="mb-0"
-                v-model="n.job_title"
-                :rules="[v=>!!v||'required']"
-                placeholder="Enter your first name"
-                outlined
-                dense
-              ></v-text-field>
+            <div class="first-div-close-button">
+              <div v-if="experiences.length > 1" class="closeButton" @click.stop="()=>remove(i)">
+                x
+                <span class="closeButton__tooltip_text">remove</span>
+              </div>
+              <div class="row-1">
+                <p>Job Title</p>
+                <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  v-model="n.job_title"
+                  :rules="[v=>!!v||'required']"
+                  placeholder="Enter your first name"
+                  outlined
+                  dense
+                ></v-text-field>
+              </div>
             </div>
-
             <div class="row-100">
               <div class="row-100-title">
                 <p>Time Period</p>
@@ -82,6 +87,7 @@
                       backgroundColor="white"
                       outlined
                       dense
+                      :disabled="n.currentlyWorking"
                       @keyups="saveData"
                       v-bind="attrs"
                       v-on="on"
@@ -92,7 +98,11 @@
               </div>
 
               <div class="row-100-6">
-                <v-checkbox label="I am currently working here" value="A"></v-checkbox>
+                <v-checkbox
+                  v-model="n.currentlyWorking"
+                  label="I am currently working here"
+                  @click="()=>currentlyWorking(n)"
+                ></v-checkbox>
               </div>
             </div>
 
@@ -103,13 +113,13 @@
               </div>
             </div>
 
-            <div class="row-we-remove" v-if="experiences.length > 1">
+            <!-- <div class="row-we-remove" v-if="experiences.length > 1">
               <v-btn
                 color="error"
                 class="ml-5 mb-3 row-we-remove__btn"
                 @click.stop="()=>remove(i)"
               >Remove</v-btn>
-            </div>
+            </div>-->
           </div>
           <v-btn
             :disabled="R.isEmpty(experiences[experiences.length-1].job_title) "
@@ -136,7 +146,6 @@
 
           <div class="row-we-af">
             <p>Available For</p>
-
             <v-autocomplete
               v-model="applicationInfo.available_for"
               class="mb-0 skill-add-text-field"
@@ -153,7 +162,7 @@
             <v-autocomplete
               item-text="name"
               item-value="id"
-              v-model="applicationInfo.job_categroy_id"
+              v-model="job_categroy_id"
               :items="job_category"
               outlined
               dense
@@ -208,11 +217,11 @@
           </div>
 
           <div class="item-2">
-            <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
+            <v-btn color="#365899" class="white--text" :loading="loading" @click.stop="nextBtn">Save</v-btn>
           </div>
         </div>
       </v-form>
-    </div>
+    </div>this.loading = true;
   </div>
 </template>
 <script>
@@ -225,6 +234,7 @@ export default {
   },
   data: () => {
     return {
+      loading: false,
       search: "",
       editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
@@ -243,13 +253,13 @@ export default {
       applicationInfo: {
         id: "",
         job_level: "",
-        job_category_id: "",
+        job_category_id: [],
         available_for: "",
         salary: "",
       },
 
       skill_id: "",
-
+      job_categroy_id: "",
       date: new Date().toISOString().substr(0, 10),
       menu: false,
       modal: false,
@@ -270,6 +280,11 @@ export default {
     };
   },
   methods: {
+    currentlyWorking(n) {
+      console.log("currently working...", n);
+      n.to_date = null;
+    },
+
     removeSkill(index) {
       this.skillArray.splice(index, 1);
     },
@@ -278,8 +293,11 @@ export default {
     },
     nextBtn() {
       console.log("experiences....", this.experiences);
+      this.loading = false;
       console.log("applicationInfo....", this.applicationInfo);
       console.log("skillArray....", this.skillArray);
+
+      this.loading = true;
 
       let skill_id = "";
       let skill_title = "";
@@ -290,16 +308,16 @@ export default {
 
       console.log("n_exx.....", n_ex);
 
-      let category_id_keeper = [];
+      let category_id_keeper = this.job_categroy_id;
 
-      this.R.forEachObjIndexed((v, k) => {
+      /*  this.R.forEachObjIndexed((v, k) => {
         if (k === "job_categroy_id" && this.R.type(v) === "Array") {
           console.log("inside......");
           category_id_keeper = v;
         }
         console.log("k", k);
         console.log("v", v);
-      }, this.applicationInfo);
+      }, this.applicationInfo); */
 
       console.log("id keeper ", category_id_keeper);
 
@@ -340,7 +358,7 @@ export default {
         })
         .then((response) => {
           console.log("resume ... ff ", response);
-          this.$awn.success("Failed!");
+          this.$awn.success("Updated!");
 
           // this.$refs.form.reset();
           //saves the items from the database in the table
@@ -352,6 +370,7 @@ export default {
           //   this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.loading = false;
           //  this.tableLoading = false;
         });
     },
@@ -381,55 +400,6 @@ export default {
 
     this.$store
       .dispatch("callApi", {
-        url: "resume/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log("resume.. data", response);
-        // eventBus.$emit( "fillData" , response.data );
-        this.skill_list = response.data.skillList;
-
-        this.applicationInfo = response.data.applicationInfo;
-        this.experiences = response.data.experiences;
-
-        this.applicationInfo.job_category_id = this.R.split(
-          ",",
-          this.applicationInfo.job_category_id
-        );
-        this.applicationInfo.job_category_id = this._.compact(
-          this.applicationInfo.job_category_id
-        );
-
-        this.applicationInfo.job_category_id = this.applicationInfo.job_category_id.map(
-          (n) => {
-            return {
-              id: n,
-            };
-          }
-        );
-
-        // console.log("job category....", abc);
-
-        this.applicationInfo = { ...this.applicationInfo };
-
-        console.log("application in mounted...", this.applicationInfo);
-
-        //  this.$refs.form.reset();
-        //  saves the items from the database in the table
-        //  console.log(response);
-        //  this.items = response.data;
-      })
-      .catch(() => {
-        this.$awn.alert("Failed!");
-        //   this.$awn.alert("Failed");
-      })
-      .finally(() => {
-        //  this.tableLoading = false;
-      });
-
-    this.$store
-      .dispatch("callApi", {
         url: "jobs-category/",
         method: "get",
         data: {},
@@ -443,30 +413,114 @@ export default {
         //  saves the items from the database in the table
         //  console.log(response);
         //  this.items = response.data;
-      })
-      .catch(() => {
-        this.$awn.alert("Failed!");
-        //   this.$awn.alert("Failed");
-      })
-      .finally(() => {
-        //  this.tableLoading = false;
-      });
 
-    this.$store
-      .dispatch("callApi", {
-        url: "/jobs/expertize-label/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log("job label ", response);
-        // eventBus.$emit( "fillData" , response.data );
-        this.job_level = response.data;
+        this.$store
+          .dispatch("callApi", {
+            url: "/jobs/expertize-label/",
+            method: "get",
+            data: {},
+          })
+          .then((response) => {
+            console.log("job label ", response);
+            // eventBus.$emit( "fillData" , response.data );
+            this.job_level = response.data;
 
-        //  this.$refs.form.reset();
-        //  saves the items from the database in the table
-        //  console.log(response);
-        //  this.items = response.data;
+            //  this.$refs.form.reset();
+            //  saves the items from the database in the table
+            //  console.log(response);
+            //  this.items = response.data;
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            //  this.tableLoading = false;
+          });
+
+        this.$store
+          .dispatch("callApi", {
+            url: "resume/",
+            method: "get",
+            data: {},
+          })
+          .then((response) => {
+            console.log("resume.. data", response);
+            // eventBus.$emit( "fillData" , response.data );
+            this.skill_list = response.data.skillList;
+
+            this.applicationInfo = response.data.applicationInfo;
+            this.experiences = this.R.isEmpty(response.data.experiences)
+              ? this.experiences
+              : response.data.experiences;
+
+            this.job_categroy_id = this.R.split(
+              ",",
+              this.applicationInfo.job_category_id
+            );
+            this.job_categroy_id = this._.compact(this.job_categroy_id);
+
+            this.job_categroy_id = this.job_categroy_id.map((n) => {
+              return {
+                id: n,
+              };
+            });
+
+            this.job_categroy_id = this.job_category.filter((n) => {
+              return this.job_categroy_id.some((m) => m.id == n.id);
+            });
+
+            console.log("filtering the result", this.job_categroy_id);
+
+            /*     console.log(
+          " mergin values.... ",
+          this.R.mergeAll(this.applicationInfo.job_category_id)
+        );
+
+        console.log(
+          "concate ",
+          this.R.concat(
+            this.applicationInfo.job_category_id,
+            this.applicationInfo.job_category_title
+          )
+        ); */
+
+            // console.log("job category....", abc);
+
+            this.applicationInfo = { ...this.applicationInfo };
+
+            console.log("application in mounted...", this.applicationInfo);
+
+            console.log("skill id list....", response.data.skills.skill_id);
+
+            this.skillArray = response.data.skills.skill_id;
+
+            this.skillArray = this.R.split(",", this.skillArray);
+            this.skillArray = this._.compact(this.skillArray);
+
+            this.skillArray = this.skillArray.map((n) => {
+              return {
+                id: n,
+              };
+            });
+
+            this.skillArray = this.skill_list.filter((n) => {
+              return this.skillArray.some((m) => m.id == n.id);
+            });
+            console.log("skill compact .... ", this.skillArray);
+
+            //  this.$refs.form.reset();
+            //  saves the items from the database in the table
+            //  console.log(response);
+            //  this.items = response.data;
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            //  this.tableLoading = false;
+          });
       })
       .catch(() => {
         this.$awn.alert("Failed!");
