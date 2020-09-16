@@ -50,16 +50,18 @@
   }
 }
 
-.row-ed-training-place{
+.row-ed-training-place {
   display: flex;
   flex-wrap: wrap;
   margin: 20px 20px 0px 20px;
+
   &__place {
     flex-grow: 1;
     flex-shrink: 1;
     margin-right: 10px;
-    
+
   }
+
   &__duration {
     flex-grow: 1;
     flex-shrink: 1;
@@ -69,7 +71,7 @@
 }
 
 
-.header-text{
+.header-text {
   font-size: 20px;
   font-weight: bold;
   margin: 20px 20px 0px 20px;
@@ -146,5 +148,21 @@
       flex-basis: 85%;
       text-align: center;
     }
+  }
+}
+
+
+.row-14 {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px;
+
+  .item-1 {
+    flex-grow: 1;
+  }
+
+  .item-2 {
+    flex-grow: 1;
+    text-align: right;
   }
 }

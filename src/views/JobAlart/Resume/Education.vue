@@ -13,17 +13,19 @@
 
         <p class="header-text">Education</p>
 
-        <div v-for="(n, i) in qualification" :key="i">
+        <div v-for="(n, i) in educations" :key="i">
           <div class="ed-row-1">
             <p>Level of Education</p>
-            <v-select
-              background-color="white"
-              :rules="[v=>!!v||'required']"
-              placeholder="Level Of Education"
+            <v-autocomplete
+              item-text="title"
+              item-value="id"
+              v-model="n.exam_id"
+              :items="examList"
               outlined
-              :items="['hi', 'hellow']"
               dense
-            ></v-select>
+              background-color="white"
+              placeholder="Select Exam"
+            ></v-autocomplete>
           </div>
 
           <div class="level-of-education">
@@ -55,7 +57,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
-                    v-model="n.startYear"
+                    v-model="n.start_year"
                     prepend-inner-icon="event"
                     readonly
                     placeholder="From"
@@ -67,7 +69,7 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="n.startYear" @input="menu = false"></v-date-picker>
+                <v-date-picker v-model="n.start_year" @input="menu = false"></v-date-picker>
               </v-menu>
             </div>
 
@@ -84,7 +86,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
-                    v-model="n.endYear"
+                    v-model="n.end_year"
                     prepend-inner-icon="event"
                     readonly
                     placeholder="To"
@@ -96,7 +98,7 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="n.endYear" @input="menu2 = false"></v-date-picker>
+                <v-date-picker v-model="n.end_year" @input="menu2 = false"></v-date-picker>
               </v-menu>
             </div>
 
@@ -112,12 +114,13 @@
               class="mb-0"
               :rules="[v=>!!v||'required']"
               placeholder="Result"
+              v-model="n.result"
               outlined
               dense
             ></v-text-field>
           </div>
 
-          <div class="row-we-remove" v-if="qualification.length > 1">
+          <div class="row-we-remove" v-if="educations.length > 1">
             <v-btn
               color="error"
               class="ml-5 mb-3 row-we-remove__btn"
@@ -127,12 +130,16 @@
         </div>
 
         <v-divider></v-divider>
-        <v-btn
-          
-          class="ml-5"
-          color="primary"
-          @click.stop="()=>addMore()"
-        >Add More+</v-btn>
+        <v-btn class="ml-5" color="primary" @click.stop="()=>addMore()">Add More+</v-btn>
+      </div>
+      <div class="row-14">
+        <div class="item-1">
+          <v-btn @click.stop="()=>{ $router.history.push('/biodata') }">Back</v-btn>
+        </div>
+
+        <div class="item-2">
+          <v-btn color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -164,14 +171,17 @@ export default {
         },
       ],
 
-      qualification: [
+      examList: [],
+
+      educations: [
         {
-          examId: "",
+          id: "",
+          exam_id: "",
           subject: "",
           institute: "",
           result: "",
-          startYear: "",
-          endYear: "",
+          start_year: "",
+          end_year: "",
           details: "",
         },
       ],
@@ -187,27 +197,71 @@ export default {
     };
   },
   methods: {
+    nextBtn() {
+      console.log(this.educations);
+
+      this.$store
+        .dispatch("callApi", {
+          url: "resume/qualification",
+          method: "post",
+          data: { qualification: this.educations },
+        })
+        .then((response) => {
+          console.log("resume ... ff ", response);
+          this.$awn.success("Updated!");
+
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
+    },
     removeItem(index) {
       console.log(index);
     },
     saveData() {},
     addMore() {
-      this.qualification.push({
+      this.educations.push({
+        id: "",
         subject: "",
         institute: "",
         result: "",
-        startYear: "",
-        endYear: "",
+        start_year: "",
+        end_year: "",
         details: "",
       });
     },
     remove(index) {
-      this.qualification.splice(index, 1);
+      this.educations.splice(index, 1);
     },
   },
   mounted() {
     this.$store.commit("resumePrevbtn", false);
     this.$store.commit("componentName", "Education");
+
+    this.$store
+      .dispatch("callApi", {
+        url: "resume/",
+        method: "get",
+        data: {},
+      })
+      .then((response) => {
+        console.log(response);
+        this.examList = response.data.examList;
+
+        this.educations = response.data.qualification.map((n) => {
+          return { ...n, ...{ exam_id: n.exam.id } };
+        });
+
+        console.log("educations....", this.educations);
+      });
   },
 };
 </script>
