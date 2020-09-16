@@ -448,22 +448,6 @@ export default {
               }
             );
 
-            this.applicationInfo.job_category_title = this.R.split(
-              ",",
-              this.applicationInfo.job_category_title
-            );
-            this.applicationInfo.job_category_title = this._.compact(
-              this.applicationInfo.job_category_title
-            );
-
-            this.applicationInfo.job_category_title = this.applicationInfo.job_category_title.map(
-              (n) => {
-                return {
-                  name: n,
-                };
-              }
-            );
-
             this.applicationInfo.job_category_id = this.job_category.filter(
               (n) => {
                 return this.applicationInfo.job_category_id.some(
@@ -495,6 +479,24 @@ export default {
             this.applicationInfo = { ...this.applicationInfo };
 
             console.log("application in mounted...", this.applicationInfo);
+
+            console.log("skill id list....", response.data.skills.skill_id);
+
+            this.skillArray = response.data.skills.skill_id;
+
+            this.skillArray = this.R.split(",", this.skillArray);
+            this.skillArray = this._.compact(this.skillArray);
+
+            this.skillArray = this.skillArray.map((n) => {
+              return {
+                id: n,
+              };
+            });
+
+            this.skillArray = this.skill_list.filter((n) => {
+              return this.skillArray.some((m) => m.id == n.id);
+            });
+            console.log("skill compact .... ", this.skillArray);
 
             //  this.$refs.form.reset();
             //  saves the items from the database in the table
