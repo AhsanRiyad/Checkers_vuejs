@@ -9,9 +9,7 @@
 
           <div class="previewButton">
             <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
-              <v-icon
-                class="previewButton__button__icon"
-              >remove_red_eye</v-icon>Preview
+              <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
             </v-btn>
           </div>
 
@@ -607,6 +605,7 @@ export default {
         console.log("this is biodata info... ", this.biodata);
         this.$store.commit("biodata", this.biodata);
         console.log("this is  ", this.$store.getters.biodata);
+        this.$store.commit("resume", response.data);
 
         //  this.$refs.form.reset();
         //  saves the items from the database in the table
