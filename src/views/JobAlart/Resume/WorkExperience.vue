@@ -449,7 +449,9 @@ export default {
             // eventBus.$emit( "fillData" , response.data );
             this.skill_list = response.data.skillList;
 
-            this.applicationInfo = response.data.applicationInfo;
+            this.applicationInfo = this.R.isNil(response.data.applicationInfo)
+              ? this.applicationInfo
+              : response.data.applicationInfo;
             this.experiences = this.R.isEmpty(response.data.experiences)
               ? this.experiences
               : response.data.experiences;
