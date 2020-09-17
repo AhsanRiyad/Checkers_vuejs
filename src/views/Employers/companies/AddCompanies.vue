@@ -1,7 +1,7 @@
 <template>
   <v-container class="mainTemplate">
     <v-row class="mainContainer">
-      <v-col cols="12" md="10" lg="10">
+      <v-col cols="12" md="11" lg="11">
         <p class="h1Text">Create a Company</p>
         <div>
           <p>Company Name</p>

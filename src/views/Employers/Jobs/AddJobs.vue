@@ -1,7 +1,7 @@
 <template>
   <v-container class="mainTemplate">
     <v-row class="mainContainer">
-      <v-col cols="12" md="10" lg="10">
+      <v-col cols="12" md="11" lg="11">
         <p class="h1Text">Create a Job</p>
         <v-form ref="form">
           <div>
@@ -199,10 +199,27 @@ export default {
     return {
       loading: false,
       phone: null,
+      jobs: {
+        job_title: '',
+        job_description: '',
+        type: '',
+        company_id: '',
+        company_name: '',
+        job_location: "",
+        country: '',
+        city: '',
+        min_salary_range: '',
+        max_salary_range: '',
+        job_category: '',
+        job_educational_req: '',
+        job_facilities: '',
+        job_responsibilities: '',
+        skills: ''
+      },
       categories: [],
       skillArray: [],
       jobResArr: [
-        {id: '', text: '', is_additional:false}
+        {id: '', text: '', is_additional: false}
       ],
       jobResId: "",
       job_responsibilities: '',
@@ -235,7 +252,7 @@ export default {
           .dispatch("callApi", {
             url: "jobs/",
             method: "post",
-            // data,
+            data : this.jobs,
           })
           .then((response) => {
             console.log("resume ... ff ", response);
