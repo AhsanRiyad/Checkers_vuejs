@@ -8,8 +8,10 @@
           <p class="h1Text">Create a Job Alert Resume</p>
 
           <div class="previewButton">
-            <v-btn color="success" class="previewButton__button">
-              <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+            <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
+              <v-icon
+                class="previewButton__button__icon"
+              >remove_red_eye</v-icon>Preview
             </v-btn>
           </div>
 
@@ -369,6 +371,8 @@
         </div>
       </div>
     </div>
+
+    <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
   </div>
 </template>
 <script>
@@ -380,11 +384,14 @@ export default {
   name: "Biodata",
   components: {
     optionTab: () => import("./tab/optionTab"),
+    resumePreview: () => import("../Dialog/resumePreview"),
   },
   data: () => {
     return {
       date: "",
       menu: "",
+
+      dialogSwitch: false,
 
       loading: false,
 
@@ -437,6 +444,10 @@ export default {
     };
   },
   methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
+    },
+
     nextBtn() {
       console.log("next btn clicked");
       //  if(!this.$refs.form.validate()) return;
