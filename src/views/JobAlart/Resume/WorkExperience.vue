@@ -510,7 +510,6 @@ export default {
               return this.skillArray.some((m) => m.id == n.id);
             });
             console.log("skill compact .... ", this.skillArray);
-
             //  this.$refs.form.reset();
             //  saves the items from the database in the table
             //  console.log(response);
