@@ -27,6 +27,7 @@ import education from "../views/JobAlart/Resume/Education"
 import pricingTable from "@/views/JobAlart/pricingTable";
 
 import forgotPassword from "../views/JobAlart/AccountSettings/forgotPassword"
+import AddCompanies from "@/views/Employers/companies/AddCompanies";
 
 
 
@@ -205,6 +206,14 @@ const routes = [
     component: AddJobs,
     meta: {
       title: 'Add Jobs'
+    }
+  },
+  {
+    path: '/add-companies',
+    name: 'AddCompanies',
+    component: AddCompanies,
+    meta: {
+      title: 'Add Companies'
     }
   },
   {
