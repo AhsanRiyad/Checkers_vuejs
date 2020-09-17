@@ -4,17 +4,14 @@
       <!-- section-1 starts -->
       <div class="defaultResume-title">
         <div class="dr-main-text-div">
-          <p class="defaultResume-title-text">{{ this.resume.payload.biodata.full_name }}</p>
-          <p>Mobile: {{ this.resume.payload.biodata.mobile_number }}</p>
-          <p>Email: {{ this.resume.payload.biodata.contact_email }}</p>
+          <p class="defaultResume-title-text">Muhammad Jahidul Islam</p>
+          <p>Mobile: 01919448787</p>
+          <p>Email: riyad298@gmail.com</p>
         </div>
 
         <div class="dr-title-photo">
           <v-avatar size="150">
-            <img
-              :src=" this.$store.getters.imageUrl + this.resume.payload.biodata.photo"
-              alt="John"
-            />
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
           </v-avatar>
         </div>
       </div>
@@ -23,14 +20,14 @@
       <!-- section-2 starts -->
       <div class="dr-career-objective">
         <p class="dr-title-all">Career Objective:</p>
-        <div v-html="this.resume.payload.biodata.objectives"></div>
+        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
       </div>
       <!-- section-2 ends -->
 
       <!-- section-3 starts -->
       <div class="dr-career-objective">
         <p class="dr-title-all">Career Description:</p>
-        <div v-html="this.resume.payload.biodata.career_description"></div>
+        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
       </div>
       <!-- section-3 ends -->
 
@@ -39,15 +36,17 @@
         <p class="dr-title-all">Employement History:</p>
 
         <p class="years-of-experience">Total year of experiences: 10 years</p>
+
+        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
       </div>
       <!-- section-4 ends -->
 
       <!-- section-5 starts -->
-      <div class="dr-academic-qualification">
+      <div class="dr-academic-qualification ">
         <p class="dr-title-all">Academic Qualification:</p>
 
         <div class="dr-academic-q-heading">
-          <div class="dr-academic-q-heading-item">
+          <div class="dr-academic-q-heading-item" >
             <p class="table-title-dr">Title</p>
           </div>
           <div class="dr-academic-q-heading-item">
@@ -64,12 +63,12 @@
           </div>
         </div>
 
-        <div class="dr-academic-q-info" v-for="n in this.resume.payload.qualification" :key="n.id">
-          <div class="dr-academic-q-heading-item">
-            <p v-text="n.exam.title"></p>
+        <div class="dr-academic-q-info">
+          <div class="dr-academic-q-heading-item" >
+            <p>BSc In CSE</p>
           </div>
           <div class="dr-academic-q-heading-item">
-            <p v-text="n.institute"></p>
+            <p>American International University-Bangladesh</p>
           </div>
           <div class="dr-academic-q-heading-item">
             <p>Computer Programming</p>
@@ -88,7 +87,7 @@
       <div class="dr-academic-certificate">
         <p class="dr-title-all">Academic Certificate:</p>
 
-        <div class="dr-academic-c-heading">
+        <div class="dr-academic-c-heading ">
           <div class="dr-academic-c-heading-item">
             <p class="table-title-dr">Certificate Name</p>
           </div>
@@ -171,13 +170,5 @@ export default {
     return {};
   },
   methods: {},
-  computed: {
-    resume() {
-      return this.$store.getters.resume;
-    },
-  },
-  mounted() {
-    console.log("resume default ..... in the design", this.resume.payload);
-  },
 };
 </script>

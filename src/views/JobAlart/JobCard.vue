@@ -224,8 +224,8 @@
                 depressed
                 link
                 :disabled="!termsAndConditions"
-                @click.stop="applyJob"
                 :loading="loadingAppliedJob"
+                @click.stop="applyJob"
               >Apply</v-btn>
             </div>
           </div>
@@ -261,6 +261,7 @@ export default {
       ShowAlertMsg: false,
       termsAndConditions: false,
       search: "",
+      applyLoading: false,
       screenHeight: "",
       loadingAppliedJob: false,
       page: 1,

@@ -221,7 +221,7 @@
           </div>
         </div>
       </v-form>
-    </div>this.loading = true;
+    </div>
   </div>
 </template>
 <script>

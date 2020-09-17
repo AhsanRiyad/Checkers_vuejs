@@ -40,6 +40,8 @@ export const store = new Vuex.Store({
 
 		userIp: "",
 
+
+
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
@@ -54,6 +56,7 @@ export const store = new Vuex.Store({
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
 		biodata: state => state.biodata,
+		resume: state => state.resume,
 		resumePrevbtn: state => state.resumePrevbtn,
 		resumeNextbtn: state => state.resumeNextbtn,
 		imageUrl: state => state.imageUrl,
