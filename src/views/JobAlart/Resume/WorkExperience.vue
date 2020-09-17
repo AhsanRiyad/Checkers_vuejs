@@ -267,6 +267,17 @@
       </v-form>
     </div>
     <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 <script>
@@ -288,6 +299,8 @@ export default {
         // The configuration of the editor.
         height: 500,
       },
+
+      loadingData: false,
 
       dialogSwitch: false,
       skillArray: [],
@@ -332,6 +345,7 @@ export default {
       this.dialogSwitch = false;
     },
     getData() {
+      this.loadingData = true;
       this.$store
         .dispatch("callApi", {
           url: "jobs-category/",
@@ -409,7 +423,7 @@ export default {
               console.log("filtering the result", this.job_categroy_id);
 
               /*     console.log(
-          " mergin values.... ",
+                " mergin values.... ",
           this.R.mergeAll(this.applicationInfo.job_category_id)
         );
 
@@ -455,6 +469,7 @@ export default {
             })
             .finally(() => {
               //  this.tableLoading = false;
+              this.loadingData = false;
             });
         })
         .catch(() => {

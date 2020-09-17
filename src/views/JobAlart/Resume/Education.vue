@@ -175,6 +175,17 @@
       </div>
     </div>
     <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 
@@ -198,6 +209,8 @@ export default {
         // The configuration of the editor.
         height: 500,
       },
+
+      loadingData: false,
 
       dialogSwitch: false,
       certifates: [
@@ -237,6 +250,7 @@ export default {
       this.dialogSwitch = false;
     },
     getData() {
+      this.loadingData = true;
       this.$store
         .dispatch("callApi", {
           url: "resume/",
@@ -256,6 +270,9 @@ export default {
                 });
 
           console.log("educations....", this.educations);
+        })
+        .finally(() => {
+          this.loadingData = false;
         });
     },
     currentlyWorking(n) {

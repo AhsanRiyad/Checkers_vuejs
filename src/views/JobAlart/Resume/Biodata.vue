@@ -371,6 +371,17 @@
     </div>
 
     <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 <script>
@@ -388,7 +399,7 @@ export default {
     return {
       date: "",
       menu: "",
-
+      loadingData: false,
       dialogSwitch: false,
 
       loading: false,
@@ -443,6 +454,8 @@ export default {
   },
   methods: {
     getData() {
+      this.loadingData = true;
+
       this.$store
         .dispatch("callApi", {
           url: "resume/",
@@ -470,6 +483,7 @@ export default {
           //   this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.loadingData = false;
           //  this.tableLoading = false;
         });
     },
