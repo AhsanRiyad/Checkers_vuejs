@@ -276,9 +276,13 @@ export default {
         console.log(response);
         this.examList = response.data.examList;
 
-        this.educations = response.data.qualification.map((n) => {
-          return { ...n, ...{ exam_id: n.exam.id } };
-        });
+        this.educations =
+          this.R.isNil(response.data.qualification) ||
+          this.R.isEmpty(response.data.qualification)
+            ? this.educations
+            : response.data.qualification.map((n) => {
+                return { ...n, ...{ exam_id: n.exam.id } };
+              });
 
         console.log("educations....", this.educations);
       });
