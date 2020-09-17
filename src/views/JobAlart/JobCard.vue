@@ -261,21 +261,13 @@ export default {
       ShowAlertMsg: false,
       termsAndConditions: false,
       search: "",
-
       screenHeight: "",
-
       loadingAppliedJob: false,
-
       page: 1,
-
       jobId: "",
-
       length: 0,
-
       expectedSalary: "",
-
       showModalSalary: false,
-
       skeleton: true,
       skeletonJobDetails: true,
 

@@ -314,6 +314,7 @@ export default {
     },
   },
   mounted() {
+    this.pageNo = 1
     this.getJobAppliedData()
   },
   methods: {
@@ -341,7 +342,6 @@ export default {
         url: "jobs/applied",
         method: "get",
         params: {
-          // q: this.search,
           page: this.pageNo,
           ip: this.$store.getters.userIp,
         },
@@ -356,17 +356,18 @@ export default {
                 response.data.jobs.total_count /
                 response.data.jobs.num_items_per_page
             );
+            console.log("page length", this.length)
             this.skeleton = false;
             this.ShowAlertMsg = false;
           })
           .catch(() => {
-            this.Jobs = [];
+            this.appliedJobs = [];
             this.$awn.alert("Failed");
           })
           .finally(() => {
             this.loading = false;
             this.skeleton = false;
-            // if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+            if (this.appliedJobs.length === 0) this.ShowAlertMsg = true;
             //  this.tableLoading = false;
             // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
           });    },
@@ -391,12 +392,14 @@ export default {
           .then((response) => {
             console.log("Job Details list in the", response.data.jobs);
             this.jobDetails = response.data.jobs;
+            this.modalSkeleton = false
           })
           .catch((error) => {
             this.$awn.alert("Failed");
             console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
           })
           .finally(() => {
+            this.modalSkeleton = false
             //  this.tableLoading = false;
             // this.skeletonJobDetails = false;
           });

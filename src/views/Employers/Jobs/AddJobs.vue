@@ -17,14 +17,11 @@
 
         <div>
           <p>Job Description</p>
-          <v-textarea
-              background-color="white"
-              class="mb-0"
-              :rules="[v=>!!v||'required']"
-              placeholder="Enter Job Description"
-              outlined
-              dense
-          ></v-textarea>
+          <ckeditor
+              :isValid="true"
+              :editor="editor"
+              :config="editorConfig"
+          ></ckeditor>
         </div>
 
         <div>
@@ -162,6 +159,7 @@
 </template>
 
 <script>
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import '../../../sass/employers/_jobs.scss'
 import validation from "@/mixins/validation";
 
@@ -171,7 +169,14 @@ export default {
   data() {
     return {
       phone: null,
-      categories: []
+      categories: [],
+      editor: ClassicEditor,
+      editorData: "<p>Content of the editor.</p>",
+      editorConfig: {
+        // The configuration of the editor.
+        height: 500,
+      },
+
     };
   },
   methods: {
