@@ -20,6 +20,21 @@
   }
 }
 
+.previewButton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  &__button {
+    margin-right: 20px;
+  }
+
+}
+
+.previewButton__button__icon {
+  padding-right: 3px;
+}
+
 
 .h1Text {
   text-align: center;

@@ -5,6 +5,12 @@
     <div class="mainContainer_we">
       <p class="h1Text">Create a Job Alert Resume</p>
 
+      <div class="previewButton">
+        <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
+          <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+        </v-btn>
+      </div>
+
       <v-form ref="form">
         <div>
           <p class="pHeader">
@@ -35,6 +41,44 @@
                 ></v-text-field>
               </div>
             </div>
+
+            <div class="row-9">
+              <div class="item-1">
+                <p>
+                  Company Name
+                  <span class="required">*</span>
+                </p>
+                <div>
+                  <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    :rules="[v=>!!v||true]"
+                    placeholder="Enter your city"
+                    outlined
+                    dense
+                    @keyups="saveData"
+                    v-model="n.company_name"
+                  ></v-text-field>
+                </div>
+              </div>
+
+              <div class="item-2">
+                <p>Company Location</p>
+                <div>
+                  <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    :rules="[v=>!!v||true]"
+                    placeholder="Enter your post code"
+                    outlined
+                    dense
+                    v-model="n.company_location"
+                    @keyups="saveData"
+                  ></v-text-field>
+                </div>
+              </div>
+            </div>
+
             <div class="row-100">
               <div class="row-100-title">
                 <p>Time Period</p>
@@ -222,6 +266,18 @@
         </div>
       </v-form>
     </div>
+    <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 <script>
@@ -231,6 +287,7 @@ export default {
   name: "Biodata",
   components: {
     optionTab: () => import("./tab/optionTab"),
+    resumePreview: () => import("../Dialog/resumePreview"),
   },
   data: () => {
     return {
@@ -242,6 +299,10 @@ export default {
         // The configuration of the editor.
         height: 500,
       },
+
+      loadingData: false,
+
+      dialogSwitch: false,
       skillArray: [],
       skill: "",
       skill_list: [],
@@ -280,6 +341,145 @@ export default {
     };
   },
   methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
+    },
+    getData() {
+      this.loadingData = true;
+      this.$store
+        .dispatch("callApi", {
+          url: "jobs-category/",
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log("job category..... ", response);
+          // eventBus.$emit( "fillData" , response.data );
+          this.job_category = response.data;
+
+          //  this.$refs.form.reset();
+          //  saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+
+          this.$store
+            .dispatch("callApi", {
+              url: "/jobs/expertize-label/",
+              method: "get",
+              data: {},
+            })
+            .then((response) => {
+              console.log("job label ", response);
+              // eventBus.$emit( "fillData" , response.data );
+              this.job_level = response.data;
+
+              //  this.$refs.form.reset();
+              //  saves the items from the database in the table
+              //  console.log(response);
+              //  this.items = response.data;
+            })
+            .catch(() => {
+              this.$awn.alert("Failed!");
+              //   this.$awn.alert("Failed");
+            })
+            .finally(() => {
+              //  this.tableLoading = false;
+            });
+
+          this.$store
+            .dispatch("callApi", {
+              url: "resume/",
+              method: "get",
+              data: {},
+            })
+            .then((response) => {
+              console.log("resume.. data", response);
+              // eventBus.$emit( "fillData" , response.data );
+              this.skill_list = response.data.skillList;
+
+              this.applicationInfo = this.R.isNil(response.data.applicationInfo)
+                ? this.applicationInfo
+                : response.data.applicationInfo;
+              this.experiences = this.R.isEmpty(response.data.experiences)
+                ? this.experiences
+                : response.data.experiences;
+
+              this.job_categroy_id = this.R.split(
+                ",",
+                this.applicationInfo.job_category_id
+              );
+              this.job_categroy_id = this._.compact(this.job_categroy_id);
+
+              this.job_categroy_id = this.job_categroy_id.map((n) => {
+                return {
+                  id: n,
+                };
+              });
+
+              this.job_categroy_id = this.job_category.filter((n) => {
+                return this.job_categroy_id.some((m) => m.id == n.id);
+              });
+
+              console.log("filtering the result", this.job_categroy_id);
+
+              /*     console.log(
+                " mergin values.... ",
+          this.R.mergeAll(this.applicationInfo.job_category_id)
+        );
+
+        console.log(
+          "concate ",
+          this.R.concat(
+            this.applicationInfo.job_category_id,
+            this.applicationInfo.job_category_title
+          )
+        ); */
+
+              // console.log("job category....", abc);
+
+              this.applicationInfo = { ...this.applicationInfo };
+
+              console.log("application in mounted...", this.applicationInfo);
+
+              console.log("skill id list....", response.data.skills.skill_id);
+
+              this.skillArray = response.data.skills.skill_id;
+
+              this.skillArray = this.R.split(",", this.skillArray);
+              this.skillArray = this._.compact(this.skillArray);
+
+              this.skillArray = this.skillArray.map((n) => {
+                return {
+                  id: n,
+                };
+              });
+
+              this.skillArray = this.skill_list.filter((n) => {
+                return this.skillArray.some((m) => m.id == n.id);
+              });
+              console.log("skill compact .... ", this.skillArray);
+              //  this.$refs.form.reset();
+              //  saves the items from the database in the table
+              //  console.log(response);
+              //  this.items = response.data;
+            })
+            .catch(() => {
+              this.$awn.alert("Failed!");
+              //   this.$awn.alert("Failed");
+            })
+            .finally(() => {
+              //  this.tableLoading = false;
+              this.loadingData = false;
+            });
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+        });
+    },
     currentlyWorking(n) {
       console.log("currently working...", n);
       n.to_date = null;
@@ -359,7 +559,7 @@ export default {
         .then((response) => {
           console.log("resume ... ff ", response);
           this.$awn.success("Updated!");
-
+          this.getData();
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
@@ -398,139 +598,7 @@ export default {
     this.$store.commit("resumePrevbtn", false);
     this.$store.commit("componentName", "WorkExperience");
 
-    this.$store
-      .dispatch("callApi", {
-        url: "jobs-category/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log("job category..... ", response);
-        // eventBus.$emit( "fillData" , response.data );
-        this.job_category = response.data;
-
-        //  this.$refs.form.reset();
-        //  saves the items from the database in the table
-        //  console.log(response);
-        //  this.items = response.data;
-
-        this.$store
-          .dispatch("callApi", {
-            url: "/jobs/expertize-label/",
-            method: "get",
-            data: {},
-          })
-          .then((response) => {
-            console.log("job label ", response);
-            // eventBus.$emit( "fillData" , response.data );
-            this.job_level = response.data;
-
-            //  this.$refs.form.reset();
-            //  saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-          })
-          .catch(() => {
-            this.$awn.alert("Failed!");
-            //   this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            //  this.tableLoading = false;
-          });
-
-        this.$store
-          .dispatch("callApi", {
-            url: "resume/",
-            method: "get",
-            data: {},
-          })
-          .then((response) => {
-            console.log("resume.. data", response);
-            // eventBus.$emit( "fillData" , response.data );
-            this.skill_list = response.data.skillList;
-
-            this.applicationInfo = this.R.isNil(response.data.applicationInfo)
-              ? this.applicationInfo
-              : response.data.applicationInfo;
-            this.experiences = this.R.isEmpty(response.data.experiences)
-              ? this.experiences
-              : response.data.experiences;
-
-            this.job_categroy_id = this.R.split(
-              ",",
-              this.applicationInfo.job_category_id
-            );
-            this.job_categroy_id = this._.compact(this.job_categroy_id);
-
-            this.job_categroy_id = this.job_categroy_id.map((n) => {
-              return {
-                id: n,
-              };
-            });
-
-            this.job_categroy_id = this.job_category.filter((n) => {
-              return this.job_categroy_id.some((m) => m.id == n.id);
-            });
-
-            console.log("filtering the result", this.job_categroy_id);
-
-            /*     console.log(
-          " mergin values.... ",
-          this.R.mergeAll(this.applicationInfo.job_category_id)
-        );
-
-        console.log(
-          "concate ",
-          this.R.concat(
-            this.applicationInfo.job_category_id,
-            this.applicationInfo.job_category_title
-          )
-        ); */
-
-            // console.log("job category....", abc);
-
-            this.applicationInfo = { ...this.applicationInfo };
-
-            console.log("application in mounted...", this.applicationInfo);
-
-            console.log("skill id list....", response.data.skills.skill_id);
-
-            this.skillArray = response.data.skills.skill_id;
-
-            this.skillArray = this.R.split(",", this.skillArray);
-            this.skillArray = this._.compact(this.skillArray);
-
-            this.skillArray = this.skillArray.map((n) => {
-              return {
-                id: n,
-              };
-            });
-
-            this.skillArray = this.skill_list.filter((n) => {
-              return this.skillArray.some((m) => m.id == n.id);
-            });
-            console.log("skill compact .... ", this.skillArray);
-
-            //  this.$refs.form.reset();
-            //  saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-          })
-          .catch(() => {
-            this.$awn.alert("Failed!");
-            //   this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            //  this.tableLoading = false;
-          });
-      })
-      .catch(() => {
-        this.$awn.alert("Failed!");
-        //   this.$awn.alert("Failed");
-      })
-      .finally(() => {
-        //  this.tableLoading = false;
-      });
+    this.getData();
   },
 };
 </script>

@@ -371,6 +371,17 @@
     </div>
 
     <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 <script>
@@ -388,7 +399,7 @@ export default {
     return {
       date: "",
       menu: "",
-
+      loadingData: false,
       dialogSwitch: false,
 
       loading: false,
@@ -442,10 +453,43 @@ export default {
     };
   },
   methods: {
+    getData() {
+      this.loadingData = true;
+
+      this.$store
+        .dispatch("callApi", {
+          url: "resume/",
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log("resume.. data", response);
+          // eventBus.$emit( "fillData" , response.data );
+          this.countries = response.data.countryList;
+          this.biodata = { ...this.biodata, ...response.data.biodata };
+          this.imageUrl = this.biodata.photo;
+          console.log("this is biodata info... ", this.biodata);
+          this.$store.commit("biodata", this.biodata);
+          console.log("this is  ", this.$store.getters.biodata);
+          this.$store.commit("resume", response.data);
+
+          //  this.$refs.form.reset();
+          //  saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loadingData = false;
+          //  this.tableLoading = false;
+        });
+    },
     myDialogClose() {
       this.dialogSwitch = false;
     },
-
     nextBtn() {
       console.log("next btn clicked");
       //  if(!this.$refs.form.validate()) return;
@@ -496,6 +540,7 @@ export default {
         })
         .then((response) => {
           console.log("resume ... ff ", response);
+          this.getData();
           this.$awn.success("Updated!");
 
           // this.$refs.form.reset();
@@ -589,36 +634,7 @@ export default {
     this.$store.commit("resumePrevbtn", true);
     this.$store.commit("resumeNextbtn", true);
     this.$store.commit("componentName", "Biodata");
-
-    this.$store
-      .dispatch("callApi", {
-        url: "resume/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log("resume.. data", response);
-        // eventBus.$emit( "fillData" , response.data );
-        this.countries = response.data.countryList;
-        this.biodata = { ...this.biodata, ...response.data.biodata };
-        this.imageUrl = this.biodata.photo;
-        console.log("this is biodata info... ", this.biodata);
-        this.$store.commit("biodata", this.biodata);
-        console.log("this is  ", this.$store.getters.biodata);
-        this.$store.commit("resume", response.data);
-
-        //  this.$refs.form.reset();
-        //  saves the items from the database in the table
-        //  console.log(response);
-        //  this.items = response.data;
-      })
-      .catch(() => {
-        this.$awn.alert("Failed!");
-        //   this.$awn.alert("Failed");
-      })
-      .finally(() => {
-        //  this.tableLoading = false;
-      });
+    this.getData();
   },
 };
 </script>

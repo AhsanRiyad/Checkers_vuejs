@@ -38,9 +38,47 @@
       <div class="dr-career-objective">
         <p class="dr-title-all">Employement History:</p>
 
-        <p class="years-of-experience">Total year of experiences: 10 years</p>
+        <p
+          class="years-of-experience"
+        >Total year of experiences: {{ this.resume.payload.userTotalExperiences.years }}</p>
       </div>
       <!-- section-4 ends -->
+
+      <!-- section-6 starts -->
+      <div class="dr-academic-certificate">
+        <p class="dr-title-all">Work Experiences:</p>
+
+        <div class="dr-academic-c-heading">
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Job Title</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Company Name</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Company Location</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p class="table-title-dr">Duration</p>
+          </div>
+        </div>
+
+        <div class="dr-academic-c-info" v-for="n in this.resume.payload.experiences" :key="n.id">
+          <div class="dr-academic-c-heading-item">
+            <p>{{ n.job_title }}</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p>{{ n.company_name }}</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p>{{ n.company_location }}</p>
+          </div>
+          <div class="dr-academic-c-heading-item">
+            <p>{{ n.from_date + " to " + n.to_date }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- section-6 ends -->
 
       <!-- section-5 starts -->
       <div class="dr-academic-qualification">
@@ -57,7 +95,7 @@
             <p class="table-title-dr">Field of study</p>
           </div>
           <div class="dr-academic-q-heading-item">
-            <p class="table-title-dr">Duration</p>
+            <p class="table-title-dr">End Year</p>
           </div>
           <div class="dr-academic-q-heading-item">
             <p class="table-title-dr">Result</p>
@@ -72,58 +110,22 @@
             <p v-text="n.institute"></p>
           </div>
           <div class="dr-academic-q-heading-item">
-            <p>Computer Programming</p>
+            <p>{{ n.subject }}</p>
           </div>
           <div class="dr-academic-q-heading-item">
-            <p>4 Years</p>
+            <p>{{ n.end_year }}</p>
           </div>
           <div class="dr-academic-q-heading-item">
-            <p>CGPA-3.92</p>
+            <p>{{ n.result }}</p>
           </div>
         </div>
       </div>
       <!-- section-5 ends -->
 
-      <!-- section-6 starts -->
-      <div class="dr-academic-certificate">
-        <p class="dr-title-all">Academic Certificate:</p>
-
-        <div class="dr-academic-c-heading">
-          <div class="dr-academic-c-heading-item">
-            <p class="table-title-dr">Certificate Name</p>
-          </div>
-          <div class="dr-academic-c-heading-item">
-            <p class="table-title-dr">Certificate number</p>
-          </div>
-          <div class="dr-academic-c-heading-item">
-            <p class="table-title-dr">Validity</p>
-          </div>
-          <div class="dr-academic-c-heading-item">
-            <p class="table-title-dr">Issuing Institution</p>
-          </div>
-        </div>
-
-        <div class="dr-academic-c-info">
-          <div class="dr-academic-c-heading-item">
-            <p>BSc In CSE</p>
-          </div>
-          <div class="dr-academic-c-heading-item">
-            <p>Aiub-1515</p>
-          </div>
-          <div class="dr-academic-c-heading-item">
-            <p>2022</p>
-          </div>
-          <div class="dr-academic-c-heading-item">
-            <p>American International University-Bangladesh</p>
-          </div>
-        </div>
-      </div>
-      <!-- section-6 ends -->
-
       <!-- section-7 starts -->
       <div class="dr-skills">
         <p class="dr-title-all">Skills:</p>
-        <p>web desgin</p>
+        <p>{{ this.resume.payload.skills.name }}</p>
       </div>
       <!-- section-7 ends -->
 
@@ -134,12 +136,14 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Looking For</div>
-        <div class="dr-application-info-2">: Web Development Job</div>
+        <div
+          class="dr-application-info-2"
+        >: {{ this.resume.payload.applicationInfo.job_categroy_title }}</div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Avalable For</div>
-        <div class="dr-application-info-2">: Web Application Development</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.applicationInfo.available_for }}</div>
       </div>
       <!-- section-8 ends -->
 
@@ -150,12 +154,12 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Address</div>
-        <div class="dr-application-info-2">: Kuril, Kaji bari moshjid</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.address }}</div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">City</div>
-        <div class="dr-application-info-2">: Dhaka</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.city }}</div>
       </div>
 
       <!-- section-9 ends -->

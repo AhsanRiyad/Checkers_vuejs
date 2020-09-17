@@ -4,6 +4,13 @@
 
     <div class="mainContainer_education">
       <p class="h1Text">Create a Job Alert Resume</p>
+
+      <div class="previewButton">
+        <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
+          <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+        </v-btn>
+      </div>
+
       <div>
         <p class="pHeader">
           Education (
@@ -40,6 +47,19 @@
               background-color="white"
               class="mb-0"
               v-model="n.institute"
+              :rules="[v=>!!v||'required']"
+              placeholder="Institute Name"
+              outlined
+              dense
+            ></v-text-field>
+          </div>
+
+          <div class="level-of-education">
+            <p>Subject</p>
+            <v-text-field
+              background-color="white"
+              class="mb-0"
+              v-model="n.subject"
               :rules="[v=>!!v||'required']"
               placeholder="Institute Name"
               outlined
@@ -154,6 +174,18 @@
         </div>
       </div>
     </div>
+    <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 
@@ -165,6 +197,7 @@ export default {
   name: "Education",
   components: {
     optionTab: () => import("./tab/optionTab"),
+    resumePreview: () => import("../Dialog/resumePreview"),
   },
   data: () => {
     return {
@@ -177,6 +210,9 @@ export default {
         height: 500,
       },
 
+      loadingData: false,
+
+      dialogSwitch: false,
       certifates: [
         {
           name: "",
@@ -210,6 +246,35 @@ export default {
     };
   },
   methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
+    },
+    getData() {
+      this.loadingData = true;
+      this.$store
+        .dispatch("callApi", {
+          url: "resume/",
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log(response);
+          this.examList = response.data.examList;
+
+          this.educations =
+            this.R.isNil(response.data.qualification) ||
+            this.R.isEmpty(response.data.qualification)
+              ? this.educations
+              : response.data.qualification.map((n) => {
+                  return { ...n, ...{ exam_id: n.exam.id } };
+                });
+
+          console.log("educations....", this.educations);
+        })
+        .finally(() => {
+          this.loadingData = false;
+        });
+    },
     currentlyWorking(n) {
       console.log("working here", n);
       n.end_year = null;
@@ -228,6 +293,7 @@ export default {
         .then((response) => {
           console.log("resume ... ff ", response);
           this.$awn.success("Updated!");
+          this.getData();
 
           // this.$refs.form.reset();
           //saves the items from the database in the table
@@ -266,26 +332,7 @@ export default {
     this.$store.commit("resumePrevbtn", false);
     this.$store.commit("componentName", "Education");
 
-    this.$store
-      .dispatch("callApi", {
-        url: "resume/",
-        method: "get",
-        data: {},
-      })
-      .then((response) => {
-        console.log(response);
-        this.examList = response.data.examList;
-
-        this.educations =
-          this.R.isNil(response.data.qualification) ||
-          this.R.isEmpty(response.data.qualification)
-            ? this.educations
-            : response.data.qualification.map((n) => {
-                return { ...n, ...{ exam_id: n.exam.id } };
-              });
-
-        console.log("educations....", this.educations);
-      });
+    this.getData();
   },
 };
 </script>
