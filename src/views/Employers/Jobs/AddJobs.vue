@@ -69,7 +69,7 @@
 
                 class="add_more_btn ml-5"
                 color="primary"
-                @click.stop="addJobResponsibilities"
+                @click.stop="addJobFacilities"
             >Add More+
             </v-btn>
           </div>
@@ -407,7 +407,8 @@ export default {
     },
     addJobFacilities(){
       this.jobFacilitiesArr.push(this.job_facilities)
-      this.job_facilities = ''
+      this.job_facilities.text = ''
+      this.job_facilities.title = ''
     },
     addJobResponsibilities() {
       this.jobResArr.push(this.job_responsibilities)
