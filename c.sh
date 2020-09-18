@@ -1,6 +1,6 @@
 alias a='git add -A'
 alias c='git commit -m '
-alias pull='git pull origin'
+alias pull='git pull origin riyad'
 alias p='git push origin riyad'
 alias all='git add -A; git commit -m "commit by alias" -m "this is used for short cut puspose"; git push origin riyad'
 alias s='git status'
