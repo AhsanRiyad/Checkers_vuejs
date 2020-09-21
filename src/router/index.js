@@ -191,7 +191,7 @@ const routes = [
   //     }
   //   },
   {
-    path: '/employers',
+    path: '/job-list/:id',
     name: 'EmployersPanel',
     component: EmployersPanel,
     meta: {

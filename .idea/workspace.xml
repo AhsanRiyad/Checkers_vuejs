@@ -21,11 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/EmployersPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/EmployersPanel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signup.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +182,7 @@
       <workItem from="1600232337081" duration="23468000" />
       <workItem from="1600319033986" duration="22550000" />
       <workItem from="1600578171281" duration="26552000" />
-      <workItem from="1600664173400" duration="19878000" />
+      <workItem from="1600664173400" duration="22229000" />
     </task>
     <servers />
   </component>

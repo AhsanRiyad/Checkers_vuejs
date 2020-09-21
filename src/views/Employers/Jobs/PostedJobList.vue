@@ -45,11 +45,11 @@
                 </thead>
                 <tbody>
                 <tr v-for="(job, i) in postedJobs" :key="i">
-                  <td><p>{{ job.id }}</p></td>
+                  <td><p>{{ i+1 }}</p></td>
                   <td>
-                    <a @click="goToJobDetails(job.id)">{{ job.role }}</a>
-                    <p>Published On:<span>{{ job.publishedOn }}</span></p>
-                    <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>
+                    <a @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
+<!--                    <p>Published On:<span>{{ job.publishedOn }}</span></p>-->
+<!--                    <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>-->
                   </td>
                   <td>
                     <v-switch
@@ -59,21 +59,21 @@
                         hide-details
                     ></v-switch>
                   </td>
-                  <td>{{ job.applications }}</td>
-                  <td class="text-center">{{ job.matched }}</td>
-                  <td class="text-center">{{ job.shortlisted }}</td>
-                  <td class="text-center">{{ job.views }} | {{ job.applications }}</td>
-                  <td class="action text-center">
-                    <v-btn class="interactn c-grey" icon>
-                      <v-icon>mdi-square-edit-outline</v-icon>
-                    </v-btn>
-                    <v-btn class="interactn  mr-2 ml-2 c-green" icon>
-                      <v-icon>mdi-backup-restore</v-icon>
-                    </v-btn>
-                    <v-btn class="interactn c-blue" icon>
-                      <v-icon>mdi-chart-line-stacked</v-icon>
-                    </v-btn>
-                  </td>
+<!--                  <td>{{ job.applications }}</td>-->
+<!--                  <td class="text-center">{{ job.matched }}</td>-->
+<!--                  <td class="text-center">{{ job.shortlisted }}</td>-->
+<!--                  <td class="text-center">{{ job.views }} | {{ job.applications }}</td>-->
+<!--                  <td class="action text-center">-->
+<!--                    <v-btn class="interactn c-grey" icon>-->
+<!--                      <v-icon>mdi-square-edit-outline</v-icon>-->
+<!--                    </v-btn>-->
+<!--                    <v-btn class="interactn  mr-2 ml-2 c-green" icon>-->
+<!--                      <v-icon>mdi-backup-restore</v-icon>-->
+<!--                    </v-btn>-->
+<!--                    <v-btn class="interactn c-blue" icon>-->
+<!--                      <v-icon>mdi-chart-line-stacked</v-icon>-->
+<!--                    </v-btn>-->
+<!--                  </td>-->
                 </tr>
                 </tbody>
               </table>
@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "PostedJobList",
   data: vm => ({
@@ -201,38 +203,44 @@ export default {
     },
   },
   mounted() {
-    this.getJobs()
+    const headers = {
+      Authorization: "Bearer " + this.$cookies.get("accessToken"),
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    axios({
+      baseURL: this.$store.state.apiBase,
+      url: `jobs/company-id/` + this.$route.params.id,
+      method: "get",
+      data: {},
+      headers,
+    })
+        .then((response) => {
+          console.log("posted job list", response);
+          this.postedJobs = response.data.items;
+          this.modalSkeleton = false
+        })
+        .catch((error) => {
+          this.$awn.alert("Failed");
+          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+        })
+        .finally(() => {
+          this.modalSkeleton = false
+          //  this.tableLoading = false;
+          // this.skeletonJobDetails = false;
+        });
+    // this.getJobs()
   },
   methods: {
-    getJobs(n) {
-      this.companyId = n;
-      const headers = {
-        Authorization: "Bearer " + this.$cookies.get("accessToken"),
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
-      this.$store
-          .dispatch("callApi", {
-            url: "jobs/company-id/" + n,
-            method: "get",
-            headers,
-            data: {},
-          })
-          .then((response) => {
-            console.log("posted job list", response);
-            // this.postedJobs = response;
-            this.modalSkeleton = false
-          })
-          .catch((error) => {
-            this.$awn.alert("Failed");
-            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-          })
-          .finally(() => {
-            this.modalSkeleton = false
-            //  this.tableLoading = false;
-            // this.skeletonJobDetails = false;
-          });
-    },
+    // getJobs(n) {
+    //   this.companyId = n;
+    //   const headers = {
+    //     Authorization: "Bearer " + this.$cookies.get("accessToken"),
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   };
+    //
+    // },
     goToJobDetails(jobId) {
       this.$router.push({name: 'JobDetails', params: {id: jobId}})
     },

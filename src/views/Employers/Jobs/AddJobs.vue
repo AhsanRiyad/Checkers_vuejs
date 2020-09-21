@@ -434,7 +434,7 @@ export default {
             console.log("jobs post done ", response);
             this.$awn.success("Saved!");
             setTimeout( ()=> {
-              this.$router.history.push({name: "EmployersPanel"})
+              this.$router.history.push({name: "EmployersPanel", params: {id: this.jobs.company_id}})
             }, 1000);
           })
           .catch(() => {
