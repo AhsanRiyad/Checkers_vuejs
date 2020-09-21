@@ -198,6 +198,25 @@
             </v-col>
           </v-row>
           <v-row>
+            <v-col cols="12" md="2" lg="2">
+              <p>Currency Code</p>
+              <div>
+                <v-select
+                    item-text="name"
+                    :menu-props="{ maxHeight: '400' }"
+                    label="Select Currency"
+                    item-value="curr_data"
+                    persistent-hint
+                    :items="currency"
+                    :rules="[v=>!!v||'required']"
+                    dense
+                    single-line
+                    outlined
+                    v-model="jobs.currency_code"
+                    background-color="white"
+                ></v-select>
+              </div>
+            </v-col>
             <v-col cols="12" md="5" lg="5">
               <p>Minimum Salary Range</p>
               <div>
@@ -226,25 +245,6 @@
                     type="number"
                     v-model="jobs.max_salary_range"
                 ></v-text-field>
-              </div>
-            </v-col>
-            <v-col cols="12" md="2" lg="2">
-              <p>Currency Code</p>
-              <div>
-                <v-select
-                    item-text="name"
-                    :menu-props="{ maxHeight: '400' }"
-                    label="Select Currency"
-                    item-value="curr_data"
-                    persistent-hint
-                    :items="currency"
-                    :rules="[v=>!!v||'required']"
-                    dense
-                    single-line
-                    outlined
-                    v-model="jobs.currency_code"
-                    background-color="white"
-                ></v-select>
               </div>
             </v-col>
           </v-row>

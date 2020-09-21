@@ -17,7 +17,7 @@
           text
           color="white"
         >{{ $store.getters.isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
-        <v-btn router to="/employers" text color="white">Employeer/Job Post</v-btn>
+        <v-btn router to="/add-job" text color="white">Employeer/Job Post</v-btn>
         <v-menu
           bottom
           origin="center center"
