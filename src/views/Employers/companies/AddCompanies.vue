@@ -4,41 +4,72 @@
       <v-row class="mainContainer">
         <v-col cols="12" md="11" lg="11">
           <p class="h1Text">Create a Company</p>
-          <div>
-            <p>Company Name</p>
-            <v-text-field
-              background-color="white"
-              class="mb-0"
-              placeholder="Enter Company Name"
-              outlined
-              dense
-              v-model="company.company_name"
-            ></v-text-field>
-          </div>
+          <v-row align="center">
+            <v-col cols="12" md="8" lg="8">
+              <p>Company Name</p>
+              <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Company Name"
+                  outlined
+                  dense
+                  v-model="company.company_name"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" lg="4" md="4" class="text-center">
+              <div class="biodata-second">
+                <div class="biodata-image-display">
+                  <v-avatar class="profile" color="grey" size="164" tile>
+                    <v-img
+                        :src=" $store.getters.imageUrl + imageUrl"
+                        lazy-src="../../../assets/balgownie-avatar.jpg"
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                        max-width="500"
+                        max-height="300"
+                    ></v-img>
+                  </v-avatar>
+                </div>
+
+                <div class="biodata-image-input">
+                  <v-file-input
+                      :rules="rules"
+                      accept="image/png, image/jpeg, image/bmp"
+                      placeholder="Choose a photo"
+                      prepend-icon="perm_media"
+                      label="Avatar"
+                      :loading="imageUploadLoading"
+                      @change="uploadPhoto"
+                      v-model="photo"
+                  ></v-file-input>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
 
           <div>
             <p>Company Address</p>
             <v-textarea
-              background-color="white"
-              class="mb-0"
-              placeholder="Enter Company Address"
-              outlined
-              dense
-              v-model="company.company_address"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Company Address"
+                outlined
+                dense
+                v-model="company.company_address"
             ></v-textarea>
           </div>
 
           <div>
-            <p>Company Responsibilities</p>
+            <p>Company Email</p>
             <div>
               <v-text-field
-                background-color="white"
-                class="mb-0"
-                placeholder="Enter Company Email"
-                outlined
-                dense
-                v-model="company.company_email"
-                type="email"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Company Email"
+                  outlined
+                  dense
+                  v-model="company.company_email"
+                  type="email"
               ></v-text-field>
             </div>
           </div>
@@ -46,13 +77,13 @@
             <p>Company Mobile Number</p>
             <div>
               <v-text-field
-                background-color="white"
-                class="mb-0"
-                placeholder="Enter Company Mobile Number"
-                outlined
-                dense
-                type="number"
-                v-model="company.phone_number"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Company Mobile Number"
+                  outlined
+                  dense
+                  type="number"
+                  v-model="company.phone_number"
               ></v-text-field>
             </div>
           </div>
@@ -60,12 +91,12 @@
             <p>Company Location</p>
             <div>
               <v-text-field
-                v-model="company.company_location"
-                background-color="white"
-                class="mb-0"
-                placeholder="Enter Company Location"
-                outlined
-                dense
+                  v-model="company.company_location"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Company Location"
+                  outlined
+                  dense
               ></v-text-field>
             </div>
           </div>
@@ -73,12 +104,12 @@
             <p>Company Website</p>
             <div>
               <v-text-field
-                background-color="white"
-                class="mb-0"
-                placeholder="Enter Company Website"
-                outlined
-                v-model="company.company_website"
-                dense
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Company Website"
+                  outlined
+                  v-model="company.company_website"
+                  dense
               ></v-text-field>
             </div>
           </div>
@@ -86,12 +117,12 @@
             <p>About Us</p>
             <div>
               <v-textarea
-                v-model="company.about_us"
-                background-color="white"
-                class="mb-0"
-                placeholder="About us"
-                outlined
-                dense
+                  v-model="company.about_us"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="About us"
+                  outlined
+                  dense
               ></v-textarea>
             </div>
           </div>
@@ -101,27 +132,16 @@
               <p>Contact Name</p>
               <div>
                 <v-text-field
-                  background-color="white"
-                  v-model="company.contact_name"
-                  class="mb-0"
-                  placeholder="Enter Contact Name"
-                  outlined
-                  dense
+                    background-color="white"
+                    v-model="company.contact_name"
+                    class="mb-0"
+                    placeholder="Enter Contact Name"
+                    outlined
+                    dense
                 ></v-text-field>
               </div>
             </div>
-            <div class="item-2">
-              <p>Contact Number</p>
-              <div>
-                <vue-tel-input-vuetify
-                  v-model="company.company_mobile_number"
-                  label="Outlined"
-                  single-line
-                  outlined
-                  dense
-                ></vue-tel-input-vuetify>
-              </div>
-            </div>
+
           </div>
 
           <div>
@@ -129,11 +149,11 @@
               <p>Country</p>
               <div>
                 <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter your country"
-                  outlined
-                  dense
+                    background-color="white"
+                    class="mb-0"
+                    placeholder="Enter your country"
+                    outlined
+                    dense
                 ></v-text-field>
               </div>
             </div>
@@ -172,29 +192,29 @@ export default {
       if (!this.$refs.form.validate()) return;
 
       this.$store
-        .dispatch("callApi", {
-          url: "companies/new",
-          method: "post",
-          data: {
-            company: this.company,
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          this.$awn.success("Updated!");
+          .dispatch("callApi", {
+            url: "companies/new",
+            method: "post",
+            data: {
+              company: this.company,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            this.$awn.success("Updated!");
 
-          // this.$refs.form.reset();
-          //saves the items from the database in the table
-          //  this.items = response.data;
-        })
-        .catch(() => {
-          this.$awn.alert("Failed!");
-          //   this.$awn.alert("Failed");
-        })
-        .finally(() => {
-          this.loading = false;
-          //  this.tableLoading = false;
-        });
+            // this.$refs.form.reset();
+            //saves the items from the database in the table
+            //  this.items = response.data;
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            this.loading = false;
+            //  this.tableLoading = false;
+          });
     },
   },
 };

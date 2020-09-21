@@ -131,7 +131,7 @@ export default {
             email: this.email,
             username: this.username,
             password: this.password,
-            role: "COMPANY",
+            roles: "COMPANY",
           });
 
       this.$store

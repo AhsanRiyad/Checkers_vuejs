@@ -14,65 +14,70 @@
             </div>
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
-           <div style="overflow-x: auto !important;">
-             <table>
-               <thead>
-               <tr class="panel-heading">
-                 <th>Sl</th>
-                 <th style=" width:35%;">Job Title</th>
-                 <th><v-icon>mdi-bell-ring</v-icon>Job Status</th>
-                 <th>
-                   <v-icon>mdi-file-multiple-outline</v-icon>
-                   Application
-                 </th>
-                 <th class="text-center">
-                   <v-icon>mdi-account-group</v-icon>
-                   Matched
-                 </th>
-                 <th class="text-center">
-                   <v-icon>mdi-format-list-bulleted</v-icon>
-                   Short-listed
-                 </th>
-                 <th class="text-center">
-                   <v-icon>mdi-eye</v-icon>
-                   View Status
-                 </th>
-                 <th class="text-center">Actions</th>
-               </tr>
-               </thead>
-               <tbody>
-               <tr v-for="(job, i) in postedJobs" :key="i">
-                 <td><p>{{ job.id }}</p></td>
-                 <td>
-                   <a @click="goToJobDetails(job.id)">{{ job.role }}</a>
-                   <p>Published On:<span>{{ job.publishedOn }}</span></p>
-                   <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>
-                 </td>
-                 <td><v-switch
-                     v-model="job.jobStatus"
-                     color="success"
-                     value="success"
-                     hide-details
-                 ></v-switch></td>
-                 <td >{{ job.applications }}</td>
-                 <td class="text-center">{{job.matched}}</td>
-                 <td class="text-center">{{job.shortlisted}}</td>
-                 <td class="text-center">{{job.views}} | {{job.applications}}</td>
-                 <td class="action text-center">
-                   <v-btn class="interactn c-grey" icon>
-                     <v-icon>mdi-square-edit-outline</v-icon>
-                   </v-btn>
-                   <v-btn class="interactn  mr-2 ml-2 c-green" icon>
-                     <v-icon>mdi-backup-restore</v-icon>
-                   </v-btn>
-                   <v-btn class="interactn c-blue" icon>
-                     <v-icon>mdi-chart-line-stacked</v-icon>
-                   </v-btn>
-                 </td>
-               </tr>
-               </tbody>
-             </table>
-           </div>
+            <div style="overflow-x: auto !important;">
+              <table>
+                <thead>
+                <tr class="panel-heading">
+                  <th>Sl</th>
+                  <th style=" width:35%;">Job Title</th>
+                  <th>
+                    <v-icon>mdi-bell-ring</v-icon>
+                    Job Status
+                  </th>
+                  <th>
+                    <v-icon>mdi-file-multiple-outline</v-icon>
+                    Application
+                  </th>
+                  <th class="text-center">
+                    <v-icon>mdi-account-group</v-icon>
+                    Matched
+                  </th>
+                  <th class="text-center">
+                    <v-icon>mdi-format-list-bulleted</v-icon>
+                    Short-listed
+                  </th>
+                  <th class="text-center">
+                    <v-icon>mdi-eye</v-icon>
+                    View Status
+                  </th>
+                  <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(job, i) in postedJobs" :key="i">
+                  <td><p>{{ job.id }}</p></td>
+                  <td>
+                    <a @click="goToJobDetails(job.id)">{{ job.role }}</a>
+                    <p>Published On:<span>{{ job.publishedOn }}</span></p>
+                    <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>
+                  </td>
+                  <td>
+                    <v-switch
+                        v-model="job.jobStatus"
+                        color="success"
+                        value="success"
+                        hide-details
+                    ></v-switch>
+                  </td>
+                  <td>{{ job.applications }}</td>
+                  <td class="text-center">{{ job.matched }}</td>
+                  <td class="text-center">{{ job.shortlisted }}</td>
+                  <td class="text-center">{{ job.views }} | {{ job.applications }}</td>
+                  <td class="action text-center">
+                    <v-btn class="interactn c-grey" icon>
+                      <v-icon>mdi-square-edit-outline</v-icon>
+                    </v-btn>
+                    <v-btn class="interactn  mr-2 ml-2 c-green" icon>
+                      <v-icon>mdi-backup-restore</v-icon>
+                    </v-btn>
+                    <v-btn class="interactn c-blue" icon>
+                      <v-icon>mdi-chart-line-stacked</v-icon>
+                    </v-btn>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
             <!--********** Job applied table end **************-->
             <!--********** pagination start **************-->
             <div class="pagination">
@@ -113,79 +118,81 @@
 export default {
   name: "PostedJobList",
   data: vm => ({
-    date: new Date().toISOString().substr(0, 10),
+    // date: new Date().toISOString().substr(0, 10),
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     menu2: false,
     items: ['viewed', 'Not viewed'],
-    postedJobs: [
-      {
-        id: 1,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        publishedOn: '4 Aug 2019',
-        deadline: '4 Aug 2019',
-        expectedSalary: '30000',
-        jobStatus: true
-        ,
-        applications: 300,
-        matched: 50,
-        shortlisted: 3,
-        views: 73
-      },
-      {
-        id: 2,
-        role: 'Software Developer - Back End Engineer',
-        companyName: 'One One and Co. Limited',
-        publishedOn: '4 Aug 2019',
-        deadline: '4 Aug 2019',
-        expectedSalary: '60000',
-        jobStatus: true,
-        applications: 300,
-        matched: 50,
-        shortlisted: 3,
-        views: 73
-      },
-      {
-        id: 3,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        publishedOn: '4 Aug 2019',
-        deadline: '4 Aug 2019',
-        expectedSalary: '30000',
-        jobStatus: true,
-        applications: 300,
-        matched: 50,
-        shortlisted: 3,
-        views: 73
-      },
-      {
-        id: 4,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        publishedOn: '4 Aug 2019',
-        deadline: '4 Aug 2019',
-        expectedSalary: '30000',
-        jobStatus: false,
-        applications: 300,
-        matched: 50,
-        shortlisted: 3,
-        views: 73
-      },
-      {
-        id: 5,
-        role: 'Software Developer - Front End Engineer',
-        companyName: 'One One and Co. Limited',
-        publishedOn: '4 Aug 2019',
-        deadline: '4 Aug 2019',
-        expectedSalary: '30000',
-        jobStatus: false,
-        applications: 300,
-        matched: 50,
-        shortlisted: 3,
-        views: 73
-      }
-    ]
+    postedJobs: [],
+    company_id: null
+    // postedJobs: [
+    //   {
+    //     id: 1,
+    //     role: 'Software Developer - Front End Engineer',
+    //     companyName: 'One One and Co. Limited',
+    //     publishedOn: '4 Aug 2019',
+    //     deadline: '4 Aug 2019',
+    //     expectedSalary: '30000',
+    //     jobStatus: true
+    //     ,
+    //     applications: 300,
+    //     matched: 50,
+    //     shortlisted: 3,
+    //     views: 73
+    //   },
+    //   {
+    //     id: 2,
+    //     role: 'Software Developer - Back End Engineer',
+    //     companyName: 'One One and Co. Limited',
+    //     publishedOn: '4 Aug 2019',
+    //     deadline: '4 Aug 2019',
+    //     expectedSalary: '60000',
+    //     jobStatus: true,
+    //     applications: 300,
+    //     matched: 50,
+    //     shortlisted: 3,
+    //     views: 73
+    //   },
+    //   {
+    //     id: 3,
+    //     role: 'Software Developer - Front End Engineer',
+    //     companyName: 'One One and Co. Limited',
+    //     publishedOn: '4 Aug 2019',
+    //     deadline: '4 Aug 2019',
+    //     expectedSalary: '30000',
+    //     jobStatus: true,
+    //     applications: 300,
+    //     matched: 50,
+    //     shortlisted: 3,
+    //     views: 73
+    //   },
+    //   {
+    //     id: 4,
+    //     role: 'Software Developer - Front End Engineer',
+    //     companyName: 'One One and Co. Limited',
+    //     publishedOn: '4 Aug 2019',
+    //     deadline: '4 Aug 2019',
+    //     expectedSalary: '30000',
+    //     jobStatus: false,
+    //     applications: 300,
+    //     matched: 50,
+    //     shortlisted: 3,
+    //     views: 73
+    //   },
+    //   {
+    //     id: 5,
+    //     role: 'Software Developer - Front End Engineer',
+    //     companyName: 'One One and Co. Limited',
+    //     publishedOn: '4 Aug 2019',
+    //     deadline: '4 Aug 2019',
+    //     expectedSalary: '30000',
+    //     jobStatus: false,
+    //     applications: 300,
+    //     matched: 50,
+    //     shortlisted: 3,
+    //     views: 73
+    //   }
+    // ]
   }),
 
   computed: {
@@ -193,10 +200,41 @@ export default {
       return this.formatDate(this.date)
     },
   },
-
+  mounted() {
+    this.getJobs()
+  },
   methods: {
-    goToJobDetails(jobId){
-      this.$router.push({name:'JobDetails', params:{id:jobId}})
+    getJobs(n) {
+      this.companyId = n;
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      this.$store
+          .dispatch("callApi", {
+            url: "jobs/company-id/" + n,
+            method: "get",
+            headers,
+            data: {},
+          })
+          .then((response) => {
+            console.log("posted job list", response);
+            // this.postedJobs = response;
+            this.modalSkeleton = false
+          })
+          .catch((error) => {
+            this.$awn.alert("Failed");
+            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+          })
+          .finally(() => {
+            this.modalSkeleton = false
+            //  this.tableLoading = false;
+            // this.skeletonJobDetails = false;
+          });
+    },
+    goToJobDetails(jobId) {
+      this.$router.push({name: 'JobDetails', params: {id: jobId}})
     },
     formatDate(date) {
       if (!date) return null

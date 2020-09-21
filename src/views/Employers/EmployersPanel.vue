@@ -41,7 +41,3 @@ name: "EmployersPanel",
 }
 }
 </script>
-
-<style scoped>
-
-</style>

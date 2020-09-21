@@ -27,11 +27,13 @@
                     label="Select Job Type"
                     hint="Pick Job Type"
                     persistent-hint
+                    item-text="type_in_text"
                     :items="types"
                     :rules="[v=>!!v||'required']"
                     dense
                     outlined
-                    v-model="jobs.type_in_text"
+                    item-value="type"
+                    v-model="jobs.type"
                     background-color="white"
                 ></v-select>
               </div>
@@ -162,7 +164,7 @@
             </v-col>
             <!--    :disabled="R.isEmpty(job_responsibilities[job_responsibilities.length-1].job_title) "-->
           </v-row>
-          <v-row align="center" v-for="(edu, i) in jobs.job_educational_req" :key="i">
+          <v-row align="center" v-for="(edu, i) in jobs.job_education_req" :key="i">
             <v-col cols="12" md="10">
               <p>Job Educational Requirements</p>
               <v-text-field
@@ -182,11 +184,11 @@
             <!--    :disabled="R.isEmpty(job_responsibilities[job_responsibilities.length-1].job_title) "-->
             <v-col cols="12" md="2" lg="2">
               <v-btn class="add_more_btn mt-3 mr-2"
-                     color="error" @click="remove(i)" v-show="i || ( !i && jobs.job_educational_req.length > 1)">
+                     color="error" @click="remove(i)" v-show="i || ( !i && jobs.job_education_req.length > 1)">
                 <v-icon small>mdi-close</v-icon>
               </v-btn>
               <v-btn
-                  v-show="i == jobs.job_educational_req.length-1"
+                  v-show="i == jobs.job_education_req.length-1"
                   class="add_more_btn mt-3"
                   color="primary"
                   @click.stop="addJobEduReq"
@@ -257,8 +259,8 @@
                     item-text="company_name"
                     :items="companies"
                     :rules="[v=>!!v||'required']"
-                    dense
                     item-value="id"
+                    dense
                     outlined
                     v-model="jobs.company_id"
                     background-color="white"
@@ -295,8 +297,10 @@ export default {
       countries: [],
       companies: [],
       currency: [],
-      types: ['Part-time job', 'Full time job', 'Time flexible', 'Remote'],
+      types: [],
       jobs: {
+        type: '',
+        type_in_text: '',
         job_title: '',
         job_description: '',
         company_id: '',
@@ -310,7 +314,7 @@ export default {
         job_category: [{id: ''}],
         job_facilities: [{text: ''}],
         job_responsibilities: [{text: ''}],
-        job_educational_req: [
+        job_education_req: [
           {degre_title: ''}
         ],
         skills: []
@@ -325,6 +329,16 @@ export default {
     };
   },
   mounted() {
+    this.$store
+        .dispatch("callApi", {
+          url: "jobs-type",
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log("types..... ", response);
+          this.types = response.types;
+        })
     this.$store
         .dispatch("callApi", {
           url: "resume/skill/lists/",
@@ -384,6 +398,29 @@ export default {
         })
   },
   methods: {
+    // categoryName(selected) {
+    //   this.jobs.company_name = selected
+    //   console.log("category name", selected)
+    clearForm() {
+      this.job_title = ''
+      this.job_description = ''
+      this.type = ''
+      this.type_in_text = ''
+      this.company_id = ''
+      this.company_name = ''
+      this.job_location = ""
+      this.country = ''
+      this.city = ''
+      this.min_salary_range = ''
+      this.max_salary_range = ''
+      this.currency_code = ''
+      this.job_category = []
+      this.job_facilities = []
+      this.job_responsibilities = []
+      this.job_education_req = []
+      this.skills = []
+    },
+    // },
     saveJob() {
       if (!this.$refs.form.validate()) return;
       this.loading = true;
@@ -391,11 +428,14 @@ export default {
           .dispatch("callApi", {
             url: "jobs/",
             method: "post",
-            data: {jobs: this.jobs},
+            data: this.jobs,
           })
           .then((response) => {
             console.log("jobs post done ", response);
             this.$awn.success("Saved!");
+            setTimeout( ()=> {
+              this.$router.history.push({name: "EmployersPanel"})
+            }, 1000);
           })
           .catch(() => {
             this.$awn.alert("Failed!");
@@ -405,10 +445,10 @@ export default {
           });
     },
     addJobEduReq() {
-      this.jobs.job_educational_req.push({degre_title: ''})
+      this.jobs.job_education_req.push({degre_title: ''})
     },
     remove(index) {
-      this.jobs.job_educational_req.splice(index, 1);
+      this.jobs.job_education_req.splice(index, 1);
     },
     customValidateEditorData() {
       if (!this.jobs.job_responsibilities || this.jobs.job_responsibilities === "") {
