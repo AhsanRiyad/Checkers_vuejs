@@ -409,7 +409,6 @@ export default {
     },
     remove(index) {
       this.jobs.job_educational_req.splice(index, 1);
-      // this.jobResArr.splice(index, 1);
     },
     customValidateEditorData() {
       if (!this.jobs.job_responsibilities || this.jobs.job_responsibilities === "") {
