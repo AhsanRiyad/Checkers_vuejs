@@ -46,22 +46,53 @@
               </div>
             </v-col>
           </v-row>
-
-          <div>
-            <p>Company Address</p>
-            <v-textarea
-                background-color="white"
-                class="mb-0"
-                placeholder="Enter Company Address"
-                outlined
-                dense
-                v-model="company.company_address"
-            ></v-textarea>
-          </div>
-
-          <div>
-            <p>Company Email</p>
-            <div>
+          <v-row>
+            <v-col cols="12" lg="4" md="4">
+              <p>Company Size</p>
+              <div>
+                <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    placeholder="Enter Company Size"
+                    outlined
+                    dense
+                    v-model="company.company_size"
+                    type="email"
+                ></v-text-field>
+                </div>
+            </v-col>
+            <v-col cols="12" lg="4" md="4">
+              <p>Designation</p>
+              <div>
+                <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    placeholder="Enter Designation"
+                    outlined
+                    dense
+                    v-model="company.designation"
+                    type="email"
+                ></v-text-field>
+              </div>
+            </v-col>
+            <v-col cols="12" md="4" lg="4">
+              <p>Company Contact Number</p>
+              <vue-tel-input-vuetify
+                  outlined
+                  dense
+                  single-line
+                  v-model="company.company_mobile_number"
+                  @validate="validate"
+                  :required="true"
+                  background-color="white"
+                  :validCharactersOnly="true"
+                  inputClasses="vTelInput"
+              ></vue-tel-input-vuetify>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" md="6" lg="6">
+              <p>Company Email</p>
               <v-text-field
                   background-color="white"
                   class="mb-0"
@@ -71,25 +102,35 @@
                   v-model="company.company_email"
                   type="email"
               ></v-text-field>
-            </div>
-          </div>
-          <div>
-            <p>Company Mobile Number</p>
-            <div>
+            </v-col>
+            <v-col cols="12" md="6" lg="6">
+              <p>Company licence</p>
               <v-text-field
                   background-color="white"
                   class="mb-0"
-                  placeholder="Enter Company Mobile Number"
+                  placeholder="Enter Company License"
                   outlined
                   dense
-                  type="number"
-                  v-model="company.phone_number"
+                  type="text"
+                  v-model="company.trade_license"
               ></v-text-field>
-            </div>
-          </div>
-          <div>
-            <p>Company Location</p>
-            <div>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" md="6" lg="6">
+              <p>Company Website</p>
+              <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Company License"
+                  outlined
+                  dense
+                  type="text"
+                  v-model="company.company_website"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6" lg="6">
+              <p>Company Location</p>
               <v-text-field
                   v-model="company.company_location"
                   background-color="white"
@@ -98,21 +139,9 @@
                   outlined
                   dense
               ></v-text-field>
-            </div>
-          </div>
-          <div>
-            <p>Company Website</p>
-            <div>
-              <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Company Website"
-                  outlined
-                  v-model="company.company_website"
-                  dense
-              ></v-text-field>
-            </div>
-          </div>
+            </v-col>
+          </v-row>
+
           <div>
             <p>About Us</p>
             <div>
@@ -127,26 +156,9 @@
             </div>
           </div>
 
-          <div class="d-flex">
-            <div class="item-1">
+          <v-row>
+            <v-col cols="12" md="6" lg="6">
               <p>Contact Name</p>
-              <div>
-                <v-text-field
-                    background-color="white"
-                    v-model="company.contact_name"
-                    class="mb-0"
-                    placeholder="Enter Contact Name"
-                    outlined
-                    dense
-                ></v-text-field>
-              </div>
-            </div>
-
-          </div>
-
-          <div>
-            <div class="item-1">
-              <p>Country</p>
               <div>
                 <v-text-field
                     background-color="white"
@@ -156,8 +168,24 @@
                     dense
                 ></v-text-field>
               </div>
-            </div>
-          </div>
+            </v-col>
+            <v-col cols="12" md="6" lg="6">
+              <p>Contact Number</p>
+              <div>
+                <vue-tel-input-vuetify
+                    outlined
+                    dense
+                    single-line
+                    v-model="company.phone_number"
+                    @validate="validate"
+                    :required="true"
+                    background-color="white"
+                    :validCharactersOnly="true"
+                    inputClasses="vTelInput"
+                ></vue-tel-input-vuetify>
+              </div>
+            </v-col>
+          </v-row>
 
           <div class="text-right">
             <div class="item-2">
