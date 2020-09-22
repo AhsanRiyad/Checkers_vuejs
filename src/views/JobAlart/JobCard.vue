@@ -165,7 +165,7 @@
                 <p>{{ JobDescription.city }}</p>
 
                 <h4>Descriptions</h4>
-                <p>{{ JobDescription.job_description }}</p>
+                <div v-html="JobDescription.job_description" />
               </div>
             </div>
           </div>
