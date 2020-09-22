@@ -37,7 +37,7 @@
                      append-icon="search"
                      solo-inverted
                  ></v-text-field>
-                 <v-text-field outlined dense v-model="dateRangeText" placeholder="Date range" prepend-inner-icon="event" single-line></v-text-field>
+                 <v-text-field outlined dense  placeholder="Date range" prepend-inner-icon="event" single-line></v-text-field>
                </div>
              </v-col>
            </v-row>
@@ -111,9 +111,9 @@ export default {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   }),
   computed: {
-    computedDateFormatted () {
-      return this.formatDate(this.dates.join(' ~ '))
-    },
+    // computedDateFormatted () {
+    //   return this.formatDate(this.dates.join(' ~ '))
+    // },
     // dateRangeText() {
     //   return this.dates.join(' ~ ')
     // },

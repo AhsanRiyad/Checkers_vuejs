@@ -27,21 +27,14 @@ export const store = new Vuex.Store({
 			// crossDomain: true
 		}),
 		isLoggedIn: false,
-
 		resume: {},
 		biodata: {},
-
 		componentName: "",
-
 		registerAs: "APPLICANTS",
-
 		resumeNextbtn: true,
 		resumePrevbtn: true,
-
 		userIp: "",
-
-
-
+		jobExpirity: true,
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
@@ -51,10 +44,12 @@ export const store = new Vuex.Store({
 		resumePrevbtn(state, payload) { state.resumePrevbtn = payload },
 		componentName(state, payload) { state.componentName = payload },
 		registerAs(state, payload) { state.registerAs = payload },
+		jobExpirity(state, payload) { state.jobExpirity = payload },
 		userIp(state, payload) { state.userIp = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
+		jobExpirity: state => state.jobExpirity,
 		biodata: state => state.biodata,
 		resume: state => state.resume,
 		resumePrevbtn: state => state.resumePrevbtn,
@@ -93,6 +88,9 @@ export const store = new Vuex.Store({
 					reject(error);
 				})
 			})
+		},
+		update(state, value) {
+			state.members[value.index].active = value.value;
 		},
 		upload: (context, info) => {
 			return new Promise((resolve, reject) => {

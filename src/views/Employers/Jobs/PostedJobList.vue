@@ -8,7 +8,7 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job: <span>23</span></p>
+                  <p class="jaif">Total Job: <span>{{totalPostedJobs}}</span></p>
                 </v-col>
               </v-row>
             </div>
@@ -29,51 +29,46 @@
                     Application
                   </th>
                   <th class="text-center">
-                    <v-icon>mdi-account-group</v-icon>
-                    Matched
-                  </th>
-                  <th class="text-center">
                     <v-icon>mdi-format-list-bulleted</v-icon>
                     Short-listed
-                  </th>
-                  <th class="text-center">
-                    <v-icon>mdi-eye</v-icon>
-                    View Status
                   </th>
                   <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
+                <v-progress-linear
+                    v-show="loading"
+                    :indeterminate="loading"
+                    color="deep-purple accent-4"
+                    rounded
+                    absolute
+                    height="6"
+                ></v-progress-linear>
                 <tr v-for="(job, i) in postedJobs" :key="i">
                   <td><p>{{ i+1 }}</p></td>
                   <td>
-                    <a @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
-<!--                    <p>Published On:<span>{{ job.publishedOn }}</span></p>-->
-<!--                    <p>Deadline:<span>{{ job.deadline }}</span> <span><a href="">change</a></span></p>-->
+                    <a class="text-capitalize" @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
+                    <p class="mb-0"><small>Published On:<span class="ml-1" v-if="job.live_at"> {{getHumanDate(job.live_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
+                    <p  class="mb-0"><small>Deadline:<span class="ml-1" v-if="job.end_at">{{ getHumanDate(job.end_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
                   </td>
                   <td>
                     <v-switch
-                        v-model="job.jobStatus"
+                        @click="job.job_status = (job.job_status + 1) % 2"
                         color="success"
-                        value="success"
+                        :input-value="job.job_status == 1 ? true:false"
                         hide-details
                     ></v-switch>
                   </td>
-<!--                  <td>{{ job.applications }}</td>-->
-<!--                  <td class="text-center">{{ job.matched }}</td>-->
-<!--                  <td class="text-center">{{ job.shortlisted }}</td>-->
-<!--                  <td class="text-center">{{ job.views }} | {{ job.applications }}</td>-->
-<!--                  <td class="action text-center">-->
-<!--                    <v-btn class="interactn c-grey" icon>-->
-<!--                      <v-icon>mdi-square-edit-outline</v-icon>-->
-<!--                    </v-btn>-->
-<!--                    <v-btn class="interactn  mr-2 ml-2 c-green" icon>-->
-<!--                      <v-icon>mdi-backup-restore</v-icon>-->
-<!--                    </v-btn>-->
-<!--                    <v-btn class="interactn c-blue" icon>-->
-<!--                      <v-icon>mdi-chart-line-stacked</v-icon>-->
-<!--                    </v-btn>-->
-<!--                  </td>-->
+                  <td>{{ job.applicant }}</td>
+                  <td class="text-center">{{ job.shortlisted }}</td>
+                  <td class="action text-center">
+                    <v-btn id="edit_btn" :disabled="job.job_status == 1" class="interactn c-grey" icon>
+                      <v-icon>mdi-square-edit-outline</v-icon>
+                    </v-btn>
+                    <v-btn :disabled="job.job_status == 1" class="interactn  mr-2 ml-2 c-green" icon>
+                      <v-icon>mdi-backup-restore</v-icon>
+                    </v-btn>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -81,30 +76,7 @@
             <!--********** Job applied table end **************-->
             <!--********** pagination start **************-->
             <div class="pagination">
-              <ul class="d-flex pg-list">
-                <li>
-                  <v-btn class="pg-btn" small text>
-                    <v-icon>mdi-chevron-double-left</v-icon>
-                  </v-btn>
-                </li>
-                <li>
-                  <v-btn class="pg-btn" small text>1</v-btn>
-                </li>
-                <li>
-                  <v-btn class="pg-btn" small text>2</v-btn>
-                </li>
-                <li>
-                  <v-btn class="pg-btn" small text>3</v-btn>
-                </li>
-                <li>
-                  <v-btn class="pg-btn" small text>..12</v-btn>
-                </li>
-                <li>
-                  <v-btn class="pg-btn" small text>
-                    <v-icon>mdi-chevron-double-right</v-icon>
-                  </v-btn>
-                </li>
-              </ul>
+              <v-pagination v-model="pageNo" :length="length"></v-pagination>
             </div>
             <!--********** pagination end **************-->
           </v-card>
@@ -116,90 +88,26 @@
 
 <script>
 import axios from "axios";
+import moment from 'moment';
 
 export default {
   name: "PostedJobList",
-  data: vm => ({
-    // date: new Date().toISOString().substr(0, 10),
-    dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+  data: () => ({
+    loading: true,
     menu1: false,
     menu2: false,
     items: ['viewed', 'Not viewed'],
     postedJobs: [],
-    company_id: null
-    // postedJobs: [
-    //   {
-    //     id: 1,
-    //     role: 'Software Developer - Front End Engineer',
-    //     companyName: 'One One and Co. Limited',
-    //     publishedOn: '4 Aug 2019',
-    //     deadline: '4 Aug 2019',
-    //     expectedSalary: '30000',
-    //     jobStatus: true
-    //     ,
-    //     applications: 300,
-    //     matched: 50,
-    //     shortlisted: 3,
-    //     views: 73
-    //   },
-    //   {
-    //     id: 2,
-    //     role: 'Software Developer - Back End Engineer',
-    //     companyName: 'One One and Co. Limited',
-    //     publishedOn: '4 Aug 2019',
-    //     deadline: '4 Aug 2019',
-    //     expectedSalary: '60000',
-    //     jobStatus: true,
-    //     applications: 300,
-    //     matched: 50,
-    //     shortlisted: 3,
-    //     views: 73
-    //   },
-    //   {
-    //     id: 3,
-    //     role: 'Software Developer - Front End Engineer',
-    //     companyName: 'One One and Co. Limited',
-    //     publishedOn: '4 Aug 2019',
-    //     deadline: '4 Aug 2019',
-    //     expectedSalary: '30000',
-    //     jobStatus: true,
-    //     applications: 300,
-    //     matched: 50,
-    //     shortlisted: 3,
-    //     views: 73
-    //   },
-    //   {
-    //     id: 4,
-    //     role: 'Software Developer - Front End Engineer',
-    //     companyName: 'One One and Co. Limited',
-    //     publishedOn: '4 Aug 2019',
-    //     deadline: '4 Aug 2019',
-    //     expectedSalary: '30000',
-    //     jobStatus: false,
-    //     applications: 300,
-    //     matched: 50,
-    //     shortlisted: 3,
-    //     views: 73
-    //   },
-    //   {
-    //     id: 5,
-    //     role: 'Software Developer - Front End Engineer',
-    //     companyName: 'One One and Co. Limited',
-    //     publishedOn: '4 Aug 2019',
-    //     deadline: '4 Aug 2019',
-    //     expectedSalary: '30000',
-    //     jobStatus: false,
-    //     applications: 300,
-    //     matched: 50,
-    //     shortlisted: 3,
-    //     views: 73
-    //   }
-    // ]
+    company_id: null,
+    pageNo: 1,
+    length: 0,
+    page: 1,
+    job_status: 1
   }),
 
   computed: {
-    computedDateFormatted() {
-      return this.formatDate(this.date)
+    totalPostedJobs() {
+      return this.postedJobs && this.postedJobs.length
     },
   },
   mounted() {
@@ -212,49 +120,41 @@ export default {
       baseURL: this.$store.state.apiBase,
       url: `jobs/company-id/` + this.$route.params.id,
       method: "get",
+      params: {
+        page: this.pageNo
+      },
       data: {},
       headers,
     })
         .then((response) => {
-          console.log("posted job list", response);
+          console.log("sataus", response.data.items[0].job_status);
           this.postedJobs = response.data.items;
-          this.modalSkeleton = false
+          // this.job_status = response.data.items.job_status
+          this.loading = false
+          this.length = Math.round(
+              response.data.total_count /
+              response.data.num_items_per_page
+          );
+          console.log("page length", this.length)
+          setTimeout(() => (this.loading = false), 1000)
         })
         .catch((error) => {
+          this.postedJobs = []
           this.$awn.alert("Failed");
           console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
         })
         .finally(() => {
           this.modalSkeleton = false
-          //  this.tableLoading = false;
-          // this.skeletonJobDetails = false;
+          if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
+
         });
-    // this.getJobs()
   },
   methods: {
-    // getJobs(n) {
-    //   this.companyId = n;
-    //   const headers = {
-    //     Authorization: "Bearer " + this.$cookies.get("accessToken"),
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   };
-    //
-    // },
+    getHumanDate: function (date) {
+      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
+    },
     goToJobDetails(jobId) {
       this.$router.push({name: 'JobDetails', params: {id: jobId}})
-    },
-    formatDate(date) {
-      if (!date) return null
-
-      const [year, month, day] = date.split('-')
-      return `${day}/${month}/${year}`
-    },
-    parseDate(date) {
-      if (!date) return null
-
-      const [day, month, year] = date.split('/')
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
   },
 }
