@@ -30,20 +30,17 @@
                    <p>{{ applicant.address }}</p>
                    <p>{{ applicant.institution_name }}</p>
                    <p><span>{{applicant.degree}}</span> in <span>{{applicant.subject}}</span></p>
-                   <p><span><v-icon small>mdi-phone</v-icon></span><span>{{applicant.contactNumber}}</span></p>
-                   <v-btn small style="color: #fff !important;" color="blue" depressed><v-icon small>mdi-plus</v-icon> comment</v-btn>
                  </td>
                  <td>
                    <div v-for="(ex, i) in applicant.exp" :key="i">
                      <p class="font-weight-bold">{{ex.companyName}}</p>
-                     <p>{{ex.designation}} (<span>{{ex.experience}}</span> + years)</p>
+                     <p>{{ex.designation}}</p>
                    </div>
                  </td>
                  <td></td>
                  <td>
                    <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ applicant.totalExp }} + years</span></p>
                    <p> <span class="mr-2">&#2547;</span>{{ applicant.expectedSalary }}</p>
-                   <p> <span class="mr-2"><v-icon small>mdi-restore-alert</v-icon></span><span>{{ applicant.views }} times applied</span></p>
                    <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ applicant.appliedOn }}</span></p>
                  </td>
                  <td class="action text-center">

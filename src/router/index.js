@@ -241,7 +241,7 @@ const routes = [
     }
   },
   {
-    path: '/pricing-table' ,
+    path: '/subscription' ,
     name: 'pricingTable',
     component: pricingTable,
     meta: {

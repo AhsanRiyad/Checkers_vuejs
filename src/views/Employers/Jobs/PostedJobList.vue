@@ -53,9 +53,9 @@
                   </td>
                   <td>
                     <v-switch
-                        @click="job.job_status = (job.job_status + 1) % 2"
+                        @click.stop="jobLive"
                         color="success"
-                        :input-value="job.job_status == 1 ? true:false"
+                        :input-value="job.job_status == 1 ? true : false"
                         hide-details
                     ></v-switch>
                   </td>
@@ -98,58 +98,143 @@ export default {
     menu2: false,
     items: ['viewed', 'Not viewed'],
     postedJobs: [],
+    jobId: "",
     company_id: null,
     pageNo: 1,
     length: 0,
     page: 1,
-    job_status: 1
+    job_status: 1,
+    is_expired: 0
   }),
 
   computed: {
+    isLived() {
+      return this.jobId.job_status == 1 ? true : false;
+    },
     totalPostedJobs() {
       return this.postedJobs && this.postedJobs.length
     },
   },
   mounted() {
-    const headers = {
-      Authorization: "Bearer " + this.$cookies.get("accessToken"),
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    axios({
-      baseURL: this.$store.state.apiBase,
-      url: `jobs/company-id/` + this.$route.params.id,
-      method: "get",
-      params: {
-        page: this.pageNo
-      },
-      data: {},
-      headers,
-    })
-        .then((response) => {
-          console.log("sataus", response.data.items[0].job_status);
-          this.postedJobs = response.data.items;
-          // this.job_status = response.data.items.job_status
-          this.loading = false
-          this.length = Math.round(
-              response.data.total_count /
-              response.data.num_items_per_page
-          );
-          console.log("page length", this.length)
-          setTimeout(() => (this.loading = false), 1000)
-        })
-        .catch((error) => {
-          this.postedJobs = []
-          this.$awn.alert("Failed");
-          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-        })
-        .finally(() => {
-          this.modalSkeleton = false
-          if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
-
-        });
+   this.getPostedJobs()
   },
   methods: {
+    getPostedJobs(){
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        baseURL: this.$store.state.apiBase,
+        url: `jobs/company-id/` + this.$route.params.id,
+        method: "get",
+        params: {
+          page: this.pageNo
+        },
+        data: {},
+        headers,
+      })
+          .then((response) => {
+            console.log("job list", response.data.items);
+            this.postedJobs = response.data.items;
+            // this.jobId =this.postedJobs[3]
+            for (let i = 0; i < this.postedJobs.length; i++) {
+              console.log("job index i", i) // returns the numbered index
+              console.log("job index object", this.postedJobs[i]) // returns [Object object]
+              console.log(this.postedJobs[i].id) // returns undefined
+              this.jobId = this.postedJobs[i].id
+              console.log("id jobssssssssss",this.jobId)
+            }
+
+            // this.orders.find(({ id }) => id === this.orderId)
+            // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
+            // this.job_status = response.data.items.job_status
+            this.loading = false
+            this.length = Math.round(
+                response.data.total_count /
+                response.data.num_items_per_page
+            );
+            console.log("page length", this.length)
+            setTimeout(() => (this.loading = false), 1000)
+          })
+          .catch((error) => {
+            this.postedJobs = []
+            this.$awn.alert("Failed");
+            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+          })
+          .finally(() => {
+            this.modalSkeleton = false
+            if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
+
+          });
+    },
+    jobLive(event){
+      if (event) {
+        event.preventDefault();
+      }
+      // this.postedJobs.job_status = (this.postedJobs.job_status + 1) % 2
+      if (this.$cookies.get("accessToken") == null) {
+        this.$router.history.push("/signin");
+        return;
+      }
+      // if(this.jobId){
+      //   if(!this.postedJobs.is_expired){
+      //
+      //   }
+      // }
+      // if (!this.$refs.is_.is_expired.validate()) return;
+      // this.loadingAppliedJob = true;
+
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        method: "put",
+        baseURL: this.$store.state.apiBase,
+        url: `jobs/${this.jobId}/live`,
+        data: {
+          // is_expired: this.is_expired,
+        },
+        headers,
+      })
+          .then((response) => {
+            console.log(response);
+            if (response.status == 206) {
+              this.$router.history.push("/subscription");
+              this.$awn.alert("Your job is not lived");
+              return;
+            }
+            this.$awn.success("Your job have successfully lived!");
+            this.getPostedJobs();
+          })
+          .catch((error) => {
+            console.log(error);
+            this.$awn.alert("Failed!");
+            if (error.response.status == 409) {
+              console.log(error);
+              this.$awn.alert("This Job already Lived");
+              return;
+            }
+            if (error.response.status == 423) {
+              console.log(error);
+              this.$awn.alert("Your subscribe is not completed");
+              this.$router.history.push("/subscription");
+              return;
+            }
+            // } else if (error.response.status == 423) {
+            //   this.$awn.alert("Your subscribe is not completed");
+            //   this.$router.history.push("/subscription");
+            //   return;
+            // }
+          })
+          .finally(() => {
+            this.loadingAppliedJob = false;
+          });
+    },
     getHumanDate: function (date) {
       return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
