@@ -48,7 +48,7 @@
                     block
                     color="primary"
                     class="white--text"
-                    @click.stop="submit"
+                    @click.stop="submit()"
                   >Login</v-btn>
                 </v-col>
 
@@ -96,6 +96,7 @@ export default {
       email: "",
       password: "",
       loading: false,
+      homePageUrl: '',
     };
   },
   methods: {
@@ -111,6 +112,7 @@ export default {
           data: {
             email: this.email,
             password: this.password,
+            home_page_url: this.homePageUrl
           },
           params: {
             ip: this.$store.getters.userIp,
@@ -122,8 +124,11 @@ export default {
           localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("accessToken", response.access_token);
           this.$store.commit("isLoggedIn", true);
+          this.homePageUrl = response.home_page_url
+
           setTimeout(() => {
-            this.$router.history.push({ name: "SearchJob" });
+            this.$router.history.push({name:"userInfo", params: {homePageUrl:this.homePageUrl} } );
+            // this.$router.history.push({ name: "SearchJob" }); params: {homePageUrl:this.homePageUrl}
           }, 1000);
 
           // this.$refs.form.reset();
@@ -147,7 +152,7 @@ export default {
     this.$store.commit("isLoggedIn", false);
 
     // console.log("cookies", this.$cookies.get("accessToken"));
-    /* 
+    /*
     console.log(
       " is logged in ",
       this.R.isEmpty(this.$cookies.get("accessToken"))

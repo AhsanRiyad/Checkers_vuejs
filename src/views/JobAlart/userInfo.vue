@@ -1,0 +1,167 @@
+<template>
+  <v-container class="mainTemplate">
+    <v-form ref="form">
+      <v-row class="mainContainer">
+        <v-col cols="12" md="11" lg="11">
+          <p class="h1Text">User Info</p>
+          <v-row align="center">
+            <v-col cols="12" md="12" lg="12">
+              <p>Full Name</p>
+              <v-text-field
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Full Name"
+                  outlined
+                  dense
+                  v-model="full_name"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" lg="6" md="6">
+              <p>Email</p>
+              <div>
+                <v-text-field
+                    background-color="white"
+                    class="mb-0"
+                    placeholder="Enter email"
+                    outlined
+                    dense
+                    v-model="official_email"
+                    type="email"
+                ></v-text-field>
+              </div>
+            </v-col>
+            <v-col cols="12" md="6" lg="6">
+              <p>Company Contact Number</p>
+              <vue-tel-input-vuetify
+                  outlined
+                  dense
+                  single-line
+                  v-model="official_phone"
+                  @validate="validate"
+                  :required="true"
+                  background-color="white"
+                  :validCharactersOnly="true"
+                  inputClasses="vTelInput"
+              ></vue-tel-input-vuetify>
+            </v-col>
+          </v-row>
+          <div>
+            <p>About You</p>
+            <div>
+              <v-textarea
+                  v-model="about_you"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="About us"
+                  outlined
+                  dense
+              ></v-textarea>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <div class="item-2">
+              <v-btn color="#365899" class="white--text" @click.stop="submit">Save</v-btn>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+    </v-form>
+  </v-container>
+</template>
+
+<script>
+import "../../sass/employers/_jobs.scss";
+import axios from "axios";
+export default {
+name: "userInfo",
+  data:() =>{
+  return{
+    full_name:'',
+    official_email:'',
+    official_phone: '',
+    about_you: '',
+    userInfo: {
+
+    }
+  }
+},
+  mounted(){
+    this.getUrl()
+  },
+  methods: {
+  getUrl(){
+    const headers = {
+      Authorization: "Bearer " + this.$cookies.get("accessToken"),
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    axios({
+      method: "get",
+      baseURL: this.$store.state.apiBase,
+      url: `companies/user-basic-infos/`,
+      data: {},
+      headers,
+    })
+        .then((response) => {
+          console.log("user response", response.status);
+          this.$awn.success("Successful");
+          if (response.status == 404) {
+            this.$awn.alert("please Enter Your Information");
+            this.$router.history.push("/user-info");
+          }else if (response.status == 200) {
+            this.$router.history.push("/company-list");
+          }
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+  },
+    submit() {
+      if (!this.$refs.form.validate()) return;
+
+      this.loading = true;
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      this.$store
+          .dispatch("callApi", {
+            url: "companies/user-basic-infos/",
+            method: "post",
+            data: {
+              full_name:this.full_name,
+              official_email:this.official_email,
+              official_phone: this.official_phone,
+              about_you: this.about_you,
+            },
+            headers
+          })
+          .then((response) => {
+            console.log("user info", response);
+            this.$awn.success("Successful");
+            // localStorage.setItem("accessToken", response.access_token);
+            // this.$cookies.set("accessToken", response.access_token);
+            // this.$store.commit("isLoggedIn", true);
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+    },
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

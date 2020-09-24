@@ -116,11 +116,8 @@ export default {
   methods: {
     submit() {
       if (!this.$refs.form.validate()) return;
-
       this.loading = true;
-
       let data = {};
-
       this.$store.getters.registerAs == "APPLICANTS"
         ? (data = {
             email: this.email,
@@ -149,11 +146,6 @@ export default {
           setTimeout(() => {
             this.$router.history.push({ name: "Signin" });
           }, 1000);
-
-          // this.$refs.form.reset();
-          //saves the items from the database in the table
-          //  console.log(response);
-          //  this.items = response.data;
         })
         .catch(() => {
           this.$awn.alert("Failed! Email/Password doesn't match");
@@ -171,7 +163,7 @@ export default {
     this.$store.commit("isLoggedIn", false);
 
     // console.log("cookies", this.$cookies.get("accessToken"));
-    /* 
+    /*
     console.log(
       " is logged in ",
       this.R.isEmpty(this.$cookies.get("accessToken"))

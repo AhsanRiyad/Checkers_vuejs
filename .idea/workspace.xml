@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/userInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signup.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,6 +188,7 @@
       <workItem from="1600748789942" duration="23500000" />
       <workItem from="1600777229596" duration="204000" />
       <workItem from="1600837492638" duration="21772000" />
+      <workItem from="1600923391870" duration="19283000" />
     </task>
     <servers />
   </component>
@@ -211,6 +217,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="585" y="197" key="#Inspections" timestamp="1600948951100">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="585" y="197" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1600948951100" />
     <state x="736" y="319" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599731085193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -247,10 +257,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="913" y="0" width="896" height="812" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1599718407128" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1600757213276">
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1600937005532">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600757213276" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600937005532" />
     <state x="623" y="225" key="search.everywhere.popup" timestamp="1599720754991">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -19,18 +19,10 @@
                 <thead>
                 <tr class="panel-heading">
                   <th>Sl</th>
-                  <th style=" width:35%;">Job Title</th>
+                  <th style=" width:35%;">Company Name</th>
                   <th>
                     <v-icon>mdi-bell-ring</v-icon>
-                    Job Status
-                  </th>
-                  <th>
-                    <v-icon>mdi-file-multiple-outline</v-icon>
-                    Application
-                  </th>
-                  <th class="text-center">
-                    <v-icon>mdi-format-list-bulleted</v-icon>
-                    Short-listed
+                    Company Status
                   </th>
                   <th class="text-center">Actions</th>
                 </tr>
@@ -44,31 +36,55 @@
                     absolute
                     height="6"
                 ></v-progress-linear>
-                <tr v-for="(job, i) in postedJobs" :key="i">
+                <tr v-for="(comp, i) in companies" :key="i">
                   <td><p>{{ i+1 }}</p></td>
                   <td>
-                    <a class="text-capitalize" @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
-                    <p class="mb-0"><small>Published On:<span class="ml-1" v-if="job.live_at"> {{getHumanDate(job.live_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
-                    <p  class="mb-0"><small>Deadline:<span class="ml-1" v-if="job.end_at">{{ getHumanDate(job.end_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
+                    <a class="text-capitalize" @click="goToCompanyDetails(comp.id)">{{ comp.company_name }}</a>
                   </td>
-                  <td>
-                    <v-switch
-                        @click="job_status = (job_status + 1) % 2"
-                        v-model="job.job_status"
-                        color="success"
-                        value="success"
-                        hide-details
-                    ></v-switch>
-                  </td>
-                  <td>{{ job.applicant }}</td>
-                  <td class="text-center">{{ job.shortlisted }}</td>
+                  <td v-if="comp.is_verified"><span class="green--text">Verified</span></td>
+                  <td v-else><span class="red--text">Not Verified</span></td>
                   <td class="action text-center">
-                    <v-btn :disabled="job_status == 1" class="interactn c-grey" icon>
-                      <v-icon>mdi-square-edit-outline</v-icon>
-                    </v-btn>
-                    <v-btn :disabled="job_status == 1" class="interactn  mr-2 ml-2 c-green" icon>
-                      <v-icon>mdi-backup-restore</v-icon>
-                    </v-btn>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn  v-bind="attrs"
+                                v-on="on" class="interactn c-grey" icon>
+                          <v-icon>mdi-square-edit-outline</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Edit The Company</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn v-bind="attrs"
+                               v-on="on" class="interactn ml-2 c-green" icon>
+                          <v-icon>mdi-view-list</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>View Job List</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn  mr-2 ml-2 c-blue"
+                            v-bind="attrs"
+                            v-on="on"
+                            icon
+                        ><v-icon>mdi-briefcase-upload</v-icon></v-btn>
+                      </template>
+                      <span>Job Post</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="interactn  c-blue"
+                            v-bind="attrs"
+                            v-on="on"
+                            icon
+                        ><v-icon>mdi-shield-check</v-icon></v-btn>
+                      </template>
+                      <span>Request For Company Verification</span>
+                    </v-tooltip>
+
                   </td>
                 </tr>
                 </tbody>
@@ -88,8 +104,41 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-name: "CompanyList"
+name: "CompanyList",
+  data: () => {
+    return {
+      companies: [],
+      length: 0
+    }},
+  mounted(){
+    this.getCompanies()
+  },
+  methods: {
+    getCompanies(){
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        method: "get",
+        baseURL: this.$store.state.apiBase,
+        url: `companies/`,
+        data: {},
+        headers,
+      })
+          .then((response) => {
+            console.log("companies", response.data.data);
+            this.companies = response.data.data
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+          })
+    },
+  }
 }
 </script>
 

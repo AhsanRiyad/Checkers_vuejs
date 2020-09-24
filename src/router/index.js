@@ -28,6 +28,8 @@ import pricingTable from "@/views/JobAlart/pricingTable";
 
 import forgotPassword from "../views/JobAlart/AccountSettings/forgotPassword"
 import AddCompanies from "@/views/Employers/companies/AddCompanies";
+import userInfo from "@/views/JobAlart/userInfo";
+import CompanyList from "@/views/Employers/companies/CompanyList";
 
 
 
@@ -199,11 +201,11 @@ const routes = [
     }
   },
   {
-    path: '/company-list/:id',
-    name: 'EmployersPanel',
-    component: EmployersPanel,
+    path: '/company-list',
+    name: 'CompanyList',
+    component: CompanyList,
     meta: {
-      title: 'Employers Panel'
+      title: 'Companies List'
     }
   },
   //    companies components routing end
@@ -246,6 +248,14 @@ const routes = [
     component: pricingTable,
     meta: {
       title: 'Pricing Table'
+    }},
+  {
+    path: '/user-info/:homePage' ,
+    name: 'userInfo',
+    component: userInfo,
+    props: { newsletterPopup: false },
+    meta: {
+      title: 'User Info'
     }
   }
   //   jobs components routing end
