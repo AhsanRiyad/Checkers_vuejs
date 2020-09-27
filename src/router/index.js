@@ -30,6 +30,8 @@ import forgotPassword from "../views/JobAlart/AccountSettings/forgotPassword"
 import AddCompanies from "@/views/Employers/companies/AddCompanies";
 import userInfo from "@/views/JobAlart/userInfo";
 import CompanyList from "@/views/Employers/companies/CompanyList";
+import PostedJobList from "@/views/Employers/Jobs/PostedJobList";
+import recruiter from "@/views/recruiter";
 
 
 
@@ -195,6 +197,22 @@ const routes = [
   {
     path: '/job-list/:id',
     name: 'PostedJobList',
+    component: PostedJobList,
+    meta: {
+      title: 'Employers Panel'
+    }
+  },
+  {
+    path: '/recruiter',
+    name: 'recruiter',
+    component: recruiter,
+    meta: {
+      title: 'recruiter'
+    }
+  },
+  {
+    path: '/employers',
+    name: 'EmployersPanel',
     component: EmployersPanel,
     meta: {
       title: 'Employers Panel'

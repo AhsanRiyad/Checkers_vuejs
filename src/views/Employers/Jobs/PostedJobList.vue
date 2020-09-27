@@ -36,14 +36,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <v-progress-linear
-                    v-show="loading"
-                    :indeterminate="loading"
-                    color="deep-purple accent-4"
-                    rounded
-                    absolute
-                    height="6"
-                ></v-progress-linear>
+                <v-dialog v-model="loading" hide-overlay persistent width="300">
+                  <v-card color="primary" dark>
+                    <v-card-text>
+                      Loading Data...
+                      <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
                 <tr v-for="(job, i) in postedJobs" :key="i">
                   <td><p>{{ i+1 }}</p></td>
                   <td>
@@ -156,7 +156,7 @@ export default {
                 response.data.num_items_per_page
             );
             console.log("page length", this.length)
-            setTimeout(() => (this.loading = false), 1000)
+            // setTimeout(() => (this.loading = false), 1000)
           })
           .catch((error) => {
             this.postedJobs = []

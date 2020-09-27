@@ -19,7 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="" />
+    <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/companies/companiesTab.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/recruiter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/EmployersPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/EmployersPanel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Auth/Signin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Header.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,6 +194,7 @@
       <workItem from="1600777229596" duration="204000" />
       <workItem from="1600837492638" duration="21772000" />
       <workItem from="1600923391870" duration="19525000" />
+      <workItem from="1601183502015" duration="21313000" />
     </task>
     <servers />
   </component>

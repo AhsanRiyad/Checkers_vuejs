@@ -127,7 +127,11 @@ export default {
           this.homePageUrl = response.home_page_url
 
           setTimeout(() => {
-            this.$router.history.push({name:"userInfo", params: {homePageUrl:this.homePageUrl} } );
+            if(response.is_company){
+              this.$router.history.push({name:"userInfo"})
+            }else {
+              this.$router.history.push({name:"biodata"})
+            }
             // this.$router.history.push({ name: "SearchJob" }); params: {homePageUrl:this.homePageUrl}
           }, 1000);
 

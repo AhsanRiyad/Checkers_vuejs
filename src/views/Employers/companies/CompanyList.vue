@@ -28,14 +28,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <v-progress-linear
-                    v-show="loading"
-                    :indeterminate="loading"
-                    color="deep-purple accent-4"
-                    rounded
-                    absolute
-                    height="6"
-                ></v-progress-linear>
                 <tr v-for="(comp, i) in companies" :key="i">
                   <td><p>{{ i+1 }}</p></td>
                   <td>
@@ -55,7 +47,7 @@
                     </v-tooltip>
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs"
+                        <v-btn v-bind="attrs"  @click="goToJobsList(comp.id)"
                                v-on="on" class="interactn ml-2 c-green" icon>
                           <v-icon>mdi-view-list</v-icon>
                         </v-btn>
@@ -64,7 +56,7 @@
                     </v-tooltip>
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn
+                        <v-btn @click="goToJobAdd()"
                             class="interactn  mr-2 ml-2 c-blue"
                             v-bind="attrs"
                             v-on="on"
@@ -90,6 +82,16 @@
                 </tbody>
               </table>
             </div>
+            <!-- loading data  starts-->
+            <v-dialog v-model="loading" hide-overlay persistent width="300">
+              <v-card color="primary" dark>
+                <v-card-text>
+                  Loading Data...
+                  <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+            <!-- loading data  ends-->
             <!--********** Job applied table end **************-->
             <!--********** pagination start **************-->
             <div class="pagination">
@@ -111,7 +113,10 @@ name: "CompanyList",
   data: () => {
     return {
       companies: [],
-      length: 0
+      length: 0,
+      loading : true,
+      jobId: '',
+      pageNo: 1
     }},
   mounted(){
     this.getCompanies()
@@ -133,10 +138,20 @@ name: "CompanyList",
           .then((response) => {
             console.log("companies", response.data.data);
             this.companies = response.data.data
+            this.loading = false
+            setTimeout(()=> {
+
+            }, 3000)
           })
           .catch(() => {
             this.$awn.alert("Failed!");
           })
+    },
+    goToJobAdd(){
+      this.$router.push({name:'AddJobs'})
+    },
+    goToJobsList(jobId){
+      this.$router.push({name:'PostedJobList', params:{id: jobId}})
     },
   }
 }

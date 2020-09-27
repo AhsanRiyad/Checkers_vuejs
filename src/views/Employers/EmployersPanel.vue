@@ -4,13 +4,13 @@
       <v-row>
         <v-col cols="12" md="12">
           <v-tabs v-model="tabs"
-              background-color="indigo"
-              dark
+                  background-color="indigo"
+                  dark
           >
-            <v-tab>
-             Jobs
+            <v-tab @click="gotoJoblist()">
+              Jobs
             </v-tab>
-            <v-tab>
+            <v-tab to="/company-list">
               Companies
             </v-tab>
           </v-tabs>
@@ -19,7 +19,7 @@
               <employers-jobs/>
             </v-tab-item>
             <v-tab-item>
-
+              <employers-companies/>
             </v-tab-item>
           </v-tabs-items>
         </v-col>
@@ -29,15 +29,17 @@
 </template>
 
 <script>
+
 export default {
-name: "EmployersPanel",
+  name: "EmployersPanel",
   components: {
     EmployersJobs: () => import('./Jobs/JobsTab'),
+    EmployersCompanies: () => import('./companies/companiesTab')
   },
   data: () => {
     return {
       tabs: null,
     }
-}
+  }
 }
 </script>

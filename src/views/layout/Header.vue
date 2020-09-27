@@ -10,14 +10,14 @@
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
-        <v-btn text color="white">Recruiters</v-btn>
+        <v-btn text  router to="/recruiter" color="white">Recruiters</v-btn>
         <v-btn
           router
           to="/signin"
           text
           color="white"
         >{{ $store.getters.isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
-        <v-btn router to="/add-job" text color="white">Employeer/Job Post</v-btn>
+        <v-btn router to="/employers" text color="white">Employeer/Job Post</v-btn>
         <v-menu
           bottom
           origin="center center"

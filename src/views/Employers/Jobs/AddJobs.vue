@@ -401,25 +401,6 @@ export default {
     // categoryName(selected) {
     //   this.jobs.company_name = selected
     //   console.log("category name", selected)
-    clearForm() {
-      this.job_title = ''
-      this.job_description = ''
-      this.type = ''
-      this.type_in_text = ''
-      this.company_id = ''
-      this.company_name = ''
-      this.job_location = ""
-      this.country = ''
-      this.city = ''
-      this.min_salary_range = ''
-      this.max_salary_range = ''
-      this.currency_code = ''
-      this.job_category = []
-      this.job_facilities = []
-      this.job_responsibilities = []
-      this.job_education_req = []
-      this.skills = []
-    },
     // },
     saveJob() {
       if (!this.$refs.form.validate()) return;
