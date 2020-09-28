@@ -245,7 +245,7 @@ const routes = [
     }
   },
   {
-    path: '/details/:id',
+    path: '/applicant-list/:id',
     name: 'JobDetails',
     component: JobDetails,
     meta: {

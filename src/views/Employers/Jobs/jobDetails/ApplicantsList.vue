@@ -17,31 +17,38 @@
            <div  style="overflow-x: auto !important;">
              <table>
                <tbody>
-               <tr v-for="(applicant, i) in applicants" :key="i">
-                 <td class="text-center"><p class="font-weight-bold">{{ applicant.id }}</p></td>
+
+               <tr v-for="app in applicant" :key="app.id">
+                 <td class="text-center"><p class="font-weight-bold"></p></td>
                  <td style="width: 10%">
                    <v-avatar size="85">
-                     <img src="https://cdn.vuetifyjs.com/images/john.jpg"
-                          alt="John">
+                     <img :src="app.photo"
+                          :alt="app.full_name">
                    </v-avatar>
                  </td>
                  <td>
-                   <p><a href="">{{ applicant.name }} </a><span class="age_outline">{{applicant.age}}</span></p>
-                   <p>{{ applicant.address }}</p>
-                   <p>{{ applicant.institution_name }}</p>
-                   <p><span>{{applicant.degree}}</span> in <span>{{applicant.subject}}</span></p>
+                   <div v-for="bio in app.biodata" :key="bio.id">
+                     <p><a href="">{{ bio.full_name }} </a><span class="age_outline"> age:{{bio.age}}</span></p>
+                     <p>{{ bio.address }}</p>
+                   </div>
+                   <div v-for="qua in app.qualification" :key="qua.id">
+                     <p>{{qua.institute}}</p>
+                     <p><span>{{qua.exam_title}}</span> in <span>{{qua.subject}}</span></p>
+                   </div>
                  </td>
                  <td>
-                   <div v-for="(ex, i) in applicant.exp" :key="i">
-                     <p class="font-weight-bold">{{ex.companyName}}</p>
-                     <p>{{ex.designation}}</p>
+                   <div v-for="(ex) in app.experiences" :key="ex.id">
+                     <p class="font-weight-bold">{{ex.company_name}}</p>
+                     <p>{{ex.job_title}}</p>
                    </div>
                  </td>
                  <td></td>
                  <td>
-                   <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ applicant.totalExp }} + years</span></p>
-                   <p> <span class="mr-2">&#2547;</span>{{ applicant.expectedSalary }}</p>
-                   <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ applicant.appliedOn }}</span></p>
+                   <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ totalExp.years }} Years {{totalExp.months}} Months {{totalExp.days}} Days</span></p>
+                   <div v-for="apear in app.job_appliers" :key="apear.id">
+                     <p> <span class="mr-2" >{{ apear.currency_code }}</span>{{ apear.expected_salary }}</p>
+                     <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ getHumanDate(apear.created_at) }}</span></p>
+                   </div>
                  </td>
                  <td class="action text-center">
                    <v-btn class="interactn c-grey" color="success" icon>
@@ -93,134 +100,29 @@
 
 <script>
 import "../../../../sass/employers/_jobs.scss"
+import moment from "moment";
 export default {
   name: "ApplicantsList",
+  props: {
+    applicant: Array,
+    experience: Array,
+    jobs: Object,
+    biodata: Array,
+    qualification: Array,
+    jobAppliers: Array,
+    totalExp: Object,
+    length: Number,
+    pageNo: Number,
+  },
   data: () => {
     return {
-      applicants: [
-        {
-          id: 1,
-          name: 'Mizanur Rahman',
-          img: 'assets/balgownie-avatar.jpg',
-          age: 25,
-          address: 'Dhaka, Bangladesh',
-          institution_name: 'IUB',
-          degree: 'B.Sc Engineering',
-          graduation: '30000',
-          subject: 'CSE',
-          contactNumber: '01712794616',
-          matched: "50%",
-          exp: [
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-          ],
-          shortlisted: true,
-          rejected: true,
-          expectedSalary: '60,689',
-          views: 73,
-          totalExp: '5',
-          appliedOn: '20 August 2020'
-        },
-        {
-          id: 2,
-          name: 'Mizanur Rahman',
-          img: 'assets/balgownie-avatar.jpg',
-          age: 25,
-          address: 'Dhaka, Bangladesh',
-          institution_name: 'IUB',
-          degree: 'B.Sc Engineering',
-          graduation: '30000',
-          subject: 'CSE',
-          contactNumber: '01712794616',
-          matched: "50%",
-          exp: [
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-          ],
-          shortlisted: true,
-          rejected: true,
-          expectedSalary: '60,689',
-          views: 73,
-          totalExp: '5',
-          appliedOn: '20 August 2020'
-        },
-        {
-          id: 3,
-          name: 'Mizanur Rahman',
-          img: 'assets/balgownie-avatar.jpg',
-          age: 25,
-          address: 'Dhaka, Bangladesh',
-          institution_name: 'IUB',
-          degree: 'B.Sc Engineering',
-          graduation: '30000',
-          subject: 'CSE',
-          contactNumber: '01712794616',
-          matched: "50%",
-          exp: [
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-          ],
-          shortlisted: true,
-          rejected: true,
-          expectedSalary: '60,689',
-          views: 73,
-          totalExp: '5',
-          appliedOn: '20 August 2020'
-        },
-        {
-          id: 4,
-          name: 'Mizanur Rahman',
-          img: 'assets/balgownie-avatar.jpg',
-          age: 25,
-          address: 'Dhaka, Bangladesh',
-          institution_name: 'IUB',
-          degree: 'B.Sc Engineering',
-          graduation: '30000',
-          subject: 'CSE',
-          contactNumber: '01712794616',
-          matched: "50%",
-          exp: [
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-          ],
-          shortlisted: true,
-          rejected: true,
-          expectedSalary: '60,689',
-          views: 73,
-          totalExp: '5',
-          appliedOn: '20 August 2020'
-        },
-        {
-          id: 5,
-          name: 'Mizanur Rahman',
-          img: 'assets/balgownie-avatar.jpg',
-          age: 25,
-          address: 'Dhaka, Bangladesh',
-          institution_name: 'IUB',
-          degree: 'B.Sc Engineering',
-          graduation: '30000',
-          subject: 'CSE',
-          contactNumber: '01712794616',
-          matched: "50%",
-          exp: [
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-            {companyName: 'One One and Co. Limited', designation: 'software engineer', experience:'3'},
-          ],
-          shortlisted: true,
-          rejected: true,
-          expectedSalary: '60,689',
-          views: 73,
-          totalExp: '5',
-          appliedOn: '20 August 2020'
-        }
-      ]
     }
   },
+ methods: {
+   getHumanDate: function (date) {
+     return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
+   },
+ }
 }
 </script>
 

@@ -57,16 +57,6 @@
             </v-card>
           </div>
           <!-- statistics end -->
-          <!--chart start-->
-          <v-row>
-            <v-col cols="12" lg="6" md="6">
-              <pie-chart/>
-            </v-col>
-            <v-col cols="12" lg="6" md="6">
-              <bar-chart/>
-            </v-col>
-          </v-row>
-          <!--chart end-->
         </v-card>
       </v-col>
     </v-row>
@@ -74,12 +64,8 @@
 </template>
 
 <script>
-
-import PieChart from "@/components/chart/PieChart";
-import BarChart from "@/components/chart/BarChart";
 export default {
-  name: "JobPreview",
-  components: {BarChart, PieChart},
+  name: "ShortListed",
 }
 </script>
 
