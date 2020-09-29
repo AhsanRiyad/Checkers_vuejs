@@ -6,7 +6,7 @@
           <!--********** Top card start **************-->
           <div class="top_section_card">
             <div class="ja_left_card">
-              <h1 class="job_title">{{jobs.job_title}}</h1>
+              <h1 class="job_title">{{ jobs.job_title }}</h1>
             </div>
             <div class="ja_right_card">
               <v-btn class="text--white" color="blue-grey">
@@ -65,7 +65,7 @@
             <v-row align="center">
               <v-col cols="12" md="8">
                 <v-tabs v-model="tabs">
-                  <v-tab class="job_tab">Applicants ({{totalApplicants}})</v-tab>
+                  <v-tab class="job_tab">Applicants ({{ totalApplicants }})</v-tab>
                   <v-tab class="job_tab">Shortlisted</v-tab>
                   <v-tab class="job_tab">Job Preview</v-tab>
                 </v-tabs>
@@ -81,7 +81,8 @@
                       append-icon="search"
                       solo-inverted
                   ></v-text-field>
-                  <v-text-field outlined dense v-model="dateRangeText" placeholder="Date range"
+                  <!--                  v-model="dateRangeText"-->
+                  <v-text-field outlined dense placeholder="Date range"
                                 prepend-inner-icon="event" single-line></v-text-field>
                 </div>
               </v-col>
@@ -90,13 +91,15 @@
 
           <v-tabs-items v-model="tabs">
             <v-tab-item>
-              <applicant-list :total-exp="totalExp" :biodata="biodata" :job-appliers="jobAppliers" :experience="experience" :qualification="qualification" :applicant="applicant"/>
+              <applicant-list :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
+                              :job-appliers="jobAppliers" :experience="experience" :qualification="qualification"
+                              :applicant="applicant"/>
             </v-tab-item>
             <v-tab-item>
               <short-listed/>
             </v-tab-item>
             <v-tab-item>
-              <job-summary job="job"/>
+              <job-preview :jobs="jobs"/>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
@@ -114,7 +117,7 @@ export default {
   components: {
     ApplicantList: () => import('../Jobs/jobDetails/ApplicantsList'),
     ShortListed: () => import('./jobDetails/ShortListed'),
-    JobSummary: () => import('../Jobs/jobDetails/JobSummary'),
+    JobPreview: () => import('./jobDetails/JobPreview'),
   },
   data: () => {
     return {
@@ -122,15 +125,17 @@ export default {
       applicant: [],
       qualification: [],
       experience: [],
-      jobAppliers: {},
+      jobAppliers: [],
       biodata: [],
       totalExp: {},
       pageNo: 1,
       length: 0,
-      jobs: {}
+      jobs: {},
+      jobResponsibility: {},
+      imageUrl: "",
     }
   },
-created() {
+  created() {
     this.getApplicantList()
   },
   computed: {
@@ -139,7 +144,7 @@ created() {
     },
   },
   methods: {
-    getApplicantList(){
+    getApplicantList() {
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -156,23 +161,31 @@ created() {
         headers,
       })
           .then((response) => {
-            console.log("Applicant list", response.data.data);
+            console.log("Applicant list", response.data);
             console.log("job list", response.data.job);
             console.log("qualification", this.qualification);
             this.applicant = response.data.data;
             this.jobs = response.data.job
             for (let i = 0; i < this.applicant.length; i++) {
-              console.log("qualification index object", this.applicant[i]) // returns [Object object]
-              console.log("qualification", this.applicant[i].qualification) // returns undefined
-              console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
-              console.log("experience", this.experience) // returns undefined
-              console.log("biodata", this.biodata) // returns undefined
-              console.log("total exp", this.totalExp) // returns undefined
+              // console.log("qualification index object", this.applicant[i]) // returns [Object object]
+              // console.log("qualification", this.applicant[i].qualification) // returns undefined
+              // console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
+              // console.log("experience", this.experience) // returns undefined
+              // console.log("biodata", this.biodata) // returns undefined
+              // console.log("total exp", this.totalExp) // returns undefined
               this.qualification = this.applicant[i].qualification
               this.biodata = this.applicant[i].biodata
+              for(let z = 0; z < this.biodata.length; z++){
+                this.imageUrl = this.biodata[z].photo
+                console.log("Image Url", this.imageUrl)
+              }
               this.experience = this.applicant[i].experiences
               this.jobAppliers = this.applicant[i].job_appliers
               this.totalExp = this.applicant[i].total_experice
+            }
+            for (let j = 0; j < this.jobs.length; j++) {
+              console.log("Job Responsibilities", this.jobs[j])
+
             }
 
             // this.jobId =this.postedJobs[3]
@@ -189,7 +202,7 @@ created() {
             // setTimeout(() => (this.loading = false), 1000)
           })
           .catch((error) => {
-            this.postedJobs = []
+            this.applicant = []
             this.$awn.alert("Failed");
             console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
           })

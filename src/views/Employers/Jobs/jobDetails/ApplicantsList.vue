@@ -4,15 +4,6 @@
       <v-row justify="center">
         <v-col cols="12" md="12">
           <v-card flat class="ja__card pt-0">
-            <!--********** Job activities start **************-->
-            <div class="jobActivity">
-              <v-row>
-                <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job: <span>23</span></p>
-                </v-col>
-              </v-row>
-            </div>
-            <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
            <div  style="overflow-x: auto !important;">
              <table>
@@ -20,15 +11,15 @@
 
                <tr v-for="app in applicant" :key="app.id">
                  <td class="text-center"><p class="font-weight-bold"></p></td>
-                 <td style="width: 10%">
+                 <td style="width: 10%" v-for="photo in app.biodata" :key="photo.id">
                    <v-avatar size="85">
-                     <img :src="app.photo"
-                          :alt="app.full_name">
+                     <img :src=" $store.getters.imageUrl + photo.photo"
+                          :alt="photo.full_name">
                    </v-avatar>
                  </td>
                  <td>
                    <div v-for="bio in app.biodata" :key="bio.id">
-                     <p><a href="">{{ bio.full_name }} </a><span class="age_outline"> age:{{bio.age}}</span></p>
+                     <p class="mb-4"><a @click="applicantResume(bio.userId)" style="font-size: 20px; text-transform: capitalize">{{ bio.full_name }} </a><span class="age_outline font-weight-bold"> Age: {{bio.age}}</span></p>
                      <p>{{ bio.address }}</p>
                    </div>
                    <div v-for="qua in app.qualification" :key="qua.id">
@@ -44,7 +35,7 @@
                  </td>
                  <td></td>
                  <td>
-                   <p> <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ totalExp.years }} Years {{totalExp.months}} Months {{totalExp.days}} Days</span></p>
+                   <p > <span class="mr-2"><v-icon small>mdi-briefcase</v-icon></span><span>{{ app.total_experice.years }} <span class="font-weight-bold ml-1 mr-1">Years</span> {{app.total_experice.months}} <span class="font-weight-bold ml-1 mr-1">Month</span> {{app.total_experice.days}} <span class="font-weight-bold ml-1 mr-1">Days</span></span></p>
                    <div v-for="apear in app.job_appliers" :key="apear.id">
                      <p> <span class="mr-2" >{{ apear.currency_code }}</span>{{ apear.expected_salary }}</p>
                      <p> <span class="mr-2 font-weight-bold">Applied On: </span><span>{{ getHumanDate(apear.created_at) }}</span></p>
@@ -54,7 +45,7 @@
                    <v-btn class="interactn c-grey" color="success" icon>
                      <i class="material-icons">check</i>
                    </v-btn>
-                   <v-btn class="interactn  mr-2 ml-2 c-green" color="error" icon>
+                   <v-btn class="interactn  mr-2 ml-1 mr-1 c-green" color="error" icon>
                      <i class="material-icons">close</i>
                    </v-btn>
                  </td>
@@ -106,22 +97,27 @@ export default {
   props: {
     applicant: Array,
     experience: Array,
-    jobs: Object,
     biodata: Array,
     qualification: Array,
     jobAppliers: Array,
     totalExp: Object,
     length: Number,
     pageNo: Number,
+    jobResponsibilities: Array,
   },
   data: () => {
     return {
+      showModal: false,
+      applicantsReg: {}
     }
   },
  methods: {
    getHumanDate: function (date) {
      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
    },
+   applicantResume(n){
+     this.$router.push({name: 'ApplicantResume', params: {id: n}})
+   }
  }
 }
 </script>

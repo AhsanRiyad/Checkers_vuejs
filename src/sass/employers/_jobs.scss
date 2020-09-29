@@ -207,6 +207,14 @@
 //job details css end
 //Applicant list css start
 .applicant__list {
+  .age_outline{
+    background-color: $secondaryColor;
+    padding: 0 8px;
+    margin-left: 5px;
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 2px;
+  }
   table {
     width: 100%;
     border-collapse: separate;
