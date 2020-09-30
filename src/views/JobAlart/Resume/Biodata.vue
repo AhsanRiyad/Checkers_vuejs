@@ -599,7 +599,7 @@ export default {
 
       let data = new FormData();
       data.append("image", this.photo);
-      data.append("id", "1");
+      data.append("id", this.$cookies.get("_id"));
 
       this.$store
         .dispatch("upload", {
