@@ -86,7 +86,7 @@
 
               <div class="row-100-1">
                 <v-menu
-                  v-model="menu"
+                  v-model="n.menu1"
                   :close-on-content-click="false"
                   :nudge-right="40"
                   transition="scale-transition"
@@ -107,7 +107,7 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="n.from_date" @input="menu = false"></v-date-picker>
+                  <v-date-picker v-model="n.from_date" @input="n.menu1 = false"></v-date-picker>
                 </v-menu>
               </div>
 
@@ -115,7 +115,7 @@
 
               <div class="row-100-4">
                 <v-menu
-                  v-model="menu2"
+                  v-model="n.menu2"
                   :close-on-content-click="false"
                   :nudge-right="40"
                   transition="scale-transition"
@@ -137,7 +137,7 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="n.to_date" @input="menu2 = false"></v-date-picker>
+                  <v-date-picker v-model="n.to_date" @input="n.menu2 = false"></v-date-picker>
                 </v-menu>
               </div>
 
@@ -333,6 +333,8 @@ export default {
           job_category: "",
           from_date: "",
           to_date: "",
+          menu1: false,
+          menu2: false,
           company_name: "",
           company_location: "",
           job_description: "",
@@ -494,6 +496,19 @@ export default {
     nextBtn() {
       console.log("experiences....", this.experiences);
       this.loading = false;
+      this.experiences = this.experiences.filter((n) => {
+        return {
+          id: n.id,
+          job_title: n.job_title,
+          job_category: n.job_category,
+          from_date: n.from_date,
+          to_date: n.to_date,
+          company_name: n.company_name,
+          company_location: n.company_location,
+          job_description: n.job_description,
+        };
+      });
+
       console.log("applicationInfo....", this.applicationInfo);
       console.log("skillArray....", this.skillArray);
 
