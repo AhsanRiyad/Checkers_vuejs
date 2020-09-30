@@ -234,7 +234,7 @@ export default {
           details: "",
         },
       ],
-
+      resume: {},
       trainings: [{}],
 
       certificate_validity: "",
@@ -260,7 +260,7 @@ export default {
         .then((response) => {
           console.log(response);
           this.examList = response.data.examList;
-
+          this.resume = response.data;
           this.educations =
             this.R.isNil(response.data.qualification) ||
             this.R.isEmpty(response.data.qualification)
@@ -272,6 +272,16 @@ export default {
           console.log("educations....", this.educations);
         })
         .finally(() => {
+          if (
+            this.R.isNil(this.resume.biodata) ||
+            this.R.isEmpty(this.resume.biodata) ||
+            this.R.isNil(this.resume.experiences) ||
+            this.R.isEmpty(this.resume.experiences)
+          ) {
+            this.$awn.alert("Your biodata/experices is not complete");
+            this.$router.history.push("/biodata");
+          }
+
           this.loadingData = false;
         });
     },

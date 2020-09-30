@@ -300,6 +300,8 @@ export default {
         height: 500,
       },
 
+      resume: {},
+
       loadingData: false,
 
       dialogSwitch: false,
@@ -397,6 +399,9 @@ export default {
             .then((response) => {
               console.log("resume.. data", response);
               // eventBus.$emit( "fillData" , response.data );
+
+              this.resume = response.data;
+
               this.skill_list = response.data.skillList;
 
               this.applicationInfo = this.R.isNil(response.data.applicationInfo)
@@ -471,6 +476,15 @@ export default {
             })
             .finally(() => {
               //  this.tableLoading = false;
+
+              if (
+                this.R.isNil(this.resume.biodata) ||
+                this.R.isEmpty(this.resume.biodata)
+              ) {
+                this.$awn.alert("Your biodata is not complete");
+                this.$router.history.push("/biodata");
+              }
+
               this.loadingData = false;
             });
         })
@@ -586,6 +600,7 @@ export default {
         })
         .finally(() => {
           this.loading = false;
+
           //  this.tableLoading = false;
         });
     },
