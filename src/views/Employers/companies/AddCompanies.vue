@@ -234,6 +234,17 @@
         </v-col>
       </v-row>
     </v-form>
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          {{ this.loadingDataText }}
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </v-container>
 </template>
 
@@ -246,6 +257,8 @@ export default {
   mixins: [validation],
   data() {
     return {
+      loadingData: false,
+      loadingDataText: "",
       phone: null,
       companyId: "",
       photo: null,
@@ -288,6 +301,9 @@ export default {
     submit() {
       if (!this.$refs.form.validate()) return;
 
+      this.loadingDataText = "Creating Company...";
+      this.loadingData = true;
+
       this.$store
         .dispatch("callApi", {
           url: "companies/new",
@@ -311,11 +327,13 @@ export default {
           //   this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.loadingData = false;
           this.loading = false;
           //  this.tableLoading = false;
         });
     },
     updateLogo() {
+      this.loadingData = true;
       this.$store
         .dispatch("callApi", {
           url: `companies/${this.companyId}/company-logo`,
@@ -337,6 +355,7 @@ export default {
           //   this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.loadingData = false;
           this.loading = false;
           //  this.tableLoading = false;
         });
@@ -344,8 +363,11 @@ export default {
     uploadPhoto() {
       console.log(this.photo);
 
+      this.loadingDataText = "Uploading Logo...";
+      this.loadingData = true;
+
       // if(this.photo.size > 2048) return;
-      this.imageUploadLoading = true;
+      // this.imageUploadLoading = true;
 
       let data = new FormData();
       data.append("image", this.photo);
@@ -373,7 +395,8 @@ export default {
         })
         .finally(() => {
           //  this.tableLoading = false;
-          this.imageUploadLoading = false;
+          // this.loadingData = false;
+          // this.imageUploadLoading = false;
         });
     },
   },
