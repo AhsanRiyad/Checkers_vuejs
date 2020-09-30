@@ -91,7 +91,7 @@
 
           <v-tabs-items v-model="tabs">
             <v-tab-item>
-              <applicant-list :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
+              <applicant-list :loading="loading" :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
                               :job-appliers="jobAppliers" :experience="experience" :qualification="qualification"
                               :applicant="applicant"/>
             </v-tab-item>
@@ -132,6 +132,7 @@ export default {
       length: 0,
       jobs: {},
       jobResponsibility: {},
+      loading: true,
       imageUrl: "",
     }
   },

@@ -6,7 +6,7 @@
           <!--********** Top card start **************-->
           <v-card flat class="ja__selected_card">
             <div class="top_portion text-right">
-              <v-btn class="mr-2" color="primary">
+              <v-btn class="mr-2" color="primary" v-if="false">
                 <v-icon>mdi-magnify</v-icon>
                 search cv bank
               </v-btn>
@@ -21,7 +21,7 @@
            <v-row align="center">
              <v-col cols="12" md="8">
                <v-tabs v-model="tabs">
-                 <v-tab>Posted jobs (12)</v-tab>
+                 <v-tab>Posted jobs ({{totalJobs}})</v-tab>
                  <v-tab>Drafted jobs (12)</v-tab>
                  <v-tab>Archived jobs (12)</v-tab>
                </v-tabs>
@@ -48,28 +48,7 @@
               <job-posted-list/>
             </v-tab-item>
             <v-tab-item>
-              <v-card flat>
-                <v-card-title class="headline">An awesome title</v-card-title>
-                <v-card-text>
-                  <p>
-                    Duis lobortis massa imperdiet quam. Donec vitae orci sed dolor rutrum auctor. Vestibulum facilisis,
-                    purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Praesent
-                    congue erat at massa.
-                  </p>
-
-                  <p>
-                    Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
-                    sagittis lacus. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue,
-                    ac auctor orci leo non est. Etiam sit amet orci eget eros faucibus tincidunt. Donec sodales sagittis
-                    magna.
-                  </p>
-
-                  <p class="mb-0">
-                    Ut leo. Suspendisse potenti. Duis vel nibh at velit scelerisque suscipit. Fusce pharetra convallis
-                    urna.
-                  </p>
-                </v-card-text>
-              </v-card>
+             <drafted-job-list/>
             </v-tab-item>
             <v-tab-item>
               <v-card flat>
@@ -100,8 +79,15 @@ import '../../../sass/employers/_jobs.scss'
 
 export default {
   name: "JobsTab",
+  props: {
+    allJobs: Array,
+    draftedJobs: Array,
+    companies: Array,
+    totalJobs: Function
+  },
   components: {
-    JobPostedList: () => import('./PostedJobList'),
+    JobPostedList: () => import('../Jobs/JobsTab/AllJobList'),
+    DraftedJobList: () => import('../Jobs/JobsTab/DraftedJobs'),
   },
   data: vm => ({
         tabs: null,

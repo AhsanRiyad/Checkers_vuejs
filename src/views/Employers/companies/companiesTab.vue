@@ -6,13 +6,13 @@
           <!--********** Top card start **************-->
           <v-card flat class="ja__selected_card">
             <div class="top_portion text-right">
-              <v-btn class="mr-2" color="primary">
+              <v-btn class="mr-2" color="primary" v-if="false">
                 <v-icon>mdi-magnify</v-icon>
                 search cv bank
               </v-btn>
               <v-btn link to="/add-companies" color="success">
                 <v-icon>mdi-plus</v-icon>
-                Post a new job
+                Post a new Company
               </v-btn>
             </div>
           </v-card>

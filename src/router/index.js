@@ -32,8 +32,6 @@ import userInfo from "@/views/JobAlart/userInfo";
 import CompanyList from "@/views/Employers/companies/CompanyList";
 import PostedJobList from "@/views/Employers/Jobs/PostedJobList";
 import recruiter from "@/views/recruiter";
-import ApplicantResume from "@/views/Employers/Jobs/jobDetails/ApplicantResume";
-
 
 
 Vue.use(VueRouter)
@@ -70,14 +68,6 @@ const routes = [
     component: premiumResume,
     meta: {
       title: 'premiumResume'
-    }
-  },
-  {
-    path: '/applicant-resume/:id',
-    name: 'ApplicantResume',
-    component: ApplicantResume,
-    meta: {
-      title: 'ApplicantResume'
     }
   },
   {
