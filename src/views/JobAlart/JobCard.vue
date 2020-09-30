@@ -545,6 +545,7 @@ export default {
       this.skeleton = true;
 
       let url = "search";
+      this.$router.push("/search?q=" + this.search);
 
       if (this.$store.getters.isLoggedIn) url = "job-search";
 
