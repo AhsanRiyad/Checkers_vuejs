@@ -11,7 +11,7 @@
 
 .jobcard-first-container {
   // height: 100vh;
-  min-height: 400px;
+  min-height: 100vh;
 }
 
 .loader {
@@ -214,6 +214,7 @@
 
   }
 }
+
 // job online applied css end
 
 
@@ -230,12 +231,14 @@
 }
 
 
-.expectedSalary-job-search__applybutton{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: flex-end;
+.expectedSalary-job-search__applybutton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
-.job_desc{
+
+.job_desc {
   padding: 25px 15px;
 }
+
 //expected salry ends
