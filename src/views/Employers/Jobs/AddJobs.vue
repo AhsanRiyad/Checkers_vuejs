@@ -268,6 +268,17 @@
               </div>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col>
+              <p>Job Apply Instructions</p>
+              <ckeditor
+                  :isValid="true"
+                  :editor="editor"
+                  :config="editorConfig"
+                  v-model="jobs.apply_instruction"
+              ></ckeditor>
+            </v-col>
+          </v-row>
 
           <div class="text-right">
             <div class="item-2">
@@ -313,6 +324,7 @@ export default {
         currency_code: '',
         job_category: [{id: ''}],
         job_facilities: [{text: ''}],
+        apply_instruction: '',
         job_responsibilities: [{text: ''}],
         job_education_req: [
           {degre_title: ''}

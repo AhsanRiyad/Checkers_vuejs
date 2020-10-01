@@ -8,7 +8,7 @@
             <div style="overflow-x: auto !important;">
               <table>
                 <tbody>
-                <v-dialog v-model="loading" hide-overlay persistent width="300">
+                <v-dialog v-model="loadingApplicant" hide-overlay persistent width="300">
                   <v-card color="primary" dark>
                     <v-card-text>
                       Loading Data...
@@ -29,11 +29,12 @@
                   </td>
                   <td>
                     <div v-for="bio in app.biodata" :key="bio.id">
-                      <p class="mb-4"><a :disabled="dialog"
-                                         :loading="dialog" @click="showApplicantResume(bio.userId)"
-                                         style="font-size: 20px; text-transform: capitalize">{{
-                          bio.full_name
-                        }} </a><span class="age_outline font-weight-bold"> Age: {{ bio.age }}</span></p>
+                      <p class="mb-4">
+                        <a
+                            :loading="dialogShowing" @click="showApplicantResume(bio.userId)"
+                            style="font-size: 20px; text-transform: capitalize">{{
+                            bio.full_name
+                          }} </a><span class="age_outline font-weight-bold"> Age: {{ bio.age }}</span></p>
                       <p>{{ bio.address }}</p>
                     </div>
                     <div v-for="qua in app.qualification" :key="qua.id">
@@ -75,12 +76,11 @@
             </div>
             <!--********** Job applied table end **************-->
             <!-- job apply modal starts-->
-            <v-dialog
-                v-model="dialog"
-                width="600px"
-            >
-              <applicant-resume-modal :applicants-resume="applicantsResume" :applicants-biodata="applicantBiodata"/>
+            <v-dialog v-model="dialogShowing" width="900">
+              <applicant-resume-modal v-show="dialogShowing" :applicantInfo="applicntInfo" :skills="skills" :exmas="exams" :qualifications="qualification" :experiences="experiences" :applicantResume="applicantsResume"
+                                      :applicant-biodata="applicantBiodata"/>
             </v-dialog>
+
             <!-- job apply modal ends-->
             <!--********** pagination start **************-->
             <div class="pagination">
@@ -137,14 +137,20 @@ export default {
     length: Number,
     pageNo: Number,
     jobResponsibilities: Array,
-    loading: Boolean
+    loadingApplicant: Boolean,
   },
   data: () => {
     return {
-      dialog: false,
+      loading: false,
+      dialogShowing: false,
       applicantsResume: {},
+      experiences: [],
+      skills: {},
+      qualifications: [],
       userId: '',
-      applicantBiodata: {}
+      applicantBiodata: {},
+      exams: {},
+      applicntInfo: {}
     }
   },
   methods: {
@@ -153,7 +159,8 @@ export default {
     },
     showApplicantResume(userId) {
       console.log("User id", userId)
-      this.dialog = true
+      this.dialogShowing = true
+      this.loading = true
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -170,7 +177,23 @@ export default {
             console.log("Resume", response);
             this.applicantResume = response.data;
             this.applicantBiodata = response.data.biodata;
+            this.skills = response.data.skills
+            this.experiences = response.data.experiences
+            this.qualifications = response.data.qualification
+
             console.log("bio", response.data.biodata)
+            console.log("skills", response.data.skills)
+            console.log("experiencess", response.data.experiences)
+            console.log("qualifications", response.data.qualification)
+            for(let i = 0; i<this.qualifications.length; i++){
+              this.exams = response.data.qualification[i].exam
+              console.log("examss", this.exams)
+            }
+            this.applicntInfo = response.data.applicationInfo
+            console.log("applicants info", response.data.applicationInfo)
+
+            // setTimeout({
+            // }, 1000)
             // this.dialog = true
           })
           .catch((error) => {
@@ -178,7 +201,7 @@ export default {
             console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
           })
           .finally(() => {
-            this.modalSkeleton = false
+            this.loading = false
 
           });
     }

@@ -53,7 +53,7 @@
                   </td>
                   <td>
                     <v-switch
-                        @click.stop="jobLive"
+                        @click.stop="jobLive(job.id)"
                         color="success"
                         :input-value="job.job_status == 1 ? true : false"
                         hide-details
@@ -104,7 +104,8 @@ export default {
     length: 0,
     page: 1,
     job_status: 1,
-    is_expired: 0
+    is_expired: 0,
+    jobsId: ''
   }),
 
   computed: {
@@ -169,10 +170,10 @@ export default {
 
           });
     },
-    jobLive(event){
-      if (event) {
-        event.preventDefault();
-      }
+    jobLive(jobsId){
+      // if (event) {
+      //   event.preventDefault();
+      // }
       // this.postedJobs.job_status = (this.postedJobs.job_status + 1) % 2
       if (this.$cookies.get("accessToken") == null) {
         this.$router.history.push("/signin");
@@ -195,7 +196,7 @@ export default {
       axios({
         method: "put",
         baseURL: this.$store.state.apiBase,
-        url: `jobs/${this.jobId}/live`,
+        url: `jobs/` + jobsId + `/live`,
         data: {
           // is_expired: this.is_expired,
         },

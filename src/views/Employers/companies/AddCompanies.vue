@@ -263,6 +263,7 @@ export default {
       companyId: "",
       photo: null,
       companyLogo: "",
+      disable: false,
       company: {
         company_name: "",
         company_address: "",
@@ -315,6 +316,7 @@ export default {
           this.companyId = response.company.id;
           this.$awn.success("Updated!");
           this.uploadPhoto();
+          this.disable = true
           /* setTimeout(() => {
             this.$router.push({ name: "CompanyList" });
           }, 1000); */
