@@ -490,7 +490,7 @@ export default {
         })
         .catch(() => {
           this.$awn.alert("Failed!");
-          //   this.$awn.alert("Failed");
+          // this.$awn.alert("Failed");
         })
         .finally(() => {
           //  this.tableLoading = false;

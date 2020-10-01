@@ -91,15 +91,15 @@
               <!-- <div class="row-1"></div> -->
 
               <!--     <div class="row-2">
-      <p>Last Name</p>
-      <v-text-field
-        background-color="white"
-        class="mb-0"
-        :rules="[v=>!!v||'required']"
-        placeholder="Enter your last name"
-        outlined
-        dense
-      ></v-text-field>
+              <p>Last Name</p>
+              <v-text-field
+                background-color="white"
+                class="mb-0"
+                :rules="[v=>!!v||'required']"
+                placeholder="Enter your last name"
+                outlined
+                dense
+              ></v-text-field>
               </div>-->
 
               <!-- <div class="row-3"></div> -->
