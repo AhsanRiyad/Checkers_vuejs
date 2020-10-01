@@ -28,7 +28,9 @@ export default {
       className: "resume-option-tab__item",
     };
   },
-  computed: {},
+  computed: {
+    
+  },
 };
 </script>
 

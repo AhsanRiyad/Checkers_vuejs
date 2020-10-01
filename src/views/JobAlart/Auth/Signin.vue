@@ -123,6 +123,7 @@ export default {
           this.$awn.success("Successful");
           localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("accessToken", response.access_token);
+          this.$cookies.set("_id", response.id);
           this.$store.commit("isLoggedIn", true);
           this.homePageUrl = response.home_page_url
 
