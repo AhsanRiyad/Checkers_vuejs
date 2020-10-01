@@ -155,7 +155,15 @@
         </v-card>
       </div>
 
-      <div>
+      <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
+        <v-skeleton-loader
+          width="400"
+          class="loader"
+          type="card"
+        ></v-skeleton-loader>
+      </div>
+
+      <div v-else>
         <div :style="jobDetails" v-if="!loading">
           <div outlined :style="firstContainer">
             <v-list-item three-line>
@@ -228,18 +236,6 @@
       </div>
 
       <div class="clearFix"></div>
-
-      <div class="Fixed-Job-Details">
-        <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
-          <v-skeleton-loader
-            width="400"
-            class="loader"
-            type="card"
-          ></v-skeleton-loader>
-        </div>
-
-        <div v-else></div>
-      </div>
     </div>
 
     <!-- job apply modal starts-->
@@ -540,7 +536,7 @@ export default {
       }
 
       this.JobDescriptionStyle.height =
-      screen.availHeight - 300 - window.scrollY + "px";
+        screen.availHeight - 300 - window.scrollY + "px";
 
       // this.JobDescriptionStyle.height = "100px";
 
