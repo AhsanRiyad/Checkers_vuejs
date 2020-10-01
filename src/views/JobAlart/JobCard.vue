@@ -215,6 +215,13 @@
               <div v-for="(n, i) in JobDescription.skills" :key="n.id">
                 <div>{{ i + 1 }} . {{ n.title }}</div>
               </div>
+
+              <h4>Salary Range</h4>
+              <div>
+                {{ JobDescription.currency_code }}
+                {{ JobDescription.min_salary_range }} -
+                {{ JobDescription.max_salary_range }}
+              </div>
             </div>
           </div>
         </div>
@@ -389,8 +396,9 @@ export default {
         paddingRight: "10px",
         marginTop: "20px",
         // height: "calc( 100vh - 400px )",
-        minHeight: "400px",
+        // minHeight: "400px",
         overflowY: "scroll",
+        height: "30px",
         // overflowY: "visible",
       },
 
@@ -504,31 +512,6 @@ export default {
       this.JobDescriptionStyle.height =
         screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; */
 
-      console.log("screen available height.......", screen.availHeight);
-
-      if (window.scrollY > screen.availHeight - 296 - 140 - 140) {
-        this.JobDescriptionStyle.height =
-          screen.availHeight -
-          140 -
-          140 -
-          140 -
-          140 -
-          40 -
-          (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
-          "px";
-        // this.JobDescriptionStyle.height = "464px";
-        // console.log("scrolled.......", screen.availHeight - 296 - 140 - 140);
-        console.log(
-          "scrolled.......",
-          screen.availHeight -
-            140 -
-            140 -
-            140 -
-            (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
-            "px"
-        );
-      }
-
       if (window.scrollY > 132) {
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
@@ -555,6 +538,26 @@ export default {
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
+
+      this.JobDescriptionStyle.height =
+      screen.availHeight - 300 - window.scrollY + "px";
+
+      // this.JobDescriptionStyle.height = "100px";
+
+      console.log(
+        "screen available height.......",
+        screen.availHeight - 400 - window.scrollY + "px"
+      );
+      console.log(
+        "document available height.......",
+        document.querySelector("#mainDocs").scrollHeight
+      );
+      console.log("scroll Y.......", window.scrollY);
+      console.log("inner height.......", window.innerHeight);
+
+      let screenDifference = screen.availHeight - window.innerHeight;
+
+      console.log(screenDifference);
     },
     getData() {
       if (this.$store.getters.userIp == "") {
@@ -620,8 +623,8 @@ export default {
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
           //  this.tableLoading = false;
           // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
-          /* this.JobDescriptionStyle.height =
-            screen.availHeight - 48 - 64 - 140 - window.scrollY + "px"; */
+          this.JobDescriptionStyle.height =
+            screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
           console.log(
             "window availheight.....",
             document.querySelector("#mainDocs").scrollHeight
