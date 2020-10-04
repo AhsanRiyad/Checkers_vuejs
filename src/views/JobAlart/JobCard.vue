@@ -554,6 +554,11 @@ export default {
       this.JobDescriptionStyle.height =
         screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; */
 
+      console.log("pixel ratio ", window.devicePixelRatio);
+      console.log("match media ", window.matchMedia);
+      
+
+
       let spaceGap = 0;
       if (window.innerHeight > 900) spaceGap = 280;
       else if (window.innerHeight < 700) spaceGap = 180;
