@@ -1,5 +1,5 @@
 <template>
-  <div class="posted__list">
+  <div class="posted__list" :companies="companies">
     <v-container>
       <v-row justify="center">
         <v-col cols="12" md="12">
@@ -8,7 +8,7 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job: <span>{{totalPostedJobs}}</span></p>
+                  <h2 class="jaif">Total Companies: <span>{{totalCompanies}}</span></h2>
                 </v-col>
               </v-row>
             </div>
@@ -19,7 +19,7 @@
                 <thead>
                 <tr class="panel-heading">
                   <th>Sl</th>
-                  <th style=" width:35%;">Company Name</th>
+                  <th style=" width:45%;">Company Name</th>
                   <th>
                     <v-icon>mdi-bell-ring</v-icon>
                     Company Status
@@ -45,7 +45,7 @@
                       </template>
                       <span>Edit The Company</span>
                     </v-tooltip>
-                    <v-tooltip bottom>
+                    <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs"  @click="goToJobsList(comp.id)"
                                v-on="on" class="interactn ml-2 c-green" icon>
@@ -54,7 +54,7 @@
                       </template>
                       <span>View Job List</span>
                     </v-tooltip>
-                    <v-tooltip bottom>
+                    <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn @click="goToJobAdd()"
                             class="interactn  mr-2 ml-2 c-blue"
@@ -65,7 +65,7 @@
                       </template>
                       <span>Job Post</span>
                     </v-tooltip>
-                    <v-tooltip bottom>
+                    <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn
                             class="interactn  c-blue"
@@ -120,6 +120,11 @@ name: "CompanyList",
     }},
   mounted(){
     this.getCompanies()
+  },
+  computed: {
+    totalCompanies() {
+      return this.companies && this.companies.length
+    },
   },
   methods: {
     getCompanies(){

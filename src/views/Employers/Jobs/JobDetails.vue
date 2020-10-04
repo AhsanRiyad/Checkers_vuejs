@@ -91,7 +91,7 @@
 
           <v-tabs-items v-model="tabs">
             <v-tab-item>
-              <applicant-list :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
+              <applicant-list :loading-applicant="loadingApplicant" :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
                               :job-appliers="jobAppliers" :experience="experience" :qualification="qualification"
                               :applicant="applicant"/>
             </v-tab-item>
@@ -132,6 +132,7 @@ export default {
       length: 0,
       jobs: {},
       jobResponsibility: {},
+      loadingApplicant: true,
       imageUrl: "",
     }
   },
@@ -193,13 +194,13 @@ export default {
             // this.orders.find(({ id }) => id === this.orderId)
             // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
             // this.job_status = response.data.items.job_status
-            this.loading = false
+            this.loadingApplicant = false
             this.length = Math.round(
                 response.data.total /
                 response.data.page
             );
             console.log("page length", this.length)
-            // setTimeout(() => (this.loading = false), 1000)
+            // setTimeout(() => (this.loadingApplicant = false), 1000)
           })
           .catch((error) => {
             this.applicant = []

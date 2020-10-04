@@ -7,10 +7,10 @@
                   background-color="indigo"
                   dark
           >
-            <v-tab @click="gotoJoblist()">
+            <v-tab>
               Jobs
             </v-tab>
-            <v-tab to="/company-list">
+            <v-tab>
               Companies
             </v-tab>
           </v-tabs>

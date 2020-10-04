@@ -1,5 +1,5 @@
 <template>
-  <div class="posted__list">
+  <div class="posted__list" :drafted-jobs="draftedJobs">
     <v-container>
       <v-row justify="center">
         <v-col cols="12" md="12">
@@ -8,7 +8,7 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <p class="jaif">Total Job: <span>{{totalPostedJobs}}</span></p>
+                  <h2 class="jaif">Total Drafted Job: <span>{{totalJobs}}</span></h2>
                 </v-col>
               </v-row>
             </div>
@@ -44,16 +44,16 @@
                     </v-card-text>
                   </v-card>
                 </v-dialog>
-                <tr v-for="(job, i) in postedJobs" :key="i">
+                <tr v-for="(job, i) in draftedJobs" :key="i">
                   <td><p>{{ i+1 }}</p></td>
                   <td>
-                    <a class="text-capitalize" @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
+                                        <a class="text-capitalize" @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
                     <p class="mb-0"><small>Published On:<span class="ml-1" v-if="job.live_at"> {{getHumanDate(job.live_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
                     <p  class="mb-0"><small>Deadline:<span class="ml-1" v-if="job.end_at">{{ getHumanDate(job.end_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
                   </td>
                   <td>
                     <v-switch
-                        @click.stop="jobLive(job.id)"
+                        @click.stop="jobLive"
                         color="success"
                         :input-value="job.job_status == 1 ? true : false"
                         hide-details
@@ -88,92 +88,35 @@
 
 <script>
 import axios from "axios";
-import moment from 'moment';
+import moment from "moment";
 
 export default {
-  name: "PostedJobList",
+name: "DraftedJobs",
   data: () => ({
-    loading: true,
-    menu1: false,
-    menu2: false,
-    items: ['viewed', 'Not viewed'],
-    postedJobs: [],
-    jobId: "",
-    company_id: null,
+    draftedJobs: [],
     pageNo: 1,
     length: 0,
-    page: 1,
-    job_status: 1,
-    is_expired: 0,
-    jobsId: ''
+    loading: true
   }),
-
   computed: {
-    isLived() {
-      return this.jobId.job_status == 1 ? true : false;
-    },
-    totalPostedJobs() {
-      return this.postedJobs && this.postedJobs.length
+    totalJobs() {
+      return this.draftedJobs && this.draftedJobs.length
     },
   },
-  mounted() {
-   this.getPostedJobs()
+  created() {
+    this.getDraftedJobs()
   },
   methods: {
-    getPostedJobs(){
-      const headers = {
-        Authorization: "Bearer " + this.$cookies.get("accessToken"),
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
-      axios({
-        baseURL: this.$store.state.apiBase,
-        url: `jobs/company-id/` + this.$route.params.id,
-        method: "get",
-        params: {
-          page: this.pageNo
-        },
-        data: {},
-        headers,
-      })
-          .then((response) => {
-            console.log("job list", response.data.items);
-            this.postedJobs = response.data.items;
-            // this.jobId =this.postedJobs[3]
-            for (let i = 0; i < this.postedJobs.length; i++) {
-              console.log("job index i", i) // returns the numbered index
-              console.log("job index object", this.postedJobs[i]) // returns [Object object]
-              console.log(this.postedJobs[i].id) // returns undefined
-              this.jobId = this.postedJobs[i].id
-              console.log("id jobssssssssss",this.jobId)
-            }
-
-            // this.orders.find(({ id }) => id === this.orderId)
-            // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
-            // this.job_status = response.data.items.job_status
-            this.loading = false
-            this.length = Math.round(
-                response.data.total_count /
-                response.data.num_items_per_page
-            );
-            console.log("page length", this.length)
-            // setTimeout(() => (this.loading = false), 1000)
-          })
-          .catch((error) => {
-            this.postedJobs = []
-            this.$awn.alert("Failed");
-            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-          })
-          .finally(() => {
-            this.modalSkeleton = false
-            if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
-
-          });
+    getHumanDate: function (date) {
+      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
-    jobLive(jobsId){
-      // if (event) {
-      //   event.preventDefault();
-      // }
+    goToJobDetails(jobId) {
+      this.$router.push({name: 'JobDetails', params: {id: jobId}})
+    },
+    jobLive(event) {
+      if (event) {
+        event.preventDefault();
+      }
       // this.postedJobs.job_status = (this.postedJobs.job_status + 1) % 2
       if (this.$cookies.get("accessToken") == null) {
         this.$router.history.push("/signin");
@@ -196,7 +139,7 @@ export default {
       axios({
         method: "put",
         baseURL: this.$store.state.apiBase,
-        url: `jobs/` + jobsId + `/live`,
+        url: `jobs/${this.jobId}/live`,
         data: {
           // is_expired: this.is_expired,
         },
@@ -236,12 +179,59 @@ export default {
             this.loadingAppliedJob = false;
           });
     },
-    getHumanDate: function (date) {
-      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
-    },
-    goToJobDetails(jobId) {
-      this.$router.push({name: 'JobDetails', params: {id: jobId}})
-    },
-  },
+  getDraftedJobs(){
+    const headers = {
+      Authorization: "Bearer " + this.$cookies.get("accessToken"),
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    axios({
+      baseURL: this.$store.state.apiBase,
+      url: `jobs/drafts-job`,
+      method: "get",
+      params: {
+        page: this.pageNo
+      },
+      data: {},
+      headers,
+    })
+        .then((response) => {
+          console.log("drafted jobs", response);
+          this.draftedJobs = response.data.data.job.items;
+          // this.jobId =this.draftedJobs[3]
+          for (let i = 0; i < this.draftedJobs.length; i++) {
+            console.log("job index i", i) // returns the numbered index
+            console.log("job index object", this.draftedJobs[i]) // returns [Object object]
+            console.log(this.draftedJobs[i].id) // returns undefined
+            this.jobId = this.draftedJobs[i].id
+            console.log("id jobssssssssss",this.jobId)
+          }
+
+          // this.orders.find(({ id }) => id === this.orderId)
+          // this.jobId = this.draftedJobs.find((job_id) => job_id.id === id);
+          // this.job_status = response.data.items.job_status
+          this.loading = false
+          this.length = Math.round(
+              response.data.total_count /
+              response.data.num_items_per_page
+          );
+          console.log("page length", this.length)
+          // setTimeout(() => (this.loading = false), 1000)
+        })
+        .catch((error) => {
+          this.draftedJobs = []
+          this.$awn.alert("Failed");
+          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+        })
+        .finally(() => {
+          if (this.draftedJobs.length === 0) this.ShowAlertMsg = true;
+
+        });
+  }
+  }
 }
 </script>
+
+<style scoped>
+
+</style>
