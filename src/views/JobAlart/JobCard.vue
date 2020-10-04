@@ -185,11 +185,12 @@
                 </p>
               </v-list-item-content>
 
-              <v-list-item-avatar
-                tile
-                size="80"
-                color="grey"
-              ></v-list-item-avatar>
+              <v-list-item-avatar tile size="80" color="grey">
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-list-item-avatar>
             </v-list-item>
 
             <v-card-actions>
