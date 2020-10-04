@@ -315,6 +315,21 @@
 
     <!-- this modal is for mobile version -->
     <JobDetails @close="() => myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 
@@ -350,6 +365,7 @@ export default {
       showModalSalary: false,
       skeleton: true,
       skeletonJobDetails: true,
+      loadingData: false,
 
       JobDescription: {
         job_title: "PHP developer",
@@ -492,9 +508,12 @@ export default {
       this.skeletonJobDetails = true;
 
       //this is for mobile device
-      if (window.innerWidth < 900) this.dialogSwitch = true;
 
       this.jobId = n;
+
+      if (window.innerWidth < 900) {
+        this.loadingData = true;
+      }
 
       this.$store
         .dispatch("callApi", {
@@ -511,6 +530,9 @@ export default {
           //saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
+          if (window.innerWidth < 900) {
+            this.dialogSwitch = true;
+          }
           this.skeleton = false;
         })
         .catch((error) => {
@@ -520,6 +542,7 @@ export default {
         .finally(() => {
           //  this.tableLoading = false;
           this.skeletonJobDetails = false;
+          this.loadingData = false;
         });
     },
     onScroll() {

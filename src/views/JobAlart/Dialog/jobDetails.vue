@@ -43,7 +43,7 @@
 
             <v-card-actions>
               <v-btn
-                @click="showModal = true"
+                @click="dialogSwitch = true"
                 class="applyNow white--text"
                 color="primary"
                 v-bind:disabled="isApplied"
@@ -93,6 +93,8 @@
         <div style="height: 100px"></div>
       </v-card>
     </v-dialog>
+
+    <ApplyNow @close="() => myDialogClose()" :dialogVisible="dialogSwitch" />
   </div>
 </template>
 
@@ -106,7 +108,7 @@ export default {
     },
   },
   components: {
-    // defaultResume: () => import("../ResumeLayout/default"),
+    ApplyNow: () => import("./applyNow"),
   },
   data() {
     return {
@@ -114,6 +116,7 @@ export default {
       notifications: false,
       sound: true,
       widgets: false,
+      dialogSwitch: false,
     };
   },
   computed: {
@@ -129,6 +132,11 @@ export default {
           this.$emit("close");
         }
       },
+    },
+  },
+  methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
     },
   },
 };
