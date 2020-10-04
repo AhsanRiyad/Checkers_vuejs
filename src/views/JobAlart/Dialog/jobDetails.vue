@@ -142,5 +142,10 @@ export default {
       this.dialogSwitch = false;
     },
   },
+  watch: {
+    dialogSwitch(nVal) {
+      if (nVal == false) this.getData();
+    },
+  },
 };
 </script>

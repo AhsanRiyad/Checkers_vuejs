@@ -703,6 +703,9 @@ export default {
     pageNo() {
       this.getData();
     },
+    dialogSwitch(nVal) {
+      if (nVal == false) this.getData();
+    },
   },
 };
 </script>
