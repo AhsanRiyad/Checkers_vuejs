@@ -155,6 +155,9 @@
         </v-card>
       </div>
 
+      
+
+      <!-- job details skeleton loader starts -->
       <div
         :style="jobDetailsLoader"
         v-if="skeletonJobDetails"
@@ -166,6 +169,7 @@
           type="card"
         ></v-skeleton-loader>
       </div>
+      <!-- job details skeleton loader ends -->
 
       <div v-else class="jobDetails">
         <div :style="jobDetails" v-if="!loading">
@@ -308,6 +312,9 @@
     <!-- apply online Expected salary starts -->
 
     <!-- apply online Expected salary ends -->
+
+    <!-- this modal is for mobile version -->
+    <JobDetails @close="() => myDialogClose()" :dialogVisible="dialogSwitch" />
   </div>
 </template>
 
@@ -321,6 +328,7 @@ export default {
   name: "JobCard",
   components: {
     JobAlertModal: () => import("../../components/Modal"),
+    JobDetails: () => import("./Dialog/jobDetails"),
   },
   mixins: [ipMixins, tokenMixins],
   data: () => {
@@ -362,7 +370,7 @@ export default {
         backgroundColor: "#e1e1e1",
         paddingTop: "10px",
       },
-
+      dialogSwitch: false,
       //style for search
       jobDetails: {
         // display: "none",
@@ -415,6 +423,9 @@ export default {
     },
   },
   methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
+    },
     applyJob(event) {
       if (event) {
         event.preventDefault();
@@ -479,6 +490,9 @@ export default {
     saveDetails(n) {
       console.log("dd", n);
       this.skeletonJobDetails = true;
+
+      //this is for mobile device
+      if (window.innerWidth < 900) this.dialogSwitch = true;
 
       this.jobId = n;
 
