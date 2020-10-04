@@ -641,7 +641,7 @@ export default {
           skill_title,
         },
       };
-      console.log(data);
+      console.log("final data.....", data);
 
       this.$store
         .dispatch("callApi", {
@@ -681,16 +681,37 @@ export default {
       });
     },
     previewButton() {
+      // this.dialogSwitch = true;
+      if (
+        this.R.isNil(this.$store.getters.resume.payload.biodata) ||
+        this.R.isEmpty(this.$store.getters.resume.payload.biodata) ||
+        this.R.isNil(this.$store.getters.resume.payload.experiences) ||
+        this.R.isEmpty(this.$store.getters.resume.payload.experiences) ||
+        this.R.isNil(this.$store.getters.resume.payload.qualification) ||
+        this.R.isEmpty(this.$store.getters.resume.payload.qualification)
+      ) {
+        this.$awn.alert("Sorry, Your resume is not complete!");
+        return;
+      }
       this.dialogSwitch = true;
     },
     addSkill() {
       console.log("skill id", this.skill_id);
-      console.log("skill arrat", this.skillArray);
+      // console.log("skill arrat", this.skillArray);
       if (this.R.isEmpty(this.skill_id)) return;
 
-      if (this.skillArray.some((n) => n.id == this.skill_id.id)) return;
-
-      this.skillArray.push(this.skill_id);
+      if (this.R.isEmpty(this.skillArray) || this.R.isNil(this.skillArray)) {
+        this.skillArray = [];
+        this.skillArray.push(this.skill_id);
+        return;
+      } else {
+        if (this.skillArray.some((n) => n.id == this.skill_id.id)) {
+          this.$awn.alert("Already Added in the list");
+          return;
+        } else {
+          this.skillArray.push(this.skill_id);
+        }
+      }
     },
     saveData() {},
   },

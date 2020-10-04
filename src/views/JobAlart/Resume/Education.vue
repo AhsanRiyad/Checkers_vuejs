@@ -284,7 +284,21 @@ export default {
   },
   methods: {
     previewButton() {
+      
+      // this.dialogSwitch = true;
+      if (
+        this.R.isNil(this.$store.getters.resume.payload.biodata) ||
+        this.R.isEmpty(this.$store.getters.resume.payload.biodata) ||
+        this.R.isNil(this.$store.getters.resume.payload.experiences) ||
+        this.R.isEmpty(this.$store.getters.resume.payload.experiences) ||
+        this.R.isNil(this.$store.getters.resume.payload.qualification) ||
+        this.R.isEmpty(this.$store.getters.resume.payload.qualification)
+      ) {
+        this.$awn.alert("Sorry, Your resume is not complete!");
+        return;
+      }
       this.dialogSwitch = true;
+    
     },
 
     myDialogClose() {
