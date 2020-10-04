@@ -137,10 +137,9 @@
 }
 
 .jobDetails {
-  width: 23%;
-  right: 25%;
-  top: 185px;
-  position: fixed;
+  @include tab() {
+    display: none;
+  }
 }
 
 .JobDescription {

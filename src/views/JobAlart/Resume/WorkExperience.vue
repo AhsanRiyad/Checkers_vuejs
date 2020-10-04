@@ -6,8 +6,13 @@
       <p class="h1Text">Create a Job Alert Resume</p>
 
       <div class="previewButton">
-        <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
-          <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+        <v-btn
+          @click.stop="previewButton"
+          color="success"
+          class="previewButton__button"
+        >
+          <v-icon class="previewButton__button__icon">remove_red_eye</v-icon
+          >Preview
         </v-btn>
       </div>
 
@@ -24,7 +29,11 @@
             <v-divider></v-divider>
 
             <div class="first-div-close-button">
-              <div v-if="experiences.length > 1" class="closeButton" @click.stop="()=>remove(i)">
+              <div
+                v-if="experiences.length > 1"
+                class="closeButton"
+                @click.stop="() => remove(i)"
+              >
                 x
                 <span class="closeButton__tooltip_text">remove</span>
               </div>
@@ -34,7 +43,7 @@
                   background-color="white"
                   class="mb-0"
                   v-model="n.job_title"
-                  :rules="[v=>!!v||'required']"
+                  :rules="[(v) => !!v || 'required']"
                   placeholder="Enter your first name"
                   outlined
                   dense
@@ -52,7 +61,7 @@
                   <v-text-field
                     background-color="white"
                     class="mb-0"
-                    :rules="[v=>!!v||true]"
+                    :rules="[(v) => !!v || true]"
                     placeholder="Enter your city"
                     outlined
                     dense
@@ -68,7 +77,7 @@
                   <v-text-field
                     background-color="white"
                     class="mb-0"
-                    :rules="[v=>!!v||true]"
+                    :rules="[(v) => !!v || true]"
                     placeholder="Enter your post code"
                     outlined
                     dense
@@ -107,7 +116,10 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="n.from_date" @input="n.menu1 = false"></v-date-picker>
+                  <v-date-picker
+                    v-model="n.from_date"
+                    @input="n.menu1 = false"
+                  ></v-date-picker>
                 </v-menu>
               </div>
 
@@ -137,7 +149,10 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="n.to_date" @input="n.menu2 = false"></v-date-picker>
+                  <v-date-picker
+                    v-model="n.to_date"
+                    @input="n.menu2 = false"
+                  ></v-date-picker>
                 </v-menu>
               </div>
 
@@ -145,7 +160,7 @@
                 <v-checkbox
                   v-model="n.currentlyWorking"
                   label="I am currently working here"
-                  @click="()=>currentlyWorking(n)"
+                  @click="() => currentlyWorking(n)"
                 ></v-checkbox>
               </div>
             </div>
@@ -153,7 +168,11 @@
             <div class="row-we-6">
               <p>Job Description/Job Respsonsibilites</p>
               <div>
-                <ckeditor v-model="n.job_description" :editor="editor" :config="editorConfig"></ckeditor>
+                <ckeditor
+                  v-model="n.job_description"
+                  :editor="editor"
+                  :config="editorConfig"
+                ></ckeditor>
               </div>
             </div>
 
@@ -166,11 +185,12 @@
             </div>-->
           </div>
           <v-btn
-            :disabled="R.isEmpty(experiences[experiences.length-1].job_title) "
+            :disabled="R.isEmpty(experiences[experiences.length - 1].job_title)"
             class="add_more_btn ml-5"
             color="primary"
             @click.stop="addAnotherExperience"
-          >Add More+</v-btn>
+            >Add More+</v-btn
+          >
 
           <div class="applicationInfo">Application Information</div>
 
@@ -233,9 +253,15 @@
             </div>
             </v-badge>-->
 
-            <div class="skill_badge we-skills-box" v-for="(v , i) in skillArray" :key="i">
+            <div
+              class="skill_badge we-skills-box"
+              v-for="(v, i) in skillArray"
+              :key="i"
+            >
               {{ v.title }}
-              <div class="skill_badge_close" @click.stop="()=>removeSkill(i)">x</div>
+              <div class="skill_badge_close" @click.stop="() => removeSkill(i)">
+                x
+              </div>
             </div>
 
             <v-autocomplete
@@ -251,29 +277,51 @@
               placeholder="Select Skill"
             ></v-autocomplete>
 
-            <v-btn color="#00adef" class="white--text" @click.stop="addSkill">Add Skill</v-btn>
+            <v-btn color="#00adef" class="white--text" @click.stop="addSkill"
+              >Add Skill</v-btn
+            >
           </div>
         </div>
 
         <div class="row-14">
           <div class="item-1">
-            <v-btn @click.stop="()=>{ $router.history.push('/biodata') }">Back</v-btn>
+            <v-btn
+              @click.stop="
+                () => {
+                  $router.history.push('/biodata');
+                }
+              "
+              >Back</v-btn
+            >
           </div>
 
           <div class="item-2">
-            <v-btn color="#365899" class="white--text" :loading="loading" @click.stop="nextBtn">Save</v-btn>
+            <v-btn
+              color="#365899"
+              class="white--text"
+              :loading="loading"
+              @click.stop="nextBtn"
+              >Save</v-btn
+            >
           </div>
         </div>
       </v-form>
     </div>
-    <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+    <resumePreview
+      @close="() => myDialogClose()"
+      :dialogVisible="dialogSwitch"
+    />
 
     <!-- loading data  starts-->
     <v-dialog v-model="loadingData" hide-overlay persistent width="300">
       <v-card color="primary" dark>
         <v-card-text>
           Loading Data...
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -383,6 +431,7 @@ export default {
               //  this.items = response.data;
             })
             .catch(() => {
+              console.log("failed 4");
               this.$awn.alert("Failed!");
               //   this.$awn.alert("Failed");
             })
@@ -429,18 +478,18 @@ export default {
 
               console.log("filtering the result", this.job_categroy_id);
 
-              /*     console.log(
+              /* console.log(
                 " mergin values.... ",
-          this.R.mergeAll(this.applicationInfo.job_category_id)
-        );
+                this.R.mergeAll(this.applicationInfo.job_category_id)
+              );
 
-        console.log(
-          "concate ",
-          this.R.concat(
-            this.applicationInfo.job_category_id,
-            this.applicationInfo.job_category_title
-          )
-        ); */
+              console.log(
+                "concate ",
+                this.R.concat(
+                  this.applicationInfo.job_category_id,
+                  this.applicationInfo.job_category_title
+                )
+              ); */
 
               // console.log("job category....", abc);
 
@@ -448,29 +497,43 @@ export default {
 
               console.log("application in mounted...", this.applicationInfo);
 
-              console.log("skill id list....", response.data.skills.skill_id);
+              console.log("skill id ....", response.data.skills);
 
-              this.skillArray = response.data.skills.skill_id;
+              if (
+                !this.R.isNil(response.data.skills) ||
+                !this.R.isEmpty(response.data.skills)
+              ) {
+                console.log("skill id list....", response.data.skills);
 
-              this.skillArray = this.R.split(",", this.skillArray);
-              this.skillArray = this._.compact(this.skillArray);
+                this.skillArray = response.data.skills.id;
+                // console.log("skill 1", response.data.skills);
+                console.log("skill 1", this.skillArray);
 
-              this.skillArray = this.skillArray.map((n) => {
-                return {
-                  id: n,
-                };
-              });
+                this.skillArray = this.R.split(",", this.skillArray);
+                console.log("skill 2", this.skillArray);
+                this.skillArray = this._.compact(this.skillArray);
+                console.log("skill 3", this.skillArray);
 
-              this.skillArray = this.skill_list.filter((n) => {
-                return this.skillArray.some((m) => m.id == n.id);
-              });
-              console.log("skill compact .... ", this.skillArray);
-              //  this.$refs.form.reset();
-              //  saves the items from the database in the table
-              //  console.log(response);
-              //  this.items = response.data;
+                this.skillArray = this.skillArray.map((n) => {
+                  return {
+                    id: n,
+                  };
+                });
+                console.log("skill 4", this.skillArray);
+
+                this.skillArray = this.skill_list.filter((n) => {
+                  return this.skillArray.some((m) => m.id == n.id);
+                });
+                console.log("skill 5", this.skillArray);
+                console.log("skill compact .... ", this.skillArray);
+                //  this.$refs.form.reset();
+                //  saves the items from the database in the table
+                //  console.log(response);
+                //  this.items = response.data;
+              }
             })
             .catch(() => {
+              console.log("failed 1");
               this.$awn.alert("Failed!");
               //   this.$awn.alert("Failed");
             })
@@ -489,6 +552,7 @@ export default {
             });
         })
         .catch(() => {
+          console.log("failed 2");
           this.$awn.alert("Failed!");
           // this.$awn.alert("Failed");
         })
@@ -595,6 +659,7 @@ export default {
           //  this.items = response.data;
         })
         .catch(() => {
+          console.log("failed 3");
           this.$awn.alert("Failed!");
           //   this.$awn.alert("Failed");
         })
@@ -615,7 +680,12 @@ export default {
         job_description: "",
       });
     },
+    previewButton() {
+      this.dialogSwitch = true;
+    },
     addSkill() {
+      console.log("skill id", this.skill_id);
+      console.log("skill arrat", this.skillArray);
       if (this.R.isEmpty(this.skill_id)) return;
 
       if (this.skillArray.some((n) => n.id == this.skill_id.id)) return;

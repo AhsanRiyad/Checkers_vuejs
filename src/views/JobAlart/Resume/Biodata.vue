@@ -8,8 +8,13 @@
           <p class="h1Text">Create a Job Alert Resume</p>
 
           <div class="previewButton">
-            <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
-              <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+            <v-btn
+              @click.stop="previewButton"
+              color="success"
+              class="previewButton__button"
+            >
+              <v-icon class="previewButton__button__icon">remove_red_eye</v-icon
+              >Preview
             </v-btn>
           </div>
 
@@ -32,7 +37,7 @@
                     <v-text-field
                       background-color="white"
                       class="mb-0"
-                      :rules="[v=>!!v||'required']"
+                      :rules="[(v) => !!v || 'required']"
                       placeholder="Enter your first name"
                       outlined
                       dense
@@ -47,7 +52,10 @@
                       <v-text-field
                         background-color="white"
                         class="mb-0"
-                        :rules="[v=>!!v||'required', v => v > 0 || 'cant not be negative']"
+                        :rules="[
+                          (v) => !!v || 'required',
+                          (v) => v > 0 || 'cant not be negative',
+                        ]"
                         placeholder="In month"
                         outlined
                         type="number"
@@ -63,7 +71,7 @@
                   <div class="biodata-image-display">
                     <v-avatar class="profile" color="grey" size="164" tile>
                       <v-img
-                        :src=" $store.getters.imageUrl + imageUrl"
+                        :src="$store.getters.imageUrl + imageUrl"
                         lazy-src="../../../assets/balgownie-avatar.jpg"
                         aspect-ratio="1"
                         class="grey lighten-2"
@@ -142,7 +150,7 @@
                   <v-text-field
                     background-color="white"
                     class="mb-0"
-                    :rules="[v=>!!v||'email is required']"
+                    :rules="[(v) => !!v || 'email is required']"
                     placeholder="Enter your address"
                     outlined
                     dense
@@ -158,7 +166,7 @@
                   <v-text-field
                     background-color="white"
                     class="mb-0"
-                    :rules="[v=>!!v||true]"
+                    :rules="[(v) => !!v || true]"
                     placeholder="Enter your address"
                     outlined
                     dense
@@ -198,7 +206,7 @@
                       <v-text-field
                         background-color="white"
                         class="mb-0"
-                        :rules="[v=>!!v||true]"
+                        :rules="[(v) => !!v || true]"
                         placeholder="Enter your city"
                         outlined
                         dense
@@ -214,7 +222,7 @@
                       <v-text-field
                         background-color="white"
                         class="mb-0"
-                        :rules="[v=>!!v||true]"
+                        :rules="[(v) => !!v || true]"
                         placeholder="Enter your post code"
                         outlined
                         dense
@@ -231,7 +239,7 @@
                     <v-text-field
                       background-color="white"
                       class="mb-0"
-                      :rules="[v=>!!v||true]"
+                      :rules="[(v) => !!v || true]"
                       placeholder="Enter your nationality"
                       outlined
                       dense
@@ -268,7 +276,10 @@
                           v-on="on"
                         ></v-text-field>
                       </template>
-                      <v-date-picker v-model="biodata.date_of_birth" @input="menu = false"></v-date-picker>
+                      <v-date-picker
+                        v-model="biodata.date_of_birth"
+                        @input="menu = false"
+                      ></v-date-picker>
                     </v-menu>
                   </div>
                 </div>
@@ -277,13 +288,13 @@
                   <p>Gender</p>
                   <div>
                     <v-select
-                      v-model="biodata.gender "
+                      v-model="biodata.gender"
                       background-color="white"
                       class="mb-0"
-                      :rules="[v=>!!v||true]"
+                      :rules="[(v) => !!v || true]"
                       placeholder="Enter your gender"
                       outlined
-                      :items="['Male', 'Female', 'Common' ,'Not Decided']"
+                      :items="['Male', 'Female', 'Common', 'Not Decided']"
                       dense
                       @keyups="saveData"
                     ></v-select>
@@ -298,7 +309,7 @@
                     background-color="white"
                     v-model="biodata.identity_number"
                     class="mb-0"
-                    :rules="[v=>!!v||true]"
+                    :rules="[(v) => !!v || true]"
                     placeholder="Enter your nid/passport no."
                     outlined
                     dense
@@ -322,7 +333,7 @@
                       @input="saveData"
                       @focus="focus"
                       v-model="biodata.mobile_number"
-                      :rules="[v=>!!v||'required']"
+                      :rules="[(v) => !!v || 'required']"
                       :validCharactersOnly="true"
                       :inputClasses="vTelInput"
                       background-color="white"
@@ -354,7 +365,14 @@
 
           <div class="row-14">
             <div class="item-1">
-              <v-btn @click.stop="()=>{ $router.history.push('/') }">Back</v-btn>
+              <v-btn
+                @click.stop="
+                  () => {
+                    $router.history.push('/');
+                  }
+                "
+                >Back</v-btn
+              >
             </div>
 
             <div class="item-2">
@@ -363,21 +381,29 @@
                 color="#365899"
                 class="white--text"
                 @click.stop="nextBtn"
-              >Save</v-btn>
+                >Save</v-btn
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+    <resumePreview
+      @close="() => myDialogClose()"
+      :dialogVisible="dialogSwitch"
+    />
 
     <!-- loading data  starts-->
     <v-dialog v-model="loadingData" hide-overlay persistent width="300">
       <v-card color="primary" dark>
         <v-card-text>
           Loading Data...
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -591,6 +617,22 @@ export default {
       this.$store.commit("biodata", this.biodata);
       console.log("biodada... ", this.$store.getters.biodata);
     },
+    previewButton() {
+      // this.dialogSwitch = true;
+      if (
+        this.R.isNil(this.$store.getters.resume.biodata) ||
+        this.R.isEmpty(this.$store.getters.resume.biodata) ||
+        this.R.isNil(this.$store.getters.resume.experiences) ||
+        this.R.isEmpty(this.$store.getters.resume.experiences) ||
+        this.R.isNil(this.$store.getters.resume.qualification) ||
+        this.R.isEmpty(this.$store.getters.resume.qualification)
+      ) {
+        this.$awn.alert("Sorry, Your resume is not complete!");
+        return;
+      }
+      this.dialogSwitch = true;
+    },
+
     uploadPhoto() {
       console.log(this.photo);
 

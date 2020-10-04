@@ -155,7 +155,11 @@
         </v-card>
       </div>
 
-      <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
+      <div
+        :style="jobDetailsLoader"
+        v-if="skeletonJobDetails"
+        class="jobDetails"
+      >
         <v-skeleton-loader
           width="400"
           class="loader"
@@ -163,7 +167,7 @@
         ></v-skeleton-loader>
       </div>
 
-      <div v-else>
+      <div v-else class="jobDetails">
         <div :style="jobDetails" v-if="!loading">
           <div outlined :style="firstContainer">
             <v-list-item three-line>
@@ -508,6 +512,11 @@ export default {
       this.JobDescriptionStyle.height =
         screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; */
 
+      let spaceGap = 0;
+      if (window.innerHeight > 900) spaceGap = 280;
+      else if (window.innerHeight < 700) spaceGap = 180;
+      else spaceGap = 210;
+
       if (window.scrollY > 132) {
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
@@ -536,7 +545,7 @@ export default {
       }
 
       this.JobDescriptionStyle.height =
-        screen.availHeight - 300 - window.scrollY + "px";
+        screen.availHeight - spaceGap - window.scrollY + "px";
 
       // this.JobDescriptionStyle.height = "100px";
 
@@ -552,6 +561,8 @@ export default {
       console.log("inner height.......", window.innerHeight);
 
       let screenDifference = screen.availHeight - window.innerHeight;
+
+      console.log("inner height...", window.innerHeight);
 
       console.log(screenDifference);
     },

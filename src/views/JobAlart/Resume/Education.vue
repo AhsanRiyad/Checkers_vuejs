@@ -6,8 +6,13 @@
       <p class="h1Text">Create a Job Alert Resume</p>
 
       <div class="previewButton">
-        <v-btn @click.stop="dialogSwitch = true" color="success" class="previewButton__button">
-          <v-icon class="previewButton__button__icon">remove_red_eye</v-icon>Preview
+        <v-btn
+          @click.stop="previewButton"
+          color="success"
+          class="previewButton__button"
+        >
+          <v-icon class="previewButton__button__icon">remove_red_eye</v-icon
+          >Preview
         </v-btn>
       </div>
 
@@ -22,7 +27,11 @@
 
         <div v-for="(n, i) in educations" :key="i">
           <div class="first-div-close-button">
-            <div v-if="educations.length > 1" class="closeButton" @click.stop="()=>remove(i)">
+            <div
+              v-if="educations.length > 1"
+              class="closeButton"
+              @click.stop="() => remove(i)"
+            >
               x
               <span class="closeButton__tooltip_text">remove</span>
             </div>
@@ -47,7 +56,7 @@
               background-color="white"
               class="mb-0"
               v-model="n.institute"
-              :rules="[v=>!!v||'required']"
+              :rules="[(v) => !!v || 'required']"
               placeholder="Institute Name"
               outlined
               dense
@@ -60,7 +69,7 @@
               background-color="white"
               class="mb-0"
               v-model="n.subject"
-              :rules="[v=>!!v||'required']"
+              :rules="[(v) => !!v || 'required']"
               placeholder="Institute Name"
               outlined
               dense
@@ -95,7 +104,10 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="n.start_year" @input="menu = false"></v-date-picker>
+                <v-date-picker
+                  v-model="n.start_year"
+                  @input="menu = false"
+                ></v-date-picker>
               </v-menu>
             </div>
 
@@ -125,7 +137,10 @@
                     :disabled="n.currentlyWorking"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="n.end_year" @input="menu2 = false"></v-date-picker>
+                <v-date-picker
+                  v-model="n.end_year"
+                  @input="menu2 = false"
+                ></v-date-picker>
               </v-menu>
             </div>
 
@@ -134,7 +149,7 @@
                 label="I am currently studying here"
                 value="A"
                 v-model="n.currentlyWorking"
-                @change="()=>currentlyWorking(n)"
+                @change="() => currentlyWorking(n)"
               ></v-checkbox>
             </div>
           </div>
@@ -144,7 +159,7 @@
             <v-text-field
               background-color="white"
               class="mb-0"
-              :rules="[v=>!!v||'required']"
+              :rules="[(v) => !!v || 'required']"
               placeholder="Result"
               v-model="n.result"
               outlined
@@ -162,26 +177,48 @@
         </div>
 
         <v-divider></v-divider>
-        <v-btn class="ml-5" color="primary" @click.stop="()=>addMore()">Add More+</v-btn>
+        <v-btn class="ml-5" color="primary" @click.stop="() => addMore()"
+          >Add More+</v-btn
+        >
       </div>
       <div class="row-14">
         <div class="item-1">
-          <v-btn @click.stop="()=>{ $router.history.push('/biodata') }">Back</v-btn>
+          <v-btn
+            @click.stop="
+              () => {
+                $router.history.push('/biodata');
+              }
+            "
+            >Back</v-btn
+          >
         </div>
 
         <div class="item-2">
-          <v-btn :loading="loading" color="#365899" class="white--text" @click.stop="nextBtn">Save</v-btn>
+          <v-btn
+            :loading="loading"
+            color="#365899"
+            class="white--text"
+            @click.stop="nextBtn"
+            >Save</v-btn
+          >
         </div>
       </div>
     </div>
-    <resumePreview @close="()=>myDialogClose()" :dialogVisible="dialogSwitch" />
+    <resumePreview
+      @close="() => myDialogClose()"
+      :dialogVisible="dialogSwitch"
+    />
 
     <!-- loading data  starts-->
     <v-dialog v-model="loadingData" hide-overlay persistent width="300">
       <v-card color="primary" dark>
         <v-card-text>
           Loading Data...
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -246,6 +283,10 @@ export default {
     };
   },
   methods: {
+    previewButton() {
+      this.dialogSwitch = true;
+    },
+
     myDialogClose() {
       this.dialogSwitch = false;
     },
