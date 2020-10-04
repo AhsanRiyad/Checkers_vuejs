@@ -33,43 +33,44 @@
             ></v-checkbox>
             <v-spacer></v-spacer>
           </div>
-        </div>
 
-        <div v-if="termsAndConditions">
-          <div class="expectedSalary-job-search">
-            <div class="expectedSalary-job-search__title">Expected Salary</div>
-            <div class="expectedSalary-job-search__textinput">
-              <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
-                <v-text-field
-                  type="number"
-                  :rules="[(v) => !!v || 'required']"
-                  v-model="expectedSalary"
-                  outlined
-                  dense
-                  solo
-                  placeholder="Salary"
-                  @keyup.enter.stop="applyJob"
-                ></v-text-field>
-              </v-form>
+          <div v-if="termsAndConditions">
+            <div class="expectedSalary-job-search">
+              <div class="expectedSalary-job-search__title">
+                Expected Salary
+              </div>
+              <div class="expectedSalary-job-search__textinput">
+                <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
+                  <v-text-field
+                    type="number"
+                    :rules="[(v) => !!v || 'required']"
+                    v-model="expectedSalary"
+                    outlined
+                    dense
+                    solo
+                    placeholder="Salary"
+                    @keyup.enter.stop="applyJob"
+                  ></v-text-field>
+                </v-form>
+              </div>
+            </div>
+
+            <div class="expectedSalary-job-search__applybutton">
+              <div>
+                <v-btn
+                  class="white--text"
+                  color="green"
+                  depressed
+                  link
+                  :disabled="!termsAndConditions"
+                  :loading="loadingAppliedJob"
+                  @click.stop="applyJob"
+                  >Apply</v-btn
+                >
+              </div>
             </div>
           </div>
-
-          <div class="expectedSalary-job-search__applybutton">
-            <div>
-              <v-btn
-                class="white--text"
-                color="green"
-                depressed
-                link
-                :disabled="!termsAndConditions"
-                :loading="loadingAppliedJob"
-                @click.stop="applyJob"
-                >Apply</v-btn
-              >
-            </div>
-          </div>
         </div>
-
         <div style="height: 100px"></div>
       </v-card>
     </v-dialog>
@@ -111,7 +112,6 @@ export default {
         }
       },
     },
-    
   },
   methods: {
     applyJob(event) {
@@ -150,7 +150,7 @@ export default {
             this.$awn.alert("Your resume is not completed");
             return;
           }
-          this.showModal = false;
+          this.intDialogVisible = false;
           this.$awn.success("You have successfully applied!");
         })
         .catch((error) => {

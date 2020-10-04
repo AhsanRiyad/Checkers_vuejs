@@ -509,7 +509,7 @@ export default {
 
       //this is for mobile device
 
-      this.$store.commit("jobDetailsSearch" , n);
+      this.$store.commit("jobDetailsSearch", n);
 
       this.jobId = n;
 
