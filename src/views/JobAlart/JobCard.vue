@@ -155,8 +155,6 @@
         </v-card>
       </div>
 
-      
-
       <!-- job details skeleton loader starts -->
       <div
         :style="jobDetailsLoader"
@@ -171,6 +169,7 @@
       </div>
       <!-- job details skeleton loader ends -->
 
+      <!-- job details info part starts -->
       <div v-else class="jobDetails">
         <div :style="jobDetails" v-if="!loading">
           <div outlined :style="firstContainer">
@@ -242,6 +241,7 @@
           </div>
         </div>
       </div>
+      <!-- job details info part ends -->
 
       <div class="clearFix"></div>
     </div>
@@ -505,6 +505,8 @@ export default {
         .then((response) => {
           console.log("details list in the", response.data.jobs);
           this.JobDescription = response.data.jobs;
+          this.$store.commit("jobDetails", this.JobDescription);
+
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
