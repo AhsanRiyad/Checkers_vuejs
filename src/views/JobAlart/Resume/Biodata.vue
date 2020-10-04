@@ -611,7 +611,7 @@ export default {
       if (this.biodata.mobile_number == "") this.vTelInput = "vTelInput_error";
       else this.vTelInput = "vTelInput";
 
-      /*      let biodata =  this.R.pick(['full_name', 'contact_email', 'address', 'city', 'zip_post_code', 'country_id', 'nationality', 'date_of_birth', 'gender', 'identity_number', 'mobile_number', 'another_mobile_number', 'objectives', 'photo', 'career_description', 'cover_letter', 'notice_period'], this.biodata);
+      /*  let biodata =  this.R.pick(['full_name', 'contact_email', 'address', 'city', 'zip_post_code', 'country_id', 'nationality', 'date_of_birth', 'gender', 'identity_number', 'mobile_number', 'another_mobile_number', 'objectives', 'photo', 'career_description', 'cover_letter', 'notice_period'], this.biodata);
        */
 
       this.$store.commit("biodata", this.biodata);
