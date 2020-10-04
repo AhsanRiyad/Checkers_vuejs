@@ -196,7 +196,7 @@
               <v-btn
                 @click="showModal = true"
                 class="applyNow white--text"
-                color="primary"
+                color="#365899"
                 v-bind:disabled="isApplied"
                 >Apply Now</v-btn
               >
