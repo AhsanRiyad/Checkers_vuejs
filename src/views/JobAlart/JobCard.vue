@@ -509,6 +509,8 @@ export default {
 
       //this is for mobile device
 
+      this.$store.commit("jobDetailsSearch" , n);
+
       this.jobId = n;
 
       if (window.innerWidth < 900) {

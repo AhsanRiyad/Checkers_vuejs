@@ -53,7 +53,7 @@
 
             <v-divider class="divider"></v-divider>
 
-            <div :style="JobDescriptionStyle">
+            <div>
               <h4>Location</h4>
               <p>{{ JobDescription.city }}</p>
 
@@ -132,6 +132,9 @@ export default {
           this.$emit("close");
         }
       },
+    },
+    isApplied() {
+      return this.$store.getters.jobDetailsSearch.applied == 1 ? true : false;
     },
   },
   methods: {
