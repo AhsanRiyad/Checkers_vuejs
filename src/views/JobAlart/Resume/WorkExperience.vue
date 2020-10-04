@@ -504,12 +504,15 @@ export default {
                 !this.R.isEmpty(response.data.skills)
               ) {
                 console.log("skill id list....", response.data.skills);
-
                 this.skillArray = response.data.skills.id;
                 // console.log("skill 1", response.data.skills);
                 console.log("skill 1", this.skillArray);
 
-                this.skillArray = this.R.split(",", this.skillArray);
+                this.skillArray = this.R.map(
+                  this.R.trim,
+                  this.R.split(",", this.skillArray)
+                );
+                // this.skillArray = this.R.split(",", this.skillArray);
                 console.log("skill 2", this.skillArray);
                 this.skillArray = this._.compact(this.skillArray);
                 console.log("skill 3", this.skillArray);
