@@ -14,7 +14,7 @@
             <v-btn
               tile
               class="white--text"
-              style="height: 50px; margin-top: -13px; margin-left: -8px; background: #365899 "
+              style="height: 50px; margin-top: -13px; margin-left: -8px; background: #365899"
               @click.stop="submit"
             >Search</v-btn>
           </template>

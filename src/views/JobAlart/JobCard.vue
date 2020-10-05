@@ -552,17 +552,17 @@ export default {
       // if (window.innerHeight)
       /* 
       this.JobDescriptionStyle.height =
-        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; */
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; 
+      */
 
       console.log("pixel ratio ", window.devicePixelRatio);
       console.log("match media ", window.matchMedia);
-      
 
-
-      let spaceGap = 0;
-      if (window.innerHeight > 900) spaceGap = 280;
-      else if (window.innerHeight < 700) spaceGap = 180;
-      else spaceGap = 210;
+      let spaceGap = 0 * window.devicePixelRatio;
+      if (window.innerHeight > 900) spaceGap = 280 * window.devicePixelRatio;
+      else if (window.innerHeight < 700)
+        spaceGap = 225 * window.devicePixelRatio;
+      else spaceGap = 225 * window.devicePixelRatio;
 
       if (window.scrollY > 132) {
         this.filterFixedPosition.position = "fixed";
@@ -606,6 +606,7 @@ export default {
       );
       console.log("scroll Y.......", window.scrollY);
       console.log("inner height.......", window.innerHeight);
+      console.log("inner width.......", window.innerWidth);
 
       let screenDifference = screen.availHeight - window.innerHeight;
 

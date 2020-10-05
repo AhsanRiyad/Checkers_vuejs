@@ -8,17 +8,16 @@
 .login-main-container {
     // margin-top: 200px ;
     // padding-top: 100px ;
-    height: calc(100vh - (64px + 296px));
+    // height: calc(100vh - (64px + 296px));
+    height: 600px;
     background: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    @include mobileSearch(){
+    @include mobileSearch() {
         height: 500px;
     }
-
-
 }
 
 .buttonContainer-search {
