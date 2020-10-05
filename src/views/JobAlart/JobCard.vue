@@ -631,13 +631,19 @@ export default {
       console.log("refs...", this.$refs);
       console.log("entries....", entries);
       entries.forEach(({ target, isIntersecting }) => {
-        if (!isIntersecting) {
+        /* if (!isIntersecting) {
           return;
-        }
+        } */
 
-        this.observer.unobserve(target);
+        // this.observer.unobserve(target);
 
         console.log("intersection key", target.getAttribute("key"));
+
+        setTimeout(() => {
+          const i = target.getAttribute("key");
+          console.log("target key...." ,  i);
+        }, 1000);
+
         // do something ...
         console.log("observed");
         console.log("target ... ", target);
@@ -709,16 +715,20 @@ export default {
   created() {
     this.$nextTick().then(function () {
       // DOM updated
-      this.observer = new IntersectionObserver(this.onElementObserved, {
-        root: this.$el,
-        threshold: 1.0,
-      });
+    });
+    this.observer = new IntersectionObserver(this.onElementObserved, {
+      root: this.$el,
+      threshold: 1.0,
     });
   },
   beforeDestroy() {
     this.observer.disconnect();
   },
   mounted() {
+    this.$nextTick().then(function () {
+      // DOM updated
+    });
+
     this.observer.observe(this.$el);
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
