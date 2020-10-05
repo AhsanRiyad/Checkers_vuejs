@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import login from '@/views/login_registration/Login.vue'
-import JobCard from '../views/JobAlart/JobCard'
+
+/* import JobCard from '../views/JobAlart/JobCard'
 import SearchJob from '../views/JobAlart/SearchJob'
 import CreateAlert from '../views/JobAlart/CreateAlert'
 import Signin from '../views/JobAlart/Auth/Signin'
@@ -12,9 +13,45 @@ import changeEmail from "@/views/JobAlart/AccountSettings/changeEmail";
 import changePassword from "@/views/JobAlart/AccountSettings/changePassword";
 import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
 import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
-import appliedJobs from "@/views/JobAlart/appliedJobs";
+import appliedJobs from "@/views/JobAlart/appliedJobs"; */
+
+const JobCard = () => import('../views/JobAlart/JobCard')
+const SearchJob = () => import('../views/JobAlart/SearchJob')
+const CreateAlert = () => import('../views/JobAlart/CreateAlert')
+const Signin = () => import('../views/JobAlart/Auth/Signin')
+const Signup = () => import('../views/JobAlart/Auth/Signup')
+const Resume = () => import('../views/JobAlart/Resume/Resume.vue')
+const accountSettings = () => import("@/views/JobAlart/accountSettings")
+const changeEmail = () => import("@/views/JobAlart/AccountSettings/changeEmail")
+const changePassword = () => import("@/views/JobAlart/AccountSettings/changePassword")
+const addNumber = () => import("@/views/JobAlart/AccountSettings/addNumber")
+const verifyPhoneNumber = () => import("@/views/JobAlart/AccountSettings/verifyPhoneNumber")
+const appliedJobs = () => import("@/views/JobAlart/appliedJobs")
+
+const AddJobs = () => import("@/views/Employers/Jobs/AddJobs")
+const defaultResume = () => import("../views/JobAlart/ResumeLayout/default.vue")
+const premiumResume = () => import("../views/JobAlart/ResumeLayout/premium.vue")
+const EmployersPanel = () => import("@/views/Employers/EmployersPanel")
+const JobDetails = () => import("@/views/Employers/Jobs/JobDetails")
+const JobOnlineApply = () => import("@/views/JobAlart/JobApply/JobOnlineApply")
+
+const biodata = () => import("../views/JobAlart/Resume/Biodata")
+const workExperience = () => import("../views/JobAlart/Resume/WorkExperience")
+const education = () => import("../views/JobAlart/Resume/Education")
+const pricingTable = () => import("@/views/JobAlart/pricingTable")
+
+const forgotPassword = () => import("../views/JobAlart/AccountSettings/forgotPassword")
+const AddCompanies = () => import("@/views/Employers/companies/AddCompanies")
+const userInfo = () => import("@/views/JobAlart/userInfo")
+const CompanyList = () => import("@/views/Employers/companies/CompanyList")
+const PostedJobList = () => import("@/views/Employers/Jobs/PostedJobList")
+const recruiter = () => import("@/views/recruiter")
+
+
 // import AddCompany from "@/views/Employers/Company/AddCompany";
-import AddJobs from "@/views/Employers/Jobs/AddJobs";
+
+
+/* import AddJobs from "@/views/Employers/Jobs/AddJobs";
 import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
 import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
 import EmployersPanel from "@/views/Employers/EmployersPanel";
@@ -32,7 +69,7 @@ import userInfo from "@/views/JobAlart/userInfo";
 import CompanyList from "@/views/Employers/companies/CompanyList";
 import PostedJobList from "@/views/Employers/Jobs/PostedJobList";
 import recruiter from "@/views/recruiter";
-
+ */
 
 Vue.use(VueRouter)
 
@@ -260,14 +297,15 @@ const routes = [
     }
   },
   {
-    path: '/subscription' ,
+    path: '/subscription',
     name: 'pricingTable',
     component: pricingTable,
     meta: {
       title: 'Pricing Table'
-    }},
+    }
+  },
   {
-    path: '/user-info/:homePage' ,
+    path: '/user-info/:homePage',
     name: 'userInfo',
     component: userInfo,
     props: { newsletterPopup: false },

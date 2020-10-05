@@ -35,6 +35,8 @@ export const store = new Vuex.Store({
 		resumePrevbtn: true,
 		userIp: "",
 		jobExpirity: true,
+		jobDetails: {},
+		jobDetailsSearch: {},
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
@@ -46,6 +48,8 @@ export const store = new Vuex.Store({
 		registerAs(state, payload) { state.registerAs = payload },
 		jobExpirity(state, payload) { state.jobExpirity = payload },
 		userIp(state, payload) { state.userIp = payload },
+		jobDetails(state, payload) { state.jobDetails = payload },
+		jobDetailsSearch(state, payload) { state.jobDetailsSearch = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -58,6 +62,8 @@ export const store = new Vuex.Store({
 		componentName: state => state.componentName,
 		registerAs: state => state.registerAs,
 		userIp: state => state.userIp,
+		jobDetails: state => state.jobDetails,
+		jobDetailsSearch: state => state.jobDetailsSearch,
 	},
 	actions: {
 		callApi: (context, info) => {

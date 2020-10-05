@@ -9,9 +9,19 @@
   clear: both;
 }
 
+.jobDetailsMobile {
+  padding: 15px;
+  margin: 2px 2px;
+
+  -webkit-box-shadow: -1px -1px 14px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px -1px 14px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px -1px 14px -1px rgba(0, 0, 0, 0.75);
+}
+
+
 .jobcard-first-container {
   // height: 100vh;
-  min-height: 400px;
+  min-height: 100vh;
 }
 
 .loader {
@@ -137,10 +147,9 @@
 }
 
 .jobDetails {
-  width: 23%;
-  right: 25%;
-  top: 185px;
-  position: fixed;
+  @include tab() {
+    display: none;
+  }
 }
 
 .JobDescription {
@@ -174,6 +183,9 @@
 .applyNow {
   width: 300px;
   margin-top: -30px;
+  @include tab(){
+    width: 150px;
+  }
 }
 
 // job online applied css start
@@ -214,6 +226,7 @@
 
   }
 }
+
 // job online applied css end
 
 
@@ -230,12 +243,14 @@
 }
 
 
-.expectedSalary-job-search__applybutton{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: flex-end;
+.expectedSalary-job-search__applybutton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
-.job_desc{
+
+.job_desc {
   padding: 25px 15px;
 }
+
 //expected salry ends

@@ -13,7 +13,12 @@
     </div>
 
     <div v-if="skeleton">
-      <v-skeleton-loader v-for="n in 3" :key="n" class="loader" type="card"></v-skeleton-loader>
+      <v-skeleton-loader
+        v-for="n in 3"
+        :key="n"
+        class="loader"
+        type="card"
+      ></v-skeleton-loader>
     </div>
 
     <div class="alertMsg" v-else-if="ShowAlertMsg">
@@ -29,9 +34,16 @@
           <v-btn
             tile
             class="white--text"
-            style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+            style="
+              height: 40px;
+              margin-top: -8px;
+              margin-bottom: 0;
+              margin-left: -8px;
+              background: rgb(54, 88, 153);
+            "
             @click.stop="getData"
-          >Search</v-btn>
+            >Search</v-btn
+          >
         </template>
       </v-text-field>
       <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>
@@ -52,9 +64,16 @@
               <v-btn
                 tile
                 class="white--text"
-                style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
+                style="
+                  height: 40px;
+                  margin-top: -8px;
+                  margin-bottom: 0;
+                  margin-left: -8px;
+                  background: rgb(54, 88, 153);
+                "
                 @click.stop="getData"
-              >Search</v-btn>
+                >Search</v-btn
+              >
             </template>
           </v-text-field>
         </div>
@@ -109,8 +128,15 @@
       </div>
 
       <div class="searchResults">
-        <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
-          <v-card-text @click.stop="()=>saveDetails(n)" class="job-card-job-search">
+        <v-card
+          class="mx-auto searchResults-text"
+          v-for="n in Jobs"
+          :key="n.id"
+        >
+          <v-card-text
+            @click.stop="() => saveDetails(n)"
+            class="job-card-job-search"
+          >
             <h2 style="color: green" class="mb-2" v-text="n.job_title"></h2>
             <h4 v-text="n.company_name"></h4>
             <p class="text--primary">
@@ -129,48 +155,96 @@
         </v-card>
       </div>
 
-      <div class="clearFix"></div>
+      <!-- job details skeleton loader starts -->
+      <div
+        :style="jobDetailsLoader"
+        v-if="skeletonJobDetails"
+        class="jobDetails"
+      >
+        <v-skeleton-loader
+          width="400"
+          class="loader"
+          type="card"
+        ></v-skeleton-loader>
+      </div>
+      <!-- job details skeleton loader ends -->
 
-      <div class="Fixed-Job-Details">
-        <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
-          <v-skeleton-loader width="400" class="loader" type="card"></v-skeleton-loader>
-        </div>
+      <!-- job details info part starts -->
+      <div v-else class="jobDetails">
+        <div :style="jobDetails" v-if="!loading">
+          <div outlined :style="firstContainer">
+            <v-list-item three-line>
+              <v-list-item-content>
+                <v-list-item-title class="headline mb-1">{{
+                  JobDescription.job_title
+                }}</v-list-item-title>
+                <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
+                <p>
+                  {{ JobDescription.company_name }} ||
+                  {{ JobDescription.type_in_text }}
+                </p>
+              </v-list-item-content>
 
-        <div v-else>
-          <div :style="jobDetails" v-if="!loading">
-            <div outlined :style="firstContainer">
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <v-list-item-title class="headline mb-1">{{ JobDescription.job_title }}</v-list-item-title>
-                  <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
-                  <p>{{ JobDescription.company_name }} || {{ JobDescription.type_in_text }}</p>
-                </v-list-item-content>
+              <v-list-item-avatar tile size="80" color="grey">
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-list-item-avatar>
+            </v-list-item>
 
-                <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-              </v-list-item>
+            <v-card-actions>
+              <v-btn
+                @click="showModal = true"
+                class="applyNow white--text"
+                color="#365899"
+                v-bind:disabled="isApplied"
+                >Apply Now</v-btn
+              >
+            </v-card-actions>
 
-              <v-card-actions>
-                <v-btn
-                  @click="showModal = true"
-                  class="applyNow white--text"
-                  color="primary"
-                  v-bind:disabled="isApplied"
-                >Apply Now</v-btn>
-              </v-card-actions>
+            <v-divider class="divider"></v-divider>
 
-              <v-divider class="divider"></v-divider>
+            <div :style="JobDescriptionStyle">
+              <h4>Location</h4>
+              <p>{{ JobDescription.city }}</p>
 
-              <div :style="JobDescriptionStyle">
-                <h4>Location</h4>
-                <p>{{ JobDescription.city }}</p>
+              <h4>Descriptions</h4>
+              <div v-html="JobDescription.job_description" />
 
-                <h4>Descriptions</h4>
-                <div v-html="JobDescription.job_description" />
+              <h4>Responsibilities</h4>
+              <div v-for="n in JobDescription.job_responsibilities" :key="n.id">
+                <div v-html="n.text" />
+              </div>
+
+              <h4>Facilities</h4>
+              <div v-for="n in JobDescription.job_facilities" :key="n.id">
+                <div v-html="n.text" />
+              </div>
+
+              <h4>Educational Requirements</h4>
+              <div v-for="n in JobDescription.job_education_req" :key="n.id">
+                <div v-html="n.degre_title" />
+              </div>
+
+              <h4>Skill Requirements</h4>
+              <div v-for="(n, i) in JobDescription.skills" :key="n.id">
+                <div>{{ i + 1 }} . {{ n.title }}</div>
+              </div>
+
+              <h4>Salary Range</h4>
+              <div>
+                {{ JobDescription.currency_code }}
+                {{ JobDescription.min_salary_range }} -
+                {{ JobDescription.max_salary_range }}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- job details info part ends -->
+
+      <div class="clearFix"></div>
     </div>
 
     <!-- job apply modal starts-->
@@ -184,9 +258,10 @@
       </div>
       <div slot="body">
         <p>
-          JobAlert.com only works as a mean of communication between employers and job-seekers.
-          JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
-          the company after applying through the jobalert.com website.
+          JobAlert.com only works as a mean of communication between employers
+          and job-seekers. JobAlert.com Limited will not be responsible for any
+          financial transaction or irregularity/ fraud by the company after
+          applying through the jobalert.com website.
         </p>
         <div class="d-flex align-center">
           <v-checkbox
@@ -204,7 +279,7 @@
               <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
                 <v-text-field
                   type="number"
-                  :rules="[ v=>!!v||'required' ]"
+                  :rules="[(v) => !!v || 'required']"
                   v-model="expectedSalary"
                   outlined
                   dense
@@ -226,7 +301,8 @@
                 :disabled="!termsAndConditions"
                 :loading="loadingAppliedJob"
                 @click.stop="applyJob"
-              >Apply</v-btn>
+                >Apply</v-btn
+              >
             </div>
           </div>
         </div>
@@ -237,6 +313,24 @@
     <!-- apply online Expected salary starts -->
 
     <!-- apply online Expected salary ends -->
+
+    <!-- this modal is for mobile version -->
+    <JobDetails @close="() => myDialogClose()" :dialogVisible="dialogSwitch" />
+
+    <!-- loading data  starts-->
+    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- loading data  ends-->
   </div>
 </template>
 
@@ -250,6 +344,7 @@ export default {
   name: "JobCard",
   components: {
     JobAlertModal: () => import("../../components/Modal"),
+    JobDetails: () => import("./Dialog/jobDetails"),
   },
   mixins: [ipMixins, tokenMixins],
   data: () => {
@@ -271,6 +366,7 @@ export default {
       showModalSalary: false,
       skeleton: true,
       skeletonJobDetails: true,
+      loadingData: false,
 
       JobDescription: {
         job_title: "PHP developer",
@@ -291,16 +387,20 @@ export default {
         backgroundColor: "#e1e1e1",
         paddingTop: "10px",
       },
-
+      dialogSwitch: false,
       //style for search
       jobDetails: {
         // display: "none",
-        // overflowY: "scroll",
         // maxHeight: "300px",
+        // overflowY: "scroll",
         width: "35%",
-        right: "21%",
-        top: "287px",
-        position: "fixed",
+        // height: "400px",
+        float: "left",
+        marginLeft: "2%",
+        // right: "21%",
+        // top: "287px",
+        // position: "static",
+        // position: "fixed",
         // height: "100%",
         // transition: "top 0.1s",
       },
@@ -321,8 +421,9 @@ export default {
         paddingRight: "10px",
         marginTop: "20px",
         // height: "calc( 100vh - 400px )",
-        height: "300px",
+        // minHeight: "400px",
         overflowY: "scroll",
+        height: "30px",
         // overflowY: "visible",
       },
 
@@ -339,6 +440,9 @@ export default {
     },
   },
   methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
+    },
     applyJob(event) {
       if (event) {
         event.preventDefault();
@@ -404,7 +508,15 @@ export default {
       console.log("dd", n);
       this.skeletonJobDetails = true;
 
+      //this is for mobile device
+
+      this.$store.commit("jobDetailsSearch", n);
+
       this.jobId = n;
+
+      if (window.innerWidth < 900) {
+        this.loadingData = true;
+      }
 
       this.$store
         .dispatch("callApi", {
@@ -415,10 +527,15 @@ export default {
         .then((response) => {
           console.log("details list in the", response.data.jobs);
           this.JobDescription = response.data.jobs;
+          this.$store.commit("jobDetails", this.JobDescription);
+
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
+          if (window.innerWidth < 900) {
+            this.dialogSwitch = true;
+          }
           this.skeleton = false;
         })
         .catch((error) => {
@@ -428,105 +545,73 @@ export default {
         .finally(() => {
           //  this.tableLoading = false;
           this.skeletonJobDetails = false;
+          this.loadingData = false;
         });
     },
     onScroll() {
-      // console.log(e);
-      /* console.log(window);
-      let MainCard = document.getElementById("MainCard");
-      console.log('in the main card');
-      console.log(window.scrollY);
-      console.log(MainCard);
-      console.log("scorlling"); */
-
-      console.log("window ... ", window);
-
-      this.JobDescriptionStyle.height =
-        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
-
-      /* console.log("window inner height", window.innerHeight);
-      console.log("scrol top", document.body.scrollTop);
-      console.log("offset height", document.body.offsetHeight);
-      console.log("addition ", window.innerHeight + window.scrollY); */
-
-      console.log("inner height ", window.innerHeight);
-      console.log("scroll y... ", window.scrollY);
-      console.log("subtraction... ", 142 - window.scrollY);
-      console.log("document height", document.body.scrollHeight);
-      console.log(
-        "document body height",
-        document.querySelector("#mainDocs").scrollHeight
-      );
-
-      // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
-      // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
-      // this.JobDescriptionStyle.height = "200px";
-
-      // this.jobDetails.top = screen.availHeight + "px";
-
-      // this.JobDescriptionStyle.height = screen.availHeight - 140 + "px";
-
-      if (window.scrollY > screen.availHeight - 296 - 140 - 140) {
-        this.JobDescriptionStyle.height =
-          screen.availHeight -
-          140 -
-          140 -
-          140 -
-          140 -
-          40 -
-          (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
-          "px";
-        // this.JobDescriptionStyle.height = "464px";
-        // console.log("scrolled.......", screen.availHeight - 296 - 140 - 140);
-        console.log(
-          "scrolled.......",
-          screen.availHeight -
-            140 -
-            140 -
-            140 -
-            (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
-            "px"
-        );
-      }
-
       // if (window.innerHeight)
+      /* 
+      this.JobDescriptionStyle.height =
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; */
+
+      console.log("pixel ratio ", window.devicePixelRatio);
+      console.log("match media ", window.matchMedia);
+      
+
+
+      let spaceGap = 0;
+      if (window.innerHeight > 900) spaceGap = 280;
+      else if (window.innerHeight < 700) spaceGap = 180;
+      else spaceGap = 210;
+
       if (window.scrollY > 132) {
-        this.jobDetails.top = "142px";
-        // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
         this.filterFixedPosition.zIndex = 3;
 
-        console.log("inner width.... ", window.innerWidth);
-
+        // this.jobDetails.top = "100px";
+        this.jobDetails.float = "none";
+        this.jobDetails.right = "20%";
+        this.jobDetails.width = "35%";
+        this.jobDetails.top = "142px";
+        this.jobDetails.position = "fixed";
+        // this.JobDescriptionStyle.height = "300px";
         if (window.innerWidth > 960) {
           this.filterFixedPosition.right = "20%";
         }
       } else {
-        this.jobDetails.top = 287 - window.scrollY + "px";
         // this.jobDetails.top = "287px";
+        this.jobDetails.float = "left";
+        this.jobDetails.marginLeft = "2%";
+        this.jobDetails.width = "35%";
+        this.jobDetails.position = "static";
+
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
 
-      if (
-        document.body.offsetHeight - (window.innerHeight + window.scrollY) <
-        210
-      ) {
-        // this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
-      }
+      this.JobDescriptionStyle.height =
+        screen.availHeight - spaceGap - window.scrollY + "px";
 
-      let pageNo = window.scrollY / 2400;
-      let isInt = Number.isInteger(window.scrollY / 2400);
-      // console.log('is int check,' , isInt);
-      // console.log( 'scroll result ' ,  (window.scrollY/2400) ) ;
+      // this.JobDescriptionStyle.height = "100px";
 
-      if (isInt && this.pageNo < pageNo + 1) {
-        // console.log("call second api");
-        this.pageNo = pageNo + 1;
-        // this.getData();
-      }
+      console.log(
+        "screen available height.......",
+        screen.availHeight - 400 - window.scrollY + "px"
+      );
+      console.log(
+        "document available height.......",
+        document.querySelector("#mainDocs").scrollHeight
+      );
+      console.log("scroll Y.......", window.scrollY);
+      console.log("inner height.......", window.innerHeight);
+
+      let screenDifference = screen.availHeight - window.innerHeight;
+
+      console.log("inner height...", window.innerHeight);
+
+      console.log(screenDifference);
     },
     getData() {
       if (this.$store.getters.userIp == "") {
@@ -623,6 +708,9 @@ export default {
   watch: {
     pageNo() {
       this.getData();
+    },
+    dialogSwitch(nVal) {
+      if (nVal == false) this.getData();
     },
   },
 };

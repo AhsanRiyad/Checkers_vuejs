@@ -55,14 +55,14 @@
       </span>
 
       <span>
-        <v-app-bar-nav-icon color="white" class="d-sm-none d-inline" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon color="white" class="d-md-none d-inline" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </span>
     </v-app-bar>
     <!-- header ends -->
 
     <!-- drawer starts -->
     <v-navigation-drawer v-model="drawer" fixed temporary style="background: #365899">
-      <v-list>
+      <v-list style="background: #365899">
         <v-list-item v-for="([icon, text, url], i) in items" :key="i" link>
           <v-list-item-icon>
             <router-link :to="url">
