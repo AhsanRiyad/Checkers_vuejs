@@ -14,4 +14,6 @@ options.labels = {
     info: 'Status'
 };
 
+options.position = "top-right";
+
 Vue.use(VueAWN, options);

@@ -87,7 +87,6 @@
                       accept="image/png, image/jpeg, image/bmp"
                       placeholder="Choose a photo"
                       prepend-icon="perm_media"
-                      label="Avatar"
                       :loading="imageUploadLoading"
                       @change="uploadPhoto"
                       v-model="photo"
