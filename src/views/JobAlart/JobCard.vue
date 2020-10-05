@@ -127,11 +127,11 @@
         <div class="clearFix"></div>
       </div>
 
-      <div class="searchResults">
+      <div class="searchResults" ref="searchResults">
         <v-card
           class="mx-auto searchResults-text"
-          v-for="n in Jobs"
-          :key="n.id"
+          v-for="(n, i) in Jobs"
+          :key="i"
         >
           <v-card-text
             @click.stop="() => saveDetails(n)"
@@ -367,6 +367,8 @@ export default {
       skeleton: true,
       skeletonJobDetails: true,
       loadingData: false,
+
+      observer: null,
 
       JobDescription: {
         job_title: "PHP developer",
@@ -625,6 +627,23 @@ export default {
         this.getSearchData();
       }
     },
+    onElementObserved(entries) {
+      console.log("refs...", this.$refs);
+      console.log("entries....", entries);
+      entries.forEach(({ target, isIntersecting }) => {
+        if (!isIntersecting) {
+          return;
+        }
+
+        this.observer.unobserve(target);
+
+        console.log("intersection key", target.getAttribute("key"));
+        // do something ...
+        console.log("observed");
+        console.log("target ... ", target);
+        console.log("isIntersecting ... ", isIntersecting);
+      });
+    },
     getSearchData() {
       this.loading = true;
 
@@ -687,7 +706,20 @@ export default {
         });
     },
   },
+  created() {
+    this.$nextTick().then(function () {
+      // DOM updated
+      this.observer = new IntersectionObserver(this.onElementObserved, {
+        root: this.$el,
+        threshold: 1.0,
+      });
+    });
+  },
+  beforeDestroy() {
+    this.observer.disconnect();
+  },
   mounted() {
+    this.observer.observe(this.$el);
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
     this.screenHeight = screen.availHeight;
