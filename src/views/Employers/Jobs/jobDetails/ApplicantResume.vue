@@ -3,9 +3,9 @@
     <div class="default-resume-main-card applicant_resume">
       <div class="top-section d-flex justify-space-between align-center">
        <div class="action_btn">
-         <v-btn small class="ml-1 mr-1" color="primary">shortlisted</v-btn>
+         <v-btn @click.stop="applicantShortListed" small class="ml-1 mr-1" color="primary">shortlisted</v-btn>
          <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>
-         <v-btn small class="ml-1 mr-1" color="primary">Interview Call</v-btn>
+         <v-btn @click="applicantInterviewCall" small class="ml-1 mr-1" color="primary">Interview Call</v-btn>
        </div>
         <div class="close_btn">
           <v-btn icon @click="dialogShowing = false"><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn>
@@ -185,6 +185,7 @@ export default {
     experiences: Array,
     applicntInfo: Object,
     userId: String,
+    jobId: String,
     exams: Object,
     dialogShowing: {
       type: Boolean,
@@ -193,7 +194,7 @@ export default {
   },
   data() {
     return{
-      dialog: false
+      dialog: false,
     }
   },
   computed: {
@@ -207,7 +208,49 @@ export default {
         }
       },
     }
-  }
+  },
+  methods: {
+    applicantShortListed(event){
+      if (event) {
+        event.preventDefault();
+      }
+      this.$store
+          .dispatch("callApi", {
+            url: `jobs/${this.jobId}/${this.userId}/shortlist`,
+            method: "put",
+            data: {},
+          })
+          .then((response) => {
+            console.log("applicant shortlisted response..", response);
+            // this.companyId = response.company.id;
+            this.$awn.success("Updated Successfully!");
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+  },
+    applicantInterviewCall(event){
+      if (event) {
+        event.preventDefault();
+      }
+      this.$store
+          .dispatch("callApi", {
+            url: `jobs/${this.jobId}/${this.userId}/interview-call`,
+            method: "put",
+            data: {},
+          })
+          .then((response) => {
+            console.log("applicant shortlisted response..", response);
+            // this.companyId = response.company.id;
+            this.$awn.success("Updated Successfully!");
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          })
+    }
+}
 }
 </script>
 <style>

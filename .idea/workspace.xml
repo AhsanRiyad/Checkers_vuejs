@@ -21,6 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/AddJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab/DraftedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab/DraftedJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/AddCompanies.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +208,7 @@
       <workItem from="1601356941568" duration="17097000" />
       <workItem from="1601440356233" duration="24130000" />
       <workItem from="1601523961227" duration="23268000" />
-      <workItem from="1601873796340" duration="800000" />
+      <workItem from="1601873796340" duration="20313000" />
     </task>
     <servers />
   </component>
@@ -322,13 +329,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="886" y="0" width="894" height="835" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1601357663109" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1600937005532">
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1601875333783">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600937005532" />
-    <state x="623" y="225" key="search.everywhere.popup" timestamp="1599720754991">
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601875333783" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601883860962">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599720754991" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601883860962" />
   </component>
 </project>

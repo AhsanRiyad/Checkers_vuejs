@@ -8,7 +8,7 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <h2 class="jaif">Total Companies: <span>{{totalCompanies}}</span></h2>
+                  <h2 class="jaif">Total Companies: <span>{{ totalCompanies }}</span></h2>
                 </v-col>
               </v-row>
             </div>
@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="(comp, i) in companies" :key="i">
-                  <td><p>{{ i+1 }}</p></td>
+                  <td><p>{{ i + 1 }}</p></td>
                   <td>
                     <a class="text-capitalize" @click="goToCompanyDetails(comp.id)">{{ comp.company_name }}</a>
                   </td>
@@ -38,8 +38,8 @@
                   <td class="action text-center">
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn  v-bind="attrs"
-                                v-on="on" class="interactn c-grey" icon>
+                        <v-btn @click.stop="editCompany(comp.id)" v-bind="attrs"
+                               v-on="on" class="interactn c-grey" icon>
                           <v-icon>mdi-square-edit-outline</v-icon>
                         </v-btn>
                       </template>
@@ -47,7 +47,7 @@
                     </v-tooltip>
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs"  @click="goToJobsList(comp.id)"
+                        <v-btn v-bind="attrs" @click="goToJobsList(comp.id)"
                                v-on="on" class="interactn ml-2 c-green" icon>
                           <v-icon>mdi-view-list</v-icon>
                         </v-btn>
@@ -57,11 +57,13 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn @click="goToJobAdd()"
-                            class="interactn  mr-2 ml-2 c-blue"
-                            v-bind="attrs"
-                            v-on="on"
-                            icon
-                        ><v-icon>mdi-briefcase-upload</v-icon></v-btn>
+                               class="interactn  mr-2 ml-2 c-blue"
+                               v-bind="attrs"
+                               v-on="on"
+                               icon
+                        >
+                          <v-icon>mdi-briefcase-upload</v-icon>
+                        </v-btn>
                       </template>
                       <span>Job Post</span>
                     </v-tooltip>
@@ -72,7 +74,9 @@
                             v-bind="attrs"
                             v-on="on"
                             icon
-                        ><v-icon>mdi-shield-check</v-icon></v-btn>
+                        >
+                          <v-icon>mdi-shield-check</v-icon>
+                        </v-btn>
                       </template>
                       <span>Request For Company Verification</span>
                     </v-tooltip>
@@ -109,16 +113,17 @@
 import axios from "axios";
 
 export default {
-name: "CompanyList",
+  name: "CompanyList",
   data: () => {
     return {
       companies: [],
       length: 0,
-      loading : true,
+      loading: true,
       jobId: '',
       pageNo: 1
-    }},
-  mounted(){
+    }
+  },
+  mounted() {
     this.getCompanies()
   },
   computed: {
@@ -127,7 +132,7 @@ name: "CompanyList",
     },
   },
   methods: {
-    getCompanies(){
+    getCompanies() {
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -144,7 +149,7 @@ name: "CompanyList",
             console.log("companies", response.data.data);
             this.companies = response.data.data
             this.loading = false
-            setTimeout(()=> {
+            setTimeout(() => {
 
             }, 3000)
           })
@@ -152,11 +157,14 @@ name: "CompanyList",
             this.$awn.alert("Failed!");
           })
     },
-    goToJobAdd(){
-      this.$router.push({name:'AddJobs'})
+    editCompany: function (id) {
+      this.$router.push({name: 'AddCompanies', params: {id: id}})
     },
-    goToJobsList(jobId){
-      this.$router.push({name:'PostedJobList', params:{id: jobId}})
+    goToJobAdd() {
+      this.$router.push({name: 'AddJobs'})
+    },
+    goToJobsList(jobId) {
+      this.$router.push({name: 'PostedJobList', params: {id: jobId}})
     },
   }
 }

@@ -53,7 +53,7 @@
                   </td>
                   <td>
                     <v-switch
-                        @click.stop="jobLive"
+                        @click.stop="jobLive(job.id)"
                         color="success"
                         :input-value="job.job_status == 1 ? true : false"
                         hide-details
@@ -62,7 +62,7 @@
                   <td>{{ job.applicant }}</td>
                   <td class="text-center">{{ job.shortlisted }}</td>
                   <td class="action text-center">
-                    <v-btn id="edit_btn" :disabled="job.job_status == 1" class="interactn c-grey" icon>
+                    <v-btn @click.stop="editJob(job.id)" id="edit_btn" class="interactn c-grey" icon>
                       <v-icon>mdi-square-edit-outline</v-icon>
                     </v-btn>
                     <v-btn :disabled="job.job_status == 1" class="interactn  mr-2 ml-2 c-green" icon>
@@ -96,7 +96,8 @@ name: "DraftedJobs",
     draftedJobs: [],
     pageNo: 1,
     length: 0,
-    loading: true
+    loading: true,
+    jobsId: ''
   }),
   computed: {
     totalJobs() {
@@ -107,16 +108,16 @@ name: "DraftedJobs",
     this.getDraftedJobs()
   },
   methods: {
+  editJob: function (id){
+    this.$router.history.push({name: 'AddJobs', params: {id: id}})
+  },
     getHumanDate: function (date) {
       return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
     goToJobDetails(jobId) {
       this.$router.push({name: 'JobDetails', params: {id: jobId}})
     },
-    jobLive(event) {
-      if (event) {
-        event.preventDefault();
-      }
+    jobLive(jobsId) {
       // this.postedJobs.job_status = (this.postedJobs.job_status + 1) % 2
       if (this.$cookies.get("accessToken") == null) {
         this.$router.history.push("/signin");
@@ -139,10 +140,8 @@ name: "DraftedJobs",
       axios({
         method: "put",
         baseURL: this.$store.state.apiBase,
-        url: `jobs/${this.jobId}/live`,
-        data: {
-          // is_expired: this.is_expired,
-        },
+        url: `jobs/` + jobsId + `/live`,
+        data: {},
         headers,
       })
           .then((response) => {

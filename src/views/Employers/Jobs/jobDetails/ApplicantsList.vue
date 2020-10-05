@@ -77,7 +77,7 @@
             <!--********** Job applied table end **************-->
             <!-- job apply modal starts-->
             <v-dialog v-model="dialogShowing" width="900">
-              <applicant-resume-modal v-show="dialogShowing" :applicantInfo="applicntInfo" :skills="skills" :exmas="exams" :qualifications="qualification" :experiences="experiences" :applicantResume="applicantsResume"
+              <applicant-resume-modal :user-id="userId" v-show="dialogShowing" :applicantInfo="applicntInfo" :skills="skills" :exmas="exams" :qualifications="qualification" :experiences="experiences" :applicantResume="applicantsResume"
                                       :applicant-biodata="applicantBiodata"/>
             </v-dialog>
 
@@ -136,6 +136,7 @@ export default {
     totalExp: Object,
     length: Number,
     pageNo: Number,
+    jobId: String,
     jobResponsibilities: Array,
     loadingApplicant: Boolean,
   },
@@ -152,6 +153,9 @@ export default {
       exams: {},
       applicntInfo: {}
     }
+  },
+  created() {
+    console.log('jobsssssssssssssssssssssss id ', this.jobId)
   },
   methods: {
     getHumanDate: function (date) {
@@ -180,6 +184,7 @@ export default {
             this.skills = response.data.skills
             this.experiences = response.data.experiences
             this.qualifications = response.data.qualification
+            this.userId = response.data.applicationInfo.user_id
 
             console.log("bio", response.data.biodata)
             console.log("skills", response.data.skills)

@@ -56,7 +56,7 @@
               <li class="jd_list">
                 <v-icon>mdi-file-multiple-outline</v-icon>
                 <p class="jd_title">application</p>
-                <div class="jd_status">35</div>
+                <div class="jd_status">{{ totalApplicants }}</div>
               </li>
             </ul>
           </div>
@@ -91,7 +91,7 @@
 
           <v-tabs-items v-model="tabs">
             <v-tab-item>
-              <applicant-list :loading-applicant="loadingApplicant" :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
+              <applicant-list :job-id="jobId" :loading-applicant="loadingApplicant" :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
                               :job-appliers="jobAppliers" :experience="experience" :qualification="qualification"
                               :applicant="applicant"/>
             </v-tab-item>
@@ -131,6 +131,7 @@ export default {
       pageNo: 1,
       length: 0,
       jobs: {},
+      jobId: '',
       jobResponsibility: {},
       loadingApplicant: true,
       imageUrl: "",
@@ -167,6 +168,8 @@ export default {
             console.log("qualification", this.qualification);
             this.applicant = response.data.data;
             this.jobs = response.data.job
+            this.jobId = response.data.job.id
+            console.log('job id', this.jobId)
             for (let i = 0; i < this.applicant.length; i++) {
               // console.log("qualification index object", this.applicant[i]) // returns [Object object]
               // console.log("qualification", this.applicant[i].qualification) // returns undefined

@@ -281,7 +281,10 @@
           </v-row>
 
           <div class="text-right">
-            <div class="item-2">
+            <div class="item-2" v-if="paramId">
+              <v-btn color="green" class="white--text" :loading="loading" @click.stop="updateJobs">Update</v-btn>
+            </div>
+            <div class="item-2" v-else>
               <v-btn color="#365899" class="white--text" :loading="loading" @click.stop="saveJob">Save</v-btn>
             </div>
           </div>
@@ -295,6 +298,7 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import '../../../sass/employers/_jobs.scss'
 import validation from "@/mixins/validation";
+import axios from "axios";
 
 export default {
   name: "AddJobs",
@@ -309,6 +313,7 @@ export default {
       companies: [],
       currency: [],
       types: [],
+      paramId: null,
       jobs: {
         type: '',
         type_in_text: '',
@@ -339,6 +344,35 @@ export default {
       },
 
     };
+  },
+  created() {
+    if (this.$route.params.id) {
+      this.paramId = this.$route.params.id
+      this.loadingData = true
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        baseURL: this.$store.state.apiBase,
+        url: `jobs/` + this.$route.params.id,
+        method: "get",
+        data: {},
+        headers,
+      })
+          .then(response => {
+            console.log("job per id", response)
+            this.jobs = response.data.data.jobs
+            this.loadingData = false
+          })
+          .catch(error => {
+            this.$awn.alert(error.response.status)
+            this.loadingData = false
+          })
+    } else {
+      this.paramId = null
+    }
   },
   mounted() {
     this.$store
@@ -417,25 +451,68 @@ export default {
     saveJob() {
       if (!this.$refs.form.validate()) return;
       this.loading = true;
-      this.$store
-          .dispatch("callApi", {
-            url: "jobs/",
-            method: "post",
-            data: this.jobs,
-          })
-          .then((response) => {
-            console.log("jobs post done ", response);
-            this.$awn.success("Saved!");
-            setTimeout( ()=> {
-              this.$router.history.push({name: "PostedJobList", params: {id: this.jobs.company_id}})
-            }, 1000);
-          })
-          .catch(() => {
-            this.$awn.alert("Failed!");
-          })
-          .finally(() => {
-            this.loading = false;
-          });
+      if (this.paramId){
+        this.$store
+            .dispatch("callApi", {
+              url: "jobs/" + this.paramId,
+              method: "put",
+              data: this.jobs,
+            })
+            .then((response) => {
+              console.log("JOB Update response..", response);
+              // this.companyId = response.company.id;
+              this.$awn.success("Updated Successfully!");
+              setTimeout(() => {
+                this.$router.history.push({name: "PostedJobList", params: {id: this.jobs.company_id}})
+              }, 1000);
+            })
+            .catch(() => {
+              this.$awn.alert("Failed!");
+              //   this.$awn.alert("Failed");
+            })
+      }else {
+        this.$store
+            .dispatch("callApi", {
+              url: "jobs/",
+              method: "post",
+              data: this.jobs,
+            })
+            .then((response) => {
+              console.log("jobs post done ", response);
+              this.$awn.success("Saved!");
+              setTimeout(() => {
+                this.$router.history.push({name: "PostedJobList", params: {id: this.jobs.company_id}})
+              }, 1000);
+            })
+            .catch(() => {
+              this.$awn.alert("Failed!");
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+      }
+    },
+    updateJobs() {
+      if (this.paramId) {
+        this.$store
+            .dispatch("callApi", {
+              url: "jobs/" + this.paramId,
+              method: "put",
+              data: this.jobs,
+            })
+            .then((response) => {
+              console.log("JOB Update response..", response);
+              // this.companyId = response.company.id;
+              this.$awn.success("Updated Successfully!");
+              setTimeout(() => {
+                this.$router.history.push({name: "PostedJobList", params: {id: this.jobs.company_id}})
+              }, 1000);
+            })
+            .catch(() => {
+              this.$awn.alert("Failed!");
+              //   this.$awn.alert("Failed");
+            })
+      }
     },
     addJobEduReq() {
       this.jobs.job_education_req.push({degre_title: ''})
