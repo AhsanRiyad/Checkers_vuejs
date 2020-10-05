@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <!-- header starts -->
-    <v-app-bar class="white--text" style="background: #365899 ">
+    <v-app-bar class="white--text" style="background: #365899">
       <v-toolbar-title>
         <!-- <img :src="require('../../../public/JobAlartLogo.png')" alt=""> -->
         <router-link to="/" style="color: white; text-decoration: none">JobAlart</router-link>
