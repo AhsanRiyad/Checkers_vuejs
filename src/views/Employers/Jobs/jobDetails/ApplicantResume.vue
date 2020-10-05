@@ -8,7 +8,7 @@
          <v-btn small class="ml-1 mr-1" color="primary">Interview Call</v-btn>
        </div>
         <div class="close_btn">
-          <v-btn icon @click="dialog = false"><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn>
+          <v-btn icon @click="dialogShowing = false"><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn>
         </div>
       </div>
       <!-- section-1 starts -->
