@@ -20,9 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/Contact.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyTabs/AllCompanyList.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab/AllJobList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab/AllJobList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab/DraftedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobsTab/DraftedJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/companiesTab.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/companiesTab.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/userInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/userInfo.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +211,7 @@
       <workItem from="1601440356233" duration="24130000" />
       <workItem from="1601523961227" duration="23268000" />
       <workItem from="1601873796340" duration="23726000" />
-      <workItem from="1601960771467" duration="13512000" />
+      <workItem from="1601960771467" duration="21521000" />
     </task>
     <servers />
   </component>

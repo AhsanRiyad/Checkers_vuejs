@@ -107,16 +107,25 @@ name: "userInfo",
     })
         .then((response) => {
           console.log("user response", response.status);
-          this.$awn.success("Successful");
           if (response.status == 404) {
-            this.$awn.alert("please Enter Your Information");
-            this.$router.history.push("/user-info");
+            this.$router.history.push({name:"userInfo"});
+          }else if (response.status == 201) {
+            this.$awn.success("Successful");
+            setTimeout(() => {
+              this.$router.history.push({name: 'CompanyList'});
+            })
           }else if (response.status == 200) {
-            this.$router.history.push("/company-list");
+            this.$awn.success("Successful");
+            setTimeout(() => {
+              this.$router.history.push({name: 'CompanyList'});
+            })
+          }else if (response.status == 204) {
+            setTimeout(() => {
+              this.$router.history.push({name: 'CompanyList'});
+            })
           }
         })
         .catch(() => {
-          this.$awn.alert("Failed!");
         })
         .finally(() => {
           this.loading = false;

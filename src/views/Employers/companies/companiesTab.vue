@@ -99,7 +99,7 @@
 export default {
 name: "companiesTab",
   components: {
-    CompanyPostedList: () => import('./CompanyList'),
+    CompanyPostedList: () => import('./CompanyTabs/AllCompanyList'),
   },
   data: vm => ({
     tabs: null,

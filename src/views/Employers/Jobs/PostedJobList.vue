@@ -3,12 +3,18 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" md="12">
-          <v-card flat class="ja__card pt-0">
+          <v-card flat class="ja__card pa-6">
             <!--********** Job activities start **************-->
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
                   <p class="jaif">Total Job: <span>{{totalPostedJobs}}</span></p>
+                </v-col>
+                <v-col cols="12" lg="8" class="text-right">
+                  <v-btn link to="/add-job" color="success">
+                    <v-icon>mdi-plus</v-icon>
+                    Post a new Job
+                  </v-btn>
                 </v-col>
               </v-row>
             </div>
@@ -121,6 +127,7 @@ export default {
   },
   methods: {
     getPostedJobs(){
+      this.loading = true
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",

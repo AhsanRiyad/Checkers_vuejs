@@ -10,12 +10,6 @@
                 <v-col cols="12" lg="4">
                   <h2 class="jaif">Total Companies: <span>{{ totalCompanies }}</span></h2>
                 </v-col>
-                <v-col cols="12" lg="8" class="text-right">
-                  <v-btn link to="/add-companies" color="success">
-                    <v-icon>mdi-plus</v-icon>
-                    Create a Company
-                  </v-btn>
-                </v-col>
               </v-row>
             </div>
             <!--********** Job activities end **************-->
@@ -123,7 +117,7 @@
 import axios from "axios";
 
 export default {
-  name: "CompanyList",
+name: "AllCompanyList",
   data: () => {
     return {
       companies: [],

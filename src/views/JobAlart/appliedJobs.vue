@@ -171,7 +171,7 @@
                   </td>
                   <td class="text-center">
                     <!-- Interview call icon start-->
-                    <v-tooltip top v-if="jobDetails.inter_view_call">
+                    <v-tooltip top v-if="job.inter_view_call">
                       <template v-slot:activator="{ on, attrs }">
                         <v-icon class="interactn c-green" rounded
                                 dark
@@ -193,7 +193,7 @@
                     </v-tooltip>
                     <!-- Interview call icon end-->
                     <!-- shortlisted icon start-->
-                    <v-tooltip top v-if="jobDetails.short_listed">
+                    <v-tooltip top v-if="job.short_listed">
                       <template v-slot:activator="{ on, attrs }">
                         <v-icon class="interactn c-green" icon
                                 color="primary"
@@ -265,7 +265,7 @@
 <!--                 </div>-->
                </div>
                 <h4 class="mb-3">Job Description</h4>
-                <p v-if="jobDetails.job_description">{{ jobDetails.job_description }}</p>
+                <p v-html="jobDetails.job_description"></p>
               </div>
             </job-alert-modal>
             <!-- job apply modal ends-->

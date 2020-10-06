@@ -21,8 +21,8 @@
            <v-row align="center">
              <v-col cols="12" md="8">
                <v-tabs v-model="tabs">
-                 <v-tab>Posted jobs ({{totalJobs}})</v-tab>
-                 <v-tab>Drafted jobs (12)</v-tab>
+                 <v-tab>Posted jobs ({{allJobs && allJobs.length}})</v-tab>
+                 <v-tab>Drafted jobs ({{draftedJobs && draftedJobs.length}})</v-tab>
                  <v-tab>Archived jobs (12)</v-tab>
                </v-tabs>
              </v-col>
@@ -83,7 +83,6 @@ export default {
     allJobs: Array,
     draftedJobs: Array,
     companies: Array,
-    totalJobs: Function
   },
   components: {
     JobPostedList: () => import('../Jobs/JobsTab/AllJobList'),
@@ -97,12 +96,7 @@ export default {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   }),
   computed: {
-    // computedDateFormatted () {
-    //   return this.formatDate(this.dates.join(' ~ '))
-    // },
-    // dateRangeText() {
-    //   return this.dates.join(' ~ ')
-    // },
+
   },
   // watch: {
   //   date (val) {

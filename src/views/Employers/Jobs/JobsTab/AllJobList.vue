@@ -8,13 +8,16 @@
             <div class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
-                  <h2 class="jaif" :total-jobs="totalJobs">Total Job: <span>{{ totalJobs }}</span></h2>
+                  <h2 class="jaif">Total Job: <span>{{ totalJobs }}</span></h2>
                 </v-col>
               </v-row>
             </div>
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
-            <div style="overflow-x: auto !important;">
+            <div v-if="!allJobs.length" class="text-center">
+              <h1>Job is not Available</h1>
+            </div>
+            <div v-else style="overflow-x: auto !important;">
               <table>
                 <thead>
                 <tr class="panel-heading">
@@ -74,13 +77,14 @@
                 </tr>
                 </tbody>
               </table>
+              <!--********** pagination start **************-->
+              <div class="pagination">
+                <v-pagination v-model="pageNo" :length="length"></v-pagination>
+              </div>
+              <!--********** pagination end **************-->
             </div>
             <!--********** Job applied table end **************-->
-            <!--********** pagination start **************-->
-            <div class="pagination">
-              <v-pagination v-model="pageNo" :length="length"></v-pagination>
-            </div>
-            <!--********** pagination end **************-->
+
           </v-card>
         </v-col>
       </v-row>
@@ -116,6 +120,7 @@ export default {
       this.$router.push({name: 'JobDetails', params: {id: jobId}})
     },
     getPostedJobs() {
+      this.loading = true
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",

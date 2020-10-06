@@ -14,7 +14,10 @@
             </div>
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
-            <div style="overflow-x: auto !important;">
+            <div v-if="!draftedJobs.length" class="text-center">
+              <h1>Job is not Available</h1>
+            </div>
+            <div v-else style="overflow-x: auto !important;">
               <table>
                 <thead>
                 <tr class="panel-heading">
@@ -72,13 +75,13 @@
                 </tr>
                 </tbody>
               </table>
+              <!--********** pagination start **************-->
+              <div class="pagination">
+                <v-pagination v-model="pageNo" :length="length"></v-pagination>
+              </div>
+              <!--********** pagination end **************-->
             </div>
             <!--********** Job applied table end **************-->
-            <!--********** pagination start **************-->
-            <div class="pagination">
-              <v-pagination v-model="pageNo" :length="length"></v-pagination>
-            </div>
-            <!--********** pagination end **************-->
           </v-card>
         </v-col>
       </v-row>
