@@ -7,12 +7,12 @@
             @click.stop="applicantShortListed"
             small
             class="ml-1 mr-1"
-            color="primary"
-            >shortlisted</v-btn
+            :color="isShortlisted ? 'success' : 'error'"
+            >{{ isShortlisted ? "Shortlisted" : "Not Shortlisted" }}</v-btn
           >
-          <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>
+          <!-- <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn> -->
           <v-btn
-              @click.stop.prevent="dialog = true, dialogShowing = false"
+            @click.stop.prevent="(dialog = true), (dialogShowing = false)"
             small
             class="ml-1 mr-1"
             color="primary"
@@ -190,66 +190,54 @@
 
       <!-- section-9 ends -->
     </div>
-    <v-dialog v-model="dialog"
-              absolute
-              max-width="400"
-              persistent>
+    <v-dialog v-model="dialog" absolute max-width="400" persistent>
       <div>
         <template>
-          <v-card
-              class="mx-auto"
-              style="max-width: 500px;"
-          >
-            <v-toolbar
-                color="deep-purple accent-4"
-                cards
-                dark
-                flat
-            >
+          <v-card class="mx-auto" style="max-width: 500px">
+            <v-toolbar color="deep-purple accent-4" cards dark flat>
               <v-btn icon>
-                <v-icon @click.stop.prevent="dialog = false">mdi-arrow-left</v-icon>
+                <v-icon @click.stop.prevent="dialog = false"
+                  >mdi-arrow-left</v-icon
+                >
               </v-btn>
               <v-card-title class="title font-weight-regular">
                 Interview Call Info
               </v-card-title>
             </v-toolbar>
-            <v-form
-                ref="form"
-                class="pa-4 pt-6"
-            >
+            <v-form ref="form" class="pa-4 pt-6">
               <v-text-field
-                  v-model="company_email"
-                  :rules="[rules.email]"
-                  filled
-                  color="deep-purple"
-                  label="Email address"
-                  type="email"
+                v-model="company_email"
+                :rules="[rules.email]"
+                filled
+                color="deep-purple"
+                label="Email address"
+                type="email"
               ></v-text-field>
               <v-textarea
-                  v-model="interview_message"
-                  auto-grow
-                  filled
-                  :rules="[v => (v || '' ).length <= 160 || 'Description must be 160 characters or less', rules.required]"
-                  color="deep-purple"
-                  label="Interview Message"
-                  rows="4"
+                v-model="interview_message"
+                auto-grow
+                filled
+                :rules="[
+                  (v) =>
+                    (v || '').length <= 160 ||
+                    'Description must be 160 characters or less',
+                  rules.required,
+                ]"
+                color="deep-purple"
+                label="Interview Message"
+                rows="4"
               ></v-textarea>
             </v-form>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn
-                  text
-                  @click="$refs.form.reset()"
-              >
-                Clear
-              </v-btn>
+              <v-btn text @click="$refs.form.reset()"> Clear </v-btn>
               <v-spacer></v-spacer>
               <v-btn
-                  :loading="isLoading"
-                  @click="applicantInterviewCall"
-                  class="white--text"
-                  color="deep-purple accent-4"
-                  depressed
+                :loading="isLoading"
+                @click="applicantInterviewCall"
+                class="white--text"
+                color="deep-purple accent-4"
+                depressed
               >
                 interview call
               </v-btn>
@@ -275,21 +263,25 @@ export default {
     experiences: Array,
     applicntInfo: Object,
     exams: Object,
-    userId:String,
+    userId: String,
     dialogShowing: Boolean,
   },
   data() {
     return {
       agreement: false,
-      bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
+      bio:
+        "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts",
       dialog: false,
-      company_email: '',
-      interview_message: '',
+      company_email: "",
+      interview_message: "",
       form: false,
       isLoading: false,
+      isShortlisted: true,
       rules: {
-        email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
-        required: v => !!v || 'This field is required & Description must be 160 characters or less',
+        email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
+        required: (v) =>
+          !!v ||
+          "This field is required & Description must be 160 characters or less",
       },
     };
   },
@@ -313,9 +305,9 @@ export default {
       if (event) {
         event.preventDefault();
       }
-      this.$store.commit('jobId')
+      // this.$store.commit("jobId");
       // let appliedJobId = this.$store.state.jobId.id
-      console.log("jobssssss ideeeeeeeee", this.$store.state)
+      console.log("jobssssss ideeeeeeeee", this.$store.state);
       this.$store
         .dispatch("callApi", {
           url: `jobs/${this.$store.getters.job}/${this.userId}/shortlist`,
@@ -325,6 +317,7 @@ export default {
         .then((response) => {
           console.log("applicant shortlisted response..", response);
           // this.companyId = response.company.id;
+          this.isShortlisted = response.short_list;
           this.$awn.success("Updated Successfully!");
         })
         .catch(() => {
@@ -337,18 +330,18 @@ export default {
       if (event) {
         event.preventDefault();
       }
-      this.dialogShowing = false
+      this.dialogShowing = false;
       this.$store
         .dispatch("callApi", {
           url: `jobs/${this.$store.getters.job}/${this.userId}/interview-call`,
           method: "put",
           data: {
             company_email: this.company_email,
-            interview_message: this.interview_message
+            interview_message: this.interview_message,
           },
         })
         .then((response) => {
-          this.dialog = true
+          this.dialog = true;
           console.log("applicant shortlisted response..", response);
           // this.companyId = response.company.id;
           this.$awn.success("Updated Successfully!");
@@ -357,9 +350,9 @@ export default {
           this.$awn.alert("Failed!");
           //   this.$awn.alert("Failed");
         })
-      .finally(() => {
-        this.dialog = false
-      });
+        .finally(() => {
+          this.dialog = false;
+        });
     },
   },
 };
