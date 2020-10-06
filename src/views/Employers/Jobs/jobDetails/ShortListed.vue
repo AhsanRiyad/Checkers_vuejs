@@ -1,74 +1,182 @@
 <template>
-  <v-container class="jp">
-    <v-row>
-      <v-col cols="12">
-        <v-card class="ja__card">
-          <div class="chart_top d-flex justify-space-between align-center">
-            <div class="ch_left">
-              <p class="title text-capitalize">overall summary of the hiring process</p>
+  <div class="applicant__list">
+    <v-container>
+      <v-row justify="center">
+        <v-col cols="12" md="12">
+          <v-card flat class="ja__card pt-0">
+            <!--********** Job applied table start **************-->
+            <div style="overflow-x: auto !important">
+              <table>
+                <tbody>
+                <v-dialog
+                    v-model="loadingApplicant"
+                    hide-overlay
+                    persistent
+                    width="300"
+                >
+                  <v-card color="primary" dark>
+                    <v-card-text>
+                      Loading Data...
+                      <v-progress-linear
+                          indeterminate
+                          color="white"
+                          class="mb-0"
+                      ></v-progress-linear>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
+                <tr v-if="!applicant.length">
+                  <td
+                      class="text-center"
+                      style="color: #0d47a1; font-size: 25px"
+                  >
+                    No One Applied in this job
+                  </td>
+                </tr>
+                <tr v-for="app in applicant" :key="app.id">
+                  <td class="text-center">
+                    <p class="font-weight-bold"></p>
+                  </td>
+                  <td
+                      style="width: 10%"
+                      v-for="photo in app.biodata"
+                      :key="photo.id"
+                  >
+                    <v-avatar size="85">
+                      <img
+                          :src="$store.getters.imageUrl + photo.photo"
+                          :alt="photo.full_name"
+                      />
+                    </v-avatar>
+                  </td>
+                  <td>
+                    <div v-for="bio in app.biodata" :key="bio.id">
+                      <p class="mb-4">
+                        <a
+                            :loading="dialogShowing"
+                            @click="showApplicantResume(bio.userId)"
+                            style="font-size: 20px; text-transform: capitalize"
+                        >{{ bio.full_name }} </a
+                        ><span class="age_outline font-weight-bold">
+                            Age: {{ bio.age }}</span
+                      >
+                      </p>
+                      <p>{{ bio.address }}</p>
+                    </div>
+                    <div v-for="qua in app.qualification" :key="qua.id">
+                      <p>{{ qua.institute }}</p>
+                      <p>
+                        <span>{{ qua.exam_title }}</span> in
+                        <span>{{ qua.subject }}</span>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div v-for="ex in app.experiences" :key="ex.id">
+                      <p class="font-weight-bold">{{ ex.company_name }}</p>
+                      <p>{{ ex.job_title }}</p>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td>
+                    <p>
+                        <span class="mr-2"
+                        ><v-icon small>mdi-briefcase</v-icon></span
+                        ><span
+                    >{{ app.total_experice.years }}
+                          <span class="font-weight-bold ml-1 mr-1">Years</span>
+                          {{ app.total_experice.months }}
+                          <span class="font-weight-bold ml-1 mr-1">Month</span>
+                          {{ app.total_experice.days }}
+                          <span class="font-weight-bold ml-1 mr-1"
+                          >Days</span
+                          ></span
+                    >
+                    </p>
+                    <div v-for="apear in app.job_appliers" :key="apear.id">
+                      <p>
+                          <span class="mr-2">{{ apear.currency_code }}</span
+                          >{{ apear.expected_salary }}
+                      </p>
+                      <p>
+                          <span class="mr-2 font-weight-bold">Applied On: </span
+                          ><span>{{ getHumanDate(apear.created_at) }}</span>
+                      </p>
+                    </div>
+                  </td>
+                  <td class="action text-center">
+                    <v-btn class="interactn c-grey" color="success" icon>
+                      <i class="material-icons">check</i>
+                    </v-btn>
+                    <v-btn
+                        class="interactn mr-2 ml-1 mr-1 c-green"
+                        color="error"
+                        icon
+                    >
+                      <i class="material-icons">close</i>
+                    </v-btn>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="ch_right d-flex align-center">
-              <p class="text-capitalize">recruitment status: <span class="font-weight-bold">processing</span></p>
-              <v-btn depressed class="text-capitalize mr-3 ml-3">
-                <v-icon small>mdi-google-analytics</v-icon>
-                job analytics
-              </v-btn>
-              <v-btn depressed class="text-capitalize">
-                <v-icon small>mdi-printer</v-icon>
-              </v-btn>
+            <!--********** Job applied table end **************-->
+            <!-- job apply modal starts-->
+            <v-dialog v-model="dialogShowing" width="900">
+              <applicant-resume-modal
+                  :user-id="userId"
+                  v-show="dialogShowing"
+                  :applicantInfo="applicntInfo"
+                  :skills="skills"
+                  :exmas="exams"
+                  :qualifications="qualification"
+                  :experiences="experiences"
+                  :applicantResume="applicantsResume"
+                  :applicant-biodata="applicantBiodata"
+              />
+            </v-dialog>
+
+            <!-- job apply modal ends-->
+            <!--********** pagination start **************-->
+            <div class="pagination">
+              <ul class="d-flex pg-list">
+                <li>
+                  <v-btn class="pg-btn" small text>
+                    <v-icon>mdi-chevron-double-left</v-icon>
+                  </v-btn>
+                </li>
+                <li>
+                  <v-btn class="pg-btn" small text>1</v-btn>
+                </li>
+                <li>
+                  <v-btn class="pg-btn" small text>2</v-btn>
+                </li>
+                <li>
+                  <v-btn class="pg-btn" small text>3</v-btn>
+                </li>
+                <li>
+                  <v-btn class="pg-btn" small text>..124</v-btn>
+                </li>
+                <li>
+                  <v-btn class="pg-btn" small text>
+                    <v-icon>mdi-chevron-double-right</v-icon>
+                  </v-btn>
+                </li>
+              </ul>
             </div>
-          </div>
-          <!-- statistics start -->
-          <div class="jp_summary_cards d-flex justify-space-between">
-            <v-card>
-              <v-card-title class="text-capitalize">total applicants</v-card-title>
-              <div class="card_bottom d-flex justify-space-between align-center">
-                <h1 class="font-weight-bold">992</h1>
-                <v-icon>mdi-account-group</v-icon>
-              </div>
-            </v-card>
-            <v-card>
-              <v-card-title class="text-capitalize">recruitment steps</v-card-title>
-              <div class="card_bottom d-flex justify-space-between align-center">
-                <h1 class="font-weight-bold">992</h1>
-                <v-icon>mdi-printer</v-icon>
-              </div>
-            </v-card>
-            <v-card>
-              <v-card-title class="text-capitalize">total schedules</v-card-title>
-              <div class="card_bottom d-flex justify-space-between align-center">
-                <h1 class="font-weight-bold">992</h1>
-                <v-icon>mdi-calendar-month</v-icon>
-              </div>
-            </v-card>
-            <v-card>
-              <v-card-title class="text-capitalize">total invitations</v-card-title>
-              <div class="card_bottom d-flex justify-space-between align-center">
-                <h1 class="font-weight-bold">992</h1>
-                <v-icon>mdi-email-newsletter</v-icon>
-              </div>
-            </v-card>
-            <v-card>
-              <v-card-title class="text-capitalize">hired</v-card-title>
-              <div class="card_bottom d-flex justify-space-between align-center">
-                <h1 class="font-weight-bold">992</h1>
-                <v-icon>mdi-account-check</v-icon>
-              </div>
-            </v-card>
-          </div>
-          <!-- statistics end -->
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+            <!--********** pagination end **************-->
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
+import "../../../../sass/employers/_jobs.scss";
+import "../../../../sass/job-alart/ResumeLayout/_default.scss";
 export default {
   name: "ShortListed",
 }
 </script>
 
-<style scoped>
-
-</style>

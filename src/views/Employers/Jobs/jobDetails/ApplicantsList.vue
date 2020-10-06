@@ -210,12 +210,6 @@ export default {
     };
   },
   created() {},
-  mounted() {
-    this.$nextTick().then(function () {
-      // DOM updated
-      // console.log("jobsssssssssssssssssssssss id ", this.$store.getters.jobId);
-    });
-  },
   methods: {
     getHumanDate: function (date) {
       return moment(date, "YYYY-MM-DD").format("MMM Do YY");

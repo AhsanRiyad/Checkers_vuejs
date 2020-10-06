@@ -146,6 +146,7 @@ export default {
       biodata: [],
       totalExp: {},
       pageNo: 1,
+      shortList: 1,
       length: 0,
       jobs: {},
       jobId: "",
@@ -175,6 +176,7 @@ export default {
         method: "get",
         params: {
           page: this.pageNo,
+          short_list : this.shortList
         },
         data: {},
         headers,
