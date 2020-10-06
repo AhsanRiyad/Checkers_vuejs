@@ -55,7 +55,7 @@
                     <div v-for="fac in jobs.job_facilities" :key="fac.id"><p v-html="fac.text"></p></div>
                   </div>
                   <div class="job_faci mt-3 text-center">
-                    <h2>Apply Instruction</h2>
+                    <h2>Read Before Apply</h2>
                     <div v-if="jobs.apply_instruction"><p v-html="jobs.apply_instruction"></p></div>
                   </div>
                 </div>

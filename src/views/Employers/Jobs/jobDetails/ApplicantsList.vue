@@ -104,14 +104,15 @@
                         </p>
                       </div>
                     </td>
-                    <td class="action text-center">
-                      <v-btn class="interactn c-grey" color="success" icon>
+                    <td class="action text-center" v-for="apear in app.job_appliers" :key="apear.id">
+                      <v-btn class="interactn c-green" v-if="apear.short_listed" color="success" icon>
                         <i class="material-icons">check</i>
                       </v-btn>
-                      <v-btn
-                        class="interactn mr-2 ml-1 mr-1 c-green"
+                      <v-btn v-else
+                        class="interactn mr-2 ml-1 mr-1 c-red"
                         color="error"
                         icon
+                             style="border: 1px solid red !important;"
                       >
                         <i class="material-icons">close</i>
                       </v-btn>
@@ -207,6 +208,7 @@ export default {
       applicantBiodata: {},
       exams: {},
       applicntInfo: {},
+      shortListed: '',
     };
   },
   created() {},
@@ -238,6 +240,7 @@ export default {
           this.experiences = response.data.experiences;
           this.qualifications = response.data.qualification;
           this.userId = response.data.applicationInfo.user_id;
+          // this.shortListed = response.data.applicationInfo
 
           console.log("bio", response.data.biodata);
           console.log("skills", response.data.skills);

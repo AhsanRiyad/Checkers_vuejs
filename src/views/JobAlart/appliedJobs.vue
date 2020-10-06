@@ -266,6 +266,37 @@
                </div>
                 <h4 class="mb-3">Job Description</h4>
                 <p v-html="jobDetails.job_description"></p>
+                <div class="job_responsibilities mt-3">
+                  <h4>Responsibilities</h4>
+                  <div v-for="jobres in jobDetails.job_responsibilities" :key="jobres.id">
+                    <p v-html="jobres.text"></p>
+                  </div>
+                </div>
+                <div class="edu_req mt-3">
+                  <h4>Educational Requirements</h4>
+                  <div v-for="edu in jobDetails.job_education_req" :key="edu.id"><p v-html="edu.degre_title"></p></div>
+                </div>
+                <div class="edu_req mt-3">
+                  <h4>Skills</h4>
+                  <div v-for="(skill, i) in jobDetails.skills" :key="skill.id">
+                    <ul>
+                      <li>{{i+1}}. <span class="ml-1">{{skill.title}}</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="job_description mt-3">
+                  <h4>Salary</h4>
+                  <p v-if="jobDetails.negotiable">Negotiable</p>
+                  <p v-else><span class="mr-1">{{jobDetails.currency_code}}</span><span>{{jobDetails.min_salary_range}}</span> - <span>{{jobDetails.max_salary_range}}</span></p>
+                </div>
+                <div class="job_faci mt-4">
+                  <h4>Job Facilities</h4>
+                  <div v-for="fac in jobDetails.job_facilities" :key="fac.id"><p v-html="fac.text"></p></div>
+                </div>
+                <div class="job_faci mt-3 text-center">
+                  <h2>Read Before Apply</h2>
+                  <div v-if="jobDetails.apply_instruction"><p v-html="jobDetails.apply_instruction"></p></div>
+                </div>
               </div>
             </job-alert-modal>
             <!-- job apply modal ends-->
@@ -299,7 +330,7 @@ export default {
     pageNo: 1,
     jobId: "",
     length: 0,
-    modalSkeleton: false,
+    modalSkeleton: true,
     modalStyle: {
       width: "50%"
     }
@@ -374,8 +405,6 @@ export default {
     showJobDetails(id) {
       console.log("job id", id)
       this.showModal = true
-      this.modalSkeleton = true
-
       // this.jobId = id
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
@@ -392,7 +421,7 @@ export default {
           .then((response) => {
             console.log("Job Details list in the", response.data.jobs);
             this.jobDetails = response.data.jobs;
-            this.modalSkeleton = false
+            this.modalSkeleton = true
           })
           .catch((error) => {
             this.$awn.alert("Failed");
