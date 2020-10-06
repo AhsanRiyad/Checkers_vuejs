@@ -69,6 +69,7 @@ export const store = new Vuex.Store({
 		jobDetails: state => state.jobDetails,
 		jobDetailsSearch: state => state.jobDetailsSearch,
 		job: state => state.job,
+		apiBase: state => state.apiBase,
 	},
 	actions: {
 		callApi: (context, info) => {

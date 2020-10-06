@@ -325,13 +325,16 @@ import VueCookies from 'vue-cookies';
 
 router.beforeEach((to, from, next) => {
   // ...
-  if (VueCookies.get('is_company')) {
+  if (VueCookies.get('is_company') == true) {
+    console.log("is compnay", VueCookies.get('is_company'));
+
     if (to.name == "resume" || to.name == "biodata" || to.name == "workExperience" || to.name == "education" || to.name == "appliedJobs") {
       next({ name: 'search' });
       return;
     }
     next();
   } else {
+    console.log("is not compnay", VueCookies.get('is_company'));
     if (to.name == "PostedJobList" || to.name == "recruiter" || to.name == "EmployersPanel" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails"
       || to.name == "JobDetails"
     ) {

@@ -4,7 +4,16 @@
       <!-- section-1 starts -->
       <div class="defaultResume-title">
         <div class="dr-main-text-div">
-          <p class="defaultResume-title-text">{{ this.resume.payload.biodata.full_name }}</p>
+          <v-btn
+            @click.stop="downloadResume"
+            small
+            color="success"
+            style="margin-bottom: 20px"
+            >Download</v-btn
+          >
+          <p class="defaultResume-title-text">
+            {{ this.resume.payload.biodata.full_name }}
+          </p>
           <p>Mobile: {{ this.resume.payload.biodata.mobile_number }}</p>
           <p>Email: {{ this.resume.payload.biodata.contact_email }}</p>
         </div>
@@ -12,7 +21,9 @@
         <div class="dr-title-photo">
           <v-avatar size="150">
             <img
-              :src=" this.$store.getters.imageUrl + this.resume.payload.biodata.photo"
+              :src="
+                this.$store.getters.imageUrl + this.resume.payload.biodata.photo
+              "
               alt="John"
             />
           </v-avatar>
@@ -38,9 +49,10 @@
       <div class="dr-career-objective">
         <p class="dr-title-all">Employement History:</p>
 
-        <p
-          class="years-of-experience"
-        >Total year of experiences: {{ this.resume.payload.userTotalExperiences.years }}</p>
+        <p class="years-of-experience">
+          Total year of experiences:
+          {{ this.resume.payload.userTotalExperiences.years }}
+        </p>
       </div>
       <!-- section-4 ends -->
 
@@ -63,7 +75,11 @@
           </div>
         </div>
 
-        <div class="dr-academic-c-info" v-for="n in this.resume.payload.experiences" :key="n.id">
+        <div
+          class="dr-academic-c-info"
+          v-for="n in this.resume.payload.experiences"
+          :key="n.id"
+        >
           <div class="dr-academic-c-heading-item">
             <p>{{ n.job_title }}</p>
           </div>
@@ -102,7 +118,11 @@
           </div>
         </div>
 
-        <div class="dr-academic-q-info" v-for="n in this.resume.payload.qualification" :key="n.id">
+        <div
+          class="dr-academic-q-info"
+          v-for="n in this.resume.payload.qualification"
+          :key="n.id"
+        >
           <div class="dr-academic-q-heading-item">
             <p v-text="n.exam.title"></p>
           </div>
@@ -136,14 +156,16 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Looking For</div>
-        <div
-          class="dr-application-info-2"
-        >: {{ this.resume.payload.applicationInfo.job_categroy_title }}</div>
+        <div class="dr-application-info-2">
+          : {{ this.resume.payload.applicationInfo.job_categroy_title }}
+        </div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Avalable For</div>
-        <div class="dr-application-info-2">: {{ this.resume.payload.applicationInfo.available_for }}</div>
+        <div class="dr-application-info-2">
+          : {{ this.resume.payload.applicationInfo.available_for }}
+        </div>
       </div>
       <!-- section-8 ends -->
 
@@ -154,12 +176,16 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Address</div>
-        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.address }}</div>
+        <div class="dr-application-info-2">
+          : {{ this.resume.payload.biodata.address }}
+        </div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">City</div>
-        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.city }}</div>
+        <div class="dr-application-info-2">
+          : {{ this.resume.payload.biodata.city }}
+        </div>
       </div>
 
       <!-- section-9 ends -->
@@ -174,14 +200,56 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    downloadResume() {
+      console.log("download resume");
+      //file download
+      this.$store
+        .dispatch("callApi", {
+          url: `resume/applicant/${this.resume.payload.applicationInfo.user_id}`,
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log("login image", response.file);
+          // this.$refs.form.reset();
+          // saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          let url = `http://3.17.234.251/jobsresume/resumes/public/${
+            response.file
+          }?access_token=${this.$cookies.get("accessToken")}`;
+          // const link = document.createElement("a");
+          // link.href = url;
+          // link.setAttribute("download", "file.pdf"); //or any other extension
+          // document.body.appendChild(link);
+          // link.click();
+
+          // window.open(url, "_blank");
+
+          var redirectWindow = window.open(url, "_blank");
+          redirectWindow.location;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          // this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          //  this.tableLoading = false;
+        });
+    },
+  },
   computed: {
     resume() {
       return this.$store.getters.resume;
     },
   },
   mounted() {
-    console.log("resume default ..... in the design", this.resume.payload);
+    console.log(
+      "resume default ..... in the design",
+      this.resume.payload.applicationInfo
+    );
   },
 };
 </script>
