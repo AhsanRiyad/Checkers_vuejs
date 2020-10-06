@@ -498,6 +498,8 @@ export default {
           console.log("this is  ", this.$store.getters.biodata);
           this.$store.commit("resume", response.data);
 
+          console.log("resume data...", this.$store.getters.resume);
+
           //  this.$refs.form.reset();
           //  saves the items from the database in the table
           //  console.log(response);
