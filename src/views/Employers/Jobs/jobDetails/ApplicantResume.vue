@@ -184,8 +184,8 @@ export default {
     qualifications: Array,
     experiences: Array,
     applicntInfo: Object,
-    userId: String,
-    jobId: String,
+    applicantShortListed: Function,
+    applicantInterviewCall: Function,
     exams: Object,
     dialogShowing: {
       type: Boolean,
@@ -196,6 +196,10 @@ export default {
     return{
       dialog: false,
     }
+  },
+  mounted() {
+    this.applicantShortListed()
+    this.applicantInterviewCall()
   },
   computed: {
     dialogVisible: {
@@ -214,6 +218,9 @@ export default {
       if (event) {
         event.preventDefault();
       }
+      this.$store.commit('jobId')
+      // let appliedJobId = this.$store.state.jobId.id
+      console.log("jobssssss ideeeeeeeee", this.$store.state)
       this.$store
           .dispatch("callApi", {
             url: `jobs/${this.jobId}/${this.userId}/shortlist`,
@@ -229,7 +236,7 @@ export default {
             this.$awn.alert("Failed!");
             //   this.$awn.alert("Failed");
           })
-  },
+    },
     applicantInterviewCall(event){
       if (event) {
         event.preventDefault();

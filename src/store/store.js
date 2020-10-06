@@ -17,13 +17,13 @@ export const store = new Vuex.Store({
 		ax: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
 			baseURL: "http://13.58.205.236:8080/",
-			// withCredentials: true, 
+			// withCredentials: true,
 			// crossDomain: true
 		}),
 		upload: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
 			baseURL: "http://f1.redspice.ae/public/api/",
-			// withCredentials: true, 
+			// withCredentials: true,
 			// crossDomain: true
 		}),
 		isLoggedIn: false,
@@ -37,9 +37,11 @@ export const store = new Vuex.Store({
 		jobExpirity: true,
 		jobDetails: {},
 		jobDetailsSearch: {},
+		appliedJobId: ''
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
+		appliedJobId(state, payload) { state.appliedJobId = payload; },
 		biodata(state, payload) { state.biodata = payload; },
 		resume(state, payload) { state.resume = { ...state.resume, payload } },
 		resumeNextbtn(state, payload) { state.resumeNextbtn = payload },
@@ -53,6 +55,7 @@ export const store = new Vuex.Store({
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
+		appliedJobId: state => state.appliedJobId,
 		jobExpirity: state => state.jobExpirity,
 		biodata: state => state.biodata,
 		resume: state => state.resume,

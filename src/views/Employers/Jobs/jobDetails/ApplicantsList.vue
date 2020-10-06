@@ -77,7 +77,7 @@
             <!--********** Job applied table end **************-->
             <!-- job apply modal starts-->
             <v-dialog v-model="dialogShowing" width="900">
-              <applicant-resume-modal :user-id="userId" v-show="dialogShowing" :applicantInfo="applicntInfo" :skills="skills" :exmas="exams" :qualifications="qualification" :experiences="experiences" :applicantResume="applicantsResume"
+              <applicant-resume-modal :method="applicantShortListed" :applicant-interview-call="applicantInterviewCall" v-show="dialogShowing" :applicantInfo="applicntInfo" :skills="skills" :exmas="exams" :qualifications="qualification" :experiences="experiences" :applicantResume="applicantsResume"
                                       :applicant-biodata="applicantBiodata"/>
             </v-dialog>
 
@@ -209,7 +209,8 @@ export default {
             this.loading = false
 
           });
-    }
+    },
+
   }
 }
 </script>
