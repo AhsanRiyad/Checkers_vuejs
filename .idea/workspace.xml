@@ -21,11 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_appliedJobs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/JobPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/JobPreview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +205,7 @@
       <workItem from="1601440356233" duration="24130000" />
       <workItem from="1601523961227" duration="23268000" />
       <workItem from="1601873796340" duration="23726000" />
-      <workItem from="1601960771467" duration="25023000" />
+      <workItem from="1601960771467" duration="25972000" />
     </task>
     <servers />
   </component>
