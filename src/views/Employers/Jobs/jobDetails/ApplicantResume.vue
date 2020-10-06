@@ -2,19 +2,35 @@
   <div class="rd-main-card">
     <div class="default-resume-main-card applicant_resume">
       <div class="top-section d-flex justify-space-between align-center">
-       <div class="action_btn">
-         <v-btn @click.stop="applicantShortListed" small class="ml-1 mr-1" color="primary">shortlisted</v-btn>
-         <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>
-         <v-btn @click="applicantInterviewCall" small class="ml-1 mr-1" color="primary">Interview Call</v-btn>
-       </div>
+        <div class="action_btn">
+          <v-btn
+            @click.stop="applicantShortListed"
+            small
+            class="ml-1 mr-1"
+            color="primary"
+            >shortlisted</v-btn
+          >
+          <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>
+          <v-btn
+            @click="applicantInterviewCall"
+            small
+            class="ml-1 mr-1"
+            color="primary"
+            >Interview Call</v-btn
+          >
+        </div>
         <div class="close_btn">
-          <v-btn icon @click="dialogShowing = false"><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn>
+          <v-btn icon @click="dialogShowing = false"
+            ><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn
+          >
         </div>
       </div>
       <!-- section-1 starts -->
       <div class="defaultResume-title">
         <div class="dr-main-text-div">
-          <p class="defaultResume-title-text">{{ applicantBiodata.full_name }}</p>
+          <p class="defaultResume-title-text">
+            {{ applicantBiodata.full_name }}
+          </p>
           <p>Mobile: {{ applicantBiodata.mobile_number }}</p>
           <p>Email: {{ applicantBiodata.contact_email }}</p>
         </div>
@@ -22,8 +38,8 @@
         <div class="dr-title-photo">
           <v-avatar size="150">
             <img
-                :src=" this.$store.getters.imageUrl + applicantBiodata.photo"
-                alt="John"
+              :src="this.$store.getters.imageUrl + applicantBiodata.photo"
+              alt="John"
             />
           </v-avatar>
         </div>
@@ -48,7 +64,9 @@
       <div class="dr-career-objective">
         <p class="dr-title-all">Employement History:</p>
 
-        <p class="years-of-experience">Total year of experiences: {{ applicantResume.years }}</p>
+        <p class="years-of-experience">
+          Total year of experiences: {{ applicantResume.years }}
+        </p>
       </div>
       <!-- section-4 ends -->
 
@@ -160,7 +178,9 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Address</div>
-        <div class="dr-application-info-2">: {{ applicantBiodata.address }}</div>
+        <div class="dr-application-info-2">
+          : {{ applicantBiodata.address }}
+        </div>
       </div>
 
       <div class="dr-application-info">
@@ -169,7 +189,6 @@
       </div>
 
       <!-- section-9 ends -->
-
     </div>
   </div>
 </template>
@@ -189,72 +208,75 @@ export default {
     exams: Object,
     dialogShowing: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
-    return{
+    return {
       dialog: false,
-    }
+    };
   },
   computed: {
     dialogVisible: {
       get: function () {
-        return this.dialogShowing
+        return this.dialogShowing;
       },
       set: function (value) {
         if (!value) {
           this.$emit("close");
         }
       },
-    }
+    },
+  },
+  mounted() {
+    console.log("job id in app resume ", this.$store.getters.job);
   },
   methods: {
-    applicantShortListed(event){
+    applicantShortListed(event) {
       if (event) {
         event.preventDefault();
       }
       this.$store
-          .dispatch("callApi", {
-            url: `jobs/${this.jobId}/${this.userId}/shortlist`,
-            method: "put",
-            data: {},
-          })
-          .then((response) => {
-            console.log("applicant shortlisted response..", response);
-            // this.companyId = response.company.id;
-            this.$awn.success("Updated Successfully!");
-          })
-          .catch(() => {
-            this.$awn.alert("Failed!");
-            //   this.$awn.alert("Failed");
-          })
+        .dispatch("callApi", {
+          url: `jobs/${this.$store.getters.job}/${this.userId}/shortlist`,
+          method: "put",
+          data: {},
+        })
+        .then((response) => {
+          console.log("applicant shortlisted response..", response);
+          // this.companyId = response.company.id;
+          this.$awn.success("Updated Successfully!");
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        });
+    },
+    applicantInterviewCall(event) {
+      if (event) {
+        event.preventDefault();
+      }
+      this.$store
+        .dispatch("callApi", {
+          url: `jobs/${this.$store.getters.job}/${this.userId}/interview-call`,
+          method: "put",
+          data: {},
+        })
+        .then((response) => {
+          console.log("applicant shortlisted response..", response);
+          // this.companyId = response.company.id;
+          this.$awn.success("Updated Successfully!");
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        });
+    },
   },
-    applicantInterviewCall(event){
-      if (event) {
-        event.preventDefault();
-      }
-      this.$store
-          .dispatch("callApi", {
-            url: `jobs/${this.jobId}/${this.userId}/interview-call`,
-            method: "put",
-            data: {},
-          })
-          .then((response) => {
-            console.log("applicant shortlisted response..", response);
-            // this.companyId = response.company.id;
-            this.$awn.success("Updated Successfully!");
-          })
-          .catch(() => {
-            this.$awn.alert("Failed!");
-            //   this.$awn.alert("Failed");
-          })
-    }
-}
-}
+};
 </script>
 <style>
-.top-section{
+.top-section {
   position: sticky;
   top: 0;
   z-index: 999;
@@ -264,7 +286,7 @@ export default {
   width: 100%;
   margin: 0 auto;
 }
-.applicant_resume{
+.applicant_resume {
   width: 100% !important;
   margin: 0 auto;
 }

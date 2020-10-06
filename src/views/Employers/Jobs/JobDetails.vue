@@ -33,13 +33,15 @@
                 <p class="jd_title">job type</p>
                 <div class="jd_status">
                   <v-icon size="20">description</v-icon>
-                  <span>Stand Out</span></div>
+                  <span>Stand Out</span>
+                </div>
               </li>
               <li class="jd_list">
                 <p class="jd_title">published on</p>
                 <div class="jd_status">
                   <v-icon size="20">calendar_today</v-icon>
-                  <span>05 September 2020</span></div>
+                  <span>05 September 2020</span>
+                </div>
               </li>
             </ul>
             <ul class="d-flex jd_border jd_right_card">
@@ -65,7 +67,9 @@
             <v-row align="center">
               <v-col cols="12" md="8">
                 <v-tabs v-model="tabs">
-                  <v-tab class="job_tab">Applicants ({{ totalApplicants }})</v-tab>
+                  <v-tab class="job_tab"
+                    >Applicants ({{ totalApplicants }})</v-tab
+                  >
                   <v-tab class="job_tab">Shortlisted</v-tab>
                   <v-tab class="job_tab">Job Preview</v-tab>
                 </v-tabs>
@@ -73,17 +77,22 @@
               <v-col cols="12" md="4">
                 <div class="tab-right_side d-flex">
                   <v-text-field
-                      dense
-                      class="mx-4"
-                      flat
-                      hide-details
-                      label="Search job by title"
-                      append-icon="search"
-                      solo-inverted
+                    dense
+                    class="mx-4"
+                    flat
+                    hide-details
+                    label="Search job by title"
+                    append-icon="search"
+                    solo-inverted
                   ></v-text-field>
                   <!--                  v-model="dateRangeText"-->
-                  <v-text-field outlined dense placeholder="Date range"
-                                prepend-inner-icon="event" single-line></v-text-field>
+                  <v-text-field
+                    outlined
+                    dense
+                    placeholder="Date range"
+                    prepend-inner-icon="event"
+                    single-line
+                  ></v-text-field>
                 </div>
               </v-col>
             </v-row>
@@ -91,15 +100,23 @@
 
           <v-tabs-items v-model="tabs">
             <v-tab-item>
-              <applicant-list :job-id="jobId" :loading-applicant="loadingApplicant" :page="pageNo" :length="length" :total-exp="totalExp" :biodata="biodata"
-                              :job-appliers="jobAppliers" :experience="experience" :qualification="qualification"
-                              :applicant="applicant"/>
+              <applicant-list
+                :loading-applicant="loadingApplicant"
+                :page="pageNo"
+                :length="length"
+                :total-exp="totalExp"
+                :biodata="biodata"
+                :job-appliers="jobAppliers"
+                :experience="experience"
+                :qualification="qualification"
+                :applicant="applicant"
+              />
             </v-tab-item>
             <v-tab-item>
-              <short-listed/>
+              <short-listed />
             </v-tab-item>
             <v-tab-item>
-              <job-preview :jobs="jobs"/>
+              <job-preview :jobs="jobs" />
             </v-tab-item>
           </v-tabs-items>
         </v-card>
@@ -115,9 +132,9 @@ import moment from "moment";
 export default {
   name: "JobDetails",
   components: {
-    ApplicantList: () => import('../Jobs/jobDetails/ApplicantsList'),
-    ShortListed: () => import('./jobDetails/ShortListed'),
-    JobPreview: () => import('./jobDetails/JobPreview'),
+    ApplicantList: () => import("../Jobs/jobDetails/ApplicantsList"),
+    ShortListed: () => import("./jobDetails/ShortListed"),
+    JobPreview: () => import("./jobDetails/JobPreview"),
   },
   data: () => {
     return {
@@ -131,18 +148,18 @@ export default {
       pageNo: 1,
       length: 0,
       jobs: {},
-      jobId: '',
+      jobId: "",
       jobResponsibility: {},
       loadingApplicant: true,
       imageUrl: "",
-    }
+    };
   },
   created() {
-    this.getApplicantList()
+    this.getApplicantList();
   },
   computed: {
     totalApplicants() {
-      return this.applicant && this.applicant.length
+      return this.applicant && this.applicant.length;
     },
   },
   methods: {
@@ -157,71 +174,67 @@ export default {
         url: `resume/` + this.$route.params.id + `/applicants`,
         method: "get",
         params: {
-          page: this.pageNo
+          page: this.pageNo,
         },
         data: {},
         headers,
       })
-          .then((response) => {
-            console.log("Applicant list", response.data);
-            console.log("job list", response.data.job);
-            console.log("qualification", this.qualification);
-            this.applicant = response.data.data;
-            this.jobs = response.data.job
-            this.jobId = response.data.job.id
-            console.log('job id', this.jobId)
-            for (let i = 0; i < this.applicant.length; i++) {
-              // console.log("qualification index object", this.applicant[i]) // returns [Object object]
-              // console.log("qualification", this.applicant[i].qualification) // returns undefined
-              // console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
-              // console.log("experience", this.experience) // returns undefined
-              // console.log("biodata", this.biodata) // returns undefined
-              // console.log("total exp", this.totalExp) // returns undefined
-              this.qualification = this.applicant[i].qualification
-              this.biodata = this.applicant[i].biodata
-              for(let z = 0; z < this.biodata.length; z++){
-                this.imageUrl = this.biodata[z].photo
-                console.log("Image Url", this.imageUrl)
-              }
-              this.experience = this.applicant[i].experiences
-              this.jobAppliers = this.applicant[i].job_appliers
-              this.totalExp = this.applicant[i].total_experice
+        .then((response) => {
+          console.log("Applicant list", response.data);
+          console.log("job list", response.data.job);
+          console.log("qualification", this.qualification);
+          this.applicant = response.data.data;
+          this.jobs = response.data.job;
+          this.jobId = response.data.job.id;
+          this.$store.commit("job", this.jobId);
+          console.log("job id", this.jobId);
+          for (let i = 0; i < this.applicant.length; i++) {
+            // console.log("qualification index object", this.applicant[i]) // returns [Object object]
+            // console.log("qualification", this.applicant[i].qualification) // returns undefined
+            // console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
+            // console.log("experience", this.experience) // returns undefined
+            // console.log("biodata", this.biodata) // returns undefined
+            // console.log("total exp", this.totalExp) // returns undefined
+            this.qualification = this.applicant[i].qualification;
+            this.biodata = this.applicant[i].biodata;
+            for (let z = 0; z < this.biodata.length; z++) {
+              this.imageUrl = this.biodata[z].photo;
+              console.log("Image Url", this.imageUrl);
             }
-            for (let j = 0; j < this.jobs.length; j++) {
-              console.log("Job Responsibilities", this.jobs[j])
+            this.experience = this.applicant[i].experiences;
+            this.jobAppliers = this.applicant[i].job_appliers;
+            this.totalExp = this.applicant[i].total_experice;
+          }
+          for (let j = 0; j < this.jobs.length; j++) {
+            console.log("Job Responsibilities", this.jobs[j]);
+          }
 
-            }
+          // this.jobId =this.postedJobs[3]
 
-            // this.jobId =this.postedJobs[3]
-
-            // this.orders.find(({ id }) => id === this.orderId)
-            // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
-            // this.job_status = response.data.items.job_status
-            this.loadingApplicant = false
-            this.length = Math.round(
-                response.data.total /
-                response.data.page
-            );
-            console.log("page length", this.length)
-            // setTimeout(() => (this.loadingApplicant = false), 1000)
-          })
-          .catch((error) => {
-            this.applicant = []
-            this.$awn.alert("Failed");
-            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-          })
-          .finally(() => {
-            this.modalSkeleton = false
-            if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
-
-          });
+          // this.orders.find(({ id }) => id === this.orderId)
+          // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
+          // this.job_status = response.data.items.job_status
+          this.loadingApplicant = false;
+          this.length = Math.round(response.data.total / response.data.page);
+          console.log("page length", this.length);
+          // setTimeout(() => (this.loadingApplicant = false), 1000)
+        })
+        .catch((error) => {
+          this.applicant = [];
+          this.$awn.alert("Failed");
+          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+        })
+        .finally(() => {
+          this.modalSkeleton = false;
+          if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
+        });
     },
     getHumanDate: function (date) {
-      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
+      return moment(date, "YYYY-MM-DD").format("MMM Do YY");
     },
     goToJobDetails(jobId) {
-      this.$router.push({name: 'JobDetails', params: {id: jobId}})
+      this.$router.push({ name: "JobDetails", params: { id: jobId } });
     },
   },
-}
+};
 </script>
