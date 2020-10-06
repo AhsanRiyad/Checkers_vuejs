@@ -184,9 +184,8 @@ export default {
     qualifications: Array,
     experiences: Array,
     applicntInfo: Object,
-    applicantShortListed: Function,
-    applicantInterviewCall: Function,
     exams: Object,
+    userId:String,
     dialogShowing: {
       type: Boolean,
       default: false

@@ -168,15 +168,8 @@ export default {
             console.log("qualification", this.qualification);
             this.applicant = response.data.data;
             this.jobs = response.data.job
-            this.jobId = response.data.job.id
-            console.log('job id', this.jobId)
+            // response.data.job.id
             for (let i = 0; i < this.applicant.length; i++) {
-              // console.log("qualification index object", this.applicant[i]) // returns [Object object]
-              // console.log("qualification", this.applicant[i].qualification) // returns undefined
-              // console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
-              // console.log("experience", this.experience) // returns undefined
-              // console.log("biodata", this.biodata) // returns undefined
-              // console.log("total exp", this.totalExp) // returns undefined
               this.qualification = this.applicant[i].qualification
               this.biodata = this.applicant[i].biodata
               for(let z = 0; z < this.biodata.length; z++){
@@ -189,14 +182,7 @@ export default {
             }
             for (let j = 0; j < this.jobs.length; j++) {
               console.log("Job Responsibilities", this.jobs[j])
-
             }
-
-            // this.jobId =this.postedJobs[3]
-
-            // this.orders.find(({ id }) => id === this.orderId)
-            // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
-            // this.job_status = response.data.items.job_status
             this.loadingApplicant = false
             this.length = Math.round(
                 response.data.total /
