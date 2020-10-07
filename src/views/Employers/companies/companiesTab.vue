@@ -12,7 +12,7 @@
               </v-btn>
               <v-btn link to="/add-companies" color="success">
                 <v-icon>mdi-plus</v-icon>
-                Post a new Company
+                Create A Company
               </v-btn>
             </div>
           </v-card>
@@ -21,13 +21,22 @@
             <v-row align="center">
               <v-col cols="12" md="8">
                 <v-tabs v-model="tabs">
-                  <v-tab>Company List (12)</v-tab>
-                  <v-tab>Drafted companies (12)</v-tab>
-                  <v-tab>Archived companies (12)</v-tab>
+                  <v-tab>Company List ()</v-tab>
+                  <v-tab v-if="false">Drafted companies (12)</v-tab>
+                  <v-tab v-if="false">Archived companies (12)</v-tab>
                 </v-tabs>
               </v-col>
-              <v-col cols="12" md="4">
+<!--              <v-col cols="12" md="4" class="text-right">-->
+<!--                <div class="tab-right_side d-flex">-->
+<!--                  -->
+<!--                </div>-->
+<!--              </v-col>-->
+              <v-col cols="12" md="4" v-if="false">
                 <div class="tab-right_side d-flex">
+                  <v-btn link to="/add-companies" color="success">
+                    <v-icon>mdi-plus</v-icon>
+                    Create A Company
+                  </v-btn>
                   <v-text-field
                       dense
                       class="mx-4"

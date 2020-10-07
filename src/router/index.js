@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
 // import login from '@/views/login_registration/Login.vue'
 
 /* import JobCard from '../views/JobAlart/JobCard'
@@ -230,14 +231,7 @@ const routes = [
   //       title: 'Add Company'
   //     }
   //   },
-  {
-    path: '/job-list/:id',
-    name: 'PostedJobList',
-    component: PostedJobList,
-    meta: {
-      title: 'Employers Panel'
-    }
-  },
+
   {
     path: '/recruiter',
     name: 'recruiter',
@@ -248,71 +242,89 @@ const routes = [
   },
   {
     path: '/employers',
-    name: 'EmployersPanel',
     component: EmployersPanel,
     meta: {
       title: 'Employers Panel'
-    }
+    },
+    children: [
+      {
+        path: '/company-list',
+        name: 'CompanyList',
+        component: CompanyList,
+        meta: {
+          title: 'Companies List'
+        }
+      },
+      //    companies components routing end
+      //   jobs components routing start
+      {
+        path: '/add-job',
+        name: 'AddJobs',
+        component: AddJobs,
+        meta: {
+          title: 'Add Jobs'
+        }
+      },
+      {
+        path: '/job-list/:id',
+        name: 'PostedJobList',
+        component: PostedJobList,
+        meta: {
+          title: 'Employers Panel'
+        }
+      },
+      {
+        path: '/all-jobs',
+        name: 'AllJobList',
+        component: AllJobList,
+        meta: {
+          title: 'All Jobs'
+        }
+      },
+      {
+        path: '/add-companies',
+        name: 'AddCompanies',
+        component: AddCompanies,
+        meta: {
+          title: 'Add Companies'
+        }
+      },
+      {
+        path: '/applicant-list/:id',
+        name: 'JobDetails',
+        component: JobDetails,
+        meta: {
+          title: 'Job Details'
+        }
+      },
+      {
+        path: '/jobonlineapply',
+        name: 'JobOnlineApply',
+        component: JobOnlineApply,
+        meta: {
+          title: 'Job Online Apply'
+        }
+      },
+      {
+        path: '/subscription',
+        name: 'pricingTable',
+        component: pricingTable,
+        meta: {
+          title: 'Pricing Table'
+        }
+      },
+      {
+        path: '/user-info',
+        name: 'userInfo',
+        component: userInfo,
+        props: { newsletterPopup: false },
+        meta: {
+          title: 'User Info'
+        }
+      }
+    ]
   },
-  {
-    path: '/company-list',
-    name: 'CompanyList',
-    component: CompanyList,
-    meta: {
-      title: 'Companies List'
-    }
-  },
-  //    companies components routing end
-  //   jobs components routing start
-  {
-    path: '/add-job',
-    name: 'AddJobs',
-    component: AddJobs,
-    meta: {
-      title: 'Add Jobs'
-    }
-  },
-  {
-    path: '/add-companies',
-    name: 'AddCompanies',
-    component: AddCompanies,
-    meta: {
-      title: 'Add Companies'
-    }
-  },
-  {
-    path: '/applicant-list/:id',
-    name: 'JobDetails',
-    component: JobDetails,
-    meta: {
-      title: 'Job Details'
-    }
-  },
-  {
-    path: '/jobonlineapply',
-    name: 'JobOnlineApply',
-    component: JobOnlineApply,
-    meta: {
-      title: 'Job Online Apply'
-    }
-  },
-  {
-    path: '/subscription',
-    name: 'pricingTable',
-    component: pricingTable,
-    meta: {
-      title: 'Pricing Table'
-    }
-  },
-  {
-    path: '/user-info/:homePage',
-    name: 'userInfo',
-    component: userInfo,
-    props: { newsletterPopup: false },
-    meta: {
-      title: 'User Info'
-    }
-  }
+
   //   jobs components routing end
 ]
 

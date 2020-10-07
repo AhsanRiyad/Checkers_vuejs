@@ -7,10 +7,10 @@
             @click.stop="applicantShortListed"
             small
             class="ml-1 mr-1"
-            :color="isShortlisted ? 'success' : 'error'"
-            >{{ isShortlisted ? "Shortlisted" : "Not Shortlisted" }}</v-btn
+            :color="applicantBiodata.short_listed ? 'success' : 'error'"
+            >{{ applicantBiodata.short_listed ? "Shortlisted" : "Not Shortlisted" }}</v-btn
           >
-          <!-- <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn> -->
+<!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
             @click.stop.prevent="(dialog = true), (dialogShowing = false)"
             small

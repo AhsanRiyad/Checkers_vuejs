@@ -12,7 +12,7 @@
               </v-btn>
               <v-btn link to="/add-job" color="success">
                 <v-icon>mdi-plus</v-icon>
-                Post a new job
+                Create a job
               </v-btn>
             </div>
           </v-card>

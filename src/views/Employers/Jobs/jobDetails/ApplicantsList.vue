@@ -126,7 +126,7 @@
             <v-dialog v-model="dialogShowing" width="900">
               <applicant-resume-modal
                 :user-id="userId"
-                v-show="dialogShowing"
+                :dialogShowing="dialogShowing"
                 :applicantInfo="applicntInfo"
                 :skills="skills"
                 :exmas="exams"
@@ -205,6 +205,7 @@ export default {
       skills: {},
       qualifications: [],
       userId: "",
+      jobId: '',
       applicantBiodata: {},
       exams: {},
       applicntInfo: {},
@@ -212,6 +213,9 @@ export default {
     };
   },
   created() {},
+  mounted() {
+    console.log("job id in app resume ", this.$store.getters.job);
+  },
   methods: {
     getHumanDate: function (date) {
       return moment(date, "YYYY-MM-DD").format("MMM Do YY");
@@ -229,6 +233,7 @@ export default {
         .dispatch("callApi", {
           url: "resume/" + userId,
           method: "get",
+          params: {job_id:this.$store.getters.job},
           headers,
           data: {},
         })
