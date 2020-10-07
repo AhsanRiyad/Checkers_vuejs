@@ -195,6 +195,7 @@
 
 <script>
 import "../../../sass/job-alart/ResumeLayout/_default.scss";
+// import { saveAs } from "file-saver";
 export default {
   name: "DefaultResume",
   data() {
@@ -212,23 +213,44 @@ export default {
         })
         .then((response) => {
           console.log("login image", response.file);
+          let url = `http://3.17.234.251/jobsresume/resumes/public/${
+            response.file
+          }?access_token=${this.$cookies.get("accessToken")}`;
+          // saveAs(url, "resume.pdf");
+
+          /* fetch(url, {
+            method: "GET",
+            headers: {
+              Authorization: "Bearer " + this.$cookies.get("accessToken"),
+            },
+          }).then(function (t) {
+            return t.blob().then((b) => {
+              var a = document.createElement("a");
+              a.href = URL.createObjectURL(b);
+              a.setAttribute("download", "resume.pdf");
+              a.click();
+            });
+          }); */
           // this.$refs.form.reset();
           // saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
-          let url = `http://3.17.234.251/jobsresume/resumes/public/${
-            response.file
-          }?access_token=${this.$cookies.get("accessToken")}`;
-          // const link = document.createElement("a");
-          // link.href = url;
-          // link.setAttribute("download", "file.pdf"); //or any other extension
-          // document.body.appendChild(link);
-          // link.click();
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "file.pdf"); //or any other extension
+          link.setAttribute("target", "_blank"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          // delete link;
 
           // window.open(url, "_blank");
-
-          var redirectWindow = window.open(url, "_blank");
-          redirectWindow.location;
+          //download/openf file in new tab
+          /*           let url = `http://3.17.234.251/jobsresume/resumes/public/${
+            response.file
+          }?access_token=${this.$cookies.get("accessToken")}`;
+          let redirectWindow = window.open(url, "_blank");
+          redirectWindow.location; */
         })
         .catch(() => {
           this.$awn.alert("Failed! Email/Password doesn't match");

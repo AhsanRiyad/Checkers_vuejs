@@ -14,7 +14,9 @@
                   <div class="bottom__text">farzanakabirrinky@yahoo.com</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-email">Change email address</router-link>
+                  <router-link to="/change-email"
+                    >Change email address</router-link
+                  >
                 </div>
               </li>
               <li>
@@ -23,10 +25,12 @@
                   <div class="bottom__text">******</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-password">Change password</router-link>
+                  <router-link to="/change-password"
+                    >Change password</router-link
+                  >
                 </div>
               </li>
-              <li>
+              <!--  <li>
                 <div class="left__side">
                   <div class="top__text">phone:</div>
                   <div class="bottom__text">01753212480</div>
@@ -49,7 +53,7 @@
                   <router-link to="/signin">signout</router-link>
                   <router-link to="/">Return to job search</router-link>
                 </div>
-              </li>
+              </li> -->
             </ul>
           </v-card>
         </v-col>
@@ -59,8 +63,8 @@
 </template>
 
 <script>
-import '../../sass/job-alart/_accountSettings.scss'
+import "../../sass/job-alart/_accountSettings.scss";
 export default {
-name: "accountSettings"
-}
+  name: "accountSettings",
+};
 </script>
