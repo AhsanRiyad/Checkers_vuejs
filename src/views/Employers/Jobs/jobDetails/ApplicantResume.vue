@@ -8,9 +8,11 @@
             small
             class="ml-1 mr-1"
             :color="applicantBiodata.short_listed ? 'success' : 'error'"
-            >{{ applicantBiodata.short_listed ? "Shortlisted" : "Not Shortlisted" }}</v-btn
+            >{{
+              applicantBiodata.short_listed ? "Shortlisted" : "Not Shortlisted"
+            }}</v-btn
           >
-<!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
+          <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
             @click.stop.prevent="(dialog = true), (dialogShowing = false)"
             small
@@ -287,13 +289,12 @@ export default {
   },
   mounted() {
     console.log("job id in app resume ", this.$store.getters.job);
-
+    console.log("applicant biodata.... ", this.applicantBiodata);
   },
   updated() {
-    this.$nextTick(() =>{
-      console.log('applicant resumeeeeeeeeeeeeeeeeee', this.applicantResume)
-      console.log('dialog show off', this.dialogShowing)
-    })
+    this.$nextTick(() => {
+      console.log("applicant biodata.... ", this.applicantResume);
+    });
   },
   computed: {
     dialogVisible: {

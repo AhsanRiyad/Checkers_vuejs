@@ -93,26 +93,20 @@ $mobileLandScape: 'only screen and (orientation: landscape) and (max-width: 767p
   @media only screen and (max-width: 424px) {
     @content
   }
-}
-
-;
+};
 
 
 @mixin mobile375() {
   @media only screen and (max-width: 375px) {
     @content
   }
-}
-
-;
+};
 
 @mixin mobileLandScape() {
   @media only screen and (orientation: landscape) and (max-width: 767px) {
     @content
   }
-}
-
-;
+};
 
 
 @mixin mobileSearch() {
