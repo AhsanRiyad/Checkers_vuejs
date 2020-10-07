@@ -51,7 +51,7 @@
                 <p class="mb-4">
                   <a
                       :loading="dialogShowing"
-                      @click="showApplicantResume(bio.userId)"
+                      @click="showApplicantResume(bio.user_id)"
                       style="font-size: 20px; text-transform: capitalize"
                   >{{ bio.full_name }} </a
                   ><span class="age_outline font-weight-bold">
@@ -238,7 +238,7 @@ export default {
           this.skills = response.data.skills;
           this.experiences = response.data.experiences;
           this.qualifications = response.data.qualification;
-          this.userId = response.data.applicationInfo.user_id;
+          // this.userId = response.data.applicationInfo.user_id;
           // this.shortListed = response.data.applicationInfo
 
           console.log("bio", response.data.biodata);

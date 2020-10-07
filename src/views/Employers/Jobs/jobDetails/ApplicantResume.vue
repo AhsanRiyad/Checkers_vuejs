@@ -292,6 +292,7 @@ export default {
   updated() {
     this.$nextTick(() =>{
       console.log('applicant resumeeeeeeeeeeeeeeeeee', this.applicantResume)
+      console.log('dialog show off', this.dialogShowing)
     })
   },
   computed: {

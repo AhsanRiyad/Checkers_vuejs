@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
+import JobsTab from "@/views/Employers/Jobs/JobsTab";
+import companiesTab from "@/views/Employers/companies/companiesTab";
+import userInfoDetails from "@/views/Employers/companies/UserInfo/userInfoDetails";
 // import login from '@/views/login_registration/Login.vue'
 
 /* import JobCard from '../views/JobAlart/JobCard'
@@ -43,7 +46,7 @@ const pricingTable = () => import("@/views/JobAlart/pricingTable")
 
 const forgotPassword = () => import("../views/JobAlart/AccountSettings/forgotPassword")
 const AddCompanies = () => import("@/views/Employers/companies/AddCompanies")
-const userInfo = () => import("@/views/JobAlart/userInfo")
+const userInfo = () => import("@/views/Employers/companies/UserInfo/userInfo")
 const CompanyList = () => import("@/views/Employers/companies/CompanyList")
 const PostedJobList = () => import("@/views/Employers/Jobs/PostedJobList")
 const recruiter = () => import("@/views/recruiter")
@@ -258,6 +261,24 @@ const routes = [
       //    companies components routing end
       //   jobs components routing start
       {
+        path: '/jobs',
+        name: 'JobsTab',
+        component: JobsTab,
+        meta: {
+          title: 'Jobs'
+        }
+      },
+      {
+        path: '/companies',
+        name: 'companiesTab',
+        component: companiesTab,
+        meta: {
+          title: 'companies'
+        }
+      },
+
+
+      {
         path: '/add-job',
         name: 'AddJobs',
         component: AddJobs,
@@ -320,6 +341,14 @@ const routes = [
         props: { newsletterPopup: false },
         meta: {
           title: 'User Info'
+        }
+      },
+      {
+        path: '/user-details',
+        name: 'userInfoDetails',
+        component: userInfoDetails,
+        meta: {
+          title: 'User Info Details'
         }
       }
     ]
