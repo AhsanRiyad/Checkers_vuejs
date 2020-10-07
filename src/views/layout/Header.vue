@@ -4,20 +4,26 @@
     <v-app-bar class="white--text" style="background: #365899">
       <v-toolbar-title>
         <!-- <img :src="require('../../../public/JobAlartLogo.png')" alt=""> -->
-        <router-link to="/" style="color: white; text-decoration: none">JobAlart</router-link>
+        <router-link to="/" style="color: white; text-decoration: none"
+          >JobAlart</router-link
+        >
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
-        <v-btn text  router to="/recruiter" color="white">Recruiters</v-btn>
+        <v-btn text router to="/recruiter" color="white">Recruiters</v-btn>
+        <v-btn router to="/signin" text color="white">{{
+          $store.getters.isLoggedIn ? "Logout" : "Login"
+        }}</v-btn>
         <v-btn
+          v-if="$cookies.get('is_company') == true"
           router
-          to="/signin"
+          to="/employers"
           text
           color="white"
-        >{{ $store.getters.isLoggedIn ? 'Logout' : 'Login' }}</v-btn>
-        <v-btn router to="/employers" text color="white">Employeer/Job Post</v-btn>
+          >Employeer/Job Post</v-btn
+        >
         <v-menu
           bottom
           origin="center center"
@@ -32,7 +38,11 @@
 
           <v-card>
             <v-list>
-              <v-list-item v-for="([icon, text, url], i) in menus" :key="i" link>
+              <v-list-item
+                v-for="([icon, text, url], i) in menus"
+                :key="i"
+                link
+              >
                 <v-list-item-content>
                   <router-link :to="url">
                     <v-list-item-title>{{ text }}</v-list-item-title>
@@ -47,7 +57,9 @@
             </v-list>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn block color="primary" text @click="menu = false">Signout</v-btn>
+              <v-btn block color="primary" text @click="menu = false"
+                >Signout</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-menu>
@@ -55,13 +67,22 @@
       </span>
 
       <span>
-        <v-app-bar-nav-icon color="white" class="d-md-none d-inline" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon
+          color="white"
+          class="d-md-none d-inline"
+          @click.stop="drawer = !drawer"
+        ></v-app-bar-nav-icon>
       </span>
     </v-app-bar>
     <!-- header ends -->
 
     <!-- drawer starts -->
-    <v-navigation-drawer v-model="drawer" fixed temporary style="background: #365899">
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      temporary
+      style="background: #365899"
+    >
       <v-list style="background: #365899">
         <v-list-item v-for="([icon, text, url], i) in items" :key="i" link>
           <v-list-item-icon>
@@ -71,7 +92,9 @@
           </v-list-item-icon>
           <v-list-item-content>
             <router-link :to="url">
-              <v-list-item-title class="white--text">{{ text }}</v-list-item-title>
+              <v-list-item-title class="white--text">{{
+                text
+              }}</v-list-item-title>
             </router-link>
           </v-list-item-content>
         </v-list-item>
@@ -83,6 +106,7 @@
 
 <script>
 import "../../sass/job-alart/_header.scss";
+
 export default {
   name: "Header",
   data: () => {

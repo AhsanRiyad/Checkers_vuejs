@@ -335,7 +335,7 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     console.log("is not compnay", VueCookies.get('is_company'));
-    if (to.name == "PostedJobList" || to.name == "recruiter" || to.name == "EmployersPanel" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails"
+    if (to.name == "PostedJobList" || to.name == "EmployersPanel" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails"
       || to.name == "JobDetails"
     ) {
       next({ name: 'search' });
@@ -346,10 +346,6 @@ router.beforeEach((to, from, next) => {
   console.log("router to...", to);
   console.log("router from...", from);
   console.log("router next...", next);
-
-
-
-
 })
 
 
