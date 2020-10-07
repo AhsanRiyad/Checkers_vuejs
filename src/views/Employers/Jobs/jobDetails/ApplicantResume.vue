@@ -287,6 +287,12 @@ export default {
   },
   mounted() {
     console.log("job id in app resume ", this.$store.getters.job);
+
+  },
+  updated() {
+    this.$nextTick(() =>{
+      console.log('applicant resumeeeeeeeeeeeeeeeeee', this.applicantResume)
+    })
   },
   computed: {
     dialogVisible: {
