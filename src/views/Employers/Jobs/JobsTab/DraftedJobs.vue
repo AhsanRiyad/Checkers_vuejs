@@ -1,6 +1,6 @@
 <template>
-  <div class="posted__list" :drafted-jobs="draftedJobs">
-    <v-card flat class="ja__card pt-0">
+  <div class="posted__list">
+    <v-card flat class="ja__card pa-6">
       <!--********** Job activities start **************-->
       <div class="jobActivity">
         <v-row>

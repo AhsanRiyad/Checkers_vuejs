@@ -73,7 +73,7 @@
                 </template>
                 <span>Job Post</span>
               </v-tooltip>
-              <v-tooltip top>
+              <v-tooltip v-if="false" top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                       class="interactn  c-blue"

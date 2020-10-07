@@ -19,7 +19,7 @@
         <v-row align="center">
           <v-col cols="12" md="8">
             <v-tabs v-model="tabs">
-              <v-tab>Company List ()</v-tab>
+              <v-tab>Company List</v-tab>
               <v-tab v-if="false">Drafted companies (12)</v-tab>
               <v-tab v-if="false">Archived companies (12)</v-tab>
             </v-tabs>

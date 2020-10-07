@@ -19,12 +19,12 @@
         <v-row align="center">
           <v-col cols="12" md="8">
             <v-tabs v-model="tabs">
-              <v-tab>Posted jobs ({{allJobs && allJobs.length}})</v-tab>
-              <v-tab>Drafted jobs ({{draftedJobs && draftedJobs.length}})</v-tab>
-              <v-tab>Expired jobs (12)</v-tab>
+              <v-tab>Posted jobs</v-tab>
+              <v-tab>Drafted jobs</v-tab>
+              <v-tab>Expired jobs</v-tab>
             </v-tabs>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="4" v-if="false">
             <div class="tab-right_side d-flex">
               <v-text-field
                   dense
@@ -62,8 +62,6 @@ import '../../../sass/employers/_jobs.scss'
 export default {
   name: "JobsTab",
   props: {
-    allJobs: Array,
-    draftedJobs: Array,
     companies: Array,
   },
   components: {
@@ -80,10 +78,13 @@ export default {
   computed: {
 
   },
+  created() {
+    console.log("all jobs...................", this.$store.getters.allJobs)
+  },
   updated() {
-    this.$nextTick(() =>{
-      console.log("all jobs", this.allJobs)
-    })
+    // this.$nextTick(() =>{
+    //
+    // })
   },
   // watch: {
   //   date (val) {

@@ -137,30 +137,7 @@
       <!-- job apply modal ends-->
       <!--********** pagination start **************-->
       <div class="pagination">
-        <ul class="d-flex pg-list">
-          <li>
-            <v-btn class="pg-btn" small text>
-              <v-icon>mdi-chevron-double-left</v-icon>
-            </v-btn>
-          </li>
-          <li>
-            <v-btn class="pg-btn" small text>1</v-btn>
-          </li>
-          <li>
-            <v-btn class="pg-btn" small text>2</v-btn>
-          </li>
-          <li>
-            <v-btn class="pg-btn" small text>3</v-btn>
-          </li>
-          <li>
-            <v-btn class="pg-btn" small text>..124</v-btn>
-          </li>
-          <li>
-            <v-btn class="pg-btn" small text>
-              <v-icon>mdi-chevron-double-right</v-icon>
-            </v-btn>
-          </li>
-        </ul>
+        <v-pagination v-model="pageNo" :length="length"></v-pagination>
       </div>
       <!--********** pagination end **************-->
     </v-card>
@@ -241,16 +218,16 @@ export default {
           // this.userId = response.data.applicationInfo.user_id;
           // this.shortListed = response.data.applicationInfo
 
-          console.log("bio", response.data.biodata);
-          console.log("skills", response.data.skills);
-          console.log("experiencess", response.data.experiences);
-          console.log("qualifications", response.data.qualification);
+          // console.log("bio", response.data.biodata);
+          // console.log("skills", response.data.skills);
+          // console.log("experiencess", response.data.experiences);
+          // console.log("qualifications", response.data.qualification);
           for (let i = 0; i < this.qualifications.length; i++) {
             this.exams = response.data.qualification[i].exam;
             console.log("examss", this.exams);
           }
           this.applicntInfo = response.data.applicationInfo;
-          console.log("applicants info", response.data.applicationInfo);
+          // console.log("applicants info", response.data.applicationInfo);
 
           // setTimeout({
           // }, 1000)

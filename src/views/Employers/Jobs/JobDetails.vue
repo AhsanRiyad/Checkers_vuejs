@@ -72,7 +72,7 @@
               <v-tab class="job_tab">Job Preview</v-tab>
             </v-tabs>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="4" v-if="false">
             <div class="tab-right_side d-flex">
               <v-text-field
                   dense
