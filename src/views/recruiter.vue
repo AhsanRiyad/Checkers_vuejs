@@ -40,22 +40,7 @@
            </v-text-field>
            <!--      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>-->
          </div>
-         <v-row v-else-if="recruiterCompanyList">
-           <v-col v-for="reqrCom in recruiterCompanyList" :key="reqrCom.id" cols="12" lg="4" md="4">
-             <div class="jobCard_box d-flex align-center">
-               <v-avatar size="90">
-                 <img :src="$store.getters.imageUrl + reqrCom.company_logo"/>
-               </v-avatar>
-               <div class="jobCard_body">
-                 <h4 class="mb-2"><span class="mr-1">Company Name:</span><span>{{reqrCom.company_name}}</span></h4>
-                 <p>
-                   <span class="mr-2">Location:</span>
-                   <span style="text-transform: capitalize">{{reqrCom.company_location}}</span>
-                 </p>
-               </div>
-             </div>
-           </v-col>
-         </v-row>
+
          <div v-else>
            <div :style="filterFixedPosition" class="filterFixedPosition">
              <div class="job-search-job-card">
@@ -194,7 +179,22 @@
            </div>
          </div>
 
-
+         <v-row id="companyName">
+           <v-col v-for="reqrCom in recruiterCompanyList" :key="reqrCom.id" cols="12" lg="4" md="4">
+             <div  @click.stop="getDataByCompany(reqrCom.company_name)" class="jobCard_box d-flex align-center">
+               <v-avatar size="90">
+                 <img :src="$store.getters.imageUrl + reqrCom.company_logo"/>
+               </v-avatar>
+               <div class="jobCard_body">
+                 <h4 class="mb-2"><span class="mr-1">Company Name:</span><span>{{reqrCom.company_name}}</span></h4>
+                 <p>
+                   <span class="mr-2">Location:</span>
+                   <span style="text-transform: capitalize">{{reqrCom.company_location}}</span>
+                 </p>
+               </div>
+             </div>
+           </v-col>
+         </v-row>
 
          <!-- job apply modal starts-->
          <job-alert-modal persistent v-if="showModal">
@@ -413,7 +413,6 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            this.$awn.alert("Failed!");
 
             if (error.response.status == 401) {
               this.$awn.alert("You are not logged in");
@@ -586,22 +585,39 @@ export default {
       }
     },
     getData() {
+
       if (this.$store.getters.userIp == "") {
         new Promise((resolve, reject) => {
           this.getIp(resolve, reject);
         }).then(() => {
+          //document.getElementById('companyName').style.display="none"
           this.getSearchData();
-          this.getAllCompanyList()
         });
       } else {
         this.getSearchData();
-        this.getAllCompanyList()
+       // document.getElementById('companyName').style.display="none"
+      }
+    },
+    getDataByCompany(name) {
+
+      this.search = name
+      if (this.$store.getters.userIp == "") {
+        new Promise((resolve, reject) => {
+          this.getIp(resolve, reject);
+        }).then(() => {
+          //document.getElementById('companyName').style.display="none"
+          this.getSearchData();
+        });
+      } else {
+        this.getSearchData();
+       // document.getElementById('companyName').style.display="none"
       }
     },
     getSearchData() {
       this.loading = true;
 
       this.skeleton = true;
+
 
       let url = "search";
 
@@ -642,9 +658,10 @@ export default {
           })
           .catch(() => {
             this.Jobs = [];
-            this.$awn.alert("Failed");
+            // this.$awn.alert("Failed");
           })
           .finally(() => {
+
             this.loading = false;
             this.skeleton = false;
             if (this.Jobs.length === 0) this.ShowAlertMsg = true;
@@ -656,6 +673,10 @@ export default {
                 "window availheight.....",
                 document.querySelector("#mainDocs").scrollHeight
             );
+            //alert(this.search)
+           if(this.search!=undefined){
+             document.getElementById('companyName').style.display='none'
+           }
           });
     },
   },
@@ -671,6 +692,7 @@ export default {
     this.search = this.$route.query.q;
 
     this.getData();
+    this.getAllCompanyList()
   },
   destroyed: function () {
     window.removeEventListener("scroll", this.onScroll);

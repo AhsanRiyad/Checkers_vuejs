@@ -18,6 +18,13 @@
             color="primary"
             >Interview Call</v-btn
           >
+          <v-btn
+              @click.stop="downloadResume"
+              small
+              class="ml-1 mr-1"
+              color="success"
+          >Download Resume</v-btn
+          >
         </div>
         <div class="close_btn">
           <v-btn small icon @click.stop.prevent="dialogShowing = false"
@@ -293,6 +300,7 @@ export default {
   updated() {
     this.$nextTick(() => {
       console.log("applicant biodata.... ", this.applicantResume);
+      console.log("User id... applicant...reusme...", this.userId);
     });
   },
   computed: {
@@ -314,6 +322,65 @@ export default {
     },
   },
   methods: {
+    downloadResume() {
+      console.log("download resume");
+      //file download
+      this.$store
+          .dispatch("callApi", {
+            url: `resume/applicant/${this.userId}/${this.$store.getters.job}`,
+            method: "get",
+            data: {},
+          })
+          .then((response) => {
+            console.log("login image", response.file);
+            let url = `http://3.17.234.251/jobsresume/resumes/public/${
+                response.file
+            }?access_token=${this.$cookies.get("accessToken")}`;
+            // saveAs(url, "resume.pdf");
+
+            /* fetch(url, {
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + this.$cookies.get("accessToken"),
+              },
+            }).then(function (t) {
+              return t.blob().then((b) => {
+                var a = document.createElement("a");
+                a.href = URL.createObjectURL(b);
+                a.setAttribute("download", "resume.pdf");
+                a.click();
+              });
+            }); */
+            // this.$refs.form.reset();
+            // saves the items from the database in the table
+            //  console.log(response);
+            //  this.items = response.data;
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "file.pdf"); //or any other extension
+            link.setAttribute("target", "_blank"); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            // delete link;
+
+            // window.open(url, "_blank");
+            //download/openf file in new tab
+            /*           let url = `http://3.17.234.251/jobsresume/resumes/public/${
+              response.file
+            }?access_token=${this.$cookies.get("accessToken")}`;
+            let redirectWindow = window.open(url, "_blank");
+            redirectWindow.location; */
+          })
+          .catch(() => {
+            this.$awn.alert("Failed! Email/Password doesn't match");
+            // this.$awn.alert("Failed");
+          })
+          .finally(() => {
+            this.loading = false;
+            //  this.tableLoading = false;
+          });
+    },
     appResume() {
       console.log("User id... applicant...reusme...", this.userId);
       console.log("Job id", this.$store.getters.job);
@@ -336,7 +403,7 @@ export default {
           this.qualifications = response.data.qualification;
           this.userId = response.data.applicationInfo.user_id; */
           // this.shortListed = response.data.applicationInfo
-          /* 
+          /*
           console.log("bio", response.data.biodata);
           console.log("skills", response.data.skills);
           console.log("experiencess", response.data.experiences);

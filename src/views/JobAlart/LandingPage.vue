@@ -1,9 +1,11 @@
 <template>
-<span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover'}" >
-<Header></Header>
-<router-view></router-view>
-<Footer></Footer>
-</span>
+<div>
+  <Header></Header>
+  <v-main :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover'}" >
+    <router-view></router-view>
+  </v-main>
+  <Footer></Footer>
+</div>
 </template>
 
 <script>

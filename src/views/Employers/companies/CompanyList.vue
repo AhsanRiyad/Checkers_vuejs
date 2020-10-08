@@ -1,5 +1,5 @@
 <template>
-  <div class="posted__list" :companies="companies">
+  <div class="posted__list">
     <v-card flat class="ja__card">
       <!--********** Job activities start **************-->
       <div class="jobActivity">
@@ -154,9 +154,6 @@ export default {
             console.log("companies", response.data.data);
             this.companies = response.data.data
             this.loading = false
-            setTimeout(() => {
-
-            }, 3000)
           })
           .catch(() => {
             this.$awn.alert("Failed!");

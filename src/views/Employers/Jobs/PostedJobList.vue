@@ -116,13 +116,10 @@ export default {
       return this.postedJobs && this.postedJobs.length
     },
   },
-  mounted() {
+ mounted() {
    this.getPostedJobs()
   },
   methods: {
-    editJob: function (id){
-      this.$router.history.push({name: 'AddJobs', params: {id: id}})
-    },
     getPostedJobs(){
       this.loading = true
       const headers = {
@@ -174,6 +171,10 @@ export default {
 
           });
     },
+    editJob: function (id){
+      this.$router.history.push({name: 'AddJobs', params: {id: id}})
+    },
+
     jobLive(jobsId){
       // if (event) {
       //   event.preventDefault();

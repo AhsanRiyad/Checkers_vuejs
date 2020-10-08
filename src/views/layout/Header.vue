@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
-        <v-btn text router to="/recruiter" color="white">Recruiters</v-btn>
+        <v-btn text router @click="gotoRecruiter()" color="white">Recruiters</v-btn>
         <v-btn router to="/signin" text color="white">{{
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
@@ -114,7 +114,7 @@ export default {
       drawer: false,
       items: [
         ["mdi-email", "Jobs", "/"],
-        ["mdi-account-supervisor-circle", "Recruite", "/"],
+        ["mdi-account-supervisor-circle", "Recruiter", "/"],
         ["mdi-clock-start", "Login", "/"],
         ["mdi-clock-start", "Employeers/Job Post"],
         // ["mdi-clock-start", "Get Alerts"],
@@ -143,5 +143,13 @@ export default {
       this.$cookies.get("accessToken")
     );
   },
+  methods: {
+    gotoRecruiter(){
+      //alert('here');
+      this.$router.history.push({name: 'recruiter'})
+      location.reload();
+
+    }
+  }
 };
 </script>

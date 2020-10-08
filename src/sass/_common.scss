@@ -84,6 +84,11 @@
   margin-left: -12px;
 }
 .footer{
+  position: absolute !important;
+  bottom: 0;
+  height: 5px;
+  width: 100%;
+  z-index: 1;
   a{
     color: #ffffff !important;
   }

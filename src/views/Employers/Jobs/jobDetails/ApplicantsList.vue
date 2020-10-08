@@ -218,7 +218,7 @@ export default {
 
           console.log(" resume console output... ", this.$store.getters.resume);
 
-          // this.userId = response.data.applicationInfo.user_id;
+          this.userId = response.data.applicationInfo.user_id;
           // this.shortListed = response.data.applicationInfo
 
           // console.log("bio", response.data.biodata);

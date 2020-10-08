@@ -16,30 +16,38 @@
         <v-col class="text-center"  cols="12" lg="12">
           <h1>Contact With Us</h1>
         </v-col>
+        <v-col cols="12">
+          <div class="d-flex justify-center">
+            <div class="contact_box">
+              <div class="contact_icon">
+                <v-icon>mdi-email</v-icon>
+              </div>
+              <div class="contact_body">
+                <h3>Email Address</h3>
+                <a href="mailto:info@redspice.ae">
+                  <span>info@jobalart.com</span>
+                </a>
+              </div>
+            </div>
+            <div class="contact_box">
+              <div class="contact_icon">
+                <v-icon>mdi-map-marker</v-icon>
+              </div>
+              <div class="contact_body">
+                <h3>Location</h3>
+                <p>A-64-00-02-05 – Flamingo Villas Ajman, United Arab Emirates PO Box: 31436</p>
+              </div>
+            </div>
+          </div>
+        </v-col>
+<!--        <v-col>-->
+<!--        <div style="width: 70%; margin: 0 auto">-->
+<!--          <p>At Jobalart, we are committed to making the job search process simple and also stress free. Our job search-->
+<!--            engine is built with powerful technology that aims to match the right job opportunities with the correct people. To find the latest and also most relevant job openings, only browse by job title, company, city or state. Or become a member to get the first alerts on jobs you will like. Always, ensure to check out the career advice section of the website for other job search tools such as resume samples and also interview tips. So, start searching, and see what we've got. You might just find better.</p>-->
+<!--        </div>-->
+<!--        </v-col>-->
       </v-row>
-      <div class="d-flex justify-center">
-        <div class="contact_box">
-          <div class="contact_icon">
-            <v-icon>mdi-email</v-icon>
-          </div>
-          <div class="contact_body">
-            <h3>Email Address</h3>
-            <a href="mailto:info@redspice.ae">
-              <span>info@jobalart.com</span>
-            </a>
-          </div>
-        </div>
-        <div class="contact_box">
-          <div class="contact_icon">
-            <v-icon>mdi-map-marker</v-icon>
-          </div>
-          <div class="contact_body">
-            <h3>Location</h3>
-            <p>A-64-00-02-05 – Flamingo Villas Ajman, United Arab Emirates PO Box: 31436</p>
-            <p></p>
-          </div>
-        </div>
-      </div>
+
     </v-container>
   </div>
 </template>
@@ -49,55 +57,5 @@ import '../../../sass/job-alart/_contact.scss'
 
 export default {
   name: "Contact",
-  data: () => ({
-    valid: false,
-    name: '',
-    email: '',
-    mobile: '',
-    message: '',
-    verify: '',
-    numberRule: [v => !!v || 'Required'],
-    emailRules: [
-      v => !!v || 'Required',
-      v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-    ],
-    rules: {
-      required: value => !!value || 'Required.',
-    },
-  }),
-  methods: {
-    clearForm() {
-      this.name = ''
-      this.email = ''
-      this.mobile = ''
-      this.message = ''
-    },
-    resetValidation() {
-      this.$refs.contactForm.resetValidation()
-    },
-    submit() {
-      if (!this.$refs.contactForm.validate()) return
-      // axios calling, actions will be dispatched asynchronously
-      this.$store
-          .dispatch('callApi', {
-            url: '/feedback',
-            method: 'post',
-            data: {
-              name: this.name,
-              email: this.email,
-              mobile: this.mobile,
-              message: this.message,
-            },
-          })
-          .then(() => {
-            this.status_text = 'Feedback send'
-            this.clearForm()
-            this.resetValidation()
-          })
-          .catch(() => {
-            this.status_text = 'Failed to response'
-          })
-    },
-  },
 }
 </script>

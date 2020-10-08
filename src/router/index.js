@@ -4,6 +4,10 @@ import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
 import JobsTab from "@/views/Employers/Jobs/JobsTab";
 import companiesTab from "@/views/Employers/companies/companiesTab";
 import userInfoDetails from "@/views/Employers/companies/UserInfo/userInfoDetails";
+import Contact from "@/views/JobAlart/Footer/Contact";
+import PrivacyPolicy from "@/views/JobAlart/Footer/PrivacyPolicy";
+import FAQSeekers from "@/views/JobAlart/Footer/FAQSeekers";
+import FAQCompany from "@/views/JobAlart/Footer/FAQCompany";
 // import login from '@/views/login_registration/Login.vue'
 
 /* import JobCard from '../views/JobAlart/JobCard'
@@ -95,6 +99,38 @@ const routes = [
     path: '/about-us',
     name: 'aboutUs',
     component: AboutUs,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/privacy-policy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/faq-for-job-seekers',
+    name: 'FAQSeekers',
+    component: FAQSeekers,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/faq-for-company',
+    name: 'FAQCompany',
+    component: FAQCompany,
     meta: {
       title: 'JobAlart'
     }
@@ -382,7 +418,7 @@ const router = new VueRouter({
   mode: 'history' /*mode: 'hash'*/
 })
 
-/* import VueCookies from 'vue-cookies';
+ import VueCookies from 'vue-cookies';
 import * as R from 'ramda';
 
 router.beforeEach((to, from, next) => {
@@ -415,5 +451,5 @@ router.beforeEach((to, from, next) => {
   console.log("router to...", to);
   console.log("router from...", from);
   console.log("router next...", next);
-}) */
+})
 export default router

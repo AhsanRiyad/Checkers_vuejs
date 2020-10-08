@@ -36,14 +36,6 @@
           </tr>
           </thead>
           <tbody>
-          <v-dialog v-model="loading" hide-overlay persistent width="300">
-            <v-card color="primary" dark>
-              <v-card-text>
-                Loading Data...
-                <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-              </v-card-text>
-            </v-card>
-          </v-dialog>
           <tr v-for="(job, i) in allJobs" :key="i">
             <td><p>{{ i + 1 }}</p></td>
             <td>
@@ -84,6 +76,14 @@
           <v-pagination v-model="pageNo" :length="length"></v-pagination>
         </div>
         <!--********** pagination end **************-->
+        <v-dialog v-model="modalLoading" hide-overlay persistent width="300">
+          <v-card color="primary" dark>
+            <v-card-text>
+              Loading Data...
+              <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </div>
       <!--********** Job applied table end **************-->
 
@@ -101,7 +101,7 @@ export default {
     allJobs: [],
     pageNo: 1,
     length: 0,
-    loading: true,
+    modalLoading: true,
     disabled: true
   }),
   computed: {
@@ -120,12 +120,12 @@ export default {
       return this.allJobs && this.allJobs.length
     },
   },
-  created() {
+mounted() {
     this.getAllJobs()
   },
   methods: {
     getAllJobs() {
-      this.loading = true
+      this.modalLoading = true
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -136,15 +136,14 @@ export default {
         url: `jobs/`,
         method: "get",
         params: {
-          limit: this.limit,
           page: this.pageNo
         },
         data: {},
         headers,
       })
           .then((response) => {
-            console.log("job list", response.data.data.jobs);
             this.allJobs = response.data.data.jobs;
+            this.modalLoading = false
             console.log("all jobasdasdvdasfvdfa", this.allJobs)
             // this.jobId =this.allJobs[3]
             for (let i = 0; i < this.allJobs.length; i++) {
@@ -155,15 +154,12 @@ export default {
               console.log("id jobssssssssss", this.jobId)
             }
 
-            // this.orders.find(({ id }) => id === this.orderId)
-            // this.jobId = this.allJobs.find((job_id) => job_id.id === id);
-            // this.job_status = response.data.items.job_status
             this.length = Math.round(
                 response.data.total_count /
                 response.data.num_items_per_page
             );
             console.log("page length", this.length)
-            // setTimeout(() => (this.loading = false), 1000)
+            // setTimeout(() => (this.modalLoading = false), 1000)
           })
           .catch((error) => {
             this.allJobs = []
@@ -171,8 +167,8 @@ export default {
             console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
           })
           .finally(() => {
+            this.modalLoading = false
             if (this.allJobs.length === 0) this.ShowAlertMsg = true;
-            this.loading = false
           });
     },
     getHumanDate: function (date) {
