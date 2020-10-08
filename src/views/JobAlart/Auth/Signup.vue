@@ -55,19 +55,6 @@
                     type="password"
                     @keyup.enter="submit"
                   ></v-text-field>
-
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: flex-end;
-                      margin-top: -15px;
-                    "
-                  >
-                    <router-link to="/forgot-password"
-                      >Forgot password?</router-link
-                    >
-                  </div>
-
                   <div
                     style="
                       display: flex;

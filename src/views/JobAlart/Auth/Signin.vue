@@ -8,12 +8,14 @@
 
             <v-card>
               <v-row justify="center">
-                <p class="text-center mb-n12 mt-4 header-text">Welcome back! Please Login</p>
+                <p class="text-center mb-n12 mt-4 header-text">
+                  Welcome back! Please Login
+                </p>
 
                 <v-col cols="10" md="10" class="col-1 mb-n4 pb-0">
                   <p class="mb-1">Email</p>
                   <v-text-field
-                    :rules="fieldRulesProp(true, 'email' , 'email')"
+                    :rules="fieldRulesProp(true, 'email', 'email')"
                     class="mb-0 pb-0 mb-0"
                     placeholder="Email"
                     outlined
@@ -21,14 +23,16 @@
                     v-model="email"
                     @keyup.enter="submit"
                   ></v-text-field>
-                  <p class="smallText mt-n3">We will never share your email with anyone</p>
+                  <p class="smallText mt-n3">
+                    We will never share your email with anyone
+                  </p>
                 </v-col>
 
                 <v-col cols="10" md="10" class="col-2 mb-0 pb-0">
                   <p class="mb-1">Password</p>
                   <v-text-field
                     class="mb-0"
-                    :rules="fieldRulesProp(true, 'password' , 'password')"
+                    :rules="fieldRulesProp(true, 'password', 'password')"
                     placeholder="Password"
                     outlined
                     v-model="password"
@@ -38,7 +42,9 @@
                   ></v-text-field>
 
                   <div style="display: flex; justify-content: flex-end">
-                    <router-link to="/forgot-password">Forgot password?</router-link>
+                    <router-link to="/forgot-password"
+                      >Forgot password?</router-link
+                    >
                   </div>
                 </v-col>
 
@@ -49,7 +55,8 @@
                     color="primary"
                     class="white--text"
                     @click.stop="submit()"
-                  >Login</v-btn>
+                    >Login</v-btn
+                  >
                 </v-col>
 
                 <v-col cols="10" md="10">
@@ -58,20 +65,23 @@
 
                 <v-col cols="10" md="10" class="mb-n6 mt-0">
                   <div class="text-center">
-                    <router-link :to="{ name: 'Signup' }">Create New Account</router-link>
+                    <router-link :to="{ name: 'Signup' }"
+                      >Create New Account</router-link
+                    >
                   </div>
                 </v-col>
 
                 <v-col cols="10" md="10" class="mb-n4 mt-0">
-                  <p class="smallText mt-0 mb-0">All your activity will remain private</p>
+                  <p class="smallText mt-0 mb-0">
+                    All your activity will remain private
+                  </p>
                 </v-col>
 
                 <v-col cols="10" md="10" class="mb-0 mt-0">
                   <p class="tocText">
                     By signing in to your account, you agree to JOB ALERT’s
-                    <span
-                      class="tocInsideText"
-                    >Terms of Service</span> and consent to our
+                    <span class="tocInsideText">Terms of Service</span> and
+                    consent to our
                     <span class="tocInsideText">Cookie Policy</span> and
                     <span class="tocInsideText">Privacy Policy</span> .
                   </p>
@@ -86,7 +96,7 @@
 </template>
 <script>
 import validation from "../../../mixins/validation";
-
+import axios from "axios";
 export default {
   name: "Signin",
   mixins: [validation],
@@ -96,11 +106,10 @@ export default {
       email: "",
       password: "",
       loading: false,
-      homePageUrl: '',
+      homePageUrl: "",
     };
   },
   methods: {
-
     submit() {
       if (!this.$refs.form.validate()) return;
 
@@ -113,7 +122,7 @@ export default {
           data: {
             email: this.email,
             password: this.password,
-            home_page_url: this.homePageUrl
+            home_page_url: this.homePageUrl,
           },
           params: {
             ip: this.$store.getters.userIp,
@@ -127,14 +136,13 @@ export default {
           this.$cookies.set("is_company", response.is_company);
           this.$cookies.set("_id", response.id);
           this.$store.commit("isLoggedIn", true);
-          this.homePageUrl = response.home_page_url
-
+          this.homePageUrl = response.home_page_url;
 
           setTimeout(() => {
-            if(response.is_company){
-              this.$router.history.push({name:"userInfo"})
-            }else {
-              this.$router.history.push({name:"biodata"})
+            if (response.is_company) {
+              this.$router.history.push({ name: "userInfo" });
+            } else {
+              this.$router.history.push({ name: "biodata" });
             }
             // this.$router.history.push({ name: "SearchJob" }); params: {homePageUrl:this.homePageUrl}
           }, 1000);
@@ -155,12 +163,7 @@ export default {
     },
   },
   mounted() {
-
     // this.$cookies.set("accessToken", null);
-    this.$cookies.remove("accessToken");
-    this.$cookies.remove("is_company");
-    this.$cookies.remove("_id");
-    this.$store.commit("isLoggedIn", false);
 
     // console.log("cookies", this.$cookies.get("accessToken"));
     /*
@@ -168,6 +171,31 @@ export default {
       " is logged in ",
       this.R.isEmpty(this.$cookies.get("accessToken"))
     ); */
+
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+
+    axios({
+      method: "get",
+      baseURL: this.$store.state.apiBase,
+      url: `users/logout`,
+      data: {},
+      params: {
+        access_token: this.$cookies.get("accessToken"),
+        ip: this.$store.getters.userIp,
+      },
+      headers,
+    })
+      .then(() => {})
+      .catch(() => {})
+      .finally(() => {
+        this.$cookies.remove("accessToken");
+        this.$cookies.remove("is_company");
+        this.$cookies.remove("_id");
+        this.$store.commit("isLoggedIn", false);
+      });
   },
 };
 </script>

@@ -214,6 +214,10 @@ export default {
           this.skills = response.data.skills;
           this.experiences = response.data.experiences;
           this.qualifications = response.data.qualification;
+          this.$store.commit("resume", response.data);
+
+          console.log(" resume console output... ", this.$store.getters.resume);
+
           // this.userId = response.data.applicationInfo.user_id;
           // this.shortListed = response.data.applicationInfo
 
