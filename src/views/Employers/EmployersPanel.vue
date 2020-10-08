@@ -76,9 +76,9 @@ export default {
   data: () => {
     return {
       items: [
-        { router:'/user-info', title: 'Basic Info', icon: 'mdi-view-dashboard' },
-        { router:'/company-list', title: 'Company', icon: 'mdi-image' },
-        { router:'/all-jobs', title: 'Job', icon: 'mdi-help-box' },
+        { router:'/user-details', title: 'Basic Info', icon: 'mdi-view-dashboard' },
+        { router:'/companies', title: 'Company', icon: 'mdi-image' },
+        { router:'/jobs', title: 'Job', icon: 'mdi-help-box' },
       ],
       right: null,
     }

@@ -100,6 +100,7 @@ export default {
     };
   },
   methods: {
+
     submit() {
       if (!this.$refs.form.validate()) return;
 
@@ -128,6 +129,7 @@ export default {
           this.$store.commit("isLoggedIn", true);
           this.homePageUrl = response.home_page_url
 
+
           setTimeout(() => {
             if(response.is_company){
               this.$router.history.push({name:"userInfo"})
@@ -153,6 +155,7 @@ export default {
     },
   },
   mounted() {
+
     // this.$cookies.set("accessToken", null);
     this.$cookies.remove("accessToken");
     this.$cookies.remove("is_company");

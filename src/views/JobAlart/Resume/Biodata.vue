@@ -69,7 +69,7 @@
 
                 <div class="biodata-second">
                   <div class="biodata-image-display">
-                    <v-avatar class="profile" color="grey" size="164" tile>
+                    <v-avatar class="profile" color="grey" size="164" >
                       <v-img
                         :src="$store.getters.imageUrl + imageUrl"
                         lazy-src="../../../assets/balgownie-avatar.jpg"

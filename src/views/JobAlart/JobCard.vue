@@ -185,7 +185,7 @@
                 </p>
               </v-list-item-content>
 
-              <v-list-item-avatar tile size="80" color="grey">
+              <v-list-item-avatar size="80" color="grey">
                 <img
                   src="https://cdn.vuetifyjs.com/images/john.jpg"
                   alt="John"
