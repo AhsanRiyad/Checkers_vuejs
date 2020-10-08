@@ -49,6 +49,9 @@ const PostedJobList = () => import("@/views/Employers/Jobs/PostedJobList")
 const recruiter = () => import("@/views/recruiter")
 
 
+//footer
+const AboutUs = () => import("../views/JobAlart/Footer/AboutUs")
+
 // import AddCompany from "@/views/Employers/Company/AddCompany";
 
 
@@ -80,6 +83,14 @@ const routes = [
     alias: '/',
     name: 'SearchJob',
     component: SearchJob,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/about-us',
+    name: 'aboutUs',
+    component: AboutUs,
     meta: {
       title: 'JobAlart'
     }
