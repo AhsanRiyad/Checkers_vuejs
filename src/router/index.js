@@ -52,6 +52,9 @@ const PostedJobList = () => import("@/views/Employers/Jobs/PostedJobList")
 const recruiter = () => import("@/views/recruiter")
 
 
+//footer
+const AboutUs = () => import("../views/JobAlart/Footer/AboutUs")
+
 // import AddCompany from "@/views/Employers/Company/AddCompany";
 
 
@@ -83,6 +86,14 @@ const routes = [
     alias: '/',
     name: 'SearchJob',
     component: SearchJob,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
+    path: '/about-us',
+    name: 'aboutUs',
+    component: AboutUs,
     meta: {
       title: 'JobAlart'
     }
@@ -245,6 +256,7 @@ const routes = [
   },
   {
     path: '/employers',
+    redirect: { name: 'userInfoDetails' },
     component: EmployersPanel,
     meta: {
       title: 'Employers Panel'
@@ -356,14 +368,13 @@ const routes = [
 
   //   jobs components routing end
 ]
-
 const router = new VueRouter({
   routes,
   mode: 'history' /*mode: 'hash'*/
 })
 
 // import VueCookies from 'vue-cookies';
-/* 
+/*
 router.beforeEach((to, from, next) => {
   // ...
   if (VueCookies.get('is_company') == true) {

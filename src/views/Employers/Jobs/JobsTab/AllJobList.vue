@@ -124,12 +124,6 @@ export default {
     this.getAllJobs()
   },
   methods: {
-    getHumanDate: function (date) {
-      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
-    },
-    goToJobDetails(jobId) {
-      this.$router.push({name: 'JobDetails', params: {id: jobId}})
-    },
     getAllJobs() {
       this.loading = true
       const headers = {
@@ -164,7 +158,6 @@ export default {
             // this.orders.find(({ id }) => id === this.orderId)
             // this.jobId = this.allJobs.find((job_id) => job_id.id === id);
             // this.job_status = response.data.items.job_status
-            this.loading = false
             this.length = Math.round(
                 response.data.total_count /
                 response.data.num_items_per_page
@@ -179,9 +172,16 @@ export default {
           })
           .finally(() => {
             if (this.allJobs.length === 0) this.ShowAlertMsg = true;
-
+            this.loading = false
           });
     },
+    getHumanDate: function (date) {
+      return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
+    },
+    goToJobDetails(jobId) {
+      this.$router.push({name: 'JobDetails', params: {id: jobId}})
+    },
+
 
   }
 }

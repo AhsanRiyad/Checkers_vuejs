@@ -1,6 +1,6 @@
 <template>
   <!-- footer starts -->
-  <v-container class="pb-0" fluid style>
+  <v-container class="pb-0 footer" fluid style>
     <v-row
       cols="12"
       offset-md="0"
@@ -12,38 +12,60 @@
       <v-container>
         <v-row>
           <v-col cols="6" md="3" class="text-md-left text-left">
-            <h3>About Us</h3>
-            <p class="mt-md-3">About Us</p>
-            <p class="mt-md-n3 mt-n4">Terms & Conditions</p>
-            <p class="mt-md-n3 mt-n4">International Partners</p>
-            <p class="mt-md-n3 mt-n4">Other Partners</p>
-            <p class="mt-md-n3 mt-n4">Privacy Policy</p>
-            <p class="mt-md-n3 mt-n4">Feedback</p>
-            <p class="mt-md-n3 mt-n4">Contact Us</p>
+            <h2  class="mb-3">About Us</h2>
+          <ul>
+            <li>
+              <router-link to="/about-us" class="mt-md-3">About Us</router-link>
+            </li>
+            <!--            <router-link to=/ class="mt-md-n3 mt-n4">Terms & Conditions</p>-->
+            <!--            <router-link to=/ class="mt-md-n3 mt-n4">International Partners</p>-->
+            <!--            <router-link to=/ class="mt-md-n3 mt-n4">Other Partners</p>-->
+            <li>
+              <router-link to="/privacy-policy" class="mt-md-n3 mt-n4">Privacy Policy</router-link>
+            </li>
+            <!--            <router-link to=/ class="mt-md-n3 mt-n4">Feedback</p>-->
+            <li>
+              <router-link to="/contact" class="mt-md-n3 mt-n4">Contact Us</router-link>
+            </li>
+          </ul>
           </v-col>
 
           <v-col cols="6" md="3" class="text-md-left text-left">
-            <h3>Job Seekers</h3>
-            <p class="mt-md-3">Create Account</p>
-            <p class="mt-md-n3 mt-n4">Career Counseling</p>
-            <p class="mt-md-n3 mt-n4">FAQ</p>
-            <p class="mt-md-n3 mt-n4">Video Guide</p>
+            <h2  class="mb-3">Job Seekers</h2>
+            <ul>
+              <li>
+                <router-link to="/" class="mt-md-3">Create Account</router-link>
+              </li>
+              <li>
+                <router-link to="/" class="mt-md-n3 mt-n4">Career Counseling</router-link>
+              </li>
+            </ul>
+<!--            <router-link to=/ class="mt-md-n3 mt-n4">FAQ</p>-->
+<!--            <router-link to=/ class="mt-md-n3 mt-n4">Video Guide</p>-->
           </v-col>
 
           <v-col cols="6" md="3" class="text-md-left text-left">
-            <h3>Employee</h3>
-            <p class="mt-md-3">Create Account</p>
-            <p class="mt-md-n3 mt-n4">Career Counseling</p>
-            <p class="mt-md-n3 mt-n4">FAQ</p>
-            <p class="mt-md-n3 mt-n4">Video Guide</p>
+            <h2  class="mb-3">Employee</h2>
+           <ul>
+             <li>
+               <router-link to="/" class="mt-md-3">Create Account</router-link>
+             </li>
+             <li>
+               <router-link to="/" class="mt-md-n3 mt-n4">Career Counseling</router-link>
+             </li>
+           </ul>
+<!--            <router-link to=/ class="mt-md-n3 mt-n4">FAQ</p>-->
+<!--            <router-link to=/ class="mt-md-n3 mt-n4">Video Guide</p>-->
           </v-col>
 
           <v-col cols="6" md="3" class="text-md-left text-left">
-            <h3>Social Media</h3>
-            <p class="mt-md-3">Facebook</p>
-            <p class="mt-md-n3 mt-n4">LinkedIn</p>
-            <p class="mt-md-n3 mt-n4">Youtube</p>
-            <p class="mt-md-n3 mt-n4">Google</p>
+            <h2  class="mb-3">Social Media</h2>
+            <ul>
+              <li><router-link to="/" class="mt-md-3">Facebook</router-link></li>
+              <li><router-link to="/" class="mt-md-n3 mt-n4">LinkedIn</router-link></li>
+              <li> <router-link to="/" class="mt-md-n3 mt-n4">Youtube</router-link></li>
+              <li><router-link to="/" class="mt-md-n3 mt-n4">Google</router-link></li>
+            </ul>
           </v-col>
         </v-row>
       </v-container>
@@ -52,6 +74,7 @@
   <!-- footer ends -->
 </template>
 <script>
+import "../../sass/_common.scss"
 export default {
   name: "Footer",
 };

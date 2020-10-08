@@ -116,13 +116,13 @@ export default {
         ["mdi-email", "Jobs", "/"],
         ["mdi-account-supervisor-circle", "Recruite", "/"],
         ["mdi-clock-start", "Login", "/"],
-        // ["mdi-clock-start", "Employeers/Job Post"],
+        ["mdi-clock-start", "Employeers/Job Post"],
         // ["mdi-clock-start", "Get Alerts"],
       ],
       menus: [
         ["mdi-account-settings-outline", "Account", "/account-settings"],
         ["mdi-account-supervisor-circle", "My Jobs", "/applied-jobs"],
-        ["mdi-clock-start", "Profile", "/"],
+        // ["mdi-clock-start", "Profile", "/"],
       ],
     };
   },
