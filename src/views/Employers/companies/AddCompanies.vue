@@ -2,10 +2,10 @@
   <v-container class="mainTemplate">
     <v-form ref="form">
       <v-row class="mainContainer">
-        <v-col cols="12" md="11" lg="11">
+        <v-col cols="12">
           <p class="h1Text">Create a Company</p>
           <v-row align="center">
-            <v-col cols="12" md="8" lg="8">
+            <v-col cols="12">
               <p>Company Name</p>
               <v-text-field
                   :rules="[v=>!!v||'required']"

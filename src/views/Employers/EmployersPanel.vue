@@ -7,11 +7,8 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="title">
-                  Application
+                  Company
                 </v-list-item-title>
-                <v-list-item-subtitle>
-                  subtext
-                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
 
@@ -79,7 +76,7 @@ export default {
   data: () => {
     return {
       items: [
-        { router:'/user-info', title: 'User Info', icon: 'mdi-view-dashboard' },
+        { router:'/user-info', title: 'Basic Info', icon: 'mdi-view-dashboard' },
         { router:'/company-list', title: 'Company', icon: 'mdi-image' },
         { router:'/all-jobs', title: 'Job', icon: 'mdi-help-box' },
       ],

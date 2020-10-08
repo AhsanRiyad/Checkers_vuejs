@@ -327,7 +327,6 @@ const routes = [
 
   //   jobs components routing end
 ]
-
 const router = new VueRouter({
   routes,
   mode: 'history' /*mode: 'hash'*/

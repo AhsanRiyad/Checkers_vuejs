@@ -7,10 +7,8 @@
             @click.stop="applicantShortListed"
             small
             class="ml-1 mr-1"
-            :color="applicantBiodata.short_listed ? 'success' : 'error'"
-            >{{
-              applicantBiodata.short_listed ? "Shortlisted" : "Not Shortlisted"
-            }}</v-btn
+            :color="is_shortlisted ? 'success' : 'error'"
+            >{{ is_shortlisted ? "Shortlisted" : "Not Shortlisted" }}</v-btn
           >
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
@@ -290,6 +288,7 @@ export default {
   mounted() {
     console.log("job id in app resume ", this.$store.getters.job);
     console.log("applicant biodata.... ", this.applicantBiodata);
+    this.appResume();
   },
   updated() {
     this.$nextTick(() => {
@@ -297,6 +296,9 @@ export default {
     });
   },
   computed: {
+    is_shortlisted() {
+      return this.applicantResume.short_listed;
+    },
     dialogVisible: {
       get: function () {
         return this.dialogShowing;
@@ -309,6 +311,52 @@ export default {
     },
   },
   methods: {
+    appResume() {
+      console.log("User id... applicant...reusme...", this.userId);
+      console.log("Job id", this.$store.getters.job);
+      // this.dialogShowing = true;
+      // this.loading = true;
+      this.$store
+        .dispatch("callApi", {
+          url: "resume/" + this.userId,
+          method: "get",
+          params: { job_id: this.$store.getters.job },
+          data: {},
+        })
+        .then((response) => {
+          console.log("Resume... applicant resume...", response);
+
+          /* this.applicantResume = response.data;
+          this.applicantBiodata = response.data.biodata;
+          this.skills = response.data.skills;
+          this.experiences = response.data.experiences;
+          this.qualifications = response.data.qualification;
+          this.userId = response.data.applicationInfo.user_id; */
+          // this.shortListed = response.data.applicationInfo
+          /* 
+          console.log("bio", response.data.biodata);
+          console.log("skills", response.data.skills);
+          console.log("experiencess", response.data.experiences);
+          console.log("qualifications", response.data.qualification); */
+          /*  for (let i = 0; i < this.qualifications.length; i++) {
+            this.exams = response.data.qualification[i].exam;
+            console.log("examss", this.exams);
+          } */
+          // this.applicntInfo = response.data.applicationInfo;
+          // console.log("applicants info", response.data.applicationInfo);
+
+          // setTimeout({
+          // }, 1000)
+          // this.dialog = true
+        })
+        .catch((error) => {
+          this.$awn.alert("Failed");
+          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+        })
+        .finally(() => {
+          // this.loading = false;
+        });
+    },
     applicantShortListed(event) {
       if (event) {
         event.preventDefault();

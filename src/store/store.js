@@ -10,10 +10,10 @@ import VueCookies from 'vue-cookies'
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-
 	state: {
 		apiBase: "http://13.58.205.236:8080/",
 		imageUrl: "http://f1.redspice.ae/public/",
+		// imageUrl: "http://18.222.77.254/imageprocess/public/",
 		ax: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
 			baseURL: "http://13.58.205.236:8080/",
@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
 		upload: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
 			baseURL: "http://f1.redspice.ae/public/api/",
+			// baseURL: "http://18.222.77.254/imageprocess/public/index.php/api/",
 			// withCredentials: true,
 			// crossDomain: true
 		}),
@@ -38,6 +39,7 @@ export const store = new Vuex.Store({
 		jobDetails: {},
 		jobDetailsSearch: {},
 		job: {},
+		userId_resume: "",
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
@@ -53,6 +55,7 @@ export const store = new Vuex.Store({
 		jobDetails(state, payload) { state.jobDetails = payload },
 		jobDetailsSearch(state, payload) { state.jobDetailsSearch = payload },
 		job(state, payload) { state.job = payload },
+		userId_resume(state, payload) { state.userId_resume = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -70,6 +73,7 @@ export const store = new Vuex.Store({
 		jobDetailsSearch: state => state.jobDetailsSearch,
 		job: state => state.job,
 		apiBase: state => state.apiBase,
+		userId_resume: state => state.userId_resume,
 	},
 	actions: {
 		callApi: (context, info) => {
