@@ -69,7 +69,7 @@
 
                 <div class="biodata-second">
                   <div class="biodata-image-display">
-                    <v-avatar class="profile" color="grey" size="164" >
+                    <v-avatar class="profile" color="grey" size="164">
                       <v-img
                         :src="$store.getters.imageUrl + imageUrl"
                         lazy-src="../../../assets/balgownie-avatar.jpg"
@@ -149,10 +149,10 @@
                   <v-text-field
                     background-color="white"
                     class="mb-0"
-                    :rules="[(v) => !!v || 'email is required']"
                     placeholder="Enter your address"
                     outlined
                     dense
+                    :rules="fieldRulesProp(false, 'email', 'email')"
                     @keyup="saveData"
                     v-model="biodata.contact_email"
                   ></v-text-field>
@@ -411,11 +411,12 @@
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
+import validation from "../../../mixins/validation";
 // import { eventBus } from '@/main';
 // import axios from 'axios';
 export default {
   name: "Biodata",
+  mixins: [validation],
   components: {
     optionTab: () => import("./tab/optionTab"),
     resumePreview: () => import("../Dialog/resumePreview"),
