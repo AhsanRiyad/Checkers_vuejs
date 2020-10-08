@@ -7,7 +7,11 @@
           <h1 class="job_title">{{ jobs.job_title }}</h1>
         </div>
         <div class="ja_right_card">
-          <v-btn @click="editJob(jobs.id)" class="text--white" color="blue-grey">
+          <v-btn
+            @click="editJob(jobs.id)"
+            class="text--white"
+            color="blue-grey"
+          >
             <v-icon>launch</v-icon>
             edit
           </v-btn>
@@ -31,14 +35,14 @@
             <p class="jd_title">job type</p>
             <div class="jd_status">
               <v-icon size="18">description</v-icon>
-              <span v-if="jobs.type_in_text">{{jobs.type_in_text}}</span>
+              <span v-if="jobs.type_in_text">{{ jobs.type_in_text }}</span>
             </div>
           </li>
           <li class="jd_list">
             <p class="jd_title">published on</p>
             <div class="jd_status">
               <v-icon size="18">calendar_today</v-icon>
-              <span>{{getHumanDate(jobs.live_at)}}</span>
+              <span>{{ getHumanDate(jobs.live_at) }}</span>
             </div>
           </li>
         </ul>
@@ -65,9 +69,7 @@
         <v-row align="center">
           <v-col cols="12" md="8">
             <v-tabs v-model="tabs">
-              <v-tab class="job_tab"
-              >Applicants ({{ totalApplicants }})</v-tab
-              >
+              <v-tab class="job_tab">Applicants ({{ totalApplicants }})</v-tab>
               <v-tab class="job_tab">Shortlisted</v-tab>
               <v-tab class="job_tab">Job Preview</v-tab>
             </v-tabs>
@@ -75,21 +77,21 @@
           <v-col cols="12" md="4" v-if="false">
             <div class="tab-right_side d-flex">
               <v-text-field
-                  dense
-                  class="mx-4"
-                  flat
-                  hide-details
-                  label="Search job by title"
-                  append-icon="search"
-                  solo-inverted
+                dense
+                class="mx-4"
+                flat
+                hide-details
+                label="Search job by title"
+                append-icon="search"
+                solo-inverted
               ></v-text-field>
               <!--                  v-model="dateRangeText"-->
               <v-text-field
-                  outlined
-                  dense
-                  placeholder="Date range"
-                  prepend-inner-icon="event"
-                  single-line
+                outlined
+                dense
+                placeholder="Date range"
+                prepend-inner-icon="event"
+                single-line
               ></v-text-field>
             </div>
           </v-col>
@@ -99,15 +101,15 @@
       <v-tabs-items v-model="tabs">
         <v-tab-item>
           <applicant-list
-              :loading-applicant="loadingApplicant"
-              :page="pageNo"
-              :length="length"
-              :total-exp="totalExp"
-              :biodata="biodata"
-              :job-appliers="jobAppliers"
-              :experience="experience"
-              :qualification="qualification"
-              :applicant="applicant"
+            :loading-applicant="loadingApplicant"
+            :page="pageNo"
+            :length="length"
+            :total-exp="totalExp"
+            :biodata="biodata"
+            :job-appliers="jobAppliers"
+            :experience="experience"
+            :qualification="qualification"
+            :applicant="applicant"
           />
         </v-tab-item>
         <v-tab-item>
@@ -172,7 +174,7 @@ export default {
         method: "get",
         params: {
           page: this.pageNo,
-          short_list : this.shortList
+          short_list: this.shortList,
         },
         data: {},
         headers,
@@ -227,8 +229,8 @@ export default {
           if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
         });
     },
-    editJob: function (id){
-      this.$router.history.push({name: 'AddJobs', params: {id: id}})
+    editJob: function (id) {
+      this.$router.history.push({ name: "AddJobs", params: { id: id } });
     },
     getHumanDate: function (date) {
       return moment(date, "YYYY-MM-DD").format("MMM Do YY");

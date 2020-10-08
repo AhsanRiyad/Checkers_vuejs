@@ -7,7 +7,7 @@
            <p class="h1Text text-left ma-0" >User Basic Info</p>
          </v-col>
          <v-col cols="12" md="6" lg="6" class="text-right">
-           <v-btn small @click.stop="editInfo(userDetails.id)" id="edit_btn" class="interactn c-grey">
+           <v-btn small @click.stop="()=>editInfo(userDetails.id)" id="edit_btn" class="interactn c-grey">
              <v-icon size="15">mdi-square-edit-outline</v-icon>
              edit
            </v-btn>

@@ -45,6 +45,7 @@ const education = () => import("../views/JobAlart/Resume/Education")
 const pricingTable = () => import("@/views/JobAlart/pricingTable")
 
 const forgotPassword = () => import("../views/JobAlart/AccountSettings/forgotPassword")
+const changeForgotPassword = () => import("../views/JobAlart/AccountSettings/changeForgotPassword")
 const AddCompanies = () => import("@/views/Employers/companies/AddCompanies")
 const userInfo = () => import("@/views/Employers/companies/UserInfo/userInfo")
 const CompanyList = () => import("@/views/Employers/companies/CompanyList")
@@ -220,6 +221,14 @@ const routes = [
     }
   },
   {
+    path: '/users/new-password/:code',
+    name: 'changeForgotPassword',
+    component: changeForgotPassword,
+    meta: {
+      title: 'Change Password'
+    }
+  },
+  {
     path: '/add-number',
     name: 'addNumber',
     component: addNumber,
@@ -373,10 +382,19 @@ const router = new VueRouter({
   mode: 'history' /*mode: 'hash'*/
 })
 
-// import VueCookies from 'vue-cookies';
-/*
+/* import VueCookies from 'vue-cookies';
+import * as R from 'ramda';
+
 router.beforeEach((to, from, next) => {
   // ...
+
+  if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
+    if (to.name == "search") {
+      next();
+      return;
+    }
+  }
+
   if (VueCookies.get('is_company') == true) {
     console.log("is compnay", VueCookies.get('is_company'));
 

@@ -29,16 +29,16 @@
       <div class="defaultResume-title">
         <div class="dr-main-text-div">
           <p class="defaultResume-title-text">
-            {{ applicantBiodata.full_name }}
+            {{ getResume.biodata.full_name }}
           </p>
-          <p>Mobile: {{ applicantBiodata.mobile_number }}</p>
-          <p>Email: {{ applicantBiodata.contact_email }}</p>
+          <p>Mobile: {{ getResume.biodata.mobile_number }}</p>
+          <p>Email: {{ getResume.biodata.contact_email }}</p>
         </div>
 
         <div class="dr-title-photo">
           <v-avatar size="150">
             <img
-              :src="this.$store.getters.imageUrl + applicantBiodata.photo"
+              :src="this.$store.getters.imageUrl + getResume.biodata.photo"
               alt="John"
             />
           </v-avatar>
@@ -49,14 +49,14 @@
       <!-- section-2 starts -->
       <div class="dr-career-objective">
         <p class="dr-title-all">Career Objective:</p>
-        <div v-html="applicantBiodata.objectives"></div>
+        <div v-html="getResume.biodata.objectives"></div>
       </div>
       <!-- section-2 ends -->
 
       <!-- section-3 starts -->
       <div class="dr-career-objective">
         <p class="dr-title-all">Career Description:</p>
-        <div v-html="applicantBiodata.career_description"></div>
+        <div v-html="getResume.biodata.career_description"></div>
       </div>
       <!-- section-3 ends -->
 
@@ -296,6 +296,9 @@ export default {
     });
   },
   computed: {
+    getResume() {
+      return this.$store.getters.resume.payload;
+    },
     is_shortlisted() {
       return this.applicantResume.short_listed;
     },
