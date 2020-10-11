@@ -1,7 +1,7 @@
 <template>
 <div>
   <Header></Header>
-  <span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover', 'display': 'block',  'height': '100%'}" >
+  <span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover', 'display': 'block'}" >
     <router-view></router-view>
   </span>
   <Footer></Footer>
