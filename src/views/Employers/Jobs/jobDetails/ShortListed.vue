@@ -102,6 +102,7 @@
       <!-- job apply modal starts-->
       <v-dialog v-model="dialogShow" width="900">
         <applicant-resume-modal
+          @closeD="dialogShow = false"
           :user-id="userId"
           :applicantShortListedResume="applicantShortListedResume"
         />
@@ -145,6 +146,7 @@ import "../../../../sass/employers/_jobs.scss";
 import "../../../../sass/job-alart/ResumeLayout/_default.scss";
 import axios from "axios";
 import moment from "moment";
+import { eventBus } from "@/main";
 export default {
   name: "ShortListed",
   components: {
@@ -166,6 +168,9 @@ export default {
   },
   created() {
     this.getApplicantList();
+    eventBus.$on("updateApplicantList", () => {
+      this.getApplicantList();
+    });
   },
   mounted() {
     console.log("job id in app resume ", this.$store.getters.job);

@@ -129,6 +129,7 @@
           :user-id="userId"
           :dialogShowing="dialogShowing"
           :applicant-resume="applicantResume"
+          @closeD="dialogShowing = false"
         />
       </v-dialog>
 

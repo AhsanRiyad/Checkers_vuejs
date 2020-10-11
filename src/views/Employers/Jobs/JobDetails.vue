@@ -82,7 +82,9 @@
           <v-col cols="12" md="8">
             <v-tabs v-model="tabs">
               <v-tab class="job_tab">Applicants ({{ totalApplicants }})</v-tab>
-              <v-tab class="job_tab">Shortlisted ({{totalApplicantShortlist}})</v-tab>
+              <v-tab class="job_tab"
+                >Shortlisted ({{ totalApplicantShortlist }})</v-tab
+              >
               <v-tab class="job_tab">Job Preview</v-tab>
             </v-tabs>
           </v-col>
@@ -171,15 +173,16 @@ export default {
       jobResponsibility: {},
       loadingApplicant: true,
       imageUrl: "",
-      applicantShortListed: []
+      applicantShortListed: [],
     };
   },
   created() {
     this.getApplicantList();
-    this.getApplicantShortList()
+    this.getApplicantShortList();
 
     eventBus.$on("updateApplicantList", () => {
       this.getApplicantList();
+      this.getApplicantShortList();
     });
   },
   computed: {
@@ -239,7 +242,7 @@ export default {
           if (this.applicant.length === 0) this.ShowAlertMsg = true;
         });
     },
-    getApplicantShortList(){
+    getApplicantShortList() {
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -256,29 +259,29 @@ export default {
         data: {},
         headers,
       })
-          .then((response) => {
-            console.log("Applicant list shortlist", response.data);
-            console.log("job list", response.data.job);
-            console.log("qualification", this.qualification);
-            this.applicantShortListed = response.data.data;
-            this.jobs = response.data.job;
-            this.jobId = response.data.job.id;
-            // this.$store.commit("job", this.jobId);
-            console.log("job id", this.jobId);
-            this.loadingApplicant = false;
-            this.length = Math.round(response.data.total / response.data.page);
-            console.log("page length", this.length);
-            // setTimeout(() => (this.loadingApplicant = false), 1000)
-          })
-          .catch((error) => {
-            this.applicantShortListed = [];
-            this.$awn.alert("Failed");
-            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-          })
-          .finally(() => {
-            this.modalSkeleton = false;
-            if (this.applicantShortListed.length === 0) this.ShowAlertMsg = true;
-          });
+        .then((response) => {
+          console.log("Applicant list shortlist", response.data);
+          console.log("job list", response.data.job);
+          console.log("qualification", this.qualification);
+          this.applicantShortListed = response.data.data;
+          this.jobs = response.data.job;
+          this.jobId = response.data.job.id;
+          // this.$store.commit("job", this.jobId);
+          console.log("job id", this.jobId);
+          this.loadingApplicant = false;
+          this.length = Math.round(response.data.total / response.data.page);
+          console.log("page length", this.length);
+          // setTimeout(() => (this.loadingApplicant = false), 1000)
+        })
+        .catch((error) => {
+          this.applicantShortListed = [];
+          this.$awn.alert("Failed");
+          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
+        })
+        .finally(() => {
+          this.modalSkeleton = false;
+          if (this.applicantShortListed.length === 0) this.ShowAlertMsg = true;
+        });
     },
     editJob: function (id) {
       this.$router.history.push({ name: "AddJobs", params: { id: id } });

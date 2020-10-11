@@ -14,7 +14,7 @@
           >
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
-              @click.stop="dialog = true"
+            @click.stop="dialog = true"
             small
             class="ml-1 mr-1"
             color="primary"
@@ -29,7 +29,7 @@
           >
         </div>
         <div class="close_btn">
-          <v-btn small icon @click.stop.prevent="dialogShowing = false"
+          <v-btn small icon @click.stop.prevent="$emit('closeD')"
             ><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn
           >
         </div>
