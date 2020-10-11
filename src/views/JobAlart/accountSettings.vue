@@ -11,7 +11,7 @@
               <li>
                 <div class="left__side">
                   <div class="top__text">Email:</div>
-                  <div class="bottom__text">{{userEmail}}</div>
+                  <div class="bottom__text">{{ $cookies.get("email") }}</div>
                 </div>
                 <div class="right__side">
                   <router-link to="/change-email"
@@ -69,13 +69,14 @@ export default {
   name: "accountSettings",
   data: () => {
     return {
-      userEmail: ''
-    }},
+      userEmail: "",
+    };
+  },
   created() {
-    this.getEmail()
+    this.getEmail();
   },
   methods: {
-    getEmail(){
+    getEmail() {
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -88,17 +89,16 @@ export default {
         data: {},
         headers,
       })
-          .then((response) => {
-            this.userEmail = response.data.email
-            console.log("farznaan emaillllllllllllllllllll",response);
+        .then((response) => {
+          this.userEmail = response.data.email;
+          console.log("farznaan emaillllllllllllllllllll", response);
 
-            this.$awn.success("Successful");
-          })
-          .catch(() => {
-            this.$awn.alert("Failed");
-          })
-
+          this.$awn.success("Successful");
+        })
+        .catch(() => {
+          this.$awn.alert("Failed");
+        });
     },
-  }
+  },
 };
 </script>

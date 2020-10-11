@@ -133,6 +133,7 @@ export default {
           this.$awn.success("Successful");
           localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("accessToken", response.access_token);
+          this.$cookies.set("email", this.email);
           this.$cookies.set("is_company", response.is_company);
           this.$store.commit("is_company", response.is_company);
           this.$cookies.set("_id", response.id);
