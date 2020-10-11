@@ -562,7 +562,7 @@ export default {
 
       let spaceGap = 0 * window.devicePixelRatio;
       // if (window.innerHeight > 900) spaceGap = 280 * window.devicePixelRatio;
-      if (window.innerHeight > 900) spaceGap = 220 * window.devicePixelRatio;
+      if (window.innerHeight > 900) spaceGap = 245 * window.devicePixelRatio;
       else if (window.innerHeight < 700)
         spaceGap = 225 * window.devicePixelRatio;
       else spaceGap = 225 * window.devicePixelRatio;
