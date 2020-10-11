@@ -102,20 +102,25 @@
 
       <v-tabs-items v-model="tabs">
         <v-tab-item>
-          <applicant-list
-            :loading-applicant="loadingApplicant"
-            :page="pageNo"
-            :length="length"
-            :total-exp="totalExp"
-            :biodata="biodata"
-            :job-appliers="jobAppliers"
-            :experience="experience"
-            :qualification="qualification"
-            :applicant="applicant"
-          />
+          <applicant-list  :loading-applicant="loadingApplicant"
+                           :page="pageNo"
+                           :length="length"
+                           :total-exp="totalExp"
+                           :biodata="biodata"
+                           :job-appliers="jobAppliers"
+                           :experience="experience"
+                           :qualification="qualification"
+                           :applicant="applicant">
+
+            <!--********** pagination start **************-->
+            <div class="pagination">
+              <v-pagination v-model="pageNo" :length="length"></v-pagination>
+            </div>
+            <!--********** pagination end **************-->
+          </applicant-list>
         </v-tab-item>
         <v-tab-item>
-          <short-listed />
+         <short-listed></short-listed>
         </v-tab-item>
         <v-tab-item>
           <job-preview :jobs="jobs" />
@@ -218,7 +223,7 @@ export default {
           // this.job_status = response.data.items.job_status
           this.loadingApplicant = false;
           this.length = Math.round(response.data.total / response.data.page);
-          console.log("page length", this.length);
+          console.log("page length of applicant list", this.length);
           // setTimeout(() => (this.loadingApplicant = false), 1000)
         })
         .catch((error) => {

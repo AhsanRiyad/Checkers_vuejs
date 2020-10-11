@@ -65,7 +65,7 @@
         </table>
         <!--********** pagination start **************-->
         <div class="pagination">
-          <v-pagination v-model="pageNo" :all-job-length="length"></v-pagination>
+          <v-pagination v-model="pageNo" :all-job-length="allJobLength"></v-pagination>
         </div>
         <!--********** pagination end **************-->
         <v-dialog v-model="modalLoading" hide-overlay persistent width="300">
@@ -92,7 +92,7 @@ export default {
   data: () => ({
     allJobs: [],
     pageNo: 1,
-    length: 0,
+    allJobLength: 0,
     modalLoading: true,
     disabled: true
   }),
@@ -136,7 +136,7 @@ mounted() {
           .then((response) => {
             this.allJobs = response.data.data.jobs;
             this.modalLoading = false
-            console.log("all jobasdasdvdasfvdfa", this.allJobs)
+            console.log("all jobasdasdvdasfvdfa", response.data.data)
             // this.jobId =this.allJobs[3]
             for (let i = 0; i < this.allJobs.length; i++) {
               console.log("job index i", i) // returns the numbered index
@@ -146,11 +146,11 @@ mounted() {
               console.log("id jobssssssssss", this.jobId)
             }
 
-            this.length = Math.round(
+            this.allJobLength = Math.round(
                 response.data.total_count /
                 response.data.num_items_per_page
             );
-            console.log("page length", this.length)
+            console.log("pagefddddddddg length", this.allJobLength)
             // setTimeout(() => (this.modalLoading = false), 1000)
           })
           .catch((error) => {

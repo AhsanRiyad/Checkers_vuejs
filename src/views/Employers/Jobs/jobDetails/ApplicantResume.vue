@@ -232,6 +232,7 @@
                 ]"
                 color="deep-purple"
                 label="Interview Message"
+                hint="Description must be 160 characters or less"
                 rows="4"
               ></v-textarea>
             </v-form>

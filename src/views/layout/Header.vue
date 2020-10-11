@@ -110,7 +110,7 @@ export default {
         ["mdi-email", "Jobs", "/"],
         ["mdi-account-supervisor-circle", "Recruiter", "/"],
         ["mdi-clock-start", "Login", "/"],
-        ["mdi-clock-start", "Employeers/Job Post"],
+        ["mdi-clock-start", "Employeers/Job Post", "/"],
         // ["mdi-clock-start", "Get Alerts"],
       ],
       menus: [
@@ -137,13 +137,13 @@ export default {
       this.$cookies.get("accessToken")
     );
   },
-  // methods: {
-  //   gotoRecruiter(){
-  //     //alert('here');
-  //     this.$router.history.push({name: 'recruiter'})
-  //     location.reload();
-  //
-  //   }
-  // }
+  methods: {
+    gotoRecruiter(){
+      //alert('here');
+      this.$router.history.push({name: 'recruiter'})
+      // location.reload();
+
+    }
+  }
 };
 </script>

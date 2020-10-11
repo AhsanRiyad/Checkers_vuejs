@@ -139,11 +139,6 @@
       </v-dialog>
 
       <!-- job apply modal ends-->
-      <!--********** pagination start **************-->
-      <div class="pagination">
-        <v-pagination v-model="pageNo" :length="length"></v-pagination>
-      </div>
-      <!--********** pagination end **************-->
     </v-card>
   </div>
 </template>
@@ -165,9 +160,6 @@ export default {
     qualification: Array,
     jobAppliers: Array,
     totalExp: Object,
-    length: Number,
-    pageNo: Number,
-    // jobId: String,
     jobResponsibilities: Array,
     loadingApplicant: Boolean,
   },
