@@ -177,6 +177,7 @@ export default {
     },
     showApplicantResume(userId) {
       console.log("User id", userId);
+      this.userId = userId;
       this.$store.commit("userId_resume", userId);
       this.dialogShowing = true;
       this.loading = true;
