@@ -13,7 +13,17 @@
             }}</v-btn
           >
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
+<<<<<<< HEAD
           <v-btn small class="ml-1 mr-1" color="primary">Interview Call</v-btn>
+=======
+          <v-btn
+              @click.stop="dialog = true"
+            small
+            class="ml-1 mr-1"
+            color="primary"
+            >Interview Call</v-btn
+          >
+>>>>>>> 24a900016a99a77e6242ffc7ce4282ed0d51045d
           <v-btn
             @click.stop="downloadResume"
             small
