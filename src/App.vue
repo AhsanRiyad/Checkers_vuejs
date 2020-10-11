@@ -47,6 +47,19 @@ export default {
     } else {
       this.$store.commit("isLoggedIn", true);
     }
+    /* if (
+      this.R.isNil(this.$cookies.get("is_company")) ||
+      this.R.isEmpty(this.$cookies.get("is_company"))
+    ) {
+      this.$store.commit("is_company", false);
+    } else {
+      if (this.$cookies.get("is_company") == true) {
+        console.log("is compnay... in the app.vue true");
+        this.$store.commit("is_company", true);
+      } else {
+        this.$store.commit("is_company", false);
+      }
+    } */
   },
   updated() {
     this.getCommonInfo();

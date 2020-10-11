@@ -11,7 +11,6 @@
 
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
-<<<<<<< HEAD
         <v-btn router to="/" text color="white">Jobs</v-btn>
         <v-btn text router @click.stop="gotoRecruiter" color="white"
           >Recruiters</v-btn
@@ -20,18 +19,8 @@
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
         <v-btn
-          v-if="$store.getters.is_company == true"
+          v-show="$store.getters.is_company"
           router
-=======
-        <v-btn router-link to="/" text color="white">Jobs</v-btn>
-        <v-btn text router @click="gotoRecruiter()" color="white">Recruiters</v-btn>
-        <v-btn router-link to="/signin" text color="white">{{
-          $store.getters.isLoggedIn ? "Logout" : "Login"
-        }}</v-btn>
-        <v-btn
-          v-if="$cookies.get('is_company') == true"
-          router-link
->>>>>>> 4bdcbf9cf80c6db8528752428e4c554410a6f15c
           to="/employers"
           text
           color="white"
@@ -144,27 +133,32 @@ export default {
       }
     },
     is_company() {
-      /* if (this.$cookies.get("is_company") == true) return true;
-      else return false; */
-      this.$nextTick(() => {
-        console.log(
-          "is company computed.... ",
-          this.$cookies.get("is_company")
-        );
-      });
-
-      return true;
+      if (
+        this.R.isNil(this.$cookies.get("is_company")) ||
+        this.R.isEmpty(this.$cookies.get("is_company"))
+      ) {
+        this.$store.commit("is_company", false);
+        return false;
+      } else {
+        if (this.$cookies.get("is_company") == true) {
+          console.log("is compnay... in the app.vue true");
+          this.$store.commit("is_company", true);
+          return true;
+        } else {
+          this.$store.commit("is_company", false);
+          return false;
+        }
+      }
     },
   },
   mounted() {
-    this.$store.commit("is_company", this.$cookies.get("is_company"));
+    // this.$store.commit("is_company", this.$cookies.get("is_company"));
     console.log("this is is_company...", this.$store.getters.is_company);
     console.log(
       "logged in check in the header...",
       this.$cookies.get("accessToken")
     );
   },
-<<<<<<< HEAD
   methods: {
     gotoRecruiter() {
       //alert('here');
@@ -172,15 +166,5 @@ export default {
       // location.reload();
     },
   },
-=======
-  // methods: {
-  //   gotoRecruiter(){
-  //     //alert('here');
-  //     this.$router.history.push({name: 'recruiter'})
-  //     location.reload();
-  //
-  //   }
-  // }
->>>>>>> 4bdcbf9cf80c6db8528752428e4c554410a6f15c
 };
 </script>

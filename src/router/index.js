@@ -418,7 +418,6 @@ const router = new VueRouter({
   mode: 'history' /*mode: 'hash'*/
 })
 
-<<<<<<< HEAD
 /* import VueCookies from 'vue-cookies';
 import * as R from 'ramda';
 
@@ -452,40 +451,4 @@ router.beforeEach((to, from, next) => {
   console.log("router from...", from);
   console.log("router next...", next);
 }) */
-=======
-// import VueCookies from 'vue-cookies';
-// import * as R from 'ramda';
-//
-// router.beforeEach((to, from, next) => {
-//   // ...
-//
-//   if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
-//     if (to.name == "search") {
-//       next();
-//       return;
-//     }
-//   }
-//
-//   if (VueCookies.get('is_company') == true) {
-//     console.log("is compnay", VueCookies.get('is_company'));
-//
-//     if (to.name == "resume" || to.name == "biodata" || to.name == "workExperience" || to.name == "education" || to.name == "appliedJobs") {
-//       next({ name: 'search' });
-//       return;
-//     }
-//     next();
-//   } else {
-//     console.log("is not compnay", VueCookies.get('is_company'));
-//     if (to.name == "PostedJobList" || to.name == "EmployersPanel" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails"
-//     ) {
-//       next({ name: 'search' });
-//       return;
-//     }
-//     next();
-//   }
-//   console.log("router to...", to);
-//   console.log("router from...", from);
-//   console.log("router next...", next);
-// })
->>>>>>> 4bdcbf9cf80c6db8528752428e4c554410a6f15c
 export default router
