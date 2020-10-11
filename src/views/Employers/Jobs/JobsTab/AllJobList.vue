@@ -24,14 +24,6 @@
               <v-icon>mdi-bell-ring</v-icon>
               Job Status
             </th>
-            <!--                  <th>-->
-            <!--                    <v-icon>mdi-file-multiple-outline</v-icon>-->
-            <!--                    Application-->
-            <!--                  </th>-->
-            <!--                  <th class="text-center">-->
-            <!--                    <v-icon>mdi-format-list-bulleted</v-icon>-->
-            <!--                    Short-listed-->
-            <!--                  </th>-->
             <th class="text-center">Actions</th>
           </tr>
           </thead>
@@ -73,7 +65,7 @@
         </table>
         <!--********** pagination start **************-->
         <div class="pagination">
-          <v-pagination v-model="pageNo" :length="length"></v-pagination>
+          <v-pagination v-model="pageNo" :all-job-length="length"></v-pagination>
         </div>
         <!--********** pagination end **************-->
         <v-dialog v-model="modalLoading" hide-overlay persistent width="300">

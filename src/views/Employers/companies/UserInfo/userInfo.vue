@@ -39,7 +39,6 @@
                   dense
                   single-line
                   v-model="companyInfo.official_phone"
-                  @validate="validate"
                   :required="true"
                   background-color="white"
                   :validCharactersOnly="true"

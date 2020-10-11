@@ -29,19 +29,21 @@
         <ul class="d-flex jd_border jd_left_card">
           <li class="jd_list">
             <p class="jd_title">job status</p>
-            <div class="jd_status"><span>expired</span></div>
+            <div class="jd_status" v-if="jobs.is_lived"><span class="green--text">Live</span></div>
+            <div class="jd_status" v-else-if="jobs.is_expired"><span class="red--text">Expired</span></div>
+            <div class="jd_status" v-else><span class="blue--text">Draft</span></div>
           </li>
           <li class="jd_list">
             <p class="jd_title">job type</p>
             <div class="jd_status">
-              <v-icon size="18">description</v-icon>
+              <v-icon  style="line-height: 0 !important;" size="20">description</v-icon>
               <span v-if="jobs.type_in_text">{{ jobs.type_in_text }}</span>
             </div>
           </li>
           <li class="jd_list">
             <p class="jd_title">published on</p>
             <div class="jd_status">
-              <v-icon size="18">calendar_today</v-icon>
+              <v-icon style="line-height: 0 !important;" size="20">calendar_today</v-icon>
               <span>{{ getHumanDate(jobs.live_at) }}</span>
             </div>
           </li>
