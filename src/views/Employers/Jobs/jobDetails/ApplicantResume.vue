@@ -7,14 +7,14 @@
             @click.stop="applicantShortListed"
             small
             class="ml-1 mr-1"
-            :color="getResume.short_listed ? 'success' : 'error'"
+            :color="getResume.short_listed ? 'error' : 'success'"
             >{{
-              getResume.short_listed ? "Shortlisted" : "Not Shortlisted"
+              getResume.short_listed ? "Not Shortlisted" : "Shortlisted"
             }}</v-btn
           >
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
-              @click.stop="dialog = true"
+            @click.stop="dialog = true"
             small
             class="ml-1 mr-1"
             color="primary"
@@ -29,7 +29,7 @@
           >
         </div>
         <div class="close_btn">
-          <v-btn small icon @click.stop.prevent="dialogShowing = false"
+          <v-btn small icon @click.stop.prevent="$emit('closeD')"
             ><v-icon class="grey--text text--darken-4">mdi-close</v-icon></v-btn
           >
         </div>
@@ -284,7 +284,7 @@ export default {
     exams: Object,
     userId: String,
     dialogShowing: Boolean,
-    dialogShow: Boolean
+    dialogShow: Boolean,
   },
   data() {
     return {
@@ -340,32 +340,32 @@ export default {
       console.log("download resume");
       //file download
       this.$store
-          .dispatch("callApi", {
-            url: `resume/applicant/${this.userId}/${this.$store.getters.job}`,
-            method: "get",
-            data: {},
-          })
-          .then((response) => {
-            console.log("login image", response.file);
-            let url = `http://3.17.234.251/jobsresume/resumes/public/${
-                response.file
-            }?access_token=${this.$cookies.get("accessToken")}`;
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", "file.pdf"); //or any other extension
-            link.setAttribute("target", "_blank"); //or any other extension
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          })
-          .catch(() => {
-            this.$awn.alert("Failed! Email/Password doesn't match");
-            // this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            this.loading = false;
-            //  this.tableLoading = false;
-          });
+        .dispatch("callApi", {
+          url: `resume/applicant/${this.userId}/${this.$store.getters.job}`,
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log("login image", response.file);
+          let url = `http://3.17.234.251/jobsresume/resumes/public/${
+            response.file
+          }?access_token=${this.$cookies.get("accessToken")}`;
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "file.pdf"); //or any other extension
+          link.setAttribute("target", "_blank"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          // this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          //  this.tableLoading = false;
+        });
     },
     appResume() {
       console.log("User id... applicant...reusme...", this.userId);
