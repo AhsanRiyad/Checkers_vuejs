@@ -114,8 +114,6 @@
         <v-tab-item>
           <applicant-list
             :loading-applicant="loadingApplicant"
-            :page="pageNo"
-            :length="length"
             :total-exp="totalExp"
             :biodata="biodata"
             :job-appliers="jobAppliers"
@@ -125,7 +123,10 @@
           >
             <!--********** pagination start **************-->
             <div class="pagination">
-              <v-pagination v-model="pageNo" :length="length"></v-pagination>
+              <v-pagination
+                v-model="pageNo"
+                :job-details-length="jobDetailsLength"
+              ></v-pagination>
             </div>
             <!--********** pagination end **************-->
           </applicant-list>
@@ -164,7 +165,7 @@ export default {
       totalExp: {},
       pageNo: 1,
       shortList: null,
-      length: 0,
+      jobDetailsLength: 0,
       jobs: {},
       jobId: "",
       jobResponsibility: {},
@@ -218,8 +219,10 @@ export default {
           // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
           // this.job_status = response.data.items.job_status
           this.loadingApplicant = false;
-          this.length = Math.round(response.data.total / response.data.page);
-          console.log("page length of applicant list", this.length);
+          this.jobDetailsLength = Math.round(
+            response.data.total / response.data.page
+          );
+          console.log("page length of applicant list", this.jobDetailsLength);
           // setTimeout(() => (this.loadingApplicant = false), 1000)
         })
         .catch((error) => {
@@ -229,7 +232,7 @@ export default {
         })
         .finally(() => {
           this.modalSkeleton = false;
-          if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
+          if (this.applicant.length === 0) this.ShowAlertMsg = true;
         });
     },
     editJob: function (id) {

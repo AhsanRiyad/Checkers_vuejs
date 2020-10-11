@@ -128,13 +128,7 @@
         <applicant-resume-modal
           :user-id="userId"
           :dialogShowing="dialogShowing"
-          :applicantInfo="applicntInfo"
-          :skills="skills"
-          :exmas="exams"
-          :qualifications="qualification"
-          :experiences="experiences"
           :applicant-resume="applicantResume"
-          :applicant-biodata="applicantBiodata"
         />
       </v-dialog>
 
@@ -168,14 +162,8 @@ export default {
       loading: false,
       dialogShowing: false,
       applicantResume: {},
-      experiences: [],
-      skills: {},
-      qualifications: [],
       userId: "",
       jobId: "",
-      applicantBiodata: {},
-      exams: {},
-      applicntInfo: {},
       shortListed: "",
     };
   },
@@ -206,12 +194,6 @@ export default {
           console.log(" resume console output... ", this.$store.getters.resume);
 
           this.userId = response.data.applicationInfo.user_id;
-          // this.shortListed = response.data.applicationInfo
-
-          // console.log("bio", response.data.biodata);
-          // console.log("skills", response.data.skills);
-          // console.log("experiencess", response.data.experiences);
-          // console.log("qualifications", response.data.qualification);
           this.applicntInfo = response.data.applicationInfo;
           // console.log("applicants info", response.data.applicationInfo);
 

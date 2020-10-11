@@ -74,7 +74,7 @@
         </table>
         <!--********** pagination start **************-->
         <div class="pagination">
-          <v-pagination v-model="pageNo" :length="length"></v-pagination>
+          <v-pagination v-model="pageNo" :length="draftedJobsLength"></v-pagination>
         </div>
         <!--********** pagination end **************-->
       </div>
@@ -92,7 +92,7 @@ name: "DraftedJobs",
   data: () => ({
     draftedJobs: [],
     pageNo: 1,
-    length: 0,
+    draftedJobsLength: 0,
     loading: true,
     jobsId: ''
   }),
@@ -207,11 +207,11 @@ name: "DraftedJobs",
           // this.jobId = this.draftedJobs.find((job_id) => job_id.id === id);
           // this.job_status = response.data.items.job_status
           this.loading = false
-          this.length = Math.round(
+          this.darafteJobsLength = Math.round(
               response.data.total_count /
               response.data.num_items_per_page
           );
-          console.log("page length", this.length)
+          console.log("page darafteJobsLength", this.darafteJobsLength)
           // setTimeout(() => (this.loading = false), 1000)
         })
         .catch((error) => {
