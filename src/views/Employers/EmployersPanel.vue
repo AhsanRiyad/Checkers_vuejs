@@ -78,7 +78,7 @@ export default {
       items: [
         { router:'/user-details', title: 'Basic Info', icon: 'mdi-view-dashboard' },
         { router:'/companies', title: 'Company', icon: 'mdi-image' },
-        { router:'/jobs', title: 'Job', icon: 'mdi-help-box' },
+        { router:'/jobs', title: 'Job', icon: 'mdi-briefcase' },
       ],
       right: null,
     }
