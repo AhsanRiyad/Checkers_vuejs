@@ -135,9 +135,9 @@
           </div>
         </div>
 
-        <div class="dr-academic-q-info" v-for="n in qualifications" :key="n.id">
+        <div class="dr-academic-q-info" v-for="n in applicantResume.qualification" :key="n.id">
           <div class="dr-academic-q-heading-item">
-            <!--            <p v-if="exams">{{exams.title}}</p>-->
+            <p>{{n.title}}</p>
           </div>
           <div class="dr-academic-q-heading-item">
             <p v-text="n.institute"></p>
@@ -267,7 +267,6 @@ export default {
     applicantResume: Object,
     applicantBiodata: Object,
     skills: Object,
-    qualifications: Array,
     experiences: Array,
     applicntInfo: Object,
     exams: Object,
@@ -337,25 +336,6 @@ export default {
             let url = `http://3.17.234.251/jobsresume/resumes/public/${
                 response.file
             }?access_token=${this.$cookies.get("accessToken")}`;
-            // saveAs(url, "resume.pdf");
-
-            /* fetch(url, {
-              method: "GET",
-              headers: {
-                Authorization: "Bearer " + this.$cookies.get("accessToken"),
-              },
-            }).then(function (t) {
-              return t.blob().then((b) => {
-                var a = document.createElement("a");
-                a.href = URL.createObjectURL(b);
-                a.setAttribute("download", "resume.pdf");
-                a.click();
-              });
-            }); */
-            // this.$refs.form.reset();
-            // saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", "file.pdf"); //or any other extension
@@ -363,15 +343,6 @@ export default {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            // delete link;
-
-            // window.open(url, "_blank");
-            //download/openf file in new tab
-            /*           let url = `http://3.17.234.251/jobsresume/resumes/public/${
-              response.file
-            }?access_token=${this.$cookies.get("accessToken")}`;
-            let redirectWindow = window.open(url, "_blank");
-            redirectWindow.location; */
           })
           .catch(() => {
             this.$awn.alert("Failed! Email/Password doesn't match");
@@ -396,29 +367,6 @@ export default {
         })
         .then((response) => {
           console.log("Resume... applicant resume...", response);
-
-          /* this.applicantResume = response.data;
-          this.applicantBiodata = response.data.biodata;
-          this.skills = response.data.skills;
-          this.experiences = response.data.experiences;
-          this.qualifications = response.data.qualification;
-          this.userId = response.data.applicationInfo.user_id; */
-          // this.shortListed = response.data.applicationInfo
-          /*
-          console.log("bio", response.data.biodata);
-          console.log("skills", response.data.skills);
-          console.log("experiencess", response.data.experiences);
-          console.log("qualifications", response.data.qualification); */
-          /*  for (let i = 0; i < this.qualifications.length; i++) {
-            this.exams = response.data.qualification[i].exam;
-            console.log("examss", this.exams);
-          } */
-          // this.applicntInfo = response.data.applicationInfo;
-          // console.log("applicants info", response.data.applicationInfo);
-
-          // setTimeout({
-          // }, 1000)
-          // this.dialog = true
         })
         .catch((error) => {
           this.$awn.alert("Failed");
