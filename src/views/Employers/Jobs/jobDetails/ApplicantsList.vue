@@ -128,11 +128,7 @@
         <applicant-resume-modal
           :user-id="userId"
           :dialogShowing="dialogShowing"
-          :applicantInfo="applicntInfo"
-          :skills="skills"
-          :experiences="experiences"
           :applicant-resume="applicantResume"
-          :applicant-biodata="applicantBiodata"
         />
       </v-dialog>
 
@@ -166,13 +162,8 @@ export default {
       loading: false,
       dialogShowing: false,
       applicantResume: {},
-      experiences: [],
-      skills: {},
       userId: "",
       jobId: "",
-      applicantBiodata: {},
-      exams: {},
-      applicntInfo: {},
       shortListed: "",
     };
   },

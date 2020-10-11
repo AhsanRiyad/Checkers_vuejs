@@ -107,17 +107,10 @@
       </div>
       <!--********** Job applied table end **************-->
       <!-- job apply modal starts-->
-      <v-dialog v-model="dialogShowing" width="900">
+      <v-dialog v-model="dialogShow" width="900">
         <applicant-resume-modal
             :user-id="userId"
-            v-show="dialogShowing"
-            :applicantShortListedInfo="applicntInfo"
-            :skills="skills"
-            :exmas="exams"
-            :qualifications="qualification"
-            :experiences="experiences"
-            :applicantShortListedResume="applicantResume"
-            :applicantShortListed-biodata="applicantBiodata"
+            :applicantShortListedResume="applicantShortListedResume"
         />
       </v-dialog>
 
@@ -165,73 +158,46 @@ export default {
     ApplicantResumeModal: () => import("../jobDetails/ApplicantResume"),
   },
   props: {
-    applicantResume: Object,
-    applicantBiodata: Object,
-    skills: Object,
-    qualifications: Array,
-    experiences: Array,
-    applicntInfo: Object,
-    exams: Object,
     userId: String,
-    dialogShowing: Boolean,
+    dialogShow: Boolean,
   },
   data: () =>{
     return{
       applicantShortListed: [],
+      applicantShortListedResume: {},
       shortList: 1,
       pageNo: 1,
       jobs:{},
       jobId: '',
-      candidateId: '',
+      userId: '',
       loadingApplicant: true
     }
   },
   created() {
     this.getApplicantList()
   },
+  mounted() {
+    console.log("job id in app resume ", this.$store.getters.job);
+  },
   methods: {
-    showApplicantResume(candidateId) {
-      console.log("User id", candidateId);
-      //alert(candidateId)
-      this.$store.commit("candidateId_resume", this.candidateId);
-      this.dialogShowing = true;
+    showApplicantResume(userId) {
+      console.log("User id", userId);
+      this.$store.commit("userId_resume", userId);
+      // this.$store.commit("userId_resume", this.userId);
+      this.dialogShow = true;
       this.loading = true;
       this.$store
           .dispatch("callApi", {
-            url: "resume/" + candidateId,
+            url: "resume/" + userId,
             method: "get",
             params: { job_id: this.$store.getters.job },
             data: {},
           })
           .then((response) => {
             console.log("Resume...fra", response);
-            this.applicantResume = response.data;
-            this.applicantBiodata = response.data.biodata;
-            this.skills = response.data.skills;
-            this.experiences = response.data.experiences;
-            this.qualifications = response.data.qualification;
-            // this.$store.commit("resume", response.data);
-            //
-            // console.log(" resume console output... ", this.$store.getters.resume);
-
-            this.candidateId = response.data.applicationInfo.user_id;
+            this.applicantShortListedResume = response.data;
+            // this.userId = response.data.applicationInfo.user_id;
             console.log("candidate id", response.data.applicationInfo.user_id)
-            // this.shortListed = response.data.applicationInfo
-
-            // console.log("bio", response.data.biodata);
-            // console.log("skills", response.data.skills);
-            // console.log("experiencess", response.data.experiences);
-            // console.log("qualifications", response.data.qualification);
-            for (let i = 0; i < this.qualifications.length; i++) {
-              this.exams = response.data.qualification[i].exam;
-              console.log("examss", this.exams);
-            }
-            this.applicntInfo = response.data.applicationInfo;
-            // console.log("applicants info", response.data.applicationInfo);
-
-            // setTimeout({
-            // }, 1000)
-            // this.dialog = true
           })
           .catch((error) => {
             this.$awn.alert("Failed");
@@ -267,34 +233,8 @@ export default {
             this.applicantShortListed = response.data.data;
             this.jobs = response.data.job;
             this.jobId = response.data.job.id;
-            this.$store.commit("job", this.jobId);
+            // this.$store.commit("job", this.jobId);
             console.log("job id", this.jobId);
-            // for (let i = 0; i < this.applicantShortListed.length; i++) {
-            //   // console.log("qualification index object", this.applicantShortListed[i]) // returns [Object object]
-            //   // console.log("qualification", this.applicantShortListed[i].qualification) // returns undefined
-            //   // console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
-            //   // console.log("experience", this.experience) // returns undefined
-            //   // console.log("biodata", this.biodata) // returns undefined
-            //   // console.log("total exp", this.totalExp) // returns undefined
-            //   this.qualification = this.applicantShortListed[i].qualification;
-            //   this.biodata = this.applicantShortListed[i].biodata;
-            //   for (let z = 0; z < this.biodata.length; z++) {
-            //     this.imageUrl = this.biodata[z].photo;
-            //     console.log("Image Url", this.imageUrl);
-            //   }
-            //   this.experience = this.applicantShortListed[i].experiences;
-            //   this.jobAppliers = this.applicantShortListed[i].job_appliers;
-            //   this.totalExp = this.applicantShortListed[i].total_experice;
-            // }
-            // for (let j = 0; j < this.jobs.length; j++) {
-            //   console.log("Job Responsibilities", this.jobs[j]);
-            // }
-
-            // this.jobId =this.postedJobs[3]
-
-            // this.orders.find(({ id }) => id === this.orderId)
-            // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
-            // this.job_status = response.data.items.job_status
             this.loadingApplicant = false;
             this.length = Math.round(response.data.total / response.data.page);
             console.log("page length", this.length);
@@ -307,7 +247,7 @@ export default {
           })
           .finally(() => {
             this.modalSkeleton = false;
-            if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
+            if (this.applicantShortListed.length === 0) this.ShowAlertMsg = true;
           });
     },
     getHumanDate: function (date) {

@@ -14,7 +14,6 @@
           >
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
-            @click.stop.prevent="(dialog = true), (dialogShowing = false)"
             small
             class="ml-1 mr-1"
             color="primary"
@@ -283,6 +282,7 @@ export default {
     exams: Object,
     userId: String,
     dialogShowing: Boolean,
+    dialogShow: Boolean
   },
   data() {
     return {
