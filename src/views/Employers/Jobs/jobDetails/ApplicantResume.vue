@@ -138,7 +138,7 @@
 
         <div class="dr-academic-q-info" v-for="n in applicantResume.qualification" :key="n.id">
           <div class="dr-academic-q-heading-item">
-            <p>{{n.title}}</p>
+            <p>{{n.exam.title}}</p>
           </div>
           <div class="dr-academic-q-heading-item">
             <p v-text="n.institute"></p>
