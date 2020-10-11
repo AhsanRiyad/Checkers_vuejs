@@ -7,8 +7,10 @@
             @click.stop="applicantShortListed"
             small
             class="ml-1 mr-1"
-            :color="is_shortlisted ? 'success' : 'error'"
-            >{{ is_shortlisted ? "Shortlisted" : "Not Shortlisted" }}</v-btn
+            :color="getResume.short_listed ? 'success' : 'error'"
+            >{{
+              getResume.short_listed ? "Shortlisted" : "Not Shortlisted"
+            }}</v-btn
           >
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn
@@ -97,7 +99,11 @@
           </div>
         </div>
 
-        <div class="dr-academic-c-info" v-for="n in getResume.experiences" :key="n.id">
+        <div
+          class="dr-academic-c-info"
+          v-for="n in getResume.experiences"
+          :key="n.id"
+        >
           <div class="dr-academic-c-heading-item">
             <p>{{ n.job_title }}</p>
           </div>
@@ -136,9 +142,13 @@
           </div>
         </div>
 
-        <div class="dr-academic-q-info" v-for="n in getResume.qualifications" :key="n.id">
+        <div
+          class="dr-academic-q-info"
+          v-for="n in getResume.qualification"
+          :key="n.id"
+        >
           <div class="dr-academic-q-heading-item">
-            <!--            <p v-if="exams">{{exams.title}}</p>-->
+            <p>{{ n.exam.title }}</p>
           </div>
           <div class="dr-academic-q-heading-item">
             <p v-text="n.institute"></p>
@@ -446,6 +456,11 @@ export default {
         .then((response) => {
           console.log("applicant shortlisted response..", response);
           // this.companyId = response.company.id;
+
+          let n = { ...this.getResume, short_listed: response.short_list };
+          this.$store.commit("resume", n);
+          console.log("short listed response .... ", n);
+
           this.isShortlisted = response.short_list;
           this.$awn.success("Updated Successfully!");
         })
