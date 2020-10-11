@@ -1,8 +1,18 @@
 <template>
   <v-container class="mainTemplate">
     <v-form ref="form">
+      <!-- loading data  starts-->
+      <v-dialog v-model="loading" hide-overlay persistent width="300">
+        <v-card color="primary" dark>
+          <v-card-text>
+            Loading Data...
+            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+      <!-- loading data  ends-->
       <v-row class="mainContainer">
-        <v-col cols="12">
+        <v-col cols="12" lg="11" md="11">
           <p class="h1Text">Create a Company</p>
           <v-row align="center">
             <v-col cols="12">
@@ -237,17 +247,6 @@
         </v-col>
       </v-row>
     </v-form>
-
-    <!-- loading data  starts-->
-    <v-dialog v-model="loadingData" hide-overlay persistent width="300">
-      <v-card color="primary" dark>
-        <v-card-text>
-          {{ this.loadingDataText }}
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-    <!-- loading data  ends-->
   </v-container>
 </template>
 
@@ -262,7 +261,7 @@ export default {
   data() {
     return {
       imageUploadLoading: false,
-      loadingData: false,
+      loading: true,
       loadingDataText: "",
       phone: null,
       companyId: "",
@@ -307,11 +306,11 @@ export default {
           .then(response => {
             console.log("company per id", response.data)
             this.company = response.data.company
-            this.loadingData = false
+            this.loading = false
           })
           .catch(error => {
             this.$awn.alert(error.response.status)
-            this.loadingData = false
+            this.loading = false
           })
     } else {
       this.paramId = null
@@ -337,7 +336,7 @@ export default {
     submit() {
       if (!this.$refs.form.validate()) return;
       this.loadingDataText = "Creating Company...";
-      this.loadingData = true;
+      this.loading = true;
       if (this.paramId) {
         this.$store
             .dispatch("callApi", {
@@ -383,7 +382,6 @@ export default {
               //   this.$awn.alert("Failed");
             })
             .finally(() => {
-              this.loadingData = false;
               this.loading = false;
               //  this.tableLoading = false;
             });
@@ -413,7 +411,7 @@ export default {
       }
     },
     updateLogo() {
-      this.loadingData = true;
+      this.loading = true;
       this.$store
           .dispatch("callApi", {
             url: `companies/${this.companyId}/company-logo`,
@@ -432,7 +430,6 @@ export default {
             //   this.$awn.alert("Failed");
           })
           .finally(() => {
-            this.loadingData = false;
             this.loading = false;
             //  this.tableLoading = false;
           });

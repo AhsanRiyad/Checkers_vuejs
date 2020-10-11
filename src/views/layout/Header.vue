@@ -11,14 +11,14 @@
 
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
-        <v-btn router to="/" text color="white">Jobs</v-btn>
+        <v-btn router-link to="/" text color="white">Jobs</v-btn>
         <v-btn text router @click="gotoRecruiter()" color="white">Recruiters</v-btn>
-        <v-btn router to="/signin" text color="white">{{
+        <v-btn router-link to="/signin" text color="white">{{
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
         <v-btn
           v-if="$cookies.get('is_company') == true"
-          router
+          router-link
           to="/employers"
           text
           color="white"
@@ -55,15 +55,9 @@
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-btn block color="primary" text @click="menu = false"
-                >Signout</v-btn
-              >
-            </v-card-actions>
           </v-card>
         </v-menu>
-        <v-btn router to="/create-alert" color="white">Get Alert</v-btn>
+        <v-btn router-link to="/create-alert" color="white">Get Alert</v-btn>
       </span>
 
       <span>
@@ -143,13 +137,13 @@ export default {
       this.$cookies.get("accessToken")
     );
   },
-  methods: {
-    gotoRecruiter(){
-      //alert('here');
-      this.$router.history.push({name: 'recruiter'})
-      location.reload();
-
-    }
-  }
+  // methods: {
+  //   gotoRecruiter(){
+  //     //alert('here');
+  //     this.$router.history.push({name: 'recruiter'})
+  //     location.reload();
+  //
+  //   }
+  // }
 };
 </script>

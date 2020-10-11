@@ -1,9 +1,9 @@
 <template>
 <div>
   <Header></Header>
-  <v-main :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover'}" >
+  <span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover', 'display': 'block',  'height': '100%'}" >
     <router-view></router-view>
-  </v-main>
+  </span>
   <Footer></Footer>
 </div>
 </template>
