@@ -418,37 +418,59 @@ const router = new VueRouter({
   mode: 'history' /*mode: 'hash'*/
 })
 
-/* import VueCookies from 'vue-cookies';
+import VueCookies from 'vue-cookies';
 import * as R from 'ramda';
 
 router.beforeEach((to, from, next) => {
   // ...
   if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
-    if (to.name == "search") {
+    if (to.name == "search" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob") {
       next();
       return;
     }
-  }
-
-  if (VueCookies.get('is_company') == true) {
-    console.log("is compnay", VueCookies.get('is_company'));
-
-    if (to.name == "resume" || to.name == "biodata" || to.name == "workExperience" || to.name == "education" || to.name == "appliedJobs") {
-      next({ name: 'search' });
+    next('/');
+  } else if (VueCookies.get('is_company') == 'false') {
+    if (to.name == "CompanyList" || to.name == "JobsTab" || to.name == "companiesTab" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails" || to.name == "JobOnlineApply" || to.name == "pricingTable" || to.name == "userInfo" || to.name == "userInfoDetails") {
+      next({ path: '/' });
       return;
     }
     next();
   } else {
-    console.log("is not compnay", VueCookies.get('is_company'));
-    if (to.name == "PostedJobList" || to.name == "EmployersPanel" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails"
-    ) {
-      next({ name: 'search' });
-      return;
-    }
     next();
+
   }
-  console.log("router to...", to);
-  console.log("router from...", from);
-  console.log("router next...", next);
-}) */
-export default router
+
+
+  /*   console.log("to ", to);
+    console.log("from ", from);
+    next(); */
+  /* if (!this.R.isNil(VueCookies.get('is_company'))) {
+ 
+    if (VueCookies.get('is_company') == 'false') {
+      console.log("is compnay", VueCookies.get('is_company'));
+ 
+      if (to.name == "CompanyList" || to.name == "CompanyList" || to.name == "JobsTab" || to.name == "companiesTab" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails" || to.name == "JobOnlineApply" || to.name == "pricingTable" || to.name == "userInfo" || to.name == "userInfoDetails") {
+        next({ name: 'search' });
+        return;
+      }
+      next();
+    }
+  } else {
+    next();
+    
+  } */
+  next();
+})
+/*   if (!this.R.isNil(VueCookies.get('is_company'))) {
+
+    if (VueCookies.get('is_company') == 'false') {
+      console.log("is compnay", VueCookies.get('is_company'));
+
+      if (to.name == "appliedJobs" ||  ) {
+        next({ name: 'search' });
+        return;
+      }
+      next();
+    }
+  } */
+export default router;
