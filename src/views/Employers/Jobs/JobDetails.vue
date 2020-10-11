@@ -195,27 +195,7 @@ export default {
           this.jobId = response.data.job.id;
           this.$store.commit("job", this.jobId);
           console.log("job id", this.jobId);
-          for (let i = 0; i < this.applicant.length; i++) {
-            // console.log("qualification index object", this.applicant[i]) // returns [Object object]
-            // console.log("qualification", this.applicant[i].qualification) // returns undefined
-            // console.log("adagsgvfgsdff", this.jobAppliers) // returns undefined
-            // console.log("experience", this.experience) // returns undefined
-            // console.log("biodata", this.biodata) // returns undefined
-            // console.log("total exp", this.totalExp) // returns undefined
-            this.qualification = this.applicant[i].qualification;
-            this.biodata = this.applicant[i].biodata;
-            for (let z = 0; z < this.biodata.length; z++) {
-              this.imageUrl = this.biodata[z].photo;
-              console.log("Image Url", this.imageUrl);
-            }
-            this.experience = this.applicant[i].experiences;
-            this.jobAppliers = this.applicant[i].job_appliers;
-            this.totalExp = this.applicant[i].total_experice;
-          }
-          for (let j = 0; j < this.jobs.length; j++) {
-            console.log("Job Responsibilities", this.jobs[j]);
-          }
-
+        
           // this.jobId =this.postedJobs[3]
 
           // this.orders.find(({ id }) => id === this.orderId)

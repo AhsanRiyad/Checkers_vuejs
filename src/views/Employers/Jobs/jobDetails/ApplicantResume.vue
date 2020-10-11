@@ -19,11 +19,11 @@
             >Interview Call</v-btn
           >
           <v-btn
-              @click.stop="downloadResume"
-              small
-              class="ml-1 mr-1"
-              color="success"
-          >Download Resume</v-btn
+            @click.stop="downloadResume"
+            small
+            class="ml-1 mr-1"
+            color="success"
+            >Download Resume</v-btn
           >
         </div>
         <div class="close_btn">
@@ -72,7 +72,8 @@
         <p class="dr-title-all">Employement History:</p>
 
         <p class="years-of-experience">
-          Total year of experiences: {{ applicantResume.years }}
+          Total year of experiences:
+          {{ this.R.isNil(getResume.years) ? 0 : getResume.years }}
         </p>
       </div>
       <!-- section-4 ends -->
@@ -96,7 +97,7 @@
           </div>
         </div>
 
-        <div class="dr-academic-c-info" v-for="n in experiences" :key="n.id">
+        <div class="dr-academic-c-info" v-for="n in getResume.experiences" :key="n.id">
           <div class="dr-academic-c-heading-item">
             <p>{{ n.job_title }}</p>
           </div>
@@ -158,7 +159,7 @@
       <!-- section-7 starts -->
       <div class="dr-skills">
         <p class="dr-title-all">Skills:</p>
-        <p>{{ skills.name }}</p>
+        <p>{{ getResume.skills.name }}</p>
       </div>
       <!-- section-7 ends -->
 
@@ -186,13 +187,13 @@
       <div class="dr-application-info">
         <div class="dr-application-info-1">Address</div>
         <div class="dr-application-info-2">
-          : {{ applicantBiodata.address }}
+          : {{ getResume.biodata.address }}
         </div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">City</div>
-        <div class="dr-application-info-2">: {{ applicantBiodata.city }}</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.city }}</div>
       </div>
 
       <!-- section-9 ends -->
@@ -300,6 +301,7 @@ export default {
   updated() {
     this.$nextTick(() => {
       console.log("applicant biodata.... ", this.applicantResume);
+      console.log("resume applicant ", this.$store.getters.resume.payload);
       console.log("User id... applicant...reusme...", this.userId);
     });
   },
