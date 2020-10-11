@@ -109,6 +109,7 @@
       <!-- job apply modal starts-->
       <v-dialog v-model="dialogShow" width="900">
         <applicant-resume-modal
+            :v-on:close-dialog=""
             :user-id="userId"
             :applicantShortListedResume="applicantShortListedResume"
         />
