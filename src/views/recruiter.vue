@@ -487,102 +487,73 @@ export default {
           });
     },
     onScroll() {
-      // console.log(e);
-      /* console.log(window);
-      let MainCard = document.getElementById("MainCard");
-      console.log('in the main card');
-      console.log(window.scrollY);
-      console.log(MainCard);
-      console.log("scorlling"); */
-
-      console.log("window ... ", window);
-
-      this.JobDescriptionStyle.height =
-          screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
-
-      /* console.log("window inner height", window.innerHeight);
-      console.log("scrol top", document.body.scrollTop);
-      console.log("offset height", document.body.offsetHeight);
-      console.log("addition ", window.innerHeight + window.scrollY); */
-
-      console.log("inner height ", window.innerHeight);
-      console.log("scroll y... ", window.scrollY);
-      console.log("subtraction... ", 142 - window.scrollY);
-      console.log("document height", document.body.scrollHeight);
-      console.log(
-          "document body height",
-          document.querySelector("#mainDocs").scrollHeight
-      );
-
-      // this.JobDescriptionStyle.height = "calc( 100% - 300px )";
-      // this.JobDescriptionStyle.height = "calc( 100vh - 300px )";
-      // this.JobDescriptionStyle.height = "200px";
-
-      // this.jobDetails.top = screen.availHeight + "px";
-
-      // this.JobDescriptionStyle.height = screen.availHeight - 140 + "px";
-
-      if (window.scrollY > screen.availHeight - 296 - 140 - 140) {
-        this.JobDescriptionStyle.height =
-            screen.availHeight -
-            140 -
-            140 -
-            140 -
-            140 -
-            40 -
-            (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
-            "px";
-        // this.JobDescriptionStyle.height = "464px";
-        // console.log("scrolled.......", screen.availHeight - 296 - 140 - 140);
-        console.log(
-            "scrolled.......",
-            screen.availHeight -
-            140 -
-            140 -
-            140 -
-            (window.scrollY - (screen.availHeight - (296 + 140 + 140))) +
-            "px"
-        );
-      }
-
       // if (window.innerHeight)
+      /*
+      this.JobDescriptionStyle.height =
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
+      */
+
+      console.log("pixel ratio ", window.devicePixelRatio);
+      console.log("match media ", window.matchMedia);
+
+      let spaceGap = 0 * window.devicePixelRatio;
+      // if (window.innerHeight > 900) spaceGap = 280 * window.devicePixelRatio;
+      if (window.innerHeight > 900) spaceGap = 245 * window.devicePixelRatio;
+      else if (window.innerHeight < 700)
+        spaceGap = 225 * window.devicePixelRatio;
+      else spaceGap = 225 * window.devicePixelRatio;
+
       if (window.scrollY > 132) {
-        this.jobDetails.top = "142px";
-        // this.JobDescriptionStyle.height = "calc( 100vh - 250px )";
         this.filterFixedPosition.position = "fixed";
         this.filterFixedPosition.top = "0px";
         this.filterFixedPosition.zIndex = 3;
 
-        console.log("inner width.... ", window.innerWidth);
-
+        // this.jobDetails.top = "100px";
+        this.jobDetails.float = "none";
+        this.jobDetails.right = "20%";
+        this.jobDetails.width = "35%";
+        //for filter top position
+        // this.jobDetails.top = "142px";
+        this.jobDetails.top = "70px";
+        this.jobDetails.position = "fixed";
+        // this.JobDescriptionStyle.height = "300px";
         if (window.innerWidth > 960) {
           this.filterFixedPosition.right = "20%";
         }
       } else {
-        this.jobDetails.top = 287 - window.scrollY + "px";
         // this.jobDetails.top = "287px";
+        this.jobDetails.float = "left";
+        this.jobDetails.marginLeft = "2%";
+        this.jobDetails.width = "35%";
+        this.jobDetails.position = "static";
+
         this.filterFixedPosition.top = "100px";
         this.filterFixedPosition.position = "static";
         // this.JobDescriptionStyle.height = " calc( 100vh - 190px ) ";
       }
 
-      if (
-          document.body.offsetHeight - (window.innerHeight + window.scrollY) <
-          210
-      ) {
-        // this.JobDescriptionStyle.height = " calc( 100vh - 550px ) ";
-      }
+      this.JobDescriptionStyle.height =
+          screen.availHeight - spaceGap - window.scrollY + "px";
 
-      let pageNo = window.scrollY / 2400;
-      let isInt = Number.isInteger(window.scrollY / 2400);
-      // console.log('is int check,' , isInt);
-      // console.log( 'scroll result ' ,  (window.scrollY/2400) ) ;
+      // this.JobDescriptionStyle.height = "100px";
 
-      if (isInt && this.pageNo < pageNo + 1) {
-        // console.log("call second api");
-        this.pageNo = pageNo + 1;
-        // this.getData();
-      }
+      console.log(
+          "screen available height.......",
+          screen.availHeight - 400 - window.scrollY + "px"
+      );
+      console.log(
+          "document available height.......",
+          document.querySelector("#mainDocs").scrollHeight
+      );
+      console.log("scroll Y.......", window.scrollY);
+      console.log("inner height.......", window.innerHeight);
+      console.log("inner width.......", window.innerWidth);
+
+      let screenDifference = screen.availHeight - window.innerHeight;
+
+      console.log("inner height...", window.innerHeight);
+
+      console.log(screenDifference);
     },
     getData() {
 
