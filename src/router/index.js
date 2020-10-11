@@ -418,12 +418,11 @@ const router = new VueRouter({
   mode: 'history' /*mode: 'hash'*/
 })
 
- import VueCookies from 'vue-cookies';
+/* import VueCookies from 'vue-cookies';
 import * as R from 'ramda';
 
 router.beforeEach((to, from, next) => {
   // ...
-
   if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
     if (to.name == "search") {
       next();
@@ -451,5 +450,5 @@ router.beforeEach((to, from, next) => {
   console.log("router to...", to);
   console.log("router from...", from);
   console.log("router next...", next);
-})
+}) */
 export default router

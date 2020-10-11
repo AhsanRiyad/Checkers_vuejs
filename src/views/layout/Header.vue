@@ -12,12 +12,14 @@
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
-        <v-btn text router @click="gotoRecruiter()" color="white">Recruiters</v-btn>
+        <v-btn text router @click.stop="gotoRecruiter" color="white"
+          >Recruiters</v-btn
+        >
         <v-btn router to="/signin" text color="white">{{
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
         <v-btn
-          v-if="$cookies.get('is_company') == true"
+          v-if="$store.getters.is_company == true"
           router
           to="/employers"
           text
@@ -116,7 +118,7 @@ export default {
         ["mdi-email", "Jobs", "/"],
         ["mdi-account-supervisor-circle", "Recruiter", "/"],
         ["mdi-clock-start", "Login", "/"],
-        ["mdi-clock-start", "Employeers/Job Post"],
+        ["mdi-clock-start", "Employeers/Job Post", "/"],
         // ["mdi-clock-start", "Get Alerts"],
       ],
       menus: [
@@ -136,20 +138,33 @@ export default {
         return true;
       }
     },
+    is_company() {
+      /* if (this.$cookies.get("is_company") == true) return true;
+      else return false; */
+      this.$nextTick(() => {
+        console.log(
+          "is company computed.... ",
+          this.$cookies.get("is_company")
+        );
+      });
+
+      return true;
+    },
   },
   mounted() {
+    this.$store.commit("is_company", this.$cookies.get("is_company"));
+    console.log("this is is_company...", this.$store.getters.is_company);
     console.log(
       "logged in check in the header...",
       this.$cookies.get("accessToken")
     );
   },
   methods: {
-    gotoRecruiter(){
+    gotoRecruiter() {
       //alert('here');
-      this.$router.history.push({name: 'recruiter'})
-      location.reload();
-
-    }
-  }
+      this.$router.history.push({ name: "recruiter" });
+      // location.reload();
+    },
+  },
 };
 </script>

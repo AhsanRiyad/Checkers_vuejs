@@ -227,7 +227,7 @@ export default {
           // console.log("qualifications", response.data.qualification);
           for (let i = 0; i < this.qualifications.length; i++) {
             this.exams = response.data.qualification[i].exam;
-            console.log("examss", this.exams);
+            console.log("exams", this.exams);
           }
           this.applicntInfo = response.data.applicationInfo;
           // console.log("applicants info", response.data.applicationInfo);
