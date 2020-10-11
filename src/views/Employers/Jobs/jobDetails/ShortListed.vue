@@ -174,6 +174,7 @@ export default {
     showApplicantResume(userId) {
       console.log("User id... farzana", userId);
       this.$store.commit("userId_resume", userId);
+      this.userId = userId;
       // this.$store.commit("userId_resume", this.userId);
       this.loading = true;
       this.$store
