@@ -63,6 +63,28 @@ export default {
   },
   updated() {
     this.getCommonInfo();
+
+
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been rendered
+      if (
+        this.R.isNil(this.$cookies.get("is_company")) ||
+        this.R.isEmpty(this.$cookies.get("is_company"))
+      ) {
+        this.$store.commit("is_company", false);
+        return false;
+      } else {
+        if (this.$cookies.get("is_company") == true) {
+          console.log("is compnay... in the app.vue true");
+          this.$store.commit("is_company", true);
+          return true;
+        } else {
+          this.$store.commit("is_company", false);
+          return false;
+        }
+      }
+    });
   },
 };
 </script>

@@ -19,7 +19,7 @@
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
         <v-btn
-          v-show="$store.getters.is_company"
+          v-if="$store.getters.is_company"
           router
           to="/employers"
           text
@@ -140,7 +140,7 @@ export default {
         this.$store.commit("is_company", false);
         return false;
       } else {
-        if (this.$cookies.get("is_company") == true) {
+        if (this.$cookies.get("is_company") == "true") {
           console.log("is compnay... in the app.vue true");
           this.$store.commit("is_company", true);
           return true;
@@ -152,12 +152,52 @@ export default {
     },
   },
   mounted() {
-    // this.$store.commit("is_company", this.$cookies.get("is_company"));
-    console.log("this is is_company...", this.$store.getters.is_company);
+    if (
+      this.R.isNil(this.$cookies.get("is_company")) ||
+      this.R.isEmpty(this.$cookies.get("is_company"))
+    ) {
+      this.$store.commit("is_company", false);
+      // return false;
+    } else {
+      if (this.$cookies.get("is_company") == "true") {
+        console.log("is compnay... in the app.vue true");
+        this.$store.commit("is_company", true);
+        // return true;
+      } else {
+        this.$store.commit("is_company", false);
+        // return false;
+      }
+    }
+
+    this.$store.commit("is_company", this.$cookies.get("is_company"));
+    // console.log("this is is_company...", this.$store.getters.is_company);
+    console.log(
+      "this is is_company... mounted",
+      this.$cookies.get("is_company")
+    );
     console.log(
       "logged in check in the header...",
       this.$cookies.get("accessToken")
     );
+  },
+  updated() {
+    console.log(
+      "this is is_company... updated",
+      this.$cookies.get("is_company")
+    );
+    if (this.$cookies.get("is_company") == null) {
+      this.$store.commit("is_company", false);
+      return false;
+    } else {
+      if (this.$cookies.get("is_company")) {
+        console.log("is compnay... in the app.vue true");
+        this.$store.commit("is_company", true);
+        return true;
+      } else {
+        this.$store.commit("is_company", false);
+        return false;
+      }
+    }
   },
   methods: {
     gotoRecruiter() {

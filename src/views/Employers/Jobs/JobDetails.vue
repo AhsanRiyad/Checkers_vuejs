@@ -29,21 +29,31 @@
         <ul class="d-flex jd_border jd_left_card">
           <li class="jd_list">
             <p class="jd_title">job status</p>
-            <div class="jd_status" v-if="jobs.is_lived"><span class="green--text">Live</span></div>
-            <div class="jd_status" v-else-if="jobs.is_expired"><span class="red--text">Expired</span></div>
-            <div class="jd_status" v-else><span class="blue--text">Draft</span></div>
+            <div class="jd_status" v-if="jobs.is_lived">
+              <span class="green--text">Live</span>
+            </div>
+            <div class="jd_status" v-else-if="jobs.is_expired">
+              <span class="red--text">Expired</span>
+            </div>
+            <div class="jd_status" v-else>
+              <span class="blue--text">Draft</span>
+            </div>
           </li>
           <li class="jd_list">
             <p class="jd_title">job type</p>
             <div class="jd_status">
-              <v-icon  style="line-height: 0 !important;" size="20">description</v-icon>
+              <v-icon style="line-height: 0 !important" size="20"
+                >description</v-icon
+              >
               <span v-if="jobs.type_in_text">{{ jobs.type_in_text }}</span>
             </div>
           </li>
           <li class="jd_list">
             <p class="jd_title">published on</p>
             <div class="jd_status">
-              <v-icon style="line-height: 0 !important;" size="20">calendar_today</v-icon>
+              <v-icon style="line-height: 0 !important" size="20"
+                >calendar_today</v-icon
+              >
               <span>{{ getHumanDate(jobs.live_at) }}</span>
             </div>
           </li>
@@ -102,25 +112,27 @@
 
       <v-tabs-items v-model="tabs">
         <v-tab-item>
-          <applicant-list  :loading-applicant="loadingApplicant"
-                           :total-exp="totalExp"
-                           :biodata="biodata"
-                           :job-appliers="jobAppliers"
-                           :experience="experience"
-                           :qualification="qualification"
-                           :applicant="applicant">
-
+          <applicant-list
+            :loading-applicant="loadingApplicant"
+            :total-exp="totalExp"
+            :biodata="biodata"
+            :job-appliers="jobAppliers"
+            :experience="experience"
+            :qualification="qualification"
+            :applicant="applicant"
+          >
             <!--********** pagination start **************-->
             <div class="pagination">
-              <v-pagination v-model="pageNo" :job-details-length="jobDetailsLength"></v-pagination>
+              <v-pagination
+                v-model="pageNo"
+                :job-details-length="jobDetailsLength"
+              ></v-pagination>
             </div>
             <!--********** pagination end **************-->
           </applicant-list>
         </v-tab-item>
         <v-tab-item>
-         <short-listed>
-
-         </short-listed>
+          <short-listed></short-listed>
         </v-tab-item>
         <v-tab-item>
           <job-preview :jobs="jobs" />
@@ -133,6 +145,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+import { eventBus } from "@/main";
 
 export default {
   name: "JobDetails",
@@ -162,6 +175,10 @@ export default {
   },
   created() {
     this.getApplicantList();
+
+    eventBus.$on("updateApplicantList", () => {
+      this.getApplicantList();
+    });
   },
   computed: {
     totalApplicants() {
@@ -202,7 +219,9 @@ export default {
           // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
           // this.job_status = response.data.items.job_status
           this.loadingApplicant = false;
-          this.jobDetailsLength = Math.round(response.data.total / response.data.page);
+          this.jobDetailsLength = Math.round(
+            response.data.total / response.data.page
+          );
           console.log("page length of applicant list", this.jobDetailsLength);
           // setTimeout(() => (this.loadingApplicant = false), 1000)
         })

@@ -268,6 +268,7 @@
 </template>
 
 <script>
+import { eventBus } from "@/main";
 export default {
   name: "ApplicantResume",
   // components: {
@@ -411,6 +412,7 @@ export default {
 
           this.isShortlisted = response.short_list;
           this.$awn.success("Updated Successfully!");
+          eventBus.$emit("updateApplicantList");
         })
         .catch(() => {
           this.$awn.alert("Failed!");
