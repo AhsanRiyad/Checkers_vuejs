@@ -134,6 +134,7 @@ export default {
           localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("accessToken", response.access_token);
           this.$cookies.set("is_company", response.is_company);
+          this.$store.commit("is_company", response.is_company);
           this.$cookies.set("_id", response.id);
           this.$store.commit("isLoggedIn", true);
           this.homePageUrl = response.home_page_url;
@@ -195,6 +196,7 @@ export default {
         this.$cookies.remove("is_company");
         this.$cookies.remove("_id");
         this.$store.commit("isLoggedIn", false);
+        this.$store.commit("is_company", false);
       });
   },
 };

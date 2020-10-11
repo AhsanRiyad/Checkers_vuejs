@@ -66,8 +66,8 @@
                     <v-checkbox v-model="toc">
                       <div slot="label">
                         I agree with the
-                        <span style="color: #365899" @click.stop="tocView"
-                          >TOC</span
+                        <span style="color: #365899" @click.stop="tocView">
+                          Terms and Conditions</span
                         >
                       </div>
                     </v-checkbox>
@@ -124,7 +124,7 @@
       <v-dialog v-model="dialog" width="500">
         <v-card>
           <v-card-title class="headline grey lighten-2">
-            Privacy Policy
+            Terms and Conditions
           </v-card-title>
 
           <v-card-text>
@@ -171,7 +171,18 @@ export default {
   methods: {
     tocView() {
       console.log("toc click");
-      this.dialog = true;
+      /* 
+      let routeData = this.$router.resolve({
+        name: "/",
+        query: { data: "someData" },
+      }); */
+
+      let routeData = this.$router.resolve({
+        name: "PrivacyPolicy",
+      });
+      window.open(routeData.href, "_blank");
+
+      // this.dialog = true;
     },
     submit() {
       if (!this.$refs.form.validate()) return;

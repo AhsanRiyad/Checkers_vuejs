@@ -40,6 +40,7 @@ export const store = new Vuex.Store({
 		jobDetailsSearch: {},
 		job: {},
 		userId_resume: "",
+		is_company: false,
 	},
 	mutations: {
 		isLoggedIn(state, payload) { state.isLoggedIn = payload; },
@@ -56,6 +57,7 @@ export const store = new Vuex.Store({
 		jobDetailsSearch(state, payload) { state.jobDetailsSearch = payload },
 		job(state, payload) { state.job = payload },
 		userId_resume(state, payload) { state.userId_resume = payload },
+		is_company(state, payload) { state.is_company = payload },
 	},
 	getters: {
 		isLoggedIn: state => state.isLoggedIn,
@@ -75,6 +77,7 @@ export const store = new Vuex.Store({
 		allJobs: state => state.allJobs,
 		apiBase: state => state.apiBase,
 		userId_resume: state => state.userId_resume,
+		is_company: state => state.is_company,
 	},
 	actions: {
 		callApi: (context, info) => {

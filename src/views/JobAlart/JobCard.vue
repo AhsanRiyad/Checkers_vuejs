@@ -78,7 +78,7 @@
           </v-text-field>
         </div>
 
-        <div class="filter">
+  <!--       <div class="filter">
           <div class="filter-item-1">
             <v-autocomplete
               item-text="country_name"
@@ -123,7 +123,7 @@
               placeholder="Select Country"
             ></v-autocomplete>
           </div>
-        </div>
+        </div> -->
         <div class="clearFix"></div>
       </div>
 
@@ -561,7 +561,8 @@ export default {
       console.log("match media ", window.matchMedia);
 
       let spaceGap = 0 * window.devicePixelRatio;
-      if (window.innerHeight > 900) spaceGap = 280 * window.devicePixelRatio;
+      // if (window.innerHeight > 900) spaceGap = 280 * window.devicePixelRatio;
+      if (window.innerHeight > 900) spaceGap = 220 * window.devicePixelRatio;
       else if (window.innerHeight < 700)
         spaceGap = 225 * window.devicePixelRatio;
       else spaceGap = 225 * window.devicePixelRatio;
@@ -575,7 +576,9 @@ export default {
         this.jobDetails.float = "none";
         this.jobDetails.right = "20%";
         this.jobDetails.width = "35%";
-        this.jobDetails.top = "142px";
+        //for filter top position
+        // this.jobDetails.top = "142px";
+        this.jobDetails.top = "70px";
         this.jobDetails.position = "fixed";
         // this.JobDescriptionStyle.height = "300px";
         if (window.innerWidth > 960) {

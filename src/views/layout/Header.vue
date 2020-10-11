@@ -11,14 +11,16 @@
 
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
-        <v-btn router-link to="/" text color="white">Jobs</v-btn>
-        <v-btn text router @click="gotoRecruiter()" color="white">Recruiters</v-btn>
-        <v-btn router-link to="/signin" text color="white">{{
+        <v-btn router to="/" text color="white">Jobs</v-btn>
+        <v-btn text router @click.stop="gotoRecruiter" color="white"
+          >Recruiters</v-btn
+        >
+        <v-btn router to="/signin" text color="white">{{
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
         <v-btn
-          v-if="$cookies.get('is_company') == true"
-          router-link
+          v-show="$store.getters.is_company"
+          router
           to="/employers"
           text
           color="white"
@@ -130,20 +132,39 @@ export default {
         return true;
       }
     },
+    is_company() {
+      if (
+        this.R.isNil(this.$cookies.get("is_company")) ||
+        this.R.isEmpty(this.$cookies.get("is_company"))
+      ) {
+        this.$store.commit("is_company", false);
+        return false;
+      } else {
+        if (this.$cookies.get("is_company") == true) {
+          console.log("is compnay... in the app.vue true");
+          this.$store.commit("is_company", true);
+          return true;
+        } else {
+          this.$store.commit("is_company", false);
+          return false;
+        }
+      }
+    },
   },
   mounted() {
+    // this.$store.commit("is_company", this.$cookies.get("is_company"));
+    console.log("this is is_company...", this.$store.getters.is_company);
     console.log(
       "logged in check in the header...",
       this.$cookies.get("accessToken")
     );
   },
   methods: {
-    gotoRecruiter(){
+    gotoRecruiter() {
       //alert('here');
-      this.$router.history.push({name: 'recruiter'})
+      this.$router.history.push({ name: "recruiter" });
       // location.reload();
-
-    }
-  }
+    },
+  },
 };
 </script>
