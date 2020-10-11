@@ -19,11 +19,11 @@
             >Interview Call</v-btn
           >
           <v-btn
-              @click.stop="downloadResume"
-              small
-              class="ml-1 mr-1"
-              color="success"
-          >Download Resume</v-btn
+            @click.stop="downloadResume"
+            small
+            class="ml-1 mr-1"
+            color="success"
+            >Download Resume</v-btn
           >
         </div>
         <div class="close_btn">
@@ -72,7 +72,8 @@
         <p class="dr-title-all">Employement History:</p>
 
         <p class="years-of-experience">
-          Total year of experiences: {{ applicantResume.years }}
+          Total year of experiences:
+          {{ this.R.isNil(getResume.years) ? 0 : getResume.years }}
         </p>
       </div>
       <!-- section-4 ends -->
@@ -96,7 +97,7 @@
           </div>
         </div>
 
-        <div class="dr-academic-c-info" v-for="n in experiences" :key="n.id">
+        <div class="dr-academic-c-info" v-for="n in getResume.experiences" :key="n.id">
           <div class="dr-academic-c-heading-item">
             <p>{{ n.job_title }}</p>
           </div>
@@ -135,7 +136,7 @@
           </div>
         </div>
 
-        <div class="dr-academic-q-info" v-for="n in qualifications" :key="n.id">
+        <div class="dr-academic-q-info" v-for="n in getResume.qualifications" :key="n.id">
           <div class="dr-academic-q-heading-item">
             <!--            <p v-if="exams">{{exams.title}}</p>-->
           </div>
@@ -158,7 +159,7 @@
       <!-- section-7 starts -->
       <div class="dr-skills">
         <p class="dr-title-all">Skills:</p>
-        <p>{{ skills.name }}</p>
+        <p>{{ getResume.skills.name }}</p>
       </div>
       <!-- section-7 ends -->
 
@@ -186,13 +187,13 @@
       <div class="dr-application-info">
         <div class="dr-application-info-1">Address</div>
         <div class="dr-application-info-2">
-          : {{ applicantBiodata.address }}
+          : {{ getResume.biodata.address }}
         </div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">City</div>
-        <div class="dr-application-info-2">: {{ applicantBiodata.city }}</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.city }}</div>
       </div>
 
       <!-- section-9 ends -->
@@ -301,6 +302,7 @@ export default {
   updated() {
     this.$nextTick(() => {
       console.log("applicant biodata.... ", this.applicantResume);
+      console.log("resume applicant ", this.$store.getters.resume.payload);
       console.log("User id... applicant...reusme...", this.userId);
     });
   },
@@ -327,19 +329,19 @@ export default {
       console.log("download resume");
       //file download
       this.$store
-          .dispatch("callApi", {
-            url: `resume/applicant/${this.userId}/${this.$store.getters.job}`,
-            method: "get",
-            data: {},
-          })
-          .then((response) => {
-            console.log("login image", response.file);
-            let url = `http://3.17.234.251/jobsresume/resumes/public/${
-                response.file
-            }?access_token=${this.$cookies.get("accessToken")}`;
-            // saveAs(url, "resume.pdf");
+        .dispatch("callApi", {
+          url: `resume/applicant/${this.userId}/${this.$store.getters.job}`,
+          method: "get",
+          data: {},
+        })
+        .then((response) => {
+          console.log("login image", response.file);
+          let url = `http://3.17.234.251/jobsresume/resumes/public/${
+            response.file
+          }?access_token=${this.$cookies.get("accessToken")}`;
+          // saveAs(url, "resume.pdf");
 
-            /* fetch(url, {
+          /* fetch(url, {
               method: "GET",
               headers: {
                 Authorization: "Bearer " + this.$cookies.get("accessToken"),
@@ -352,35 +354,35 @@ export default {
                 a.click();
               });
             }); */
-            // this.$refs.form.reset();
-            // saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", "file.pdf"); //or any other extension
-            link.setAttribute("target", "_blank"); //or any other extension
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            // delete link;
+          // this.$refs.form.reset();
+          // saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "file.pdf"); //or any other extension
+          link.setAttribute("target", "_blank"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          // delete link;
 
-            // window.open(url, "_blank");
-            //download/openf file in new tab
-            /*           let url = `http://3.17.234.251/jobsresume/resumes/public/${
+          // window.open(url, "_blank");
+          //download/openf file in new tab
+          /*           let url = `http://3.17.234.251/jobsresume/resumes/public/${
               response.file
             }?access_token=${this.$cookies.get("accessToken")}`;
             let redirectWindow = window.open(url, "_blank");
             redirectWindow.location; */
-          })
-          .catch(() => {
-            this.$awn.alert("Failed! Email/Password doesn't match");
-            // this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            this.loading = false;
-            //  this.tableLoading = false;
-          });
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          // this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          //  this.tableLoading = false;
+        });
     },
     appResume() {
       console.log("User id... applicant...reusme...", this.userId);

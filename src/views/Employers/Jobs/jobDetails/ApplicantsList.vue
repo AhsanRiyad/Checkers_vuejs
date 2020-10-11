@@ -201,11 +201,6 @@ export default {
         })
         .then((response) => {
           console.log("Resume...fra", response);
-          this.applicantResume = response.data;
-          this.applicantBiodata = response.data.biodata;
-          this.skills = response.data.skills;
-          this.experiences = response.data.experiences;
-          this.qualifications = response.data.qualification;
           this.$store.commit("resume", response.data);
 
           console.log(" resume console output... ", this.$store.getters.resume);
@@ -217,10 +212,6 @@ export default {
           // console.log("skills", response.data.skills);
           // console.log("experiencess", response.data.experiences);
           // console.log("qualifications", response.data.qualification);
-          for (let i = 0; i < this.qualifications.length; i++) {
-            this.exams = response.data.qualification[i].exam;
-            console.log("exams", this.exams);
-          }
           this.applicntInfo = response.data.applicationInfo;
           // console.log("applicants info", response.data.applicationInfo);
 
