@@ -20,10 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/ResumeLayout/_default.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/ResumeLayout/_default.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/JobCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/JobCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/recruiter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/recruiter.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +214,7 @@
       <workItem from="1602134371242" duration="32383000" />
       <workItem from="1602391656221" duration="27897000" />
       <workItem from="1602421978706" duration="761000" />
-      <workItem from="1602477960585" duration="20434000" />
+      <workItem from="1602477960585" duration="20741000" />
     </task>
     <servers />
   </component>
