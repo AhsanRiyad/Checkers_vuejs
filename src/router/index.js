@@ -424,7 +424,7 @@ import * as R from 'ramda';
 router.beforeEach((to, from, next) => {
   // ...
   if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
-    if (to.name == "search" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob") {
+    if (to.name == "search" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "FAQCompany" || to.name == "FAQSeekers") {
       next();
       return;
     }
