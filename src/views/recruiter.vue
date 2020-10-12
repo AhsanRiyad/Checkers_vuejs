@@ -180,7 +180,10 @@
          </div>
 
          <v-row id="companyName">
-           <v-col v-for="reqrCom in recruiterCompanyList" :key="reqrCom.id" cols="12" lg="4" md="4">
+           <v-col class="text-center" cols="12" md="12" lg="12" v-if="!recruiterCompanyList.length">
+            <h1> No Company Available</h1>
+           </v-col>
+           <v-col v-else v-for="reqrCom in recruiterCompanyList" :key="reqrCom.id" cols="12" lg="4" md="4">
              <div  @click.stop="getDataByCompany(reqrCom.company_name)" class="jobCard_box d-flex align-center">
                <v-avatar size="90">
                  <img :src="$store.getters.imageUrl + reqrCom.company_logo"/>

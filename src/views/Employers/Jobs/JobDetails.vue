@@ -8,6 +8,7 @@
         </div>
         <div class="ja_right_card">
           <v-btn
+              :disabled="isDisabled"
             @click="editJob(jobs.id)"
             class="text--white"
             color="blue-grey"
@@ -186,6 +187,15 @@ export default {
     });
   },
   computed: {
+    isDisabled() {
+      if (this.jobs.job_status === 1) {
+        return true;
+      } else if (this.jobs.is_expired) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     totalApplicants() {
       return this.applicant && this.applicant.length;
     },

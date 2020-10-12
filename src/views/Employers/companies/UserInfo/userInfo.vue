@@ -237,7 +237,7 @@ export default {
       if (this.paramId) {
         this.$store
             .dispatch("callApi", {
-              url: "companies/user-basic-infos/" + this.paramId,
+              url: "companies/user-basic-infos/",
               method: "put",
               data: this.companyInfo,
               headers,
@@ -265,7 +265,7 @@ export default {
             .dispatch("callApi", {
               url: "companies/user-basic-infos/",
               method: "post",
-              data: {},
+              data: this.companyInfo,
               headers,
             })
             .then((response) => {
