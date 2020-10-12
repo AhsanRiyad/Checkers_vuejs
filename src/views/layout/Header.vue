@@ -140,7 +140,7 @@ export default {
         this.$store.commit("is_company", false);
         return false;
       } else {
-        if (this.$cookies.get("is_company") == "true") {
+        if (this.$cookies.get("is_company") == 'true') {
           console.log("is compnay... in the app.vue true");
           this.$store.commit("is_company", true);
           return true;
@@ -152,6 +152,7 @@ export default {
     },
   },
   mounted() {
+
     if (
       this.R.isNil(this.$cookies.get("is_company")) ||
       this.R.isEmpty(this.$cookies.get("is_company"))
@@ -181,23 +182,7 @@ export default {
     );
   },
   updated() {
-    console.log(
-      "this is is_company... updated",
-      this.$cookies.get("is_company")
-    );
-    if (this.$cookies.get("is_company") == null) {
-      this.$store.commit("is_company", false);
-      return false;
-    } else {
-      if (this.$cookies.get("is_company")) {
-        console.log("is compnay... in the app.vue true");
-        this.$store.commit("is_company", true);
-        return true;
-      } else {
-        this.$store.commit("is_company", false);
-        return false;
-      }
-    }
+    
   },
   methods: {
     gotoRecruiter() {
