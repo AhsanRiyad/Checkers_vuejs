@@ -37,12 +37,12 @@ export default {
   watch: {
     $route() {
       console.log("route changed...", this.$route);
-      if (this.$route.path == "/" || this.$route.path == "/signin" || this.$route.path == "/forgot-password"  ) {
+      if (this.$route.path == "/" || this.$route.path == "/signin" || this.$route.path == "/signup" || this.$route.path == "/forgot-password" || this.$route.path == "/company-list"   ) {
         this.bodyStyle = {
           "background-image":
             "url(" + require("../../assets/background.png") + ")",
           "background-size": "cover",
-          height: "calc(100vh - 250px)",
+          'min-height': "calc(100vh - 250px)",
           display: "block",
         };
       } else {
