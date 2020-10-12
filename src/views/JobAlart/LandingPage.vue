@@ -1,31 +1,59 @@
 <template>
-<div>
-  <Header></Header>
-  <span :style="{'background-image': 'url(' + require('../../assets/background.png') + ')' , 'background-size':'cover', 'display': 'block'}" >
-    <router-view></router-view>
-  </span>
-  <Footer></Footer>
-</div>
+  <div>
+    <Header></Header>
+    <span :style="bodyStyle">
+      <router-view></router-view>
+    </span>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
-import Header from '../layout/Header'
-import Footer from '../layout/Footer';
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 export default {
   name: "LandingPage",
-components:{
+  components: {
     Header,
-    Footer
+    Footer,
   },
   data() {
     return {
       drawer: true,
-       items: [
-        ['mdi-email', 'Inbox'],
-        ['mdi-account-supervisor-circle', 'Supervisors'],
-        ['mdi-clock-start', 'Clock-in'],
+      items: [
+        ["mdi-email", "Inbox"],
+        ["mdi-account-supervisor-circle", "Supervisors"],
+        ["mdi-clock-start", "Clock-in"],
       ],
+      bodyStyle: {
+        "background-image":
+          "url(" + require("../../assets/background.png") + ")",
+        "background-size": "cover",
+        // height: "calc(100vh - 250px)",
+        display: "block",
+      },
     };
-  }
+  },
+  watch: {
+    $route() {
+      console.log("route changed...", this.$route);
+      if (this.$route.path == "/") {
+        this.bodyStyle = {
+          "background-image":
+            "url(" + require("../../assets/background.png") + ")",
+          "background-size": "cover",
+          height: "calc(100vh - 250px)",
+          display: "block",
+        };
+      } else {
+        this.bodyStyle = {
+          "background-image":
+            "url(" + require("../../assets/background.png") + ")",
+          "background-size": "cover",
+          display: "block",
+        };
+      }
+    },
+  },
 };
 </script>

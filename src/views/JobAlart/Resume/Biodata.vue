@@ -370,7 +370,7 @@
                     $router.history.push('/');
                   }
                 "
-                >Back</v-btn
+                >Back To Home</v-btn
               >
             </div>
 

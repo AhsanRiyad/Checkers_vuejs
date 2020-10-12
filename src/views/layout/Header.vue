@@ -15,6 +15,14 @@
         <v-btn text router @click.stop="gotoRecruiter" color="white"
           >Recruiters</v-btn
         >
+        <v-btn
+          v-if="$store.getters.isLoggedIn"
+          router
+          to="/biodata"
+          text
+          color="white"
+          >Resume</v-btn
+        >
         <v-btn router to="/signin" text color="white">{{
           $store.getters.isLoggedIn ? "Logout" : "Login"
         }}</v-btn>
@@ -180,25 +188,7 @@ export default {
       this.$cookies.get("accessToken")
     );
   },
-  updated() {
-    console.log(
-      "this is is_company... updated",
-      this.$cookies.get("is_company")
-    );
-    if (this.$cookies.get("is_company") == null) {
-      this.$store.commit("is_company", false);
-      return false;
-    } else {
-      if (this.$cookies.get("is_company")) {
-        console.log("is compnay... in the app.vue true");
-        this.$store.commit("is_company", true);
-        return true;
-      } else {
-        this.$store.commit("is_company", false);
-        return false;
-      }
-    }
-  },
+  updated() {},
   methods: {
     gotoRecruiter() {
       //alert('here');

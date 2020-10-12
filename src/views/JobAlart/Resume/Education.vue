@@ -83,7 +83,7 @@
 
             <div class="row-100-1">
               <v-menu
-                v-model="menu"
+                v-model="n.menu1"
                 :close-on-content-click="false"
                 :nudge-right="40"
                 transition="scale-transition"
@@ -106,7 +106,7 @@
                 </template>
                 <v-date-picker
                   v-model="n.start_year"
-                  @input="menu = false"
+                  @input="n.menu1 = false"
                 ></v-date-picker>
               </v-menu>
             </div>
@@ -115,7 +115,7 @@
 
             <div class="row-100-4">
               <v-menu
-                v-model="menu2"
+                v-model="n.menu2"
                 :close-on-content-click="false"
                 :nudge-right="40"
                 transition="scale-transition"
@@ -139,7 +139,7 @@
                 </template>
                 <v-date-picker
                   v-model="n.end_year"
-                  @input="menu2 = false"
+                  @input="n.menu2 = false"
                 ></v-date-picker>
               </v-menu>
             </div>
@@ -264,6 +264,8 @@ export default {
           id: "",
           exam_id: "",
           subject: "",
+          menu1: false,
+          menu2: false,
           institute: "",
           result: "",
           start_year: "",
@@ -284,7 +286,6 @@ export default {
   },
   methods: {
     previewButton() {
-      
       // this.dialogSwitch = true;
       if (
         this.R.isNil(this.$store.getters.resume.payload.biodata) ||
@@ -298,7 +299,6 @@ export default {
         return;
       }
       this.dialogSwitch = true;
-    
     },
 
     myDialogClose() {
@@ -384,6 +384,8 @@ export default {
         subject: "",
         institute: "",
         result: "",
+        menu1: false,
+        menu2: false,
         start_year: "",
         end_year: "",
         details: "",
