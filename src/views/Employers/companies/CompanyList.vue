@@ -21,7 +21,7 @@
         <h1>Company is not Available</h1>
       </div>
       <div v-else style="overflow-x: auto !important;">
-        <table>
+        <table class="ja_table">
           <thead>
           <tr class="panel-heading">
             <th>Sl</th>
