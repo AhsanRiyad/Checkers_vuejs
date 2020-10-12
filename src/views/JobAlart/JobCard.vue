@@ -78,7 +78,7 @@
           </v-text-field>
         </div>
 
-  <!--       <div class="filter">
+        <!--       <div class="filter">
           <div class="filter-item-1">
             <v-autocomplete
               item-text="country_name"
@@ -644,7 +644,7 @@ export default {
 
         setTimeout(() => {
           const i = target.getAttribute("key");
-          console.log("target key...." ,  i);
+          console.log("target key....", i);
         }, 1000);
 
         // do something ...
