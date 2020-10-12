@@ -18,6 +18,7 @@
                   class="mb-0 pb-0 mb-0"
                   placeholder="Password"
                   outlined
+                  type="password"
                   dense
                   v-model="data.password"
                 ></v-text-field>
@@ -30,19 +31,20 @@
                   :rules="[(v) => !!v || 'required']"
                   placeholder="Password"
                   outlined
+                  type="password"
                   dense
                   v-model="data.new_password"
                 ></v-text-field>
               </v-col>
               <div class="ja__button">
                 <v-btn
-                  color="#00204e"
+                  color="#365899"
                   class="white--text ma-2"
                   @click.stop="submit"
-                  >save</v-btn
+                  >Confirm Change</v-btn
                 >
                 <v-btn
-                  color="#00204e"
+                  color="#365899"
                   class="white--text ma-2"
                   link
                   to="/account-settings"
@@ -90,8 +92,11 @@ export default {
       })
         .then((response) => {
           console.log(response);
-          this.$route.history.push("/signin");
+
           this.$awn.success("Successful");
+          setTimeout(() => {
+            this.$router.history.push("/signin");
+          }, 1000);
         })
         .catch(() => {
           this.$awn.alert("Failed");
