@@ -17,13 +17,13 @@ export default{
                 if (args[0] == true) {
                     return ([
                         v => !!v || args[2] + ' is required',
-                        v => /[a-zA-Z0-9._]{2,15}@[a-zA-Z0-9-]{2,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g.test(v) || 'Invalid'
+                        v => /[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9_-]{2,15}\.[a-zA-Z-]{2,10}(\.[a-zA-Z]{2})*$/g.test(v) || 'Invalid'
                     ]);
                 } else {
                     return ([
                         v => {
                             if (this.R.isNil(v) || this.R.isEmpty(v)) return true;
-                            if (!/[a-zA-Z1-9._]{2,15}@[a-zA-Z1-9]{2,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g.test(v)) return args[2] + ' is invalid';
+                            if (!/[a-zA-Z0-9._-]{2,15}@[a-zA-Z0-9_-]{2,15}\.[a-zA-Z-]{2,10}(\.[a-zA-Z]{2})*$/g.test(v)) return args[2] + ' is invalid';
                         },
                     ]);
                 }
