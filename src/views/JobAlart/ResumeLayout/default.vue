@@ -19,7 +19,7 @@
         </div>
 
         <div class="dr-title-photo">
-          <v-avatar size="150">
+          <v-avatar size="130">
             <img
               :src="
                 this.$store.getters.imageUrl + this.resume.payload.biodata.photo
@@ -34,14 +34,14 @@
       <!-- section-2 starts -->
       <div class="dr-career-objective">
         <p class="dr-title-all">Career Objective:</p>
-        <div v-html="this.resume.payload.biodata.objectives"></div>
+        <div class="resume_gap" v-html="this.resume.payload.biodata.objectives"></div>
       </div>
       <!-- section-2 ends -->
 
       <!-- section-3 starts -->
       <div class="dr-career-objective">
         <p class="dr-title-all">Career Description:</p>
-        <div v-html="this.resume.payload.biodata.career_description"></div>
+        <div class="resume_gap" v-html="this.resume.payload.biodata.career_description"></div>
       </div>
       <!-- section-3 ends -->
 
@@ -96,64 +96,47 @@
           </div>
         </div> -->
 
-        <div v-for="(n, i) in this.resume.payload.experiences" :key="n.id">
-          <b>
-            <p>{{ i + 1 }} )</p>
-          </b>
-          <p><b>Job Title </b> : {{ n.job_title }}</p>
-          <p><b> Compnay Name </b> : {{ n.company_name }}</p>
-          <p><b> Compnay Location </b> : {{ n.company_location }}</p>
-          <p><b> Duration </b> : {{ n.from_date + " to " + n.to_date }}</p>
-          <p>
-            <b> Job Description </b> : <span v-html="n.job_description"></span>
-          </p>
+        <div class="work_exp" v-for="(n) in this.resume.payload.experiences" :key="n.id">
+
+          <div class="exp_list">
+            <p><b>Designation </b> : {{ n.job_title }}</p>
+            <p><b> Compnay Name </b> : {{ n.company_name }}</p>
+            <p><b> Compnay Location </b> : {{ n.company_location }}</p>
+            <p><b> Duration </b> : {{ n.from_date + " to " + n.to_date }}</p>
+            <p>
+              <b> Job Description </b> : <span v-html="n.job_description"></span>
+            </p>
+          </div>
         </div>
       </div>
       <!-- section-6 ends -->
 
       <!-- section-5 starts -->
       <div class="dr-academic-qualification">
-        <p class="dr-title-all">Academic Qualification:</p>
-
-        <div class="dr-academic-q-heading">
-          <div class="dr-academic-q-heading-item">
-            <p class="table-title-dr">Title</p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p class="table-title-dr">Institution name</p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p class="table-title-dr">Field of study</p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p class="table-title-dr">End Year</p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p class="table-title-dr">Result</p>
-          </div>
-        </div>
-
-        <div
-          class="dr-academic-q-info"
-          v-for="n in this.resume.payload.qualification"
-          :key="n.id"
-        >
-          <div class="dr-academic-q-heading-item">
-            <p v-text="n.exam.title"></p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p v-text="n.institute"></p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p>{{ n.subject }}</p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p>{{ n.end_year }}</p>
-          </div>
-          <div class="dr-academic-q-heading-item">
-            <p>{{ n.result }}</p>
-          </div>
-        </div>
+        <p class="dr-title-all mt-0">Academic Qualification:</p>
+        <table class="resume_table resume_gap">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th style=" width:45%;">Institution name</th>
+            <th>Field of study</th>
+            <th class="text-center">End Year</th>
+            <th>Result</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr   v-for="n in this.resume.payload.qualification"
+                :key="n.id">
+            <td>{{ n.exam.title }}</td>
+            <td>
+              <p v-text="n.institute"></p>
+            </td>
+            <td>  <p>{{ n.subject }}</p></td>
+            <td> <p>{{ n.end_year }}</p></td>
+            <td class="action"> <p>{{ n.result }}</p></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
       <!-- section-5 ends -->
 
@@ -169,19 +152,21 @@
         <p class="dr-title-all">Application Information:</p>
       </div>
 
-      <div class="dr-application-info">
-        <div class="dr-application-info-1">Looking For</div>
-        <div class="dr-application-info-2 text-capitalize">
-          : {{ this.resume.payload.applicationInfo.job_level }}
-        </div>
-      </div>
+<div class="resume_gap">
+  <div class="dr-application-info">
+    <div class="dr-application-info-1">Looking For</div>
+    <div class="dr-application-info-2 text-capitalize">
+      : {{ this.resume.payload.applicationInfo.job_level }}
+    </div>
+  </div>
 
-      <div class="dr-application-info">
-        <div class="dr-application-info-1">Avalable For</div>
-        <div class="dr-application-info-2">
-          : {{ this.resume.payload.applicationInfo.available_for }}
-        </div>
-      </div>
+  <div class="dr-application-info">
+    <div class="dr-application-info-1">Avalable For</div>
+    <div class="dr-application-info-2">
+      : {{ this.resume.payload.applicationInfo.available_for }}
+    </div>
+  </div>
+</div>
       <!-- section-8 ends -->
 
       <!-- section-9 starts -->
@@ -189,7 +174,7 @@
         <p class="dr-title-all">Personal Details:</p>
       </div>
 
-      <div class="dr-application-info">
+      <div class="dr-application-info resume_gap">
         <div class="dr-application-info-1">Address</div>
         <div class="dr-application-info-2">
           : {{ this.resume.payload.biodata.address }}
