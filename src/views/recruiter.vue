@@ -1,278 +1,333 @@
 <template>
- <v-container class="ma-10 pa-10" style="padding: 7px 155px !important">
-   <v-row>
-     <v-col cols="12">
-       <div class="jobcard-first-container" id="mainDocs">
-         <div class="searchText">
-           <div class="searchText-pagination-jobcard">
-             <div>
-               <h1>Search Result</h1>
-             </div>
+  <v-container class="ma-10 pa-10" style="padding: 7px 155px !important">
+    <v-row>
+      <v-col cols="12">
+        <div class="jobcard-first-container" id="mainDocs">
+          <div class="searchText">
+            <div class="searchText-pagination-jobcard">
+              <div>
+                <h1>Search Result</h1>
+              </div>
 
-             <div>
-               <v-pagination v-model="pageNo" :length="length"></v-pagination>
-             </div>
-           </div>
-         </div>
+              <div>
+                <v-pagination v-model="pageNo" :length="length"></v-pagination>
+              </div>
+            </div>
+          </div>
 
-         <div v-if="skeleton">
-           <v-skeleton-loader v-for="n in 3" :key="n" class="loader" type="card"></v-skeleton-loader>
-         </div>
+          <div v-if="skeleton">
+            <v-skeleton-loader
+              v-for="n in 3"
+              :key="n"
+              class="loader"
+              type="card"
+            ></v-skeleton-loader>
+          </div>
 
-         <div class="alertMsg" v-else-if="ShowAlertMsg">
-           <v-text-field
-               @keyup.enter="getData"
-               dense
-               solo
-               label="Search"
-               prepend-inner-icon="search"
-               v-model="search"
-           >
-             <template v-slot:append-outer>
-               <v-btn
-                   tile
-                   class="white--text"
-                   style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
-                   @click.stop="getData"
-               >Search
-               </v-btn>
-             </template>
-           </v-text-field>
-           <!--      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>-->
-         </div>
+          <div class="alertMsg" v-else-if="ShowAlertMsg">
+            <v-text-field
+              @keyup.enter="getData"
+              dense
+              solo
+              label="Search"
+              prepend-inner-icon="search"
+              v-model="search"
+            >
+              <template v-slot:append-outer>
+                <v-btn
+                  tile
+                  class="white--text"
+                  style="
+                    height: 40px;
+                    margin-top: -8px;
+                    margin-bottom: 0;
+                    margin-left: -8px;
+                    background: rgb(54, 88, 153);
+                  "
+                  @click.stop="getData"
+                  >Search
+                </v-btn>
+              </template>
+            </v-text-field>
+            <!--      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>-->
+          </div>
 
-         <div v-else>
-           <div :style="filterFixedPosition" class="filterFixedPosition">
-             <div class="job-search-job-card">
-               <v-text-field
-                   @keyup.enter="getData"
-                   dense
-                   solo
-                   label="Search"
-                   prepend-inner-icon="search"
-                   v-model="search"
-               >
-                 <template v-slot:append-outer>
-                   <v-btn
-                       tile
-                       class="white--text"
-                       style="height: 40px; margin-top: -8px; margin-bottom: 0; margin-left: -8px; background: rgb(54, 88, 153);"
-                       @click.stop="getData"
-                   >Search
-                   </v-btn>
-                 </template>
-               </v-text-field>
-             </div>
+          <div v-else>
+            <div :style="filterFixedPosition" class="filterFixedPosition">
+              <div class="job-search-job-card">
+                <v-text-field
+                  @keyup.enter="getData"
+                  dense
+                  solo
+                  label="Search"
+                  prepend-inner-icon="search"
+                  v-model="search"
+                >
+                  <template v-slot:append-outer>
+                    <v-btn
+                      tile
+                      class="white--text"
+                      style="
+                        height: 40px;
+                        margin-top: -8px;
+                        margin-bottom: 0;
+                        margin-left: -8px;
+                        background: rgb(54, 88, 153);
+                      "
+                      @click.stop="getData"
+                      >Search
+                    </v-btn>
+                  </template>
+                </v-text-field>
+              </div>
 
-             <!--        <div class="filter">-->
-             <!--          <div class="filter-item-1">-->
-             <!--            <v-autocomplete-->
-             <!--                item-text="country_name"-->
-             <!--                item-value="id"-->
-             <!--                :items="['hi', 'hellow']"-->
-             <!--                outlined-->
-             <!--                dense-->
-             <!--                background-color="white"-->
-             <!--                placeholder="Select Country"-->
-             <!--            ></v-autocomplete>-->
-             <!--          </div>-->
-             <!--          <div class="filter-item-2">-->
-             <!--            <v-autocomplete-->
-             <!--                item-text="country_name"-->
-             <!--                item-value="id"-->
-             <!--                :items="['hi', 'hellow']"-->
-             <!--                outlined-->
-             <!--                dense-->
-             <!--                background-color="white"-->
-             <!--                placeholder="Select Country"-->
-             <!--            ></v-autocomplete>-->
-             <!--          </div>-->
-             <!--          <div class="filter-item-3">-->
-             <!--            <v-autocomplete-->
-             <!--                item-text="country_name"-->
-             <!--                item-value="id"-->
-             <!--                :items="['hi', 'hellow']"-->
-             <!--                outlined-->
-             <!--                dense-->
-             <!--                background-color="white"-->
-             <!--                placeholder="Select Country"-->
-             <!--            ></v-autocomplete>-->
-             <!--          </div>-->
-             <!--          <div class="filter-item-4">-->
-             <!--            <v-autocomplete-->
-             <!--                item-text="country_name"-->
-             <!--                item-value="id"-->
-             <!--                :items="['hi', 'hellow']"-->
-             <!--                outlined-->
-             <!--                dense-->
-             <!--                background-color="white"-->
-             <!--                placeholder="Select Country"-->
-             <!--            ></v-autocomplete>-->
-             <!--          </div>-->
-             <!--        </div>-->
-             <div class="clearFix"></div>
-           </div>
+              <!--        <div class="filter">-->
+              <!--          <div class="filter-item-1">-->
+              <!--            <v-autocomplete-->
+              <!--                item-text="country_name"-->
+              <!--                item-value="id"-->
+              <!--                :items="['hi', 'hellow']"-->
+              <!--                outlined-->
+              <!--                dense-->
+              <!--                background-color="white"-->
+              <!--                placeholder="Select Country"-->
+              <!--            ></v-autocomplete>-->
+              <!--          </div>-->
+              <!--          <div class="filter-item-2">-->
+              <!--            <v-autocomplete-->
+              <!--                item-text="country_name"-->
+              <!--                item-value="id"-->
+              <!--                :items="['hi', 'hellow']"-->
+              <!--                outlined-->
+              <!--                dense-->
+              <!--                background-color="white"-->
+              <!--                placeholder="Select Country"-->
+              <!--            ></v-autocomplete>-->
+              <!--          </div>-->
+              <!--          <div class="filter-item-3">-->
+              <!--            <v-autocomplete-->
+              <!--                item-text="country_name"-->
+              <!--                item-value="id"-->
+              <!--                :items="['hi', 'hellow']"-->
+              <!--                outlined-->
+              <!--                dense-->
+              <!--                background-color="white"-->
+              <!--                placeholder="Select Country"-->
+              <!--            ></v-autocomplete>-->
+              <!--          </div>-->
+              <!--          <div class="filter-item-4">-->
+              <!--            <v-autocomplete-->
+              <!--                item-text="country_name"-->
+              <!--                item-value="id"-->
+              <!--                :items="['hi', 'hellow']"-->
+              <!--                outlined-->
+              <!--                dense-->
+              <!--                background-color="white"-->
+              <!--                placeholder="Select Country"-->
+              <!--            ></v-autocomplete>-->
+              <!--          </div>-->
+              <!--        </div>-->
+              <div class="clearFix"></div>
+            </div>
 
-           <div class="searchResults">
-             <v-card class="mx-auto searchResults-text" v-for="n in Jobs" :key="n.id">
-               <v-card-text @click.stop="()=>saveDetails(n)" class="job-card-job-search">
-                 <h2 style="color: green" class="mb-2" v-text="n.job_title"></h2>
-                 <h4 v-text="n.company_name"></h4>
-                 <p class="text--primary">
-                   <v-icon>location_on</v-icon>
-                   {{ n.job_location }}
-                 </p>
-                 <p class="text--primary">
-                   <v-icon>school</v-icon>
-                   {{ n.education }}
-                 </p>
-                 <p class="text--primary">
-                   <v-icon>payment</v-icon>
-                   {{ n.min_salary_range }} to {{ n.max_salary_range }}
-                 </p>
-               </v-card-text>
-             </v-card>
-           </div>
+            <div class="searchResults">
+              <v-card
+                class="mx-auto searchResults-text"
+                v-for="n in Jobs"
+                :key="n.id"
+              >
+                <v-card-text
+                  @click.stop="() => saveDetails(n)"
+                  class="job-card-job-search"
+                >
+                  <h2
+                    style="color: green"
+                    class="mb-2"
+                    v-text="n.job_title"
+                  ></h2>
+                  <h4 v-text="n.company_name"></h4>
+                  <p class="text--primary">
+                    <v-icon>location_on</v-icon>
+                    {{ n.job_location }}
+                  </p>
+                  <p class="text--primary">
+                    <v-icon>school</v-icon>
+                    {{ n.education }}
+                  </p>
+                  <p class="text--primary">
+                    <v-icon>payment</v-icon>
+                    {{ n.min_salary_range }} to {{ n.max_salary_range }}
+                  </p>
+                </v-card-text>
+              </v-card>
+            </div>
 
-           <div class="clearFix"></div>
+            <div class="clearFix"></div>
 
-           <div class="Fixed-Job-Details">
-             <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
-               <v-skeleton-loader width="400" class="loader" type="card"></v-skeleton-loader>
-             </div>
+            <div class="Fixed-Job-Details">
+              <div :style="jobDetailsLoader" v-if="skeletonJobDetails">
+                <v-skeleton-loader
+                  width="400"
+                  class="loader"
+                  type="card"
+                ></v-skeleton-loader>
+              </div>
 
-             <div v-else>
-               <div :style="jobDetails" v-if="!loading">
-                 <div outlined :style="firstContainer">
-                   <v-list-item three-line>
-                     <v-list-item-content>
-                       <v-list-item-title class="headline mb-1">{{ JobDescription.job_title }}</v-list-item-title>
-                       <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
-                       <p>{{ JobDescription.company_name }} || {{ JobDescription.type_in_text }}</p>
-                     </v-list-item-content>
+              <div v-else>
+                <div :style="jobDetails" v-if="!loading">
+                  <div outlined :style="firstContainer">
+                    <v-list-item three-line>
+                      <v-list-item-content>
+                        <v-list-item-title class="headline mb-1">{{
+                          JobDescription.job_title
+                        }}</v-list-item-title>
+                        <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
+                        <p>
+                          {{ JobDescription.company_name }} ||
+                          {{ JobDescription.type_in_text }}
+                        </p>
+                      </v-list-item-content>
 
-                     <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-                   </v-list-item>
+                      <v-list-item-avatar
+                        tile
+                        size="80"
+                        color="grey"
+                      ></v-list-item-avatar>
+                    </v-list-item>
 
-                   <v-card-actions>
-                     <v-btn
-                         @click="showModal = true"
-                         class="applyNow white--text"
-                         color="primary"
-                         v-bind:disabled="isApplied"
-                     >Apply Now
-                     </v-btn>
-                   </v-card-actions>
+                    <v-card-actions>
+                      <v-btn
+                        @click="showModal = true"
+                        class="applyNow white--text"
+                        color="primary"
+                        v-bind:disabled="isApplied"
+                        >Apply Now
+                      </v-btn>
+                    </v-card-actions>
 
-                   <v-divider class="divider"></v-divider>
+                    <v-divider class="divider"></v-divider>
 
-                   <div :style="JobDescriptionStyle">
-                     <h4>Location</h4>
-                     <p>{{ JobDescription.city }}</p>
+                    <div :style="JobDescriptionStyle">
+                      <h4>Location</h4>
+                      <p>{{ JobDescription.city }}</p>
 
-                     <h4>Descriptions</h4>
-                     <div v-html="JobDescription.job_description"/>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
+                      <h4>Descriptions</h4>
+                      <div v-html="JobDescription.job_description" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-         <v-row id="companyName">
-           <v-col class="text-center" cols="12" md="12" lg="12" v-if="!recruiterCompanyList.length">
-            <h1> No Company Available</h1>
-           </v-col>
-           <v-col v-else v-for="reqrCom in recruiterCompanyList" :key="reqrCom.id" cols="12" lg="4" md="4">
-             <div  @click.stop="getDataByCompany(reqrCom.company_name)" class="jobCard_box d-flex align-center">
-               <v-avatar size="90">
-                 <img :src="$store.getters.imageUrl + reqrCom.company_logo"/>
-               </v-avatar>
-               <div class="jobCard_body">
-                 <h4 class="mb-2"><span class="mr-1">Company Name:</span><span>{{reqrCom.company_name}}</span></h4>
-                 <p>
-                   <span class="mr-2">Location:</span>
-                   <span style="text-transform: capitalize">{{reqrCom.company_location}}</span>
-                 </p>
-               </div>
-             </div>
-           </v-col>
-         </v-row>
+          <v-row id="companyName">
+            <v-col
+              v-for="reqrCom in recruiterCompanyList"
+              :key="reqrCom.id"
+              cols="12"
+              lg="4"
+              md="4"
+            >
+              <div
+                @click.stop="getDataByCompany(reqrCom.company_name)"
+                class="jobCard_box d-flex align-center"
+              >
+                <v-avatar size="90">
+                  <img :src="$store.getters.imageUrl + reqrCom.company_logo" />
+                </v-avatar>
+                <div class="jobCard_body">
+                  <h4 class="mb-2">
+                    <span class="mr-1">Company Name:</span
+                    ><span>{{ reqrCom.company_name }}</span>
+                  </h4>
+                  <p>
+                    <span class="mr-2">Location:</span>
+                    <span style="text-transform: capitalize">{{
+                      reqrCom.company_location
+                    }}</span>
+                  </p>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
 
-         <!-- job apply modal starts-->
-         <job-alert-modal persistent v-if="showModal">
-           <div class="d-flex align-center" slot="header">
-             <h1 class="warning-text">Warning Message</h1>
-             <v-spacer></v-spacer>
-             <v-btn @click="showModal = false" icon>
-               <v-icon>mdi-close</v-icon>
-             </v-btn>
-           </div>
-           <div slot="body">
-             <p>
-               JobAlert.com only works as a mean of communication between employers and job-seekers.
-               JobAlert.com Limited will not be responsible for any financial transaction or irregularity/ fraud by
-               the company after applying through the jobalert.com website.
-             </p>
-             <div class="d-flex align-center">
-               <v-checkbox
-                   v-model="termsAndConditions"
-                   label="I have read the above warning message."
-                   required
-               ></v-checkbox>
-               <v-spacer></v-spacer>
-             </div>
+          <!-- job apply modal starts-->
+          <job-alert-modal persistent v-if="showModal">
+            <div class="d-flex align-center" slot="header">
+              <h1 class="warning-text">Warning Message</h1>
+              <v-spacer></v-spacer>
+              <v-btn @click="showModal = false" icon>
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </div>
+            <div slot="body">
+              <p>
+                JobAlert.com only works as a mean of communication between
+                employers and job-seekers. JobAlert.com Limited will not be
+                responsible for any financial transaction or irregularity/ fraud
+                by the company after applying through the jobalert.com website.
+              </p>
+              <div class="d-flex align-center">
+                <v-checkbox
+                  v-model="termsAndConditions"
+                  label="I have read the above warning message."
+                  required
+                ></v-checkbox>
+                <v-spacer></v-spacer>
+              </div>
 
-             <div v-if="termsAndConditions">
-               <div class="expectedSalary-job-search">
-                 <div class="expectedSalary-job-search__title">Expected Salary</div>
-                 <div class="expectedSalary-job-search__textinput">
-                   <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
-                     <v-text-field
-                         type="number"
-                         :rules="[ v=>!!v||'required' ]"
-                         v-model="expectedSalary"
-                         outlined
-                         dense
-                         solo
-                         placeholder="Salary"
-                         @keyup.enter.stop="applyJob"
-                     ></v-text-field>
-                   </v-form>
-                 </div>
-               </div>
+              <div v-if="termsAndConditions">
+                <div class="expectedSalary-job-search">
+                  <div class="expectedSalary-job-search__title">
+                    Expected Salary
+                  </div>
+                  <div class="expectedSalary-job-search__textinput">
+                    <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
+                      <v-text-field
+                        type="number"
+                        :rules="[(v) => !!v || 'required']"
+                        v-model="expectedSalary"
+                        outlined
+                        dense
+                        solo
+                        placeholder="Salary"
+                        @keyup.enter.stop="applyJob"
+                      ></v-text-field>
+                    </v-form>
+                  </div>
+                </div>
 
-               <div class="expectedSalary-job-search__applybutton">
-                 <div>
-                   <v-btn
-                       class="white--text"
-                       color="green"
-                       depressed
-                       link
-                       :disabled="!termsAndConditions"
-                       :loading="loadingAppliedJob"
-                       @click.stop="applyJob"
-                   >Apply
-                   </v-btn>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </job-alert-modal>
-         <!-- job apply modal ends-->
+                <div class="expectedSalary-job-search__applybutton">
+                  <div>
+                    <v-btn
+                      class="white--text"
+                      color="green"
+                      depressed
+                      link
+                      :disabled="!termsAndConditions"
+                      :loading="loadingAppliedJob"
+                      @click.stop="applyJob"
+                      >Apply
+                    </v-btn>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </job-alert-modal>
+          <!-- job apply modal ends-->
 
-         <!-- apply online Expected salary starts -->
+          <!-- apply online Expected salary starts -->
 
-         <!-- apply online Expected salary ends -->
-       </div>
-     </v-col>
-   </v-row>
- </v-container>
+          <!-- apply online Expected salary ends -->
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 
 <script>
-import '../sass/job-alart/_JobCard.scss'
+import "../sass/job-alart/_JobCard.scss";
 import ipMixins from "@/mixins/ipMixins";
 import tokenMixins from "@/mixins/tokenMixins";
 import axios from "axios";
@@ -371,7 +426,7 @@ export default {
     },
   },
   created() {
-    this.getAllCompanyList()
+    this.getAllCompanyList();
   },
   methods: {
     applyJob(event) {
@@ -402,33 +457,33 @@ export default {
         },
         headers,
       })
-          .then((response) => {
-            console.log(response);
+        .then((response) => {
+          console.log(response);
 
-            if (response.status == 206) {
-              this.$router.history.push("/biodata");
-              this.$awn.alert("Your resume is not completed");
-              return;
-            }
-            this.showModal = false;
-            this.$awn.success("You have successfully applied!");
-            this.getData();
-          })
-          .catch((error) => {
-            console.log(error);
+          if (response.status == 206) {
+            this.$router.history.push("/biodata");
+            this.$awn.alert("Your resume is not completed");
+            return;
+          }
+          this.showModal = false;
+          this.$awn.success("You have successfully applied!");
+          this.getData();
+        })
+        .catch((error) => {
+          console.log(error);
 
-            if (error.response.status == 401) {
-              this.$awn.alert("You are not logged in");
-              this.$router.history.push("/signin");
-            } else if (error.response.status == 404) {
-              this.$awn.alert("Your resume is not completed");
-              this.$router.history.push("/biodata");
-              return;
-            }
-          })
-          .finally(() => {
-            this.loadingAppliedJob = false;
-          });
+          if (error.response.status == 401) {
+            this.$awn.alert("You are not logged in");
+            this.$router.history.push("/signin");
+          } else if (error.response.status == 404) {
+            this.$awn.alert("Your resume is not completed");
+            this.$router.history.push("/biodata");
+            return;
+          }
+        })
+        .finally(() => {
+          this.loadingAppliedJob = false;
+        });
     },
     getAllCompanyList() {
       const headers = {
@@ -443,17 +498,16 @@ export default {
         data: {},
         headers,
       })
-          .then((response) => {
-            console.log("company lissssssstttttttttttt", response)
-            this.recruiterCompanyList = response.data.data
-            // console.log("user response", response.status);
-            this.loading = true
-          })
-          .catch(() => {
-          })
-          .finally(() => {
-            this.loading = false;
-          });
+        .then((response) => {
+          console.log("company lissssssstttttttttttt", response);
+          this.recruiterCompanyList = response.data.data;
+          // console.log("user response", response.status);
+          this.loading = true;
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.loading = false;
+        });
     },
     showModalExpectedSalary() {
       this.showModal = false;
@@ -465,29 +519,36 @@ export default {
 
       this.jobId = n;
 
-      this.$store
-          .dispatch("callApi", {
-            url: "jobs/" + n.id,
-            method: "get",
-            data: {},
-          })
-          .then((response) => {
-            console.log("details list in the", response.data.jobs);
-            this.JobDescription = response.data.jobs;
-            // this.$refs.form.reset();
-            //saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-            this.skeleton = false;
-          })
-          .catch((error) => {
-            this.$awn.alert("Failed");
-            console.log("eror..", error.response);
-          })
-          .finally(() => {
-            //  this.tableLoading = false;
-            this.skeletonJobDetails = false;
-          });
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        url: "jobs/" + n.id,
+        method: "get",
+        data: {},
+        baseURL: this.$store.state.apiBase,
+        headers,
+      })
+        .then((response) => {
+          console.log("details list in the", response.data.data.jobs);
+          this.JobDescription = response.data.data.jobs;
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          this.skeleton = false;
+        })
+        .catch((error) => {
+          this.$awn.alert("Failed");
+          console.log("eror..", error.response);
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+          this.skeletonJobDetails = false;
+        });
     },
     onScroll() {
       // if (window.innerHeight)
@@ -536,17 +597,17 @@ export default {
       }
 
       this.JobDescriptionStyle.height =
-          screen.availHeight - spaceGap - window.scrollY + "px";
+        screen.availHeight - spaceGap - window.scrollY + "px";
 
       // this.JobDescriptionStyle.height = "100px";
 
       console.log(
-          "screen available height.......",
-          screen.availHeight - 400 - window.scrollY + "px"
+        "screen available height.......",
+        screen.availHeight - 400 - window.scrollY + "px"
       );
       console.log(
-          "document available height.......",
-          document.querySelector("#mainDocs").scrollHeight
+        "document available height.......",
+        document.querySelector("#mainDocs").scrollHeight
       );
       console.log("scroll Y.......", window.scrollY);
       console.log("inner height.......", window.innerHeight);
@@ -559,7 +620,6 @@ export default {
       console.log(screenDifference);
     },
     getData() {
-
       if (this.$store.getters.userIp == "") {
         new Promise((resolve, reject) => {
           this.getIp(resolve, reject);
@@ -569,12 +629,11 @@ export default {
         });
       } else {
         this.getSearchData();
-       // document.getElementById('companyName').style.display="none"
+        // document.getElementById('companyName').style.display="none"
       }
     },
     getDataByCompany(name) {
-
-      this.search = name
+      this.search = name;
       if (this.$store.getters.userIp == "") {
         new Promise((resolve, reject) => {
           this.getIp(resolve, reject);
@@ -584,14 +643,13 @@ export default {
         });
       } else {
         this.getSearchData();
-       // document.getElementById('companyName').style.display="none"
+        // document.getElementById('companyName').style.display="none"
       }
     },
     getSearchData() {
       this.loading = true;
 
       this.skeleton = true;
-
 
       let url = "search";
 
@@ -613,45 +671,43 @@ export default {
         },
         headers,
       })
-          .then((response) => {
-            console.log("job list....", response);
-            // this.Jobs = [...this.Jobs, ...response.jobs.items];
-            this.Jobs = response.data.items;
-            this.jobId = this.JobDescription = this.Jobs[0];
-            this.skeletonJobDetails = false;
-            this.length = Math.round(
-                response.data.total_count /
-                response.data.num_items_per_page
-            );
-            // this.$refs.form.reset();
-            //saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-            this.skeleton = false;
-            this.ShowAlertMsg = false;
-          })
-          .catch(() => {
-            this.Jobs = [];
-            // this.$awn.alert("Failed");
-          })
-          .finally(() => {
-
-            this.loading = false;
-            this.skeleton = false;
-            if (this.Jobs.length === 0) this.ShowAlertMsg = true;
-            //  this.tableLoading = false;
-            // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
-            this.JobDescriptionStyle.height =
-                screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
-            console.log(
-                "window availheight.....",
-                document.querySelector("#mainDocs").scrollHeight
-            );
-            //alert(this.search)
-           if(this.search!=undefined){
-             document.getElementById('companyName').style.display='none'
-           }
-          });
+        .then((response) => {
+          console.log("job list....", response);
+          // this.Jobs = [...this.Jobs, ...response.jobs.items];
+          this.Jobs = response.data.items;
+          this.jobId = this.JobDescription = this.Jobs[0];
+          this.skeletonJobDetails = false;
+          this.length = Math.round(
+            response.data.total_count / response.data.num_items_per_page
+          );
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          this.skeleton = false;
+          this.ShowAlertMsg = false;
+        })
+        .catch(() => {
+          this.Jobs = [];
+          // this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          this.skeleton = false;
+          if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+          //  this.tableLoading = false;
+          // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
+          this.JobDescriptionStyle.height =
+            screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
+          console.log(
+            "window availheight.....",
+            document.querySelector("#mainDocs").scrollHeight
+          );
+          //alert(this.search)
+          if (this.search != undefined) {
+            document.getElementById("companyName").style.display = "none";
+          }
+        });
     },
   },
   mounted() {
@@ -666,7 +722,7 @@ export default {
     this.search = this.$route.query.q;
 
     this.getData();
-    this.getAllCompanyList()
+    this.getAllCompanyList();
   },
   destroyed: function () {
     window.removeEventListener("scroll", this.onScroll);
@@ -679,9 +735,8 @@ export default {
       this.getData();
     },
   },
-}
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -413,7 +413,7 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import validation from "../../../mixins/validation";
 // import { eventBus } from '@/main';
-// import axios from 'axios';
+import axios from "axios";
 export default {
   name: "Biodata",
   mixins: [validation],
@@ -482,22 +482,29 @@ export default {
     getData() {
       this.loadingData = true;
 
-      this.$store
-        .dispatch("callApi", {
-          url: "resume/",
-          method: "get",
-          data: {},
-        })
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        url: "resume/",
+        method: "get",
+        data: {},
+        headers,
+        baseURL: this.$store.state.apiBase,
+      })
         .then((response) => {
           console.log("resume.. data", response);
           // eventBus.$emit( "fillData" , response.data );
-          this.countries = response.data.countryList;
-          this.biodata = { ...this.biodata, ...response.data.biodata };
+          this.countries = response.data.data.countryList;
+          this.biodata = { ...this.biodata, ...response.data.data.biodata };
           this.imageUrl = this.biodata.photo;
           console.log("this is biodata info... ", this.biodata);
           this.$store.commit("biodata", this.biodata);
           console.log("this is  ", this.$store.getters.biodata);
-          this.$store.commit("resume", response.data);
+          this.$store.commit("resume", response.data.data);
 
           console.log("resume data...", this.$store.getters.resume);
 
@@ -506,8 +513,31 @@ export default {
           //  console.log(response);
           //  this.items = response.data;
         })
-        .catch(() => {
+        .catch((error) => {
           this.$awn.alert("Failed!");
+          console.log("error status code... ", error.response.status);
+          if (error.response.status == 401) {
+            axios({
+              method: "get",
+              baseURL: this.$store.state.apiBase,
+              url: `users/new-access-token`,
+              params: {
+                access_token: this.$cookies.get("accessToken"),
+                ip: this.$store.getters.userIp,
+              },
+              headers,
+            })
+              .then((response) => {
+                console.log("this is refresh token.....", response);
+                this.$cookies.set("accessToken", response.data.access_token);
+                this.getData();
+              })
+              .catch((error) => {
+                this.$route.history.push("/signin");
+                console.log(error);
+              })
+              .finally(() => {});
+          }
           //   this.$awn.alert("Failed");
         })
         .finally(() => {

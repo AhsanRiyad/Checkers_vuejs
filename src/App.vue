@@ -33,10 +33,10 @@ export default {
       () => {}
     );
 
-    this.refreshToken(
+    /*     this.refreshToken(
       () => {},
       () => {}
-    );
+    ); */
   },
   created() {
     if (
@@ -63,7 +63,6 @@ export default {
   },
   updated() {
     this.getCommonInfo();
-
 
     this.$nextTick(function () {
       // Code that will run only after the
