@@ -21,8 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeForgotPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeForgotPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/forgotPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/forgotPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/verifyPhoneNumber.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/verifyPhoneNumber.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +216,7 @@
       <workItem from="1602134371242" duration="32383000" />
       <workItem from="1602391656221" duration="27897000" />
       <workItem from="1602421978706" duration="761000" />
-      <workItem from="1602477960585" duration="23178000" />
+      <workItem from="1602477960585" duration="24710000" />
     </task>
     <servers />
   </component>

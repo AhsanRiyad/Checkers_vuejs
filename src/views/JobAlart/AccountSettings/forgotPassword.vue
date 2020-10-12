@@ -23,14 +23,14 @@
 
               <div class="ja__button">
                 <v-btn
-                  color="#00204e"
+                  color="#365899"
                   class="white--text ma-2"
                   @click.stop="submit"
                   :loading="loading"
-                  >save</v-btn
+                  >Mail me</v-btn
                 >
                 <v-btn
-                  color="#00204e"
+                  color="#365899"
                   class="white--text ma-2"
                   link
                   to="/account-settings"

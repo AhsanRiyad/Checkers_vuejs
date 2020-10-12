@@ -22,8 +22,8 @@
                 ></v-text-field>
               </v-col>
               <div class="ja__button">
-                <v-btn color="#00204e" class="white--text ma-2" @click.stop="submit">save</v-btn>
-                <v-btn color="#00204e" class="white--text ma-2" link to="/account-settings">cancel changes</v-btn>
+                <v-btn color="#365899" class="white--text ma-2" @click.stop="submit">save</v-btn>
+                <v-btn color="#365899" class="white--text ma-2" link to="/account-settings">cancel changes</v-btn>
               </div>
               <v-col>
                 <p class="ma-0">Didn't receive your code? <span>Resend code</span></p>
