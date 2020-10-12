@@ -14,7 +14,7 @@
               <v-col cols="12" md="8" class="col-1 mb-n4 pb-0">
                 <p class="mb-1">Current password</p>
                 <v-text-field
-                  :rules="[v=>!!v||'required']"
+                  :rules="[(v) => !!v || 'required']"
                   class="mb-0 pb-0 mb-0"
                   placeholder="Password"
                   outlined
@@ -27,7 +27,7 @@
                 <p class="mb-1">New password</p>
                 <v-text-field
                   class="mb-0"
-                  :rules="[v=>!!v||'required']"
+                  :rules="[(v) => !!v || 'required']"
                   placeholder="Password"
                   outlined
                   dense
@@ -35,13 +35,19 @@
                 ></v-text-field>
               </v-col>
               <div class="ja__button">
-                <v-btn color="#00204e" class="white--text ma-2" @click.stop="submit">save</v-btn>
+                <v-btn
+                  color="#00204e"
+                  class="white--text ma-2"
+                  @click.stop="submit"
+                  >save</v-btn
+                >
                 <v-btn
                   color="#00204e"
                   class="white--text ma-2"
                   link
                   to="/account-settings"
-                >cancel changes</v-btn>
+                  >cancel changes</v-btn
+                >
               </div>
             </v-form>
           </v-card>
@@ -84,6 +90,7 @@ export default {
       })
         .then((response) => {
           console.log(response);
+          this.$route.history.push("/signin");
           this.$awn.success("Successful");
         })
         .catch(() => {
