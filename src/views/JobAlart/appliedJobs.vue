@@ -101,7 +101,7 @@
             <!--********** Job activities end **************-->
             <!--********** Job applied table start **************-->
             <div style="overflow-x: auto">
-              <table>
+              <table class="ja_table">
                 <thead>
                 <tr class="panel-heading">
                   <th>Sl</th>

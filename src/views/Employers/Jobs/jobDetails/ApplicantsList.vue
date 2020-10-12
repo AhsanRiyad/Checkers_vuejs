@@ -3,7 +3,7 @@
     <v-card flat class="ja__card pt-0">
       <!--********** Job applied table start **************-->
       <div style="overflow-x: auto !important">
-        <table>
+        <table class="ja_table">
           <tbody>
             <v-dialog
               v-model="loadingApplicant"

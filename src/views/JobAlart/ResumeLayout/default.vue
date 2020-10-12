@@ -51,7 +51,7 @@
 
         <p class="years-of-experience">
           Total year of experiences:
-          {{ this.resume.payload.userTotalExperiences.years }}
+          {{ this.resume.payload.userTotalExperiences.years }} Year(s) {{ this.resume.payload.userTotalExperiences.months }} Month(s) {{ this.resume.payload.userTotalExperiences.days }} Day(s)
         </p>
       </div>
       <!-- section-4 ends -->
@@ -156,8 +156,8 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Looking For</div>
-        <div class="dr-application-info-2">
-          : {{ this.resume.payload.applicationInfo.job_categroy_title }}
+        <div class="dr-application-info-2 text-capitalize">
+          : {{ this.resume.payload.applicationInfo.job_level }}
         </div>
       </div>
 

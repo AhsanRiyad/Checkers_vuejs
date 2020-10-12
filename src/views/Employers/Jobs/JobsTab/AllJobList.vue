@@ -17,7 +17,7 @@
         <h1>Job is not Available</h1>
       </div>
       <div v-else style="overflow-x: auto !important">
-        <table>
+        <table class="ja_table">
           <thead>
             <tr class="panel-heading">
               <th>Sl</th>
@@ -95,13 +95,21 @@
                 >
                   <v-icon>mdi-backup-restore</v-icon>
                 </v-btn>
-                <v-btn
-                  @click="goToJobDetails(job.id)"
-                  class="interactn mr-2 ml-2 c-green"
-                  icon
-                >
-                  <v-icon>mdi-account-group</v-icon>
-                </v-btn>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                        @click="goToJobDetails(job.id)"
+                        class="interactn mr-2 ml-2 c-green"
+                        v-bind="attrs"
+                        v-on="on"
+                        icon
+                    >
+                      <v-icon>mdi-account-group</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Applicant List</span>
+                </v-tooltip>
+
               </td>
             </tr>
           </tbody>
