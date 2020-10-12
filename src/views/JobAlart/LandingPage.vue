@@ -37,7 +37,7 @@ export default {
   watch: {
     $route() {
       console.log("route changed...", this.$route);
-      if (this.$route.path == "/") {
+      if (this.$route.path == "/" || this.$route.path == "/signin" || this.$route.path == "/forgot-password"  ) {
         this.bodyStyle = {
           "background-image":
             "url(" + require("../../assets/background.png") + ")",
