@@ -230,6 +230,7 @@
 import "../../../sass/job-alart/_Education.scss";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../../../sass/job-alart/_Resume.scss";
+import axios from "axios";
 export default {
   name: "Education",
   components: {
@@ -306,25 +307,58 @@ export default {
     },
     getData() {
       this.loadingData = true;
-      this.$store
-        .dispatch("callApi", {
-          url: "resume/",
-          method: "get",
-          data: {},
-        })
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        url: "resume/",
+        method: "get",
+        data: {},
+        headers,
+        baseURL: this.$store.state.apiBase,
+      })
         .then((response) => {
           console.log(response);
-          this.examList = response.data.examList;
-          this.resume = response.data;
+          this.examList = response.data.data.examList;
+          this.resume = response.data.data;
           this.educations =
-            this.R.isNil(response.data.qualification) ||
-            this.R.isEmpty(response.data.qualification)
+            this.R.isNil(response.data.data.qualification) ||
+            this.R.isEmpty(response.data.data.qualification)
               ? this.educations
-              : response.data.qualification.map((n) => {
+              : response.data.data.qualification.map((n) => {
                   return { ...n, ...{ exam_id: n.exam.id } };
                 });
 
           console.log("educations....", this.educations);
+        })
+        .catch((error) => {
+          if (error.response.status == 401) {
+            axios({
+              method: "get",
+              baseURL: this.$store.state.apiBase,
+              url: `users/new-access-token`,
+              params: {
+                access_token: this.$cookies.get("accessToken"),
+                ip: this.$store.getters.userIp,
+              },
+              headers,
+            })
+              .then((response) => {
+                console.log("this is refresh token.....", response);
+                this.$cookies.set("accessToken", response.data.access_token);
+                this.getData();
+              })
+              .catch((error) => {
+                this.$awn.alert("Failed!");
+                this.$route.history.push("/signin");
+                console.log(error);
+                return;
+              })
+              .finally(() => {});
+          }
         })
         .finally(() => {
           if (
@@ -336,7 +370,6 @@ export default {
             this.$awn.alert("Your biodata/experices is not complete");
             this.$router.history.push("/biodata");
           }
-
           this.loadingData = false;
         });
     },
