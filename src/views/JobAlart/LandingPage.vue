@@ -1,14 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <span
-      :style="{
-        'background-image':
-          'url(' + require('../../assets/background.png') + ')',
-        'background-size': 'cover',
-        display: 'block',
-      }"
-    >
+    <span :style="bodyStyle">
       <router-view></router-view>
     </span>
     <Footer></Footer>
@@ -32,7 +25,35 @@ export default {
         ["mdi-account-supervisor-circle", "Supervisors"],
         ["mdi-clock-start", "Clock-in"],
       ],
+      bodyStyle: {
+        "background-image":
+          "url(" + require("../../assets/background.png") + ")",
+        "background-size": "cover",
+        // height: "calc(100vh - 250px)",
+        display: "block",
+      },
     };
+  },
+  watch: {
+    $route() {
+      console.log("route changed...", this.$route);
+      if (this.$route.path == "/") {
+        this.bodyStyle = {
+          "background-image":
+            "url(" + require("../../assets/background.png") + ")",
+          "background-size": "cover",
+          height: "calc(100vh - 250px)",
+          display: "block",
+        };
+      } else {
+        this.bodyStyle = {
+          "background-image":
+            "url(" + require("../../assets/background.png") + ")",
+          "background-size": "cover",
+          display: "block",
+        };
+      }
+    },
   },
 };
 </script>
