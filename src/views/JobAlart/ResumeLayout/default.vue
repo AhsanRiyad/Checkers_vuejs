@@ -51,7 +51,9 @@
 
         <p class="years-of-experience">
           Total year of experiences:
-          {{ this.resume.payload.userTotalExperiences.years }} Year(s) {{ this.resume.payload.userTotalExperiences.months }} Month(s) {{ this.resume.payload.userTotalExperiences.days }} Day(s)
+          {{ this.resume.payload.userTotalExperiences.years }} Year(s)
+          {{ this.resume.payload.userTotalExperiences.months }} Month(s)
+          {{ this.resume.payload.userTotalExperiences.days }} Day(s)
         </p>
       </div>
       <!-- section-4 ends -->
@@ -60,7 +62,7 @@
       <div class="dr-academic-certificate">
         <p class="dr-title-all">Work Experiences:</p>
 
-        <div class="dr-academic-c-heading">
+        <!--     <div class="dr-academic-c-heading">
           <div class="dr-academic-c-heading-item">
             <p class="table-title-dr">Job Title</p>
           </div>
@@ -92,6 +94,19 @@
           <div class="dr-academic-c-heading-item">
             <p>{{ n.from_date + " to " + n.to_date }}</p>
           </div>
+        </div> -->
+
+        <div v-for="(n, i) in this.resume.payload.experiences" :key="n.id">
+          <b>
+            <p>{{ i + 1 }} )</p>
+          </b>
+          <p><b>Job Title </b> : {{ n.job_title }}</p>
+          <p><b> Compnay Name </b> : {{ n.company_name }}</p>
+          <p><b> Compnay Location </b> : {{ n.company_location }}</p>
+          <p><b> Duration </b> : {{ n.from_date + " to " + n.to_date }}</p>
+          <p>
+            <b> Job Description </b> : <span v-html="n.job_description"></span>
+          </p>
         </div>
       </div>
       <!-- section-6 ends -->
