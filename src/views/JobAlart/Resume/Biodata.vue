@@ -514,7 +514,6 @@ export default {
           //  this.items = response.data;
         })
         .catch((error) => {
-          this.$awn.alert("Failed!");
           console.log("error status code... ", error.response.status);
           if (error.response.status == 401) {
             axios({
@@ -533,8 +532,10 @@ export default {
                 this.getData();
               })
               .catch((error) => {
+                this.$awn.alert("Failed!");
                 this.$route.history.push("/signin");
                 console.log(error);
+                return;
               })
               .finally(() => {});
           }

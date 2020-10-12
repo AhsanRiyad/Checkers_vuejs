@@ -330,7 +330,7 @@
 </template>
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
+import axios from "axios";
 export default {
   name: "Biodata",
   components: {
@@ -398,16 +398,24 @@ export default {
     },
     getData() {
       this.loadingData = true;
-      this.$store
-        .dispatch("callApi", {
-          url: "jobs-category/",
-          method: "get",
-          data: {},
-        })
+
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        url: "jobs-category/",
+        method: "get",
+        data: {},
+        headers,
+        baseURL: this.$store.state.apiBase,
+      })
         .then((response) => {
           console.log("job category..... ", response);
           // eventBus.$emit( "fillData" , response.data );
-          this.job_category = response.data;
+          this.job_category = response.data.data;
 
           //  this.$refs.form.reset();
           //  saves the items from the database in the table
@@ -554,10 +562,32 @@ export default {
               this.loadingData = false;
             });
         })
-        .catch(() => {
-          console.log("failed 2");
-          this.$awn.alert("Failed!");
-          // this.$awn.alert("Failed");
+        .catch((error) => {
+          console.log("error status code... ", error.response.status);
+          if (error.response.status == 401) {
+            axios({
+              method: "get",
+              baseURL: this.$store.state.apiBase,
+              url: `users/new-access-token`,
+              params: {
+                access_token: this.$cookies.get("accessToken"),
+                ip: this.$store.getters.userIp,
+              },
+              headers,
+            })
+              .then((response) => {
+                console.log("this is refresh token.....", response);
+                this.$cookies.set("accessToken", response.data.access_token);
+                this.getData();
+              })
+              .catch((error) => {
+                this.$awn.alert("Failed!");
+                this.$route.history.push("/signin");
+                console.log(error);
+              })
+              .finally(() => {});
+          }
+          //   this.$awn.alert("Failed");
         })
         .finally(() => {
           //  this.tableLoading = false;
