@@ -1,5 +1,5 @@
 <template >
-  <div class="mainTemplate_biodata">
+  <div class="mainTemplate_biodata" style="margin-bottom: 40px">
     <optionTab />
 
     <div class="mainContainer_biodata">

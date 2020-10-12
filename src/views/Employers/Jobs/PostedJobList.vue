@@ -17,7 +17,10 @@
       </div>
       <!--********** Job activities end **************-->
       <!--********** Job applied table start **************-->
-      <div style="overflow-x: auto !important;">
+      <div v-if="!postedJobs.length" class="text-center">
+        <h1>Job is not Available</h1>
+      </div>
+      <div v-else style="overflow-x: auto !important;">
         <table class="ja_table">
           <thead>
           <tr class="panel-heading">
@@ -68,20 +71,21 @@
               <v-btn @click.stop="editJob(job.id)" id="edit_btn" :disabled="job.job_status == 1" class="interactn c-grey" icon>
                 <v-icon>mdi-square-edit-outline</v-icon>
               </v-btn>
-              <v-btn :disabled="job.job_status == 1" class="interactn  mr-2 ml-2 c-green" icon>
+              <v-btn v-if="false" :disabled="job.job_status == 1" class="interactn  mr-2 ml-2 c-green" icon>
                 <v-icon>mdi-backup-restore</v-icon>
               </v-btn>
             </td>
           </tr>
           </tbody>
         </table>
+        <!--********** pagination start **************-->
+        <div class="pagination">
+          <v-pagination v-model="pageNo" :length="length"></v-pagination>
+        </div>
+        <!--********** pagination end **************-->
       </div>
       <!--********** Job applied table end **************-->
-      <!--********** pagination start **************-->
-      <div class="pagination">
-        <v-pagination v-model="pageNo" :length="length"></v-pagination>
-      </div>
-      <!--********** pagination end **************-->
+
     </v-card>
   </div>
 </template>

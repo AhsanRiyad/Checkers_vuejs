@@ -7,15 +7,31 @@
 .dr-title-all {
     color: $titleColor;
     font-size: 20px;
-    text-decoration: underline;
+    width: 100%;
+    //text-decoration: underline;
     // border-bottom: 4px solid $titleColor;
-    padding-bottom: 5px;
+    //padding-bottom: 5px;
+    padding: 5px 10px;
     font-weight: bold;
-    line-height: 4px;
-    margin-top: 20px;
+    background: #E6E6E6;
+    margin-top: 15px;
 }
-
+.work_exp{
+    .exp_list{
+        padding: 15px 0 20px 0;
+        border-bottom: 1px solid #eee;
+        //&:nth-last-child(1){
+        //    border-bottom: 0 !important;
+        //}
+    }
+}
+.resume_gap{
+    padding: 15px 0 0 0;
+}
 .default-resume-main-card {
+    p{
+        margin-bottom: 0 !important;
+    }
     background: white;
     width: 45%;
     margin: 0 auto;
@@ -57,6 +73,9 @@
     // justify-content: center;
     margin: 0 auto;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 20px;
 
     .dr-title-photo {
         // display: flex;
@@ -78,14 +97,19 @@
 }
 
 .dr-main-text-div {
-    line-height: 10px;
+    //line-height: 10px;
     margin-top: 100px;
 
     @include tab() {
         order: 2;
     }
 }
-
+.resume_table{
+tr th{
+    text-align: left;
+    font-size: 17px;
+}
+}
 
 .dr-career-objective {
     display: flex;

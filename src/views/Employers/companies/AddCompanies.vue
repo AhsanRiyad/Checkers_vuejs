@@ -261,7 +261,7 @@ export default {
   data() {
     return {
       imageUploadLoading: false,
-      loading: true,
+      loading: false,
       loadingDataText: "",
       phone: null,
       companyId: "",
@@ -336,8 +336,8 @@ export default {
     submit() {
       if (!this.$refs.form.validate()) return;
       this.loadingDataText = "Creating Company...";
-      this.loading = true;
       if (this.paramId) {
+        this.loading = true;
         this.$store
             .dispatch("callApi", {
               url: "companies/" + this.paramId,

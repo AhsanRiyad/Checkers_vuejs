@@ -78,9 +78,9 @@
               </td>
               <!--                  <td>{{ job.applicant }}</td>-->
               <!--                  <td class="text-center">{{ job.shortlisted }}</td>-->
-              <td class="action text-center">
+              <td  class="action text-center">
                 <v-btn
-                  id="edit_btn"
+                    v-if="false"
                   :disabled="isDisabled"
                   class="interactn c-grey"
                   icon
@@ -88,7 +88,7 @@
                   <v-icon>mdi-square-edit-outline</v-icon>
                 </v-btn>
                 <!--                    "-->
-                <v-btn
+                <v-btn v-if="false"
                   :disabled="isDisabled"
                   class="interactn mr-2 ml-2 c-green"
                   icon
@@ -151,16 +151,15 @@ export default {
     pageNo: 1,
     allJobLength: 0,
     modalLoading: true,
-    disabled: true,
   }),
   computed: {
     isDisabled() {
-      if (this.allJobs.job_status == 1) {
-        return "disabled == true";
+      if (this.allJobs.job_status === 1) {
+        return true;
       } else if (this.allJobs.is_expired) {
-        return "disabled == true";
+        return true;
       } else {
-        return "disabled == false";
+        return false;
       }
     },
     totalJobs() {

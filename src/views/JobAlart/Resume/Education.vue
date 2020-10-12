@@ -1,5 +1,5 @@
 <template>
-  <div class="mainTemplate_education">
+  <div class="mainTemplate_education" style="margin-bottom: 40px">
     <optionTab />
 
     <div class="mainContainer_education">

@@ -24,7 +24,7 @@
             </v-dialog>
             <tr v-if="!applicantShortListed.length">
               <td class="text-center" style="color: #0d47a1; font-size: 25px">
-                No One Applied in this job
+                No one is selected on this job
               </td>
             </tr>
             <tr v-for="app in applicantShortListed" :key="app.id">

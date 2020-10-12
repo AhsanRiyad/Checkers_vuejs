@@ -11,8 +11,8 @@
       </div>
       <!--********** Job activities end **************-->
       <!--********** Job applied table start **************-->
-      <div v-if="!draftedJobs.length" class="text-center">
-        <h1>Drafted job is not available</h1>
+      <div v-if="!expiredJobs.length" class="text-center">
+        <h1>Expired job is not available</h1>
       </div>
       <div v-else style="overflow-x: auto !important;">
         <table class="ja_table">
@@ -44,14 +44,14 @@
               </v-card-text>
             </v-card>
           </v-dialog>
-          <tr v-for="(job, i) in draftedJobs" :key="i">
+          <tr v-for="(job, i) in expiredJobs" :key="i">
             <td><p>{{ i+1 }}</p></td>
             <td>
               <a class="text-capitalize" @click="goToJobDetails(job.id)">{{ job.job_title }}</a>
               <p class="mb-0"><small>Published On:<span class="ml-1" v-if="job.live_at"> {{getHumanDate(job.live_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
               <p  class="mb-0"><small>Deadline:<span class="ml-1" v-if="job.end_at">{{ getHumanDate(job.end_at) }}</span> <span class="ml-1" v-else>Not Yet</span></small></p>
             </td>
-            <td>
+            <td v-if="false">
               <v-switch
                   @click.stop="jobLive(job.id)"
                   color="success"
@@ -81,7 +81,7 @@
         </table>
         <!--********** pagination start **************-->
         <div class="pagination">
-          <v-pagination v-model="pageNo" :length="draftedJobsLength"></v-pagination>
+          <v-pagination v-model="pageNo" :length="expiredJobsLength"></v-pagination>
         </div>
         <!--********** pagination end **************-->
       </div>
@@ -91,146 +91,78 @@
 </template>
 
 <script>
-import axios from "axios";
 import moment from "moment";
+import axios from "axios";
 
 export default {
-name: "DraftedJobs",
+name: "ExpiredJobs",
   data: () => ({
-    draftedJobs: [],
+    expiredJobs: [],
     pageNo: 1,
-    draftedJobsLength: 0,
+    expiredJobsLength: 0,
     loading: true,
     jobsId: ''
   }),
   computed: {
     totalJobs() {
-      return this.draftedJobs && this.draftedJobs.length
+      return this.expiredJobs && this.expiredJobs.length
     },
   },
   created() {
-    this.getDraftedJobs()
+    this.getExpiredJobs()
   },
   methods: {
-  editJob: function (id){
-    this.$router.history.push({name: 'AddJobs', params: {id: id}})
-  },
     getHumanDate: function (date) {
       return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
     goToJobDetails(jobId) {
       this.$router.push({name: 'JobDetails', params: {id: jobId}})
     },
-    jobLive(jobsId) {
-      // this.postedJobs.job_status = (this.postedJobs.job_status + 1) % 2
-      if (this.$cookies.get("accessToken") == null) {
-        this.$router.history.push("/signin");
-        return;
-      }
-      // if(this.jobId){
-      //   if(!this.postedJobs.is_expired){
-      //
-      //   }
-      // }
-      // if (!this.$refs.is_.is_expired.validate()) return;
-      // this.loadingAppliedJob = true;
-
+    getExpiredJobs(){
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
         Accept: "application/json",
       };
-
       axios({
-        method: "put",
         baseURL: this.$store.state.apiBase,
-        url: `jobs/` + jobsId + `/live`,
+        url: `jobs/expired-job`,
+        method: "get",
+        params: {
+          page: this.pageNo
+        },
         data: {},
         headers,
       })
           .then((response) => {
-            console.log(response);
-            if (response.status == 206) {
-              this.$router.history.push("/subscription");
-              this.$awn.alert("Your job is not lived");
-              return;
+            console.log("expired jobs", response);
+            this.expiredJobs = response.data.data.job.items;
+            // this.jobId =this.expiredJobs[3]
+            for (let i = 0; i < this.expiredJobs.length; i++) {
+              console.log("job index i", i) // returns the numbered index
+              console.log("job index object", this.expiredJobs[i]) // returns [Object object]
+              console.log(this.expiredJobs[i].id) // returns undefined
+              this.jobId = this.expiredJobs[i].id
+              console.log("id jobssssssssss",this.jobId)
             }
-            this.$awn.success("Your job have successfully lived!");
-            this.getPostedJobs();
+            this.loading = false
+            this.darafteJobsLength = Math.round(
+                response.data.total_count /
+                response.data.num_items_per_page
+            );
+            console.log("page darafteJobsLength", this.darafteJobsLength)
+            // setTimeout(() => (this.loading = false), 1000)
           })
           .catch((error) => {
-            console.log(error);
-            this.$awn.alert("Failed!");
-            if (error.response.status == 409) {
-              console.log(error);
-              this.$awn.alert("This Job already Lived");
-              return;
-            }
-            if (error.response.status == 423) {
-              console.log(error);
-              this.$awn.alert("Your subscribe is not completed");
-              this.$router.history.push("/subscription");
-              return;
-            }
-            // } else if (error.response.status == 423) {
-            //   this.$awn.alert("Your subscribe is not completed");
-            //   this.$router.history.push("/subscription");
-            //   return;
-            // }
+            this.expiredJobs = []
+            this.$awn.alert("Failed");
+            console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
           })
           .finally(() => {
-            this.loadingAppliedJob = false;
+            if (this.expiredJobs.length === 0) this.ShowAlertMsg = true;
+
           });
-    },
-  getDraftedJobs(){
-    const headers = {
-      Authorization: "Bearer " + this.$cookies.get("accessToken"),
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    axios({
-      baseURL: this.$store.state.apiBase,
-      url: `jobs/drafts-job`,
-      method: "get",
-      params: {
-        page: this.pageNo
-      },
-      data: {},
-      headers,
-    })
-        .then((response) => {
-          console.log("drafted jobs", response);
-          this.draftedJobs = response.data.data.job.items;
-          // this.jobId =this.draftedJobs[3]
-          for (let i = 0; i < this.draftedJobs.length; i++) {
-            console.log("job index i", i) // returns the numbered index
-            console.log("job index object", this.draftedJobs[i]) // returns [Object object]
-            console.log(this.draftedJobs[i].id) // returns undefined
-            this.jobId = this.draftedJobs[i].id
-            console.log("id jobssssssssss",this.jobId)
-          }
-
-          // this.orders.find(({ id }) => id === this.orderId)
-          // this.jobId = this.draftedJobs.find((job_id) => job_id.id === id);
-          // this.job_status = response.data.items.job_status
-          this.loading = false
-          this.darafteJobsLength = Math.round(
-              response.data.total_count /
-              response.data.num_items_per_page
-          );
-          console.log("page darafteJobsLength", this.darafteJobsLength)
-          // setTimeout(() => (this.loading = false), 1000)
-        })
-        .catch((error) => {
-          this.draftedJobs = []
-          this.$awn.alert("Failed");
-          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-        })
-        .finally(() => {
-          if (this.draftedJobs.length === 0) this.ShowAlertMsg = true;
-
-        });
-  }
+    }
   }
 }
 </script>

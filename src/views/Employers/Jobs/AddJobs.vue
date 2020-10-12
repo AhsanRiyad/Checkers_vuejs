@@ -444,14 +444,10 @@ export default {
         })
   },
   methods: {
-    // categoryName(selected) {
-    //   this.jobs.company_name = selected
-    //   console.log("category name", selected)
-    // },
     saveJob() {
       if (!this.$refs.form.validate()) return;
-      this.loading = true;
       if (this.paramId){
+        this.loading = true;
         this.$store
             .dispatch("callApi", {
               url: "jobs/" + this.paramId,

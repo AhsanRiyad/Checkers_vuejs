@@ -1,5 +1,5 @@
 <template>
-  <div class="posted__list">
+  <div class="posted__list" style="padding: 0 50px 30px 50px !important;">
     <v-card flat class="ja__card pt-0">
       <div class="Fixed-Job-Details">
         <div v-if="jobs">
@@ -53,7 +53,7 @@
             </div>
             <div class="job_faci mt-3 text-center">
               <h2>Read Before Apply</h2>
-              <div v-if="jobs.apply_instruction"><p v-html="jobs.apply_instruction"></p></div>
+              <div style="width: 60%; margin: 0 auto;" v-if="jobs.apply_instruction"><p v-html="jobs.apply_instruction"></p></div>
             </div>
           </div>
         </div>
