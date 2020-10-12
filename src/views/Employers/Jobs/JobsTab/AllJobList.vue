@@ -78,9 +78,9 @@
               </td>
               <!--                  <td>{{ job.applicant }}</td>-->
               <!--                  <td class="text-center">{{ job.shortlisted }}</td>-->
-              <td class="action text-center">
+              <td  class="action text-center">
                 <v-btn
-                  id="edit_btn"
+                    v-if="false"
                   :disabled="isDisabled"
                   class="interactn c-grey"
                   icon
@@ -155,7 +155,6 @@ export default {
   computed: {
     isDisabled() {
       if (this.allJobs.job_status === 1) {
-        console.log("job status true",this.allJobs.job_status === 1)
         return true;
       } else if (this.allJobs.is_expired) {
         return true;

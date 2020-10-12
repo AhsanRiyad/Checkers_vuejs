@@ -31,7 +31,7 @@
           <tr v-for="(comp, i) in companies" :key="i">
             <td><p>{{ i + 1 }}</p></td>
             <td>
-              <a class="text-capitalize" @click="goToCompanyDetails(comp.id)">{{ comp.company_name }}</a>
+              <a class="text-capitalize">{{ comp.company_name }}</a>
             </td>
             <td v-if="comp.is_verified"><span class="green--text">Verified</span></td>
             <td v-else><span class="red--text">Not Verified</span></td>

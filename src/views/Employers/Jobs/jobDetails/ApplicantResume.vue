@@ -75,7 +75,7 @@
 
         <p class="years-of-experience">
           Total year of experiences:
-          {{ this.R.isNil(getResume.years) ? 0 : getResume.years }}
+          {{ this.R.isNil(getResume.userTotalExperiences.years) ? 0 : getResume.userTotalExperiences.years }} Year(s) {{ this.R.isNil(getResume.userTotalExperiences.months) ? 0 : getResume.userTotalExperiences.months }} Month(s) {{ this.R.isNil(getResume.userTotalExperiences.days) ? 0 : getResume.userTotalExperiences.days }} Day(s)
         </p>
       </div>
       <!-- section-4 ends -->
@@ -180,12 +180,12 @@
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Looking For</div>
-        <!--        <div class="dr-application-info-2" :key="applicntInfo.id" >: {{ applicntInfo.job_category_title }}</div>-->
+        <div class="dr-application-info-2 text-capitalize">: {{ getResume.applicationInfo.job_level }}</div>
       </div>
 
       <div class="dr-application-info">
         <div class="dr-application-info-1">Available For</div>
-        <!--        <div class="dr-application-info-2" v-if="applicntInfo.available_for">: {{ applicntInfo.available_for }}</div>-->
+        <div class="dr-application-info-2">: {{ getResume.applicationInfo.available_for }}</div>
       </div>
       <!-- section-8 ends -->
 
@@ -296,7 +296,7 @@ export default {
       interview_message: "",
       form: false,
       isLoading: false,
-      isShortlisted: true,
+      // isShortlisted: true,
       rules: {
         email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
         required: (v) =>
@@ -321,9 +321,9 @@ export default {
     getResume() {
       return this.$store.getters.resume.payload;
     },
-    is_shortlisted() {
-      return this.applicantResume.short_listed;
-    },
+    // is_shortlisted() {
+    //   return this.applicantResume.short_listed;
+    // },
     dialogVisible: {
       get: function () {
         return this.dialogShowing;
@@ -411,7 +411,7 @@ export default {
           this.$store.commit("resume", n);
           console.log("short listed response .... ", n);
 
-          this.isShortlisted = response.short_list;
+          // this.isShortlisted = response.short_list;
           this.$awn.success("Updated Successfully!");
           eventBus.$emit("updateApplicantList");
         })

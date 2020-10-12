@@ -270,7 +270,8 @@ export default {
   mounted() {
     console.log(
       "resume default ..... in the design",
-      this.resume.payload.applicationInfo
+      // this.resume.payload.applicationInfo,
+        this.resume.payload.userTotalExperiences
     );
   },
 };

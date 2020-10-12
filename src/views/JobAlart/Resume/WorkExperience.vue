@@ -1,5 +1,5 @@
 <template >
-  <div class="mainTemplate_we">
+  <div class="mainTemplate_we" style="margin-bottom: 40px">
     <optionTab />
 
     <div class="mainContainer_we">

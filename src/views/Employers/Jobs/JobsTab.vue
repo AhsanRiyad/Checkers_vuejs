@@ -49,7 +49,7 @@
           <drafted-job-list/>
         </v-tab-item>
         <v-tab-item>
-          dfgjbhdfg
+          <expired-job-list/>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
@@ -67,6 +67,7 @@ export default {
   components: {
     JobPostedList: () => import('../Jobs/JobsTab/AllJobList'),
     DraftedJobList: () => import('../Jobs/JobsTab/DraftedJobs'),
+   ExpiredJobList: () => import('../Jobs/JobsTab/ExpiredJobs'),
   },
   data: vm => ({
         tabs: null,
