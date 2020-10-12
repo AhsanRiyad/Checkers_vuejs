@@ -187,7 +187,30 @@
           : {{ this.resume.payload.biodata.city }}
         </div>
       </div>
-
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Zip/Post Code</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.zip_post_code }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Country</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.country }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Nationality</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.nationality }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Date Of Birth</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.date_of_birth }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Gender</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.gender }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">NID/ Passpot Number</div>
+        <div class="dr-application-info-2">: {{ this.resume.payload.biodata.identity_number }}</div>
+      </div>
       <!-- section-9 ends -->
     </div>
   </div>

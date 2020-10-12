@@ -192,6 +192,30 @@
         <div class="dr-application-info-1">City</div>
         <div class="dr-application-info-2">: {{ getResume.biodata.city }}</div>
       </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Zip/Post Code</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.zip_post_code }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Country</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.country }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Nationality</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.nationality }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Date Of Birth</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.date_of_birth }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">Gender</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.gender }}</div>
+      </div>
+      <div class="dr-application-info">
+        <div class="dr-application-info-1">NID/ Passpot Number</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.identity_number }}</div>
+      </div>
 
       <!-- section-9 ends -->
     </div>
@@ -216,7 +240,7 @@
                   :rules="[rules.email]"
                   filled
                   color="deep-purple"
-                  label="Email address"
+                  label="Enter Email to get candidate resume"
                   type="email"
               ></v-text-field>
               <v-textarea
