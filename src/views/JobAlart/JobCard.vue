@@ -520,15 +520,22 @@ export default {
         this.loadingData = true;
       }
 
-      this.$store
-        .dispatch("callApi", {
-          url: "jobs/" + n.id,
-          method: "get",
-          data: {},
-        })
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      axios({
+        url: "jobs/" + n.id,
+        method: "get",
+        data: {},
+        headers,
+        baseURL: this.$store.state.apiBase,
+      })
         .then((response) => {
-          console.log("details list in the", response.data.jobs);
-          this.JobDescription = response.data.jobs;
+          console.log("details list in the", response.data.data.jobs);
+          this.JobDescription = response.data.data.jobs;
           this.$store.commit("jobDetails", this.JobDescription);
 
           // this.$refs.form.reset();
