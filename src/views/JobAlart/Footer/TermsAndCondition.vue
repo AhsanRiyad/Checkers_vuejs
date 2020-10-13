@@ -50,7 +50,7 @@ export default {
               'Most interactive websites use cookies to let us retrieve the user\'s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.\n'
         },
         {
-          heading: '2. What are the conditions for reposting a job?',
+          heading: 'License',
           text: 'Unless otherwise stated, Company Name and/or its licensors own the intellectual property rights for all material on Website Name. All intellectual property rights are reserved. You may access this from Website Name for your own personal use subjected to restrictions set in these terms and conditions.',
           must: [
             {list: 'Republish material from Website Name'},
@@ -63,27 +63,27 @@ export default {
           ]
         },
         {
-          heading: '3. How many jobs I can keep as draft?',
+          heading: 'Hyperlinking to our Content',
           text: 'You can keep unlimited number of jobs as drafted job.'
         },
         {
-          heading: '4. Am I able to edit any of my live job?',
+          heading: 'iFrames',
           text: 'Yes, you can edit any of your live job. Go to the “Edit” option under “Actions” tab.'
         },
         {
-          heading: '5. What are the fields I can edit of a live job?',
+          heading: 'Content Liability',
           text: 'You can edit all the fields of a live job except Job Title and Job Category.'
         },
         {
-          heading: '6. What do pending and “Publish Later” mean?',
+          heading: 'Reservation of Rights',
           text: 'When a job is in “pending” status, it means that your job is waiting for approval of JobAlart.com team. You can check the status of your pending job from support.'
         },
         {
-          heading: '7. Is it possible to change company name, if yes then how?',
+          heading: 'Removal of links from our website',
           text: 'No, once you have created an account on JobAlart.com using a definite company name then you cannot change or edit it.'
         },
         {
-          heading: '8. If I view applicant\'s CV, will that be counted as viewing CV Bank CV as well? ',
+          heading: 'Disclaimer',
           text: 'No, viewing applicant\'s CV and viewing CV bank CV are 2(two) different features. So viewing one will not be counted as viewing other.'
         },
       ],

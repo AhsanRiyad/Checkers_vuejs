@@ -34,7 +34,7 @@
                 v-for="photo in app.biodata"
                 :key="photo.id"
               >
-                <v-avatar size="85">
+                <v-avatar size="85" style="cursor: pointer" @click.stop="() => showApplicantResume(photo.userId)">
                   <img
                     :src="$store.getters.imageUrl + photo.photo"
                     :alt="photo.full_name"

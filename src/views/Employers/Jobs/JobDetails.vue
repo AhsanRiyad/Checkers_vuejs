@@ -171,7 +171,6 @@ export default {
   created() {
     this.getApplicantList();
     this.getApplicantShortList();
-
     eventBus.$on("updateApplicantList", () => {
       this.getApplicantList();
       this.getApplicantShortList();
