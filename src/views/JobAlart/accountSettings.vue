@@ -51,7 +51,7 @@
                 </div>
                 <div class="right__side">
                   <router-link to="/signin">signout</router-link>
-                  <router-link to="/">Return to job search</router-link>
+                  <router-link to="/">Return o job search</router-link>
                 </div>
               </li> -->
             </ul>
