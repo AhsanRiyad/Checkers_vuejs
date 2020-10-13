@@ -24,7 +24,7 @@
             color="white"
         >Resume</v-btn
         >
-        <v-btn v-if="$store.getters.isLoggedIn" router to="/signin" text color="white">Login</v-btn>
+        <v-btn v-if="!$store.getters.isLoggedIn" router to="/signin" text color="white">Login</v-btn>
         <v-btn
             v-if="$store.getters.is_company"
             router
