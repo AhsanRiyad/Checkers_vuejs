@@ -148,7 +148,7 @@
               {{ n.education }}
             </p>
             <p class="text--primary">
-              <v-icon>payment</v-icon>
+              <v-icon>payment</v-icon> <b>{{ n.currency_code + " " }} </b>
               {{ n.min_salary_range }} to {{ n.max_salary_range }}
             </p>
           </v-card-text>

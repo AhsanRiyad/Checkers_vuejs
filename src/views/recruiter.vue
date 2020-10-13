@@ -14,65 +14,65 @@
 
     <div v-if="skeleton">
       <v-skeleton-loader
-          v-for="n in 3"
-          :key="n"
-          class="loader"
-          type="card"
+        v-for="n in 3"
+        :key="n"
+        class="loader"
+        type="card"
       ></v-skeleton-loader>
     </div>
 
     <div class="alertMsg" v-else-if="ShowAlertMsg">
       <v-text-field
-          @keyup.enter="getData"
-          dense
-          solo
-          label="Search"
-          prepend-inner-icon="search"
-          v-model="search"
+        @keyup.enter="getData"
+        dense
+        solo
+        label="Search"
+        prepend-inner-icon="search"
+        v-model="search"
       >
         <template v-slot:append-outer>
           <v-btn
-              tile
-              class="white--text"
-              style="
+            tile
+            class="white--text"
+            style="
               height: 40px;
               margin-top: -8px;
               margin-bottom: 0;
               margin-left: -8px;
               background: rgb(54, 88, 153);
             "
-              @click.stop="getData"
-          >Search</v-btn
+            @click.stop="getData"
+            >Search</v-btn
           >
         </template>
       </v-text-field>
-<!--      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>-->
+      <!--      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>-->
     </div>
 
     <div v-else>
       <div :style="filterFixedPosition" class="filterFixedPosition">
         <div class="job-search-job-card">
           <v-text-field
-              @keyup.enter="getData"
-              dense
-              solo
-              label="Search"
-              prepend-inner-icon="search"
-              v-model="search"
+            @keyup.enter="getData"
+            dense
+            solo
+            label="Search"
+            prepend-inner-icon="search"
+            v-model="search"
           >
             <template v-slot:append-outer>
               <v-btn
-                  tile
-                  class="white--text"
-                  style="
+                tile
+                class="white--text"
+                style="
                   height: 40px;
                   margin-top: -8px;
                   margin-bottom: 0;
                   margin-left: -8px;
                   background: rgb(54, 88, 153);
                 "
-                  @click.stop="getData"
-              >Search</v-btn
+                @click.stop="getData"
+                >Search</v-btn
               >
             </template>
           </v-text-field>
@@ -129,13 +129,13 @@
 
       <div class="searchResults" ref="searchResults">
         <v-card
-            class="mx-auto searchResults-text"
-            v-for="(n, i) in Jobs"
-            :key="i"
+          class="mx-auto searchResults-text"
+          v-for="(n, i) in Jobs"
+          :key="i"
         >
           <v-card-text
-              @click.stop="() => saveDetails(n)"
-              class="job-card-job-search"
+            @click.stop="() => saveDetails(n)"
+            class="job-card-job-search"
           >
             <h2 style="color: green" class="mb-2" v-text="n.job_title"></h2>
             <h4 v-text="n.company_name"></h4>
@@ -148,7 +148,7 @@
               {{ n.education }}
             </p>
             <p class="text--primary">
-              <v-icon>payment</v-icon>
+              <v-icon>payment</v-icon> <b>{{ n.currency_code + " " }} </b>
               {{ n.min_salary_range }} to {{ n.max_salary_range }}
             </p>
           </v-card-text>
@@ -157,14 +157,14 @@
 
       <!-- job details skeleton loader starts -->
       <div
-          :style="jobDetailsLoader"
-          v-if="skeletonJobDetails"
-          class="jobDetails"
+        :style="jobDetailsLoader"
+        v-if="skeletonJobDetails"
+        class="jobDetails"
       >
         <v-skeleton-loader
-            width="100%"
-            class="loader"
-            type="card"
+          width="100%"
+          class="loader"
+          type="card"
         ></v-skeleton-loader>
       </div>
       <!-- job details skeleton loader ends -->
@@ -176,8 +176,8 @@
             <v-list-item three-line>
               <v-list-item-content>
                 <v-list-item-title class="headline mb-1">{{
-                    JobDescription.job_title
-                  }}</v-list-item-title>
+                  JobDescription.job_title
+                }}</v-list-item-title>
                 <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
                 <p>
                   {{ JobDescription.company_name }} ||
@@ -187,19 +187,19 @@
 
               <v-list-item-avatar size="80" color="grey">
                 <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    alt="John"
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
                 />
               </v-list-item-avatar>
             </v-list-item>
 
             <v-card-actions>
               <v-btn
-                  @click="showModal = true"
-                  class="applyNow white--text"
-                  color="#365899"
-                  v-bind:disabled="isApplied"
-              >Apply Now</v-btn
+                @click="showModal = true"
+                class="applyNow white--text"
+                color="#365899"
+                v-bind:disabled="isApplied"
+                >Apply Now</v-btn
               >
             </v-card-actions>
 
@@ -247,34 +247,34 @@
       <div class="clearFix"></div>
     </div>
     <v-row class="ml-10 mr-10 pl-10 pr-10" id="companyName">
-    <v-col
+      <v-col
         v-for="reqrCom in recruiterCompanyList"
         :key="reqrCom.id"
         cols="12"
         lg="4"
         md="4"
-    >
-      <div
-          @click.stop="getDataByCompany(reqrCom.company_name)"
-          class="jobCard_box d-flex align-center"
       >
-        <v-avatar size="90">
-          <img :src="$store.getters.imageUrl + reqrCom.company_logo" />
-        </v-avatar>
-        <div class="jobCard_body">
-          <h4 class="mb-2">
-                        <span class="mr-1">Company Name:</span
-                        ><span>{{ reqrCom.company_name }}</span>
-          </h4>
-          <p>
-            <span class="mr-2">Location:</span>
-            <span style="text-transform: capitalize">{{
+        <div
+          @click.stop="() => getDataByCompany(reqrCom.company_name)"
+          class="jobCard_box d-flex align-center"
+        >
+          <v-avatar size="90">
+            <img :src="$store.getters.imageUrl + reqrCom.company_logo" />
+          </v-avatar>
+          <div class="jobCard_body">
+            <h4 class="mb-2">
+              <span class="mr-1">Company Name:</span
+              ><span>{{ reqrCom.company_name }}</span>
+            </h4>
+            <p>
+              <span class="mr-2">Location:</span>
+              <span style="text-transform: capitalize">{{
                 reqrCom.company_location
               }}</span>
-          </p>
+            </p>
+          </div>
         </div>
-      </div>
-    </v-col>
+      </v-col>
     </v-row>
     <!-- job apply modal starts-->
     <job-alert-modal persistent v-if="showModal">
@@ -294,9 +294,9 @@
         </p>
         <div class="d-flex align-center">
           <v-checkbox
-              v-model="termsAndConditions"
-              label="I have read the above warning message."
-              required
+            v-model="termsAndConditions"
+            label="I have read the above warning message."
+            required
           ></v-checkbox>
           <v-spacer></v-spacer>
         </div>
@@ -307,14 +307,14 @@
             <div class="expectedSalary-job-search__textinput">
               <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
                 <v-text-field
-                    type="number"
-                    :rules="[(v) => !!v || 'required']"
-                    v-model="expectedSalary"
-                    outlined
-                    dense
-                    solo
-                    placeholder="Salary"
-                    @keyup.enter.stop="applyJob"
+                  type="number"
+                  :rules="[(v) => !!v || 'required']"
+                  v-model="expectedSalary"
+                  outlined
+                  dense
+                  solo
+                  placeholder="Salary"
+                  @keyup.enter.stop="applyJob"
                 ></v-text-field>
               </v-form>
             </div>
@@ -323,14 +323,14 @@
           <div class="expectedSalary-job-search__applybutton">
             <div>
               <v-btn
-                  class="white--text"
-                  color="green"
-                  depressed
-                  link
-                  :disabled="!termsAndConditions"
-                  :loading="loadingAppliedJob"
-                  @click.stop="applyJob"
-              >Apply</v-btn
+                class="white--text"
+                color="green"
+                depressed
+                link
+                :disabled="!termsAndConditions"
+                :loading="loadingAppliedJob"
+                @click.stop="applyJob"
+                >Apply</v-btn
               >
             </div>
           </div>
@@ -352,9 +352,9 @@
         <v-card-text>
           Loading Data...
           <v-progress-linear
-              indeterminate
-              color="white"
-              class="mb-0"
+            indeterminate
+            color="white"
+            class="mb-0"
           ></v-progress-linear>
         </v-card-text>
       </v-card>
