@@ -74,8 +74,21 @@
               </div>
             </v-card>
             <!--********** Top card END **************-->
+            <!-- loading data  starts-->
+            <v-dialog v-model="loading" hide-overlay persistent width="300">
+              <v-card color="primary" dark>
+                <v-card-text>
+                  Loading Data...
+                  <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+            <!-- loading data  ends-->
             <!--********** Job activities start **************-->
-            <div class="jobActivity">
+            <div v-if="!appliedJobs.length" class="text-center">
+              <h1>You haven't applied for any job yet</h1>
+            </div>
+            <div v-else class="jobActivity">
               <v-row>
                 <v-col cols="12" lg="4">
                   <p class="jaif">Total Job Found : <span>{{ totalJobs }}</span></p>
@@ -97,136 +110,137 @@
                   </ul>
                 </v-col>
               </v-row>
+              <!--********** Job applied table start **************-->
+              <div style="overflow-x: auto">
+                <table class="ja_table">
+                  <thead>
+                  <tr class="panel-heading">
+                    <th>Sl</th>
+                    <th style=" width:42%;">Job Title</th>
+                    <th>Expected Salary</th>
+                    <th class="text-center">Viewed (by Employer)</th>
+                    <th class="text-center">Employer's interaction</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="(job, i) in appliedJobs" :key="i">
+                    <td><p>{{ i + 1 }}</p></td>
+                    <td class="col-w">
+                      <a @click="showJobDetails(job.id)">{{ job.job_title }}</a>
+                      <p>{{ job.company_name }}</p>
+                      <small class="font-weight-bold">Applied On:
+                        <v-icon small>mdi-calendar-month</v-icon>
+                        <span>{{ getHumanDate(job.applied_at) }}</span></small>
+                    </td>
+                    <td class="exp-c"><p><span class="font-weight-bold">{{ job.currency_code }}</span>
+                      {{ job.expected_salary }}</p></td>
+                    <td class="text-center">
+                      <!-- Summary View icon start -->
+                      <v-tooltip top v-if="job.summary_view">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-green" icon
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on" color="green">mdi-eye
+                          </v-icon>
+                        </template>
+                        <span>Summary Viewed</span>
+                      </v-tooltip>
+                      <v-tooltip top v-else>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-red" rounded
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on" color="red">mdi-eye-off
+                          </v-icon>
+                        </template>
+                        <span>Summary Not Viewed</span>
+                      </v-tooltip>
+                      <!-- Summary View icon end -->
+                      <!-- Details View icon start -->
+                      <v-tooltip top v-if="job.details_view">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-green" icon
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on" color="green">mdi-text-box-check
+                          </v-icon>
+                        </template>
+                        <span>Details Viewed</span>
+                      </v-tooltip>
+                      <v-tooltip top v-else>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-red" icon
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on" color="red">mdi-text-box-remove
+                          </v-icon>
+                        </template>
+                        <span>Details Not Viewed</span>
+                      </v-tooltip>
+                      <!-- Details View icon end -->
+                    </td>
+                    <td class="text-center">
+                      <!-- Interview call icon start-->
+                      <v-tooltip top v-if="job.inter_view_call">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-green" rounded
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on" color="green">mdi-account-voice
+                          </v-icon>
+                        </template>
+                        <span>Interview call</span>
+                      </v-tooltip>
+                      <v-tooltip top v-else>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-red" rounded
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on" color="red">mdi-account-tie-voice-off
+                          </v-icon>
+                        </template>
+                        <span>Interview not call</span>
+                      </v-tooltip>
+                      <!-- Interview call icon end-->
+                      <!-- shortlisted icon start-->
+                      <v-tooltip top v-if="job.short_listed">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-green" icon
+                                  color="primary"
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on">mdi-check
+                          </v-icon>
+                        </template>
+                        <span>Short listed</span>
+                      </v-tooltip>
+                      <v-tooltip top v-else>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-icon class="interactn c-red" icon
+                                  color="red"
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on">mdi-close
+                          </v-icon>
+                        </template>
+                        <span>Not Short listed</span>
+                      </v-tooltip>
+                      <!-- shortlisted icon end-->
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--********** Job applied table end **************-->
+              <!--********** pagination start **************-->
+              <div>
+                <v-pagination v-model="pageNo" :length="length" :total-visible="page_range"></v-pagination>
+              </div>
+              <!--********** pagination end **************-->
             </div>
             <!--********** Job activities end **************-->
-            <!--********** Job applied table start **************-->
-            <div style="overflow-x: auto">
-              <table class="ja_table">
-                <thead>
-                <tr class="panel-heading">
-                  <th>Sl</th>
-                  <th style=" width:42%;">Job Title</th>
-                  <th>Expected Salary</th>
-                  <th class="text-center">Viewed (by Employer)</th>
-                  <th class="text-center">Employer's interaction</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(job, i) in appliedJobs" :key="i">
-                  <td><p>{{ i + 1 }}</p></td>
-                  <td class="col-w">
-                    <a @click="showJobDetails(job.id)">{{ job.job_title }}</a>
-                    <p>{{ job.company_name }}</p>
-                    <small class="font-weight-bold">Applied On:
-                      <v-icon small>mdi-calendar-month</v-icon>
-                      <span>{{ getHumanDate(job.applied_at) }}</span></small>
-                  </td>
-                  <td class="exp-c"><p><span class="font-weight-bold">{{ job.currency_code }}</span>
-                    {{ job.expected_salary }}</p></td>
-                  <td class="text-center">
-                    <!-- Summary View icon start -->
-                    <v-tooltip top v-if="job.summary_view">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-green" icon
-                                dark
-                                v-bind="attrs"
-                                v-on="on" color="green">mdi-eye
-                        </v-icon>
-                      </template>
-                      <span>Summary Viewed</span>
-                    </v-tooltip>
-                    <v-tooltip top v-else>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-red" rounded
-                                dark
-                                v-bind="attrs"
-                                v-on="on" color="red">mdi-eye-off
-                        </v-icon>
-                      </template>
-                      <span>Summary Not Viewed</span>
-                    </v-tooltip>
-                    <!-- Summary View icon end -->
-                    <!-- Details View icon start -->
-                    <v-tooltip top v-if="job.details_view">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-green" icon
-                                dark
-                                v-bind="attrs"
-                                v-on="on" color="green">mdi-text-box-check
-                        </v-icon>
-                      </template>
-                      <span>Details Viewed</span>
-                    </v-tooltip>
-                    <v-tooltip top v-else>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-red" icon
-                                dark
-                                v-bind="attrs"
-                                v-on="on" color="red">mdi-text-box-remove
-                        </v-icon>
-                      </template>
-                      <span>Details Not Viewed</span>
-                    </v-tooltip>
-                    <!-- Details View icon end -->
-                  </td>
-                  <td class="text-center">
-                    <!-- Interview call icon start-->
-                    <v-tooltip top v-if="job.inter_view_call">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-green" rounded
-                                dark
-                                v-bind="attrs"
-                                v-on="on" color="green">mdi-account-voice
-                        </v-icon>
-                      </template>
-                      <span>Interview call</span>
-                    </v-tooltip>
-                    <v-tooltip top v-else>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-red" rounded
-                                dark
-                                v-bind="attrs"
-                                v-on="on" color="red">mdi-account-tie-voice-off
-                        </v-icon>
-                      </template>
-                      <span>Interview not call</span>
-                    </v-tooltip>
-                    <!-- Interview call icon end-->
-                    <!-- shortlisted icon start-->
-                    <v-tooltip top v-if="job.short_listed">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-green" icon
-                                color="primary"
-                                dark
-                                v-bind="attrs"
-                                v-on="on">mdi-check
-                        </v-icon>
-                      </template>
-                      <span>Short listed</span>
-                    </v-tooltip>
-                    <v-tooltip top v-else>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="interactn c-red" icon
-                                color="red"
-                                dark
-                                v-bind="attrs"
-                                v-on="on">mdi-close
-                        </v-icon>
-                      </template>
-                      <span>Not Short listed</span>
-                    </v-tooltip>
-                    <!-- shortlisted icon end-->
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <!--********** Job applied table end **************-->
-            <!--********** pagination start **************-->
-            <div>
-              <v-pagination v-model="pageNo" :length="length"></v-pagination>
-            </div>
-            <!--********** pagination end **************-->
+
             <!-- job apply modal starts-->
             <job-alert-modal persistent v-if="showModal">
               <div :style="modalStyle" v-if="!modalSkeleton">
@@ -239,8 +253,10 @@
               <div class="d-flex" slot="header">
                 <div class="top_job_det">
                   <h1 class="warning-text">{{ jobDetails.job_title }}</h1>
-                  <p class="company-name">{{ jobDetails.company_name }} || {{jobDetails.type_in_text}}</p>
-                  <p> <span class="font-weight-bold">{{ jobDetails.currency_code }}</span><span> {{ jobDetails.min_salary_range }}</span> -
+                  <p class="company-name">{{ jobDetails.company_name }} || {{ jobDetails.type_in_text }}</p>
+                  <p><span class="font-weight-bold">{{
+                      jobDetails.currency_code
+                    }}</span><span> {{ jobDetails.min_salary_range }}</span> -
                     <span> {{ jobDetails.max_salary_range }}</span></p>
                 </div>
                 <v-spacer></v-spacer>
@@ -250,20 +266,20 @@
               </div>
               <div slot="body">
                 <h4 class="mb-3">Job Location</h4>
-               <div class="d-flex mb-4">
-                 <div class="job_location d-flex">
-                   <p>{{jobDetails.job_location}}</p>, <p>{{jobDetails.city}}</p>, <p>{{jobDetails.country}}</p>
-                 </div>
-<!--                 <div class="job_city" v-else-if="jobDetails.city">-->
-<!--                   <p>{{jobDetails.city}}</p>-->
-<!--                 </div>-->
-<!--                 <div class="job_city" v-else-if="jobDetails.country">-->
-<!--                   <p>{{jobDetails.country}}</p>-->
-<!--                 </div>-->
-<!--                 <div v-else>-->
-<!--                   <p>{{jobDetails.country}}</p>-->
-<!--                 </div>-->
-               </div>
+                <div class="d-flex mb-4">
+                  <div class="job_location d-flex">
+                    <p>{{ jobDetails.job_location }}</p>, <p>{{ jobDetails.city }}</p>, <p>{{ jobDetails.country }}</p>
+                  </div>
+                  <!--                 <div class="job_city" v-else-if="jobDetails.city">-->
+                  <!--                   <p>{{jobDetails.city}}</p>-->
+                  <!--                 </div>-->
+                  <!--                 <div class="job_city" v-else-if="jobDetails.country">-->
+                  <!--                   <p>{{jobDetails.country}}</p>-->
+                  <!--                 </div>-->
+                  <!--                 <div v-else>-->
+                  <!--                   <p>{{jobDetails.country}}</p>-->
+                  <!--                 </div>-->
+                </div>
                 <h4 class="mb-3">Job Description</h4>
                 <p v-html="jobDetails.job_description"></p>
                 <div class="job_responsibilities mt-3">
@@ -280,14 +296,16 @@
                   <h4>Skills</h4>
                   <div v-for="(skill, i) in jobDetails.skills" :key="skill.id">
                     <ul>
-                      <li>{{i+1}}. <span class="ml-1">{{skill.title}}</span></li>
+                      <li>{{ i + 1 }}. <span class="ml-1">{{ skill.title }}</span></li>
                     </ul>
                   </div>
                 </div>
                 <div class="job_description mt-3">
                   <h4>Salary</h4>
                   <p v-if="jobDetails.negotiable">Negotiable</p>
-                  <p v-else><span class="mr-1">{{jobDetails.currency_code}}</span><span>{{jobDetails.min_salary_range}}</span> - <span>{{jobDetails.max_salary_range}}</span></p>
+                  <p v-else><span
+                      class="mr-1">{{ jobDetails.currency_code }}</span><span>{{ jobDetails.min_salary_range }}</span> -
+                    <span>{{ jobDetails.max_salary_range }}</span></p>
                 </div>
                 <div class="job_faci mt-4">
                   <h4>Job Facilities</h4>
@@ -326,6 +344,9 @@ export default {
     pageNo: 1,
     jobId: "",
     length: 0,
+    page_range:5,
+    limit: 5,
+    loading: true,
     modalSkeleton: true,
     modalStyle: {
       width: "50%"
@@ -345,7 +366,7 @@ export default {
     this.getJobAppliedData()
   },
   methods: {
-    getJobAppliedData(){
+    getJobAppliedData() {
       this.loading = true;
       this.skeleton = true;
       const headers = {
@@ -359,21 +380,19 @@ export default {
         method: "get",
         params: {
           page: this.pageNo,
+          limit: this.limit
         },
         headers,
       })
           .then((response) => {
             console.log("job applied list....", response);
             this.appliedJobs = response.data.jobs.items;
-            // this.jobId = this.jobDetails = this.appliedJobs[0];
-            this.skeletonJobDetails = false;
             this.length = Math.round(
                 response.data.jobs.total_count /
                 response.data.jobs.num_items_per_page
             );
             console.log("page length", this.length)
-            this.skeleton = false;
-            this.ShowAlertMsg = false;
+            this.loading = false;
           })
           .catch(() => {
             this.appliedJobs = [];
@@ -381,11 +400,11 @@ export default {
           })
           .finally(() => {
             this.loading = false;
-            this.skeleton = false;
             if (this.appliedJobs.length === 0) this.ShowAlertMsg = true;
             //  this.tableLoading = false;
             // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
-          });    },
+          });
+    },
     showJobDetails(id) {
       console.log("job id", id)
       this.showModal = true
@@ -422,7 +441,8 @@ export default {
     getHumanDate: function (date) {
       return moment(date, 'YYYY-MM-DD').format("MMM Do YY");
     },
-    formatDate(date) {.0
+    formatDate(date) {
+      .0
 
       if (!date) return null
 

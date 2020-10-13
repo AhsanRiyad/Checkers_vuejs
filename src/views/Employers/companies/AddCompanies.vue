@@ -358,6 +358,14 @@ export default {
     // },
     submit() {
       if (!this.$refs.form.validate()) return;
+      if (this.$v.$pending || this.$v.$error) {
+        this.snackbar = {
+          message: 'Please enter your details',
+          color: 'error',
+          show: true,
+        }
+        return
+      }
       this.loadingDataText = "Creating Company...";
       if (this.paramId) {
         this.loading = true;

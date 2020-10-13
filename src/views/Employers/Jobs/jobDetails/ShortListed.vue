@@ -1,32 +1,30 @@
 <template>
   <div class="applicantShortListed__list">
+    <v-dialog
+        v-model="loadingApplicant"
+        hide-overlay
+        persistent
+        width="300"
+    >
+      <v-card color="primary" dark>
+        <v-card-text>
+          Loading Data...
+          <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-card flat class="ja__card pt-0">
       <!--********** Job applied table start **************-->
-      <div style="overflow-x: auto !important">
+      <div v-if="!applicantShortListed.length" class="text-center">
+        <h1 class=" pt-10">No one is selected on this job</h1>
+      </div>
+      <div v-else style="overflow-x: auto !important">
         <table class="ja_table">
           <tbody>
-            <v-dialog
-              v-model="loadingApplicant"
-              hide-overlay
-              persistent
-              width="300"
-            >
-              <v-card color="primary" dark>
-                <v-card-text>
-                  Loading Data...
-                  <v-progress-linear
-                    indeterminate
-                    color="white"
-                    class="mb-0"
-                  ></v-progress-linear>
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-            <tr v-if="!applicantShortListed.length">
-              <td class="text-center" style="color: #0d47a1; font-size: 25px">
-                No one is selected on this job
-              </td>
-            </tr>
             <tr v-for="app in applicantShortListed" :key="app.id">
               <td class="text-center">
                 <p class="font-weight-bold"></p>
@@ -97,6 +95,14 @@
             </tr>
           </tbody>
         </table>
+        <!--********** pagination start **************-->
+        <div class="pagination">
+          <v-pagination
+              v-model="pageNo"
+              :length="length"
+          ></v-pagination>
+        </div>
+        <!--********** pagination end **************-->
       </div>
       <!--********** Job applied table end **************-->
       <!-- job apply modal starts-->
@@ -109,14 +115,6 @@
       </v-dialog>
 
       <!-- job apply modal ends-->
-      <!--********** pagination start **************-->
-      <div class="pagination">
-        <v-pagination
-            v-model="pageNo"
-            :length="length"
-        ></v-pagination>
-      </div>
-      <!--********** pagination end **************-->
     </v-card>
   </div>
 </template>
