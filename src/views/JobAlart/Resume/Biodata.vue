@@ -553,6 +553,8 @@ export default {
       console.log("next btn clicked");
       //  if(!this.$refs.form.validate()) return;
 
+      console.log("biodata country id", this.$store.getters.biodata);
+
       this.loading = true;
 
       let data = {};
@@ -583,10 +585,10 @@ export default {
         ...data,
         ...{
           country_id:
-            this.R.isNil(data.country_id.id) ||
-            this.R.isEmpty(data.country_id.id)
+            this.R.isNil(data.country_id) ||
+            this.R.isEmpty(data.country_id)
               ? ""
-              : data.country_id.id,
+              : data.country_id,
         },
       };
       console.log(data);
