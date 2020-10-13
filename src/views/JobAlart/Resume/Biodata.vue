@@ -585,8 +585,7 @@ export default {
         ...data,
         ...{
           country_id:
-            this.R.isNil(data.country_id) ||
-            this.R.isEmpty(data.country_id)
+            this.R.isNil(data.country_id) || this.R.isEmpty(data.country_id)
               ? ""
               : data.country_id,
         },
@@ -601,8 +600,11 @@ export default {
         })
         .then((response) => {
           console.log("resume ... ff ", response);
-          this.getData();
+          // this.getData();
           this.$awn.success("Updated!");
+          setTimeout(() => {
+            this.$router.history.push("/work-experience");
+          }, 1000);
 
           // this.$refs.form.reset();
           //saves the items from the database in the table

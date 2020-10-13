@@ -685,7 +685,9 @@ export default {
         .then((response) => {
           console.log("resume ... ff ", response);
           this.$awn.success("Updated!");
-          this.getData();
+          setTimeout(() => {
+            this.$router.history.push("/education");
+          }, 1000);
           // this.$refs.form.reset();
           //saves the items from the database in the table
           //  console.log(response);
