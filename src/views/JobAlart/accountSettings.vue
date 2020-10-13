@@ -1,5 +1,5 @@
 <template>
-  <div class="account-settings" :user-email="userEmail">
+  <div class="account-settings">
     <v-container>
       <v-row justify="center">
         <v-col cols="12">
@@ -64,41 +64,10 @@
 
 <script>
 import "../../sass/job-alart/_accountSettings.scss";
-import axios from "axios";
 export default {
   name: "accountSettings",
   data: () => {
-    return {
-      userEmail: "",
-    };
-  },
-  created() {
-    this.getEmail();
-  },
-  methods: {
-    getEmail() {
-      const headers = {
-        Authorization: "Bearer " + this.$cookies.get("accessToken"),
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
-      axios({
-        baseURL: this.$store.state.apiBase,
-        url: "users/email",
-        method: "get",
-        data: {},
-        headers,
-      })
-        .then((response) => {
-          this.userEmail = response.data.email;
-          console.log("farznaan emaillllllllllllllllllll", response);
-
-          this.$awn.success("Successful");
-        })
-        .catch(() => {
-          this.$awn.alert("Failed");
-        });
-    },
+    return {};
   },
 };
 </script>

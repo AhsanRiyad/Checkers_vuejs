@@ -5,7 +5,7 @@
         <v-col cols="12">
           <h1 class="text-center ja__headline">
             Change password for
-            <span>farzanakabirrinky@yahoo.com</span>
+            <span>{{ this.$cookies.get("email") }}</span>
           </h1>
         </v-col>
         <v-col cols="12" md="6">

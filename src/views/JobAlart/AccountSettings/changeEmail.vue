@@ -5,7 +5,7 @@
         <v-col cols="12">
           <h1 class="text-center ja__headline">
             Change email address for:
-            <span>{{userEmail}}</span>
+            <span>{{ this.$cookies.get("email") }}</span>
           </h1>
         </v-col>
         <v-col cols="12" md="6">
@@ -75,34 +75,8 @@ export default {
       loading: false,
     };
   },
-  created() {
-    this.getEmail()
-  },
+  created() {},
   methods: {
-    getEmail(){
-      const headers = {
-        Authorization: "Bearer " + this.$cookies.get("accessToken"),
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
-      axios({
-        baseURL: this.$store.state.apiBase,
-        url: "users/email",
-        method: "get",
-        data: {},
-        headers,
-      })
-          .then((response) => {
-            this.userEmail = response.data.email
-            console.log("farznaan emaillllllllllllllllllll",response);
-
-            this.$awn.success("Successful");
-          })
-          .catch(() => {
-            this.$awn.alert("Failed");
-          })
-
-    },
     submit() {
       console.log("this is submit clicked...");
       if (!this.$refs.form.validate()) return;

@@ -38,7 +38,7 @@
                       background-color="white"
                       class="mb-0"
                       :rules="[(v) => !!v || 'required']"
-                      placeholder="Enter your first name"
+                      placeholder="Enter your full name"
                       outlined
                       dense
                       v-model="biodata.full_name"
@@ -152,7 +152,7 @@
                     placeholder="Enter your address"
                     outlined
                     dense
-                    :rules="fieldRulesProp(false, 'email', 'email')"
+                    :rules="fieldRulesProp(true, 'email', 'email')"
                     @keyup="saveData"
                     v-model="biodata.contact_email"
                   ></v-text-field>
@@ -551,7 +551,10 @@ export default {
     },
     nextBtn() {
       console.log("next btn clicked");
-      //  if(!this.$refs.form.validate()) return;
+      if (!this.$refs.form.validate()) {
+        this.$awn.alert("Your form is not completed");
+        return;
+      }
 
       console.log("biodata country id", this.$store.getters.biodata);
 

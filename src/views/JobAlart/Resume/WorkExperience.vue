@@ -204,7 +204,7 @@
               outlined
               dense
               background-color="white"
-              placeholder="Select Country"
+              placeholder="Job Level"
             ></v-autocomplete>
           </div>
 
@@ -217,7 +217,7 @@
               outlined
               dense
               background-color="white"
-              placeholder="Select Country"
+              placeholder="Available For"
             ></v-autocomplete>
           </div>
 
@@ -233,7 +233,7 @@
               multiple
               return-object
               background-color="white"
-              placeholder="Select Categroy"
+              placeholder="Preferable Area"
             ></v-autocomplete>
           </div>
 
@@ -605,8 +605,13 @@ export default {
       this.experiences.splice(index, 1);
     },
     nextBtn() {
+      if (!this.$refs.form.validate()) {
+        this.$awn.alert("Your form is not completed");
+        return;
+      }
+
       console.log("experiences....", this.experiences);
-      this.loading = false;
+      this.loading = true;
       this.experiences = this.experiences.filter((n) => {
         return {
           id: n.id,
