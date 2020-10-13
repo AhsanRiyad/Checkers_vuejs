@@ -353,7 +353,7 @@ export default {
               })
               .catch((error) => {
                 this.$awn.alert("Failed!");
-                this.$route.history.push("/signin");
+                this.$router.history.push("/signin");
                 console.log(error);
                 return;
               })
