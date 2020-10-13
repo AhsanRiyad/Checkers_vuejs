@@ -17,9 +17,9 @@
               <li>
                 <router-link to="/about-us" class="mt-md-3">About Us</router-link>
               </li>
-              <!--            <router-link to=/ class="mt-md-n3 mt-n4">Terms & Conditions</p>-->
-              <!--            <router-link to=/ class="mt-md-n3 mt-n4">International Partners</p>-->
-              <!--            <router-link to=/ class="mt-md-n3 mt-n4">Other Partners</p>-->
+              <li>
+                <router-link to="/terms-and-condition" class="mt-md-n3 mt-n4">Terms & Condition</router-link>
+              </li>
               <li>
                 <router-link to="/privacy-policy" class="mt-md-n3 mt-n4">Privacy Policy</router-link>
               </li>

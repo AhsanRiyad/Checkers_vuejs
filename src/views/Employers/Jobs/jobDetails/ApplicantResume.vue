@@ -41,7 +41,7 @@
       </div>
       <!-- section-1 starts -->
       <div class="defaultResume-title">
-        <div class="dr-main-text-div">
+        <div class="dr-main-text-div mt-5">
           <p class="defaultResume-title-text">
             {{ getResume.biodata.full_name }}
           </p>
@@ -49,7 +49,7 @@
           <p>Email: {{ getResume.biodata.contact_email }}</p>
         </div>
 
-        <div class="dr-title-photo">
+        <div class="dr-title-photo mt-5">
           <v-avatar size="130">
             <img
                 :src="this.$store.getters.imageUrl + getResume.biodata.photo"
@@ -80,9 +80,9 @@
 
         <p class="resume_gap years-of-experience">
           Total year of experiences:
-          {{ this.R.isNil(getResume.userTotalExperiences.years) ? 0 : getResume.userTotalExperiences.years }} Year(s)
+          <span class="font-weight-regular">{{ this.R.isNil(getResume.userTotalExperiences.years) ? 0 : getResume.userTotalExperiences.years }} Year(s)
           {{ this.R.isNil(getResume.userTotalExperiences.months) ? 0 : getResume.userTotalExperiences.months }} Month(s)
-          {{ this.R.isNil(getResume.userTotalExperiences.days) ? 0 : getResume.userTotalExperiences.days }} Day(s)
+          {{ this.R.isNil(getResume.userTotalExperiences.days) ? 0 : getResume.userTotalExperiences.days }} Day(s)</span>
         </p>
       </div>
       <!-- section-4 ends -->
@@ -223,7 +223,7 @@
       <div>
         <template>
           <v-card class="mx-auto" style="max-width: 500px">
-            <v-toolbar color="deep-purple accent-4" cards dark flat>
+            <v-toolbar color="#365899" cards dark flat>
               <v-btn icon>
                 <v-icon @click.stop.prevent="dialog = false"
                 >mdi-arrow-left
@@ -239,7 +239,7 @@
                   v-model="company_email"
                   :rules="[rules.email]"
                   filled
-                  color="deep-purple"
+                  color="#365899"
                   label="Enter Email to get candidate resume"
                   type="email"
               ></v-text-field>
@@ -253,7 +253,7 @@
                     'Description must be 160 characters or less',
                   rules.required,
                 ]"
-                  color="deep-purple"
+                  color="#365899"
                   label="Interview Message"
                   hint="Description must be 160 characters or less"
                   rows="4"
@@ -267,7 +267,7 @@
                   :loading="isLoading"
                   @click="applicantInterviewCall"
                   class="white--text"
-                  color="deep-purple accent-4"
+                  color="#365899"
                   depressed
               >
                 interview call
@@ -438,6 +438,7 @@ export default {
       if (event) {
         event.preventDefault();
       }
+      this.isLoading = true
       this.dialogShowing = false;
       this.$store
           .dispatch("callApi", {
@@ -460,6 +461,7 @@ export default {
           })
           .finally(() => {
             this.dialog = false;
+            this.isLoading = false
           });
     },
   },

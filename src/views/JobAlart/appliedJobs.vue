@@ -293,10 +293,6 @@
                   <h4>Job Facilities</h4>
                   <div v-for="fac in jobDetails.job_facilities" :key="fac.id"><p v-html="fac.text"></p></div>
                 </div>
-                <div class="job_faci mt-3 text-center">
-                  <h2>Read Before Apply</h2>
-                  <div v-if="jobDetails.apply_instruction"><p v-html="jobDetails.apply_instruction"></p></div>
-                </div>
               </div>
             </job-alert-modal>
             <!-- job apply modal ends-->
@@ -349,17 +345,6 @@ export default {
     this.getJobAppliedData()
   },
   methods: {
-    // getData() {
-    //   if (this.$store.getters.userIp == "") {
-    //     new Promise((resolve, reject) => {
-    //       this.getIp(resolve, reject);
-    //     }).then(() => {
-    //       this.getJobAppliedData();
-    //     });
-    //   } else {
-    //     this.getJobAppliedData();
-    //   }
-    // },
     getJobAppliedData(){
       this.loading = true;
       this.skeleton = true;
@@ -374,7 +359,6 @@ export default {
         method: "get",
         params: {
           page: this.pageNo,
-          ip: this.$store.getters.userIp,
         },
         headers,
       })

@@ -120,6 +120,14 @@ const routes = [
     }
   },
   {
+    path: '/terms-and-condition',
+    name: 'TermsAndCondition',
+    component: TermsAndCondition,
+    meta: {
+      title: 'JobAlart'
+    }
+  },
+  {
     path: '/faq-for-job-seekers',
     name: 'FAQSeekers',
     component: FAQSeekers,
@@ -420,11 +428,12 @@ const router = new VueRouter({
 
 import VueCookies from 'vue-cookies';
 import * as R from 'ramda';
+import TermsAndCondition from "@/views/JobAlart/Footer/TermsAndCondition";
 
 router.beforeEach((to, from, next) => {
   // ...
   if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
-    if (to.name == "search" || to.name == "ForgotPassword" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "FAQCompany" || to.name == "FAQSeekers" || to.name == "changeForgotPassword" ) {
+    if (to.name == "search" || to.name == "ForgotPassword" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "TermsAndCondition" || to.name == "FAQCompany" || to.name == "FAQSeekers" || to.name == "changeForgotPassword" ) {
       next();
       return;
     }
@@ -444,10 +453,10 @@ router.beforeEach((to, from, next) => {
     console.log("from ", from);
     next(); */
   /* if (!this.R.isNil(VueCookies.get('is_company'))) {
- 
+
     if (VueCookies.get('is_company') == 'false') {
       console.log("is compnay", VueCookies.get('is_company'));
- 
+
       if (to.name == "CompanyList" || to.name == "CompanyList" || to.name == "JobsTab" || to.name == "companiesTab" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails" || to.name == "JobOnlineApply" || to.name == "pricingTable" || to.name == "userInfo" || to.name == "userInfoDetails") {
         next({ name: 'search' });
         return;
@@ -456,7 +465,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     next();
-    
+
   } */
   next();
 })

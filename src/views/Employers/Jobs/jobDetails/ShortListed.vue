@@ -110,32 +110,12 @@
 
       <!-- job apply modal ends-->
       <!--********** pagination start **************-->
-      <!--      <div class="pagination">-->
-      <!--        <ul class="d-flex pg-list">-->
-      <!--          <li>-->
-      <!--            <v-btn class="pg-btn" small text>-->
-      <!--              <v-icon>mdi-chevron-double-left</v-icon>-->
-      <!--            </v-btn>-->
-      <!--          </li>-->
-      <!--          <li>-->
-      <!--            <v-btn class="pg-btn" small text>1</v-btn>-->
-      <!--          </li>-->
-      <!--          <li>-->
-      <!--            <v-btn class="pg-btn" small text>2</v-btn>-->
-      <!--          </li>-->
-      <!--          <li>-->
-      <!--            <v-btn class="pg-btn" small text>3</v-btn>-->
-      <!--          </li>-->
-      <!--          <li>-->
-      <!--            <v-btn class="pg-btn" small text>..124</v-btn>-->
-      <!--          </li>-->
-      <!--          <li>-->
-      <!--            <v-btn class="pg-btn" small text>-->
-      <!--              <v-icon>mdi-chevron-double-right</v-icon>-->
-      <!--            </v-btn>-->
-      <!--          </li>-->
-      <!--        </ul>-->
-      <!--      </div>-->
+      <div class="pagination">
+        <v-pagination
+            v-model="pageNo"
+            :length="length"
+        ></v-pagination>
+      </div>
       <!--********** pagination end **************-->
     </v-card>
   </div>
@@ -159,6 +139,8 @@ export default {
       applicantShortListedResume: {},
       shortList: 1,
       pageNo: 1,
+      length: 0,
+      limit:0,
       jobs: {},
       jobId: "",
       userId: "",
@@ -219,6 +201,7 @@ export default {
         params: {
           short_list: this.shortList,
           page: this.pageNo,
+          limit: this.limit
         },
         data: {},
         headers,

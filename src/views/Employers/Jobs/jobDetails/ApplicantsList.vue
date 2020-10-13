@@ -100,23 +100,14 @@
                 v-for="apear in app.job_appliers"
                 :key="apear.id"
               >
-                <v-btn
-                  class="interactn c-green"
-                  v-if="apear.short_listed"
-                  color="success"
-                  icon
-                >
-                  <i class="material-icons">check</i>
-                </v-btn>
-                <v-btn
-                  v-else
-                  class="interactn mr-2 ml-1 mr-1 c-red"
-                  color="error"
-                  icon
-                  style="border: 1px solid red !important"
-                >
-                  <i class="material-icons">close</i>
-                </v-btn>
+                <v-icon class="interactn c-green rounded-circle pa-1"
+                        v-if="apear.short_listed"
+                        color="success">mdi-check</v-icon>
+                <v-icon v-else
+                        class="interactn mr-2 ml-1 mr-1 c-red rounded-circle pa-1"
+                        color="error"
+                        icon
+                        style="border: 1px solid red !important">close</v-icon>
               </td>
             </tr>
           </tbody>

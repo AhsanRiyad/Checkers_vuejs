@@ -49,7 +49,7 @@
       <div class="dr-career-objective">
         <p class="dr-title-all">Employement History:</p>
 
-        <p class="years-of-experience">
+        <p class="resume_gap years-of-experience">
           Total year of experiences:
           {{ this.resume.payload.userTotalExperiences.years }} Year(s)
           {{ this.resume.payload.userTotalExperiences.months }} Month(s)
@@ -143,7 +143,7 @@
       <!-- section-7 starts -->
       <div class="dr-skills">
         <p class="dr-title-all">Skills:</p>
-        <p>{{ this.resume.payload.skills.name }}</p>
+        <p class="resume_gap">{{ this.resume.payload.skills.name }}</p>
       </div>
       <!-- section-7 ends -->
 
