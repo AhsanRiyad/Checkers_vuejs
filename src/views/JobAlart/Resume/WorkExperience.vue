@@ -440,7 +440,7 @@ export default {
             })
             .catch(() => {
               console.log("failed 4");
-              this.$awn.alert("Failed!");
+              // this.$awn.alert("Failed!");
               //   this.$awn.alert("Failed");
             })
             .finally(() => {
