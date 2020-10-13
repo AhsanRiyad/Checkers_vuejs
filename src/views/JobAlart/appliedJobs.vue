@@ -470,7 +470,7 @@ export default {
           this.appliedJobs = response.data.jobs.items;
           this.length = Math.round(
             response.data.jobs.total_count /
-              response.data.jobs.num_items_per_page
+              this.limit
           );
           console.log("page length", this.length);
           this.loading = false;

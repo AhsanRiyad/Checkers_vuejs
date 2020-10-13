@@ -119,8 +119,8 @@
         <!--********** pagination start **************-->
         <div class="pagination">
           <v-pagination
-              v-model="pageNo"
-              :length="jobDetailsLength"
+            v-model="pageNo"
+            :length="jobDetailsLength"
           ></v-pagination>
         </div>
         <!--********** pagination end **************-->
@@ -163,6 +163,8 @@ export default {
   },
   data: () => {
     return {
+      pageNo: 0,
+      jobDetailsLength: 0,
       loading: false,
       dialogShowing: false,
       applicantResume: {},
@@ -213,6 +215,11 @@ export default {
         .finally(() => {
           this.loadingApplicant = false;
         });
+    },
+  },
+  watch: {
+    applicant() {
+      this.jobDetailsLength = Math.round(this.applicant.length / 5);
     },
   },
 };

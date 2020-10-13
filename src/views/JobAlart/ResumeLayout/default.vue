@@ -56,10 +56,7 @@
         <p class="dr-title-all">Employement History:</p>
 
         <p class="resume_gap years-of-experience">
-          Total year of experiences:
-          {{ this.resume.payload.userTotalExperiences.years }} Year(s)
-          {{ this.resume.payload.userTotalExperiences.months }} Month(s)
-          {{ this.resume.payload.userTotalExperiences.days }} Day(s)
+          Total year of experiences: {{ getExperience }}
         </p>
       </div>
       <!-- section-4 ends -->
@@ -320,6 +317,35 @@ export default {
     },
   },
   computed: {
+    getExperience() {
+     /*  let years = "0",
+        months = "0";
+      if (this.resume.payload.userTotalExperiences.years > 1) {
+        years = this.resume.payload.userTotalExperiences.years + " " + "years ";
+      } else {
+        years = this.resume.payload.userTotalExperiences.years + " " + "year ";
+      }
+
+      if (this.resume.payload.userTotalExperiences.months > 1) {
+        years = this.resume.payload.userTotalExperiences.months + " months";
+      } else {
+        years = this.resume.payload.userTotalExperiences.months + " month";
+      } */
+      let years = "0";
+      if (this.resume.payload.userTotalExperiences.years > 1) {
+        years = this.resume.payload.userTotalExperiences.years + " " + "years ";
+      } else {
+        years = this.resume.payload.userTotalExperiences.years + " " + "year ";
+      }
+      let months = "0";
+      if (this.resume.payload.userTotalExperiences.months > 1) {
+        months = this.resume.payload.userTotalExperiences.months + " " + "months ";
+      } else {
+        months = this.resume.payload.userTotalExperiences.months + " " + "month ";
+      }
+      // return years + " " + months;
+      return years + months;
+    },
     resume() {
       return this.$store.getters.resume;
     },
