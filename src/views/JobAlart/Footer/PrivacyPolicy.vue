@@ -8,7 +8,7 @@
     </div>
     <v-container class="aboutUs-main-container__main">
       <v-row>
-        <v-col>
+        <v-col cols="12" md="12">
           <h1 class="mb-3">Privacy Policy for Job Alart:</h1>
           <p>Welcome to Jobalart! <br>
             These terms and conditions outline the rules and regulations for the use of Company Name's Website, located at Website.com.

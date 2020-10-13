@@ -47,7 +47,7 @@
                   </div>
 
                   <div class="biodata-notice-period">
-                    <p>Company Notice Period</p>
+                    <p>Company Notice Period (In Month)</p>
                     <div>
                       <v-text-field
                         background-color="white"
