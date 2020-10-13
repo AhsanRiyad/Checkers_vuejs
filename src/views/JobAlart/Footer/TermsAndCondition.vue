@@ -40,7 +40,7 @@
 import '../../../sass/job-alart/_aboutUs.scss'
 
 export default {
-  name: "Terms&Condition",
+  name: "TermsAndCondition",
   data: () => {
     return {
       terms: [

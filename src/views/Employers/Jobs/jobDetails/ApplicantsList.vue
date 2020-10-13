@@ -2,7 +2,10 @@
   <div class="applicant__list">
     <v-card flat class="ja__card pt-0">
       <!--********** Job applied table start **************-->
-      <div style="overflow-x: auto !important">
+      <div v-if="!applicant.length" class="text-center">
+        <h1>No One Applied in this job</h1>
+      </div>
+      <div v-else style="overflow-x: auto !important">
         <table class="ja_table">
           <tbody>
             <v-dialog
@@ -22,11 +25,6 @@
                 </v-card-text>
               </v-card>
             </v-dialog>
-            <tr v-if="!applicant.length">
-              <td class="text-center" style="color: #0d47a1; font-size: 25px">
-                No One Applied in this job
-              </td>
-            </tr>
             <tr v-for="app in applicant" :key="app.id">
               <td class="text-center">
                 <p class="font-weight-bold"></p>
@@ -118,6 +116,14 @@
             </tr>
           </tbody>
         </table>
+        <!--********** pagination start **************-->
+        <div class="pagination">
+          <v-pagination
+              v-model="pageNo"
+              :length="jobDetailsLength"
+          ></v-pagination>
+        </div>
+        <!--********** pagination end **************-->
       </div>
       <!--********** Job applied table end **************-->
       <!-- job apply modal starts-->

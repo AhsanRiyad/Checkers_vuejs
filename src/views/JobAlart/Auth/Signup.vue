@@ -179,14 +179,14 @@ export default {
   methods: {
     tocView() {
       console.log("toc click");
-      /* 
+      /*
       let routeData = this.$router.resolve({
         name: "/",
         query: { data: "someData" },
       }); */
 
       let routeData = this.$router.resolve({
-        name: "PrivacyPolicy",
+        name: "TermsAndCondition",
       });
       window.open(routeData.href, "_blank");
 

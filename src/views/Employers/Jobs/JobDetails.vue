@@ -123,16 +123,7 @@
             :experience="experience"
             :qualification="qualification"
             :applicant="applicant"
-          >
-            <!--********** pagination start **************-->
-            <div class="pagination">
-              <v-pagination
-                v-model="pageNo"
-                :job-details-length="jobDetailsLength"
-              ></v-pagination>
-            </div>
-            <!--********** pagination end **************-->
-          </applicant-list>
+          ></applicant-list>
         </v-tab-item>
         <v-tab-item>
           <short-listed></short-listed>
