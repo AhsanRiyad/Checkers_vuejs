@@ -24,9 +24,7 @@
             color="white"
         >Resume</v-btn
         >
-        <v-btn router to="/signin" text color="white">{{
-            $store.getters.isLoggedIn ? "Logout" : "Login"
-          }}</v-btn>
+        <v-btn v-if="$store.getters.isLoggedIn" router to="/signin" text color="white">Login</v-btn>
         <v-btn
             v-if="$store.getters.is_company"
             router
@@ -67,9 +65,12 @@
               </v-list-item>
                <v-divider></v-divider>
             <v-card-actions>
-              <v-btn block color="primary" text @click="menu = false"
-              >Logout</v-btn
-              >
+              <v-btn block router to="/signin" text color="primary">{{
+                  $store.getters.isLoggedIn ? "Logout" : "Login"
+                }}</v-btn>
+<!--              <v-btn block color="primary" text @click="menu = false"-->
+<!--              >Logout</v-btn-->
+<!--              >-->
             </v-card-actions>
             </v-list>
           </v-card>

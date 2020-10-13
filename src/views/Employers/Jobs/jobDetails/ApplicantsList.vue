@@ -170,9 +170,8 @@ export default {
     showApplicantResume(userId) {
       console.log("User id", userId);
       this.userId = userId;
+      this.loadingApplicant = true
       this.$store.commit("userId_resume", userId);
-      this.dialogShowing = true;
-      this.loading = true;
       this.$store
         .dispatch("callApi", {
           url: "resume/" + userId,
@@ -181,6 +180,7 @@ export default {
           data: {},
         })
         .then((response) => {
+          this.dialogShowing = true;
           console.log("Resume...fra", response);
           this.$store.commit("resume", response.data);
 
@@ -199,7 +199,7 @@ export default {
           console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
         })
         .finally(() => {
-          this.loading = false;
+          this.loadingApplicant = false;
         });
     },
   },

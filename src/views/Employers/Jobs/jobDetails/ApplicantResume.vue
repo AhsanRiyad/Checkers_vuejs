@@ -45,7 +45,7 @@
           <p class="defaultResume-title-text">
             {{ getResume.biodata.full_name }}
           </p>
-          <p>Mobile: {{ getResume.biodata.mobile_number }}</p>
+<!--          <p>Mobile: {{ getResume.biodata.mobile_number }}</p>-->
           <p>Email: {{ getResume.biodata.contact_email }}</p>
         </div>
 
@@ -306,7 +306,9 @@ export default {
           "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts",
       dialog: false,
       company_email: "",
-      interview_message: "",
+      interview_message: "Dear Candidate,\n" +
+          "\n" +
+          "You are invited to attend an interview session with us on 3rd July at 5:00 pm.",
       form: false,
       isLoading: false,
       // isShortlisted: true,
@@ -376,8 +378,6 @@ export default {
             // this.$awn.alert("Failed");
           })
           .finally(() => {
-            this.loading = false;
-            //  this.tableLoading = false;
           });
     },
     appResume() {
@@ -439,7 +439,6 @@ export default {
         event.preventDefault();
       }
       this.isLoading = true
-      this.dialogShowing = false;
       this.$store
           .dispatch("callApi", {
             url: `jobs/${this.$store.getters.job}/${this.userId}/interview-call`,
@@ -450,7 +449,7 @@ export default {
             },
           })
           .then((response) => {
-            this.dialog = true;
+            this.dialogShowing = true;
             console.log("applicant shortlisted response..", response);
             // this.companyId = response.company.id;
             this.$awn.success("Updated Successfully!");
