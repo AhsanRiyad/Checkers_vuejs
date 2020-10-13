@@ -38,13 +38,13 @@
                 <span class="closeButton__tooltip_text">remove</span>
               </div>
               <div class="row-1">
-                <p>Job Title</p>
+                <p>Designation</p>
                 <v-text-field
                   background-color="white"
                   class="mb-0"
                   v-model="n.job_title"
                   :rules="[(v) => !!v || 'required']"
-                  placeholder="Enter your first name"
+                  placeholder="Enter your designation"
                   outlined
                   dense
                 ></v-text-field>
@@ -62,7 +62,7 @@
                     background-color="white"
                     class="mb-0"
                     :rules="[(v) => !!v || true]"
-                    placeholder="Enter your city"
+                    placeholder="Enter company name"
                     outlined
                     dense
                     @keyups="saveData"
@@ -78,7 +78,7 @@
                     background-color="white"
                     class="mb-0"
                     :rules="[(v) => !!v || true]"
-                    placeholder="Enter your post code"
+                    placeholder="Enter company location"
                     outlined
                     dense
                     v-model="n.company_location"
