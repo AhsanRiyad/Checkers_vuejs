@@ -8,9 +8,7 @@
 
             <v-card>
               <v-row justify="center">
-                <p class="text-center mb-n12 mt-4 header-text">
-                  Welcome back! Please Login
-                </p>
+                <p class="text-center mb-n12 mt-4 header-text">Please Login</p>
 
                 <v-col cols="10" md="10" class="col-1 mb-n4 pb-0">
                   <p class="mb-1">Email</p>

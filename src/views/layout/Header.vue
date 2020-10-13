@@ -5,39 +5,45 @@
       <v-toolbar-title>
         <!-- <img :src="require('../../../public/JobAlartLogo.png')" alt=""> -->
         <router-link to="/" style="color: white; text-decoration: none"
-        >JobAlart
-        </router-link
-        >
+          >JobAlart
+        </router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <span class="d-none d-md-inline">
         <v-btn router to="/" text color="white">Jobs</v-btn>
         <v-btn text router @click.stop="gotoRecruiter" color="white"
-        >Recruiters</v-btn
+          >Recruiters</v-btn
         >
         <v-btn
-            v-if="$store.getters.isLoggedIn"
-            router
-            to="/biodata"
-            text
-            color="white"
-        >Resume</v-btn
+          v-if="$store.getters.isLoggedIn"
+          router
+          to="/biodata"
+          text
+          color="white"
+          >Resume</v-btn
         >
-        <v-btn v-if="!$store.getters.isLoggedIn" router to="/signin" text color="white">Login</v-btn>
         <v-btn
-            v-if="$store.getters.is_company"
-            router
-            to="/employers"
-            text
-            color="white"
-        >Employeer/Job Post</v-btn
+          v-if="!$store.getters.isLoggedIn"
+          router
+          to="/signin"
+          text
+          color="white"
+          >Login</v-btn
+        >
+        <v-btn
+          v-if="$store.getters.is_company"
+          router
+          to="/employers"
+          text
+          color="white"
+          >Employeer/Job Post</v-btn
         >
         <v-menu
-            bottom
-            origin="center center"
-            transition="scale-transition"
-            v-if="$store.getters.isLoggedIn"
+          bottom
+          origin="center center"
+          transition="scale-transition"
+          v-if="$store.getters.isLoggedIn"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="white" icon v-bind="attrs" v-on="on" class="mr-3">
@@ -48,9 +54,9 @@
           <v-card>
             <v-list>
               <v-list-item
-                  v-for="([icon, text, url], i) in menus"
-                  :key="i"
-                  link
+                v-for="([icon, text, url], i) in menus"
+                :key="i"
+                link
               >
                 <v-list-item-content>
                   <router-link :to="url">
@@ -63,15 +69,15 @@
                   </router-link>
                 </v-list-item-icon>
               </v-list-item>
-               <v-divider></v-divider>
-            <v-card-actions>
-              <v-btn block router to="/signin" text color="primary">{{
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-btn block router to="/signin" text color="primary">{{
                   $store.getters.isLoggedIn ? "Logout" : "Login"
                 }}</v-btn>
-<!--              <v-btn block color="primary" text @click="menu = false"-->
-<!--              >Logout</v-btn-->
-<!--              >-->
-            </v-card-actions>
+                <!--              <v-btn block color="primary" text @click="menu = false"-->
+                <!--              >Logout</v-btn-->
+                <!--              >-->
+              </v-card-actions>
             </v-list>
           </v-card>
         </v-menu>
@@ -80,9 +86,9 @@
 
       <span>
         <v-app-bar-nav-icon
-            color="white"
-            class="d-md-none d-inline"
-            @click.stop="drawer = !drawer"
+          color="white"
+          class="d-md-none d-inline"
+          @click.stop="drawer = !drawer"
         ></v-app-bar-nav-icon>
       </span>
     </v-app-bar>
@@ -90,10 +96,10 @@
 
     <!-- drawer starts -->
     <v-navigation-drawer
-        v-model="drawer"
-        fixed
-        temporary
-        style="background: #365899"
+      v-model="drawer"
+      fixed
+      temporary
+      style="background: #365899"
     >
       <v-list style="background: #365899">
         <v-list-item v-for="([icon, text, url], i) in items" :key="i" link>
@@ -104,9 +110,8 @@
           </v-list-item-icon>
           <v-list-item-content>
             <router-link :to="url">
-              <v-list-item-title class="white--text">{{
-                  text
-                }}
+              <v-list-item-title class="white--text"
+                >{{ text }}
               </v-list-item-title>
             </router-link>
           </v-list-item-content>
@@ -153,15 +158,15 @@ export default {
   mounted() {
     setTimeout(() => {
       if (
-          this.R.isNil(this.$cookies.get("is_company")) ||
-          this.R.isEmpty(this.$cookies.get("is_company"))
+        this.R.isNil(this.$cookies.get("is_company")) ||
+        this.R.isEmpty(this.$cookies.get("is_company"))
       ) {
         this.$store.commit("is_company", false);
         // return false;
       } else {
         if (
-            this.$cookies.get("is_company") == "true" ||
-            this.$cookies.get("is_company") == true
+          this.$cookies.get("is_company") == "true" ||
+          this.$cookies.get("is_company") == true
         ) {
           console.log("is compnay... in the app.vue true");
           this.$store.commit("is_company", true);
@@ -176,21 +181,21 @@ export default {
     this.$store.commit("is_company", this.$cookies.get("is_company"));
     // console.log("this is is_company...", this.$store.getters.is_company);
     console.log(
-        "this is is_company... mounted",
-        this.$cookies.get("is_company")
+      "this is is_company... mounted",
+      this.$cookies.get("is_company")
     );
     console.log(
-        "logged in check in the header...",
-        this.$cookies.get("accessToken")
+      "logged in check in the header...",
+      this.$cookies.get("accessToken")
     );
   },
-  updated() {
-  },
+  updated() {},
   methods: {
     gotoRecruiter() {
       //alert('here');
-      this.$router.history.push({name: "recruiter"});
+      // this.$router.go(-1);
       // location.reload();
+      this.$router.history.push({ name: "recruiter" });
     },
   },
 };
