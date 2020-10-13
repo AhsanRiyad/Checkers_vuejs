@@ -5,7 +5,7 @@
         <v-col cols="12">
           <h1 class="text-center ja__headline">
             Change password for
-            <span>farzanakabirrinky@yahoo.com</span>
+            <span>{{ this.$cookies.get("email") }}</span>
           </h1>
         </v-col>
         <v-col cols="12" md="6">
@@ -14,12 +14,18 @@
               <v-col cols="12" md="8" class="col-1 mb-n4 pb-0">
                 <p class="mb-1">Current password</p>
                 <v-text-field
-                  :rules="[(v) => !!v || 'required']"
+                  :rules="[
+                    (v) => !!v || 'required',
+                    (v) =>
+                      v.length > 6 ||
+                      'Password can not be less than 6 characters',
+                  ]"
                   class="mb-0 pb-0 mb-0"
                   placeholder="Password"
                   outlined
-                  type="password"
+                  :counter="6"
                   dense
+                  type="password"
                   v-model="data.password"
                 ></v-text-field>
               </v-col>
@@ -28,11 +34,18 @@
                 <p class="mb-1">New password</p>
                 <v-text-field
                   class="mb-0"
-                  :rules="[(v) => !!v || 'required']"
+                  :counter="6"
+                  :rules="[
+                    (v) => {
+                      if (v != data.password) {
+                        return 'Password does not match';
+                      } else return true;
+                    },
+                  ]"
                   placeholder="Password"
                   outlined
-                  type="password"
                   dense
+                  type="password"
                   v-model="data.new_password"
                 ></v-text-field>
               </v-col>

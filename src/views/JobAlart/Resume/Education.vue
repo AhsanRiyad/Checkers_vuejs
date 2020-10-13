@@ -45,7 +45,7 @@
                 outlined
                 dense
                 background-color="white"
-                placeholder="Select Exam"
+                placeholder="Enter level of Education"
               ></v-autocomplete>
             </div>
           </div>
@@ -70,7 +70,7 @@
               class="mb-0"
               v-model="n.subject"
               :rules="[(v) => !!v || 'required']"
-              placeholder="Institute Name"
+              placeholder="Enter Subject"
               outlined
               dense
             ></v-text-field>
@@ -379,6 +379,11 @@ export default {
     },
 
     nextBtn() {
+      if (!this.$refs.form.validate()) {
+        this.$awn.alert("Your form is not completed");
+        return;
+      }
+
       console.log(this.educations);
       this.loading = true;
 

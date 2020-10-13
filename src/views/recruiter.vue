@@ -439,7 +439,7 @@ export default {
         // display: "none",
         width: "35%",
         right: "27%",
-        top: "325px",
+        top: "250px",
         position: "fixed",
         // height: "100%",
         transition: "top 0.1s",
