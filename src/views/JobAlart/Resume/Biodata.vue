@@ -532,8 +532,8 @@ export default {
                 this.getData();
               })
               .catch((error) => {
-                this.$awn.alert("Failed!");
-                this.$route.history.push("/signin");
+                this.$awn.alert("Sorry! Your token is Expired.");
+                this.$router.history.push("/signin");
                 console.log(error);
                 return;
               })
