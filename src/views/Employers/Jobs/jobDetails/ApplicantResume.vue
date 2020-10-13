@@ -80,9 +80,7 @@
 
         <p class="resume_gap years-of-experience">
           Total year of experiences:
-          <span class="font-weight-regular">{{ this.R.isNil(getResume.userTotalExperiences.years) ? 0 : getResume.userTotalExperiences.years }} Year(s)
-          {{ this.R.isNil(getResume.userTotalExperiences.months) ? 0 : getResume.userTotalExperiences.months }} Month(s)
-          {{ this.R.isNil(getResume.userTotalExperiences.days) ? 0 : getResume.userTotalExperiences.days }} Day(s)</span>
+          <span class="font-weight-regular">{{ getExperience }}</span>
         </p>
       </div>
       <!-- section-4 ends -->
@@ -131,7 +129,7 @@
             <th>Title</th>
             <th style=" width:45%;">Institution name</th>
             <th>Field of study</th>
-            <th class="text-center">End Year</th>
+            <th>End Year</th>
             <th>Result</th>
           </tr>
           </thead>
@@ -198,7 +196,7 @@
       </div>
       <div class="dr-application-info">
         <div class="dr-application-info-1">Country</div>
-        <div class="dr-application-info-2">: {{ getResume.biodata.country }}</div>
+        <div class="dr-application-info-2">: {{ getResume.biodata.country_id.country_name }}</div>
       </div>
       <div class="dr-application-info">
         <div class="dr-application-info-1">Nationality</div>
@@ -333,6 +331,21 @@ export default {
     });
   },
   computed: {
+    getExperience() {
+      let years = "0";
+      if (this.getResume.userTotalExperiences.years > 1) {
+        years = this.getResume.userTotalExperiences.years + " " + "years ";
+      } else {
+        years = this.getResume.userTotalExperiences.years + " " + "year ";
+      }
+      let months = "0";
+      if (this.getResume.userTotalExperiences.months > 1) {
+        months = this.getResume.userTotalExperiences.months + " " + "months ";
+      } else {
+        months = this.getResume.userTotalExperiences.months + " " + "month ";
+      }
+      return years + months;
+    },
     getResume() {
       return this.$store.getters.resume.payload;
     },

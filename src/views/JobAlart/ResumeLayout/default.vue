@@ -215,7 +215,7 @@
       <div class="dr-application-info">
         <div class="dr-application-info-1">Country</div>
         <div class="dr-application-info-2">
-          : {{ this.resume.payload.biodata.country }}
+          : {{ this.resume.payload.biodata.country_id.country_name }}
         </div>
       </div>
       <div class="dr-application-info">

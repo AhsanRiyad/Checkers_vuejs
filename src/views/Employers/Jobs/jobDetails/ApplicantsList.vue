@@ -127,7 +127,7 @@
       </div>
       <!--********** Job applied table end **************-->
       <!-- job apply modal starts-->
-      <v-dialog v-model="dialogShowing" width="900">
+      <v-dialog v-model="dialogShowing" width="980">
         <applicant-resume-modal
           :user-id="userId"
           :dialogShowing="dialogShowing"
