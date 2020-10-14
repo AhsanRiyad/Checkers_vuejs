@@ -3,14 +3,14 @@
     <v-row class="mainContainer  pa-6">
       <v-col cols="12" md="12" lg="12">
        <v-row>
-         <v-col cols="12" md="6" lg="6">
-           <p class="h1Text text-left ma-0" >User Basic Info</p>
-         </v-col>
-         <v-col cols="12" md="6" lg="6" class="text-right">
-           <v-btn small @click.stop="()=>editInfo(userDetails.id)" id="edit_btn" class="interactn c-grey">
-             <v-icon size="15">mdi-square-edit-outline</v-icon>
-             edit
-           </v-btn>
+         <v-col cols="12" md="12" lg="12">
+          <div class="d-flex justify-space-between align-center basic_top">
+            <p class="h1Text text-left pa-0 ma-0" >User Basic Info</p>
+            <v-btn small @click.stop="()=>editInfo(userDetails.id)" id="edit_btn" class="interactn c-grey">
+              <v-icon size="15">mdi-square-edit-outline</v-icon>
+              edit
+            </v-btn>
+          </div>
          </v-col>
        </v-row>
         <v-row>
@@ -99,6 +99,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.basic_top{
+  width: 100%;
+}
 </style>

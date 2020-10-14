@@ -7,15 +7,15 @@
           <h1 class="job_title">{{ jobs.job_title }}</h1>
         </div>
         <div class="ja_right_card">
-          <v-btn
-              :disabled="isDisabled"
-            @click="editJob(jobs.id)"
-            class="text--white"
-            color="blue-grey"
-          >
-            <v-icon>launch</v-icon>
-            edit
-          </v-btn>
+<!--          <v-btn-->
+<!--              :disabled="isDisabled"-->
+<!--            @click="editJob(jobs.id)"-->
+<!--            class="text&#45;&#45;white"-->
+<!--            color="blue-grey"-->
+<!--          >-->
+<!--            <v-icon>launch</v-icon>-->
+<!--            edit-->
+<!--          </v-btn>-->
           <v-btn class="ml-2 mr-2" color="secondary" v-if="false">
             <v-icon>reply</v-icon>
             repost

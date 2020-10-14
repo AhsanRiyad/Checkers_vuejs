@@ -1,6 +1,6 @@
 <template>
   <div class="posted__list">
-    <v-card flat class="ja__card pa-6">
+    <v-card flat class="ja__card pa-lg-6 pa-md-">
       <!--********** Job activities start **************-->
       <div class="jobActivity">
         <v-row>
@@ -11,7 +11,7 @@
       </div>
       <!--********** Job activities end **************-->
       <!--********** Job applied table start **************-->
-      <div v-if="!expiredJobs.length" class="text-center">
+      <div v-if="!expiredJobs.length" class="text-center not-available">
         <h1>Expired job is not available</h1>
       </div>
       <div v-else style="overflow-x: auto !important;">

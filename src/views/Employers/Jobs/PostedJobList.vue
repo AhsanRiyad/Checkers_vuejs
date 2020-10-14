@@ -1,23 +1,23 @@
 <template>
   <div class="posted__list">
-    <v-card flat class="ja__card pa-6">
+    <v-card flat class="ja__card pa-lg-6 pa-md-6">
       <!--********** Job activities start **************-->
       <div class="jobActivity">
         <v-row>
-          <v-col cols="12" lg="4">
-            <p class="jaif">Total Job: <span>{{totalPostedJobs}}</span></p>
-          </v-col>
-          <v-col cols="12" lg="8" class="text-right">
-            <v-btn link to="/add-job" color="success">
-              <v-icon>mdi-plus</v-icon>
-              Post a new Job
-            </v-btn>
+          <v-col cols="12" lg="12">
+            <div class="d-flex justify-space-between align-center">
+              <p class="jaif mb-0">Total Job: <span>{{totalPostedJobs}}</span></p>
+              <v-btn class="job_create_btn" link to="/add-job" color="success">
+                <v-icon>mdi-plus</v-icon>
+                Post a new Job
+              </v-btn>
+            </div>
           </v-col>
         </v-row>
       </div>
       <!--********** Job activities end **************-->
       <!--********** Job applied table start **************-->
-      <div v-if="!postedJobs.length" class="text-center">
+      <div v-if="!postedJobs.length" class="text-center not-available">
         <h1>Job is not Available</h1>
       </div>
       <div v-else style="overflow-x: auto !important;">
@@ -254,3 +254,24 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.jaif{
+  padding: pxToVw(5) 0 pxToVw(5) 0;
+  color: #69aa44;
+  font-size: pxToVw(20) !important;
+  @media (max-width: 959px){
+    font-size: pxToMobVw(17) !important;
+  }
+  span{
+    font-size: pxToVw(20) !important;
+    padding: pxToVw(3) pxToVw(10) pxToVw(3) pxToVw(10) !important;
+    border-radius: 4px;
+    margin-left: pxToVw(5) !important;
+    @media (max-width: 959px){
+      font-size: pxToMobVw(17);
+      padding: pxToMobVw(2) pxToMobVw(10) !important;
+      margin-left: pxToMobVw(5) !important;
+    }
+  }
+}
+</style>

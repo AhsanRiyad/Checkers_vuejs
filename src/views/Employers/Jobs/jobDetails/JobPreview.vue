@@ -1,7 +1,7 @@
 <template>
   <div class="posted__list" style="padding: 0 50px 30px 50px !important;">
     <v-card flat class="ja__card pt-0">
-      <div class="Fixed-Job-Details">
+      <div class="applicant-Job-Details">
         <div v-if="jobs">
           <v-list-item three-line>
             <v-list-item-content>

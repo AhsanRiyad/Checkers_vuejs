@@ -8,7 +8,7 @@
             <v-icon>mdi-magnify</v-icon>
             search cv bank
           </v-btn>
-          <v-btn link to="/add-companies" color="success">
+          <v-btn class="job_create_btn" link to="/add-companies" color="success">
             <v-icon>mdi-plus</v-icon>
             Create A Company
           </v-btn>
@@ -101,6 +101,7 @@
 </template>
 
 <script>
+import "../../../sass/employers/_jobs.scss"
 export default {
 name: "companiesTab",
   components: {

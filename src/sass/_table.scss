@@ -9,14 +9,31 @@
     border: none;
     vertical-align: middle;
     padding: 0 pxToVw(10);
+    font-size: pxToVw(18);
+    @media (max-width: 959px) {
+      padding: 0 pxToMobVw(10) !important;
+      font-size: pxToMobVw(15);
+    }
   }
   td{
     border-top: 1px solid #efefef;
     padding: pxToVw(15) pxToVw(10);
+    p, a{
+      font-size: pxToVw(18) !important;
+      @media (max-width: 959px){
+        font-size: pxToMobVw(13) !important;
+      }
+    }
+    @media (max-width: 959px) {
+      padding: pxToMobVw(10) pxToMobVw(10) !important;
+    }
   }
   th{
     .v-icon{
       font-size: pxToVw(15) !important;
+      @media (max-width: 959px) {
+      font-size: pxToMobVw(12) !important;
+    }
     }
   }
   .v-input--switch{
@@ -33,10 +50,17 @@
     font-weight: 700;
     padding-top: 12px;
     height: pxToVw(50);
+    @media (max-width: 959px) {
+      height: pxToMobVw(40);
+    }
   }
+
   .interactn{
     .v-icon, .v-btn{
       font-size: pxToVw(16) !important;
+      @media (max-width: 959px) {
+        font-size: pxToMobVw(15) !important;
+      }
     }
   }
   .c-grey{
