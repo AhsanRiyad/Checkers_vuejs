@@ -1,23 +1,23 @@
 <template>
   <v-container class="mainTemplate">
-    <v-snackbar
-        v-model="snackbar.show"
-        :color="snackbar.color"
-        top
-    >
-      {{ snackbar.message }}
-      <template v-slot:action="{ attrs }">
-        <v-btn
-            color="white"
-            icon
-            small
-            v-bind="attrs"
-            @click="snackbar = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </template>
-    </v-snackbar>
+<!--    <v-snackbar-->
+<!--        v-model="snackbar.show"-->
+<!--        :color="snackbar.color"-->
+<!--        top-->
+<!--    >-->
+<!--      {{ snackbar.message }}-->
+<!--      <template v-slot:action="{ attrs }">-->
+<!--        <v-btn-->
+<!--            color="white"-->
+<!--            icon-->
+<!--            small-->
+<!--            v-bind="attrs"-->
+<!--            @click="snackbar = false"-->
+<!--        >-->
+<!--          <v-icon>mdi-close</v-icon>-->
+<!--        </v-btn>-->
+<!--      </template>-->
+<!--    </v-snackbar>-->
     <v-form ref="form">
       <!-- loading data  starts-->
       <v-dialog v-model="loading" hide-overlay persistent width="300">
@@ -358,14 +358,14 @@ export default {
     // },
     submit() {
       if (!this.$refs.form.validate()) return;
-      if (this.$v.$pending || this.$v.$error) {
-        this.snackbar = {
-          message: 'Please enter your details',
-          color: 'error',
-          show: true,
-        }
-        return
-      }
+      // if (this.$v.$pending || this.$v.$error) {
+      //   this.snackbar = {
+      //     message: 'Please enter your details',
+      //     color: 'error',
+      //     show: true,
+      //   }
+      //   return
+      // }
       this.loadingDataText = "Creating Company...";
       if (this.paramId) {
         this.loading = true;
