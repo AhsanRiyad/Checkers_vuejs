@@ -17,7 +17,7 @@
           <h1>Contact With Us</h1>
         </v-col>
         <v-col cols="12">
-          <div class="d-flex justify-center">
+          <div class="contact">
             <div class="contact_box">
               <div class="contact_icon">
                 <v-icon>mdi-email</v-icon>

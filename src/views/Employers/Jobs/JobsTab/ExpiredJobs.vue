@@ -5,7 +5,7 @@
       <div class="jobActivity">
         <v-row>
           <v-col cols="12" lg="4">
-            <h2 class="jaif">Total Drafted Job: <span>{{totalJobs}}</span></h2>
+            <h2 class="jaif">Total Expired Job: <span>{{totalJobs}}</span></h2>
           </v-col>
         </v-row>
       </div>
