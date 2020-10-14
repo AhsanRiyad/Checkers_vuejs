@@ -426,13 +426,25 @@ const router = new VueRouter({
   mode: 'history' /*mode: 'hash'*/
 })
 
-import VueCookies from 'vue-cookies';
-import * as R from 'ramda';
+// import VueCookies from 'vue-cookies';
+// import * as R from 'ramda';
 import TermsAndCondition from "@/views/JobAlart/Footer/TermsAndCondition";
 
 router.beforeEach((to, from, next) => {
   // ...
-  if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
+
+  if (localStorage.getItem("accessToken") == null) {
+    if (to.name == "search" || to.name == "ForgotPassword" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "TermsAndCondition" || to.name == "FAQCompany" || to.name == "FAQSeekers" || to.name == "changeForgotPassword" || to.name == "recruiter"     ) {
+      next();
+      return;
+    }
+    else {
+      next('/');
+    }
+  }
+
+
+  /* if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
     if (to.name == "search" || to.name == "ForgotPassword" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "TermsAndCondition" || to.name == "FAQCompany" || to.name == "FAQSeekers" || to.name == "changeForgotPassword" ) {
       next();
       return;
@@ -446,7 +458,7 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     next();
-  }
+  } */
 
 
   /*   console.log("to ", to);
@@ -467,7 +479,7 @@ router.beforeEach((to, from, next) => {
     next();
 
   } */
-  next();
+  // next();
 })
 /*   if (!this.R.isNil(VueCookies.get('is_company'))) {
 
