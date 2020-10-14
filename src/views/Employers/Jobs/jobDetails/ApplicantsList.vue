@@ -205,7 +205,7 @@ export default {
           // console.log("applicants info", response.data.applicationInfo);
 
           // setTimeout({
-          // }, 1000)
+          // }, 1000) 1`
           // this.dialog = true
         })
         .catch((error) => {

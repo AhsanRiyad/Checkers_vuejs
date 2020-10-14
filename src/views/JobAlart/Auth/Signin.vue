@@ -78,10 +78,18 @@
                 <v-col cols="10" md="10" class="mb-0 mt-0">
                   <p class="tocText">
                     By signing in to your account, you agree to JOB ALERT’s
-                    <span class="tocInsideText">Terms of Service</span> and
-                    consent to our
-                    <span class="tocInsideText">Cookie Policy</span> and
-                    <span class="tocInsideText">Privacy Policy</span> .
+                    <span style="color: #365899" @click.stop="tocView">
+                      Terms and Conditions</span
+                    >
+                    and consent to our
+                    <span style="color: #365899" @click.stop="tocView">
+                      Cookie Policy</span
+                    >
+                    and
+                    <span style="color: #365899" @click.stop="tocView">
+                      Privacy Policy</span
+                    >
+                    .
                   </p>
                 </v-col>
               </v-row>
@@ -108,6 +116,21 @@ export default {
     };
   },
   methods: {
+    tocView() {
+      console.log("toc click");
+      /*
+      let routeData = this.$router.resolve({
+        name: "/",
+        query: { data: "someData" },
+      }); */
+
+      let routeData = this.$router.resolve({
+        name: "TermsAndCondition",
+      });
+      window.open(routeData.href, "_blank");
+
+      // this.dialog = true;
+    },
     submit() {
       if (!this.$refs.form.validate()) return;
 
