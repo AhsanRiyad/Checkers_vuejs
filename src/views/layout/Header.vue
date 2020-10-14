@@ -115,7 +115,31 @@
             </router-link>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link v-if="$store.getters.isLoggedIn">
+        <v-list-item link>
+          <v-list-item-icon>
+            <router-link to="/create-alert">
+              <v-icon class="white--text">mdi-bell</v-icon>
+            </router-link>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link to="/create-alert">
+              <v-list-item-title class="white--text">Get Alart</v-list-item-title>
+            </router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-icon>
+            <router-link to="/recruiter">
+              <v-icon class="white--text">mdi-view-dashboard</v-icon>
+            </router-link>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link to="/recruiter">
+              <v-list-item-title class="white--text">Recruiters</v-list-item-title>
+            </router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
           <v-list-item-icon>
             <router-link to="/biodata">
               <v-icon class="white--text">mdi-account-supervisor-circle</v-icon>
@@ -136,6 +160,18 @@
           <v-list-item-content>
             <router-link to="/applied-jobs">
               <v-list-item-title class="white--text">My Jobs</v-list-item-title>
+            </router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link v-if="$store.getters.isLoggedIn">
+          <v-list-item-icon>
+            <router-link to="/account-settings">
+              <v-icon class="white--text">mdi-account-settings-outline</v-icon>
+            </router-link>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link to="/account-settings">
+              <v-list-item-title class="white--text">Account Settings</v-list-item-title>
             </router-link>
           </v-list-item-content>
         </v-list-item>
