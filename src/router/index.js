@@ -425,72 +425,23 @@ const router = new VueRouter({
   routes,
   mode: 'history' /*mode: 'hash'*/
 })
-
-// import VueCookies from 'vue-cookies';
-// import * as R from 'ramda';
 import TermsAndCondition from "@/views/JobAlart/Footer/TermsAndCondition";
-
+import { companyRoutes, guestRoute } from "../data/protectedRoute";
 router.beforeEach((to, from, next) => {
-  // ...
-
   if (localStorage.getItem("accessToken") == null) {
-    if (to.name == "search" || to.name == "ForgotPassword" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "TermsAndCondition" || to.name == "FAQCompany" || to.name == "FAQSeekers" || to.name == "changeForgotPassword" || to.name == "recruiter"     ) {
+    if (guestRoute.some(n => n == to.name)) {
       next();
-      return;
+    } else {
+      next('/');
     }
-    else {
+  } else if (localStorage.getItem("is_company") == 'true') {
+    next();
+  } else if (localStorage.getItem("is_company") == 'false') {
+    if (!companyRoutes.some(n => n == to.name)) {
+      next();
+    } else {
       next('/');
     }
   }
-
-
-  /* if (R.isNil(VueCookies.get('accessToken')) || R.isEmpty(VueCookies.get('accessToken'))) {
-    if (to.name == "search" || to.name == "ForgotPassword" || to.name == "aboutUs" || to.name == "Signin" || to.name == "Signup" || to.name == "SearchJob" || to.name == "PrivacyPolicy" || to.name == "TermsAndCondition" || to.name == "FAQCompany" || to.name == "FAQSeekers" || to.name == "changeForgotPassword" ) {
-      next();
-      return;
-    }
-    next('/');
-  } else if (VueCookies.get('is_company') == 'false') {
-    if (to.name == "CompanyList" || to.name == "JobsTab" || to.name == "companiesTab" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails" || to.name == "JobOnlineApply" || to.name == "pricingTable" || to.name == "userInfo" || to.name == "userInfoDetails") {
-      next({ path: '/' });
-      return;
-    }
-    next();
-  } else {
-    next();
-  } */
-
-
-  /*   console.log("to ", to);
-    console.log("from ", from);
-    next(); */
-  /* if (!this.R.isNil(VueCookies.get('is_company'))) {
-
-    if (VueCookies.get('is_company') == 'false') {
-      console.log("is compnay", VueCookies.get('is_company'));
-
-      if (to.name == "CompanyList" || to.name == "CompanyList" || to.name == "JobsTab" || to.name == "companiesTab" || to.name == "AddJobs" || to.name == "AddCompanies" || to.name == "JobDetails" || to.name == "JobOnlineApply" || to.name == "pricingTable" || to.name == "userInfo" || to.name == "userInfoDetails") {
-        next({ name: 'search' });
-        return;
-      }
-      next();
-    }
-  } else {
-    next();
-
-  } */
-  // next();
 })
-/*   if (!this.R.isNil(VueCookies.get('is_company'))) {
-
-    if (VueCookies.get('is_company') == 'false') {
-      console.log("is compnay", VueCookies.get('is_company'));
-
-      if (to.name == "appliedJobs" ||  ) {
-        next({ name: 'search' });
-        return;
-      }
-      next();
-    }
-  } */
 export default router;
