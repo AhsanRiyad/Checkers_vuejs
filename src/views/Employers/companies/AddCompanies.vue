@@ -228,7 +228,14 @@
               <div>
                 <v-text-field
                   v-model="company.contact_name"
-                  :rules="[(v) => !!v || 'required']"
+                   :rules="[
+                  (v) => !!v || 'Required',
+                  (v) =>
+                    R.test(
+                      /^(([a-zA-Z]{1,}[\s]?(.)?[\s]?)*)([a-zA-Z]){1,}$/,
+                      v
+                    ) || 'Company name is invalid',
+                ]"
                   background-color="white"
                   class="mb-0"
                   placeholder="Enter Contact person"
@@ -282,7 +289,7 @@
               >
             </div>
             <div class="item-2" v-else>
-              <v-btn color="#365899" class="white--text" @click.stop="submit()"
+              <v-btn color="#365899" class="white--text" @click.stop="submit"
                 >Save</v-btn
               >
             </div>
