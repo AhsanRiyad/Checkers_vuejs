@@ -99,7 +99,7 @@
                 <v-btn
                   @click.stop="()=>editJob(job.id)"
                   id="edit_btn"
-                  :disabled="job.job_status == 1 || job.is_expired"
+                  :disabled="job.job_status == 1 || job.is_expired==1"
                   class="interactn c-grey"
                   icon
                 >
