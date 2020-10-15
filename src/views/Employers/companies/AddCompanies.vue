@@ -40,7 +40,14 @@
             <v-col cols="12">
               <p>Company Name</p>
               <v-text-field
-                :rules="fieldRulesProp(true, 'CompanyName', 'Company Name')"
+                :rules="[
+                  (v) => !!v || 'Required',
+                  (v) =>
+                    R.test(
+                      /^(([a-zA-Z()]{1,}[\s]?(.)?[\s]?)*)([a-zA-Z()]){1,}[.]?$/,
+                      v
+                    ) || 'Company name is invalid',
+                ]"
                 background-color="white"
                 class="mb-0"
                 placeholder="Enter Company Name"
@@ -71,7 +78,14 @@
                 <v-text-field
                   background-color="white"
                   class="mb-0"
-                 :rules="fieldRulesProp(true, 'BranchName', 'Branch Name')"
+                  :rules="[
+                    (v) => !!v || 'Required',
+                    (v) =>
+                      R.test(
+                        /^(([a-zA-Z()0-9]{1,}[\s]?(.)?[\s]?)*)([0-9a-zA-Z()]){1,}[.]?$/,
+                        v
+                      ) || 'Branch name is invalid',
+                  ]"
                   placeholder="Enter Company Branch Name"
                   outlined
                   dense
@@ -134,7 +148,7 @@
             <v-col cols="12" md="6" lg="6">
               <p>Company Email</p>
               <v-text-field
-                :rules="[(v) => !!v || 'required']"
+                :rules="fieldRulesProp(true, 'email', 'Email')"
                 background-color="white"
                 class="mb-0"
                 placeholder="Enter Company Email"
