@@ -288,7 +288,7 @@
       }
     }
 
-    .v-list-item__subtitle {
+    .job-preview__subtitle {
       font-size: pxToVw(16);
       @include tab(){
         font-size: pxToMobVw(17) !important;

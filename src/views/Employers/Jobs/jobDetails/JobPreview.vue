@@ -3,17 +3,16 @@
     <v-card flat class="ja__card pt-0">
       <div class="applicant-Job-Details">
         <div v-if="jobs">
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">{{ jobs.job_title }}</v-list-item-title>
-              <v-list-item-subtitle> {{ jobs.company_name }} || {{ jobs.type_in_text }} || <span v-if="jobs.is_lived" class="green--text">Lived</span>
+          <div class="d-flex justify-space-between align-center pb-4">
+            <div class="left-side">
+              <p class="headline mb-1">{{ jobs.job_title }}</p>
+              <p class="job-preview__subtitle"> {{ jobs.company_name }} || {{ jobs.type_in_text }} || <span v-if="jobs.is_lived" class="green--text">Lived</span>
                 <span v-else-if="jobs.is_expired" class="red--text">Expired</span>
                 <span v-else class="blue--text">Pending</span>
-              </v-list-item-subtitle>
-            </v-list-item-content>
-            <v-spacer></v-spacer>
+              </p>
+            </div>
             <h3 class="font-weight-bold">Category: <span>{{jobs.job_category[0].name}}</span></h3>
-          </v-list-item>
+          </div>
           <v-divider></v-divider>
           <div class="job_desc">
             <div class="job_location">
