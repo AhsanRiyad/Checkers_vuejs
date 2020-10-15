@@ -154,8 +154,11 @@ export default {
           this.$awn.success("Successful");
           localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("accessToken", response.access_token);
+          localStorage.setItem("accessToken", response.access_token);
           this.$cookies.set("email", this.email);
+          localStorage.setItem("email", this.email);
           this.$cookies.set("is_company", response.is_company);
+          localStorage.setItem("is_company", response.is_company);
           this.$store.commit("is_company", response.is_company);
           this.$cookies.set("_id", response.id);
           this.$store.commit("isLoggedIn", true);
@@ -216,6 +219,8 @@ export default {
       .finally(() => {
         this.$cookies.remove("accessToken");
         this.$cookies.remove("is_company");
+        localStorage.removeItem("is_company");
+        localStorage.removeItem("accessToken");
         this.$cookies.remove("_id");
         this.$store.commit("isLoggedIn", false);
         this.$store.commit("is_company", false);

@@ -1,30 +1,34 @@
 <template>
   <v-container class="mainTemplate">
-<!--    <v-snackbar-->
-<!--        v-model="snackbar.show"-->
-<!--        :color="snackbar.color"-->
-<!--        top-->
-<!--    >-->
-<!--      {{ snackbar.message }}-->
-<!--      <template v-slot:action="{ attrs }">-->
-<!--        <v-btn-->
-<!--            color="white"-->
-<!--            icon-->
-<!--            small-->
-<!--            v-bind="attrs"-->
-<!--            @click="snackbar = false"-->
-<!--        >-->
-<!--          <v-icon>mdi-close</v-icon>-->
-<!--        </v-btn>-->
-<!--      </template>-->
-<!--    </v-snackbar>-->
+    <!--    <v-snackbar-->
+    <!--        v-model="snackbar.show"-->
+    <!--        :color="snackbar.color"-->
+    <!--        top-->
+    <!--    >-->
+    <!--      {{ snackbar.message }}-->
+    <!--      <template v-slot:action="{ attrs }">-->
+    <!--        <v-btn-->
+    <!--            color="white"-->
+    <!--            icon-->
+    <!--            small-->
+    <!--            v-bind="attrs"-->
+    <!--            @click="snackbar = false"-->
+    <!--        >-->
+    <!--          <v-icon>mdi-close</v-icon>-->
+    <!--        </v-btn>-->
+    <!--      </template>-->
+    <!--    </v-snackbar>-->
     <v-form ref="form">
       <!-- loading data  starts-->
       <v-dialog v-model="loading" hide-overlay persistent width="300">
         <v-card color="primary" dark>
           <v-card-text>
             Loading Data...
-            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+            <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+            ></v-progress-linear>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -36,26 +40,32 @@
             <v-col cols="12">
               <p>Company Name</p>
               <v-text-field
-                  :rules="[v=>!!v||'required']"
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Company Name"
-                  outlined
-                  dense
-                  v-model="company.company_name"
+                :rules="[
+                  (v) => !!v || 'Required',
+                  (v) =>
+                    R.test(
+                      /^(([a-zA-Z()]{1,}[\s]?(.)?[\s]?)*)([a-zA-Z()]){1,}[.]?$/,
+                      v
+                    ) || 'Company name is invalid',
+                ]"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Company Name"
+                outlined
+                dense
+                v-model="company.company_name"
               ></v-text-field>
             </v-col>
             <v-col cols="12" lg="4" md="4" class="text-center">
               <div class="biodata-second">
                 <div class="biodata-image-input">
                   <v-file-input
-                      :rules="[v=>!!v||'required']"
-                      accept="image/png, image/jpeg, image/bmp"
-                      placeholder="Choose a photo"
-                      prepend-icon="perm_media"
-                      label="Company Logo"
-                      :loading="imageUploadLoading"
-                      v-model="photo"
+                    accept="image/png, image/jpeg, image/bmp"
+                    placeholder="Choose a photo"
+                    prepend-icon="perm_media"
+                    label="Company Logo"
+                    :loading="imageUploadLoading"
+                    v-model="photo"
                   ></v-file-input>
                 </div>
               </div>
@@ -66,26 +76,34 @@
               <p>Company Branch Name</p>
               <div>
                 <v-text-field
-                    background-color="white"
-                    class="mb-0"
-                    placeholder="Enter Company Branch Name"
-                    outlined
-                    dense
-                    v-model="company.branch_name"
-                    type="text"
+                  background-color="white"
+                  class="mb-0"
+                  :rules="[
+                    (v) => !!v || 'Required',
+                    (v) =>
+                      R.test(
+                        /^(([a-zA-Z()0-9]{1,}[\s]?(.)?[\s]?)*)([0-9a-zA-Z()]){1,}[.]?$/,
+                        v
+                      ) || 'Branch name is invalid',
+                  ]"
+                  placeholder="Enter Company Branch Name"
+                  outlined
+                  dense
+                  v-model="company.branch_name"
+                  type="text"
                 ></v-text-field>
               </div>
             </v-col>
             <v-col cols="12" md="6" lg="6">
               <p>Company Website</p>
               <v-text-field
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Company License"
-                  outlined
-                  dense
-                  type="text"
-                  v-model="company.company_website"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Company License"
+                outlined
+                dense
+                type="text"
+                v-model="company.company_website"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -94,17 +112,17 @@
               <p>Company Size</p>
               <div>
                 <v-select
-                    :menu-props="{ maxHeight: '400' }"
-                    label="Select Company Size"
-                    persistent-hint
-                    item-text="company_name"
-                    :items="companySize"
-                    :rules="[v=>!!v||'required']"
-                    item-value="id"
-                    dense
-                    outlined
-                    v-model="company.company_size"
-                    background-color="white"
+                  :menu-props="{ maxHeight: '400' }"
+                  label="Select Company Size"
+                  persistent-hint
+                  item-text="company_name"
+                  :items="companySize"
+                  :rules="[(v) => !!v || 'required']"
+                  item-value="id"
+                  dense
+                  outlined
+                  v-model="company.company_size"
+                  background-color="white"
                 ></v-select>
               </div>
             </v-col>
@@ -112,17 +130,17 @@
             <v-col cols="12" md="6" lg="6">
               <p>Company Contact Number</p>
               <vue-tel-input-vuetify
-                  outlined
-                  dense
-                  single-line
-                  v-model="company.company_mobile_number"
-                  :rules="[v=>!!v||'required']"
-                  @validate="validate"
-                  :required="true"
-                  background-color="white"
-                  :validCharactersOnly="true"
-                  inputClasses="vTelInput"
-                  type="number"
+                outlined
+                dense
+                single-line
+                v-model="company.company_mobile_number"
+                :rules="[(v) => !!v || 'required']"
+                @validate="validate"
+                :required="true"
+                background-color="white"
+                :validCharactersOnly="true"
+                inputClasses="vTelInput"
+                type="number"
               ></vue-tel-input-vuetify>
             </v-col>
           </v-row>
@@ -130,27 +148,27 @@
             <v-col cols="12" md="6" lg="6">
               <p>Company Email</p>
               <v-text-field
-                  :rules="[v=>!!v||'required']"
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Company Email"
-                  outlined
-                  dense
-                  v-model="company.company_email"
-                  type="email"
+                :rules="fieldRulesProp(true, 'email', 'Email')"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Company Email"
+                outlined
+                dense
+                v-model="company.company_email"
+                type="email"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" lg="6">
               <p>Trade licence</p>
               <v-text-field
-                  :rules="[v=>!!v||'required']"
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Trade License"
-                  outlined
-                  dense
-                  type="text"
-                  v-model="company.trade_license"
+                :rules="[(v) => !!v || 'required']"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Trade License"
+                outlined
+                dense
+                type="text"
+                v-model="company.trade_license"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -158,27 +176,27 @@
             <v-col cols="12" md="6" lg="6">
               <p>Company Address</p>
               <v-text-field
-                  :rules="[v=>!!v||'required']"
-                  v-model="company.company_address"
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Company Address"
-                  outlined
-                  dense
-                  type="text"
+                :rules="[(v) => !!v || 'required']"
+                v-model="company.company_address"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Company Address"
+                outlined
+                dense
+                type="text"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" lg="6">
               <p>Company Location</p>
               <v-text-field
-                  :rules="[v=>!!v||'required']"
-                  v-model="company.company_location"
-                  background-color="white"
-                  class="mb-0"
-                  placeholder="Enter Company Location"
-                  outlined
-                  dense
-                  type="text"
+                :rules="[(v) => !!v || 'required']"
+                v-model="company.company_location"
+                background-color="white"
+                class="mb-0"
+                placeholder="Enter Company Location"
+                outlined
+                dense
+                type="text"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -188,14 +206,14 @@
               <p>About Your Company</p>
               <div>
                 <v-textarea
-                    :rules="[v=>!!v||'required']"
-                    v-model="company.about_us"
-                    background-color="white"
-                    class="mb-0"
-                    hint="max 300 words"
-                    placeholder="Write About Your Company"
-                    outlined
-                    dense
+                  :rules="[(v) => !!v || 'required']"
+                  v-model="company.about_us"
+                  background-color="white"
+                  class="mb-0"
+                  hint="max 300 words"
+                  placeholder="Write About Your Company"
+                  outlined
+                  dense
                 ></v-textarea>
               </div>
             </v-col>
@@ -209,13 +227,13 @@
               <p>Contact Person Name</p>
               <div>
                 <v-text-field
-                    v-model="company.contact_name"
-                    :rules="[v=>!!v||'required']"
-                    background-color="white"
-                    class="mb-0"
-                    placeholder="Enter Contact person"
-                    outlined
-                    dense
+                  v-model="company.contact_name"
+                  :rules="[(v) => !!v || 'required']"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Contact person"
+                  outlined
+                  dense
                 ></v-text-field>
               </div>
             </v-col>
@@ -223,14 +241,14 @@
               <p>Designation</p>
               <div>
                 <v-text-field
-                    background-color="white"
-                    class="mb-0"
-                    placeholder="Enter Designation"
-                    outlined
-                    dense
-                    :rules="[v=>!!v||'required']"
-                    v-model="company.designation"
-                    type="text"
+                  background-color="white"
+                  class="mb-0"
+                  placeholder="Enter Designation"
+                  outlined
+                  dense
+                  :rules="[(v) => !!v || 'required']"
+                  v-model="company.designation"
+                  type="text"
                 ></v-text-field>
               </div>
             </v-col>
@@ -238,17 +256,17 @@
               <p>Contact Person Number</p>
               <div>
                 <vue-tel-input-vuetify
-                    outlined
-                    dense
-                    single-line
-                    v-model="company.phone_number"
-                    :rules="[v=>!!v||'required']"
-                    @validate="validate"
-                    :required="true"
-                    background-color="white"
-                    :validCharactersOnly="true"
-                    inputClasses="vTelInput"
-                    type="number"
+                  outlined
+                  dense
+                  single-line
+                  v-model="company.phone_number"
+                  :rules="[(v) => !!v || 'required']"
+                  @validate="validate"
+                  :required="true"
+                  background-color="white"
+                  :validCharactersOnly="true"
+                  inputClasses="vTelInput"
+                  type="number"
                 ></vue-tel-input-vuetify>
               </div>
             </v-col>
@@ -256,10 +274,17 @@
 
           <div class="text-right">
             <div class="item-2" v-if="paramId">
-              <v-btn  class="white--text" color="green"  @click.stop="updateCompany()">Update</v-btn>
+              <v-btn
+                class="white--text"
+                color="green"
+                @click.stop="updateCompany()"
+                >Update</v-btn
+              >
             </div>
             <div class="item-2" v-else>
-              <v-btn color="#365899" class="white--text" @click.stop="submit()">Save</v-btn>
+              <v-btn color="#365899" class="white--text" @click.stop="submit()"
+                >Save</v-btn
+              >
             </div>
           </div>
         </v-col>
@@ -312,8 +337,8 @@ export default {
   },
   created() {
     if (this.$route.params.id) {
-      this.paramId = this.$route.params.id
-      this.loadingData = true
+      this.paramId = this.$route.params.id;
+      this.loadingData = true;
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -326,17 +351,17 @@ export default {
         data: {},
         headers,
       })
-          .then(response => {
-            console.log("company per id", response.data)
-            this.company = response.data.company
-            this.loading = false
-          })
-          .catch(error => {
-            this.$awn.alert(error.response.status)
-            this.loading = false
-          })
+        .then((response) => {
+          console.log("company per id", response.data);
+          this.company = response.data.company;
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.$awn.alert(error.response.status);
+          this.loading = false;
+        });
     } else {
-      this.paramId = null
+      this.paramId = null;
     }
   },
   methods: {
@@ -344,7 +369,7 @@ export default {
       console.log(fieldName);
       return [(v) => !!v || fieldName + " is required"];
     },
-    validate({number, isValid, country}) {
+    validate({ number, isValid, country }) {
       console.log(number);
       console.log(isValid);
       console.log(country);
@@ -370,88 +395,40 @@ export default {
       if (this.paramId) {
         this.loading = true;
         this.$store
-            .dispatch("callApi", {
-              url: "companies/" + this.paramId,
-              method: "put",
-              data: this.company,
-            })
-            .then((response) => {
-              console.log("company Updated response..", response);
-              this.companyId = response.company.id;
-              this.$awn.success("Updated!");
-              this.uploadPhoto();
-              this.disable = true
-              setTimeout(() => {
-                this.$router.history.push({name: "CompanyList"});
-              }, 1000);
-            })
-      } else {
-        this.$store
-            .dispatch("callApi", {
-              url: "companies/new",
-              method: "post",
-              data: this.company,
-            })
-            .then((response) => {
-              console.log("company create response..", response);
-              this.companyId = response.company.id;
-              this.$awn.success("Updated!");
-              this.uploadPhoto();
-              this.disable = true
-              setTimeout(() => {
-                this.$router.history.push({name: "CompanyList"});
-              }, 1000);
-              /* setTimeout(() => {
-                this.$router.push({ name: "CompanyList" });
-              }, 1000); */
-              // this.$refs.form.reset();
-              //saves the items from the database in the table
-              //  this.items = response.data;
-            })
-            .catch(() => {
-              this.$awn.alert("Failed!");
-              //   this.$awn.alert("Failed");
-            })
-            .finally(() => {
-              this.loading = false;
-              //  this.tableLoading = false;
-            });
-      }
-    },
-    updateCompany() {
-      if (this.paramId) {
-        this.$store
-            .dispatch("callApi", {
-              url: "companies/" + this.paramId,
-              method: "put",
-              data: this.company,
-            })
-            .then((response) => {
-              console.log("company Update response..", response);
-              // this.companyId = response.company.id;
-              this.$awn.success("Updated Successfully!");
-              this.uploadPhoto();
-              setTimeout(() => {
-                this.$router.history.push({name: "CompanyList"});
-              }, 1000);
-            })
-            .catch(() => {
-              this.$awn.alert("Failed!");
-              //   this.$awn.alert("Failed");
-            })
-      }
-    },
-    updateLogo() {
-      this.loading = true;
-      this.$store
           .dispatch("callApi", {
-            url: `companies/${this.companyId}/company-logo`,
+            url: "companies/" + this.paramId,
             method: "put",
-            data: {company_logo: this.companyLogo},
+            data: this.company,
           })
           .then((response) => {
-            console.log(response);
-            this.$awn.success("Logo Updated!");
+            console.log("company Updated response..", response);
+            this.companyId = response.company.id;
+            this.$awn.success("Updated!");
+            this.uploadPhoto();
+            this.disable = true;
+            setTimeout(() => {
+              this.$router.history.push({ name: "CompanyList" });
+            }, 1000);
+          });
+      } else {
+        this.$store
+          .dispatch("callApi", {
+            url: "companies/new",
+            method: "post",
+            data: this.company,
+          })
+          .then((response) => {
+            console.log("company create response..", response);
+            this.companyId = response.company.id;
+            this.$awn.success("Updated!");
+            this.uploadPhoto();
+            this.disable = true;
+            setTimeout(() => {
+              this.$router.history.push({ name: "CompanyList" });
+            }, 1000);
+            /* setTimeout(() => {
+                this.$router.push({ name: "CompanyList" });
+              }, 1000); */
             // this.$refs.form.reset();
             //saves the items from the database in the table
             //  this.items = response.data;
@@ -464,6 +441,54 @@ export default {
             this.loading = false;
             //  this.tableLoading = false;
           });
+      }
+    },
+    updateCompany() {
+      if (this.paramId) {
+        this.$store
+          .dispatch("callApi", {
+            url: "companies/" + this.paramId,
+            method: "put",
+            data: this.company,
+          })
+          .then((response) => {
+            console.log("company Update response..", response);
+            // this.companyId = response.company.id;
+            this.$awn.success("Updated Successfully!");
+            this.uploadPhoto();
+            setTimeout(() => {
+              this.$router.history.push({ name: "CompanyList" });
+            }, 1000);
+          })
+          .catch(() => {
+            this.$awn.alert("Failed!");
+            //   this.$awn.alert("Failed");
+          });
+      }
+    },
+    updateLogo() {
+      this.loading = true;
+      this.$store
+        .dispatch("callApi", {
+          url: `companies/${this.companyId}/company-logo`,
+          method: "put",
+          data: { company_logo: this.companyLogo },
+        })
+        .then((response) => {
+          console.log(response);
+          this.$awn.success("Logo Updated!");
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed!");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.loading = false;
+          //  this.tableLoading = false;
+        });
     },
     uploadPhoto() {
       console.log(this.photo);
@@ -479,30 +504,30 @@ export default {
       data.append("id", this.companyId);
 
       this.$store
-          .dispatch("upload", {
-            url: "company-logo",
-            method: "post",
-            data,
-          })
-          .then((response) => {
-            console.log("file upload response...", response);
-            this.companyLogo = response;
-            this.updateLogo();
-            // this.imageUrl = "https://cdn.vuetifyjs.com/images/cards/server-room.jpg";
-            // this.$refs.form.reset();
-            //saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-          })
-          .catch(() => {
-            this.$awn.alert("Failed! Email/Password doesn't match");
-            //   this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            //  this.tableLoading = false;
-            // this.loadingData = false;
-            this.imageUploadLoading = false;
-          });
+        .dispatch("upload", {
+          url: "company-logo",
+          method: "post",
+          data,
+        })
+        .then((response) => {
+          console.log("file upload response...", response);
+          this.companyLogo = response;
+          this.updateLogo();
+          // this.imageUrl = "https://cdn.vuetifyjs.com/images/cards/server-room.jpg";
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+        })
+        .catch(() => {
+          this.$awn.alert("Failed! Email/Password doesn't match");
+          //   this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+          // this.loadingData = false;
+          this.imageUploadLoading = false;
+        });
     },
   },
 };

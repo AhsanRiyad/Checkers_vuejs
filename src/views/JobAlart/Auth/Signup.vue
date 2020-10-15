@@ -17,7 +17,14 @@
                 <v-col cols="10" md="10" class="col-1 pb-0">
                   <p class="mb-1">Username</p>
                   <v-text-field
-                    :rules="fieldRulesProp(true, 'name', 'name')"
+                    :rules="[
+                      (v) => !!v || 'required',
+                      (v) =>
+                        R.test(
+                          /^[^.|^@|^\s]?[a-zA-Z0-9_-]*[.]*[a-zA-Z0-9_-]+$/,
+                          v
+                        ) || 'Invalid',
+                    ]"
                     class="mb-0 pb-0 mb-0"
                     placeholder="Username"
                     outlined

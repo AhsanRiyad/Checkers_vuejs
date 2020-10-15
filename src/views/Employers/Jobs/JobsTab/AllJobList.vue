@@ -78,9 +78,9 @@
               </td>
               <!--                  <td>{{ job.applicant }}</td>-->
               <!--                  <td class="text-center">{{ job.shortlisted }}</td>-->
-              <td  class="action text-center">
+              <td class="action text-center">
                 <v-btn
-                    v-if="false"
+                  v-if="false"
                   :disabled="isDisabled"
                   class="interactn c-grey"
                   icon
@@ -88,7 +88,8 @@
                   <v-icon>mdi-square-edit-outline</v-icon>
                 </v-btn>
                 <!--                    "-->
-                <v-btn v-if="false"
+                <v-btn
+                  v-if="false"
                   :disabled="isDisabled"
                   class="interactn mr-2 ml-2 c-green"
                   icon
@@ -98,18 +99,17 @@
                 <v-tooltip top>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                        @click="goToJobDetails(job.id)"
-                        class="interactn mr-2 ml-2 c-green"
-                        v-bind="attrs"
-                        v-on="on"
-                        icon
+                      @click="goToJobDetails(job.id)"
+                      class="interactn mr-2 ml-2 c-green"
+                      v-bind="attrs"
+                      v-on="on"
+                      icon
                     >
                       <v-icon>mdi-account-group</v-icon>
                     </v-btn>
                   </template>
                   <span>Applicant List</span>
                 </v-tooltip>
-
               </td>
             </tr>
           </tbody>

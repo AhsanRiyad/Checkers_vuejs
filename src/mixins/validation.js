@@ -1,10 +1,10 @@
-export default{
-    data: function(){
+export default {
+    data: function () {
         return {
 
         }
     },
-    methods:{
+    methods: {
         //form validation rules, working for all pages
         fieldRulesProp(...args) {
             /* this vuex variable is used in allFormInputs, commonMixins, baseTable,
@@ -60,15 +60,50 @@ export default{
                 if (args[0] == true) {
                     return ([
                         v => !!v || args[2] + ' is required',
+                        v => /^(([a-zA-Z]{1,}[\s]?(.)?[\s]?)*)([a-zA-Z]){1,}$/g.test(v) || args[2] + ' is invalid'
                     ]);
                 } else {
                     return ([
                         v => {
                             if (this.R.isNil(v) || this.R.isEmpty(v)) return true;
+                            else if (/^(([a-zA-Z]{1,}[\s]?(.)?[\s]?)*)([a-zA-Z]){1,}$/g.test(v)) return args[2] + ' is invalid';
                         },
                     ]);
                 }
-            } else if (/(price|cost)/g.test(args[1])) {
+            }
+            else if (/(CompanyName)/g.test(args[1])) {
+                if (args[0] == true) {
+                    return ([
+                        v => !!v || args[2] + ' is required',
+                        v => /^(([a-zA-Z()]{1,}[\s]?(.)?[\s]?)*)[a-zA-Z()]{1,}\.?$/gis.test(v) || args[2] + ' is invalid'
+                    ]);
+                } else {
+                    return ([
+                        v => {
+                            if (this.R.isNil(v) || this.R.isEmpty(v)) return true;
+                            else if (/^(([a-zA-Z()]{1,}[\s]?(.)?[\s]?)*)[a-zA-Z()]{1,}\.?$/gis.test(v)) return args[2] + ' is invalid';
+                        },
+                    ]);
+                }
+            }
+            else if (/(BranchName)/g.test(args[1])) {
+                if (args[0] == true) {
+                    return ([
+                        v => !!v || args[2] + ' is required',
+                        v => /^(([0-9a-zA-Z]{1,}[\s]?(.)?[\s]?)*)[a-zA-Z0-9]{1,}/g.test(v) || args[2] + ' is invalid'
+                    ]);
+                } else {
+                    return ([
+                        v => {
+                            if (this.R.isNil(v) || this.R.isEmpty(v)) return true;
+                            else if (/^(([0-9a-zA-Z]{1,}[\s]?(.)?[\s]?)*)[a-zA-Z0-9]{1,}/g.test(v)) return args[2] + ' is invalid';
+                            else return true;
+                        },
+                    ]);
+                }
+            }
+
+            else if (/(price|cost)/g.test(args[1])) {
 
                 if (args[0] == true) {
                     return ([
