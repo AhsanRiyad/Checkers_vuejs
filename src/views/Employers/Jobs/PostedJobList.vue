@@ -87,9 +87,9 @@
                   color="success"
                   :input-value="job.job_status == 1 ? true : false"
                   hide-details
-                  :disabled="job.is_expired"
+                  :disabled="job.is_expired == 1"
                 ></v-switch>
-                <small v-if="job.is_expired" class="red--text"
+                <small v-if="job.is_expired == 1" class="red--text"
                   >Job is expired</small
                 >
               </td>
@@ -97,7 +97,7 @@
               <td class="text-center">{{ job.shortlisted }}</td>
               <td class="action text-center">
                 <v-btn
-                  @click.stop="editJob(job.id)"
+                  @click.stop="()=>editJob(job.id)"
                   id="edit_btn"
                   :disabled="job.job_status == 1 || job.is_expired"
                   class="interactn c-grey"

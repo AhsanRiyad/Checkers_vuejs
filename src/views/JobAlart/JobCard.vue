@@ -200,7 +200,7 @@
                 class="applyNow white--text"
                 color="#365899"
                 v-bind:disabled="isApplied"
-                >Apply Now</v-btn
+                >{{ isApplied ? "Already Appllied" : "Apply Now" }}</v-btn
               >
             </v-card-actions>
 
