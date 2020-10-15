@@ -1,6 +1,6 @@
 <template>
   <div class="posted__list">
-    <v-card flat class="ja__card">
+    <v-card flat class="ja__card pa-lg-6 pa-md-6">
       <!--********** Job activities start **************-->
       <div class="jobActivity">
         <v-row>
@@ -8,7 +8,7 @@
             <h2 class="jaif">Total Companies: <span>{{ totalCompanies }}</span></h2>
           </v-col>
           <v-col cols="12" lg="8" class="text-right">
-            <v-btn link to="/add-companies" color="success">
+            <v-btn class="job_create_btn" link to="/add-companies" color="success">
               <v-icon>mdi-plus</v-icon>
               Create a Company
             </v-btn>
@@ -17,7 +17,7 @@
       </div>
       <!--********** Job activities end **************-->
       <!--********** Job applied table start **************-->
-      <div v-if="!companies.length" class="text-center">
+      <div v-if="!companies.length" class="text-center not-available">
         <h1>Company is not Available</h1>
       </div>
       <div v-else style="overflow-x: auto !important;">
@@ -26,10 +26,7 @@
           <tr class="panel-heading">
             <th>Sl</th>
             <th style=" width:45%;">Company Name</th>
-            <th>
-              <v-icon>mdi-bell-ring</v-icon>
-              Company Status
-            </th>
+            <th>Company Status</th>
             <th class="text-center">Actions</th>
           </tr>
           </thead>
@@ -54,7 +51,7 @@
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn v-bind="attrs" @click="goToJobsList(comp.id)"
-                         v-on="on" class="interactn ml-2 c-green" icon>
+                         v-on="on" class="interactn ml-lg-2 mb-sm-1 mt-sm-1 ml-md-2 c-green" icon>
                     <v-icon>mdi-view-list</v-icon>
                   </v-btn>
                 </template>
@@ -63,7 +60,7 @@
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn @click="goToJobAdd()"
-                         class="interactn  mr-2 ml-2 c-blue"
+                         class="interactn  mr-lg-2 ml-lg-2 mr-md-2 ml-md-2 c-blue"
                          v-bind="attrs"
                          v-on="on"
                          icon
@@ -115,6 +112,7 @@
 
 <script>
 import axios from "axios";
+import "../../../sass/employers/_jobs.scss"
 
 export default {
   name: "CompanyList",

@@ -8,7 +8,7 @@
             <v-icon>mdi-magnify</v-icon>
             search cv bank
           </v-btn>
-          <v-btn link to="/add-job" color="success">
+          <v-btn class="job_create_btn" link to="/add-job" color="success">
             <v-icon>mdi-plus</v-icon>
             Create a job
           </v-btn>

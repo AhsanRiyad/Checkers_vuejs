@@ -3,7 +3,12 @@
 
 .jobsTab {
   border-radius: 0 !important;
-
+.v-card{
+  padding: pxToVw(20);
+  @media (max-width: 959px) {
+    padding: pxToMobVw(15);
+  }
+}
   .v-text-field__details {
     display: none;
   }
@@ -15,6 +20,9 @@
   .v-tab {
     text-transform: capitalize;
     font-size: pxToVw(16);
+    @media (max-width: 959px) {
+      font-size: pxToMobVw(15);
+    }
     font-weight: 700;
   }
 
@@ -37,16 +45,24 @@
       .job_create_btn {
         background-color: #69aa44 !important;
         text-transform: capitalize !important;
-
+        @media (max-width: 959px){
+          padding: pxToMobVw(15);
+        }
         span {
           color: #ffffff !important;
           font-size: pxToVw(12);
           letter-spacing: .02px;
+          @media (max-width: 959px) {
+            font-size: pxToMobVw(12);
+          }
         }
 
         i {
           color: #ffffff !important;
           font-size: pxToVw(15);
+          @media (max-width: 959px) {
+            font-size: pxToMobVw(12);
+          }
         }
       }
 
@@ -72,6 +88,42 @@
 
   .posted__list {
     justify-content: center;
+    .jaif{
+      padding: pxToVw(5) 0 pxToVw(5) 0;
+      color: #69aa44;
+      font-size: pxToVw(20);
+      @media (max-width: 959px){
+        font-size: pxToMobVw(17);
+      }
+      span{
+        font-size: pxToVw(20);
+        padding: pxToVw(3) pxToVw(10) pxToVw(3) pxToVw(10);
+        color: #fff;
+        border-radius: 4px;
+        margin-left: pxToVw(5);
+        @media (max-width: 959px){
+          font-size: pxToMobVw(17);
+          padding: pxToMobVw(2) pxToMobVw(10);
+          margin-left: pxToMobVw(5);
+        }
+      }
+    }
+    .not-available{
+      padding: pxToVw(20);
+      h1{
+        @media (max-width: 959px){
+          font-size: pxToMobVw(20);
+        }
+      }
+      @media (max-width: 959px) {
+        padding: pxToMobVw(20) pxToMobVw(20) pxToMobVw(30) pxToMobVw(20);
+      }
+    }
+    .ja__card{
+      @media (max-width: 959px) {
+        padding: 0 pxToMobVw(20) !important;
+      }
+    }
   }
 }
 
@@ -96,7 +148,7 @@
       font-size: pxToVw(25);
       color: $secondaryColor;
       @media (max-width: 959px) {
-        font-size: pxToMobVw(40);
+        font-size: pxToMobVw(20);
       }
     }
   }
@@ -112,11 +164,17 @@
 
   .tab_contain {
     padding: pxToVw(20) pxToVw(45) pxToVw(0) pxToVw(45) !important;
+    @media (max-width: 959px) {
+      padding: pxToMobVw(15) pxToMobVw(35) 0 pxToMobVw(35) !important;
+    }
   }
 
   .top_section_card {
     background-color: #d9d9d9;
     padding: pxToVw(40) pxToVw(40);
+    @media (max-width: 959px) {
+      padding: pxToMobVw(20);
+    }
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -126,6 +184,9 @@
       .job_title {
         text-transform: capitalize;
         font-size: pxToVw(30);
+        @media (max-width: 959px)  {
+          font-size: pxToMobVw(25);
+        }
       }
     }
 
@@ -136,6 +197,9 @@
       .v-btn, .v-icon {
         color: #ffffff !important;
         font-size: pxToVw(14);
+        @media (max-width: 959px){
+          font-size: pxToMobVw(12);
+        }
       }
     }
   }
@@ -146,27 +210,48 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    @media (max-width: 959px){
+      padding: pxToMobVw(20) pxToMobVw(20);
+    }
 
     .jd_border {
       border: 2px solid #E0E0E0;
       padding: pxToVw(20) !important;
       height: pxToVw(150);
       align-items: center;
+      @media (max-width: 959px){
+        padding: pxToMobVw(0) !important;
+        height: pxToMobVw(100);
+      }
     }
 
     .jd_left_card {
       .jd_list {
         margin: 0 pxToVw(15);
         text-align: center;
+        @media (max-width: 959px){
+          margin: 0 pxToMobVw(10) 0 pxToMobVw(10);
+        }
 
         .jd_status {
           font-size: pxToVw(18);
+          @media (max-width: 959px){
+            font-size: pxToMobVw(15);
+          }
         }
-
+        .v-icon {
+          font-size: pxToVw(35) !important;
+          @media (max-width: 959px){
+            font-size: pxToMobVw(12) !important;
+          }
+        }
         .jd_title {
           text-transform: capitalize;
           font-size: pxToVw(22);
           font-weight: 700;
+          @media (max-width: 959px){
+            font-size: pxToMobVw(15);
+          }
         }
       }
     }
@@ -175,6 +260,9 @@
       .jd_list {
         text-align: center;
         margin: 0 pxToVw(15);
+        @media (max-width: 959px){
+          margin: 0 pxToMobVw(10) 0 pxToMobVw(10);
+        }
 
         .jd_status {
           font-weight: 700;
@@ -183,11 +271,16 @@
         .jd_status, .jd_title {
           text-transform: uppercase;
           font-size: pxToVw(20) !important;
+          @media (max-width: 959px){
+            font-size: pxToMobVw(15) !important;
+          }
         }
 
         .v-icon {
           font-size: pxToVw(35) !important;
-
+          @media (max-width: 959px){
+            font-size: pxToMobVw(12) !important;
+          }
         }
       }
     }
@@ -201,6 +294,9 @@
 
   .job_tab {
     font-size: pxToVw(16) !important;
+    @media (max-width: 959px){
+      font-size: pxToMobVw(15) !important;
+    }
   }
 }
 

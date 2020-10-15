@@ -336,6 +336,8 @@ export default {
     };
   },
   created() {
+    this.companyId = this.$route.params.id;
+
     if (this.$route.params.id) {
       this.paramId = this.$route.params.id;
       this.loadingData = true;

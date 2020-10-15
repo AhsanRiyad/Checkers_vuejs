@@ -33,8 +33,6 @@
         font-size: pxToVw(16);
         height: pxToVw(22);
         padding: pxToVw(0) pxToVw(10) pxToVw(0) pxToVw(10);
-        color: #fff;
-        background-color: #68aa47;
         border-radius: 4px;
         margin-left: pxToVw(5);
         @media (max-width: 959px){
@@ -119,8 +117,8 @@
     .interactn{
       .v-icon{
         font-size: pxToVw(16) !important;
-        @media (max-width: 959px){
-          font-size: pxToMobVw(25) !important;
+        @media (max-width: 959px) {
+          font-size: pxToMobVw(15) !important;
         }
       }
     }

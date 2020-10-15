@@ -1,13 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
+/* import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
 import JobsTab from "@/views/Employers/Jobs/JobsTab";
 import companiesTab from "@/views/Employers/companies/companiesTab";
 import userInfoDetails from "@/views/Employers/companies/UserInfo/userInfoDetails";
 import Contact from "@/views/JobAlart/Footer/Contact";
-import PrivacyPolicy from "@/views/JobAlart/Footer/PrivacyPolicy";
-import FAQSeekers from "@/views/JobAlart/Footer/FAQSeekers";
-import FAQCompany from "@/views/JobAlart/Footer/FAQCompany";
+import PrivacyPolicy from "@/views/JobAlart/Footer/PrivacyPolicy"; */
+
+import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
+import JobsTab from "@/views/Employers/Jobs/JobsTab";
+const companiesTab = () => import("@/views/Employers/companies/companiesTab");
+const userInfoDetails = () => import("@/views/Employers/companies/UserInfo/userInfoDetails");
+const Contact = () =>  import("@/views/JobAlart/Footer/Contact");
+const PrivacyPolicy = () =>  ("@/views/JobAlart/Footer/PrivacyPolicy");
+
+const FAQSeekers = () => import("@/views/JobAlart/Footer/FAQSeekers");
+const FAQCompany = () => import("@/views/JobAlart/Footer/FAQCompany");
+const TermsAndCondition = () => import("@/views/JobAlart/Footer/TermsAndCondition");
 // import login from '@/views/login_registration/Login.vue'
 
 /* import JobCard from '../views/JobAlart/JobCard'
@@ -425,7 +434,7 @@ const router = new VueRouter({
   routes,
   mode: 'history' /*mode: 'hash'*/
 })
-import TermsAndCondition from "@/views/JobAlart/Footer/TermsAndCondition";
+
 import { companyRoutes, guestRoute } from "../data/protectedRoute";
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem("accessToken") == null) {

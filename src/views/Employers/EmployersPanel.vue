@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="2">
+      <v-col cols="12" class="employer_sidenav" md="2">
         <v-card height="100%">
           <v-navigation-drawer width="100%" permanent>
             <v-list-item>
@@ -85,3 +85,10 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.employer_sidenav{
+  @media (max-width: 959px) {
+    display: none
+  }
+}
+</style>

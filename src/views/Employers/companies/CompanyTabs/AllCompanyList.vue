@@ -20,10 +20,7 @@
           <tr class="panel-heading">
             <th>Sl</th>
             <th style=" width:45%;">Company Name</th>
-            <th>
-              <v-icon>mdi-bell-ring</v-icon>
-              Company Status
-            </th>
+            <th>Company Status</th>
             <th class="text-center">Actions</th>
           </tr>
           </thead>
@@ -48,7 +45,7 @@
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn v-bind="attrs" @click="goToJobsList(comp.id)"
-                         v-on="on" class="interactn ml-2 c-green" icon>
+                         v-on="on" class="interactn mb-sm-1 mt-sm-1 ml-lg-2 ml-md-2 c-green" icon>
                     <v-icon>mdi-view-list</v-icon>
                   </v-btn>
                 </template>
@@ -57,7 +54,7 @@
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn @click="goToJobAdd()"
-                         class="interactn  mr-2 ml-2 c-blue"
+                         class="interactn mr-lg-2 ml-lg-2 mr-md-2 ml-md-2 c-blue"
                          v-bind="attrs"
                          v-on="on"
                          icon
