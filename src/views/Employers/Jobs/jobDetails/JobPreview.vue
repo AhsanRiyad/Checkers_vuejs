@@ -1,5 +1,5 @@
 <template>
-  <div class="posted__list" style="padding: 0 50px 30px 50px !important;">
+  <div class="posted__list candidate-details">
     <v-card flat class="ja__card pt-0">
       <div class="applicant-Job-Details">
         <div v-if="jobs">
@@ -78,7 +78,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

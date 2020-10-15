@@ -50,7 +50,7 @@
         </div>
 
         <div class="dr-title-photo mt-5">
-          <v-avatar size="130">
+          <v-avatar class="applicant_img">
             <img
                 :src="this.$store.getters.imageUrl + getResume.biodata.photo"
                 alt="John"
@@ -136,7 +136,7 @@
           <tbody>
           <tr  v-for="n in getResume.qualification"
                :key="n.id">
-            <td>{{ n.exam.title }}</td>
+            <td><p>{{ n.exam.title }}</p></td>
             <td>
               <p v-text="n.institute"></p>
             </td>
@@ -479,7 +479,17 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
+.applicant_img{
+  height: 130px !important;
+  min-width: 130px !important;
+  width: 130px !important;
+@media (max-width: 540px) {
+  height: 60px !important;
+  min-width: 60px !important;
+  width: 60px !important;
+}
+}
 .top-section {
   position: sticky;
   top: 0;

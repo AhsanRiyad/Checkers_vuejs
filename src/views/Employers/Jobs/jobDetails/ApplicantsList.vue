@@ -226,7 +226,7 @@ export default {
 </script>
 <style lang="scss">
 .v-avatar{
- @media (max-width: 959px) {
+ @media (max-width: 540px) {
    height: 60px !important;
    min-width: 60px !important;
    width: 60px !important;

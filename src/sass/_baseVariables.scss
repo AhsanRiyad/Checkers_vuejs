@@ -36,9 +36,12 @@ $mobileLandScape: 'only screen and (orientation: landscape) and (max-width: 767p
 }
 
 @mixin defaultResume-title-text {
-  font-size: 30px;
+  font-size: pxToVw(30) !important;
   color: $titleColor;
   font-weight: bold;
+  @include mobile(){
+    font-size: pxToMobVw(22) !important;
+  }
 }
 
 @mixin desktop() {

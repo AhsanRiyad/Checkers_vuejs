@@ -140,7 +140,7 @@
           </thead>
           <tbody>
             <tr v-for="n in this.resume.payload.qualification" :key="n.id">
-              <td>{{ n.exam.title }}</td>
+              <td><p>{{ n.exam.title }}</p></td>
               <td>
                 <p v-text="n.institute"></p>
               </td>

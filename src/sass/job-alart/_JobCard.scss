@@ -276,6 +276,63 @@
   }
 }
 
+//
+.candidate-details {
+  padding: 0 pxToVw(50) pxToVw(30) pxToVw(50) !important;
+
+  .applicant-Job-Details {
+    .headline {
+      font-size: pxToVw(30) !important;
+      @include tab(){
+        font-size: pxToMobVw(20) !important;
+      }
+    }
+
+    .v-list-item__subtitle {
+      font-size: pxToVw(16);
+      @include tab(){
+        font-size: pxToMobVw(17) !important;
+      }
+    }
+
+    h3 {
+      font-size: pxToVw(18) !important;
+      @include tab(){
+        font-size: pxToMobVw(18) !important;
+      }
+    }
+
+    h4 {
+      font-size: pxToVw(20);
+      @include tab(){
+        font-size: pxToMobVw(20) !important;
+      }
+    }
+
+    h2 {
+      font-size: pxToVw(25);
+      @include tab(){
+        font-size: pxToMobVw(22) !important;
+      }
+    }
+
+    p {
+      font-size: pxToVw(16);
+      @include tab(){
+        font-size: pxToMobVw(16) !important;
+      }
+    }
+
+    ul li {
+      font-size: pxToVw(16);
+      @include tab(){
+        font-size: pxToMobVw(16) !important;
+      }
+    }
+  }
+}
+
+
 //.jobCard_icon {
 //  border: 1px solid #ebebeb;
 //  width: 78px;
@@ -293,3 +350,4 @@
 //  }
 //}
 //expected salry ends
+
