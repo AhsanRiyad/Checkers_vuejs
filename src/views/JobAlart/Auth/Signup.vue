@@ -227,6 +227,7 @@ export default {
           //   this.$awn.success("Successful");
           //   localStorage.setItem("accessToken", response.access_token);
           //   this.$cookies.set("accessToken", response.access_token);
+          this.$awn.success("Successful! Please login");
 
           setTimeout(() => {
             this.$router.history.push({ name: "Signin" });

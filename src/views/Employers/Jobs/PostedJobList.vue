@@ -6,7 +6,9 @@
         <v-row>
           <v-col cols="12" lg="12">
             <div class="d-flex justify-space-between align-center">
-              <p class="jaif mb-0">Total Job: <span>{{totalPostedJobs}}</span></p>
+              <p class="jaif mb-0">
+                Total Job: <span>{{ totalPostedJobs }}</span>
+              </p>
               <v-btn class="job_create_btn" link to="/add-job" color="success">
                 <v-icon>mdi-plus</v-icon>
                 Post a new Job
@@ -81,11 +83,15 @@
               </td>
               <td>
                 <v-switch
-                  @click.stop="() => jobLive(job.id)"
+                  @click.stop="() => jobLive(job)"
                   color="success"
                   :input-value="job.job_status == 1 ? true : false"
                   hide-details
+                  :disabled="job.is_expired"
                 ></v-switch>
+                <small v-if="job.is_expired" class="red--text"
+                  >Job is expired</small
+                >
               </td>
               <td>{{ job.applicant }}</td>
               <td class="text-center">{{ job.shortlisted }}</td>
@@ -93,20 +99,20 @@
                 <v-btn
                   @click.stop="editJob(job.id)"
                   id="edit_btn"
-                  :disabled="job.job_status == 1"
+                  :disabled="job.job_status == 1 || job.is_expired"
                   class="interactn c-grey"
                   icon
                 >
                   <v-icon>mdi-square-edit-outline</v-icon>
                 </v-btn>
-                <v-btn
+                <!--   <v-btn
                   v-if="false"
-                  :disabled="job.job_status == 1"
+                  :disabled="true"
                   class="interactn mr-2 ml-2 c-green"
                   icon
                 >
                   <v-icon>mdi-backup-restore</v-icon>
-                </v-btn>
+                </v-btn> -->
               </td>
             </tr>
           </tbody>
@@ -209,7 +215,7 @@ export default {
       this.$router.history.push({ name: "AddJobs", params: { id: id } });
     },
 
-    jobLive(jobsId) {
+    jobLive(job) {
       // if (event) {
       //   event.preventDefault();
       // }
@@ -226,6 +232,8 @@ export default {
       // if (!this.$refs.is_.is_expired.validate()) return;
       // this.loadingAppliedJob = true;
 
+      // const is_live = job.job_status;
+
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -235,7 +243,7 @@ export default {
       axios({
         method: "put",
         baseURL: this.$store.state.apiBase,
-        url: `jobs/` + jobsId + `/live`,
+        url: `jobs/` + job.id + `/live`,
         data: {
           // is_expired: this.is_expired,
         },
@@ -248,7 +256,8 @@ export default {
             this.$awn.alert("Your job is not lived");
             return;
           }
-          this.$awn.success("Your job have successfully lived!");
+          this.$awn.success("Job status changed!");
+          // is_live ? this.$awn.success("Your job have successfully lived!") : this.$awn.success("Your job have successfully lived!");
           this.getPostedJobs();
         })
         .catch((error) => {
@@ -285,19 +294,19 @@ export default {
 };
 </script>
 <style lang="scss">
-.jaif{
+.jaif {
   padding: pxToVw(5) 0 pxToVw(5) 0;
   color: #69aa44;
   font-size: pxToVw(20) !important;
-  @media (max-width: 959px){
+  @media (max-width: 959px) {
     font-size: pxToMobVw(17) !important;
   }
-  span{
+  span {
     font-size: pxToVw(20) !important;
     padding: pxToVw(3) pxToVw(10) pxToVw(3) pxToVw(10) !important;
     border-radius: 4px;
     margin-left: pxToVw(5) !important;
-    @media (max-width: 959px){
+    @media (max-width: 959px) {
       font-size: pxToMobVw(17);
       padding: pxToMobVw(2) pxToMobVw(10) !important;
       margin-left: pxToMobVw(5) !important;

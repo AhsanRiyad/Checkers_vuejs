@@ -143,10 +143,11 @@
               <v-icon>location_on</v-icon>
               {{ n.job_location }}
             </p>
-            <p class="text--primary">
-              <v-icon>school</v-icon>
-              {{ n.education }}
-            </p>
+            <div class="text--primary">
+              <div v-for="req in n.job_education_req" :key="req.id">
+                <p><v-icon>school</v-icon> {{ req.degre_title }}</p>
+              </div>
+            </div>
             <p class="text--primary">
               <v-icon>payment</v-icon> <b>{{ n.currency_code + " " }} </b>
               {{ n.min_salary_range }} to {{ n.max_salary_range }}
@@ -187,7 +188,7 @@
 
               <v-list-item-avatar size="80" color="grey">
                 <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  :src="$store.getters.imageUrl + JobDescription.company_logo"
                   alt="John"
                 />
               </v-list-item-avatar>
