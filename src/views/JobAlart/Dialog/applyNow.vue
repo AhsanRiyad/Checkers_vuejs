@@ -122,6 +122,7 @@ export default {
 
       if (this.$cookies.get("accessToken") == null) {
         this.$router.history.push("/signin");
+        // this.$router.push({name: 'Signin', params: {id: '1'}})
         return;
       }
 
