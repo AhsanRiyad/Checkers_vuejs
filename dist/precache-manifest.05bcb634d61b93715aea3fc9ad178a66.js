@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/JobAlartLogo.png"
   },
   {
-    "revision": "fb32495042d9016545cf",
+    "revision": "9b7e25669e81f3ec315a",
     "url": "/css/app.32972166.css"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-163ce758.0bc50863.css"
   },
   {
-    "revision": "169057092339f05eab5f",
+    "revision": "7eac5b0ac465da16d950",
     "url": "/css/chunk-197adab8.aad11b7d.css"
   },
   {
@@ -204,12 +204,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/banner.2af6a10e.webp"
   },
   {
-    "revision": "f7b7d6b025522d4a979be17e8d1c7b88",
+    "revision": "b3fc09cdc27e7eacdf0abcb3c6a6e50a",
     "url": "/index.html"
   },
   {
-    "revision": "fb32495042d9016545cf",
-    "url": "/js/app.3f760079.js"
+    "revision": "9b7e25669e81f3ec315a",
+    "url": "/js/app.e9ebf0c2.js"
   },
   {
     "revision": "56e3eefc9db55f6b605b",
@@ -244,8 +244,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/chunk-163ce758.d884093c.js"
   },
   {
-    "revision": "169057092339f05eab5f",
-    "url": "/js/chunk-197adab8.7876321d.js"
+    "revision": "7eac5b0ac465da16d950",
+    "url": "/js/chunk-197adab8.ad9b6f7f.js"
   },
   {
     "revision": "765ccef69927f02f0288",
