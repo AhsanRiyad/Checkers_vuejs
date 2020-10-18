@@ -257,14 +257,19 @@
 }
 
 .jobCard_box {
-  margin: 75px 5px 55px 5px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   border: 1px solid #ebebeb;
   border-radius: 10px;
   background: #fff;
   padding: 0 30px;
   cursor: pointer;
   height: 100%;
-  max-height: 200px;
+  min-height: 180px;
+  @media (max-width: 959px) {
+    margin: 0;
+  }
 }
 
 .jobCard_body {

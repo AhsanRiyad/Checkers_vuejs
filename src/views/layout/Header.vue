@@ -139,7 +139,7 @@
             </router-link>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link v-if="$store.getters.isLoggedIn">
           <v-list-item-icon>
             <router-link to="/biodata">
               <v-icon class="white--text">mdi-account-supervisor-circle</v-icon>

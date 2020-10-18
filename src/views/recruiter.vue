@@ -246,7 +246,7 @@
 
       <div class="clearFix"></div>
     </div>
-    <v-row class="ml-10 mr-10 pl-10 pr-10" id="companyName">
+    <v-row class="ml-lg-10 ml-md-10 mr-lg-10 mr-md-10 pl-lg-10 pl-md-10 pr-lg-10 pr-md-10" id="companyName">
       <v-col
         v-for="reqrCom in recruiterCompanyList"
         :key="reqrCom.id"
@@ -256,7 +256,7 @@
       >
         <div
           @click.stop="() => getDataByCompany(reqrCom.company_name)"
-          class="jobCard_box d-flex align-center"
+          class="jobCard_box"
         >
           <v-avatar size="90">
             <img :src="$store.getters.imageUrl + reqrCom.company_logo" />
