@@ -32,7 +32,7 @@
               </v-col>
               <v-col md="8" cols="8">
                 <v-select
-                  v-model="formData.jobCategory"
+                  v-model="formData.job_category"
                   :rules="fieldRulesProp(true, 'others' , 'others')"
                   item-value="id"
                   item-text="name"
@@ -51,7 +51,7 @@
               </v-col>
               <v-col md="8" cols="8">
                 <v-text-field
-                  v-model="formData.fullName"
+                  v-model="formData.full_name"
                   :rules="fieldRulesProp(true, 'name' , 'name')"
                   dense
                   class="textField"
@@ -83,7 +83,7 @@
               </v-col>
               <v-col md="8" cols="8">
                 <v-text-field
-                  v-model="formData.NameOfAlertedJob"
+                  v-model="formData.name_of_alerted_job"
                   :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
@@ -115,7 +115,7 @@
               </v-col>
               <v-col md="8" cols="8">
                 <v-text-field
-                  v-model="formData.workExperience"
+                  v-model="formData.work_experience"
                   :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
@@ -132,7 +132,7 @@
               </v-col>
               <v-col md="8" cols="8">
                 <v-text-field
-                  v-model="formData.expectedSlary"
+                  v-model="formData.expected_slary"
                   :rules="fieldRulesProp(true, 'others' , 'others')"
                   dense
                   class="textField"
@@ -149,7 +149,7 @@
               </v-col>
               <v-col md="8" cols="8">
                 <v-select
-                  v-model="formData.jobLabelId"
+                  v-model="formData.job_label_id"
                   :rules="fieldRulesProp(true, 'others' , 'others')"
                   item-value="id"
                   item-text="name"
