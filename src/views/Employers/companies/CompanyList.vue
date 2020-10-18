@@ -94,8 +94,8 @@
         </div>
         <!--********** pagination end **************-->
       </div>
-      <!-- loading data  starts-->
-      <v-dialog v-model="loading" hide-overlay persistent width="300">
+      <!-- loadingData data  starts-->
+      <v-dialog v-model="loadingData" hide-overlay persistent width="300">
         <v-card color="primary" dark>
           <v-card-text>
             Loading Data...
@@ -103,7 +103,7 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <!-- loading data  ends-->
+      <!-- loadingData data  ends-->
       <!--********** Job applied table end **************-->
 
     </v-card>
@@ -120,7 +120,7 @@ export default {
     return {
       companies: [],
       length: 0,
-      loading: true,
+      loadingData: true,
       jobId: '',
       pageNo: 1
     }
@@ -135,7 +135,7 @@ export default {
   },
   methods: {
     getCompanies() {
-      this.loading = true
+      this.loadingData = true
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export default {
           .then((response) => {
             console.log("companies", response.data.data);
             this.companies = response.data.data
-            this.loading = false
+            this.loadingData = false
           })
           .catch(() => {
             this.$awn.alert("Failed!");

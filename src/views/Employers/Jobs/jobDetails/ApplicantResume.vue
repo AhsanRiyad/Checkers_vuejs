@@ -4,6 +4,8 @@
       <div class="top-section d-flex justify-space-between align-center">
         <div class="action_btn">
           <v-btn
+              :loading="loadingShortListBtn"
+              :disabled="loadingShortListBtn"
               @click.stop="applicantShortListed"
               small
               class="ml-1 mr-1"
@@ -23,6 +25,8 @@
           </v-btn
           >
           <v-btn
+              :loading="loadingResume"
+              :disabled="loadingResume"
               @click.stop="downloadResume"
               small
               class="ml-1 mr-1"
@@ -45,7 +49,7 @@
           <p class="defaultResume-title-text">
             {{ getResume.biodata.full_name }}
           </p>
-<!--          <p>Mobile: {{ getResume.biodata.mobile_number }}</p>-->
+          <!--          <p>Mobile: {{ getResume.biodata.mobile_number }}</p>-->
           <p>Email: {{ getResume.biodata.contact_email }}</p>
         </div>
 
@@ -89,33 +93,33 @@
       <div class="dr-academic-certificate">
         <p class="dr-title-all">Work Experiences:</p>
 
-<!--        <div class="dr-academic-c-heading">-->
-<!--          <div class="dr-academic-c-heading-item">-->
-<!--            <p class="table-title-dr">Job Title</p>-->
-<!--          </div>-->
-<!--          <div class="dr-academic-c-heading-item">-->
-<!--            <p class="table-title-dr">Company Name</p>-->
-<!--          </div>-->
-<!--          <div class="dr-academic-c-heading-item">-->
-<!--            <p class="table-title-dr">Company Location</p>-->
-<!--          </div>-->
-<!--          <div class="dr-academic-c-heading-item">-->
-<!--            <p class="table-title-dr">Duration</p>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div class="dr-academic-c-heading">-->
+        <!--          <div class="dr-academic-c-heading-item">-->
+        <!--            <p class="table-title-dr">Job Title</p>-->
+        <!--          </div>-->
+        <!--          <div class="dr-academic-c-heading-item">-->
+        <!--            <p class="table-title-dr">Company Name</p>-->
+        <!--          </div>-->
+        <!--          <div class="dr-academic-c-heading-item">-->
+        <!--            <p class="table-title-dr">Company Location</p>-->
+        <!--          </div>-->
+        <!--          <div class="dr-academic-c-heading-item">-->
+        <!--            <p class="table-title-dr">Duration</p>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
         <div class="work_exp" v-for="(n) in  getResume.experiences"
-            :key="n.id"
+             :key="n.id"
         >
-       <div class="exp_list">
-         <p><b>Designation </b> : {{ n.job_title }}</p>
-         <p><b> Compnay Name </b> : {{ n.company_name }}</p>
-         <p><b> Compnay Location </b> : {{ n.company_location }}</p>
-         <p><b> Duration </b> : {{ n.from_date + " to " + n.to_date }}</p>
-         <p>
-           <b> Job Description </b> : <span v-html="n.job_description"></span>
-         </p>
-       </div>
+          <div class="exp_list">
+            <p><b>Designation </b> : {{ n.job_title }}</p>
+            <p><b> Compnay Name </b> : {{ n.company_name }}</p>
+            <p><b> Compnay Location </b> : {{ n.company_location }}</p>
+            <p><b> Duration </b> : {{ n.from_date + " to " + n.to_date }}</p>
+            <p>
+              <b> Job Description </b> : <span v-html="n.job_description"></span>
+            </p>
+          </div>
         </div>
       </div>
       <!-- section-6 ends -->
@@ -134,15 +138,15 @@
           </tr>
           </thead>
           <tbody>
-          <tr  v-for="n in getResume.qualification"
-               :key="n.id">
+          <tr v-for="n in getResume.qualification"
+              :key="n.id">
             <td><p>{{ n.exam.title }}</p></td>
             <td>
               <p v-text="n.institute"></p>
             </td>
-            <td>  <p>{{ n.subject }}</p></td>
-            <td> <p>{{ n.end_year }}</p></td>
-            <td class="action"> <p>{{ n.result }}</p></td>
+            <td><p>{{ n.subject }}</p></td>
+            <td><p>{{ n.end_year }}</p></td>
+            <td class="action"><p>{{ n.result }}</p></td>
           </tr>
           </tbody>
         </table>
@@ -161,17 +165,17 @@
         <p class="dr-title-all">Application Information:</p>
       </div>
 
-    <div class="resume_gap">
-      <div class="dr-application-info">
-        <div class="dr-application-info-1">Looking For</div>
-        <div class="dr-application-info-2 text-capitalize">: {{ getResume.applicationInfo.job_level }}</div>
-      </div>
+      <div class="resume_gap">
+        <div class="dr-application-info">
+          <div class="dr-application-info-1">Looking For</div>
+          <div class="dr-application-info-2 text-capitalize">: {{ getResume.applicationInfo.job_level }}</div>
+        </div>
 
-      <div class="dr-application-info">
-        <div class="dr-application-info-1">Available For</div>
-        <div class="dr-application-info-2">: {{ getResume.applicationInfo.available_for }}</div>
+        <div class="dr-application-info">
+          <div class="dr-application-info-1">Available For</div>
+          <div class="dr-application-info-2">: {{ getResume.applicationInfo.available_for }}</div>
+        </div>
       </div>
-    </div>
       <!-- section-8 ends -->
 
       <!-- section-9 starts -->
@@ -262,7 +266,8 @@
               <v-btn text @click="$refs.form.reset()"> Clear</v-btn>
               <v-spacer></v-spacer>
               <v-btn
-                  :loading="isLoading"
+                  :loading="loading"
+                  :disabled="loading"
                   @click="applicantInterviewCall"
                   class="white--text"
                   color="#365899"
@@ -308,7 +313,9 @@ export default {
           "\n" +
           "You are invited to attend an interview session with us on 3rd July at 5:00 pm.",
       form: false,
-      isLoading: false,
+      loading: false,
+      loadingResume: false,
+      loadingShortListBtn: false,
       // isShortlisted: true,
       rules: {
         email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
@@ -365,6 +372,7 @@ export default {
   },
   methods: {
     downloadResume() {
+      this.loadingResume = true
       console.log("download resume");
       //file download
       this.$store
@@ -375,6 +383,7 @@ export default {
           })
           .then((response) => {
             console.log("login image", response.file);
+            this.loadingResume = false
             let url = `http://3.17.234.251/jobsresume/resumes/public/${
                 response.file
             }?access_token=${this.$cookies.get("accessToken")}`;
@@ -391,6 +400,7 @@ export default {
             // this.$awn.alert("Failed");
           })
           .finally(() => {
+            this.loadingResume = false
           });
     },
     appResume() {
@@ -417,6 +427,7 @@ export default {
           });
     },
     applicantShortListed(event) {
+      this.loadingShortListBtn = true
       if (event) {
         event.preventDefault();
       }
@@ -440,18 +451,23 @@ export default {
             // this.isShortlisted = response.short_list;
             this.$awn.success("Updated Successfully!");
             eventBus.$emit("updateApplicantList");
+            this.loadingShortListBtn = false
           })
           .catch(() => {
             this.$awn.alert("Failed!");
             //   this.$awn.alert("Failed");
-          });
+          })
+          .finally(() => {
+            this.loadingShortListBtn = false
+          })
     },
     applicantInterviewCall(event) {
+      this.loading = true
       if (!this.$refs.form.validate()) return;
       if (event) {
         event.preventDefault();
       }
-      this.isLoading = true
+
       this.$store
           .dispatch("callApi", {
             url: `jobs/${this.$store.getters.job}/${this.userId}/interview-call`,
@@ -462,7 +478,6 @@ export default {
             },
           })
           .then((response) => {
-            this.dialogShowing = true;
             console.log("applicant shortlisted response..", response);
             // this.companyId = response.company.id;
             this.$awn.success("Updated Successfully!");
@@ -473,23 +488,24 @@ export default {
           })
           .finally(() => {
             this.dialog = false;
-            this.isLoading = false
+            this.loading = false
           });
     },
   },
 };
 </script>
 <style lang="scss">
-.applicant_img{
+.applicant_img {
   height: 130px !important;
   min-width: 130px !important;
   width: 130px !important;
-@media (max-width: 540px) {
-  height: 60px !important;
-  min-width: 60px !important;
-  width: 60px !important;
+  @media (max-width: 540px) {
+    height: 60px !important;
+    min-width: 60px !important;
+    width: 60px !important;
+  }
 }
-}
+
 .top-section {
   position: sticky;
   top: 0;

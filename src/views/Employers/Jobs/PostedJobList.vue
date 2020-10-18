@@ -135,7 +135,7 @@ import moment from "moment";
 export default {
   name: "PostedJobList",
   data: () => ({
-    loading: true,
+    loading: false,
     menu1: false,
     menu2: false,
     items: ["viewed", "Not viewed"],
@@ -183,23 +183,18 @@ export default {
           console.log("job list", response.data.items);
           this.postedJobs = response.data.items;
           // this.jobId =this.postedJobs[3]
-          for (let i = 0; i < this.postedJobs.length; i++) {
-            console.log("job index i", i); // returns the numbered index
-            console.log("job index object", this.postedJobs[i]); // returns [Object object]
-            console.log(this.postedJobs[i].id); // returns undefined
-            this.jobId = this.postedJobs[i].id;
-            console.log("id jobssssssssss", this.jobId);
-          }
-
-          // this.orders.find(({ id }) => id === this.orderId)
-          // this.jobId = this.postedJobs.find((job_id) => job_id.id === id);
-          // this.job_status = response.data.items.job_status
+          // for (let i = 0; i < this.postedJobs.length; i++) {
+          //   console.log("job index i", i); // returns the numbered index
+          //   console.log("job index object", this.postedJobs[i]); // returns [Object object]
+          //   console.log(this.postedJobs[i].id); // returns undefined
+          //   this.jobId = this.postedJobs[i].id;
+          //   console.log("id jobssssssssss", this.jobId);
+          // }
           this.loading = false;
           this.length = Math.round(
             response.data.total_count / response.data.num_items_per_page
           );
           console.log("page length", this.length);
-          // setTimeout(() => (this.loading = false), 1000)
         })
         .catch((error) => {
           this.postedJobs = [];
@@ -207,7 +202,7 @@ export default {
           console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
         })
         .finally(() => {
-          this.modalSkeleton = false;
+          this.loading = false;
           if (this.postedJobs.length === 0) this.ShowAlertMsg = true;
         });
     },
@@ -216,6 +211,20 @@ export default {
     },
 
     jobLive(job) {
+      let onOk = () => {this.jobLiveConfirm(job)};
+      let onCancel = () => {this.$awn.info('You pressed Cancel')};
+      this.$awn.confirm(
+          'want to live this job?',
+          onOk,
+          onCancel,
+          {
+            labels: {
+              confirm: 'Are You Sure'
+            }
+          }
+      )
+    },
+    jobLiveConfirm(job){
       // if (event) {
       //   event.preventDefault();
       // }
@@ -249,40 +258,40 @@ export default {
         },
         headers,
       })
-        .then((response) => {
-          console.log(response);
-          if (response.status == 206) {
-            this.$router.history.push("/subscription");
-            this.$awn.alert("Your job is not lived");
-            return;
-          }
-          this.$awn.success("Job status changed!");
-          // is_live ? this.$awn.success("Your job have successfully lived!") : this.$awn.success("Your job have successfully lived!");
-          this.getPostedJobs();
-        })
-        .catch((error) => {
-          console.log(error);
-          this.$awn.alert("Failed!");
-          if (error.response.status == 409) {
+          .then((response) => {
+            console.log(response);
+            if (response.status == 206) {
+              this.$router.history.push("/subscription");
+              this.$awn.alert("Your job is not lived");
+              return;
+            }
+            this.$awn.success("Job status changed!");
+            // is_live ? this.$awn.success("Your job have successfully lived!") : this.$awn.success("Your job have successfully lived!");
+            this.getPostedJobs();
+          })
+          .catch((error) => {
             console.log(error);
-            this.$awn.alert("This Job already Lived");
-            return;
-          }
-          if (error.response.status == 423) {
-            console.log(error);
-            this.$awn.alert("Your subscribe is not completed");
-            this.$router.history.push("/subscription");
-            return;
-          }
-          // } else if (error.response.status == 423) {
-          //   this.$awn.alert("Your subscribe is not completed");
-          //   this.$router.history.push("/subscription");
-          //   return;
-          // }
-        })
-        .finally(() => {
-          this.loadingAppliedJob = false;
-        });
+            this.$awn.alert("Failed!");
+            if (error.response.status == 409) {
+              console.log(error);
+              this.$awn.alert("This Job already Lived");
+              return;
+            }
+            if (error.response.status == 423) {
+              console.log(error);
+              this.$awn.alert("Your subscribe is not completed");
+              this.$router.history.push("/subscription");
+              return;
+            }
+            // } else if (error.response.status == 423) {
+            //   this.$awn.alert("Your subscribe is not completed");
+            //   this.$router.history.push("/subscription");
+            //   return;
+            // }
+          })
+          .finally(() => {
+            this.loadingAppliedJob = false;
+          });
     },
     getHumanDate: function (date) {
       return moment(date, "YYYY-MM-DD").format("MMM Do YY");

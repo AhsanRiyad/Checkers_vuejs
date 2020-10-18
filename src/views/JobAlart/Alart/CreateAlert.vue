@@ -181,7 +181,7 @@
                 >
               </v-col>
               <v-col v-else md="8" cols="12" class="text-md-right">
-                <v-btn color="primary" block justify="end" @click.stop="submit">CREATE JOB ALERT</v-btn>
+                <v-btn color="primary" block justify="end" :loading="loadingSaveBtn" @click.stop="submit">CREATE JOB ALERT</v-btn>
               </v-col>
             </v-row>
           </v-col>
@@ -230,6 +230,7 @@ export default {
     return {
       drawer: true,
       loading: false,
+      loadingSaveBtn:false,
       items: [
         ["mdi-email", "Inbox"],
         ["mdi-account-supervisor-circle", "Supervisors"],
@@ -283,6 +284,7 @@ export default {
       this.$refs.form.reset()
     },
     submit() {
+      this.loadingSaveBtn = true
       if (!this.$refs.form.validate()) {
         this.$awn.alert("Sorry! Your form is not complete!");
         return;
@@ -301,11 +303,13 @@ export default {
               console.log("company Updated response..", response);
               this.jobAlertId = response.data.id;
               this.$awn.success("Updated!");
+              this.loadingSaveBtn = false
               setTimeout(() => {
                 this.$router.history.push({name: "AlertList"});
               }, 1000);
             });
       } else {
+        this.loadingSaveBtn = true
         this.$store
             .dispatch("callApi", {
               url: "job-alerts/new",
@@ -316,12 +320,13 @@ export default {
               console.log("alert post", response);
               this.$awn.success("Successful");
               this.clearForm()
+              this.loadingSaveBtn = false
             })
             .catch(() => {
               this.$awn.alert("Failed");
             })
             .finally(() => {
-              //  this.tableLoading = false;
+              this.loadingSaveBtn = false
             });
       }
 
