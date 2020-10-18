@@ -19,7 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="" />
+    <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/Alart/AlertList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/CreateAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Alart/CreateAlert.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Header.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,11 +88,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\job alert\job-alert\jobalertfrontend\src\views\JobAlart\Alart" />
       <recent name="D:\job alert\job-alert\jobalertfrontend\src\views\JobAlart\Footer" />
       <recent name="D:\job alert\job-alert\jobalertfrontend\src\views\Employers\companies\UserInfo" />
       <recent name="D:\job alert\job-alert\jobalertfrontend\src\views\Employers\companies" />
       <recent name="D:\job alert\job-alert\jobalertfrontend\src\components" />
-      <recent name="D:\job alert\jobalertfrontend\src\views\Employers\Jobs" />
     </key>
   </component>
   <component name="RunManager">
@@ -214,6 +222,7 @@
       <workItem from="1602652553713" duration="22849000" />
       <workItem from="1602735703880" duration="3725000" />
       <workItem from="1602998198240" duration="1568000" />
+      <workItem from="1603001526816" duration="12943000" />
     </task>
     <servers />
   </component>
@@ -338,9 +347,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601875333783" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602163471222">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603002341397">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602163471222" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603002341397" />
   </component>
 </project>

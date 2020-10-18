@@ -34,7 +34,7 @@ import appliedJobs from "@/views/JobAlart/appliedJobs"; */
 
 const JobCard = () => import('../views/JobAlart/JobCard')
 const SearchJob = () => import('../views/JobAlart/SearchJob')
-const CreateAlert = () => import('../views/JobAlart/CreateAlert')
+const CreateAlert = () => import('../views/JobAlart/Alart/CreateAlert')
 const Signin = () => import('../views/JobAlart/Auth/Signin')
 const Signup = () => import('../views/JobAlart/Auth/Signup')
 const Resume = () => import('../views/JobAlart/Resume/Resume.vue')
@@ -182,6 +182,14 @@ const routes = [
     component: CreateAlert,
     meta: {
       title: 'Create Alert'
+    }
+  },
+  {
+    path: '/my-job-alerts',
+    name: 'AlertList',
+    component: AlertList,
+    meta: {
+      title: 'Alert List'
     }
   },
   {
@@ -436,6 +444,7 @@ const router = new VueRouter({
 })
 
 import { companyRoutes, guestRoute } from "../data/protectedRoute";
+import AlertList from "@/views/JobAlart/Alart/AlertList";
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem("accessToken") == null) {
     if (guestRoute.some(n => n == to.name)) {
