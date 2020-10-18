@@ -3,15 +3,27 @@
     <!-- style="padding-right: 3px; color: white" -->
     <div class="resume-option-tab-containe_signup">
       <div class="resume-option-tab">
-        <div @click.stop="()=>$store.commit( 'registerAs' , 'APPLICANTS' )" :class="`${ $store.getters.registerAs == 'APPLICANTS' ?  active_class: className}`">
+        <div
+          @click.stop="registerAsApplicants"
+          :class="`${
+            $store.getters.registerAs == 'APPLICANTS' ? active_class : className
+          }`"
+        >
           <span>
             <v-icon class="v__icon_1">sports_volleyball</v-icon>
-          </span> Register as Applicants
+          </span>
+          Register as Applicants
         </div>
-        <div  @click.stop="()=>$store.commit( 'registerAs' , 'COMPANY' )" :class="`${ $store.getters.registerAs == 'COMPANY' ?  active_class: className}`">
+        <div
+          @click.stop="registerAsCompany"
+          :class="`${
+            $store.getters.registerAs == 'COMPANY' ? active_class : className
+          }`"
+        >
           <span>
             <v-icon class="v__icon_1">person</v-icon>
-          </span> Register as Company
+          </span>
+          Register as Company
         </div>
       </div>
     </div>
@@ -19,7 +31,6 @@
 </template>
 
 <script>
-
 export default {
   props: ["active"],
   data() {
@@ -28,8 +39,20 @@ export default {
       className: "resume-option-tab__item",
     };
   },
-  computed: {
-    
+  computed: {},
+  methods: {
+    registerAsApplicants() {
+      this.$store.commit("registerAs", "OTHERS");
+      setTimeout(() => {
+        this.$store.commit("registerAs", "APPLICANTS");
+      }, 430);
+    },
+    registerAsCompany() {
+      this.$store.commit("registerAs", "OTHERS");
+      setTimeout(() => {
+        this.$store.commit("registerAs", "COMPANY");
+      }, 430);
+    },
   },
 };
 </script>

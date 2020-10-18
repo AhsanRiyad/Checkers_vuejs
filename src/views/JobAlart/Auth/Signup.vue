@@ -8,128 +8,130 @@
 
             <optionTab />
 
-            <v-card>
-              <v-row justify="center">
-                <p class="text-center mb-n12 mt-4 header-text">
-                  Create a new account
-                </p>
-
-                <v-col cols="10" md="10" class="col-1 pb-0">
-                  <p class="mb-1">Username</p>
-                  <v-text-field
-                    :rules="[
-                      (v) => !!v || 'required',
-                      (v) =>
-                        R.test(
-                          /^[^.|^@|^\s]?[a-zA-Z0-9_-]*[.]*[a-zA-Z0-9_-]+$/,
-                          v
-                        ) || 'Invalid',
-                    ]"
-                    class="mb-0 pb-0 mb-0"
-                    placeholder="Username"
-                    outlined
-                    dense
-                    v-model="username"
-                    @keyup.enter="submit"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="10" md="10" class="col-2 mb-n4 pb-0">
-                  <p class="mb-1">Email</p>
-                  <v-text-field
-                    :rules="fieldRulesProp(true, 'email', 'email')"
-                    class="mb-0 pb-0 mb-0"
-                    placeholder="Email"
-                    outlined
-                    dense
-                    v-model="email"
-                    @keyup.enter="submit"
-                  ></v-text-field>
-                  <p class="smallText mt-n3">
-                    We will never share your email with anyone
+            <transition name="fade" mode="out-in" appear>
+              <v-card v-show="$store.getters.registerAs == 'APPLICANTS' || $store.getters.registerAs == 'COMPANY'">
+                <v-row justify="center">
+                  <p class="text-center mb-n12 mt-4 header-text">
+                    Create a new account
                   </p>
-                </v-col>
 
-                <v-col cols="10" md="10" class="col-2 mb-0 pb-0">
-                  <p class="mb-1">Password</p>
-                  <v-text-field
-                    class="mb-0"
-                    :rules="fieldRulesProp(true, 'password', 'password')"
-                    placeholder="Password"
-                    outlined
-                    v-model="password"
-                    dense
-                    type="password"
-                    @keyup.enter="submit"
-                  ></v-text-field>
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: flex-start;
-                      margin-top: -15px;
-                      margin-bottom: -20px;
-                    "
-                  >
-                    <v-checkbox v-model="toc">
-                      <div slot="label">
-                        I agree with the
-                        <span style="color: #365899" @click.stop="tocView">
-                          Terms and Conditions</span
-                        >
-                      </div>
-                    </v-checkbox>
-                  </div>
-                </v-col>
+                  <v-col cols="10" md="10" class="col-1 pb-0">
+                    <p class="mb-1">Username</p>
+                    <v-text-field
+                      :rules="[
+                        (v) => !!v || 'required',
+                        (v) =>
+                          R.test(
+                            /^[^.|^@|^\s]?[a-zA-Z0-9_-]*[.]*[a-zA-Z0-9_-]+$/,
+                            v
+                          ) || 'Invalid',
+                      ]"
+                      class="mb-0 pb-0 mb-0"
+                      placeholder="Username"
+                      outlined
+                      dense
+                      v-model="username"
+                      @keyup.enter="submit"
+                    ></v-text-field>
+                  </v-col>
 
-                <v-col cols="10" md="10" class="col-3">
-                  <v-btn
-                    :loading="loading"
-                    block
-                    color="primary"
-                    class="white--text"
-                    :disabled="!toc"
-                    @click.stop="submit"
-                    >Signup</v-btn
-                  >
-                </v-col>
+                  <v-col cols="10" md="10" class="col-2 mb-n4 pb-0">
+                    <p class="mb-1">Email</p>
+                    <v-text-field
+                      :rules="fieldRulesProp(true, 'email', 'email')"
+                      class="mb-0 pb-0 mb-0"
+                      placeholder="Email"
+                      outlined
+                      dense
+                      v-model="email"
+                      @keyup.enter="submit"
+                    ></v-text-field>
+                    <p class="smallText mt-n3">
+                      We will never share your email with anyone
+                    </p>
+                  </v-col>
 
-                <v-col cols="10" md="10">
-                  <v-divider></v-divider>
-                </v-col>
-
-                <v-col cols="10" md="10" class="mb-n6 mt-0">
-                  <div class="text-center">
-                    <router-link :to="{ name: 'Signin' }"
-                      >Already have an account? Signin.</router-link
+                  <v-col cols="10" md="10" class="col-2 mb-0 pb-0">
+                    <p class="mb-1">Password</p>
+                    <v-text-field
+                      class="mb-0"
+                      :rules="fieldRulesProp(true, 'password', 'password')"
+                      placeholder="Password"
+                      outlined
+                      v-model="password"
+                      dense
+                      type="password"
+                      @keyup.enter="submit"
+                    ></v-text-field>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: flex-start;
+                        margin-top: -15px;
+                        margin-bottom: -20px;
+                      "
                     >
-                  </div>
-                </v-col>
+                      <v-checkbox v-model="toc">
+                        <div slot="label">
+                          I agree with the
+                          <span style="color: #365899" @click.stop="tocView">
+                            Terms and Conditions</span
+                          >
+                        </div>
+                      </v-checkbox>
+                    </div>
+                  </v-col>
 
-                <v-col cols="10" md="10" class="mb-n4 mt-0">
-                  <p class="smallText mt-0 mb-0">
-                    All your activity will remain private
-                  </p>
-                </v-col>
+                  <v-col cols="10" md="10" class="col-3">
+                    <v-btn
+                      :loading="loading"
+                      block
+                      color="primary"
+                      class="white--text"
+                      :disabled="!toc"
+                      @click.stop="submit"
+                      >Signup</v-btn
+                    >
+                  </v-col>
 
-                <v-col cols="10" md="10" class="mb-0 mt-0">
-                  <p class="tocText">
-                    By signing in to your account, you agree to JOB ALERT’s
-                    <span style="color: #365899" @click.stop="tocView">
-                      Terms and Conditions</span
-                    >
-                    and consent to our
-                    <span style="color: #365899" @click.stop="tocView">
-                      Cookie Policy</span
-                    >
-                    and
-                    <span style="color: #365899" @click.stop="tocView">
-                      Privacy Policy</span
-                    >
-                    .
-                  </p>
-                </v-col>
-              </v-row>
-            </v-card>
+                  <v-col cols="10" md="10">
+                    <v-divider></v-divider>
+                  </v-col>
+
+                  <v-col cols="10" md="10" class="mb-n6 mt-0">
+                    <div class="text-center">
+                      <router-link :to="{ name: 'Signin' }"
+                        >Already have an account? Signin.</router-link
+                      >
+                    </div>
+                  </v-col>
+
+                  <v-col cols="10" md="10" class="mb-n4 mt-0">
+                    <p class="smallText mt-0 mb-0">
+                      All your activity will remain private
+                    </p>
+                  </v-col>
+
+                  <v-col cols="10" md="10" class="mb-0 mt-0">
+                    <p class="tocText">
+                      By signing in to your account, you agree to JOB ALERT’s
+                      <span style="color: #365899" @click.stop="tocView">
+                        Terms and Conditions</span
+                      >
+                      and consent to our
+                      <span style="color: #365899" @click.stop="tocView">
+                        Cookie Policy</span
+                      >
+                      and
+                      <span style="color: #365899" @click.stop="tocView">
+                        Privacy Policy</span
+                      >
+                      .
+                    </p>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </transition>
           </v-col>
         </v-row>
       </v-form>
@@ -258,7 +260,6 @@ export default {
 };
 </script>
 
-
 <style scoped lang="scss">
 // @import "../../../sass/_baseVariables.scss";
 .col-1 {
@@ -282,5 +283,18 @@ export default {
   font-size: 20px;
   color: #002157;
   font-weight: bold;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

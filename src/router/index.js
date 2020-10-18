@@ -7,8 +7,8 @@ import userInfoDetails from "@/views/Employers/companies/UserInfo/userInfoDetail
 import Contact from "@/views/JobAlart/Footer/Contact";
 import PrivacyPolicy from "@/views/JobAlart/Footer/PrivacyPolicy"; */
 
-import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
-import JobsTab from "@/views/Employers/Jobs/JobsTab";
+const AllJobList = () => import("@/views/Employers/Jobs/JobsTab/AllJobList");
+const JobsTab = () =>  import("@/views/Employers/Jobs/JobsTab");
 const companiesTab = () => import("@/views/Employers/companies/companiesTab");
 const userInfoDetails = () => import("@/views/Employers/companies/UserInfo/userInfoDetails");
 const Contact = () =>  import("@/views/JobAlart/Footer/Contact");
