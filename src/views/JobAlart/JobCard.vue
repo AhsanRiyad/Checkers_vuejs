@@ -418,7 +418,6 @@ export default {
         // height: "100%",
         transition: "top 0.1s",
       },
-
       JobDescriptionStyle: {
         paddingLeft: "10px",
         paddingRight: "10px",
@@ -429,7 +428,6 @@ export default {
         height: "30px",
         // overflowY: "visible",
       },
-
       firstContainer: {
         background: "white",
         // height: "calc( 100% - 190px )",
@@ -453,7 +451,11 @@ export default {
       if (!this.$refs.expectedSalary.validate()) return;
 
       if (this.$cookies.get("accessToken") == null) {
-        this.$router.history.push("/signin");
+        // this.$router.history.push("/signin");
+        this.$router.push({
+          name: "Signin",
+          params: { jobId: this.jobId.id, q: this.search },
+        });
         return;
       }
 
@@ -511,6 +513,7 @@ export default {
       console.log("dd", n);
       this.skeletonJobDetails = true;
 
+      console.log("job detials.. from commit", n);
       //this is for mobile device
 
       this.$store.commit("jobDetailsSearch", n);
@@ -667,7 +670,7 @@ export default {
       this.skeleton = true;
 
       let url = "search";
-      this.$router.push("/search?q=" + this.search);
+      
 
       if (this.$store.getters.isLoggedIn) url = "job-search";
 
@@ -703,12 +706,23 @@ export default {
           //  this.items = response.data;
           this.skeleton = false;
           this.ShowAlertMsg = false;
+
+          console.log("the the saveDetails... api");
+          console.log(this.$route);
+          if (
+            this.$route.query.jobId != undefined &&
+            this.$route.query.jobId != null
+          ) {
+            console.log("the the saveDetails... api2");
+            this.saveDetails(this.$store.getters.jobDetailsSearch);
+          }
         })
         .catch(() => {
           this.Jobs = [];
           this.$awn.alert("Failed");
         })
         .finally(() => {
+          this.$router.push("/search?q=" + this.search);
           this.loading = false;
           this.skeleton = false;
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
@@ -736,9 +750,7 @@ export default {
     this.observer.disconnect();
   },
   mounted() {
-    this.$nextTick().then(function () {
-      // DOM updated
-    });
+    console.log("route... in the search", this.$route);
 
     this.observer.observe(this.$el);
     this.pageNo = 1;

@@ -162,6 +162,11 @@
               <v-list-item-title class="white--text">My Jobs</v-list-item-title>
             </router-link>
           </v-list-item-content>
+          <v-list-item-content>
+            <router-link to="/applied-jobs">
+              <v-list-item-title class="white--text">My JobAlert</v-list-item-title>
+            </router-link>
+          </v-list-item-content>
         </v-list-item>
         <v-list-item link v-if="$store.getters.isLoggedIn">
           <v-list-item-icon>
@@ -233,6 +238,7 @@ export default {
       menus: [
         ["mdi-account-settings-outline", "Account", "/account-settings"],
         ["mdi-account-supervisor-circle", "My Jobs", "/applied-jobs"],
+        ["mdi-account-supervisor-circle", "My JobAlert", "/"],
         // ["mdi-clock-start", "Profile", "/"],
       ],
     };

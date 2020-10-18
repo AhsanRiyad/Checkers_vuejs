@@ -165,7 +165,18 @@ export default {
           this.homePageUrl = response.home_page_url;
 
           setTimeout(() => {
-            if (response.is_company) {
+            if (
+              this.$route.params.jobId != undefined &&
+              this.$route.params.jobId != null
+            ) {
+              this.$router.push({
+                path:
+                  "/search?q=" +
+                  this.$route.params.q +
+                  "&jobId=" +
+                  this.$route.params.jobId,
+              });
+            } else if (response.is_company) {
               this.$router.history.push({ name: "userInfo" });
             } else {
               this.$router.history.push({ name: "biodata" });
@@ -189,6 +200,8 @@ export default {
     },
   },
   mounted() {
+    console.log("route...", this.$route);
+
     // this.$cookies.set("accessToken", null);
 
     // console.log("cookies", this.$cookies.get("accessToken"));
