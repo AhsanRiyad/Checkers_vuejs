@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import "../../../sass/employers/_jobs.scss"
 import axios from "axios";
 
 export default {

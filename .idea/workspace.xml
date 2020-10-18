@@ -20,13 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/JobAlart/Alart/AlertList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/CreateAlert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Alart/CreateAlert.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/LandingPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Alart/AlertList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Alart/AlertList.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +216,7 @@
       <workItem from="1602652553713" duration="22849000" />
       <workItem from="1602735703880" duration="3725000" />
       <workItem from="1602998198240" duration="1568000" />
-      <workItem from="1603001526816" duration="13021000" />
+      <workItem from="1603001526816" duration="13358000" />
     </task>
     <servers />
   </component>
