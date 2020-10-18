@@ -144,8 +144,10 @@
               {{ n.job_location }}
             </p>
             <div class="text--primary">
-              <div v-for="req in n.job_education_req" :key="req.id">
-                <p><v-icon>school</v-icon> {{ req.degre_title }}</p>
+              <div v-for="(req, ind) in n.job_education_req" :key="req.id">
+                <p>
+                  <v-icon v-if="ind == 0">school</v-icon> {{ req.degre_title }}
+                </p>
               </div>
             </div>
             <p class="text--primary">
@@ -670,7 +672,6 @@ export default {
       this.skeleton = true;
 
       let url = "search";
-      
 
       if (this.$store.getters.isLoggedIn) url = "job-search";
 

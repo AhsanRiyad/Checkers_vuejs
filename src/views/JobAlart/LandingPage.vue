@@ -36,13 +36,15 @@ export default {
   },
   watch: {
     $route() {
+     /*  const routesPath = [ "/" , "/signin", "/signup", "/forgot-password", "/company-list", "/companies", "/company-list", "/user-info", "/user-details" , "/jobs"  , "/change-password" , "/applied-jobs" ,"/account-settings" , "/change-email"];
+      const routeName = [ "PostedJobList" , "JobDetails" ];  */
+
       console.log("route changed...", this.$route);
-      if (this.$route.path == "/" || this.$route.path == "/signin" || this.$route.path == "/signup" || this.$route.path == "/forgot-password" || this.$route.path == "/company-list" || this.$route.name == "PostedJobList" || this.$route.path == "/companies" || this.$route.path == "/company-list" || this.$route.path == "/user-info" || this.$route.path == "/user-details" || this.$route.path == "/jobs" || this.$route.path == "/change-password" || this.$route.path == "/applied-jobs" || this.$route.path == "/account-settings" || this.$route.name == "JobDetails" || this.$route.path == "/change-email") {
-        this.bodyStyle = {
+      if ( this.$route.name == "search" ) {
+         this.bodyStyle = {
           "background-image":
             "url(" + require("../../assets/background.png") + ")",
           "background-size": "cover",
-          'min-height': "calc(100vh - 250px)",
           display: "block",
         };
       } else {
@@ -50,6 +52,7 @@ export default {
           "background-image":
             "url(" + require("../../assets/background.png") + ")",
           "background-size": "cover",
+          'min-height': "calc(100vh - 250px)",
           display: "block",
         };
       }
