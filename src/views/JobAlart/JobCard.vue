@@ -696,6 +696,7 @@ export default {
           // this.Jobs = [...this.Jobs, ...response.jobs.items];
           this.Jobs = response.data.jobs.items;
           this.jobId = this.JobDescription = this.Jobs[0];
+          this.saveDetails(this.JobDescription);
           this.skeletonJobDetails = false;
           this.length = Math.round(
             response.data.jobs.total_count /

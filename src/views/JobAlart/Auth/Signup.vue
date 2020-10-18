@@ -258,7 +258,6 @@ export default {
 };
 </script>
 
-
 <style scoped lang="scss">
 // @import "../../../sass/_baseVariables.scss";
 .col-1 {
