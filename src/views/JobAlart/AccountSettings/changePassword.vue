@@ -23,7 +23,7 @@
                   class="mb-0 pb-0 mb-0"
                   placeholder="Password"
                   outlined
-                  :counter="6"
+                  :counter="0"
                   dense
                   type="password"
                   v-model="data.password"
@@ -34,7 +34,7 @@
                 <p class="mb-1">New password</p>
                 <v-text-field
                   class="mb-0"
-                  :counter="6"
+                  :counter="0"
                   :rules="[
                     (v) => {
                       if (v != data.password) {

@@ -230,7 +230,10 @@ export default {
       return [(v) => !!v || fieldName + " is required"];
     },
     submit() {
-      if (!this.$refs.form.validate()) return;
+      if (!this.$refs.form.validate()){
+        this.$awn.alert("Sorry! Your form is not complete!");
+        return;
+      }
 
       console.log(this.formData);
 
