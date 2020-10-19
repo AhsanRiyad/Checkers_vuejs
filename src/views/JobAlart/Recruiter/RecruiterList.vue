@@ -39,8 +39,7 @@
       </v-text-field>
     </div>
 
-   
-   <div v-if="skeleton">
+    <div v-if="skeleton">
       <v-skeleton-loader
         v-for="n in 3"
         :key="n"
@@ -49,11 +48,10 @@
       ></v-skeleton-loader>
     </div>
 
-
-
     <v-row
       class="ml-lg-10 ml-md-10 mr-lg-10 mr-md-10 pl-lg-10 pl-md-10 pr-lg-10 pr-md-10"
-      id="companyName" v-else
+      id="companyName"
+      v-else
     >
       <v-col
         v-for="reqrCom in recruiterCompanyList"
@@ -84,9 +82,6 @@
         </div>
       </v-col>
     </v-row>
-
-
-
   </div>
 </template>
 
@@ -399,18 +394,8 @@ export default {
       }
     },
     getDataByCompany(name) {
-      this.search = name;
-      if (this.$store.getters.userIp == "") {
-        new Promise((resolve, reject) => {
-          this.getIp(resolve, reject);
-        }).then(() => {
-          //document.getElementById('companyName').style.display="none"
-          this.getSearchData();
-        });
-      } else {
-        this.getSearchData();
-        // document.getElementById('companyName').style.display="none"
-      }
+      console.log(name);
+      this.$router.history.push("/recruitersJob?q=" + name);
     },
     getSearchData() {
       this.loading = true;

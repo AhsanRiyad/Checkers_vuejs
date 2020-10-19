@@ -68,6 +68,7 @@ const PostedJobList = () => import("@/views/Employers/Jobs/PostedJobList")
 //recruriter
 // const recruiter = () => import("@/views/recruiter");
 const recruiterList = () => import("../views/JobAlart/Recruiter/RecruiterList");
+const recruitersJob = () => import("../views/JobAlart/Recruiter/RecruitersJob");
 
 
 //footer
@@ -324,6 +325,15 @@ const routes = [
     path: '/recruiter',
     name: 'recruiter',
     component: recruiterList,
+    meta: {
+      title: 'recruiter'
+    }
+  },
+
+  {
+    path: '/recruitersJob',
+    name: 'recruitersJob',
+    component: recruitersJob,
     meta: {
       title: 'recruiter'
     }
