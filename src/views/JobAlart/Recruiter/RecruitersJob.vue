@@ -1,29 +1,78 @@
 <template>
-  <div id="mainDocs">
+  <div class="jobcard-first-container" id="mainDocs">
+    <div class="searchText">
+      <div class="searchText-pagination-jobcard">
+        <div>
+          <h1>Search Result</h1>
+        </div>
+
+        <div>
+          <v-pagination v-model="pageNo" :length="length"></v-pagination>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="skeleton">
+      <v-skeleton-loader
+        v-for="n in 3"
+        :key="n"
+        class="loader"
+        type="card"
+      ></v-skeleton-loader>
+    </div>
+
+    <div class="alertMsg" v-else-if="ShowAlertMsg">
+      <v-text-field
+        @keyup.enter="getData"
+        dense
+        solo
+        label="Search"
+        prepend-inner-icon="search"
+        v-model="search"
+      >
+        <template v-slot:append-outer>
+          <v-btn
+            tile
+            class="white--text"
+            style="
+              height: 40px;
+              margin-top: -8px;
+              margin-bottom: 0;
+              margin-left: -8px;
+              background: rgb(54, 88, 153);
+            "
+            @click.stop="getData"
+            >Search</v-btn
+          >
+        </template>
+      </v-text-field>
+      <v-alert type="error">Sorry, No Jobs Found with this Keyword</v-alert>
+    </div>
+
     <div v-else>
       <div :style="filterFixedPosition" class="filterFixedPosition">
         <div class="job-search-job-card">
           <v-text-field
-              @keyup.enter="getData"
-              dense
-              solo
-              label="Search"
-              prepend-inner-icon="search"
-              v-model="search"
+            @keyup.enter="getData"
+            dense
+            solo
+            label="Search"
+            prepend-inner-icon="search"
+            v-model="search"
           >
             <template v-slot:append-outer>
               <v-btn
-                  tile
-                  class="white--text"
-                  style="
+                tile
+                class="white--text"
+                style="
                   height: 40px;
                   margin-top: -8px;
                   margin-bottom: 0;
                   margin-left: -8px;
                   background: rgb(54, 88, 153);
                 "
-                  @click.stop="getData"
-              >Search</v-btn
+                @click.stop="getData"
+                >Search</v-btn
               >
             </template>
           </v-text-field>
@@ -80,13 +129,13 @@
 
       <div class="searchResults" ref="searchResults">
         <v-card
-            class="mx-auto searchResults-text"
-            v-for="(n, i) in Jobs"
-            :key="i"
+          class="mx-auto searchResults-text"
+          v-for="(n, i) in Jobs"
+          :key="i"
         >
           <v-card-text
-              @click.stop="() => saveDetails(n)"
-              class="job-card-job-search"
+            @click.stop="() => saveDetails(n)"
+            class="job-card-job-search"
           >
             <h2 style="color: green" class="mb-2" v-text="n.job_title"></h2>
             <h4 v-text="n.company_name"></h4>
@@ -94,10 +143,13 @@
               <v-icon>location_on</v-icon>
               {{ n.job_location }}
             </p>
-            <p class="text--primary">
-              <v-icon>school</v-icon>
-              {{ n.education }}
-            </p>
+            <div class="text--primary">
+              <div v-for="(req, ind) in n.job_education_req" :key="req.id">
+                <p>
+                  <v-icon v-if="ind == 0">school</v-icon> {{ req.degre_title }}
+                </p>
+              </div>
+            </div>
             <p class="text--primary">
               <v-icon>payment</v-icon> <b>{{ n.currency_code + " " }} </b>
               {{ n.min_salary_range }} to {{ n.max_salary_range }}
@@ -108,14 +160,14 @@
 
       <!-- job details skeleton loader starts -->
       <div
-          :style="jobDetailsLoader"
-          v-if="skeletonJobDetails"
-          class="jobDetails"
+        :style="jobDetailsLoader"
+        v-if="skeletonJobDetails"
+        class="jobDetails"
       >
         <v-skeleton-loader
-            width="100%"
-            class="loader"
-            type="card"
+          width="400"
+          class="loader"
+          type="card"
         ></v-skeleton-loader>
       </div>
       <!-- job details skeleton loader ends -->
@@ -127,8 +179,8 @@
             <v-list-item three-line>
               <v-list-item-content>
                 <v-list-item-title class="headline mb-1">{{
-                    JobDescription.job_title
-                  }}</v-list-item-title>
+                  JobDescription.job_title
+                }}</v-list-item-title>
                 <!-- <v-list-item-subtitle> {{ JobDescription.companyName }} || {{ JobDescription.typeInText }} </v-list-item-subtitle> -->
                 <p>
                   {{ JobDescription.company_name }} ||
@@ -138,19 +190,19 @@
 
               <v-list-item-avatar size="80" color="grey">
                 <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    alt="John"
+                  :src="$store.getters.imageUrl + JobDescription.company_logo"
+                  alt="John"
                 />
               </v-list-item-avatar>
             </v-list-item>
 
             <v-card-actions>
               <v-btn
-                  @click="showModal = true"
-                  class="applyNow white--text"
-                  color="#365899"
-                  v-bind:disabled="isApplied"
-              >Apply Now</v-btn
+                @click="showModal = true"
+                class="applyNow white--text"
+                color="#365899"
+                v-bind:disabled="isApplied"
+                >{{ isApplied ? "Already Appllied" : "Apply Now" }}</v-btn
               >
             </v-card-actions>
 
@@ -197,36 +249,7 @@
 
       <div class="clearFix"></div>
     </div>
-    <v-row class="ml-10 mr-10 pl-10 pr-10" id="companyName">
-      <v-col
-          v-for="reqrCom in recruiterCompanyList"
-          :key="reqrCom.id"
-          cols="12"
-          lg="4"
-          md="4"
-      >
-        <div
-            @click.stop="() => getDataByCompany(reqrCom.company_name)"
-            class="jobCard_box d-flex align-center"
-        >
-          <v-avatar size="90">
-            <img :src="$store.getters.imageUrl + reqrCom.company_logo" />
-          </v-avatar>
-          <div class="jobCard_body">
-            <h4 class="mb-2">
-              <span class="mr-1">Company Name:</span
-              ><span>{{ reqrCom.company_name }}</span>
-            </h4>
-            <p>
-              <span class="mr-2">Location:</span>
-              <span style="text-transform: capitalize">{{
-                  reqrCom.company_location
-                }}</span>
-            </p>
-          </div>
-        </div>
-      </v-col>
-    </v-row>
+
     <!-- job apply modal starts-->
     <job-alert-modal persistent v-if="showModal">
       <div class="d-flex align-center" slot="header">
@@ -245,9 +268,9 @@
         </p>
         <div class="d-flex align-center">
           <v-checkbox
-              v-model="termsAndConditions"
-              label="I have read the above warning message."
-              required
+            v-model="termsAndConditions"
+            label="I have read the above warning message."
+            required
           ></v-checkbox>
           <v-spacer></v-spacer>
         </div>
@@ -258,14 +281,14 @@
             <div class="expectedSalary-job-search__textinput">
               <v-form ref="expectedSalary" v-on:submit.prevent="applyJob">
                 <v-text-field
-                    type="number"
-                    :rules="[(v) => !!v || 'required']"
-                    v-model="expectedSalary"
-                    outlined
-                    dense
-                    solo
-                    placeholder="Salary"
-                    @keyup.enter.stop="applyJob"
+                  type="number"
+                  :rules="[(v) => !!v || 'required']"
+                  v-model="expectedSalary"
+                  outlined
+                  dense
+                  solo
+                  placeholder="Salary"
+                  @keyup.enter.stop="applyJob"
                 ></v-text-field>
               </v-form>
             </div>
@@ -274,14 +297,14 @@
           <div class="expectedSalary-job-search__applybutton">
             <div>
               <v-btn
-                  class="white--text"
-                  color="green"
-                  depressed
-                  link
-                  :disabled="!termsAndConditions"
-                  :loading="loadingAppliedJob"
-                  @click.stop="applyJob"
-              >Apply</v-btn
+                class="white--text"
+                color="green"
+                depressed
+                link
+                :disabled="!termsAndConditions"
+                :loading="loadingAppliedJob"
+                @click.stop="applyJob"
+                >Apply</v-btn
               >
             </div>
           </div>
@@ -303,9 +326,9 @@
         <v-card-text>
           Loading Data...
           <v-progress-linear
-              indeterminate
-              color="white"
-              class="mb-0"
+            indeterminate
+            color="white"
+            class="mb-0"
           ></v-progress-linear>
         </v-card-text>
       </v-card>
@@ -315,16 +338,20 @@
 </template>
 
 <script>
+import "../../../sass/job-alart/_JobCard.scss";
 import axios from "axios";
 import ipMixins from "@/mixins/ipMixins";
 import tokenMixins from "@/mixins/tokenMixins";
 
 export default {
-name: "RecruitersJob",
+  name: "JobCard",
+  components: {
+    JobAlertModal: () => import("@/components/Modal"),
+    JobDetails: () => import("../Dialog/jobDetails"),
+  },
   mixins: [ipMixins, tokenMixins],
   data: () => {
     return {
-      recruiterCompanyList: [],
       Jobs: [],
       loading: false,
       pageNo: 1,
@@ -342,6 +369,9 @@ name: "RecruitersJob",
       showModalSalary: false,
       skeleton: true,
       skeletonJobDetails: true,
+      loadingData: false,
+
+      observer: null,
 
       JobDescription: {
         job_title: "PHP developer",
@@ -362,7 +392,7 @@ name: "RecruitersJob",
         backgroundColor: "#e1e1e1",
         paddingTop: "10px",
       },
-
+      dialogSwitch: false,
       //style for search
       jobDetails: {
         // display: "none",
@@ -390,17 +420,16 @@ name: "RecruitersJob",
         // height: "100%",
         transition: "top 0.1s",
       },
-
       JobDescriptionStyle: {
         paddingLeft: "10px",
         paddingRight: "10px",
         marginTop: "20px",
         // height: "calc( 100vh - 400px )",
-        height: "300px",
+        // minHeight: "400px",
         overflowY: "scroll",
+        height: "30px",
         // overflowY: "visible",
       },
-
       firstContainer: {
         background: "white",
         // height: "calc( 100% - 190px )",
@@ -413,10 +442,10 @@ name: "RecruitersJob",
       return this.jobId.applied == 1 ? true : false;
     },
   },
-  created() {
-    this.getAllCompanyList();
-  },
-  methods:{
+  methods: {
+    myDialogClose() {
+      this.dialogSwitch = false;
+    },
     applyJob(event) {
       if (event) {
         event.preventDefault();
@@ -424,7 +453,11 @@ name: "RecruitersJob",
       if (!this.$refs.expectedSalary.validate()) return;
 
       if (this.$cookies.get("accessToken") == null) {
-        this.$router.history.push("/signin");
+        // this.$router.history.push("/signin");
+        this.$router.push({
+          name: "Signin",
+          params: { jobId: this.jobId.id, q: this.search },
+        });
         return;
       }
 
@@ -445,33 +478,34 @@ name: "RecruitersJob",
         },
         headers,
       })
-          .then((response) => {
-            console.log(response);
+        .then((response) => {
+          console.log(response);
 
-            if (response.status == 206) {
-              this.$router.history.push("/biodata");
-              this.$awn.alert("Your resume is not completed");
-              return;
-            }
-            this.showModal = false;
-            this.$awn.success("You have successfully applied!");
-            this.getData();
-          })
-          .catch((error) => {
-            console.log(error);
+          if (response.status == 206) {
+            this.$router.history.push("/biodata");
+            this.$awn.alert("Your resume is not completed");
+            return;
+          }
+          this.showModal = false;
+          this.$awn.success("You have successfully applied!");
+          this.getData();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$awn.alert("Failed!");
 
-            if (error.response.status == 401) {
-              this.$awn.alert("You are not logged in");
-              this.$router.history.push("/signin");
-            } else if (error.response.status == 404) {
-              this.$awn.alert("Your resume is not completed");
-              this.$router.history.push("/biodata");
-              return;
-            }
-          })
-          .finally(() => {
-            this.loadingAppliedJob = false;
-          });
+          if (error.response.status == 401) {
+            this.$awn.alert("You are not logged in");
+            this.$router.history.push("/signin");
+          } else if (error.response.status == 404) {
+            this.$awn.alert("Your resume is not completed");
+            this.$router.history.push("/biodata");
+            return;
+          }
+        })
+        .finally(() => {
+          this.loadingAppliedJob = false;
+        });
     },
     showModalExpectedSalary() {
       this.showModal = false;
@@ -481,7 +515,16 @@ name: "RecruitersJob",
       console.log("dd", n);
       this.skeletonJobDetails = true;
 
+      console.log("job detials.. from commit", n);
+      //this is for mobile device
+
+      this.$store.commit("jobDetailsSearch", n);
+
       this.jobId = n;
+
+      if (window.innerWidth < 900) {
+        this.loadingData = true;
+      }
 
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
@@ -493,32 +536,38 @@ name: "RecruitersJob",
         url: "jobs/" + n.id,
         method: "get",
         data: {},
-        baseURL: this.$store.state.apiBase,
         headers,
+        baseURL: this.$store.state.apiBase,
       })
-          .then((response) => {
-            console.log("details list in the", response.data.data.jobs);
-            this.JobDescription = response.data.data.jobs;
-            // this.$refs.form.reset();
-            //saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-            this.skeleton = false;
-          })
-          .catch((error) => {
-            this.$awn.alert("Failed");
-            console.log("eror..", error.response);
-          })
-          .finally(() => {
-            //  this.tableLoading = false;
-            this.skeletonJobDetails = false;
-          });
+        .then((response) => {
+          console.log("details list in the", response.data.data.jobs);
+          this.JobDescription = response.data.data.jobs;
+          this.$store.commit("jobDetails", this.JobDescription);
+
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          if (window.innerWidth < 900) {
+            this.dialogSwitch = true;
+          }
+          this.skeleton = false;
+        })
+        .catch((error) => {
+          this.$awn.alert("Failed");
+          console.log("eror..", error.response);
+        })
+        .finally(() => {
+          //  this.tableLoading = false;
+          this.skeletonJobDetails = false;
+          this.loadingData = false;
+        });
     },
     onScroll() {
       // if (window.innerHeight)
-      /*
+      /* 
       this.JobDescriptionStyle.height =
-        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; 
       */
 
       console.log("pixel ratio ", window.devicePixelRatio);
@@ -561,17 +610,17 @@ name: "RecruitersJob",
       }
 
       this.JobDescriptionStyle.height =
-          screen.availHeight - spaceGap - window.scrollY + "px";
+        screen.availHeight - spaceGap - window.scrollY + "px";
 
       // this.JobDescriptionStyle.height = "100px";
 
       console.log(
-          "screen available height.......",
-          screen.availHeight - 400 - window.scrollY + "px"
+        "screen available height.......",
+        screen.availHeight - 400 - window.scrollY + "px"
       );
       console.log(
-          "document available height.......",
-          document.querySelector("#mainDocs").scrollHeight
+        "document available height.......",
+        document.querySelector("#mainDocs").scrollHeight
       );
       console.log("scroll Y.......", window.scrollY);
       console.log("inner height.......", window.innerHeight);
@@ -588,13 +637,34 @@ name: "RecruitersJob",
         new Promise((resolve, reject) => {
           this.getIp(resolve, reject);
         }).then(() => {
-          //document.getElementById('companyName').style.display="none"
           this.getSearchData();
         });
       } else {
         this.getSearchData();
-        // document.getElementById('companyName').style.display="none"
       }
+    },
+    onElementObserved(entries) {
+      console.log("refs...", this.$refs);
+      console.log("entries....", entries);
+      entries.forEach(({ target, isIntersecting }) => {
+        /* if (!isIntersecting) {
+          return;
+        } */
+
+        // this.observer.unobserve(target);
+
+        console.log("intersection key", target.getAttribute("key"));
+
+        setTimeout(() => {
+          const i = target.getAttribute("key");
+          console.log("target key....", i);
+        }, 1000);
+
+        // do something ...
+        console.log("observed");
+        console.log("target ... ", target);
+        console.log("isIntersecting ... ", isIntersecting);
+      });
     },
     getSearchData() {
       this.loading = true;
@@ -603,7 +673,7 @@ name: "RecruitersJob",
 
       let url = "search";
 
-      if (this.$store.getters.isLoggedIn) url = "job-search";
+      // if (this.$store.getters.isLoggedIn) url = "job-search";
 
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
@@ -621,46 +691,73 @@ name: "RecruitersJob",
         },
         headers,
       })
-          .then((response) => {
-            console.log("job list....", response);
-            // this.Jobs = [...this.Jobs, ...response.jobs.items];
-            this.Jobs = response.data.items;
-            this.jobId = this.JobDescription = this.Jobs[0];
-            this.skeletonJobDetails = false;
-            this.length = Math.round(
-                response.data.total_count / response.data.num_items_per_page
-            );
-            // this.$refs.form.reset();
-            //saves the items from the database in the table
-            //  console.log(response);
-            //  this.items = response.data;
-            this.skeleton = false;
-            this.ShowAlertMsg = false;
-          })
-          .catch(() => {
-            this.Jobs = [];
-            // this.$awn.alert("Failed");
-          })
-          .finally(() => {
-            this.loading = false;
-            this.skeleton = false;
-            if (this.Jobs.length === 0) this.ShowAlertMsg = true;
-            //  this.tableLoading = false;
-            // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
-            this.JobDescriptionStyle.height =
-                screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
-            console.log(
-                "window availheight.....",
-                document.querySelector("#mainDocs").scrollHeight
-            );
-            //alert(this.search)
-            if (this.search != undefined) {
-              document.getElementById("companyName").style.display = "none";
-            }
-          });
+        .then((response) => {
+          console.log("job list....", response);
+          // this.Jobs = [...this.Jobs, ...response.jobs.items];
+          this.Jobs = response.data.items;
+          this.jobId = this.JobDescription = this.Jobs[0];
+
+          if (window.innerWidth > 960) {
+            this.saveDetails(this.JobDescription);
+          }
+          this.skeletonJobDetails = false;
+          this.length = Math.round(
+            response.data.total_count /
+              response.data.num_items_per_page
+          );
+          // this.$refs.form.reset();
+          //saves the items from the database in the table
+          //  console.log(response);
+          //  this.items = response.data;
+          this.skeleton = false;
+          this.ShowAlertMsg = false;
+
+          console.log("the the saveDetails... api");
+          console.log(this.$route);
+          if (
+            this.$route.query.jobId != undefined &&
+            this.$route.query.jobId != null
+          ) {
+            console.log("the the saveDetails... api2");
+            this.saveDetails(this.$store.getters.jobDetailsSearch);
+          }
+        })
+        .catch(() => {
+          this.Jobs = [];
+          // this.$awn.alert("Failed");
+        })
+        .finally(() => {
+          this.$router.push("/recruitersJob?q=" + this.search);
+          this.loading = false;
+          this.skeleton = false;
+          if (this.Jobs.length === 0) this.ShowAlertMsg = true;
+          //  this.tableLoading = false;
+          // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
+          this.JobDescriptionStyle.height =
+            screen.availHeight - 48 - 64 - 140 - window.scrollY + "px";
+          console.log(
+            "window availheight.....",
+            document.querySelector("#mainDocs").scrollHeight
+          );
+        });
     },
   },
+  created() {
+    this.$nextTick().then(function () {
+      // DOM updated
+    });
+    this.observer = new IntersectionObserver(this.onElementObserved, {
+      root: this.$el,
+      threshold: 1.0,
+    });
+  },
+  beforeDestroy() {
+    this.observer.disconnect();
+  },
   mounted() {
+    console.log("route... in the search", this.$route);
+
+    this.observer.observe(this.$el);
     this.pageNo = 1;
     window.addEventListener("scroll", this.onScroll);
     this.screenHeight = screen.availHeight;
@@ -683,10 +780,9 @@ name: "RecruitersJob",
     pageNo() {
       this.getData();
     },
+    dialogSwitch(nVal) {
+      if (nVal == false) this.getData();
+    },
   },
-}
+};
 </script>
-
-<style scoped>
-
-</style>

@@ -439,7 +439,7 @@ export default {
               //  this.items = response.data;
             })
             .catch(() => {
-              console.log("failed 4");
+              // console.log("failed 4");
               // this.$awn.alert("Failed!");
               //   this.$awn.alert("Failed");
             })

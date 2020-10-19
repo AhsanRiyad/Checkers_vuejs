@@ -558,10 +558,10 @@ export default {
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     },
   },
-  // watch: {
-  //   pageNo() {
-  //     this.getData();
-  //   },
-  // },
+  watch: {
+    pageNo() {
+      this.getJobAppliedData();
+    },
+  },
 };
 </script>
