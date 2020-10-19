@@ -138,13 +138,15 @@
   width: 23%;
   margin-left: 20%;
   float: left;
-
+  
   .searchResults-text {
     margin-bottom: 10px;
   }
-
+  
   @include tab() {
-    width: 70%;
+    margin-left: 0%;
+    padding: 5%;
+    width: 100%;
   }
 }
 
