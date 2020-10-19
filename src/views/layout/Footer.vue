@@ -1,8 +1,8 @@
 <template>
   <!-- footer starts -->
-  <v-container class="pa-0 footer" fluid>
+  <v-container class="pa-lg-0 pa-md-0 footer" fluid>
     <v-row
-        cols="12"
+        cols="6"
         offset-md="0"
         md="12"
         justify="center"
@@ -11,7 +11,7 @@
     >
       <v-container>
         <v-row>
-          <v-col cols="6" md="3" class="text-md-left text-left">
+          <v-col cols="6" md="3" sm="6" class="text-md-left text-left">
             <h2 class="mb-3">About Us</h2>
             <ul class="footer-list">
               <li>
@@ -36,7 +36,7 @@
             </ul>
           </v-col>
 
-          <v-col cols="6" md="3" class="text-md-left text-left">
+          <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
             <h2 class="mb-3">Job Seekers</h2>
             <ul class="footer-list">
               <li>
@@ -62,7 +62,7 @@
             <!--            <router-link to=/ class="mt-md-n3 mt-n4">Video Guide</p>-->
           </v-col>
 
-          <v-col cols="6" md="3" class="text-md-left text-left">
+          <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
             <h2 class="mb-3">Employee</h2>
             <ul class="footer-list">
               <li>
@@ -89,7 +89,7 @@
             <!--            <router-link to=/ class="mt-md-n3 mt-n4">Video Guide</p>-->
           </v-col>
 
-          <v-col cols="6" md="3" class="text-md-left text-left">
+          <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
             <h2 class="mb-3">Social Media</h2>
             <ul class="footer-list">
               <li>

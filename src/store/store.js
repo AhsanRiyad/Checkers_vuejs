@@ -11,12 +11,12 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
-		apiBase: "http://13.58.205.236:8080/",
+		apiBase: "http://gateway.jobalart.com/",
 		imageUrl: "http://f1.redspice.ae/public/",
 		// imageUrl: "http://18.222.77.254/imageprocess/public/",
 		ax: axios.create({
 			// baseURL: "https://server.redspice.ae/api/",
-			baseURL: "http://13.58.205.236:8080/",
+			baseURL: "http://gateway.jobalart.com/",
 			// withCredentials: true,
 			// crossDomain: true
 		}),

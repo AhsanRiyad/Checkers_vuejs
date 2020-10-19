@@ -129,8 +129,31 @@ name: "AlertList",
             this.alerts = response.data.data
             this.loading = false
           })
-          .catch(() => {
-            this.$awn.alert("Failed!");
+          .catch((error) => {
+            if (error.response.status == 401) {
+              axios({
+                method: "get",
+                baseURL: this.$store.state.apiBase,
+                url: `users/new-access-token`,
+                params: {
+                  access_token: this.$cookies.get("accessToken"),
+                  ip: this.$store.getters.userIp,
+                },
+                headers,
+              })
+                  .then((response) => {
+                    console.log("this is refresh token.....", response);
+                    this.$cookies.set("accessToken", response.data.access_token);
+                    this.getJobAlerts();
+                  })
+                  .catch((error) => {
+                    this.$awn.alert("Sorry! Your token is Expired.");
+                    this.$router.history.push("/signin");
+                    console.log(error);
+                    return;
+                  })
+                  .finally(() => {});
+            }
           })
     },
     editJobAlert: function (id) {
