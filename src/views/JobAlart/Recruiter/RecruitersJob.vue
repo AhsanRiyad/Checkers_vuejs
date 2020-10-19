@@ -694,7 +694,7 @@ export default {
         .then((response) => {
           console.log("job list....", response);
           // this.Jobs = [...this.Jobs, ...response.jobs.items];
-          this.Jobs = response.data.jobs.items;
+          this.Jobs = response.data.items;
           this.jobId = this.JobDescription = this.Jobs[0];
 
           if (window.innerWidth > 960) {
@@ -702,8 +702,8 @@ export default {
           }
           this.skeletonJobDetails = false;
           this.length = Math.round(
-            response.data.jobs.total_count /
-              response.data.jobs.num_items_per_page
+            response.data.total_count /
+              response.data.num_items_per_page
           );
           // this.$refs.form.reset();
           //saves the items from the database in the table
@@ -727,7 +727,7 @@ export default {
           // this.$awn.alert("Failed");
         })
         .finally(() => {
-          this.$router.push("/search?q=" + this.search);
+          this.$router.push("/recruitersJob?q=" + this.search);
           this.loading = false;
           this.skeleton = false;
           if (this.Jobs.length === 0) this.ShowAlertMsg = true;
