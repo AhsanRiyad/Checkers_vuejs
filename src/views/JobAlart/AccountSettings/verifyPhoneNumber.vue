@@ -6,7 +6,7 @@
           <h1 class="text-center ja__headline">Verify your phone number</h1>
         </v-col>
         <v-col cols="12" md="6">
-          <v-card class="ja__card">
+          <v-card class="ja__card pa-5">
             <v-form ref="form">
               <v-col>
                 <p class="ma-0">Verification code sent to +880 1850-699118. Enter the code you received below.</p>

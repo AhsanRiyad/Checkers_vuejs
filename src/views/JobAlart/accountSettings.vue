@@ -14,8 +14,11 @@
                   <div class="bottom__text">{{ $cookies.get("email") }}</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-email"
+                  <router-link to="/change-email" class="hidden-sm-and-down"
                     >Change email address</router-link
+                  >
+                  <router-link to="/change-email" class="hidden-md-and-up"
+                  ><v-icon>mdi-square-edit-outline</v-icon></router-link
                   >
                 </div>
               </li>
@@ -25,8 +28,11 @@
                   <div class="bottom__text">******</div>
                 </div>
                 <div class="right__side">
-                  <router-link to="/change-password"
+                  <router-link to="/change-password" class="hidden-sm-and-down"
                     >Change password</router-link
+                  >
+                  <router-link to="/change-password" class="hidden-md-and-up"
+                  ><v-icon>mdi-square-edit-outline</v-icon></router-link
                   >
                 </div>
               </li>

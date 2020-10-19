@@ -3,6 +3,9 @@
   .ja__card{
     padding: pxToVw(30) pxToVw(30);
     border-radius: 0 !important;
+    @media (max-width: 959px) {
+      padding: pxToMobVw(20) pxToMobVw(30);
+    }
   }
   .ja__account__list{
     li{
@@ -11,6 +14,9 @@
       align-items: center;
       padding: pxToVw(15) 0;
       border-bottom: 2px solid #ececec;
+      @media (max-width: 959px){
+        padding: pxToMobVw(15) 0;
+      }
       &:last-child{
         border-bottom: 0;
       }
@@ -18,9 +24,15 @@
         .top__text{
           font-size: pxToVw(20);
           font-weight: 700;
+          @media (max-width: 959px){
+            font-size: pxToMobVw(17);
+          }
         }
         .bottom__text{
           font-size: pxToVw(16);
+          @media (max-width: 959px){
+            font-size: pxToMobVw(16);
+          }
         }
       }
       .right__side{
@@ -29,6 +41,9 @@
           text-align: right;
           text-transform: capitalize;
           font-size: pxToVw(18);
+          @media (max-width: 959px){
+            font-size: pxToMobVw(14);
+          }
         }
       }
     }

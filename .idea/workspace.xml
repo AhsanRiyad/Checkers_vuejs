@@ -21,10 +21,17 @@
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/ResumeLayout/_default.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/ResumeLayout/_default.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/job-alart/_accountSettings.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/job-alart/_accountSettings.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeEmail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeForgotPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changeForgotPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changePassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/changePassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/forgotPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/forgotPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/verifyPhoneNumber.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/AccountSettings/verifyPhoneNumber.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Alart/AlertList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Alart/AlertList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/layout/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Resume/Biodata.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/accountSettings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/accountSettings.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +228,8 @@
       <workItem from="1602735703880" duration="3725000" />
       <workItem from="1602998198240" duration="1568000" />
       <workItem from="1603001526816" duration="19257000" />
-      <workItem from="1603082384918" duration="4742000" />
+      <workItem from="1603082384918" duration="8209000" />
+      <workItem from="1603102577149" duration="3663000" />
     </task>
     <servers />
   </component>
@@ -338,10 +346,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="460" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600247542803" />
-    <state x="886" y="0" width="894" height="835" key="dock-window-1" timestamp="1601357663109">
+    <state x="214" y="0" width="562" height="995" key="dock-window-1" timestamp="1603107573370">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="886" y="0" width="894" height="835" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1601357663109" />
+    <state x="214" y="0" width="562" height="995" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1603107573370" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1601875333783">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

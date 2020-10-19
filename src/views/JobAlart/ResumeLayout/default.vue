@@ -6,6 +6,8 @@
         <div class="dr-main-text-div">
           <v-btn
             @click.stop="downloadResume"
+            :disabled="loading"
+            :loading="loading"
             small
             color="success"
             style="margin-bottom: 20px"
@@ -128,8 +130,9 @@
       <!-- section-5 starts -->
       <div class="dr-academic-qualification">
         <p class="dr-title-all mt-0">Academic Qualification:</p>
-        <table class="resume_table resume_gap">
-          <thead>
+        <div style="overflow-x: scroll;">
+          <table class="resume_table resume_gap">
+            <thead>
             <tr>
               <th>Title</th>
               <th style="width: 45%">Institution name</th>
@@ -137,8 +140,8 @@
               <th class="text-center">End Year</th>
               <th>Result</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr v-for="n in this.resume.payload.qualification" :key="n.id">
               <td><p>{{ n.exam.title }}</p></td>
               <td>
@@ -154,8 +157,9 @@
                 <p>{{ n.result }}</p>
               </td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
       <!-- section-5 ends -->
 
@@ -253,10 +257,13 @@ import "../../../sass/job-alart/ResumeLayout/_default.scss";
 export default {
   name: "DefaultResume",
   data() {
-    return {};
+    return {
+      loading: false
+    };
   },
   methods: {
     downloadResume() {
+      this.loading = true
       console.log("download resume");
       //file download
       this.$store
@@ -267,6 +274,7 @@ export default {
         })
         .then((response) => {
           console.log("login image", response.file);
+          this.loading = false
           let url = `http://3.17.234.251/jobsresume/resumes/public/${
             response.file
           }?access_token=${this.$cookies.get("accessToken")}`;

@@ -47,16 +47,16 @@
                   </div>
 
                   <div class="biodata-notice-period">
-                    <p>Company Notice Period (In Month)</p>
+                    <p>Company Notice Period (Days)</p>
                     <div>
                       <v-text-field
                         background-color="white"
                         class="mb-0"
                         :rules="[
                           (v) => !!v || 'required',
-                          (v) => v > 0 || 'cant not be negative',
+                          (v) => v > 0 || 'Days can not be negative',
                         ]"
-                        placeholder="In month"
+                        placeholder="Days"
                         outlined
                         type="number"
                         dense

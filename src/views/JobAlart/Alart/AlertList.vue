@@ -1,5 +1,5 @@
 <template>
-  <div class="posted__list">
+  <div class="posted__list  alert_card">
     <v-card flat class="ja__card pa-lg-6 pa-md-6">
       <!--********** Job activities start **************-->
       <div class="jobActivity">
@@ -163,12 +163,12 @@ name: "AlertList",
       let onOk = () => {this.deleteJobAlert(jobAlertId)};
       let onCancel = () => {this.$awn.info('You pressed Cancel')};
       this.$awn.confirm(
-          'Are you sure?',
+          'Are you sure want to delete this?',
           onOk,
           onCancel,
           {
             labels: {
-              confirm: 'Dangerous action'
+              confirm: 'Warning'
             }
           }
       )
@@ -204,6 +204,8 @@ name: "AlertList",
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.alert_card{
+  padding: 3%;
+}
 </style>
