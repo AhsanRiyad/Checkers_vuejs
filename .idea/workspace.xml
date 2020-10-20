@@ -20,21 +20,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b741829c-2433-4f21-a74e-c3cd2cbc3f8f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/employers/_jobs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/JobDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/PostedJobList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/app.fc055164.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/app.fc055164.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-2b667464.30943592.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-2b667464.30943592.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-619ae8b8.99aff532.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-79c3c2ae.88411c16.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-79c3c2ae.88411c16.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-826b5930.c3fc0ba6.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/js/chunk-826b5930.c3fc0ba6.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.43292b82.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.43292b82.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-581005b2.86a34312.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-581005b2.8b3fde20.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-581005b2.86a34312.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-581005b2.8b3fde20.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-619ae8b8.5e98cb11.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-619ae8b8.5e98cb11.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-619ae8b8.99aff532.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-79c3c2ae.1e987422.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-79c3c2ae.1e987422.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-7a933170.63415c22.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-7a933170.2a7d2747.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-7a933170.63415c22.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-7a933170.2a7d2747.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-826b5930.eeb6004e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-826b5930.eeb6004e.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.e0a2f932.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-vendors.a6a43330.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.e0a2f932.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/chunk-vendors.a6a43330.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/precache-manifest.829d31d99687ebcb9d71077ef8e6ed39.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/precache-manifest.483fd616db2e39974e9aa105725f30e2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/registerServiceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/registerServiceWorker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/protectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protectedRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantResume.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ApplicantsList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ShortListed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/Jobs/jobDetails/ShortListed.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Employers/companies/CompanyTabs/AllCompanyList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Employers/companies/CompanyTabs/AllCompanyList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Footer/AboutUs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Footer/AboutUs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/JobCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/JobCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Recruiter/RecruiterList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Recruiter/RecruiterList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/Recruiter/RecruitersJob.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/Recruiter/RecruitersJob.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/appliedJobs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/JobAlart/ResumeLayout/default.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/layout/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/layout/Footer.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +249,7 @@
       <workItem from="1603001526816" duration="19257000" />
       <workItem from="1603082384918" duration="8209000" />
       <workItem from="1603102577149" duration="4102000" />
-      <workItem from="1603170541045" duration="23050000" />
+      <workItem from="1603170541045" duration="23357000" />
     </task>
     <servers />
   </component>
