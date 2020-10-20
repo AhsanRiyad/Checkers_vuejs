@@ -130,33 +130,35 @@
       <!-- section-5 starts -->
       <div class="dr-academic-qualification">
         <p class="dr-title-all mt-0">Academic Qualification:</p>
-        <div style="overflow-x: scroll;">
+        <div style="overflow-x: scroll">
           <table class="resume_table resume_gap">
             <thead>
-            <tr>
-              <th>Title</th>
-              <th style="width: 45%">Institution name</th>
-              <th>Field of study</th>
-              <th class="text-center">End Year</th>
-              <th>Result</th>
-            </tr>
+              <tr>
+                <th>Title</th>
+                <th style="width: 45%">Institution name</th>
+                <th>Field of study</th>
+                <th class="text-center">End Year</th>
+                <th>Result</th>
+              </tr>
             </thead>
             <tbody>
-            <tr v-for="n in this.resume.payload.qualification" :key="n.id">
-              <td><p>{{ n.exam.title }}</p></td>
-              <td>
-                <p v-text="n.institute"></p>
-              </td>
-              <td>
-                <p>{{ n.subject }}</p>
-              </td>
-              <td>
-                <p>{{ n.end_year }}</p>
-              </td>
-              <td class="action">
-                <p>{{ n.result }}</p>
-              </td>
-            </tr>
+              <tr v-for="n in this.resume.payload.qualification" :key="n.id">
+                <td>
+                  <p>{{ n.exam.title }}</p>
+                </td>
+                <td>
+                  <p v-text="n.institute"></p>
+                </td>
+                <td>
+                  <p>{{ n.subject }}</p>
+                </td>
+                <td>
+                  <p>{{ n.end_year }}</p>
+                </td>
+                <td class="action">
+                  <p>{{ n.result }}</p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -253,17 +255,18 @@
 
 <script>
 import "../../../sass/job-alart/ResumeLayout/_default.scss";
+import axios from "axios";
 // import { saveAs } from "file-saver";
 export default {
   name: "DefaultResume",
   data() {
     return {
-      loading: false
+      loading: false,
     };
   },
   methods: {
     downloadResume() {
-      this.loading = true
+      this.loading = true;
       console.log("download resume");
       //file download
       this.$store
@@ -274,7 +277,8 @@ export default {
         })
         .then((response) => {
           console.log("login image", response.file);
-          this.loading = false
+          let fn = response.file;
+          this.loading = false;
           let url = `http://3.17.234.251/jobsresume/resumes/public/${
             response.file
           }?access_token=${this.$cookies.get("accessToken")}`;
@@ -297,14 +301,33 @@ export default {
           // saves the items from the database in the table
           //  console.log(response);
           //  this.items = response.data;
-          const link = document.createElement("a");
+          /* const link = document.createElement("a");
           link.href = url;
           link.setAttribute("download", "file.pdf"); //or any other extension
           link.setAttribute("target", "_blank"); //or any other extension
           document.body.appendChild(link);
           link.click();
-          document.body.removeChild(link);
+          document.body.removeChild(link); */
           // delete link;
+
+          axios({
+            url,
+            method: "GET",
+            responseType: "blob",
+          }).then((response) => {
+            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            var fileLink = document.createElement("a");
+
+            fileLink.href = fileURL;
+            var lastIndexOfSlash = fn.lastIndexOf("/");
+            fileLink.setAttribute(
+              "download",
+              fn.substring(lastIndexOfSlash + 1, fn.length)
+            );
+            document.body.appendChild(fileLink);
+
+            fileLink.click();
+          });
 
           // window.open(url, "_blank");
           //download/openf file in new tab
@@ -326,7 +349,7 @@ export default {
   },
   computed: {
     getExperience() {
-     /*  let years = "0",
+      /*  let years = "0",
         months = "0";
       if (this.resume.payload.userTotalExperiences.years > 1) {
         years = this.resume.payload.userTotalExperiences.years + " " + "years ";
@@ -347,9 +370,11 @@ export default {
       }
       let months = "0";
       if (this.resume.payload.userTotalExperiences.months > 1) {
-        months = this.resume.payload.userTotalExperiences.months + " " + "months ";
+        months =
+          this.resume.payload.userTotalExperiences.months + " " + "months ";
       } else {
-        months = this.resume.payload.userTotalExperiences.months + " " + "month ";
+        months =
+          this.resume.payload.userTotalExperiences.months + " " + "month ";
       }
       // return years + " " + months;
       return years + months;
