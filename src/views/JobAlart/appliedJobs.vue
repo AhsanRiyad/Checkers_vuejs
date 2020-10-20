@@ -275,7 +275,7 @@
                               >mdi-close
                             </v-icon>
                           </template>
-                          <span>Not Short listed</span>
+                          <span>Remove from shortlist</span>
                         </v-tooltip>
                         <!-- shortlisted icon end-->
                       </td>
