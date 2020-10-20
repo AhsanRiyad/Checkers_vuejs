@@ -39,7 +39,7 @@
           <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
             <h2 class="mb-3">Job Seekers</h2>
             <ul class="footer-list">
-              <li>
+              <li v-if="!$store.getters.isLoggedIn">
                 <p
                     @click.stop="
                     () => {
@@ -63,9 +63,9 @@
           </v-col>
 
           <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
-            <h2 class="mb-3">Employer</h2>
+            <h2 class="mb-3">Employers</h2>
             <ul class="footer-list">
-              <li>
+              <li v-if="!$store.getters.isLoggedIn">
                 <p
                     @click.stop="
                     () => {
