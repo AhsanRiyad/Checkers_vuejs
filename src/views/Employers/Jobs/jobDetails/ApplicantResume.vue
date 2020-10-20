@@ -10,7 +10,7 @@
             small
             class="ml-1 mr-1"
             :color="getResume.short_listed ? 'error' : 'success'"
-            >{{ getResume.short_listed ? "Not Shortlisted" : "Shortlisted" }}
+            >{{ getResume.short_listed ? "Remove from shortlist" : "Shortlisted" }}
           </v-btn>
           <!--           <v-btn small class="ml-1 mr-1" color="primary">Not shortlisted</v-btn>-->
           <v-btn

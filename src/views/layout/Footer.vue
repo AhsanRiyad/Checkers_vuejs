@@ -104,9 +104,9 @@
               <li>
                 <router-link to="/" class="mt-md-n3 mt-n4">Youtube</router-link>
               </li>
-              <li>
+<!--               <li>
                 <router-link to="/" class="mt-md-n3 mt-n4">Google</router-link>
-              </li>
+              </li> -->
             </ul>
           </v-col>
         </v-row>

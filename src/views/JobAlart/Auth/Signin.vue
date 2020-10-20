@@ -4,7 +4,7 @@
       <v-form ref="form">
         <v-row justify="center">
           <v-col cols="12" md="4">
-            <h1 class="text-center ja__headline">Job Alert</h1>
+            <h1 class="text-center ja__headline">Job Alart</h1>
 
             <v-card>
               <v-row justify="center">
@@ -77,7 +77,7 @@
 
                 <v-col cols="10" md="10" class="mb-0 mt-0">
                   <p class="tocText">
-                    By signing in to your account, you agree to JOB ALERT’s
+                    By signing in to your account, you agree to JOB ALART’s
                     <span style="color: #365899" @click.stop="tocView">
                       Terms and Conditions</span
                     >
