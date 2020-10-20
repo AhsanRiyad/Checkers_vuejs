@@ -50,15 +50,19 @@
             {{ getResume.biodata.full_name }}
           </p>
           <!--          <p>Mobile: {{ getResume.biodata.mobile_number }}</p>-->
-          <p>Email: {{ getResume.biodata.contact_email }}</p>
+          <!--          <p>Email: {{ getResume.biodata.contact_email }}</p>-->
         </div>
 
         <div class="dr-title-photo mt-5">
           <v-avatar class="applicant_img">
             <img
+                v-if="this.$store.getters.imageUrl + getResume.biodata.photo"
                 :src="this.$store.getters.imageUrl + getResume.biodata.photo"
-                alt="John"
-            />
+                :alt="getResume.biodata.full_name"
+            >
+            <v-icon
+                v-else
+            >mdi-account</v-icon>
           </v-avatar>
         </div>
       </div>
@@ -131,10 +135,10 @@
           <thead>
           <tr>
             <th>Title</th>
-            <th style=" width:45%;">Institution name</th>
-            <th>Field of study</th>
-            <th>End Year</th>
-            <th>Result</th>
+            <th style=" width:40%;">Institution name</th>
+            <th style="width: 30%">Field of study</th>
+            <th style="width: 25%">End Year</th>
+            <th style="width: 5%">Result</th>
           </tr>
           </thead>
           <tbody>
@@ -226,15 +230,16 @@
         <template>
           <v-card class="mx-auto" style="max-width: 500px">
             <v-toolbar color="#365899" cards dark flat>
+              <h3 class="title font-weight-regular">
+                Interview Call Info
+              </h3>
+              <v-spacer></v-spacer>
               <v-btn icon>
                 <v-icon @click.stop.prevent="dialog = false"
-                >mdi-arrow-left
+                >mdi-close
                 </v-icon
                 >
               </v-btn>
-              <v-card-title class="title font-weight-regular">
-                Interview Call Info
-              </v-card-title>
             </v-toolbar>
             <v-form ref="form" class="pa-4 pt-6">
               <v-text-field
@@ -356,9 +361,6 @@ export default {
     getResume() {
       return this.$store.getters.resume.payload;
     },
-    // is_shortlisted() {
-    //   return this.applicantResume.short_listed;
-    // },
     dialogVisible: {
       get: function () {
         return this.dialogShowing;
@@ -406,8 +408,6 @@ export default {
     appResume() {
       console.log("User id... applicant...reusme...", this.userId);
       console.log("Job id", this.$store.getters.job);
-      // this.dialogShowing = true;
-      // this.loading = true;
       this.$store
           .dispatch("callApi", {
             url: "resume/" + this.userId,
@@ -431,8 +431,6 @@ export default {
       if (event) {
         event.preventDefault();
       }
-      // this.$store.commit("jobId");
-      // let appliedJobId = this.$store.state.jobId.id
       console.log("jobssssss ideeeeeeeee", this.$store.state);
       this.$store
           .dispatch("callApi", {
@@ -442,20 +440,15 @@ export default {
           })
           .then((response) => {
             console.log("applicant shortlisted response..", response);
-            // this.companyId = response.company.id;
-
             let n = {...this.getResume, short_listed: response.short_list};
             this.$store.commit("resume", n);
             console.log("short listed response .... ", n);
-
-            // this.isShortlisted = response.short_list;
             this.$awn.success("Updated Successfully!");
             eventBus.$emit("updateApplicantList");
             this.loadingShortListBtn = false
           })
           .catch(() => {
             this.$awn.alert("Failed!");
-            //   this.$awn.alert("Failed");
           })
           .finally(() => {
             this.loadingShortListBtn = false
@@ -479,12 +472,10 @@ export default {
           })
           .then((response) => {
             console.log("applicant shortlisted response..", response);
-            // this.companyId = response.company.id;
             this.$awn.success("Updated Successfully!");
           })
           .catch(() => {
             this.$awn.alert("Failed!");
-            //   this.$awn.alert("Failed");
           })
           .finally(() => {
             this.dialog = false;

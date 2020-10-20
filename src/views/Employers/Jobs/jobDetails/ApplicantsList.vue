@@ -9,7 +9,7 @@
         <table class="ja_table">
           <tbody>
             <v-dialog
-              v-model="loadingApplicant"
+              v-model="loadingApplicantResume"
               hide-overlay
               persistent
               width="300"
@@ -127,7 +127,7 @@
       </div>
       <!--********** Job applied table end **************-->
       <!-- job apply modal starts-->
-      <v-dialog v-model="dialogShowing" width="980">
+      <v-dialog v-model="dialogShowing" width="995">
         <applicant-resume-modal
           :user-id="userId"
           :dialogShowing="dialogShowing"
@@ -159,7 +159,7 @@ export default {
     jobAppliers: Array,
     totalExp: Object,
     jobResponsibilities: Array,
-    loadingApplicant: Boolean,
+    loadingApplicant: Boolean
   },
   data: () => {
     return {
@@ -171,6 +171,7 @@ export default {
       userId: "",
       jobId: "",
       shortListed: "",
+      loadingApplicantResume: false
     };
   },
   created() {},
@@ -182,9 +183,9 @@ export default {
       return moment(date, "YYYY-MM-DD").format("MMM Do YY");
     },
     showApplicantResume(userId) {
+      this.loadingApplicantResume = true;
       console.log("User id", userId);
       this.userId = userId;
-      this.loadingApplicant = true;
       this.$store.commit("userId_resume", userId);
       this.$store
         .dispatch("callApi", {
@@ -197,23 +198,17 @@ export default {
           this.dialogShowing = true;
           console.log("Resume...fra", response);
           this.$store.commit("resume", response.data);
-
           console.log(" resume console output... ", this.$store.getters.resume);
 
           this.userId = response.data.applicationInfo.user_id;
           this.applicntInfo = response.data.applicationInfo;
-          // console.log("applicants info", response.data.applicationInfo);
-
-          // setTimeout({
-          // }, 1000) 1`
-          // this.dialog = true
         })
         .catch((error) => {
           this.$awn.alert("Failed");
           console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
         })
         .finally(() => {
-          this.loadingApplicant = false;
+          this.loadingApplicantResume = false;
         });
     },
   },

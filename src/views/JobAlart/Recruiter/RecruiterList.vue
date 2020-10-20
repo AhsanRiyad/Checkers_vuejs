@@ -1,5 +1,5 @@
 <template>
-  <div class="jobcard-first-container" id="mainDocs">
+  <v-container class="jobcard-first-container" id="mainDocs">
     <div class="searchText">
       <div class="searchText-pagination-jobcard">
         <div>
@@ -39,14 +39,14 @@
       </v-text-field>
     </div>
 
-    <div v-if="skeleton">
-      <v-skeleton-loader
-        v-for="n in 3"
-        :key="n"
-        class="loader"
-        type="card"
-      ></v-skeleton-loader>
-    </div>
+    <v-row class="ml-lg-10 ml-md-10 mr-lg-10 mr-md-10 pl-lg-10 pl-md-10 pr-lg-10 pr-md-10" v-if="skeleton">
+      <v-col cols="12" md="4" v-for="n in 3" :key="n">
+        <v-skeleton-loader
+            class="recruiter-loader"
+            type="card"
+        ></v-skeleton-loader>
+      </v-col>
+    </v-row>
 
     <v-row
       class="ml-lg-10 ml-md-10 mr-lg-10 mr-md-10 pl-lg-10 pl-md-10 pr-lg-10 pr-md-10"
@@ -82,7 +82,7 @@
         </div>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 

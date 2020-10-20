@@ -34,7 +34,7 @@
                 v-for="photo in app.biodata"
                 :key="photo.id"
               >
-                <v-avatar size="85">
+                <v-avatar style="cursor: pointer" size="85"  @click.stop="() => showApplicantResume(photo.userId)">
                   <img
                     :src="$store.getters.imageUrl + photo.photo"
                     :alt="photo.full_name"
@@ -142,7 +142,7 @@ export default {
       jobs: {},
       jobId: "",
       userId: "",
-      loadingApplicant: true,
+      loadingApplicant: false,
       dialogShow: false,
     };
   },
@@ -157,11 +157,11 @@ export default {
   },
   methods: {
     showApplicantResume(userId) {
+      this.loadingApplicant =true
       console.log("User id... farzana", userId);
       this.$store.commit("userId_resume", userId);
       this.userId = userId;
       // this.$store.commit("userId_resume", this.userId);
-      this.loading = true;
       this.$store
         .dispatch("callApi", {
           url: "resume/" + userId,
@@ -182,10 +182,11 @@ export default {
           console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
         })
         .finally(() => {
-          this.loading = false;
+          this.loadingApplicant = false;
         });
     },
     getApplicantList() {
+      this.loadingApplicant = true
       //alert(this.shortList)
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
@@ -218,11 +219,33 @@ export default {
           console.log("page length", this.length);
           // setTimeout(() => (this.loadingApplicant = false), 1000)
         })
-        .catch((error) => {
-          this.applicantShortListed = [];
-          this.$awn.alert("Failed");
-          console.log("errorrrrrrrrrrrrrrrrrrrr..", error.response);
-        })
+          .catch((error) => {
+            console.log("error status code... ", error.response.status);
+            if (error.response.status == 401) {
+              axios({
+                method: "get",
+                baseURL: this.$store.state.apiBase,
+                url: `users/new-access-token`,
+                params: {
+                  access_token: this.$cookies.get("accessToken"),
+                  ip: this.$store.getters.userIp,
+                },
+                headers,
+              })
+                  .then((response) => {
+                    console.log("this is refresh token.....", response);
+                    this.$cookies.set("accessToken", response.data.access_token);
+                    this.getApplicantList();
+                  })
+                  .catch((error) => {
+                    this.$awn.alert("Failed!");
+                    this.$router.history.push("/signin");
+                    console.log(error);
+                  })
+                  .finally(() => {});
+            }
+            //   this.$awn.alert("Failed");
+          })
         .finally(() => {
           this.modalSkeleton = false;
           if (this.applicantShortListed.length === 0) this.ShowAlertMsg = true;
@@ -235,3 +258,12 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.v-avatar{
+  @media (max-width: 540px) {
+    height: 60px !important;
+    min-width: 60px !important;
+    width: 60px !important;
+  }
+}
+</style>

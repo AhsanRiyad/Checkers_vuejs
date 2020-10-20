@@ -28,10 +28,7 @@
               </li>
               <!--            <router-link to=/ class="mt-md-n3 mt-n4">Feedback</p>-->
               <li>
-                <router-link to="/contact" class="mt-md-n3 mt-n4"
-                >Contact Us
-                </router-link
-                >
+                <router-link to="/contact" class="mt-md-n3 mt-n4">Contact Us</router-link>
               </li>
             </ul>
           </v-col>
@@ -39,7 +36,7 @@
           <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
             <h2 class="mb-3">Job Seekers</h2>
             <ul class="footer-list">
-              <li>
+              <li v-if="!$store.getters.isLoggedIn">
                 <p
                     @click.stop="
                     () => {
@@ -63,9 +60,9 @@
           </v-col>
 
           <v-col cols="6" sm="6" md="3" class="text-md-left text-left">
-            <h2 class="mb-3">Employee</h2>
+            <h2 class="mb-3">Employer</h2>
             <ul class="footer-list">
-              <li>
+              <li v-if="!$store.getters.isLoggedIn">
                 <p
                     @click.stop="
                     () => {
@@ -120,5 +117,16 @@ import "../../sass/_common.scss";
 
 export default {
   name: "Footer",
+  computed: {
+    isLoggedIn() {
+      if (this.$cookies.get("accessToken") == null) {
+        this.$store.commit("isLoggedIn", false);
+        return false;
+      } else {
+        this.$store.commit("isLoggedIn", true);
+        return true;
+      }
+    },
+  },
 };
 </script>

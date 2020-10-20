@@ -61,7 +61,7 @@
                 <p>{{ i + 1 }}</p>
               </td>
               <td>
-                <a class="text-capitalize" @click="goToJobDetails(job.id)">{{
+                <a class="text-capitalize" @click="() => goToJobDetails(job.id)">{{
                   job.job_title
                 }}</a>
                 <p class="mb-0">
@@ -182,14 +182,6 @@ export default {
         .then((response) => {
           console.log("job list", response.data.items);
           this.postedJobs = response.data.items;
-          // this.jobId =this.postedJobs[3]
-          // for (let i = 0; i < this.postedJobs.length; i++) {
-          //   console.log("job index i", i); // returns the numbered index
-          //   console.log("job index object", this.postedJobs[i]); // returns [Object object]
-          //   console.log(this.postedJobs[i].id); // returns undefined
-          //   this.jobId = this.postedJobs[i].id;
-          //   console.log("id jobssssssssss", this.jobId);
-          // }
           this.loading = false;
           this.length = Math.round(
             response.data.total_count / response.data.num_items_per_page
@@ -225,24 +217,10 @@ export default {
       )
     },
     jobLiveConfirm(job){
-      // if (event) {
-      //   event.preventDefault();
-      // }
-      // this.postedJobs.job_status = (this.postedJobs.job_status + 1) % 2
       if (this.$cookies.get("accessToken") == null) {
         this.$router.history.push("/signin");
         return;
       }
-      // if(this.jobId){
-      //   if(!this.postedJobs.is_expired){
-      //
-      //   }
-      // }
-      // if (!this.$refs.is_.is_expired.validate()) return;
-      // this.loadingAppliedJob = true;
-
-      // const is_live = job.job_status;
-
       const headers = {
         Authorization: "Bearer " + this.$cookies.get("accessToken"),
         "Content-Type": "application/json",
@@ -253,9 +231,7 @@ export default {
         method: "put",
         baseURL: this.$store.state.apiBase,
         url: `jobs/` + job.id + `/live`,
-        data: {
-          // is_expired: this.is_expired,
-        },
+        data: {},
         headers,
       })
           .then((response) => {
@@ -266,7 +242,6 @@ export default {
               return;
             }
             this.$awn.success("Job status changed!");
-            // is_live ? this.$awn.success("Your job have successfully lived!") : this.$awn.success("Your job have successfully lived!");
             this.getPostedJobs();
           })
           .catch((error) => {
@@ -283,11 +258,6 @@ export default {
               this.$router.history.push("/subscription");
               return;
             }
-            // } else if (error.response.status == 423) {
-            //   this.$awn.alert("Your subscribe is not completed");
-            //   this.$router.history.push("/subscription");
-            //   return;
-            // }
           })
           .finally(() => {
             this.loadingAppliedJob = false;

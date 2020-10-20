@@ -5,14 +5,13 @@
         <v-col cols="12">
           <h1 class="text-center ja__headline">Applied Jobs</h1>
         </v-col>
-        <v-col cols="12" md="8">
+        <v-col cols="12" md="9">
           <v-card class="ja__card">
             <!--********** Top card start **************-->
             <v-card flat class="ja__selected_card">
               <v-row>
-                <v-col cols="12" lg="3">
+                <v-col cols="12" lg="4">
                   <v-menu
-                    ref="menu1"
                     v-model="menu1"
                     :close-on-content-click="false"
                     transition="scale-transition"
@@ -22,23 +21,24 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
-                        v-model="computedDateFormatted"
-                        label="Date"
+                          clearable
+                          autocomplete="off"
+                        v-model="from_date"
+                        label="From Date"
                         prepend-icon="event"
                         v-bind="attrs"
-                        @blur="date = parseDate(dateFormatted)"
                         v-on="on"
                       ></v-text-field>
                     </template>
                     <v-date-picker
-                      v-model="date"
+                      v-model="from_date"
                       no-title
                       @input="menu1 = false"
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
 
-                <v-col cols="12" lg="3">
+                <v-col cols="12" lg="4">
                   <v-menu
                     v-model="menu2"
                     :close-on-content-click="false"
@@ -49,8 +49,9 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
-                        v-model="computedDateFormatted"
-                        label="Date (read only text field)"
+                          clearable
+                        v-model="to_date"
+                        label="To Date"
                         persistent-hint
                         prepend-icon="event"
                         readonly
@@ -59,21 +60,18 @@
                       ></v-text-field>
                     </template>
                     <v-date-picker
-                      v-model="date"
+                      v-model="to_date"
                       no-title
                       @input="menu2 = false"
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col cols="12" lg="3" md="3">
-                  <v-text-field label="Company Name"></v-text-field>
-                </v-col>
-                <v-col cols="12" lg="3">
-                  <v-select :items="items" label="Status"></v-select>
+                <v-col cols="12" lg="4" md="3">
+                  <v-text-field v-model="company_name" label="Company Name"></v-text-field>
                 </v-col>
               </v-row>
               <div class="search__btn text-center">
-                <v-btn color="success" dark>search</v-btn>
+                <v-btn color="success" dark @click="searchAppliedJobs()">search</v-btn>
               </div>
             </v-card>
             <!--********** Top card END **************-->
@@ -139,7 +137,7 @@
                         <p>{{ i + 1 }}</p>
                       </td>
                       <td class="col-w">
-                        <a @click="showJobDetails(job.id)">{{
+                        <a @click="() => showJobDetails(job.id)">{{
                           job.job_title
                         }}</a>
                         <p>{{ job.company_name }}</p>
@@ -427,6 +425,9 @@ export default {
     length: 0,
     page_range: 5,
     limit: 5,
+    company_name: '',
+    from_date: '',
+    to_date: '',
     loading: true,
     modalSkeleton: true,
     modalStyle: {
@@ -447,6 +448,73 @@ export default {
     this.getJobAppliedData();
   },
   methods: {
+    searchAppliedJobs(){
+
+      if( (this.from_date == '' || this.from_date == null) && (this.to_date == '' || this.to_date == null) && (this.company_name == '' || this.company_name == null)){
+        return this.getJobAppliedData()
+      }
+      this.loading = true;
+      this.skeleton = true;
+      const headers = {
+        Authorization: "Bearer " + this.$cookies.get("accessToken"),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      axios({
+        baseURL: this.$store.state.apiBase,
+        url: "jobs/applied",
+        method: "get",
+        params: {
+          page: this.pageNo,
+          limit: this.limit,
+          company_name: this.company_name,
+          from_date: this.from_date,
+          to_date: this.to_date
+        },
+        headers,
+      })
+          .then((response) => {
+            console.log("job applied list....", response);
+            this.appliedJobs = response.data.jobs.items;
+            this.length = Math.round(
+                response.data.jobs.total_count /
+                this.limit
+            );
+            console.log("page length", this.length);
+            this.loading = false;
+          })
+          .catch((error) => {
+            if (error.response.status == 401) {
+              axios({
+                method: "get",
+                baseURL: this.$store.state.apiBase,
+                url: `users/new-access-token`,
+                params: {
+                  access_token: this.$cookies.get("accessToken"),
+                  ip: this.$store.getters.userIp,
+                },
+                headers,
+              })
+                  .then((response) => {
+                    console.log("this is refresh token.....", response);
+                    this.$cookies.set("accessToken", response.data.access_token);
+                    this.getJobAppliedData();
+                  })
+                  .catch((error) => {
+                    this.$awn.alert("Sorry! Your token is Expired.");
+                    this.$router.history.push("/signin");
+                    console.log(error);
+                    return;
+                  })
+            }
+          })
+          .finally(() => {
+            this.loading = false;
+            if (this.appliedJobs.length === 0) this.ShowAlertMsg = true;
+            //  this.tableLoading = false;
+            // this.JobDescriptionStyle.height = document.querySelector("#mainDocs").scrollHeight - 64 - 48 - 140 + "px";
+          });
+    },
     getJobAppliedData() {
       this.loading = true;
       this.skeleton = true;

@@ -1,12 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-/* import AllJobList from "@/views/Employers/Jobs/JobsTab/AllJobList";
-import JobsTab from "@/views/Employers/Jobs/JobsTab";
-import companiesTab from "@/views/Employers/companies/companiesTab";
-import userInfoDetails from "@/views/Employers/companies/UserInfo/userInfoDetails";
-import Contact from "@/views/JobAlart/Footer/Contact";
-import PrivacyPolicy from "@/views/JobAlart/Footer/PrivacyPolicy"; */
-
 const AllJobList = () => import("@/views/Employers/Jobs/JobsTab/AllJobList");
 const JobsTab = () =>  import("@/views/Employers/Jobs/JobsTab");
 const companiesTab = () => import("@/views/Employers/companies/companiesTab");
@@ -17,20 +10,6 @@ const PrivacyPolicy = () =>  ("@/views/JobAlart/Footer/PrivacyPolicy");
 const FAQSeekers = () => import("@/views/JobAlart/Footer/FAQSeekers");
 const FAQCompany = () => import("@/views/JobAlart/Footer/FAQCompany");
 const TermsAndCondition = () => import("@/views/JobAlart/Footer/TermsAndCondition");
-// import login from '@/views/login_registration/Login.vue'
-
-/* import JobCard from '../views/JobAlart/JobCard'
-import SearchJob from '../views/JobAlart/SearchJob'
-import CreateAlert from '../views/JobAlart/CreateAlert'
-import Signin from '../views/JobAlart/Auth/Signin'
-import Signup from '../views/JobAlart/Auth/Signup'
-import Resume from '../views/JobAlart/Resume/Resume.vue'
-import accountSettings from "@/views/JobAlart/accountSettings";
-import changeEmail from "@/views/JobAlart/AccountSettings/changeEmail";
-import changePassword from "@/views/JobAlart/AccountSettings/changePassword";
-import addNumber from "@/views/JobAlart/AccountSettings/addNumber";
-import verifyPhoneNumber from "@/views/JobAlart/AccountSettings/verifyPhoneNumber";
-import appliedJobs from "@/views/JobAlart/appliedJobs"; */
 
 const JobCard = () => import('../views/JobAlart/JobCard')
 const SearchJob = () => import('../views/JobAlart/SearchJob')
@@ -64,38 +43,14 @@ const userInfo = () => import("@/views/Employers/companies/UserInfo/userInfo")
 const CompanyList = () => import("@/views/Employers/companies/CompanyList")
 const PostedJobList = () => import("@/views/Employers/Jobs/PostedJobList")
 
-
-//recruriter
-// const recruiter = () => import("@/views/recruiter");
 const recruiterList = () => import("../views/JobAlart/Recruiter/RecruiterList");
 const recruitersJob = () => import("../views/JobAlart/Recruiter/RecruitersJob");
+const AlertList = () => import ("../views/JobAlart/Alart/AlertList");
 
 
 //footer
 const AboutUs = () => import("../views/JobAlart/Footer/AboutUs")
 
-// import AddCompany from "@/views/Employers/Company/AddCompany";
-
-
-/* import AddJobs from "@/views/Employers/Jobs/AddJobs";
-import defaultResume from "../views/JobAlart/ResumeLayout/default.vue"
-import premiumResume from "../views/JobAlart/ResumeLayout/premium.vue"
-import EmployersPanel from "@/views/Employers/EmployersPanel";
-import JobDetails from "@/views/Employers/Jobs/JobDetails";
-import JobOnlineApply from "@/views/JobAlart/JobApply/JobOnlineApply";
-
-import biodata from "../views/JobAlart/Resume/Biodata"
-import workExperience from "../views/JobAlart/Resume/WorkExperience"
-import education from "../views/JobAlart/Resume/Education"
-import pricingTable from "@/views/JobAlart/pricingTable";
-
-import forgotPassword from "../views/JobAlart/AccountSettings/forgotPassword"
-import AddCompanies from "@/views/Employers/companies/AddCompanies";
-import userInfo from "@/views/JobAlart/userInfo";
-import CompanyList from "@/views/Employers/companies/CompanyList";
-import PostedJobList from "@/views/Employers/Jobs/PostedJobList";
-import recruiter from "@/views/recruiter";
- */
 
 Vue.use(VueRouter)
 
@@ -458,7 +413,7 @@ const router = new VueRouter({
 })
 
 import { companyRoutes, guestRoute } from "../data/protectedRoute";
-import AlertList from "@/views/JobAlart/Alart/AlertList";
+
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem("accessToken") == null) {
     if (guestRoute.some(n => n == to.name)) {

@@ -3,12 +3,14 @@
 
 .jobsTab {
   border-radius: 0 !important;
-.v-card{
-  padding: pxToVw(20);
-  @media (max-width: 959px) {
-    padding: pxToMobVw(15);
+
+  .v-card {
+    padding: pxToVw(20);
+    @media (max-width: 959px) {
+      padding: pxToMobVw(15);
+    }
   }
-}
+
   .v-text-field__details {
     display: none;
   }
@@ -45,9 +47,10 @@
       .job_create_btn {
         background-color: #69aa44 !important;
         text-transform: capitalize !important;
-        @media (max-width: 959px){
+        @media (max-width: 959px) {
           padding: pxToMobVw(15);
         }
+
         span {
           color: #ffffff !important;
           font-size: pxToVw(12);
@@ -88,37 +91,43 @@
 
   .posted__list {
     justify-content: center;
-    .jaif{
+
+    .jaif {
       padding: pxToVw(5) 0 pxToVw(5) 0;
       color: #69aa44;
       font-size: pxToVw(20);
-      @media (max-width: 959px){
+      @media (max-width: 959px) {
         font-size: pxToMobVw(17);
       }
-      span{
+
+      span {
         font-size: pxToVw(20);
         padding: pxToVw(3) pxToVw(10) pxToVw(3) pxToVw(10);
         border-radius: 4px;
         margin-left: pxToVw(5);
-        @media (max-width: 959px){
+        @media (max-width: 959px) {
           font-size: pxToMobVw(17);
           padding: pxToMobVw(2) pxToMobVw(10);
           margin-left: pxToMobVw(5);
         }
       }
     }
-    .not-available{
+
+    .not-available {
       padding: pxToVw(20);
-      h1{
-        @media (max-width: 959px){
+
+      h1 {
+        @media (max-width: 959px) {
           font-size: pxToMobVw(20);
         }
       }
+
       @media (max-width: 959px) {
         padding: pxToMobVw(20) pxToMobVw(20) pxToMobVw(30) pxToMobVw(20);
       }
     }
-    .ja__card{
+
+    .ja__card {
       @media (max-width: 959px) {
         padding: 0 pxToMobVw(20) !important;
       }
@@ -129,18 +138,20 @@
 //add jobs css start
 .mainTemplate {
   background-color: transparent !important;
+
   .mainContainer {
     padding-bottom: 10px;
     -webkit-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
     box-shadow: -1px 1px 11px 6px rgba(0, 0, 0, 0.75);
     justify-content: center;
-   width: 95%;
+    width: 95%;
     margin: pxToVw(20) auto;
     background: #efefef;
-    @media (max-width: 959px){
+    @media (max-width: 959px) {
       width: 95%;
     }
+
     .h1Text {
       text-align: center;
       margin: 20px 0;
@@ -183,20 +194,21 @@
       .job_title {
         text-transform: capitalize;
         font-size: pxToVw(30);
-        @media (max-width: 959px)  {
+        @media (max-width: 959px) {
           font-size: pxToMobVw(25);
         }
       }
     }
 
     .ja_right_card {
-      .v-icon{
+      .v-icon {
         line-height: 0 !important;
       }
+
       .v-btn, .v-icon {
         color: #ffffff !important;
         font-size: pxToVw(14);
-        @media (max-width: 959px){
+        @media (max-width: 959px) {
           font-size: pxToMobVw(12);
         }
       }
@@ -209,7 +221,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    @media (max-width: 959px){
+    @media (max-width: 959px) {
       padding: pxToMobVw(20) pxToMobVw(20);
     }
 
@@ -218,7 +230,7 @@
       padding: pxToVw(20) !important;
       height: pxToVw(150);
       align-items: center;
-      @media (max-width: 959px){
+      @media (max-width: 959px) {
         padding: pxToMobVw(0) !important;
         height: pxToMobVw(100);
       }
@@ -228,27 +240,29 @@
       .jd_list {
         margin: 0 pxToVw(15);
         text-align: center;
-        @media (max-width: 959px){
+        @media (max-width: 959px) {
           margin: 0 pxToMobVw(10) 0 pxToMobVw(10);
         }
 
         .jd_status {
           font-size: pxToVw(18);
-          @media (max-width: 959px){
+          @media (max-width: 959px) {
             font-size: pxToMobVw(15);
           }
         }
+
         .v-icon {
           font-size: pxToVw(35) !important;
-          @media (max-width: 959px){
+          @media (max-width: 959px) {
             font-size: pxToMobVw(12) !important;
           }
         }
+
         .jd_title {
           text-transform: capitalize;
           font-size: pxToVw(22);
           font-weight: 700;
-          @media (max-width: 959px){
+          @media (max-width: 959px) {
             font-size: pxToMobVw(15);
           }
         }
@@ -259,7 +273,7 @@
       .jd_list {
         text-align: center;
         margin: 0 pxToVw(15);
-        @media (max-width: 959px){
+        @media (max-width: 959px) {
           margin: 0 pxToMobVw(10) 0 pxToMobVw(10);
         }
 
@@ -270,18 +284,43 @@
         .jd_status, .jd_title {
           text-transform: uppercase;
           font-size: pxToVw(20) !important;
-          @media (max-width: 959px){
+          @media (max-width: 959px) {
             font-size: pxToMobVw(15) !important;
           }
         }
 
         .v-icon {
           font-size: pxToVw(35) !important;
-          @media (max-width: 959px){
+          @media (max-width: 959px) {
             font-size: pxToMobVw(12) !important;
           }
         }
       }
+    }
+  }
+
+  .filter_panel{
+    width: 94%;
+    margin: 0 auto;
+    .v-expansion-panel-header{
+     span{
+       color: $primaryColor;
+       font-weight: 500;
+       font-size: pxToVw(22);
+       @media (max-width: 959px){
+         font-size: pxToMobVw(17);
+       }
+       .v-icon{
+         color: $primaryColor !important;
+       }
+     }
+    }
+  }
+  .filter_card {
+    border: 2px solid #E0E0E0;
+    padding: pxToVw(40) pxToVw(40);
+    @media (max-width: 959px) {
+      padding: pxToMobVw(20);
     }
   }
 
@@ -293,7 +332,7 @@
 
   .job_tab {
     font-size: pxToVw(16) !important;
-    @media (max-width: 959px){
+    @media (max-width: 959px) {
       font-size: pxToMobVw(15) !important;
     }
   }
@@ -302,7 +341,7 @@
 //job details css end
 //Applicant list css start
 .applicant__list {
-  .age_outline{
+  .age_outline {
     background-color: $secondaryColor;
     padding: 0 8px;
     margin-left: 5px;
@@ -310,6 +349,7 @@
     font-size: 12px;
     border-radius: 2px;
   }
+
   table {
     width: 100%;
     border-collapse: separate;
@@ -325,24 +365,29 @@
 
 //Applicant list css end
 //job preview css start
-.jp{
-  .ja__card{
-    padding-top:  0 !important;
-    box-shadow:none !important;
+.jp {
+  .ja__card {
+    padding-top: 0 !important;
+    box-shadow: none !important;
   }
-  .chart_top{
+
+  .chart_top {
     padding: 0 pxToVw(10);
   }
-  .jp_summary_cards{
+
+  .jp_summary_cards {
 
     padding: pxToVw(25) 0;
-    .v-card{
+
+    .v-card {
       width: 35%;
       margin: 0 pxToVw(10);
     }
-    .card_bottom{
+
+    .card_bottom {
       padding: pxToVw(25) pxToVw(20) pxToVw(10) pxToVw(20);
     }
   }
 }
+
 //job preview css end

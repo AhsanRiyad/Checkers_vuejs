@@ -202,7 +202,7 @@
                 class="applyNow white--text"
                 color="#365899"
                 v-bind:disabled="isApplied"
-                >{{ isApplied ? "Already Appllied" : "Apply Now" }}</v-btn
+                >{{ isApplied ? "Already Applied" : "Apply Now" }}</v-btn
               >
             </v-card-actions>
 
@@ -565,9 +565,9 @@ export default {
     },
     onScroll() {
       // if (window.innerHeight)
-      /* 
+      /*
       this.JobDescriptionStyle.height =
-        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; 
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
       */
 
       console.log("pixel ratio ", window.devicePixelRatio);

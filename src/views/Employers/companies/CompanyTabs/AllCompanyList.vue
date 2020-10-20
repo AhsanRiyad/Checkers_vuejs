@@ -28,7 +28,7 @@
           <tr v-for="(comp, i) in companies" :key="i">
             <td><p>{{ i + 1 }}</p></td>
             <td>
-              <a class="text-capitalize">{{ comp.company_name }}</a>
+              <p class="text-capitalize">{{ comp.company_name }}</p>
             </td>
             <td v-if="comp.is_verified"><span class="green--text">Verified</span></td>
             <td v-else><span class="red--text">Not Verified</span></td>
@@ -149,9 +149,36 @@ name: "AllCompanyList",
 
             }, 3000)
           })
-          .catch(() => {
-            this.$awn.alert("Failed!");
+          .catch((error) => {
+            console.log("error status code... ", error.response.status);
+            if (error.response.status == 401) {
+              axios({
+                method: "get",
+                baseURL: this.$store.state.apiBase,
+                url: `users/new-access-token`,
+                params: {
+                  access_token: this.$cookies.get("accessToken"),
+                  ip: this.$store.getters.userIp,
+                },
+                headers,
+              })
+                  .then((response) => {
+                    console.log("this is refresh token.....", response);
+                    this.$cookies.set("accessToken", response.data.access_token);
+                    this.getCompanies();
+                  })
+                  .catch((error) => {
+                    this.$awn.alert("Failed!");
+                    this.$router.history.push("/signin");
+                    console.log(error);
+                  })
+                  .finally(() => {});
+            }
+            //   this.$awn.alert("Failed");
           })
+          .finally(() => {
+            //  this.tableLoading = false;
+          });
     },
     editCompany: function (id) {
       this.$router.push({name: 'AddCompanies', params: {id: id}})

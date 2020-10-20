@@ -165,7 +165,7 @@
         class="jobDetails"
       >
         <v-skeleton-loader
-          width="400"
+          width="100%"
           class="loader"
           type="card"
         ></v-skeleton-loader>
@@ -202,7 +202,7 @@
                 class="applyNow white--text"
                 color="#365899"
                 v-bind:disabled="isApplied"
-                >{{ isApplied ? "Already Appllied" : "Apply Now" }}</v-btn
+                >{{ isApplied ? "Already Applied" : "Apply Now" }}</v-btn
               >
             </v-card-actions>
 
@@ -312,10 +312,6 @@
       </div>
     </job-alert-modal>
     <!-- job apply modal ends-->
-
-    <!-- apply online Expected salary starts -->
-
-    <!-- apply online Expected salary ends -->
 
     <!-- this modal is for mobile version -->
     <JobDetails @close="() => myDialogClose()" :dialogVisible="dialogSwitch" />
@@ -565,9 +561,9 @@ export default {
     },
     onScroll() {
       // if (window.innerHeight)
-      /* 
+      /*
       this.JobDescriptionStyle.height =
-        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px"; 
+        screen.availHeight - 48 - 64 - 20 - window.scrollY + "px";
       */
 
       console.log("pixel ratio ", window.devicePixelRatio);

@@ -10,11 +10,7 @@
       <v-row>
         <v-col>
           <h1 class="mb-3">ABOUT OUR COMPANY</h1>
-          <p>Jobalart is the first and also prominent career management website in the country. Eight young business plus IT expert backed by strong command over e-business and in-depth understanding of the requirements of job seekers and also employers in the country's context started this venture on July 2020.
-            The vision of the business is to try bringing Internet technology (IT) in the mainstream business and also economic life of the society.
-            Our website aims to explore maximum profits of the Internet. We trust our service might help the job seekers manage their profession more professionally. This website may also help employers solve several of the problems associated with traditional recruiting procedures and also permit them to save time & money.
-            Right after its launching, the website has been capable to attract the Internet users in the country. The website frequently updates Job Information (on average more than 2500 valid job news are placed at any point of time at the site), delivers facility to the job seekers for posting resume and also online application. The website has also been able to get decent response from a big number of organizations in the country who use online job advertisement facility, online CV bank access and also online application receiving plus processing facility of ‘Job Alart’. Till now, more than 25, 000 employers in the country have recruited more than 3,00,000 professionals at different levels for their organizations through ‘Jobalart’ service.
-          </p>
+          <p>Job Alart is a global leader in connecting people and jobs. Job Alart is a job search engine designed to make the process of finding a job on the internet easier for the user. Every day, Job Alart aims to make every workplace happier and more productive by transforming the way employers and candidates find the right fit. It maps the huge selection of job offerings available on the internet in one extensive database by referencing job listings originating from job boards, recruitment agency websites and large specialist recruitment sites. Using a fast and straightforward interface, users can query this database and save themselves the trouble of visiting each site individually. The vision of the business is to try bringing Internet technology (IT) in the mainstream business and economic life of the society.</p>
         </v-col>
       </v-row>
     </v-container>
