@@ -1,68 +1,60 @@
 <template>
   <v-app>
-    <LandingPage></LandingPage>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <HelloWorld/>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-// import { bus } from '@/main'
-import cookie_mixins from "@/mixins/cookie_mixins";
-import commonInfoMixins from "@/mixins/commonInfoMixins";
-import LandingPage from "./views/JobAlart/LandingPage";
-import ipMixins from "./mixins/ipMixins";
-import refreshToken from "./mixins/tokenMixins";
+import HelloWorld from './components/HelloWorld';
+
 export default {
-  name: "App",
-  mixins: [cookie_mixins, commonInfoMixins, ipMixins, refreshToken],
+  name: 'App',
+
   components: {
-    LandingPage: LandingPage,
+    HelloWorld,
   },
 
   data: () => ({
-    login: false,
+    //
   }),
-  computed: {
-    isLogin() {
-      return this.$store.getters.auth;
-    },
-  },
-  beforeCreate() {},
-  mounted() {
-    this.getIp(
-      () => {},
-      () => {}
-    );
-
-    /*     this.refreshToken(
-      () => {},
-      () => {}
-    ); */
-  },
-  created() {
-    if (
-      this.R.isNil(this.$cookies.get("accessToken")) ||
-      this.R.isEmpty(this.$cookies.get("accessToken"))
-    ) {
-      this.$store.commit("isLoggedIn", false);
-    } else {
-      this.$store.commit("isLoggedIn", true);
-    }
-    /* if (
-      this.R.isNil(this.$cookies.get("is_company")) ||
-      this.R.isEmpty(this.$cookies.get("is_company"))
-    ) {
-      this.$store.commit("is_company", false);
-    } else {
-      if (this.$cookies.get("is_company") == true) {
-        console.log("is compnay... in the app.vue true");
-        this.$store.commit("is_company", true);
-      } else {
-        this.$store.commit("is_company", false);
-      }
-    } */
-  },
-  updated() {
-    this.getCommonInfo();
-  },
 };
 </script>
